@@ -68,15 +68,25 @@ chore: adiciona dependência do Pandas
 
 ---
 
-## 3. Proteção da `main`
+## 3. Configuração do repositório
 
-Configuração única, feita pelo Davi em
-`Settings → Branches → Add branch ruleset`:
+Configuração única, feita pelo Davi.
+
+**a) Definir a `main` como branch padrão** — `Settings → General → Default branch`
+
+Como o repositório foi criado vazio, o GitHub adotou como padrão a primeira
+branch enviada. Troque para `main` e apague a branch antiga.
+
+**b) Proteger a `main`** — `Settings → Branches → Add branch ruleset`
 
 - [ ] Require a pull request before merging
 - [ ] Require 1 approval
 - [ ] Block force pushes
 - [ ] Restrict deletions
+
+**c) Adicionar o secret do assistente** — `Settings → Secrets and variables → Actions`
+
+- [ ] `ANTHROPIC_API_KEY` — sem ele o workflow `@claude` não roda
 
 ---
 
