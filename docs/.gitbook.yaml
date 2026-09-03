@@ -1,0 +1,7 @@
+# Configura este espaço. Os caminhos são relativos a esta pasta (docs/).
+
+root: ./
+
+structure:
+  readme: README.md
+  summary: SUMMARY.md

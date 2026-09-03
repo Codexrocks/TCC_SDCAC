@@ -107,28 +107,22 @@ seja, a regra passa a depender de disciplina, não de trava.
 
 ## 4. GitBook — configuração inicial
 
-Estado atual: organização `TCC_SDCAC` criada, site **TCC_SDCAC Docs** publicado,
-Git Sync com status **`pending`** — a conexão foi iniciada mas não concluída.
+O passo a passo com os campos exatos está em
+[Configuração passo a passo](configuracao.md#1-gitbook-git-sync).
 
-Para concluir (só pela interface do GitBook, não dá por API):
+Dois arquivos, com papéis diferentes — confundir os dois é o que gera o erro
+`expected "site" to be defined`:
 
-1. Abrir o Space do site **TCC_SDCAC Docs**
-2. `Configure → Git Sync → GitHub`
-3. Autorizar a **organização** `Codexrocks` — não a conta pessoal
-4. Repositório: `Codexrocks/TCC_SDCAC`
-5. Branch: `main`
-6. Project directory: `docs`
-7. Config file: `gitbook-docs.yaml`
-8. Na primeira sincronização, escolher **importar do Git** — e não começar
-   pelo template do GitBook, senão o conteúdo do repositório é sobrescrito
+| Arquivo | Onde | Configura |
+|---|---|---|
+| [`gitbook-docs.yaml`](../gitbook-docs.yaml) | raiz | o **site** e qual pasta alimenta cada espaço |
+| `docs/.gitbook.yaml` | dentro de `docs/` | **o espaço**: página inicial e índice |
+
+No Git Sync, deixe **Project directory vazio** — o `gitbook-docs.yaml` está na
+raiz do repositório.
 
 > O plano Pro está em **trial até 17/09/2026**. Confira o que muda no plano
 > gratuito antes dessa data.
-
-O arquivo [`gitbook-docs.yaml`](../gitbook-docs.yaml) na raiz já diz ao GitBook
-que a documentação está em `docs/` e que o índice é o `SUMMARY.md`. **O nome do
-arquivo precisa ser exatamente o que o campo *Config file* do Git Sync mostrar** —
-se a UI indicar outro nome, renomeie o arquivo no repositório.
 
 > **Toda página nova precisa entrar no `docs/SUMMARY.md`.**
 > Se não estiver lá, não aparece no GitBook.

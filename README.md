@@ -36,6 +36,7 @@ Detalhes em [`docs/equipe.md`](docs/equipe.md).
 | [Equipe e papéis](docs/equipe.md) | Quem faz o quê |
 | [Processo de trabalho](docs/processo.md) | Como GitHub, GitBook e Claude se encaixam |
 | [Padrões](docs/padroes.md) | Branch, commit, pull, push, merge, docs, relatórios |
+| [Configuração](docs/configuracao.md) | GitBook, secrets, ruleset, CODEOWNERS — passo a passo |
 | [Cronograma](docs/cronograma.md) | As 16 semanas |
 | [Arquitetura](docs/arquitetura.md) | Fluxo, regras de risco, cenários de teste |
 | [Entregas](docs/entregas/tarefa-01.md) | O que o professor pediu |

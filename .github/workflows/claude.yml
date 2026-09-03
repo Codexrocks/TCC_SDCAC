@@ -3,8 +3,11 @@ name: Claude
 # Aciona o assistente quando alguém escreve "@claude" numa issue,
 # num comentário ou numa revisão de Pull Request.
 #
-# Requer o secret ANTHROPIC_API_KEY em:
-# Settings -> Secrets and variables -> Actions -> New repository secret
+# Requer UM destes secrets em Settings -> Secrets and variables -> Actions:
+#   CLAUDE_CODE_OAUTH_TOKEN  gerado com `claude setup-token` (assinatura Pro/Max)
+#   ANTHROPIC_API_KEY        chave da API, cobrada por uso
+# Basta um. Se os dois existirem, o OAuth tem prioridade.
+# Passo a passo em docs/configuracao.md
 
 on:
   issue_comment:
@@ -40,6 +43,7 @@ jobs:
       - name: Claude Code
         uses: anthropics/claude-code-action@v1
         with:
+          claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
           anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
           prompt: |
             Você é o assistente do TCC_SDCAC.
