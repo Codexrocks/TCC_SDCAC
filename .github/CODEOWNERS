@@ -1,0 +1,16 @@
+# Quem é chamado automaticamente para revisar cada parte.
+# Substitua pelos usuários reais do GitHub depois que Yasmin e Felipe
+# tiverem acesso ao repositório.
+
+# Padrão: o líder revisa qualquer coisa
+*                       @Codexrocks/lideranca
+
+# Documentação e artigo
+# /docs/                @yasmin @felipe
+
+# Regras de detecção e Risk Score
+# /detection/           @yasmin
+
+# Dashboard e análise de dados
+# /frontend/            @felipe
+# /results/             @felipe

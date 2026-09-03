@@ -72,15 +72,20 @@ chore: adiciona dependência do Pandas
 
 Configuração única, feita pelo Davi.
 
-**a) Definir a `main` como branch padrão** — `Settings → General → Default branch`
+**a) Tornar o repositório público** — `Settings → General → Danger Zone → Change visibility`
 
-Como o repositório foi criado vazio, o GitHub adotou como padrão a primeira
-branch enviada. Troque para `main` e apague a branch antiga.
+Não é só preferência: no plano gratuito, **regra de branch em repositório
+privado de organização é recurso pago**. Em repositório público é gratuita. Sem
+isso, não há como impedir de fato um push direto na `main`.
 
-**b) Proteger a `main`** — `Settings → Branches → Add branch ruleset`
+O plano do TCC já prevê o repositório como ativo de portfólio profissional, e o
+site do GitBook já é público — então abrir o código não muda a exposição.
 
-- [ ] Require a pull request before merging
-- [ ] Require 1 approval
+**b) Proteger a `main`** — `Settings → Rules → Rulesets → New branch ruleset`
+
+- [ ] Target: `main`
+- [ ] Require a pull request before merging → **1 approval**
+- [ ] Require status checks to pass → **Validação**
 - [ ] Block force pushes
 - [ ] Restrict deletions
 
@@ -88,21 +93,42 @@ branch enviada. Troque para `main` e apague a branch antiga.
 
 - [ ] `ANTHROPIC_API_KEY` — sem ele o workflow `@claude` não roda
 
+**d) Dar acesso à equipe** — `Settings → Collaborators and teams`
+
+- [ ] Yasmin e Felipe com papel **Write**
+
+### Enquanto o repositório for privado
+
+A proteção de branch não existe e o merge não é bloqueado por nada. O que sobra
+é o check **Validação**, que fica vermelho no PR mas não impede o merge — ou
+seja, a regra passa a depender de disciplina, não de trava.
+
 ---
 
 ## 4. GitBook — configuração inicial
 
-Feita **uma vez**, pelo Davi:
+Estado atual: organização `TCC_SDCAC` criada, site **TCC_SDCAC Docs** publicado,
+Git Sync com status **`pending`** — a conexão foi iniciada mas não concluída.
 
-1. Criar um Space no GitBook
+Para concluir (só pela interface do GitBook, não dá por API):
+
+1. Abrir o Space do site **TCC_SDCAC Docs**
 2. `Configure → Git Sync → GitHub`
-3. Autorizar o repositório `Codexrocks/TCC_SDCAC`
-4. Branch: `main`
-5. Monorepo / root directory: `docs`
-6. Direção: **bidirecional** (GitHub ↔ GitBook)
+3. Autorizar a **organização** `Codexrocks` — não a conta pessoal
+4. Repositório: `Codexrocks/TCC_SDCAC`
+5. Branch: `main`
+6. Project directory: `docs`
+7. Config file: `gitbook-docs.yaml`
+8. Na primeira sincronização, escolher **importar do Git** — e não começar
+   pelo template do GitBook, senão o conteúdo do repositório é sobrescrito
 
-O arquivo [`.gitbook.yaml`](../.gitbook.yaml) na raiz já diz ao GitBook que a
-documentação está em `docs/` e que o índice é o `SUMMARY.md`.
+> O plano Pro está em **trial até 17/09/2026**. Confira o que muda no plano
+> gratuito antes dessa data.
+
+O arquivo [`gitbook-docs.yaml`](../gitbook-docs.yaml) na raiz já diz ao GitBook
+que a documentação está em `docs/` e que o índice é o `SUMMARY.md`. **O nome do
+arquivo precisa ser exatamente o que o campo *Config file* do Git Sync mostrar** —
+se a UI indicar outro nome, renomeie o arquivo no repositório.
 
 > **Toda página nova precisa entrar no `docs/SUMMARY.md`.**
 > Se não estiver lá, não aparece no GitBook.

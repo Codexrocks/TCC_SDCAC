@@ -1,0 +1,26 @@
+name: Validação
+
+# Confere as regras de docs/padroes.md a cada Pull Request.
+# Para que este check possa BLOQUEAR o merge, ele precisa estar marcado em
+# Settings -> Rules -> Rulesets -> Require status checks to pass.
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+
+jobs:
+  validar:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Validar regras do repositório
+        env:
+          BRANCH_PR: ${{ github.head_ref }}
+        run: python3 scripts/validar.py --base origin/main

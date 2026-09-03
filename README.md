@@ -34,10 +34,20 @@ Detalhes em [`docs/equipe.md`](docs/equipe.md).
 | Página | Conteúdo |
 |---|---|
 | [Equipe e papéis](docs/equipe.md) | Quem faz o quê |
-| [Processo de trabalho](docs/processo.md) | Branch, commit, PR, merge, GitBook |
+| [Processo de trabalho](docs/processo.md) | Como GitHub, GitBook e Claude se encaixam |
+| [Padrões](docs/padroes.md) | Branch, commit, pull, push, merge, docs, relatórios |
 | [Cronograma](docs/cronograma.md) | As 16 semanas |
 | [Arquitetura](docs/arquitetura.md) | Fluxo, regras de risco, cenários de teste |
 | [Entregas](docs/entregas/tarefa-01.md) | O que o professor pediu |
 | [Relatórios](docs/relatorios/) | Histórico das sessões com o Claude |
 
-Regras de contribuição resumidas: [`CONTRIBUTING.md`](CONTRIBUTING.md).
+## Antes de abrir um Pull Request
+
+```bash
+python3 scripts/validar.py
+```
+
+Confere nome de branch, formato dos commits, cobertura do `SUMMARY.md`, links
+quebrados e segredo vazado. O mesmo script roda no CI a cada PR.
+
+Resumo das regras: [`CONTRIBUTING.md`](CONTRIBUTING.md) · Regras do assistente: [`CLAUDE.md`](CLAUDE.md)

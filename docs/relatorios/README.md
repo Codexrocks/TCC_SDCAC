@@ -20,3 +20,4 @@ Use o [modelo](_modelo.md) e adicione a página nova ao
 | Data | Sessão | Assunto |
 |---|---|---|
 | 03/09/2026 | [Sessão 01](2026-09-03-sessao-01.md) | Setup do repositório, papéis e processo |
+| 03/09/2026 | [Sessão 02](2026-09-03-sessao-02.md) | Padrões, validação automática e GitBook |
