@@ -18,7 +18,7 @@ ambientes corporativos?
 |---|---|---|
 | **Davi** | Líder & Backend | API, banco de dados, repositório, prazos |
 | **Yasmin** | Cybersecurity Specialist | Referencial teórico, regras de detecção, Risk Score |
-| **Felipe** | Data & Dashboard Specialist | Dados, dashboard, métricas |
+| **Filipe** | Data & Dashboard Specialist | Dados, dashboard, métricas |
 
 Detalhes em [`docs/equipe.md`](docs/equipe.md).
 

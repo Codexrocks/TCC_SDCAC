@@ -22,7 +22,14 @@ TIPOS = ("docs", "feat", "fix", "chore")
 # "gitbook" nao e pessoa: e a branch permanente do Git Sync, onde o GitBook
 # escreve as edicoes feitas pelo site. Ela nao pode ser apagada depois do merge,
 # ao contrario das outras. Ver docs/configuracao.md.
-AUTORES = ("davi", "yasmin", "felipe", "claude", "gitbook")
+#
+# "felipe" e a grafia errada do nome do Filipe, e esta aqui SO enquanto esta
+# correcao nao chega na main. O motivo e mecanico: os workflows validam cada PR
+# com o validar.py da BASE, nao com o do proprio PR. Enquanto a main tiver a
+# lista antiga, uma branch "filipe/..." seria reprovada com "nao esta na lista
+# de autores" — e quem abriu ela nao teria como adivinhar por que.
+# REMOVER assim que este arquivo estiver na main. Ver docs/equipe.md.
+AUTORES = ("davi", "yasmin", "filipe", "claude", "gitbook", "felipe")
 RE_BRANCH = re.compile(
     r"^(%s)/(%s)/[a-z0-9][a-z0-9-]*$" % ("|".join(AUTORES), "|".join(TIPOS))
 )

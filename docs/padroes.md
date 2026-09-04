@@ -18,10 +18,10 @@ GitHub agrupa por pessoa, e dá para ver quem está com o quê sem abrir o log.
 |---|---|---|
 | `docs` | documentação e artigo | `yasmin/docs/referencial-teorico` |
 | `feat` | código novo | `davi/feat/motor-deteccao` |
-| `fix` | correção | `felipe/fix/faixa-risco-medio` |
+| `fix` | correção | `filipe/fix/faixa-risco-medio` |
 | `chore` | configuração, manutenção | `davi/chore/atualiza-dependencias` |
 
-Autores válidos: `davi` · `yasmin` · `felipe` · `claude`. Só minúsculas,
+Autores válidos: `davi` · `yasmin` · `filipe` · `claude`. Só minúsculas,
 números e hífen. Uma branch por tarefa — não acumule assuntos.
 
 > **As branches `gitbook/` são exceção.** Não são de ninguém e não se apagam:
@@ -157,7 +157,7 @@ aprová-la sozinho é que não dá.
 
 Só o **Davi**, e isso é trava do GitHub, não combinado de boca: o ruleset
 `Merge restrito ao líder` recusa qualquer atualização da `main` que não venha
-dele. Yasmin e Felipe abrem PR e aprovam normalmente — o botão de merge é que
+dele. Yasmin e Filipe abrem PR e aprovam normalmente — o botão de merge é que
 falha para os dois.
 
 O Davi não escapa do resto: PR, 1 aprovação de outra pessoa e check verde valem

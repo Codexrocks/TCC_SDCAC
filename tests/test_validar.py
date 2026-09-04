@@ -29,7 +29,7 @@ def limpa_estado():
     [
         "davi/feat/motor-deteccao",
         "yasmin/docs/referencial-teorico",
-        "felipe/fix/faixa-risco-medio",
+        "filipe/fix/faixa-risco-medio",
         "claude/chore/governanca-e-padroes",
         "gitbook/docs/documentacao",
         "davi/docs/a1",
@@ -147,8 +147,19 @@ def test_declaracao_de_ia_recusada(mensagem):
 
 
 def test_lista_de_autores_bate_com_a_documentacao():
-    """Autor novo entra aqui e em docs/padroes.md — os dois nao podem divergir."""
-    assert set(validar.AUTORES) == {"davi", "yasmin", "felipe", "claude", "gitbook"}
+    """Autor novo entra aqui e em docs/padroes.md — os dois nao podem divergir.
+
+    "felipe" e transitorio: a grafia errada do nome do Filipe, aceita so ate
+    esta correcao chegar na main. Ao remove-la de validar.py, remova daqui.
+    """
+    assert set(validar.AUTORES) == {
+        "davi",
+        "yasmin",
+        "filipe",
+        "claude",
+        "gitbook",
+        "felipe",
+    }
 
 
 # ---------------------------------------------------------------------------

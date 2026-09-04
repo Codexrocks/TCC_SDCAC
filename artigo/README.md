@@ -22,9 +22,9 @@ Estrutura definida pelo professor, conforme o [cronograma](../docs/cronograma.md
 | # | Seção | Quando | Quem |
 |---|---|---|---|
 | 1 | [Introdução](01-introducao.md) | S2 — **entrega 10/09** | Todos |
-| 2 | [Referencial teórico](02-referencial-teorico.md) | S3 e S4 | Yasmin, com Felipe na S4 |
+| 2 | [Referencial teórico](02-referencial-teorico.md) | S3 e S4 | Yasmin, com Filipe na S4 |
 | 3 | [Metodologia](03-metodologia.md) | S5 | Todos |
-| 4 | [Resultados e discussão](04-resultados.md) | S12 e S13 | Felipe e Davi, discussão com todos |
+| 4 | [Resultados e discussão](04-resultados.md) | S12 e S13 | Filipe e Davi, discussão com todos |
 | 5 | [Conclusão](05-conclusao.md) | S14 | Todos |
 | — | [Referências](referencias.md) | contínuo | Quem citar |
 

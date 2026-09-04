@@ -156,6 +156,33 @@ Como a lista de bypass está vazia e o GitHub não pede revisão ao autor do
 próprio PR, **quem abre o PR sempre depende de outra pessoa para mergear**.
 Hoje isso significa: Davi depende da Yasmin, e vice-versa.
 
+### Os dois checks obrigatórios não são da mesma espécie
+
+Detalhe que parece burocrático e não é — ele já travou um merge:
+
+| Nome | Espécie | Quem publica |
+|---|---|---|
+| `validar` | **check run** — o próprio job do workflow `Validação` | GitHub Actions |
+| `governanca` | **commit status** — publicado pelo job `verificar` via API | GitHub Actions |
+
+O motivo está em como o GitHub soma cada uma. **Check runs de mesmo nome se
+acumulam** no mesmo commit: uma reprovação antiga continua contando depois de
+uma aprovação nova. Já o **commit status vale pelo mais recente por contexto**.
+
+Isso importa porque o workflow da governança roda de novo **a cada revisão
+enviada**, sempre no mesmo commit. O caminho normal é reprovar primeiro (ainda
+sem aprovação) e passar depois (com as aprovações) — exatamente o padrão que
+quebra com check run. Foi o que travou o [PR #3](https://github.com/Codexrocks/TCC_SDCAC/pull/3)
+com tudo aprovado na tela, e exigiu re-executar runs antigos na mão.
+
+O `validar` não tem esse problema: ele só roda quando o código muda, e código
+que muda gera commit novo.
+
+> **Se um dia precisar mexer:** o job chama-se `verificar` e o status chama-se
+> `governanca` de propósito. A documentação do GitHub avisa que, quando um
+> check e um status têm o mesmo nome, **os dois** precisam passar — e o check
+> run voltaria a travar tudo. Não unifique os nomes.
+
 ### Refazendo pela interface
 
 `Settings → Rules → Rulesets → New ruleset → New branch ruleset`
@@ -178,12 +205,21 @@ disso, o ruleset existe mas não faz nada.
   - [ ] Dismiss stale pull request approvals when new commits are pushed
 - [ ] **Require status checks to pass**
   - `Add checks` → procure **`validar`** → selecione
+  - `Add checks` → procure **`governanca`** → selecione
   - [ ] Require branches to be up to date before merging
 
 **Create** no fim da página.
 
-> O check só aparece na busca depois que o workflow **Validação** rodar pelo
-> menos uma vez. Isso já aconteceu — `validar` aparece normalmente na lista.
+> Nenhum dos dois aparece na busca antes de ter sido publicado **pelo menos uma
+> vez**. Se a caixa vier vazia, abra um PR qualquer, espere os workflows
+> rodarem e volte aqui. Não digite o nome no escuro: o GitHub aceita um nome
+> que nunca vai existir, e o resultado é um PR travado para sempre esperando um
+> check que ninguém publica.
+>
+> Procure por **`governanca`**, e não por `verificar`. O primeiro é o commit
+> status que decide; o segundo é o job que o produz e não deve ser obrigatório
+> — a explicação está logo acima, em *"Os dois checks obrigatórios não são da
+> mesma espécie"*.
 
 ### "Merge without waiting for requirements to be met (bypass rules)"
 
@@ -198,7 +234,7 @@ O bypass é **por ruleset**, não geral:
 | `Merge restrito ao líder` | só `update` | Sempre — é o papel dele |
 
 Marcar a caixa contorna apenas o que ele **tem permissão** de contornar, ou seja
-a regra `update`, que é justamente a que impede Yasmin e Felipe de mergear. As
+a regra `update`, que é justamente a que impede Yasmin e Filipe de mergear. As
 exigências de revisão e de check continuam valendo para ele, marcando ou não.
 
 Foi por isso que os dois ficaram separados em rulesets distintos. Num ruleset só
@@ -255,10 +291,10 @@ O efeito combinado dos dois rulesets:
 |---|---|---|---|
 | Davi (org owner) | sim | sim, no PR dos outros | **sim** |
 | Yasmin | sim | sim | não |
-| Felipe | sim | sim | não |
+| Filipe | sim | sim | não |
 | Assistente (`@claude`) | sim | não | não |
 
-Yasmin e Felipe veem o botão de merge, mas o GitHub recusa o push resultante.
+Yasmin e Filipe veem o botão de merge, mas o GitHub recusa o push resultante.
 Não é falta de educação com a ferramenta: é a regra funcionando.
 
 > **O Davi não fica acima das regras.** O bypass vale só neste segundo ruleset,
@@ -317,13 +353,13 @@ usuário só vira regra válida depois de ter acesso de escrita ao repositório.
 > `@Codexrocks/lideranca`, que nunca foi criado. O GitHub tratava o arquivo
 > inteiro como inválido, com o erro *Unknown owner*. Foi por isso que trocou.
 
-Quando o Felipe entrar, descubra o usuário GitHub dele, apague o `#` do começo
+Quando o Filipe entrar, descubra o usuário GitHub dele, apague o `#` do começo
 das linhas e troque o placeholder:
 
 ```
-/docs/                @Yas2046 @usuario-do-felipe
+/docs/                @Yas2046 @usuario-do-filipe
 /detection/           @Yas2046
-/frontend/            @usuario-do-felipe
+/frontend/            @usuario-do-filipe
 ```
 
 Para conferir se o arquivo está válido sem precisar abrir um PR:
@@ -343,19 +379,19 @@ revisor na mão.
 
 `Settings → Collaborators and teams → Add people`
 
-Yasmin e Felipe com papel **Write**. Write permite criar branch, abrir PR e
+Yasmin e Filipe com papel **Write**. Write permite criar branch, abrir PR e
 aprovar — e não permite mexer em configuração do repositório.
 
 | Pessoa | Usuário | Papel | Estado |
 |---|---|---|---|
 | Davi | `@DaviSoaresDilly` | Admin · owner da org | ativo |
 | Yasmin | `@Yas2046` | Write | ativo |
-| Felipe | `@FilipeF4guiar` | Write | ativo |
+| Filipe | `@FilipeF4guiar` | Write | ativo |
 
 Equipe completa desde 03/09/2026. Com três pessoas, sempre há alguém que possa
 aprovar o PR de outro — o que era o ponto frágil enquanto o time era de dois.
 
-> Yasmin é membro da organização; Felipe entrou como **colaborador externo** do
+> Yasmin é membro da organização; Filipe entrou como **colaborador externo** do
 > repositório. Para o dia a dia dá no mesmo. A diferença aparece se um dia o
 > `CODEOWNERS` usar time (`@Codexrocks/algum-time`): time só alcança quem é
 > membro da organização.
