@@ -6,24 +6,28 @@ Versão curta. A completa está em [`docs/padroes.md`](docs/padroes.md).
 
 ```bash
 git checkout main && git pull origin main
-git checkout -b docs/meu-assunto      # docs/ feat/ fix/ chore/
+git checkout -b davi/docs/meu-assunto   # <seu-nome>/<tipo>/<assunto>
 # ... trabalhe ...
 git commit -m "docs: adiciona seção sobre SIEM"
-python3 scripts/validar.py            # tem que passar
-git push -u origin docs/meu-assunto
-# abra o PR, peça revisão de 1 colega, Squash and merge
+python3 scripts/validar.py              # tem que passar
+git push -u origin davi/docs/meu-assunto
+# abra o PR, peça revisão de 1 colega, avise o Davi para fazer o merge
 ```
 
 ## Branch
 
-| Prefixo | Para quê |
-|---|---|
-| `docs/` | documentação e artigo |
-| `feat/` | código novo |
-| `fix/` | correção |
-| `chore/` | configuração, manutenção |
+`<autor>/<tipo>/<assunto>` — começa pelo seu nome, para dar para ver quem está
+com o quê.
 
-Só minúsculas, números e hífen.
+| Tipo | Para quê | Exemplo |
+|---|---|---|
+| `docs` | documentação e artigo | `yasmin/docs/referencial-teorico` |
+| `feat` | código novo | `davi/feat/motor-deteccao` |
+| `fix` | correção | `felipe/fix/faixa-risco-medio` |
+| `chore` | configuração, manutenção | `davi/chore/atualiza-dependencias` |
+
+Autores: `davi` · `yasmin` · `felipe` · `claude`. Só minúsculas, números e
+hífen.
 
 ## Commit
 
@@ -38,7 +42,24 @@ chore: atualiza dependências
 
 ## Merge
 
-PR para `main` → check **Validação** verde → **1 aprovação** → **Squash and merge** → apaga a branch.
+PR para `main` → check **Validação** verde → **1 aprovação** → **o Davi faz o
+merge** → apaga a branch.
+
+Só o Davi consegue mergear: o GitHub recusa a atualização da `main` vinda de
+qualquer outra pessoa. Você abre o PR e aprova normalmente — quando estiver
+verde e aprovado, avise.
+
+## Código
+
+O código começa na S6 (02/10). O que vale para ele — Python 3.12, Ruff, type
+hints, docstring em português, teste com pytest — está em
+[`docs/padroes-codigo.md`](docs/padroes-codigo.md). Antes de abrir PR com `.py`:
+
+```bash
+ruff format . && ruff check --fix . && pytest
+```
+
+Mexeu no dashboard? Vale também [`docs/usabilidade.md`](docs/usabilidade.md).
 
 ## Nunca
 

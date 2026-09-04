@@ -3,9 +3,9 @@
 Página de consulta para quando algo não estiver funcionando. Cada seção é
 independente — vá direto na que precisa.
 
-Estado em 03/09/2026: repositório **público**, branch padrão **`main`**,
-ruleset **`Proteção da main`** ativo, Yasmin com acesso de escrita.
-Pendente: o secret da seção 2 e o acesso do Felipe (seção 5).
+Estado em 03/09/2026: repositório **público**, branch padrão **`main`**, dois
+rulesets ativos, secret do assistente cadastrado, equipe completa com acesso.
+A configuração inicial está **concluída** — esta página vira consulta.
 
 ---
 
@@ -70,6 +70,10 @@ Pode apagar o *Untitled* depois que a sincronização funcionar.
 ---
 
 ## 2. Secret do assistente
+
+> **Já está feito.** `CLAUDE_CODE_OAUTH_TOKEN` foi cadastrado em 03/09/2026 e o
+> `@claude` responde em issue e em PR. O resto da seção fica como referência
+> para quando o token expirar ou precisar ser trocado.
 
 O workflow `@claude` aceita **uma** destas duas credenciais. Basta escolher uma.
 
@@ -193,6 +197,64 @@ O GitHub tem que recusar. Se recusar, está funcionando — desfaça com
 > ruleset (*bypass*). Não adicione ninguém à lista de bypass: a regra vale para
 > todos, inclusive para você e para o assistente.
 
+### Quem pode executar o merge
+
+Um **segundo ruleset**, `Merge restrito ao líder` (id `22236517`), resolve o
+"quem aperta o botão". Ele tem uma regra só — *Restrict updates* — e uma lista
+de bypass com **Organization admin**.
+
+O efeito combinado dos dois rulesets:
+
+| Pessoa | Abre PR | Aprova PR | Executa o merge |
+|---|---|---|---|
+| Davi (org owner) | sim | sim, no PR dos outros | **sim** |
+| Yasmin | sim | sim | não |
+| Felipe | sim | sim | não |
+| Assistente (`@claude`) | sim | não | não |
+
+Yasmin e Felipe veem o botão de merge, mas o GitHub recusa o push resultante.
+Não é falta de educação com a ferramenta: é a regra funcionando.
+
+> **O Davi não fica acima das regras.** O bypass vale só neste segundo ruleset,
+> o do merge. O primeiro — `Proteção da main` — continua sem bypass nenhum, então
+> ele também precisa de PR, de 1 aprovação de outra pessoa e do check verde. Ele
+> decide **quando** entra, não **se** passou pelas regras.
+
+Para recriar pela API, se alguém apagar:
+
+```bash
+gh api --method POST repos/Codexrocks/TCC_SDCAC/rulesets --input - <<'JSON'
+{
+  "name": "Merge restrito ao líder",
+  "target": "branch",
+  "enforcement": "active",
+  "conditions": { "ref_name": { "include": ["~DEFAULT_BRANCH"], "exclude": [] } },
+  "bypass_actors": [
+    { "actor_id": 1, "actor_type": "OrganizationAdmin", "bypass_mode": "always" }
+  ],
+  "rules": [ { "type": "update" } ]
+}
+JSON
+```
+
+Para conferir os dois de uma vez:
+
+```bash
+gh api repos/Codexrocks/TCC_SDCAC/rulesets --jq '.[] | "\(.name): \(.enforcement)"'
+```
+
+### Por que o padrão de branch não é travado no servidor
+
+Seria possível exigir o formato `<autor>/<tipo>/<assunto>` por ruleset, com uma
+regra de *branch name pattern*. **Não fizemos, de propósito:** essa regra vale
+para toda branch criada no repositório, e o GitBook cria branches próprias
+quando alguém edita a documentação pelo site. Travar o padrão no servidor
+quebraria o Git Sync.
+
+A verificação fica no [`scripts/validar.py`](../scripts/validar.py), que roda no
+check **Validação** de todo PR. O efeito prático é o mesmo — branch fora do
+padrão não fecha PR — sem o efeito colateral.
+
 ---
 
 ## 4. CODEOWNERS — o item 6
@@ -240,13 +302,50 @@ aprovar — e não permite mexer em configuração do repositório.
 
 | Pessoa | Usuário | Papel | Estado |
 |---|---|---|---|
-| Davi | `@DaviSoaresDilly` | Admin | ativo |
+| Davi | `@DaviSoaresDilly` | Admin · owner da org | ativo |
 | Yasmin | `@Yas2046` | Write | ativo |
-| Felipe | — | Write | **falta convidar** |
+| Felipe | `@filipef4guiar-afk` | Write | ativo |
 
-Com o ruleset da seção 3 ativo, o acesso do Felipe deixa de ser só organização:
-enquanto a equipe for de duas pessoas, cada PR depende da outra estar
-disponível para aprovar.
+Equipe completa desde 03/09/2026. Com três pessoas, sempre há alguém que possa
+aprovar o PR de outro — o que era o ponto frágil enquanto o time era de dois.
+
+> Yasmin é membro da organização; Felipe entrou como **colaborador externo** do
+> repositório. Para o dia a dia dá no mesmo. A diferença aparece se um dia o
+> `CODEOWNERS` usar time (`@Codexrocks/algum-time`): time só alcança quem é
+> membro da organização.
+
+---
+
+## 6. Relatório semanal automático
+
+Todo segunda de manhã o workflow **Relatório semanal** abre um PR com o balanço
+da semana. Configuração em
+[`.github/workflows/relatorio-semanal.yml`](https://github.com/Codexrocks/TCC_SDCAC/blob/main/.github/workflows/relatorio-semanal.yml).
+
+Duas etapas, e a separação é o ponto:
+
+| Etapa | Quem faz | Saída |
+|---|---|---|
+| Contar | [`scripts/atividade.py`](../scripts/atividade.py) | PRs, revisões e commits por pessoa, PRs parados |
+| Interpretar | o assistente, lendo só esses números | a leitura da semana, os riscos e as pendências |
+
+Número de relatório de banca precisa ser reproduzível. Como a contagem é um
+script sem IA, qualquer número pode ser conferido:
+
+```bash
+GITHUB_TOKEN=$(gh auth token) python3 scripts/atividade.py --dias 7
+```
+
+Para rodar fora da segunda-feira: aba **Actions** → *Relatório semanal* →
+*Run workflow*.
+
+### Se o relatório não aparecer
+
+| Sintoma | Causa provável |
+|---|---|
+| Nenhuma execução na aba Actions | Repositório sem atividade há 60 dias — o GitHub suspende `schedule`. Rode uma vez na mão para religar |
+| Executou e falhou na etapa do assistente | Token do secret expirado. Refaça a seção 2 |
+| PR aberto com relatório vazio | Semana sem atividade mesmo. É resultado válido |
 
 ---
 

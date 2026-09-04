@@ -32,17 +32,26 @@ convenção da linguagem.
    ou resultado experimental só entram se vierem de fonte verificada. Na dúvida,
    marque `<!-- FALTA CITAÇÃO -->` e avise.
 6. **Não alterar o cronograma nem o escopo** sem pedido explícito do Davi.
+7. **Código segue `docs/padroes-codigo.md`** — Python 3.12, Ruff, type hints,
+   docstring em português, nome de identificador em inglês, SQL parametrizado.
+8. **Mexeu no dashboard? Vale `docs/usabilidade.md`** — rótulo textual junto da
+   cor, contraste mínimo de 4,5:1, decomposição do Risk Score visível.
 
 ## Padrão de branch
 
 ```
-docs/<assunto>     documentação e artigo
-feat/<assunto>     código novo
-fix/<assunto>      correção
-chore/<assunto>    configuração, dependências, manutenção
+<autor>/<tipo>/<assunto>
 ```
 
-Só minúsculas, números e hífen. Ex.: `docs/referencial-teorico`.
+Autor: `davi` · `yasmin` · `felipe` · `claude`.
+Tipo: `docs` (documentação e artigo) · `feat` (código novo) · `fix` (correção) ·
+`chore` (configuração, dependências, manutenção).
+
+Só minúsculas, números e hífen. Ex.: `yasmin/docs/referencial-teorico`.
+As suas branches começam com `claude/`.
+
+Autor novo precisa entrar na lista `AUTORES` de `scripts/validar.py`, senão a
+branch reprova.
 
 ## Padrão de commit
 
@@ -60,6 +69,9 @@ Corpo opcional explicando **por quê**, não o quê.
 - Preencher o template
 - 1 aprovação antes do merge
 - **Squash and merge**, sempre
+
+**Nunca faça merge.** Na `main` só o Davi merge, e o GitHub recusa qualquer
+outra origem. Deixe o PR pronto e aprovado, e avise.
 
 ## Relatório de sessão — obrigatório
 

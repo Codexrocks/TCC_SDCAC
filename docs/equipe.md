@@ -20,7 +20,9 @@ Dono da infraestrutura do projeto: o que roda e o que organiza.
 
 **Estudar:** Python intermediário · APIs RESTful · SQL/PostgreSQL · Git Flow · Engenharia de Software
 
-**No repositório:** revisa todos os PRs · administra `main` · mantém `docs/relatorios/`
+**GitHub:** [`@DaviSoaresDilly`](https://github.com/DaviSoaresDilly) · branches `davi/...`
+
+**No repositório:** revisa todos os PRs · **único que executa merge na `main`** · mantém `docs/relatorios/`
 
 ---
 
@@ -38,6 +40,8 @@ Dona do conteúdo de segurança: o que o sistema procura e por quê.
 **Stack:** SIEM · SOC · UEBA · Incident Response · SecOps
 
 **Estudar:** Pilares da Segurança (CIA) · Análise de Logs · UEBA · Ameaças Internas · Incident Response
+
+**GitHub:** [`@Yas2046`](https://github.com/Yas2046) · branches `yasmin/...`
 
 **No repositório:** dona de `docs/arquitetura.md` (regras e cenários) e do referencial teórico
 
@@ -57,9 +61,23 @@ Dono da leitura dos dados: o que os números mostram.
 
 **Estudar:** Análise exploratória de dados · Pandas · Visualização de dados · Métricas de ML (Precision, Recall, F1)
 
-**No repositório:** dono do dashboard e dos resultados/gráficos do artigo
+**GitHub:** [`@filipef4guiar-afk`](https://github.com/filipef4guiar-afk) · branches `felipe/...`
+
+**No repositório:** dono do dashboard e dos resultados/gráficos do artigo · responsável pela [usabilidade](usabilidade.md) do painel
 
 ---
+
+## Quem é quem no GitHub
+
+| Pessoa | Usuário | Papel no repositório | Prefixo de branch |
+|---|---|---|---|
+| Davi | `@DaviSoaresDilly` | Admin · owner da organização | `davi/` |
+| Yasmin | `@Yas2046` | Write | `yasmin/` |
+| Felipe | `@filipef4guiar-afk` | Write | `felipe/` |
+| Assistente | `@claude` (workflow) | via GitHub Actions | `claude/` |
+
+Todos abrem PR e aprovam PR dos outros. **Só o Davi executa o merge na `main`** —
+é trava do GitHub, explicada em [Configuração](configuracao.md#quem-pode-executar-o-merge).
 
 ## Responsabilidade de todos
 

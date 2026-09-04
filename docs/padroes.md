@@ -8,13 +8,25 @@ O resto desta página é o detalhe disso.
 ## Branch
 
 ```
-docs/<assunto>     documentação e artigo      docs/referencial-teorico
-feat/<assunto>     código novo                feat/motor-deteccao
-fix/<assunto>      correção                   fix/faixa-risco-medio
-chore/<assunto>    configuração, manutenção   chore/atualiza-dependencias
+<autor>/<tipo>/<assunto>
 ```
 
-Só minúsculas, números e hífen. Uma branch por tarefa — não acumule assuntos.
+O nome **começa por quem está trabalhando**. Assim a lista de branches do
+GitHub agrupa por pessoa, e dá para ver quem está com o quê sem abrir o log.
+
+| Tipo | Para quê | Exemplo |
+|---|---|---|
+| `docs` | documentação e artigo | `yasmin/docs/referencial-teorico` |
+| `feat` | código novo | `davi/feat/motor-deteccao` |
+| `fix` | correção | `felipe/fix/faixa-risco-medio` |
+| `chore` | configuração, manutenção | `davi/chore/atualiza-dependencias` |
+
+Autores válidos: `davi` · `yasmin` · `felipe` · `claude`. Só minúsculas,
+números e hífen. Uma branch por tarefa — não acumule assuntos.
+
+> **Entrou alguém novo no projeto?** O nome precisa ser acrescentado à lista
+> `AUTORES` em [`scripts/validar.py`](../scripts/validar.py), senão a branch
+> dele reprova na validação e o PR não fecha.
 
 ## Commit
 
@@ -43,7 +55,7 @@ Antes de começar qualquer coisa:
 ```bash
 git checkout main
 git pull origin main
-git checkout -b docs/meu-assunto
+git checkout -b davi/docs/meu-assunto     # troque pelo seu nome
 ```
 
 Se a sua branch ficou velha enquanto você trabalhava:
@@ -59,10 +71,11 @@ publicado quebra o clone de quem já baixou.
 ## Push
 
 ```bash
-git push -u origin docs/meu-assunto
+git push -u origin davi/docs/meu-assunto
 ```
 
-Nunca `--force` em branch de outra pessoa. Nunca push direto na `main`.
+Nunca `--force` em branch de outra pessoa. Push direto na `main` não é questão
+de disciplina: o GitHub recusa.
 
 ## Merge
 
@@ -70,8 +83,21 @@ Nunca `--force` em branch de outra pessoa. Nunca push direto na `main`.
 2. Preencha o template
 3. Peça revisão de **1 colega**
 4. Espere o check **Validação** ficar verde
-5. **Squash and merge**
+5. **Avise o Davi** — o merge é ele quem faz
 6. Apague a branch
+
+### Quem faz o merge
+
+Só o **Davi**, e isso é trava do GitHub, não combinado de boca: o ruleset
+`Merge restrito ao líder` recusa qualquer atualização da `main` que não venha
+dele. Yasmin e Felipe abrem PR e aprovam normalmente — o botão de merge é que
+falha para os dois.
+
+O Davi não escapa do resto: PR, 1 aprovação de outra pessoa e check verde valem
+para ele igual. Ele decide **quando** entra, não **se** passou pelas regras.
+
+O GitHub também só oferece **Squash and merge** — as outras opções foram
+desligadas no ruleset. Um PR = um commit na `main`.
 
 Um PR = um commit na `main`. O histórico da `main` deve ser legível de cima a
 baixo, sem `wip` nem `corrige typo`.

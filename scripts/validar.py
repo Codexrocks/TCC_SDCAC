@@ -15,7 +15,13 @@ import sys
 
 RAIZ = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 TIPOS = ("docs", "feat", "fix", "chore")
-RE_BRANCH = re.compile(r"^(%s)/[a-z0-9][a-z0-9-]*$" % "|".join(TIPOS))
+# Quem pode abrir branch. O prefixo diz de quem e o trabalho sem precisar abrir
+# o log. Entrou alguem novo no projeto? Acrescente aqui, senao a branch dele
+# nao passa na validacao.
+AUTORES = ("davi", "yasmin", "felipe", "claude")
+RE_BRANCH = re.compile(
+    r"^(%s)/(%s)/[a-z0-9][a-z0-9-]*$" % ("|".join(AUTORES), "|".join(TIPOS))
+)
 RE_COMMIT = re.compile(r"^(%s): .{3,}$" % "|".join(TIPOS))
 RE_LINK = re.compile(r"(?<!\!)\[[^\]]*\]\(([^)]+)\)")
 
@@ -53,11 +59,26 @@ def checar_branch():
     b = os.environ.get("BRANCH_PR") or git("rev-parse", "--abbrev-ref", "HEAD")
     if not b or b in ("main", "HEAD"):
         return
-    if b.startswith("claude/"):
-        avisos.append(f"branch '{b}' e de sessao do assistente; renomeie antes do PR")
+    if RE_BRANCH.match(b):
         return
-    if not RE_BRANCH.match(b):
-        erros.append(f"branch '{b}' fora do padrao. Use {'/'.join(TIPOS)}/<assunto-com-hifen>")
+    autor = b.split("/")[0]
+    if autor in TIPOS:
+        # Padrao antigo, de antes de 03/09/2026: comecava pelo tipo.
+        erros.append(
+            f"branch '{b}': o padrao mudou, agora comeca pelo autor. "
+            f"Use <autor>/{b}"
+        )
+    elif autor not in AUTORES:
+        erros.append(
+            f"branch '{b}': '{autor}' nao esta na lista de autores "
+            f"({', '.join(AUTORES)}). Se entrou alguem novo, acrescente em "
+            f"scripts/validar.py"
+        )
+    else:
+        erros.append(
+            f"branch '{b}' fora do padrao. Use <autor>/<tipo>/<assunto-com-hifen>, "
+            f"com tipo em {'/'.join(TIPOS)}"
+        )
 
 
 def checar_commits(base):

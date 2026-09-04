@@ -30,23 +30,30 @@ Regra geral: **simples o suficiente para ninguém esquecer.**
 ## 2. O ciclo de uma tarefa
 
 ```
-1. git pull origin main          pegue a versão mais recente
-2. git checkout -b docs/tema     crie sua branch
+1. git pull origin main               pegue a versão mais recente
+2. git checkout -b davi/docs/tema     crie sua branch, com o seu nome
 3. ... trabalhe ...
-4. git add . && git commit       commits pequenos e frequentes
-5. git push -u origin docs/tema  suba
-6. abra o Pull Request           peça revisão de 1 colega
-7. Squash and merge              depois de aprovado
+4. git add . && git commit            commits pequenos e frequentes
+5. git push -u origin davi/docs/tema  suba
+6. abra o Pull Request                peça revisão de 1 colega
+7. avise o Davi                       o merge é ele quem faz
 8. apague a branch
 ```
 
 ### Nomes de branch
 
-| Prefixo | Para quê | Exemplo |
+`<autor>/<tipo>/<assunto>` — o nome começa por quem está trabalhando, para dar
+para ver quem está com o quê sem abrir o log.
+
+| Tipo | Para quê | Exemplo |
 |---|---|---|
-| `docs/` | documentação e artigo | `docs/referencial-teorico` |
-| `feat/` | código novo | `feat/motor-deteccao` |
-| `fix/` | correção | `fix/faixa-risco-medio` |
+| `docs` | documentação e artigo | `yasmin/docs/referencial-teorico` |
+| `feat` | código novo | `davi/feat/motor-deteccao` |
+| `fix` | correção | `felipe/fix/faixa-risco-medio` |
+| `chore` | configuração, manutenção | `davi/chore/atualiza-dependencias` |
+
+Autores: `davi` · `yasmin` · `felipe` · `claude`. Detalhe em
+[Padrões](padroes.md#branch).
 
 ### Mensagens de commit
 
@@ -62,8 +69,10 @@ chore: adiciona dependência do Pandas
 ### Regras de merge
 
 - PR sempre para `main`
-- **1 aprovação** obrigatória de um colega
-- Sempre **Squash and merge** (1 PR = 1 commit na `main`)
+- **1 aprovação** obrigatória de um colega — ninguém aprova o próprio PR
+- Check **Validação** verde
+- **Só o Davi executa o merge** — trava do GitHub, não combinado
+- Sempre **Squash and merge**, e é a única opção que o GitHub oferece
 - Branch apagada depois do merge
 
 ---
@@ -81,27 +90,30 @@ isso, não há como impedir de fato um push direto na `main`.
 O plano do TCC já prevê o repositório como ativo de portfólio profissional, e o
 site do GitBook já é público — então abrir o código não muda a exposição.
 
-**b) Proteger a `main`** — `Settings → Rules → Rulesets → New branch ruleset`
+**b) Proteger a `main`** — dois rulesets, ambos `Active`:
 
-- [ ] Target: `main`
-- [ ] Require a pull request before merging → **1 approval**
-- [ ] Require status checks to pass → **Validação**
-- [ ] Block force pushes
-- [ ] Restrict deletions
+- [x] `Proteção da main` — PR obrigatório com 1 aprovação, check **Validação**,
+      sem force push, sem deleção, só *Squash and merge*. Sem bypass para
+      ninguém
+- [x] `Merge restrito ao líder` — só o dono da organização atualiza a `main`
 
 **c) Adicionar o secret do assistente** — `Settings → Secrets and variables → Actions`
 
-- [ ] `ANTHROPIC_API_KEY` — sem ele o workflow `@claude` não roda
+- [x] `CLAUDE_CODE_OAUTH_TOKEN` — cadastrado em 03/09/2026
 
 **d) Dar acesso à equipe** — `Settings → Collaborators and teams`
 
-- [ ] Yasmin e Felipe com papel **Write**
+- [x] Yasmin (`@Yas2046`) e Felipe (`@filipef4guiar-afk`) com papel **Write**
 
-### Enquanto o repositório for privado
+Tudo isso está feito. O passo a passo de cada item, para conferir ou refazer,
+está em [Configuração passo a passo](configuracao.md).
 
-A proteção de branch não existe e o merge não é bloqueado por nada. O que sobra
-é o check **Validação**, que fica vermelho no PR mas não impede o merge — ou
-seja, a regra passa a depender de disciplina, não de trava.
+### Por que o repositório precisou ser público
+
+No plano gratuito, regra de branch em repositório **privado** de organização é
+recurso pago. Em repositório público é gratuita. Sem isso, não haveria como
+impedir de fato um push direto na `main` — a regra dependeria de disciplina, e
+disciplina não aparece no log da banca.
 
 ---
 
@@ -150,6 +162,24 @@ documentação aparece lá automaticamente. Ele não precisa de acesso separado.
 A cada sessão de trabalho com o Claude, é gerado um relatório em
 [`docs/relatorios/`](relatorios/README.md) com: o que foi pedido, o que foi
 respondido, o que mudou no repositório e o que ficou pendente.
+
+**Toda segunda de manhã**, além disso, um workflow abre sozinho um PR com o
+relatório da semana. Ele funciona em duas etapas, e a separação é proposital:
+
+1. [`scripts/atividade.py`](../scripts/atividade.py) **conta** — PRs abertos e
+   mergeados, revisões e commits por pessoa, PRs parados. Sem IA no meio, então
+   qualquer número do relatório pode ser reproduzido rodando o script
+2. o assistente **lê esses números** e escreve a leitura da semana, cruzando com
+   o [cronograma](cronograma.md)
+
+Quem quiser conferir um número roda:
+
+```bash
+python3 scripts/atividade.py --dias 7
+```
+
+Precisa de um token do GitHub em `GITHUB_TOKEN`. O relatório também roda sob
+demanda pelo botão *Run workflow*, na aba **Actions**.
 
 Serve para dois propósitos: ninguém perde o fio da meada, e a banca tem prova
 documentada do processo de desenvolvimento.
