@@ -550,45 +550,73 @@ Mas é um buraco declarado: quem quisesse escapar da declaração de IA poderia
 forjar uma mensagem com esse prefixo. **O que segura esse caso é a revisão do
 Pull Request, onde o diff aparece — não o validador.**
 
-### Cada espaço na sua branch
+### Um site, uma branch — os dois espaços andam juntos
 
-**Nenhum dos dois espaços aponta para a `main`.** Cada um lê da sua própria
-branch — e apontar o espaço errado para a branch errada perde texto sem avisar.
+**Não dá para colocar cada espaço numa branch diferente.** O Git Sync deste
+site é *site-wide*: uma instalação só, compartilhada pelos dois espaços. A
+documentação do GitBook é explícita:
 
-`GitBook → o espaço → Configure → Git Sync`
+> Use site-wide Git Sync to sync multiple spaces from **one repository and
+> branch**. Map each space to its own directory in `gitbook-docs.yaml`.
 
-| Espaço | Branch | Project directory |
-|---|---|---|
-| **Documentação** | `gitbook/docs/documentacao` | vazio |
-| **Artigo** | `gitbook/docs/artigo` | vazio |
+O `gitbook-docs.yaml` separa os espaços por **diretório**, nunca por branch.
+Trocar a branch em um espaço troca no outro junto — os dois têm o mesmo
+`parentInstallationId`.
 
-Repositório é `Codexrocks/TCC_SDCAC` nos dois. Se ele perguntar a direção da
-primeira sincronização, escolha **importar do Git** (GitHub → GitBook). O
-GitHub é a fonte da verdade.
+Foi assim que se descobriu: ao apontar o espaço Artigo para
+`gitbook/docs/artigo`, o espaço Documentação foi junto, e exportou todo o
+`docs/` reformatado — inclusive apagando os comentários do `gitbook-docs.yaml` —
+para dentro da branch do artigo.
 
-> **Por que o Artigo não pode ficar em `gitbook/docs/documentacao`.** Essa
-> branch é espelho forçado da `main`: o workflow roda `git push --force` nela a
-> cada merge. Se o espaço do Artigo escrever ali, o texto é sobrescrito no
-> próximo push — e o job que abre o Pull Request só dispara em
-> `gitbook/docs/artigo`, então nada chega na `main`. O resultado é o pior
-> possível: o site mostra o texto salvo, e ele some sem erro nenhum.
+`GitBook → Configure → Git Sync`
 
-### Conferindo em que branch cada espaço está
+| Campo | Valor |
+|---|---|
+| Repositório | `Codexrocks/TCC_SDCAC` |
+| Branch | **uma só, para o site inteiro** |
+| Project directory | vazio |
 
-Vale conferir depois de mexer no Git Sync — a tela não deixa isso óbvio:
+Se ele perguntar a direção da primeira sincronização, escolha **importar do
+Git** (GitHub → GitBook). O GitHub é a fonte da verdade.
+
+> **Consequência para o desenho de duas branches.** O
+> [`gitbook-sync.yml`](https://github.com/Codexrocks/TCC_SDCAC/blob/main/.github/workflows/gitbook-sync.yml)
+> pressupõe `gitbook/docs/documentacao` como espelho forçado e
+> `gitbook/docs/artigo` como caminho de escrita. Com uma branch só, esse
+> desenho não se sustenta: ou as duas pastas são espelho — e ninguém escreve
+> pelo GitBook — ou as duas são graváveis, e o `docs/` volta reformatado.
+> **Decisão pendente do Davi**, registrada no relatório da sessão 08.
+
+O que segurou o estrago foi a trava do próprio workflow, que recusa levar para
+a `main` qualquer arquivo fora de `artigo/`:
+
+```
+::error::A branch do artigo traz arquivos fora de artigo/
+```
+
+Os três runs falharam e nenhum Pull Request foi aberto.
+
+### Conferindo em que branch os espaços estão
+
+A tela do Git Sync não deixa a branch óbvia, e foi por isso que a configuração
+errada passou despercebida. Confira pela API depois de mexer:
 
 ```bash
-# Documentacao -> tem que responder .../tree/gitbook/docs/documentacao
+# Documentacao
 curl -s -H "Authorization: Bearer $GITBOOK_TOKEN" \
   https://api.gitbook.com/v1/spaces/aKvalQTXmABRN7IP3nVq/git/info
 
-# Artigo -> tem que responder .../tree/gitbook/docs/artigo
+# Artigo
 curl -s -H "Authorization: Bearer $GITBOOK_TOKEN" \
   https://api.gitbook.com/v1/spaces/RTQgTj7MhGTUCLhhic5R/git/info
 ```
 
-O campo `url` da resposta mostra a branch. Se os dois responderem a mesma, o
-Artigo está errado.
+O campo `url` mostra a branch, e o `operation.direction` mostra se a última
+sincronização foi `import` (GitHub → GitBook) ou `export` (GitBook → GitHub).
+
+**Os dois respondem a mesma branch** — é o esperado, não defeito: o Git Sync é
+do site, não do espaço. Um `export` partindo do espaço Documentação é o sinal
+de que o `docs/` está voltando reformatado.
 
 **Trave a edição no espaço.** Como o caminho de volta é descartado, deixar
 alguém editar no site cria trabalho que se perde sem aviso. No GitBook, deixe o
