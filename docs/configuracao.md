@@ -3,7 +3,9 @@
 Página de consulta para quando algo não estiver funcionando. Cada seção é
 independente — vá direto na que precisa.
 
-Estado em 03/09/2026: repositório **público**, branch padrão **`main`**.
+Estado em 03/09/2026: repositório **público**, branch padrão **`main`**, dois
+rulesets ativos, secret do assistente cadastrado, equipe completa com acesso.
+A configuração inicial está **concluída** — esta página vira consulta.
 
 ---
 
@@ -43,7 +45,7 @@ TCC_SDCAC/
 | Provider | GitHub |
 | Organização a autorizar | **`Codexrocks`** — não a conta pessoal |
 | Repositório | `Codexrocks/TCC_SDCAC` |
-| Branch | `main` |
+| Branch | **`gitbook/docs/documentacao`** — não a `main`, ver seção 7 |
 | **Project directory** | **deixe vazio** |
 
 > Project directory vazio significa "raiz do repositório", que é onde o
@@ -57,8 +59,14 @@ template do GitBook, senão ele sobrescreve o repositório.
 
 O site foi criado com um espaço vazio chamado *Untitled*. O
 `gitbook-docs.yaml` declara um espaço com a chave `documentacao`, então o
-GitBook vai criar um espaço novo e deixar o *Untitled* solto na organização.
-Pode apagar o *Untitled* depois que a sincronização funcionar.
+GitBook criou um espaço novo e deixou o *Untitled* solto na organização.
+
+Conferido em 03/09/2026: o *Untitled* está **vazio** (nenhuma página, nenhum
+comentário, nenhuma change request) e **não é fonte de conteúdo do site** — o
+site tem só o espaço `Documentação`. Apagar não afeta a publicação.
+
+`GitBook → espaço Untitled → menu ⋯ → Delete`. Se apagar por engano, o GitBook
+guarda na lixeira e dá para restaurar.
 
 > **Não mude a chave `documentacao` depois que o espaço existir.** O GitBook
 > identifica o espaço pela chave, não pelo título. Trocar a chave faz ele criar
@@ -68,6 +76,10 @@ Pode apagar o *Untitled* depois que a sincronização funcionar.
 ---
 
 ## 2. Secret do assistente
+
+> **Já está feito.** `CLAUDE_CODE_OAUTH_TOKEN` foi cadastrado em 03/09/2026 e o
+> `@claude` responde em issue e em PR. O resto da seção fica como referência
+> para quando o token expirar ou precisar ser trocado.
 
 O workflow `@claude` aceita **uma** destas duas credenciais. Basta escolher uma.
 
@@ -107,9 +119,44 @@ Preencha:
 
 O nome tem que ser exatamente esse, em maiúsculas.
 
+### Alternativa pelo terminal
+
+Se preferir não passar o token pelo navegador, o `gh` cadastra direto e lê o
+valor de forma oculta:
+
+```bash
+gh secret set CLAUDE_CODE_OAUTH_TOKEN -R Codexrocks/TCC_SDCAC
+```
+
+Ele pergunta o valor, você cola, e o token não fica no histórico do shell.
+Confira depois com `gh secret list -R Codexrocks/TCC_SDCAC` — o comando mostra
+só o nome e a data, nunca o valor.
+
 ---
 
 ## 3. Proteger a `main` com um ruleset
+
+> **Já está feito.** O ruleset `Proteção da main` foi criado em 03/09/2026 e
+> está `Active`. O passo a passo abaixo fica como referência — para conferir o
+> que está valendo, para recriar se alguém apagar, ou para repetir em outro
+> repositório.
+
+O que ficou valendo:
+
+| Regra | Efeito |
+|---|---|
+| Restrict deletions | ninguém apaga a `main` |
+| Block force pushes | ninguém reescreve o histórico |
+| Require a pull request | 1 aprovação, e aprovação cai a cada novo commit |
+| Require status checks | o check `validar` precisa passar, com a branch atualizada |
+| Allowed merge methods | só **Squash and merge** — as outras opções somem do botão |
+| Bypass list | **vazia** — a regra vale para todo mundo, inclusive o dono |
+
+Como a lista de bypass está vazia e o GitHub não pede revisão ao autor do
+próprio PR, **quem abre o PR sempre depende de outra pessoa para mergear**.
+Hoje isso significa: Davi depende da Yasmin, e vice-versa.
+
+### Refazendo pela interface
 
 `Settings → Rules → Rulesets → New ruleset → New branch ruleset`
 
@@ -136,8 +183,7 @@ disso, o ruleset existe mas não faz nada.
 **Create** no fim da página.
 
 > O check só aparece na busca depois que o workflow **Validação** rodar pelo
-> menos uma vez. Se a lista vier vazia, abra um PR qualquer, espere o check
-> rodar, e volte aqui.
+> menos uma vez. Isso já aconteceu — `validar` aparece normalmente na lista.
 
 ### Testando
 
@@ -157,6 +203,64 @@ O GitHub tem que recusar. Se recusar, está funcionando — desfaça com
 > ruleset (*bypass*). Não adicione ninguém à lista de bypass: a regra vale para
 > todos, inclusive para você e para o assistente.
 
+### Quem pode executar o merge
+
+Um **segundo ruleset**, `Merge restrito ao líder` (id `22236517`), resolve o
+"quem aperta o botão". Ele tem uma regra só — *Restrict updates* — e uma lista
+de bypass com **Organization admin**.
+
+O efeito combinado dos dois rulesets:
+
+| Pessoa | Abre PR | Aprova PR | Executa o merge |
+|---|---|---|---|
+| Davi (org owner) | sim | sim, no PR dos outros | **sim** |
+| Yasmin | sim | sim | não |
+| Felipe | sim | sim | não |
+| Assistente (`@claude`) | sim | não | não |
+
+Yasmin e Felipe veem o botão de merge, mas o GitHub recusa o push resultante.
+Não é falta de educação com a ferramenta: é a regra funcionando.
+
+> **O Davi não fica acima das regras.** O bypass vale só neste segundo ruleset,
+> o do merge. O primeiro — `Proteção da main` — continua sem bypass nenhum, então
+> ele também precisa de PR, de 1 aprovação de outra pessoa e do check verde. Ele
+> decide **quando** entra, não **se** passou pelas regras.
+
+Para recriar pela API, se alguém apagar:
+
+```bash
+gh api --method POST repos/Codexrocks/TCC_SDCAC/rulesets --input - <<'JSON'
+{
+  "name": "Merge restrito ao líder",
+  "target": "branch",
+  "enforcement": "active",
+  "conditions": { "ref_name": { "include": ["~DEFAULT_BRANCH"], "exclude": [] } },
+  "bypass_actors": [
+    { "actor_id": 1, "actor_type": "OrganizationAdmin", "bypass_mode": "always" }
+  ],
+  "rules": [ { "type": "update" } ]
+}
+JSON
+```
+
+Para conferir os dois de uma vez:
+
+```bash
+gh api repos/Codexrocks/TCC_SDCAC/rulesets --jq '.[] | "\(.name): \(.enforcement)"'
+```
+
+### Por que o padrão de branch não é travado no servidor
+
+Seria possível exigir o formato `<autor>/<tipo>/<assunto>` por ruleset, com uma
+regra de *branch name pattern*. **Não fizemos, de propósito:** essa regra vale
+para toda branch criada no repositório, e o GitBook cria branches próprias
+quando alguém edita a documentação pelo site. Travar o padrão no servidor
+quebraria o Git Sync.
+
+A verificação fica no [`scripts/validar.py`](../scripts/validar.py), que roda no
+check **Validação** de todo PR. O efeito prático é o mesmo — branch fora do
+padrão não fecha PR — sem o efeito colateral.
+
 ---
 
 ## 4. CODEOWNERS — o item 6
@@ -165,17 +269,30 @@ O GitHub tem que recusar. Se recusar, está funcionando — desfaça com
 cada parte do repositório**. Quando alguém abre um PR que mexe em `docs/`, o
 GitHub pede revisão de quem estiver marcado ali, sem ninguém precisar lembrar.
 
-O arquivo está em `.github/CODEOWNERS`, com as linhas **comentadas** — porque
-comentário só vira regra quando os usuários existem de verdade no repositório.
+O arquivo está em `.github/CODEOWNERS`. A linha geral aponta para
+`@DaviSoaresDilly`; as linhas por pasta seguem **comentadas**, porque um
+usuário só vira regra válida depois de ter acesso de escrita ao repositório.
 
-Quando Yasmin e Felipe tiverem acesso, descubra o usuário GitHub de cada uma,
-apague o `#` do começo das linhas e troque os nomes:
+> Antes de 03/09/2026 a linha geral apontava para o time
+> `@Codexrocks/lideranca`, que nunca foi criado. O GitHub tratava o arquivo
+> inteiro como inválido, com o erro *Unknown owner*. Foi por isso que trocou.
+
+Quando o Felipe entrar, descubra o usuário GitHub dele, apague o `#` do começo
+das linhas e troque o placeholder:
 
 ```
-/docs/                @usuario-da-yasmin @usuario-do-felipe
-/detection/           @usuario-da-yasmin
+/docs/                @Yas2046 @usuario-do-felipe
+/detection/           @Yas2046
 /frontend/            @usuario-do-felipe
 ```
+
+Para conferir se o arquivo está válido sem precisar abrir um PR:
+
+```bash
+gh api repos/Codexrocks/TCC_SDCAC/codeowners/errors
+```
+
+Resposta com `"errors":[]` significa arquivo limpo.
 
 É opcional. Sem ele nada quebra — só significa que quem abre o PR escolhe o
 revisor na mão.
@@ -188,3 +305,206 @@ revisor na mão.
 
 Yasmin e Felipe com papel **Write**. Write permite criar branch, abrir PR e
 aprovar — e não permite mexer em configuração do repositório.
+
+| Pessoa | Usuário | Papel | Estado |
+|---|---|---|---|
+| Davi | `@DaviSoaresDilly` | Admin · owner da org | ativo |
+| Yasmin | `@Yas2046` | Write | ativo |
+| Felipe | `@FilipeF4guiar` | Write | ativo |
+
+Equipe completa desde 03/09/2026. Com três pessoas, sempre há alguém que possa
+aprovar o PR de outro — o que era o ponto frágil enquanto o time era de dois.
+
+> Yasmin é membro da organização; Felipe entrou como **colaborador externo** do
+> repositório. Para o dia a dia dá no mesmo. A diferença aparece se um dia o
+> `CODEOWNERS` usar time (`@Codexrocks/algum-time`): time só alcança quem é
+> membro da organização.
+
+---
+
+## 6. Relatório semanal automático
+
+Todo segunda de manhã o workflow **Relatório semanal** abre um PR com o balanço
+da semana. Configuração em
+[`.github/workflows/relatorio-semanal.yml`](https://github.com/Codexrocks/TCC_SDCAC/blob/main/.github/workflows/relatorio-semanal.yml).
+
+Duas etapas, e a separação é o ponto:
+
+| Etapa | Quem faz | Saída |
+|---|---|---|
+| Contar | [`scripts/atividade.py`](../scripts/atividade.py) | PRs, revisões e commits por pessoa, PRs parados |
+| Interpretar | o assistente, lendo só esses números | a leitura da semana, os riscos e as pendências |
+
+Número de relatório de banca precisa ser reproduzível. Como a contagem é um
+script sem IA, qualquer número pode ser conferido:
+
+```bash
+GITHUB_TOKEN=$(gh auth token) python3 scripts/atividade.py --dias 7
+```
+
+Para rodar fora da segunda-feira: aba **Actions** → *Relatório semanal* →
+*Run workflow*.
+
+### Se o relatório não aparecer
+
+| Sintoma | Causa provável |
+|---|---|
+| Nenhuma execução na aba Actions | Repositório sem atividade há 60 dias — o GitHub suspende `schedule`. Rode uma vez na mão para religar |
+| Executou e falhou na etapa do assistente | Token do secret expirado. Refaça a seção 2 |
+| PR aberto com relatório vazio | Semana sem atividade mesmo. É resultado válido |
+
+---
+
+## 7. GitBook e a `main` protegida
+
+### O erro `cannot update this protected ref`
+
+Se o Git Sync falhar com:
+
+```
+Git repository rule violation: "cannot update this protected ref."
+```
+
+não é defeito do GitBook. É a proteção da `main` funcionando.
+
+O Git Sync é de mão dupla. Na direção **import** (GitHub → GitBook) ele só lê, e
+nada o impede. Na direção **export** (GitBook → GitHub) ele **empurra um commit
+direto na branch configurada** — e é aí que bate nos dois rulesets da seção 3: o
+primeiro exige Pull Request, o segundo exige que quem atualiza a `main` seja o
+dono da organização. O app `gitbook-com` não é nem uma coisa nem outra.
+
+Vale registrar o que esse erro revelou: enquanto o Git Sync apontava para a
+`main`, **o GitBook era uma porta dos fundos**. Qualquer pessoa com acesso de
+edição ao site escrevia na `main` sem PR, sem revisão e sem passar pelo líder.
+A trava não quebrou o fluxo — ela expôs um furo que já existia.
+
+### A solução: branch dedicada
+
+O GitBook passou a escrever numa branch própria, **`gitbook/docs/documentacao`**,
+que não é protegida. De lá, o conteúdo entra na `main` como todo o resto: por
+Pull Request.
+
+```
+   edição no site
+        │
+        ▼
+  gitbook/docs/documentacao ──PR──> main ──> (volta para a branch)
+        ▲                                          │
+        └──────────────────────────────────────────┘
+```
+
+Os dois sentidos são automáticos, pelo workflow
+[`gitbook-sync.yml`](https://github.com/Codexrocks/TCC_SDCAC/blob/main/.github/workflows/gitbook-sync.yml):
+
+| Quando | O que acontece |
+|---|---|
+| Alguém edita no GitBook | O GitBook empurra na branch dele → o workflow abre PR para a `main` |
+| Um PR entra na `main` | O workflow leva a `main` de volta para a branch do GitBook |
+
+Sem o segundo sentido a branch divergiria em poucos dias e alguém teria que
+reconciliar na mão.
+
+> **Não apague a branch `gitbook/docs/documentacao`** depois do merge, como se
+> faz com as outras. Ela é permanente: é o outro lado do Git Sync.
+
+### Trocando a branch no GitBook
+
+`GitBook → espaço Documentação → Configure → Git Sync`
+
+| Campo | Valor |
+|---|---|
+| Repositório | `Codexrocks/TCC_SDCAC` |
+| **Branch** | **`gitbook/docs/documentacao`** |
+| Project directory | vazio |
+
+Se ele perguntar a direção da primeira sincronização, escolha **importar do
+Git** (GitHub → GitBook). O GitHub é a fonte da verdade; a branch já foi criada
+a partir da `main`, com o mesmo conteúdo.
+
+Para conferir o estado do Git Sync sem abrir o site, incluindo o erro da última
+operação:
+
+```bash
+curl -s -H "Authorization: Bearer $GITBOOK_TOKEN"   https://api.gitbook.com/v1/spaces/aKvalQTXmABRN7IP3nVq/git/info
+```
+
+### Se aparecer conflito
+
+O workflow falha com a mensagem de que o mesmo trecho foi editado nos dois
+lados. Acontece quando alguém mexe no mesmo parágrafo pelo GitHub e pelo
+GitBook antes de sincronizar. Resolva na mão:
+
+```bash
+git fetch origin
+git checkout gitbook/docs/documentacao
+git merge origin/main       # resolva os conflitos
+git push origin gitbook/docs/documentacao
+```
+
+A regra que evita isso: **um assunto por vez, num lugar só**. Quem está
+escrevendo pelo GitBook não deve estar com PR aberto no mesmo arquivo.
+
+---
+
+## 6. Windows — dois comandos que não funcionam como estão escritos
+
+O restante desta página assume Linux ou macOS. No Windows, dois comandos que
+aparecem na documentação falham por motivos que não têm nada a ver com o
+projeto. Ambos têm solução de uma linha.
+
+### `python3` abre a Microsoft Store em vez de rodar
+
+O Windows traz um atalho falso chamado `python3` em `WindowsApps`. Ele não é o
+Python — só abre a loja. O sintoma é este, com código de saída `9009`:
+
+```
+Python não foi encontrado; executar sem argumentos para instalar do
+Microsoft Store ou desabilitar este atalho em Configurações > Aplicativos...
+```
+
+O Python de verdade atende por **`python`**. Então, no Windows:
+
+```powershell
+python scripts/validar.py
+```
+
+O workflow **Validação** roda em Ubuntu e continua usando `python3` — lá o nome
+certo é esse. Não mude o `.github/workflows/validacao.yml`.
+
+> Para conferir qual é o seu: `python --version` tem que responder `Python 3.x`.
+> Se responder a mensagem da loja, o Python não está instalado.
+
+### `claude` não é reconhecido como comando
+
+Quem usa o **aplicativo desktop** do Claude não recebe o `claude` no PATH. O
+executável existe, mas mora dentro do aplicativo — e o aplicativo é empacotado
+(MSIX), o que traz uma armadilha a mais.
+
+Um aplicativo empacotado roda num contêiner com **redirecionamento de sistema
+de arquivos**. Dentro do contêiner o executável aparece em:
+
+```
+%APPDATA%\Claude\claude-code\<versão>\claude.exe
+```
+
+Esse caminho é uma visão virtual. **Num PowerShell comum ele não existe** — o
+erro é `CommandNotFoundException` apontando justamente para o caminho que você
+acabou de ver funcionando em outro lugar. O arquivo de verdade está em:
+
+```
+%LOCALAPPDATA%\Packages\Claude_pzs8sxrjxfjjc\LocalCache\Roaming\Claude\claude-code\<versão>\claude.exe
+```
+
+Então, no seu terminal, use o caminho real. Esta versão descobre sozinha qual é
+a versão mais nova, e não quebra quando o aplicativo atualizar:
+
+```powershell
+& (Get-ChildItem "$env:LOCALAPPDATA\Packages\Claude_pzs8sxrjxfjjc\LocalCache\Roaming\Claude\claude-code\*\claude.exe" | Sort-Object { [version]$_.Directory.Name } -Descending | Select-Object -First 1).FullName setup-token
+```
+
+> O sufixo `pzs8sxrjxfjjc` identifica o pacote e pode mudar em outra instalação.
+> Se o caminho não existir, ache o seu com:
+> `Get-ChildItem "$env:LOCALAPPDATA\Packages" -Filter "Claude*"`.
+
+Quem instala o Claude Code pelo `npm`, no terminal, não passa por nada disso —
+o `claude` entra no PATH como qualquer outro programa.

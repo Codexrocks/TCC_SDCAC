@@ -1,16 +1,18 @@
 # Quem é chamado automaticamente para revisar cada parte.
-# Substitua pelos usuários reais do GitHub depois que Yasmin e Felipe
-# tiverem acesso ao repositório.
+# Descomente e ajuste as linhas abaixo conforme a equipe entrar no
+# repositório. Usuário só vira regra depois de ter acesso de escrita —
+# antes disso o GitHub marca o arquivo com erro 'Unknown owner'.
+# Yasmin = @Yas2046 · Felipe = ainda sem acesso.
 
 # Padrão: o líder revisa qualquer coisa
-*                       @Codexrocks/lideranca
+*                       @DaviSoaresDilly
 
 # Documentação e artigo
-# /docs/                @yasmin @felipe
+# /docs/                @Yas2046 @usuario-do-felipe
 
 # Regras de detecção e Risk Score
-# /detection/           @yasmin
+# /detection/           @Yas2046
 
 # Dashboard e análise de dados
-# /frontend/            @felipe
-# /results/             @felipe
+# /frontend/            @usuario-do-felipe
+# /results/             @usuario-do-felipe

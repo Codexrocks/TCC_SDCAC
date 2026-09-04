@@ -1,0 +1,64 @@
+name: Governança
+
+# Confere as duas regras que protegem as próprias regras:
+#
+#   1. O corpo do PR declara qual IA foi usada e o que é de quem
+#   2. PR que mexe em AGENTS.md, docs/padroes*, .github/ ou scripts/ precisa de
+#      DUAS aprovações, não uma
+#
+# A segunda existe porque, sem ela, bastaria um PR editando o validar.py para
+# desligar todas as checagens — e a IA que escreveu o PR seria a mesma que
+# sugeriu a mudança.
+#
+# Motivo completo em AGENTS.md, seção 4. Política em docs/uso-de-ia.md.
+
+on:
+  pull_request:
+    # `edited` é essencial: sem ele, preencher a seção Uso de IA depois de abrir
+    # o PR não faria o check rodar de novo, e ele ficaria vermelho para sempre.
+    types: [opened, edited, synchronize, reopened, ready_for_review]
+  pull_request_review:
+    # Sem isto, aprovar não recalcularia a contagem de aprovações.
+    types: [submitted, dismissed]
+
+jobs:
+  governanca:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    permissions:
+      contents: read
+      pull-requests: read
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          # Precisa do historico completo para alcancar o commit da base.
+          fetch-depth: 0
+
+      - name: Preparar Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Usar os verificadores da base, não os do próprio PR
+        # Sem isto, um PR que edite scripts/*.py roda a versao adulterada como
+        # se fosse o verificador — e o check que deveria barra-lo passa verde.
+        # O que vale para julgar um PR e o verificador que ja esta na main.
+        run: |
+          base="${{ github.event.pull_request.base.sha }}"
+          for arquivo in scripts/validar.py scripts/governanca.py; do
+            if git cat-file -e "$base:$arquivo" 2>/dev/null; then
+              git show "$base:$arquivo" > "$arquivo"
+              echo "$arquivo: usando a versao da base ($base)"
+            else
+              echo "::warning::$arquivo nao existe na base — usando a versao do PR. Isso e esperado so no PR que cria o arquivo."
+            fi
+          done
+
+      - name: Conferir declaração de IA e aprovações
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REPO: ${{ github.repository }}
+          PR_NUMERO: ${{ github.event.pull_request.number }}
+        run: python3 scripts/governanca.py
