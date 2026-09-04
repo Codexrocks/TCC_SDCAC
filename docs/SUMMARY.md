@@ -27,4 +27,5 @@
 * [2026-09-03 — Sessão 04: proteção da main e CODEOWNERS](relatorios/2026-09-03-sessao-04.md)
 * [2026-09-03 — Sessão 05: governança, usabilidade e padrões de código](relatorios/2026-09-03-sessao-05.md)
 * [2026-09-04 — Sessão 06: merge sem revisão e correções no PR #1](relatorios/2026-09-04-sessao-06.md)
+* [2026-09-04 — Sessão 07: o artigo, o primeiro PR da equipe e a governança travada](relatorios/2026-09-04-sessao-07.md)
 * [Modelo de relatório](relatorios/_modelo.md)

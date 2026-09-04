@@ -55,10 +55,10 @@ para ver quem está com o quê sem abrir o log.
 |---|---|---|
 | `docs` | documentação e artigo | `yasmin/docs/referencial-teorico` |
 | `feat` | código novo | `davi/feat/motor-deteccao` |
-| `fix` | correção | `felipe/fix/faixa-risco-medio` |
+| `fix` | correção | `filipe/fix/faixa-risco-medio` |
 | `chore` | configuração, manutenção | `davi/chore/atualiza-dependencias` |
 
-Autores: `davi` · `yasmin` · `felipe` · `claude`. Detalhe em
+Autores: `davi` · `yasmin` · `filipe` · `claude`. Detalhe em
 [Padrões](padroes.md#branch).
 
 ### Mensagens de commit
@@ -109,7 +109,7 @@ site do GitBook já é público — então abrir o código não muda a exposiç�
 
 **d) Dar acesso à equipe** — `Settings → Collaborators and teams`
 
-- [x] Yasmin (`@Yas2046`) e Felipe (`@FilipeF4guiar`) com papel **Write**
+- [x] Yasmin (`@Yas2046`) e Filipe (`@FilipeF4guiar`) com papel **Write**
 
 Tudo isso está feito. O passo a passo de cada item, para conferir ou refazer,
 está em [Configuração passo a passo](configuracao.md).

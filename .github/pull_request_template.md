@@ -37,4 +37,4 @@ entra — marque a linha com o aviso de citação pendente e siga.
 
 ## Responsável
 
-<!-- Davi / Yasmin / Felipe -->
+<!-- Davi / Yasmin / Filipe -->

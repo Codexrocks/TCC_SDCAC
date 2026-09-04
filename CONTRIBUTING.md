@@ -50,10 +50,10 @@ com o quê.
 |---|---|---|
 | `docs` | documentação e artigo | `yasmin/docs/referencial-teorico` |
 | `feat` | código novo | `davi/feat/motor-deteccao` |
-| `fix` | correção | `felipe/fix/faixa-risco-medio` |
+| `fix` | correção | `filipe/fix/faixa-risco-medio` |
 | `chore` | configuração, manutenção | `davi/chore/atualiza-dependencias` |
 
-Autores: `davi` · `yasmin` · `felipe` · `claude`. Só minúsculas, números e
+Autores: `davi` · `yasmin` · `filipe` · `claude`. Só minúsculas, números e
 hífen.
 
 ## Commit

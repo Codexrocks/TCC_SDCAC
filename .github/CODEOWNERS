@@ -2,17 +2,17 @@
 # Descomente e ajuste as linhas abaixo conforme a equipe entrar no
 # repositório. Usuário só vira regra depois de ter acesso de escrita —
 # antes disso o GitHub marca o arquivo com erro 'Unknown owner'.
-# Yasmin = @Yas2046 · Felipe = ainda sem acesso.
+# Yasmin = @Yas2046 · Filipe = @FilipeF4guiar. Os dois ja tem acesso de escrita.
 
 # Padrão: o líder revisa qualquer coisa
 *                       @DaviSoaresDilly
 
 # Documentação e artigo
-# /docs/                @Yas2046 @usuario-do-felipe
+# /docs/                @Yas2046 @FilipeF4guiar
 
 # Regras de detecção e Risk Score
 # /detection/           @Yas2046
 
 # Dashboard e análise de dados
-# /frontend/            @usuario-do-felipe
-# /results/             @usuario-do-felipe
+# /frontend/            @FilipeF4guiar
+# /results/             @FilipeF4guiar

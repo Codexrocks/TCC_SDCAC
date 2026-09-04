@@ -3,7 +3,7 @@
 **Sistema de Detecção de Comportamentos Anômalos em Cybersecurity**
 
 Trabalho de Conclusão de Curso · Prof. Euzébio D. de Souza · 2026/2
-Davi · Yasmin · Felipe
+Davi · Yasmin · Filipe
 
 ---
 

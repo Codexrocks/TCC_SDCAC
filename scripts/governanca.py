@@ -81,8 +81,18 @@ def api(caminho, tok):
 
 
 def sem_comentarios(texto):
-    """Remove comentarios HTML — no template eles sao instrucao, nao resposta."""
-    return re.sub(r"<!--.*?-->", "", texto or "", flags=re.DOTALL)
+    """Remove comentarios HTML e normaliza o fim de linha.
+
+    A normalizacao nao e detalhe de estilo. O GitHub devolve o corpo do Pull
+    Request com CRLF; sem trocar por LF, o retorno de carro sobra no campo
+    depois que o comentario e removido, o campo parece preenchido, e um
+    template intacto passa como se tivesse sido respondido.
+
+    Foi exatamente o que aconteceu no PR #5: os quatro campos em branco e o
+    check verde.
+    """
+    texto = (texto or "").replace("\r\n", "\n").replace("\r", "\n")
+    return re.sub(r"<!--.*?-->", "", texto, flags=re.DOTALL)
 
 
 def checar_declaracao_ia(corpo):
@@ -105,7 +115,9 @@ def checar_declaracao_ia(corpo):
         achado = padrao.search(limpo)
         if not achado:
             erros.append(f"falta o campo '{campo}' na secao Uso de IA do PR")
-        elif not achado.group(1).strip(" *_`-"):
+        # Cobre espaco, tabulacao e os enfeites de Markdown. O retorno de carro
+        # ja saiu em sem_comentarios; fica aqui como segunda barreira.
+        elif not achado.group(1).strip(" \t\r*_`-"):
             erros.append(
                 f"o campo '{campo}' esta em branco. Uma resposta honesta e curta "
                 f"basta — inclusive 'nenhuma', se for o caso"

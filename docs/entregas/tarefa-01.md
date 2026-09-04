@@ -42,7 +42,7 @@ ambiente controlado.
 |---|---|
 | **Davi** | Líder do grupo · Backend e arquitetura |
 | **Yasmin** | Cybersecurity Specialist |
-| **Felipe** | Data & Dashboard Specialist |
+| **Filipe** | Data & Dashboard Specialist |
 
 **Líder do grupo:** Davi
 **E-mail do líder:** davi.cyberjatico@gmail.com

@@ -14,7 +14,7 @@ As seções 3 e 4 dizem o que você não pode fazer sozinho.
 
 TCC 2026/2 · Prof. Euzébio D. de Souza · Sistema de Detecção de Comportamentos
 Anômalos em Cybersecurity. Equipe de três: **Davi** (líder & backend),
-**Yasmin** (cybersecurity), **Felipe** (data & dashboard).
+**Yasmin** (cybersecurity), **Filipe** (data & dashboard).
 
 O repositório é **público**. A pasta `docs/` é publicada no GitBook. Tudo que
 entra em `docs/` vira site público.
@@ -154,7 +154,7 @@ uma pergunta.
 <autor>/<tipo>/<assunto>
 ```
 
-Autor: `davi` · `yasmin` · `felipe` · `claude` · `gitbook`.
+Autor: `davi` · `yasmin` · `filipe` · `claude` · `gitbook`.
 Tipo: `docs` · `feat` · `fix` · `chore`.
 
 Só minúsculas, números e hífen. Ex.: `yasmin/docs/referencial-teorico`.

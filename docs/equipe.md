@@ -47,7 +47,7 @@ Dona do conteúdo de segurança: o que o sistema procura e por quê.
 
 ---
 
-## Felipe — Data & Dashboard Specialist
+## Filipe — Data & Dashboard Specialist
 
 Dono da leitura dos dados: o que os números mostram.
 
@@ -61,7 +61,7 @@ Dono da leitura dos dados: o que os números mostram.
 
 **Estudar:** Análise exploratória de dados · Pandas · Visualização de dados · Métricas de ML (Precision, Recall, F1)
 
-**GitHub:** [`@FilipeF4guiar`](https://github.com/FilipeF4guiar) · branches `felipe/...`
+**GitHub:** [`@FilipeF4guiar`](https://github.com/FilipeF4guiar) · branches `filipe/...`
 
 **No repositório:** dono do dashboard e dos resultados/gráficos do artigo · responsável pela [usabilidade](usabilidade.md) do painel
 
@@ -73,7 +73,7 @@ Dono da leitura dos dados: o que os números mostram.
 |---|---|---|---|
 | Davi | `@DaviSoaresDilly` | Admin · owner da organização | `davi/` |
 | Yasmin | `@Yas2046` | Write | `yasmin/` |
-| Felipe | `@FilipeF4guiar` | Write | `felipe/` |
+| Filipe | `@FilipeF4guiar` | Write | `filipe/` |
 | Assistente | `@claude` (workflow) | via GitHub Actions | `claude/` |
 
 Todos abrem PR e aprovam PR dos outros. **Só o Davi executa o merge na `main`** —

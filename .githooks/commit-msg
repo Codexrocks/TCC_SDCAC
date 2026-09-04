@@ -12,6 +12,16 @@
 #
 # Regras em AGENTS.md, seções 3 e 7.
 
+# Commit de merge nao passa por aqui.
+#
+# O scripts/validar.py usa --no-merges e ignora esses commits. Sem esta saida,
+# o gancho local seria mais rigoroso que o check do Pull Request e barraria um
+# "git merge origin/main" de rotina — que foi exatamente o que aconteceu ao
+# atualizar a branch do PR #6.
+if [ -e "$(git rev-parse --git-dir)/MERGE_HEAD" ]; then
+  exit 0
+fi
+
 # Achar um Python que realmente rode.
 #
 # `command -v python3` NAO basta no Windows: existe um atalho do Microsoft

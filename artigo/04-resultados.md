@@ -1,7 +1,7 @@
 # 4. Resultados e Discussão
 
 > **4ª Versão** na numeração do professor · S12 e S13 do
-> [cronograma](../docs/cronograma.md) · Felipe e Davi nos números, discussão com
+> [cronograma](../docs/cronograma.md) · Filipe e Davi nos números, discussão com
 > todos.
 >
 > **Não escreva nada aqui antes de rodar os testes.** Número de resultado sai de
