@@ -59,8 +59,14 @@ template do GitBook, senão ele sobrescreve o repositório.
 
 O site foi criado com um espaço vazio chamado *Untitled*. O
 `gitbook-docs.yaml` declara um espaço com a chave `documentacao`, então o
-GitBook vai criar um espaço novo e deixar o *Untitled* solto na organização.
-Pode apagar o *Untitled* depois que a sincronização funcionar.
+GitBook criou um espaço novo e deixou o *Untitled* solto na organização.
+
+Conferido em 03/09/2026: o *Untitled* está **vazio** (nenhuma página, nenhum
+comentário, nenhuma change request) e **não é fonte de conteúdo do site** — o
+site tem só o espaço `Documentação`. Apagar não afeta a publicação.
+
+`GitBook → espaço Untitled → menu ⋯ → Delete`. Se apagar por engano, o GitBook
+guarda na lixeira e dá para restaurar.
 
 > **Não mude a chave `documentacao` depois que o espaço existir.** O GitBook
 > identifica o espaço pela chave, não pelo título. Trocar a chave faz ele criar
