@@ -123,6 +123,14 @@ Texto normal. **Negrito** com dois asteriscos, *itálico* com um.
 > **O nome da branch começa com o seu nome**, seguido do tipo e do assunto. É
 > assim que a equipe vê quem está com o quê sem perguntar.
 
+> 🔒 **Esse é o único campo que não dá para corrigir depois.** Mensagem de
+> commit e corpo do PR você edita à vontade; **nome de branch, não** — depois
+> que o Pull Request existe, ele fica. Errar aqui significa abrir tudo de novo.
+> Pare cinco segundos neste campo antes de clicar.
+>
+> Exemplos válidos: `yasmin/docs/referencial-teorico` ·
+> `felipe/docs/uso-de-ia` · `davi/feat/coletor-de-logs`
+
 **6.** **`Propose changes`** e depois **`Create pull request`**.
 
 **7.** Preencha o formulário que aparece. Ele vem com um modelo, e há uma
