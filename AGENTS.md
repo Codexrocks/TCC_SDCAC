@@ -163,7 +163,9 @@ A branch de uma IA leva **o nome de quem a está usando**, não o da IA — quem
 responde pelo trabalho é a pessoa. A exceção é `claude/`, usada pelo assistente
 quando ele age sozinho, por exemplo no relatório semanal automático.
 
-`gitbook/docs/documentacao` é branch permanente do Git Sync e **não se apaga**.
+`gitbook/docs/documentacao` é branch permanente do Git Sync, **não se apaga** e
+**não se trabalha nela**: é um espelho da `main`, forçado a cada merge. Commit
+feito ali é descartado no espelhamento seguinte.
 
 Autor novo precisa entrar na lista `AUTORES` de `scripts/validar.py`.
 
@@ -232,6 +234,10 @@ Três exigências:
 ```bash
 python3 scripts/validar.py
 ```
+
+Se o clone estiver com `git config core.hooksPath .githooks`, os ganchos de
+`pre-commit` e `commit-msg` já rodam isso sozinhos a cada commit — inclusive a
+conferência da linha `Assistido-por:`.
 
 Confere nome de branch, formato dos commits, declaração de IA, cobertura do
 `SUMMARY.md`, links internos quebrados e segredo vazado. Só suba se passar.

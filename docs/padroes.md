@@ -24,9 +24,14 @@ GitHub agrupa por pessoa, e dá para ver quem está com o quê sem abrir o log.
 Autores válidos: `davi` · `yasmin` · `felipe` · `claude`. Só minúsculas,
 números e hífen. Uma branch por tarefa — não acumule assuntos.
 
-> **`gitbook/docs/documentacao` é a exceção.** Não é de ninguém e não se apaga
-> depois do merge: é a branch permanente onde o GitBook escreve as edições
-> feitas pelo site. Ver [Configuração, seção 7](configuracao.md#7-gitbook-e-a-main-protegida).
+> **As branches `gitbook/` são exceção.** Não são de ninguém e não se apagam:
+>
+> - `gitbook/docs/documentacao` — espelho da `main`, forçado a cada merge. **Não
+>   trabalhe nela**: qualquer commit ali é descartado
+> - `gitbook/docs/artigo` — onde o GitBook grava o texto do artigo. Vira Pull
+>   Request sozinha
+>
+> Ver [Configuração, seção 7](configuracao.md#7-gitbook-e-a-main-protegida).
 
 > **Entrou alguém novo no projeto?** O nome precisa ser acrescentado à lista
 > `AUTORES` em [`scripts/validar.py`](../scripts/validar.py), senão a branch
@@ -173,9 +178,18 @@ baixo, sem `wip` nem `corrige typo`.
 - A seção **Uso de IA** está preenchida de verdade, e não com "ajudou"?
 - Se tem texto de IA, quem abriu o PR conseguiria explicar aquilo na banca?
 
+## Onde cada coisa se escreve
+
+| O quê | Onde | Como |
+|---|---|---|
+| Texto do artigo | `artigo/` | **Pelo GitBook.** Não edite pelo GitHub — gera conflito |
+| Regras, processo, relatórios | `docs/` | Pelo GitHub, por Pull Request |
+| Código | `backend/`, `detection/`, ... | Pelo GitHub |
+
 ## Docs
 
-- Toda documentação vive em `docs/`. Se não está lá, não existe.
+- Documentação de processo vive em `docs/`; o texto do artigo, em `artigo/`.
+  Cada um tem seu próprio `SUMMARY.md`.
 - **Toda página nova entra no `docs/SUMMARY.md`.** Sem isso, não aparece no GitBook.
 - Um assunto por arquivo. Nome em minúsculas com hífen: `referencial-teorico.md`.
 - Link entre páginas sempre relativo: `[equipe](equipe.md)`.
@@ -214,7 +228,24 @@ tem prova documentada de como o projeto foi construído.
 
 ## Validação automática
 
-Antes de abrir PR:
+### Na sua máquina, a cada commit
+
+Uma vez por clone:
+
+```bash
+git config core.hooksPath .githooks
+```
+
+Isso liga dois ganchos: o `pre-commit`, que roda a validação do repositório, e o
+`commit-msg`, que confere o formato da mensagem e a declaração de IA. O erro
+passa a aparecer **antes** do commit, em vez de dez minutos depois no Pull
+Request.
+
+Precisa de Python. Sem ele, os ganchos avisam e saem sem atrapalhar — e o check
+do PR roda de qualquer forma. Para pular num commit específico:
+`git commit --no-verify`.
+
+### Antes de abrir PR
 
 ```bash
 python3 scripts/validar.py

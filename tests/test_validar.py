@@ -227,3 +227,60 @@ def test_checar_commits_avalia_cada_commit_do_intervalo(tmp_path, monkeypatch):
     validar.checar_commits("main")
     assert len(validar.erros) == 2
     assert all("falta declarar a IA" in e for e in validar.erros)
+
+
+# ---------------------------------------------------------------------------
+# Isencao dos commits do GitBook
+#
+# O GitBook escreve na pasta artigo/ e gera as mensagens sozinho, sem seguir
+# "tipo: descricao" nem declarar IA. A isencao existe por isso — e e o unico
+# buraco conhecido desta validacao, entao precisa ser ESTREITA.
+# ---------------------------------------------------------------------------
+
+
+@pytest.mark.parametrize(
+    "assunto",
+    [
+        "GitBook: Export content from Documentação",
+        "GITBOOK-SITE: Changes to TCC_SDCAC Docs",
+        "gitbook: export minusculo",
+    ],
+)
+def test_reconhece_commit_do_gitbook(assunto):
+    assert validar.RE_COMMIT_GITBOOK.match(assunto)
+
+
+@pytest.mark.parametrize(
+    "assunto",
+    [
+        "GitBooking: tentativa de imitar",       # prefixo parecido, sem os dois-pontos no lugar
+        "docs: fala sobre o GitBook",            # menciona, mas nao comeca com ele
+        "chore: ajusta GitBook: config",         # o prefixo nao esta no inicio
+        "Sobre GitBook: alguma coisa",
+    ],
+)
+def test_nao_confunde_com_commit_do_gitbook(assunto):
+    assert not validar.RE_COMMIT_GITBOOK.match(assunto), (
+        f"a isencao nao pode alcancar {assunto!r} — ela precisa ser estreita"
+    )
+
+
+def test_commit_do_gitbook_passa_com_aviso(tmp_path, monkeypatch):
+    repo = _repo(tmp_path, ["GitBook: Export content from Documentação"])
+    monkeypatch.setattr(validar, "RAIZ", str(repo))
+    validar.checar_commits("main")
+    assert validar.erros == []
+    assert any("gerado pelo GitBook" in a for a in validar.avisos)
+
+
+def test_commit_humano_nao_escapa_pela_isencao(tmp_path, monkeypatch):
+    """A isencao vale para o GitBook, nao para quem quiser fugir da regra."""
+    repo = _repo(tmp_path, ["docs: mudanca sem declarar ia"])
+    monkeypatch.setattr(validar, "RAIZ", str(repo))
+    validar.checar_commits("main")
+    assert any("falta declarar a IA" in e for e in validar.erros)
+
+
+def test_espacos_declarados():
+    """Cada espaco do GitBook precisa do proprio SUMMARY conferido."""
+    assert validar.ESPACOS == ("docs", "artigo")

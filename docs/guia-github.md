@@ -78,15 +78,12 @@ executa o merge, e é uma trava do GitHub, não combinado.
 
 Sem instalar nada. Serve para o referencial teórico, o artigo, qualquer texto.
 
-### Pelo GitBook — o caminho mais confortável
+> **Não escreva pelo site do GitBook.** Ele publica a documentação, mas o
+> caminho de volta está desligado: o texto escrito lá **não chega ao
+> repositório** e se perde. O motivo está em
+> [Configuração, seção 7](configuracao.md#7-gitbook-e-a-main-protegida).
 
-Escreva no [GitBook](https://app.gitbook.com) como escreveria no Word. Ao
-salvar, o texto vai parar numa branch chamada `gitbook/docs/documentacao` e um
-Pull Request abre sozinho. Você não faz mais nada — só avisa que terminou.
-
-### Pelo GitHub, editando o arquivo
-
-Quando quiser mexer num arquivo específico:
+O caminho é editar o arquivo no GitHub — e dá para fazer tudo pelo navegador:
 
 **1.** Abra o arquivo no GitHub, por exemplo `docs/arquitetura.md`.
 
@@ -200,6 +197,16 @@ Depois, o ciclo de sempre:
 git checkout main && git pull origin main
 git checkout -b yasmin/docs/meu-assunto
 ```
+
+Ligue as verificações locais, uma vez só:
+
+```bash
+git config core.hooksPath .githooks
+```
+
+Com isso o computador confere o commit antes de gravá-lo, e você descobre o
+erro na hora em vez de descobrir no Pull Request. Precisa de Python instalado;
+sem ele, o gancho avisa e não atrapalha.
 
 Trabalhe nos arquivos. Quando terminar:
 
