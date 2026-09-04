@@ -247,3 +247,54 @@ aprovar — e não permite mexer em configuração do repositório.
 Com o ruleset da seção 3 ativo, o acesso do Felipe deixa de ser só organização:
 enquanto a equipe for de duas pessoas, cada PR depende da outra estar
 disponível para aprovar.
+
+---
+
+## 6. Windows — dois comandos que não funcionam como estão escritos
+
+O restante desta página assume Linux ou macOS. No Windows, dois comandos que
+aparecem na documentação falham por motivos que não têm nada a ver com o
+projeto. Ambos têm solução de uma linha.
+
+### `python3` abre a Microsoft Store em vez de rodar
+
+O Windows traz um atalho falso chamado `python3` em `WindowsApps`. Ele não é o
+Python — só abre a loja. O sintoma é este, com código de saída `9009`:
+
+```
+Python não foi encontrado; executar sem argumentos para instalar do
+Microsoft Store ou desabilitar este atalho em Configurações > Aplicativos...
+```
+
+O Python de verdade atende por **`python`**. Então, no Windows:
+
+```powershell
+python scripts/validar.py
+```
+
+O workflow **Validação** roda em Ubuntu e continua usando `python3` — lá o nome
+certo é esse. Não mude o `.github/workflows/validacao.yml`.
+
+> Para conferir qual é o seu: `python --version` tem que responder `Python 3.x`.
+> Se responder a mensagem da loja, o Python não está instalado.
+
+### `claude` não é reconhecido como comando
+
+Quem usa o **aplicativo desktop** do Claude não recebe o `claude` no PATH — o
+executável fica embutido na pasta do aplicativo, com a versão no caminho:
+
+```
+%APPDATA%\Claude\claude-code\<versão>\claude.exe
+```
+
+Para resolver de vez, peça ao próprio executável que se instale. Assim o
+`claude` passa a funcionar em qualquer terminal, como o resto da documentação
+assume:
+
+```powershell
+& (Get-ChildItem "$env:APPDATA\Claude\claude-code\*\claude.exe" | Sort-Object { [version]$_.Directory.Name } -Descending | Select-Object -First 1).FullName install
+```
+
+Feche e reabra o terminal depois. Confira com `claude --version`.
+
+Quem usa o Claude Code pelo terminal, instalado via `npm`, não passa por isso.

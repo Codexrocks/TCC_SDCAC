@@ -55,4 +55,7 @@ PR para `main` → check **Validação** verde → **1 aprovação** → **Squas
 | Quinzenal | Reunião com o orientador |
 | A cada sessão com o Claude | Relatório em `docs/relatorios/` |
 
+No Windows, `python3` e `claude` não funcionam como escrito acima — a
+correção está em [`docs/configuracao.md`](docs/configuracao.md), seção 6.
+
 As regras que o assistente segue estão em [`CLAUDE.md`](CLAUDE.md).
