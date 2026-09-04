@@ -18,4 +18,5 @@
 * [2026-09-03 — Sessão 01: setup do repositório](relatorios/2026-09-03-sessao-01.md)
 * [2026-09-03 — Sessão 02: padrões, validação e GitBook](relatorios/2026-09-03-sessao-02.md)
 * [2026-09-03 — Sessão 03: correção do GitBook e guia de configuração](relatorios/2026-09-03-sessao-03.md)
+* [2026-09-03 — Sessão 04: proteção da main e CODEOWNERS](relatorios/2026-09-03-sessao-04.md)
 * [Modelo de relatório](relatorios/_modelo.md)

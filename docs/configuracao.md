@@ -3,7 +3,9 @@
 Página de consulta para quando algo não estiver funcionando. Cada seção é
 independente — vá direto na que precisa.
 
-Estado em 03/09/2026: repositório **público**, branch padrão **`main`**.
+Estado em 03/09/2026: repositório **público**, branch padrão **`main`**,
+ruleset **`Proteção da main`** ativo, Yasmin com acesso de escrita.
+Pendente: o secret da seção 2 e o acesso do Felipe (seção 5).
 
 ---
 
@@ -107,9 +109,44 @@ Preencha:
 
 O nome tem que ser exatamente esse, em maiúsculas.
 
+### Alternativa pelo terminal
+
+Se preferir não passar o token pelo navegador, o `gh` cadastra direto e lê o
+valor de forma oculta:
+
+```bash
+gh secret set CLAUDE_CODE_OAUTH_TOKEN -R Codexrocks/TCC_SDCAC
+```
+
+Ele pergunta o valor, você cola, e o token não fica no histórico do shell.
+Confira depois com `gh secret list -R Codexrocks/TCC_SDCAC` — o comando mostra
+só o nome e a data, nunca o valor.
+
 ---
 
 ## 3. Proteger a `main` com um ruleset
+
+> **Já está feito.** O ruleset `Proteção da main` foi criado em 03/09/2026 e
+> está `Active`. O passo a passo abaixo fica como referência — para conferir o
+> que está valendo, para recriar se alguém apagar, ou para repetir em outro
+> repositório.
+
+O que ficou valendo:
+
+| Regra | Efeito |
+|---|---|
+| Restrict deletions | ninguém apaga a `main` |
+| Block force pushes | ninguém reescreve o histórico |
+| Require a pull request | 1 aprovação, e aprovação cai a cada novo commit |
+| Require status checks | o check `validar` precisa passar, com a branch atualizada |
+| Allowed merge methods | só **Squash and merge** — as outras opções somem do botão |
+| Bypass list | **vazia** — a regra vale para todo mundo, inclusive o dono |
+
+Como a lista de bypass está vazia e o GitHub não pede revisão ao autor do
+próprio PR, **quem abre o PR sempre depende de outra pessoa para mergear**.
+Hoje isso significa: Davi depende da Yasmin, e vice-versa.
+
+### Refazendo pela interface
 
 `Settings → Rules → Rulesets → New ruleset → New branch ruleset`
 
@@ -136,8 +173,7 @@ disso, o ruleset existe mas não faz nada.
 **Create** no fim da página.
 
 > O check só aparece na busca depois que o workflow **Validação** rodar pelo
-> menos uma vez. Se a lista vier vazia, abra um PR qualquer, espere o check
-> rodar, e volte aqui.
+> menos uma vez. Isso já aconteceu — `validar` aparece normalmente na lista.
 
 ### Testando
 
@@ -165,17 +201,30 @@ O GitHub tem que recusar. Se recusar, está funcionando — desfaça com
 cada parte do repositório**. Quando alguém abre um PR que mexe em `docs/`, o
 GitHub pede revisão de quem estiver marcado ali, sem ninguém precisar lembrar.
 
-O arquivo está em `.github/CODEOWNERS`, com as linhas **comentadas** — porque
-comentário só vira regra quando os usuários existem de verdade no repositório.
+O arquivo está em `.github/CODEOWNERS`. A linha geral aponta para
+`@DaviSoaresDilly`; as linhas por pasta seguem **comentadas**, porque um
+usuário só vira regra válida depois de ter acesso de escrita ao repositório.
 
-Quando Yasmin e Felipe tiverem acesso, descubra o usuário GitHub de cada uma,
-apague o `#` do começo das linhas e troque os nomes:
+> Antes de 03/09/2026 a linha geral apontava para o time
+> `@Codexrocks/lideranca`, que nunca foi criado. O GitHub tratava o arquivo
+> inteiro como inválido, com o erro *Unknown owner*. Foi por isso que trocou.
+
+Quando o Felipe entrar, descubra o usuário GitHub dele, apague o `#` do começo
+das linhas e troque o placeholder:
 
 ```
-/docs/                @usuario-da-yasmin @usuario-do-felipe
-/detection/           @usuario-da-yasmin
+/docs/                @Yas2046 @usuario-do-felipe
+/detection/           @Yas2046
 /frontend/            @usuario-do-felipe
 ```
+
+Para conferir se o arquivo está válido sem precisar abrir um PR:
+
+```bash
+gh api repos/Codexrocks/TCC_SDCAC/codeowners/errors
+```
+
+Resposta com `"errors":[]` significa arquivo limpo.
 
 É opcional. Sem ele nada quebra — só significa que quem abre o PR escolhe o
 revisor na mão.
@@ -188,3 +237,13 @@ revisor na mão.
 
 Yasmin e Felipe com papel **Write**. Write permite criar branch, abrir PR e
 aprovar — e não permite mexer em configuração do repositório.
+
+| Pessoa | Usuário | Papel | Estado |
+|---|---|---|---|
+| Davi | `@DaviSoaresDilly` | Admin | ativo |
+| Yasmin | `@Yas2046` | Write | ativo |
+| Felipe | — | Write | **falta convidar** |
+
+Com o ruleset da seção 3 ativo, o acesso do Felipe deixa de ser só organização:
+enquanto a equipe for de duas pessoas, cada PR depende da outra estar
+disponível para aprovar.

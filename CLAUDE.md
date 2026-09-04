@@ -21,10 +21,8 @@ convenção da linguagem.
 ## Regras que não se quebram
 
 1. **Nunca commitar direto na `main`.** Sempre branch + Pull Request.
-   *Exceção única, temporária:* enquanto o ruleset da `main` não existir e a
-   equipe não tiver acesso ao repositório, commits de configuração podem ir
-   direto para a `main` — não há quem aprove um PR. A exceção morre no instante
-   em que o ruleset for criado.
+   Sem exceção. O ruleset `Proteção da main` está ativo desde 03/09/2026 e o
+   próprio GitHub recusa o push direto, inclusive o do dono do repositório.
 2. **Nunca commitar segredo** — `.env`, senha, token, chave, string de conexão.
    Se encontrar um no repositório, pare e avise em vez de corrigir sozinho.
 3. **Toda página nova em `docs/` entra no `docs/SUMMARY.md`.** Fora do SUMMARY,
