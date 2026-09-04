@@ -16,12 +16,48 @@ on:
 jobs:
   validar:
     runs-on: ubuntu-latest
-    timeout-minutes: 5
+    timeout-minutes: 10
     steps:
       - name: Checkout
         uses: actions/checkout@v4
         with:
+          # Precisa do historico completo para alcancar o commit da base.
           fetch-depth: 0
+
+      - name: Preparar Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Instalar pytest
+        run: pip install --quiet pytest
+
+      # A ORDEM DOS DOIS PROXIMOS PASSOS IMPORTA.
+      #
+      # Os testes rodam com o codigo DO PR: eles existem justamente para
+      # conferir que o PR nao quebrou os verificadores. Roda-los contra a versao
+      # da base testaria o que ja esta na main, o que nao diz nada sobre esta
+      # mudanca.
+      #
+      # Ja a validacao das regras roda com o verificador DA BASE, logo depois.
+      - name: Testar os verificadores (código do PR)
+        run: python3 -m pytest -q
+
+      - name: Usar os verificadores da base, não os do próprio PR
+        # Sem isto, um PR que edite scripts/*.py roda a versao adulterada como
+        # se fosse o verificador — e o check que deveria barra-lo passa verde.
+        # O que vale para julgar um PR e o verificador que ja esta na main.
+        if: github.event_name == 'pull_request'
+        run: |
+          base="${{ github.event.pull_request.base.sha }}"
+          for arquivo in scripts/validar.py scripts/governanca.py; do
+            if git cat-file -e "$base:$arquivo" 2>/dev/null; then
+              git show "$base:$arquivo" > "$arquivo"
+              echo "$arquivo: usando a versao da base ($base)"
+            else
+              echo "::warning::$arquivo nao existe na base — usando a versao do PR. Isso e esperado so no PR que cria o arquivo."
+            fi
+          done
 
       - name: Validar regras do repositório
         env:

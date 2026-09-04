@@ -135,8 +135,16 @@ isso cada regra que importa tem uma verificação de verdade atrás.
 | Não commitar na `main` | GitHub recusa o push | ruleset |
 | Só o líder faz merge | GitHub recusa o push | ruleset |
 | Sem segredo, branch no padrão | Reprova o check | `scripts/validar.py` |
+| Um PR não adultera o próprio verificador | Workflow usa o script da base | `.github/workflows/` |
+| Os verificadores não quebram calados | Testes a cada PR | `tests/` |
 
 Nenhuma delas depende de a IA "se comportar bem".
+
+> **Um limite que fica em aberto.** O arquivo do workflow em si vem do Pull
+> Request, então um PR pode alterar o próprio workflow. Não há como impedir isso
+> tecnicamente no GitHub Actions. O que existe contra esse caso é a dupla
+> aprovação em `.github/**` e a visibilidade no diff — defesa em camadas, não
+> trava. Vale registrar em vez de fingir que o cerco é perfeito.
 
 ---
 

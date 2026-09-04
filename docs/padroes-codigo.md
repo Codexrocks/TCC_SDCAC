@@ -31,7 +31,7 @@ pip install -e ".[dev]"
 
 ## 2. Idioma no código
 
-A regra do [`CLAUDE.md`](../CLAUDE.md) aplicada ao código:
+A regra do [`AGENTS.md`](../AGENTS.md) aplicada ao código:
 
 | O quê | Idioma | Por quê |
 |---|---|---|
@@ -149,7 +149,7 @@ counter += 1
 
 Já definida em [`arquitetura.md`](arquitetura.md). Não invente pasta nova sem
 falar com o Davi — e **não crie pasta vazia**, conforme o
-[`CLAUDE.md`](../CLAUDE.md). A pasta nasce junto com o primeiro arquivo dela.
+[`AGENTS.md`](../AGENTS.md). A pasta nasce junto com o primeiro arquivo dela.
 
 Cada módulo faz uma coisa. Se um arquivo passa de ~300 linhas, provavelmente
 está fazendo duas.
@@ -160,6 +160,11 @@ está fazendo duas.
 
 **pytest.** Todo arquivo em `detection/` precisa de teste — é o coração do TCC e
 o que a banca vai querer ver funcionando.
+
+O mesmo vale para `scripts/`: são os arquivos que fazem as regras deste
+documento valerem. Se um deles quebrar em silêncio, o check fica verde e
+qualquer coisa entra na `main`. `tests/test_validar.py` e
+`tests/test_governanca.py` já cobrem os dois, e rodam a cada Pull Request.
 
 ```
 tests/

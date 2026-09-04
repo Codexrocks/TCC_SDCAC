@@ -234,10 +234,38 @@ Por isso cada regra que importa tem uma trava de verdade atrás:
 | Declarar a IA no commit | `scripts/validar.py` |
 | Declarar a IA no PR | Workflow **Governança** |
 | Duas aprovações para mudar as regras | Workflow **Governança** |
+| Os verificadores não podem ser adulterados pelo próprio PR | Workflows usam `scripts/*.py` da base |
+| Os verificadores não quebram em silêncio | `tests/`, rodando a cada PR |
 
-Este arquivo explica o **porquê** de cada uma. As travas é que garantem o
-**cumprimento**. Se alguma trava e este texto discordarem, a trava está certa e
-o texto está desatualizado — corrija o texto, e não a trava.
+### Os verificadores rodam da `main`, não do PR
+
+Um detalhe que parece técnico e é de segurança. O GitHub Actions executa o
+workflow **da branch do Pull Request** — foi assim que o check `Governança`
+rodou antes mesmo de existir na `main`.
+
+Isso abria um buraco: um PR que editasse `scripts/governanca.py` para sempre
+retornar sucesso faria o próprio check que deveria barrá-lo passar verde. Junto
+caía toda a validação de segredo, branch e declaração de IA.
+
+Por isso os workflows sobrescrevem `scripts/*.py` com a versão da base antes de
+validar. **O PR é julgado pelo verificador vigente, não pelo que ele traz
+consigo.** Os testes, esses sim, rodam com o código do PR — o objetivo deles é
+justamente pegar quem quebrou um verificador.
+
+### O que ainda não está fechado
+
+Honestidade sobre o limite: **o próprio arquivo `.yml` continua vindo do PR.**
+Um Pull Request pode alterar o workflow para não fazer essa substituição. Não há
+como impedir isso pelo GitHub Actions comum.
+
+O que sobra contra esse caso é defesa em camadas, não uma trava: alterar
+`.github/**` exige duas aprovações, e a mudança aparece no diff de quem revisa.
+Por isso a lista de arquivos protegidos inclui os workflows — **quem revisa um
+PR que mexe em `.github/` precisa olhar com atenção redobrada.**
+
+### Se a trava e o texto discordarem
+
+A trava está certa e o texto está desatualizado. Corrija o texto, não a trava.
 
 A política completa, escrita para gente e não para máquina, está em
 [`docs/uso-de-ia.md`](docs/uso-de-ia.md).
