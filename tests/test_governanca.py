@@ -258,12 +258,44 @@ def test_campo_so_com_espaco_ou_tabulacao_reprova():
         "- **IA usada:**   \n"
         "- **No que ajudou:** \t \n"
         "- **O que é meu:** ***\n"
-        "- **Conferi tudo que a IA escreveu:** -\n"
+        "- **Conferi tudo que a IA escreveu:** `\n"
     )
     governanca.checar_declaracao_ia(corpo)
     assert len(governanca.erros) == 4, (
         "espaco, tabulacao e enfeite de Markdown nao sao resposta"
     )
+
+
+def test_traco_sozinho_e_resposta_valida():
+    """Um traco quer dizer 'nao se aplica', e reprova-lo insultava quem respondeu.
+
+    Veio do PR #10: o campo 'No que ajudou' foi preenchido com '-' e o check
+    disse que estava em branco, porque o hifen entrava no strip de enfeites.
+    """
+    for traco in ("-", "–", "—"):
+        governanca.erros.clear()
+        corpo = (
+            "## Uso de IA\n\n"
+            "- **IA usada:** nenhuma\n"
+            f"- **No que ajudou:** {traco}\n"
+            "- **O que é meu:** a linha inteira\n"
+            "- **Conferi tudo que a IA escreveu:** não se aplica\n"
+        )
+        governanca.checar_declaracao_ia(corpo)
+        assert governanca.erros == [], f"{traco!r} sozinho e resposta: 'nao se aplica'"
+
+
+def test_varios_tracos_seguidos_continuam_reprovando():
+    """'---' e linha horizontal do Markdown, nao resposta."""
+    corpo = (
+        "## Uso de IA\n\n"
+        "- **IA usada:** ---\n"
+        "- **No que ajudou:** --\n"
+        "- **O que é meu:** ————\n"
+        "- **Conferi tudo que a IA escreveu:** sim\n"
+    )
+    governanca.checar_declaracao_ia(corpo)
+    assert len(governanca.erros) == 3, "traco repetido e enfeite, nao resposta"
 
 
 def test_sem_comentarios_normaliza_fim_de_linha():

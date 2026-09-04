@@ -49,6 +49,11 @@ CAMPOS_IA = (
     "Conferi tudo que a IA escreveu",
 )
 
+# Dois ou mais tracos seguidos sao enfeite de Markdown, nao resposta. Um traco
+# sozinho e resposta: quer dizer "nao se aplica". Cobre hifen, traco de dialogo
+# e travessao, porque quem escreve nao distingue os tres no teclado.
+RE_SO_TRACOS = re.compile(r"^[-–—]{2,}$")
+
 erros = []
 
 
@@ -117,10 +122,21 @@ def checar_declaracao_ia(corpo):
             erros.append(f"falta o campo '{campo}' na secao Uso de IA do PR")
         # Cobre espaco, tabulacao e os enfeites de Markdown. O retorno de carro
         # ja saiu em sem_comentarios; fica aqui como segunda barreira.
-        elif not achado.group(1).strip(" \t\r*_`-"):
+        #
+        # O hifen NAO entra nesta lista, e isso e proposital: um traco sozinho e
+        # resposta legitima para "nao se aplica", e foi o que o PR #10 escreveu.
+        # Reprova-lo dizia a quem respondeu que ele nao tinha respondido.
+        # Traco de enfeite continua barrado logo abaixo.
+        elif not achado.group(1).strip(" \t\r*_`"):
             erros.append(
                 f"o campo '{campo}' esta em branco. Uma resposta honesta e curta "
                 f"basta — inclusive 'nenhuma', se for o caso"
+            )
+        elif RE_SO_TRACOS.match(achado.group(1).strip(" \t\r*_`")):
+            # "---" e linha horizontal do Markdown, nao resposta. Um traco so e.
+            erros.append(
+                f"o campo '{campo}' tem so tracos de enfeite. Escreva a resposta "
+                f"— um traco sozinho vale como 'nao se aplica'"
             )
 
 
