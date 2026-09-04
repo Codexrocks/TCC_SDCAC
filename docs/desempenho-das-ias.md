@@ -100,6 +100,15 @@ que contexto cada uma trabalhou.
 
 | Quebrou o heredoc do shell com aspas no conteúdo — **pela terceira vez na mesma sessão** | sintaxe | `unexpected EOF while looking for matching '` ao criar as seções do artigo | Passou a escrever pela ferramenta de escrita | a própria IA |
 
+| A checagem de declaração de IA aprovava template em branco quando o corpo vinha com CRLF | processo | O PR #5, o primeiro aberto por outra pessoa, passou no check com os quatro campos vazios | `sem_comentarios` passou a normalizar o fim de linha; cinco testes com o formato real do GitHub | a pessoa — o Davi mandou investigar por que o PR passou |
+| Tornou obrigatório um check que dispara duas vezes e acumula resultados | processo | O PR #3 ficou travado com tudo aprovado: o GitHub soma os check runs e o rollup dava FAILURE por causa de execuções antigas | Runs antigos re-executados; correção estrutural ainda pendente | a pessoa — travou no merge dela |
+| Gancho `commit-msg` barrava commit de merge | conteúdo | `git merge origin/main` de rotina foi interrompido pelo gancho pedindo `Assistido-por:` | Sai antes quando existe `MERGE_HEAD`, espelhando o `--no-merges` do validador | a própria IA, ao tropeçar nele |
+
+> **O gancho era mais rigoroso que o próprio check que ele imita.** O
+> `validar.py` ignora commits de merge desde sempre; o gancho, escrito para
+> "reaproveitar as mesmas regras", não reproduziu essa parte. Copiar a intenção
+> não é o mesmo que copiar o comportamento.
+
 > **Três vezes o mesmo erro, no mesmo dia.** Já havia acontecido ao criar
 > `usabilidade.md` e ao editar o `validar.py`. A IA corrige o caso e volta a
 > cometê-lo minutos depois: ela não retém a correção dentro da própria sessão.
@@ -120,18 +129,18 @@ Fechado em 04/09/2026, ainda na fase de configuração.
 
 | Tipo | Ocorrências |
 |---|---|
-| processo | 7 |
-| conteúdo | 5 |
+| processo | 9 |
+| conteúdo | 6 |
 | defeito latente | 2 |
 | sintaxe | 2 |
 | desperdício | 2 |
-| **Total** | **18** |
+| **Total** | **21** |
 
 | Quem pegou | Ocorrências |
 |---|---|
-| a própria IA | 16 |
-| a pessoa | 1 |
-| **o check** | **1** |
+| a própria IA | 17 |
+| **a pessoa** | **3** |
+| o check | 1 |
 | a revisão do PR | 0 |
 
 > **O primeiro erro pego por uma máquina.** O check `governanca` reprovou uma
@@ -160,13 +169,19 @@ leitura errada. Três ressalvas, todas importantes:
    sessão 06 foi percebido depois de já ter descartado a aprovação de alguém.
    Detectar não é o mesmo que evitar, e a tabela ainda não distingue os dois —
    vale considerar uma coluna a mais se o caso se repetir.
-5. **Testar antes de entregar pega o que a leitura não pega.** O gancho de
+5. **A conta de "quem pegou" virou.** Os três erros mais graves do dia — o
+   verificador adulterável, o falso negativo do CRLF e o check que se
+   auto-bloqueia — **foram todos pegos por uma pessoa**, não pela IA. Dois
+   deles só apareceram porque o Davi perguntou "por que isso passou?" em vez de
+   aceitar o verde. A autocorreção da IA continua alta em número e baixa em
+   gravidade.
+6. **Testar antes de entregar pega o que a leitura não pega.** O gancho de
    commit parecia certo e teria falhado na máquina de todo mundo: no Windows,
    `command -v python3` encontra um atalho da Microsoft Store que não é Python.
    Nenhuma revisão de código pegaria isso — só rodar. Vale como contraponto ao
    item anterior: a IA erra menos quando executa do que quando raciocina sobre
    o que aconteceria.
-6. **O erro mais caro não foi técnico, foi de investigação.** A IA ofereceu três
+7. **O erro mais caro não foi técnico, foi de investigação.** A IA ofereceu três
    opções para o GitBook sem ter verificado o que o produto faz com o conteúdo.
    A escolha foi tomada com informação incompleta, e uma rodada inteira de
    trabalho precisou ser refeita. Bastava uma consulta à documentação — que ela

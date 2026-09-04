@@ -105,23 +105,43 @@ Texto normal. **Negrito** com dois asteriscos, *itálico* com um.
 
 **4.** Terminou, clique em **`Commit changes...`**, no alto à direita.
 
-**5.** Aparece uma janela. Preencha assim:
+**5.** Aparece uma janela. E aqui vem a parte que já derrubou gente:
 
-| Campo | O que escrever |
-|---|---|
-| Mensagem (primeira linha) | `docs: adiciona seção sobre UEBA` — sempre começando com `docs:`, em minúscula, sem ponto final |
-| Descrição | **Obrigatório:** a linha `Assistido-por: nome da IA que você usou` — ou `Assistido-por: nenhuma`. Ver abaixo |
-| Onde salvar | Escolha **`Create a new branch for this commit`** — nunca a primeira opção |
-| Nome da branch | `yasmin/docs/assunto-do-texto` |
+> ⚠️ **Os campos vêm preenchidos, e o que vem dentro está errado.**
+>
+> O GitHub sugere um nome de branch como `SeuNome-patch-1` e uma mensagem como
+> `Update arquivo.md`. Os dois reprovam na validação. **Apague o que estiver
+> lá** e escreva por cima — não é caso de completar, é de substituir.
 
-> **O nome da branch começa com o seu nome.** É assim que a equipe vê quem está
-> trabalhando em quê sem perguntar. Se errar o formato, uma verificação
-> automática reprova e o PR não fecha.
+| Campo | O que vem | O que você escreve |
+|---|---|---|
+| Mensagem (1ª linha) | `Update arquivo.md` | `docs: adiciona seção sobre UEBA` — minúscula, sem ponto final |
+| Descrição | vazio | `Assistido-por: nome da IA` — ou `Assistido-por: nenhuma` |
+| Onde salvar | *Commit directly* | **`Create a new branch for this commit`** |
+| Nome da branch | `SeuNome-patch-1` | `yasmin/docs/assunto-do-texto` |
+
+> **O nome da branch começa com o seu nome**, seguido do tipo e do assunto. É
+> assim que a equipe vê quem está com o quê sem perguntar.
 
 **6.** **`Propose changes`** e depois **`Create pull request`**.
 
-**7.** Preencha o formulário que aparece — ele já vem com as perguntas — e
-clique em **`Create pull request`** de novo.
+**7.** Preencha o formulário que aparece. Ele vem com um modelo, e há uma
+seção que **precisa** ser respondida:
+
+```markdown
+## Uso de IA
+
+- **IA usada:** Gemini 2.5 Pro
+- **No que ajudou:** revisou a redação da seção
+- **O que é meu:** a pesquisa e a escolha das fontes
+- **Conferi tudo que a IA escreveu:** sim
+```
+
+> As linhas entre `<!--` e `-->` são instruções, não respostas. **Escreva
+> depois dos dois-pontos**, apagando o comentário. Não usou IA? `nenhuma` é
+> resposta válida.
+
+Depois clique em **`Create pull request`** de novo.
 
 **8.** Na direita da página, em *Reviewers*, escolha um colega. Espere a
 aprovação e o check verde. Depois avise o Davi para fazer o merge.
