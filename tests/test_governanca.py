@@ -216,3 +216,55 @@ def test_arquivo_parecido_nao_e_protegido():
         ["docs/padroes-de-escrita.md", "documentacao/scripts/algo.py"], [], "davi"
     )
     assert governanca.erros == []
+
+
+# ---------------------------------------------------------------------------
+# Fim de linha CRLF
+#
+# O GitHub devolve o corpo do Pull Request com CRLF. Os testes acima usam "\n"
+# porque as strings foram escritas aqui — e foi essa diferenca que deixou passar
+# o PR #5 com os quatro campos em branco e o check verde.
+#
+# A licao: teste com dado que voce mesmo inventou nao prova que funciona com o
+# dado de verdade.
+# ---------------------------------------------------------------------------
+
+
+def crlf(texto):
+    return texto.replace("\n", "\r\n")
+
+
+def test_template_intacto_reprova_tambem_com_crlf():
+    """O caso que escapou: o \r sobrava no campo e parecia resposta."""
+    governanca.checar_declaracao_ia(crlf(TEMPLATE_INTACTO))
+    assert len(governanca.erros) == 4
+    assert all("em branco" in e for e in governanca.erros)
+
+
+def test_declaracao_preenchida_passa_com_crlf():
+    governanca.checar_declaracao_ia(crlf(PREENCHIDO))
+    assert governanca.erros == []
+
+
+def test_secao_ausente_reprova_com_crlf():
+    governanca.checar_declaracao_ia(crlf("## O que muda\n\nmexi num arquivo\n"))
+    assert len(governanca.erros) == 1
+    assert "Uso de IA" in governanca.erros[0]
+
+
+def test_campo_so_com_espaco_ou_tabulacao_reprova():
+    corpo = (
+        "## Uso de IA\n\n"
+        "- **IA usada:**   \n"
+        "- **No que ajudou:** \t \n"
+        "- **O que é meu:** ***\n"
+        "- **Conferi tudo que a IA escreveu:** -\n"
+    )
+    governanca.checar_declaracao_ia(corpo)
+    assert len(governanca.erros) == 4, (
+        "espaco, tabulacao e enfeite de Markdown nao sao resposta"
+    )
+
+
+def test_sem_comentarios_normaliza_fim_de_linha():
+    assert "\r" not in governanca.sem_comentarios("linha\r\noutra\rterceira")
