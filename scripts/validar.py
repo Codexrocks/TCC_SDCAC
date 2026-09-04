@@ -18,7 +18,11 @@ TIPOS = ("docs", "feat", "fix", "chore")
 # Quem pode abrir branch. O prefixo diz de quem e o trabalho sem precisar abrir
 # o log. Entrou alguem novo no projeto? Acrescente aqui, senao a branch dele
 # nao passa na validacao.
-AUTORES = ("davi", "yasmin", "felipe", "claude")
+#
+# "gitbook" nao e pessoa: e a branch permanente do Git Sync, onde o GitBook
+# escreve as edicoes feitas pelo site. Ela nao pode ser apagada depois do merge,
+# ao contrario das outras. Ver docs/configuracao.md.
+AUTORES = ("davi", "yasmin", "felipe", "claude", "gitbook")
 RE_BRANCH = re.compile(
     r"^(%s)/(%s)/[a-z0-9][a-z0-9-]*$" % ("|".join(AUTORES), "|".join(TIPOS))
 )

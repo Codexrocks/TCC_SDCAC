@@ -1,0 +1,95 @@
+name: Sincroniza GitBook
+
+# O GitBook não escreve mais na `main` — ela é protegida, e o app dele não passa
+# por Pull Request. Ele escreve numa branch própria, `gitbook/docs/documentacao`,
+# e este workflow cuida dos dois sentidos:
+#
+#   main  ─────────────────>  gitbook/docs/documentacao   (a cada merge na main)
+#   gitbook/docs/... ──────>  Pull Request para a main    (a cada edição no site)
+#
+# Sem isso, a branch do GitBook divergiria da `main` em poucos dias e alguém
+# teria que reconciliar na mão.
+#
+# Não há risco de laço: push feito com o GITHUB_TOKEN padrão não dispara outros
+# workflows. Só o push vindo do GitBook aciona a abertura do PR.
+#
+# Passo a passo e motivo em docs/configuracao.md, seção 7.
+
+on:
+  push:
+    branches:
+      - main
+      - gitbook/docs/documentacao
+
+env:
+  BRANCH_GITBOOK: gitbook/docs/documentacao
+
+jobs:
+  # -------------------------------------------------------------------------
+  # main -> branch do GitBook
+  # -------------------------------------------------------------------------
+  atualiza-branch:
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Levar a main para a branch do GitBook
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git checkout "$BRANCH_GITBOOK"
+
+          if git merge origin/main --no-edit -m "chore: traz a main para a branch do GitBook"; then
+            git push origin "$BRANCH_GITBOOK"
+            echo "Branch do GitBook atualizada."
+          else
+            git merge --abort
+            echo "::error::Conflito entre a main e $BRANCH_GITBOOK. O mesmo trecho foi editado no GitHub e no GitBook — resolva na mão."
+            exit 1
+          fi
+
+  # -------------------------------------------------------------------------
+  # branch do GitBook -> Pull Request para a main
+  # -------------------------------------------------------------------------
+  abre-pr:
+    if: github.ref == 'refs/heads/gitbook/docs/documentacao'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: read
+      pull-requests: write
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Abrir o PR, se houver o que levar
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          if [ -z "$(git log "origin/main..origin/$BRANCH_GITBOOK" --oneline)" ]; then
+            echo "Nada a levar para a main."
+            exit 0
+          fi
+
+          aberto=$(gh pr list --base main --head "$BRANCH_GITBOOK" --state open --json number --jq '.[].number')
+          if [ -n "$aberto" ]; then
+            echo "Já existe o PR #$aberto para esta branch; os commits novos entram nele."
+            exit 0
+          fi
+
+          gh pr create \
+            --base main \
+            --head "$BRANCH_GITBOOK" \
+            --title "docs: sincroniza edições feitas no GitBook" \
+            --body-file .github/gitbook-sync-pr.md
