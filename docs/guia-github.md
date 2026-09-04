@@ -277,11 +277,61 @@ os erros que doem de verdade.
 
 | Situação | O que fazer |
 |---|---|
-| Errei o texto e já commitei | Edite de novo e commite outra vez, na mesma branch. O PR se atualiza sozinho |
+| Errei o **texto do arquivo** | Edite de novo e commite outra vez, na mesma branch. O PR se atualiza sozinho |
+| Errei a **mensagem do commit** | **Não tem conserto pelo navegador.** Feche o PR e abra outro — ver o quadro abaixo |
+| Errei o **nome da branch** | Idem. O nome fica preso ao PR desde que ele nasce |
 | Abri o PR sem terminar | Deixe aberto e continue commitando na mesma branch |
 | Fiz besteira na branch inteira | Feche o PR, apague a branch, comece de novo. Não afeta ninguém |
 | Não entendi o que o check quer | Comente no próprio PR marcando `@claude` e descreva o problema. Ele responde ali |
 | Escrevi na `main` sem querer | Não conseguiu. O GitHub recusou o envio antes de acontecer |
+
+> ⚠️ **A diferença que mais custa caro.** Conteúdo se corrige na mesma branch,
+> quantas vezes for preciso. **Mensagem de commit e nome de branch, não** — a
+> validação confere *todos* os commits do PR, então um commit novo não apaga o
+> anterior. Errou num dos dois: PR novo.
+>
+> É por isso que a seção seguinte existe.
+
+---
+
+## 7.1. A cola — o que digitar, sem inventar
+
+Três campos, e é só copiar. Trocar `<seu-nome>` por `davi`, `yasmin` ou
+`filipe`, e o assunto pelo seu.
+
+| Campo, na janela do `Commit changes` | O que digitar |
+|---|---|
+| **Nome da branch** | `<seu-nome>/docs/<assunto-com-hifen>` |
+| **Mensagem** (campo de cima) | `docs: <o que você fez, minúscula, sem ponto>` |
+| **Descrição** (campo de baixo) | `Assistido-por: <nome da IA>` — ou `Assistido-por: nenhuma` |
+
+Exemplo completo, para copiar e adaptar:
+
+```
+branch:     yasmin/docs/referencial-teorico
+mensagem:   docs: adiciona a seção sobre UEBA
+descrição:  Assistido-por: Gemini 2.5 Pro
+```
+
+E no corpo do Pull Request, a seção **Uso de IA** — os quatro campos, nenhum
+vazio:
+
+```
+- **IA usada:** nenhuma
+- **No que ajudou:** não se aplica
+- **O que é meu:** a seção inteira
+- **Conferi tudo que a IA escreveu:** não se aplica
+```
+
+Três coisas que já derrubaram PR de gente da equipe, e não por descuido:
+
+1. **A mensagem tem limite de 72 caracteres.** Se passar, não tente continuar na
+   descrição — a descrição é do `Assistido-por:`, e o que estiver lá no lugar
+   dele reprova. Encurte o assunto.
+2. **O `Assistido-por:` não é opcional**, nem quando você não usou IA nenhuma.
+   `nenhuma` é resposta; campo vazio não é.
+3. **Nenhum dos quatro campos pode ficar vazio.** Escreva o que for verdade —
+   `nenhuma`, `não se aplica`, `nada`. O silêncio é o único errado.
 
 ---
 
