@@ -10,6 +10,32 @@ name: Governança
 # desligar todas as checagens — e a IA que escreveu o PR seria a mesma que
 # sugeriu a mudança.
 #
+# ---------------------------------------------------------------------------
+# POR QUE O RESULTADO VAI PARA UM COMMIT STATUS, E NÃO PARA O CHECK DO JOB
+# ---------------------------------------------------------------------------
+#
+# Este workflow roda várias vezes no MESMO commit: quando o PR abre, quando o
+# corpo é editado, e a cada revisão enviada. O caminho normal é falhar primeiro
+# (ainda sem aprovação) e passar depois (com as aprovações).
+#
+# O problema: o GitHub SOMA os check runs de mesmo nome. Um `failure` antigo
+# continua contando mesmo depois de o mais recente passar, e o PR trava com
+# tudo verde na tela. Foi o que aconteceu no PR #3, que precisou de
+# re-execução manual dos runs antigos para destravar.
+#
+# Commit status funciona diferente — a documentação do GitHub é explícita:
+#
+#     "success if the latest status for all contexts is success"
+#
+# Ou seja: vale o MAIS RECENTE por contexto, e o histórico não atrapalha.
+#
+# Por isso o job se chama `verificar` e o status publicado se chama
+# `governanca`. Os dois PRECISAM ter nomes diferentes: se um check e um status
+# compartilham o nome, o GitHub exige que ambos passem — e o check run voltaria
+# a travar tudo.
+#
+# O check obrigatório no ruleset é o STATUS `governanca`, não o job.
+#
 # Motivo completo em AGENTS.md, seção 4. Política em docs/uso-de-ia.md.
 
 on:
@@ -22,12 +48,13 @@ on:
     types: [submitted, dismissed]
 
 jobs:
-  governanca:
+  verificar:
     runs-on: ubuntu-latest
     timeout-minutes: 5
     permissions:
       contents: read
       pull-requests: read
+      statuses: write # para publicar o commit status `governanca`
 
     steps:
       - name: Checkout
@@ -57,8 +84,44 @@ jobs:
           done
 
       - name: Conferir declaração de IA e aprovações
+        id: conferir
+        # O passo não derruba o job aqui: o resultado precisa virar commit
+        # status antes, senão uma falha deixaria o PR sem status nenhum e o
+        # check obrigatório ficaria pendente para sempre.
+        continue-on-error: true
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           REPO: ${{ github.repository }}
           PR_NUMERO: ${{ github.event.pull_request.number }}
         run: python3 scripts/governanca.py
+
+      - name: Publicar o resultado como commit status
+        if: always()
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          if [ "${{ steps.conferir.outcome }}" = "success" ]; then
+            estado="success"
+            descricao="Declaração de IA e aprovações em ordem"
+          else
+            estado="failure"
+            descricao="Falta declarar a IA no PR, ou faltam aprovações"
+          fi
+
+          gh api --method POST \
+            "repos/${{ github.repository }}/statuses/${{ github.event.pull_request.head.sha }}" \
+            -f state="$estado" \
+            -f context="governanca" \
+            -f description="$descricao" \
+            -f target_url="${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+
+          echo "Status 'governanca' publicado como $estado."
+
+      - name: Refletir a falha no job
+        # Depois de publicar o status, o job falha para que a aba Actions mostre
+        # vermelho. Este check run se chama `verificar` e NÃO é obrigatório,
+        # entao acumular falhas aqui nao trava merge nenhum.
+        if: steps.conferir.outcome != 'success'
+        run: |
+          echo "A conferência falhou — veja o passo anterior. O status 'governanca' foi publicado como failure."
+          exit 1
