@@ -148,7 +148,7 @@ O que ficou valendo:
 | Restrict deletions | ninguém apaga a `main` |
 | Block force pushes | ninguém reescreve o histórico |
 | Require a pull request | 1 aprovação, e aprovação cai a cada novo commit |
-| Require status checks | o check `validar` precisa passar, com a branch atualizada |
+| Require status checks | `validar` e `governanca` precisam passar, com a branch atualizada |
 | Allowed merge methods | só **Squash and merge** — as outras opções somem do botão |
 | Bypass list | **vazia** — a regra vale para todo mundo, inclusive o dono |
 
@@ -184,6 +184,46 @@ disso, o ruleset existe mas não faz nada.
 
 > O check só aparece na busca depois que o workflow **Validação** rodar pelo
 > menos uma vez. Isso já aconteceu — `validar` aparece normalmente na lista.
+
+### "Merge without waiting for requirements to be met (bypass rules)"
+
+Ao mergear, o Davi vê essa caixa marcável e ela assusta. **Marcar é necessário,
+e é seguro** — mas vale entender por quê, porque o rótulo do GitHub não explica.
+
+O bypass é **por ruleset**, não geral:
+
+| Ruleset | Regras | O Davi pode contornar? |
+|---|---|---|
+| `Proteção da main` | PR obrigatório, 1 aprovação, checks verdes | **Nunca** — `bypass_actors` vazio |
+| `Merge restrito ao líder` | só `update` | Sempre — é o papel dele |
+
+Marcar a caixa contorna apenas o que ele **tem permissão** de contornar, ou seja
+a regra `update`, que é justamente a que impede Yasmin e Felipe de mergear. As
+exigências de revisão e de check continuam valendo para ele, marcando ou não.
+
+Foi por isso que os dois ficaram separados em rulesets distintos. Num ruleset só
+com bypass, aquela caixa passaria por cima de tudo.
+
+Para conferir a qualquer momento quem pode contornar o quê:
+
+```bash
+for id in $(gh api repos/Codexrocks/TCC_SDCAC/rulesets --jq '.[].id'); do
+  gh api repos/Codexrocks/TCC_SDCAC/rulesets/$id --jq '"\(.name): \(.current_user_can_bypass)"'
+done
+```
+
+A resposta esperada é `Proteção da main: never` e
+`Merge restrito ao líder: always`. Se o primeiro deixar de ser `never`, alguém
+abriu uma brecha na regra de revisão.
+
+> Precisa consultar um ruleset por vez: a listagem devolve
+> `current_user_can_bypass: null` para todos, e só o `GET` por id traz o valor
+> de verdade.
+
+> **O risco não é o clique, é o hábito.** Ele vai marcar essa caixa em todo
+> merge e ela vai virar rotina. Duas defesas: **nunca** adicionar bypass ao
+> `Proteção da main`, e olhar a lista de checks antes de clicar — check vermelho
+> importa mais que o botão.
 
 ### Testando
 

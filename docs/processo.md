@@ -95,9 +95,9 @@ site do GitBook já é público — então abrir o código não muda a exposiç�
 
 **b) Proteger a `main`** — dois rulesets, ambos `Active`:
 
-- [x] `Proteção da main` — PR obrigatório com 1 aprovação, check **Validação**,
-      sem force push, sem deleção, só *Squash and merge*. Sem bypass para
-      ninguém
+- [x] `Proteção da main` — PR obrigatório com 1 aprovação, checks **Validação**
+      e **Governança**, sem force push, sem deleção, só *Squash and merge*. Sem
+      bypass para ninguém
 - [x] `Merge restrito ao líder` — só o dono da organização atualiza a `main`
 
 **c) Adicionar o secret do assistente** — `Settings → Secrets and variables → Actions`
