@@ -79,6 +79,9 @@ Dono da leitura dos dados: o que os números mostram.
 Todos abrem PR e aprovam PR dos outros. **Só o Davi executa o merge na `main`** —
 é trava do GitHub, explicada em [Configuração](configuracao.md#quem-pode-executar-o-merge).
 
+> Primeira vez no GitHub? O [Guia do GitHub](guia-github.md) parte do zero: o que
+> é branch, como aprovar um PR e como escrever documentação sem instalar nada.
+
 ## Responsabilidade de todos
 
 - Escrever a parte do artigo que corresponde à sua frente

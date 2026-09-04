@@ -2,6 +2,10 @@
 
 Versão curta. A completa está em [`docs/padroes.md`](docs/padroes.md).
 
+**Primeira vez no GitHub?** Comece pelo
+[Guia do GitHub](docs/guia-github.md), que parte do zero e não pressupõe git
+instalado.
+
 ## O ciclo
 
 ```bash
