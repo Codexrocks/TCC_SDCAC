@@ -1,6 +1,16 @@
 # Configura o SITE do GitBook e diz qual pasta do repositório alimenta cada espaço.
 # Fica na raiz do repositório (campo "Project directory" do Git Sync vazio).
-# A configuração do espaço em si está em docs/.gitbook.yaml — são arquivos diferentes.
+# A configuração de cada espaço está no .gitbook.yaml de dentro da pasta dele.
+#
+# Dois espaços, com regimes diferentes:
+#
+#   documentacao -> ./docs    só leitura. O GitBook lê e publica; nada volta.
+#   artigo       -> ./artigo  leitura e ESCRITA. É onde a equipe redige.
+#
+# As pastas precisam ser IRMÃS: o GitBook não aceita o diretório de um espaço
+# aninhado dentro do de outro. Foi isso que tirou o artigo de dentro de docs/.
+#
+# Motivo completo em docs/configuracao.md, seção 7.
 
 $schema: https://api.gitbook.com/gitbook-docs.yaml
 site:
@@ -13,3 +23,9 @@ site:
       default: true
       content:
         directory: ./docs
+    - type: space
+      key: artigo
+      title: Artigo
+      path: artigo
+      content:
+        directory: ./artigo

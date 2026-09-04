@@ -1,0 +1,13 @@
+# Configura o espaço do ARTIGO. Caminhos relativos a esta pasta.
+#
+# Este espaço é o único do repositório onde o GitBook pode ESCREVER de volta.
+# Por isso ele mora aqui fora, e não dentro de docs/: espaços do GitBook não
+# podem ter diretórios aninhados um no outro — precisam ser pastas irmãs.
+#
+# Motivo completo em ../docs/configuracao.md, seção 7.
+
+root: ./
+
+structure:
+  readme: README.md
+  summary: SUMMARY.md

@@ -94,6 +94,18 @@ que contexto cada uma trabalhou.
 |---|---|---|---|---|
 | Empurrou um commit no PR #1 sem avisar que isso descartaria a aprovação já existente | processo | A revisão do Felipe virou `DISMISSED` e o PR voltou a `REVIEW_REQUIRED` | Nada a corrigir — o efeito é o desejado da regra. Faltou avisar **antes** e deixar a pessoa escolher o momento | a própria IA, depois do fato consumado |
 
+| Recomendou a branch dedicada para o GitBook sem antes verificar o que o GitBook faz com o conteúdo | processo | Nenhum na hora. Só apareceu na primeira sincronização real, quando ele reformatou 11 arquivos e −982 linhas | Caminho de volta desligado; a branch virou espelho de mão única. Uma rodada inteira de trabalho — branch, workflow, documentação — teve de ser refeita | a própria IA, depois de o Davi mandar investigar |
+| Afirmou no corpo do PR #3 que uma aprovação bastava, sem conferir a lista de arquivos protegidos | conteúdo | O check `governanca` reprovou o PR: `docs/processo.md` está na lista e exige duas | Corpo do PR corrigido | **o check** |
+| Detectou o Python nos ganchos com `command -v python3`, que no Windows encontra um atalho falso do Microsoft Store | defeito latente | Os sete casos de teste do gancho reprovaram, inclusive os corretos: o "python3" achado não era Python, só um convite para instalar da loja | Cada candidato passou a ser **executado** antes de ser aceito, e `py` entrou na lista | a própria IA, ao testar o gancho antes de entregá-lo |
+
+| Quebrou o heredoc do shell com aspas no conteúdo — **pela terceira vez na mesma sessão** | sintaxe | `unexpected EOF while looking for matching '` ao criar as seções do artigo | Passou a escrever pela ferramenta de escrita | a própria IA |
+
+> **Três vezes o mesmo erro, no mesmo dia.** Já havia acontecido ao criar
+> `usabilidade.md` e ao editar o `validar.py`. A IA corrige o caso e volta a
+> cometê-lo minutos depois: ela não retém a correção dentro da própria sessão.
+> Se o padrão se repetir com Gemini e Copilot, é achado para a discussão do
+> artigo; se for só aqui, é característica desta ferramenta.
+
 > O tipo mais incômodo de erro: a IA **sabia**. Ela mesma configurou
 > `dismiss_stale_reviews_on_push` na sessão 04 e escreveu em `configuracao.md`
 > que *"a aprovação cai a cada novo commit"*. Conhecer a regra e não aplicar a
@@ -108,19 +120,24 @@ Fechado em 04/09/2026, ainda na fase de configuração.
 
 | Tipo | Ocorrências |
 |---|---|
-| processo | 6 |
-| conteúdo | 4 |
+| processo | 7 |
+| conteúdo | 5 |
+| defeito latente | 2 |
 | sintaxe | 2 |
 | desperdício | 2 |
-| defeito latente | 1 |
-| **Total** | **15** |
+| **Total** | **18** |
 
 | Quem pegou | Ocorrências |
 |---|---|
-| a própria IA | 14 |
+| a própria IA | 16 |
 | a pessoa | 1 |
-| o check | 0 |
+| **o check** | **1** |
 | a revisão do PR | 0 |
+
+> **O primeiro erro pego por uma máquina.** O check `governanca` reprovou uma
+> afirmação que a IA fez sem verificar — que uma aprovação bastaria no PR #3.
+> É a rede de segurança saindo do zero, e vale mais que qualquer autocorreção:
+> não dependeu de a IA decidir olhar de novo.
 
 ### O que estes números ainda **não** dizem
 
@@ -143,6 +160,18 @@ leitura errada. Três ressalvas, todas importantes:
    sessão 06 foi percebido depois de já ter descartado a aprovação de alguém.
    Detectar não é o mesmo que evitar, e a tabela ainda não distingue os dois —
    vale considerar uma coluna a mais se o caso se repetir.
+5. **Testar antes de entregar pega o que a leitura não pega.** O gancho de
+   commit parecia certo e teria falhado na máquina de todo mundo: no Windows,
+   `command -v python3` encontra um atalho da Microsoft Store que não é Python.
+   Nenhuma revisão de código pegaria isso — só rodar. Vale como contraponto ao
+   item anterior: a IA erra menos quando executa do que quando raciocina sobre
+   o que aconteceria.
+6. **O erro mais caro não foi técnico, foi de investigação.** A IA ofereceu três
+   opções para o GitBook sem ter verificado o que o produto faz com o conteúdo.
+   A escolha foi tomada com informação incompleta, e uma rodada inteira de
+   trabalho precisou ser refeita. Bastava uma consulta à documentação — que ela
+   só fez quando mandaram. **Ela sabe pesquisar; o que faltou foi julgar que
+   precisava.**
 
 A hipótese a testar no resto do TCC é essa: **a IA se corrige bem no detalhe e
 mal no estrutural.** Se ela se sustentar até dezembro, é um achado que vale

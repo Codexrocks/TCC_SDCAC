@@ -10,6 +10,7 @@
 * [Padrões de código](padroes-codigo.md)
 * [Configuração passo a passo](configuracao.md)
 * [Cronograma](cronograma.md)
+* [Diretrizes institucionais](diretrizes.md)
 * [Arquitetura](arquitetura.md)
 * [Usabilidade](usabilidade.md)
 
