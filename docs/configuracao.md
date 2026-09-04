@@ -550,18 +550,45 @@ Mas é um buraco declarado: quem quisesse escapar da declaração de IA poderia
 forjar uma mensagem com esse prefixo. **O que segura esse caso é a revisão do
 Pull Request, onde o diff aparece — não o validador.**
 
-### Trocando a branch no GitBook
+### Cada espaço na sua branch
 
-`GitBook → espaço Documentação → Configure → Git Sync`
+**Nenhum dos dois espaços aponta para a `main`.** Cada um lê da sua própria
+branch — e apontar o espaço errado para a branch errada perde texto sem avisar.
 
-| Campo | Valor |
-|---|---|
-| Repositório | `Codexrocks/TCC_SDCAC` |
-| **Branch** | **`gitbook/docs/documentacao`** |
-| Project directory | vazio |
+`GitBook → o espaço → Configure → Git Sync`
 
-Se ele perguntar a direção da primeira sincronização, escolha **importar do
-Git** (GitHub → GitBook). O GitHub é a fonte da verdade.
+| Espaço | Branch | Project directory |
+|---|---|---|
+| **Documentação** | `gitbook/docs/documentacao` | vazio |
+| **Artigo** | `gitbook/docs/artigo` | vazio |
+
+Repositório é `Codexrocks/TCC_SDCAC` nos dois. Se ele perguntar a direção da
+primeira sincronização, escolha **importar do Git** (GitHub → GitBook). O
+GitHub é a fonte da verdade.
+
+> **Por que o Artigo não pode ficar em `gitbook/docs/documentacao`.** Essa
+> branch é espelho forçado da `main`: o workflow roda `git push --force` nela a
+> cada merge. Se o espaço do Artigo escrever ali, o texto é sobrescrito no
+> próximo push — e o job que abre o Pull Request só dispara em
+> `gitbook/docs/artigo`, então nada chega na `main`. O resultado é o pior
+> possível: o site mostra o texto salvo, e ele some sem erro nenhum.
+
+### Conferindo em que branch cada espaço está
+
+Vale conferir depois de mexer no Git Sync — a tela não deixa isso óbvio:
+
+```bash
+# Documentacao -> tem que responder .../tree/gitbook/docs/documentacao
+curl -s -H "Authorization: Bearer $GITBOOK_TOKEN" \
+  https://api.gitbook.com/v1/spaces/aKvalQTXmABRN7IP3nVq/git/info
+
+# Artigo -> tem que responder .../tree/gitbook/docs/artigo
+curl -s -H "Authorization: Bearer $GITBOOK_TOKEN" \
+  https://api.gitbook.com/v1/spaces/RTQgTj7MhGTUCLhhic5R/git/info
+```
+
+O campo `url` da resposta mostra a branch. Se os dois responderem a mesma, o
+Artigo está errado.
 
 **Trave a edição no espaço.** Como o caminho de volta é descartado, deixar
 alguém editar no site cria trabalho que se perde sem aviso. No GitBook, deixe o
@@ -594,7 +621,7 @@ git log origin/gitbook/docs/documentacao@{1}    # antes do ultimo espelhamento
 
 ---
 
-## 6. Windows — dois comandos que não funcionam como estão escritos
+## 8. Windows — dois comandos que não funcionam como estão escritos
 
 O restante desta página assume Linux ou macOS. No Windows, dois comandos que
 aparecem na documentação falham por motivos que não têm nada a ver com o
