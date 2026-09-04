@@ -1,38 +1,45 @@
 name: Sincroniza GitBook
 
-# Mão única: a `main` alimenta a branch que o GitBook lê. Nada volta.
+# Duas branches, dois regimes — porque os dois espaços do GitBook têm papéis
+# diferentes. Contexto completo em docs/configuracao.md, seção 7.
 #
-#   main  ──────>  gitbook/docs/documentacao  ──────>  GitBook lê e publica
+#   docs/    espaço "Documentação" — SÓ LEITURA
+#            main ──espelho forçado──> gitbook/docs/documentacao
+#            O que o GitBook escrever ali é descartado.
 #
-# Por que não é de mão dupla, já que o Git Sync do GitBook é:
+#   artigo/  espaço "Artigo" — LEITURA E ESCRITA
+#            main ──merge──> gitbook/docs/artigo ──Pull Request──> main
+#            É onde a equipe redige.
 #
-# O GitBook normaliza o Markdown ao exportar, e isso não é configurável — é
-# comportamento documentado do produto ("GitBook is opinionated. If there are
-# different ways to express the same concept in markdown, GitBook will only use
-# one"). Na primeira sincronização ele reescreveu 11 arquivos, −982 linhas:
-# desfez as quebras de linha, trocou `---` por `***`, apagou os comentários do
-# gitbook-docs.yaml e duplicou o índice de relatórios. E a documentação deles é
-# explícita em que ele desfaz qualquer correção "at the next opportunity".
+# Por que a documentação é só leitura: o GitBook normaliza o Markdown ao
+# exportar, e isso não é configurável — é comportamento documentado do produto
+# ("GitBook is opinionated... will only use one"). Na primeira sincronização ele
+# reescreveu 11 arquivos, −982 linhas: desfez as quebras de linha, apagou os
+# comentários do gitbook-docs.yaml e duplicou o índice de relatórios. E desfaz
+# qualquer correção manual "at the next opportunity".
 #
-# Somado a isso, os commits dele nunca passariam no `validar.py`: não seguem
-# `tipo: descrição` nem trazem `Assistido-por:`.
+# No artigo isso é aceitável: o que importa ali é o texto, e a reformatação não
+# sai da pasta — espaços do GitBook são limitados ao diretório que recebem.
 #
-# Então a branch é um **espelho descartável**. O que o GitBook escrever nela é
-# sobrescrito na próxima sincronização, sem dó. Quem quiser mudar a
-# documentação faz isso pelo GitHub, por Pull Request, como todo o resto.
-#
-# Contexto completo em docs/configuracao.md, seção 7.
+# Push feito com o GITHUB_TOKEN não dispara outros workflows, então não há laço.
 
 on:
   push:
-    branches: [main]
+    branches:
+      - main
+      - gitbook/docs/artigo
   workflow_dispatch:
 
 env:
-  BRANCH_GITBOOK: gitbook/docs/documentacao
+  BRANCH_DOCS: gitbook/docs/documentacao
+  BRANCH_ARTIGO: gitbook/docs/artigo
 
 jobs:
+  # -------------------------------------------------------------------------
+  # main -> as duas branches
+  # -------------------------------------------------------------------------
   espelhar:
+    if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     timeout-minutes: 10
     permissions:
@@ -44,20 +51,84 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Espelhar a main na branch do GitBook
+      - name: Espelhar a main na branch da documentação
         run: |
-          # --force de propósito: a branch é espelho, não fonte. Se o GitBook
-          # escreveu alguma coisa nela, é reformatação nossa de volta — e é
-          # exatamente isso que não queremos na main.
-          if git diff --quiet "origin/$BRANCH_GITBOOK" origin/main 2>/dev/null; then
-            echo "A branch do GitBook já está idêntica à main. Nada a fazer."
+          # --force de propósito: esta branch é espelho, não fonte.
+          descartados=$(git rev-list --count "origin/main..origin/$BRANCH_DOCS" 2>/dev/null || echo 0)
+          if [ "$descartados" != "0" ]; then
+            echo "::warning::Descartando $descartados commit(s) que o GitBook escreveu em $BRANCH_DOCS. Esperado: a branch é espelho, e edição feita no site não volta para o repositório."
+          fi
+          git push --force origin "origin/main:refs/heads/$BRANCH_DOCS"
+          echo "Branch da documentação espelha a main."
+
+      - name: Levar a main para a branch do artigo
+        run: |
+          # Aqui NAO se força: o que o GitBook escreveu é o texto do artigo, e
+          # precisa sobreviver para virar Pull Request.
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          if ! git ls-remote --exit-code --heads origin "$BRANCH_ARTIGO" >/dev/null 2>&1; then
+            git push origin "origin/main:refs/heads/$BRANCH_ARTIGO"
+            echo "Branch do artigo criada a partir da main."
             exit 0
           fi
 
-          descartados=$(git rev-list --count "origin/main..origin/$BRANCH_GITBOOK" 2>/dev/null || echo 0)
-          if [ "$descartados" != "0" ]; then
-            echo "::warning::Descartando $descartados commit(s) que o GitBook escreveu na branch. Isso é esperado: a branch é espelho da main, e edição feita pelo site do GitBook não volta para o repositório."
+          git checkout -B "$BRANCH_ARTIGO" "origin/$BRANCH_ARTIGO"
+          if git merge origin/main --no-edit -m "chore: traz a main para a branch do artigo"; then
+            git push origin "$BRANCH_ARTIGO"
+            echo "Branch do artigo atualizada."
+          else
+            git merge --abort
+            echo "::error::Conflito entre a main e $BRANCH_ARTIGO. O mesmo trecho de artigo/ foi mexido nos dois lados — e o artigo só se escreve pelo GitBook, então isso indica edição pelo GitHub."
+            exit 1
           fi
 
-          git push --force origin "origin/main:refs/heads/$BRANCH_GITBOOK"
-          echo "Branch do GitBook agora espelha a main."
+  # -------------------------------------------------------------------------
+  # branch do artigo -> Pull Request para a main
+  # -------------------------------------------------------------------------
+  abre-pr-do-artigo:
+    if: github.ref == 'refs/heads/gitbook/docs/artigo'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: read
+      pull-requests: write
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Abrir o PR, se houver texto novo
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          if [ -z "$(git log "origin/main..origin/$BRANCH_ARTIGO" --oneline)" ]; then
+            echo "Nada a levar para a main."
+            exit 0
+          fi
+
+          # Só o artigo pode vir por este caminho. Arquivo fora de artigo/ é
+          # sinal de espaço do GitBook mal configurado — e a documentação
+          # técnica não pode entrar reformatada pela porta do artigo.
+          fora=$(git diff --name-only "origin/main..origin/$BRANCH_ARTIGO" | grep -v '^artigo/' || true)
+          if [ -n "$fora" ]; then
+            echo "::error::A branch do artigo traz arquivos fora de artigo/:"
+            echo "$fora"
+            echo "::error::O espaço do GitBook deveria estar limitado a ./artigo. Confira gitbook-docs.yaml e o Git Sync."
+            exit 1
+          fi
+
+          aberto=$(gh pr list --base main --head "$BRANCH_ARTIGO" --state open --json number --jq '.[].number')
+          if [ -n "$aberto" ]; then
+            echo "Já existe o PR #$aberto; o texto novo entra nele."
+            exit 0
+          fi
+
+          gh pr create \
+            --base main \
+            --head "$BRANCH_ARTIGO" \
+            --title "docs: texto do artigo escrito no GitBook" \
+            --body-file .github/artigo-sync-pr.md

@@ -6,7 +6,7 @@ GitBook, como se escreve num editor de texto, sem passar por branch e Pull
 Request.
 
 Fora daqui, o GitBook só lê. O motivo está em
-[Configuração, seção 7](../configuracao.md#7-gitbook-e-a-main-protegida).
+[Configuração, seção 7](../docs/configuracao.md#7-gitbook-e-a-main-protegida).
 
 > **Aviso que vale a pena entender.** O GitBook normaliza o Markdown ao salvar:
 > junta as quebras de linha, realinha tabelas, troca `---` por `***`. Aqui isso
@@ -17,7 +17,7 @@ Fora daqui, o GitBook só lê. O motivo está em
 
 ## As cinco seções
 
-Estrutura definida pelo professor, conforme o [cronograma](../cronograma.md).
+Estrutura definida pelo professor, conforme o [cronograma](../docs/cronograma.md).
 
 | # | Seção | Quando | Quem |
 |---|---|---|---|
@@ -34,7 +34,7 @@ Estrutura definida pelo professor, conforme o [cronograma](../cronograma.md).
 repositório sozinho.
 
 **Pelo GitHub** — como qualquer outra página, pelo
-[guia](../guia-github.md). Vale quando você quiser revisar o texto de outra
+[guia](../docs/guia-github.md). Vale quando você quiser revisar o texto de outra
 pessoa com comentário linha a linha, que o GitBook não faz tão bem.
 
 ## Duas regras que não mudam aqui
@@ -52,12 +52,15 @@ plausível — autor real, revista real, ano real, artigo que não existe.
 **Número sai de execução real.** Taxa de detecção, falso positivo e MTTD vêm dos
 testes registrados em `results/`, nunca de estimativa.
 
-## O template COBEM
+## Norma: ABNT
 
-O artigo final é formatado no template **COBEM 2026**, que é do professor. O
-Markdown daqui é a **fonte da verdade do texto**; o template é formatação,
-aplicada na hora de montar o documento de entrega.
+Confirmado com o orientador em 04/09/2026: o artigo segue as **normas da ABNT**,
+e não o template COBEM que o [cronograma](../docs/cronograma.md) menciona. O
+**abstract em inglês é obrigatório**, além do Resumo em português.
 
-Escreva o conteúdo aqui primeiro. Copiar para o template é o último passo, não
-o primeiro — texto preso dentro de um `.docx` não é revisável por ninguém e não
-aparece no histórico.
+O Markdown daqui é a **fonte da verdade do texto**; a formatação ABNT é aplicada
+na hora de montar o documento de entrega.
+
+Escreva o conteúdo aqui primeiro. Formatar é o último passo, não o primeiro —
+texto preso dentro de um `.docx` não é revisável por ninguém e não aparece no
+histórico.

@@ -33,6 +33,22 @@ RE_COMMIT = re.compile(r"^(%s): .{3,}$" % "|".join(TIPOS))
 # "nao usei" de "esqueci". Regra em AGENTS.md, secao 3.
 RE_IA = re.compile(r"^[ \t]*(assistido-por|co-authored-by)[ \t]*:[ \t]*\S+",
                    re.IGNORECASE | re.MULTILINE)
+
+# O GitBook escreve na pasta artigo/ e gera as mensagens de commit sozinho:
+# "GitBook: Export content from X" e "GITBOOK-SITE: Changes to Y". Elas nunca
+# vao seguir "tipo: descricao" nem trazer Assistido-por, e nao ha como
+# configurar isso — e comportamento do produto.
+#
+# EXCECAO DECLARADA, e o unico buraco conhecido nesta validacao: quem quisesse
+# escapar da regra poderia forjar uma mensagem com esse prefixo. O que segura o
+# caso e a revisao do Pull Request, onde o diff aparece, e nao esta regra.
+#
+# Motivo em docs/configuracao.md, secao 7.
+RE_COMMIT_GITBOOK = re.compile(r"^(GitBook|GITBOOK-[A-Z]+):", re.IGNORECASE)
+
+# Cada espaco do GitBook tem seu proprio SUMMARY. Pasta que nao esta aqui nao e
+# publicada, e seus .md nao precisam estar em indice nenhum.
+ESPACOS = ("docs", "artigo")
 RE_LINK = re.compile(r"(?<!\!)\[[^\]]*\]\(([^)]+)\)")
 
 SEGREDOS = [
@@ -104,6 +120,11 @@ def checar_commits(base):
         linhas = mensagem.strip().splitlines()
         assunto = linhas[0] if linhas else ""
 
+        if RE_COMMIT_GITBOOK.match(assunto):
+            # Commit do GitBook: formato e declaracao de IA nao se aplicam.
+            avisos.append(f"commit {sha[:8]}: gerado pelo GitBook, formato nao verificado")
+            continue
+
         if not RE_COMMIT.match(assunto):
             erros.append(f"commit {sha[:8]}: '{assunto}' fora do padrao 'tipo: descricao'")
         elif len(assunto) > 72:
@@ -118,19 +139,21 @@ def checar_commits(base):
 
 
 def checar_summary():
-    sm = os.path.join(RAIZ, "docs", "SUMMARY.md")
-    if not os.path.exists(sm):
-        erros.append("docs/SUMMARY.md nao existe")
-        return
-    with open(sm, encoding="utf-8") as fh:
-        conteudo = fh.read()
-    listados = {os.path.normpath(m) for m in RE_LINK.findall(conteudo)}
-    for caminho in arquivos_md():
-        rel = os.path.relpath(caminho, os.path.join(RAIZ, "docs"))
-        if rel.startswith("..") or rel == "SUMMARY.md":
+    for espaco in ESPACOS:
+        base = os.path.join(RAIZ, espaco)
+        sm = os.path.join(base, "SUMMARY.md")
+        if not os.path.exists(sm):
+            erros.append(f"{espaco}/SUMMARY.md nao existe")
             continue
-        if os.path.normpath(rel) not in listados:
-            erros.append(f"docs/{rel} nao esta no docs/SUMMARY.md")
+        with open(sm, encoding="utf-8") as fh:
+            conteudo = fh.read()
+        listados = {os.path.normpath(m) for m in RE_LINK.findall(conteudo)}
+        for caminho in arquivos_md():
+            rel = os.path.relpath(caminho, base)
+            if rel.startswith("..") or rel == "SUMMARY.md":
+                continue
+            if os.path.normpath(rel) not in listados:
+                erros.append(f"{espaco}/{rel} nao esta no {espaco}/SUMMARY.md")
 
 
 def checar_links():

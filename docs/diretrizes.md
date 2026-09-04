@@ -107,14 +107,17 @@ Iniciante**.
 
 ---
 
-## Divergências a confirmar com o orientador
+## Confirmado com o orientador
 
-- [ ] **Template.** As diretrizes falam em **ABNT ou padrões da coordenação**, e
-      em submissão via plataforma institucional. O nosso
-      [cronograma](cronograma.md) fala em **template COBEM 2026**. São coisas
-      diferentes — confirmar qual vale, e obter o arquivo.
-- [ ] **Resumo e abstract.** A 5ª versão pede Resumo. Confirmar se são
-      necessários também *abstract*, palavras-chave e *keywords*.
+Em 04/09/2026:
+
+- **Norma: ABNT.** Não é o template COBEM. O
+  [cronograma](cronograma.md) menciona COBEM por engano, herdado da primeira
+  versão do plano — vale a ABNT.
+- **Abstract em inglês é necessário**, além do Resumo em português.
+
+## Ainda a confirmar com o orientador
+
 - [ ] **Plataforma de submissão.** Dreamshaper, RUNA ou outra.
 - [ ] **Mapeamento das versões.** As cinco versões do professor precisam ser
       casadas com as semanas do nosso cronograma, para não descobrirmos um

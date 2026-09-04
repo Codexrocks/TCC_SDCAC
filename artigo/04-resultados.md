@@ -1,7 +1,7 @@
 # 4. Resultados e Discussão
 
 > **4ª Versão** na numeração do professor · S12 e S13 do
-> [cronograma](../cronograma.md) · Felipe e Davi nos números, discussão com
+> [cronograma](../docs/cronograma.md) · Felipe e Davi nos números, discussão com
 > todos.
 >
 > **Não escreva nada aqui antes de rodar os testes.** Número de resultado sai de
@@ -25,7 +25,7 @@
 ## 4.4 Resultados de usabilidade
 
 <!-- Escore SUS, violações heurísticas por severidade, métricas de tarefa.
-     Método em ../usabilidade.md, seção 6. -->
+     Método em ../docs/usabilidade.md, seção 6. -->
 
 ## 4.5 Discussão
 
@@ -37,7 +37,7 @@
      - comparação com o Isolation Forest, se a S10 acontecer
 
      A leitura cruzada entre falso positivo e SUS está prevista em
-     ../usabilidade.md, seção 7. -->
+     ../docs/usabilidade.md, seção 7. -->
 
 ## 4.6 Limitações
 

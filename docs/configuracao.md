@@ -464,12 +464,55 @@ quebrado nas duas pontas.
 > que o GitBook lê. Mas também **não trabalhe nela**: qualquer commit ali é
 > descartado no próximo espelhamento.
 
-### Quem escreve a documentação, então
+### As duas zonas
 
-Pelo GitHub, por Pull Request, como todo o resto do repositório. O
-[Guia do GitHub](guia-github.md) mostra como fazer isso **sem instalar nada**,
-editando o arquivo direto no navegador — que era a conveniência que o GitBook
-oferecia.
+Boa parte do TCC é redação, não código: oito das quinze semanas do
+[cronograma](cronograma.md) são escrever texto. Fechar o GitBook por completo
+resolveria o problema técnico e criaria um pior — obrigar quem escreve artigo a
+trabalhar num editor de código.
+
+Por isso o repositório tem **duas zonas**, com regimes diferentes:
+
+| Pasta | Espaço | Quem escreve | Por quê |
+|---|---|---|---|
+| `artigo/` | **Artigo** | GitBook | É o texto do TCC. A reformatação não incomoda, porque o que importa ali é o conteúdo |
+| `docs/` | **Documentação** | só GitHub | Regras, processo, relatórios. Formato instável aqui quebra revisão e links |
+
+```
+                    ┌── espelho forçado ──> gitbook/docs/documentacao ──> lê
+main ───────────────┤
+                    └── merge ────────────> gitbook/docs/artigo ────────> lê e escreve
+                                                      │
+                                                      └── Pull Request ──> main
+```
+
+**As pastas precisam ser irmãs.** O GitBook não aceita o diretório de um espaço
+aninhado dentro do de outro — foi isso que tirou o artigo de dentro de `docs/`:
+
+> Keep all mapped directories as distinct, non-overlapping sibling folders.
+
+### A regra que evita conflito
+
+**`artigo/` se escreve pelo GitBook. `docs/` se escreve pelo GitHub.**
+
+Ninguém edita `artigo/` pelo GitHub — nem para corrigir digitação. Se as duas
+pontas mexerem no mesmo arquivo, o workflow falha com conflito e alguém precisa
+resolver na mão. Revisão de texto se faz por comentário no Pull Request, sem
+editar o arquivo.
+
+### A exceção no validador
+
+Os commits que o GitBook gera — `GitBook: Export content from...` — nunca vão
+seguir `tipo: descrição` nem trazer `Assistido-por:`. O `validar.py` os isenta,
+e essa é a **única exceção da governança**.
+
+Ela é estreita de propósito: só alcança mensagens que começam exatamente com
+`GitBook:` ou `GITBOOK-ALGO:`. Uma mensagem como `GitBooking: ...` continua
+reprovando, e há teste garantindo isso.
+
+Mas é um buraco declarado: quem quisesse escapar da declaração de IA poderia
+forjar uma mensagem com esse prefixo. **O que segura esse caso é a revisão do
+Pull Request, onde o diff aparece — não o validador.**
 
 ### Trocando a branch no GitBook
 

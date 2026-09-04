@@ -1,7 +1,7 @@
 # 5. Conclusão
 
 > **5ª Versão** na numeração do professor — que pede **Conclusão, Resumo e
-> Referências** juntos · S14 do [cronograma](../cronograma.md) · Todos.
+> Referências** juntos · S14 do [cronograma](../docs/cronograma.md) · Todos.
 
 ---
 
@@ -32,7 +32,7 @@
 
 > **Este é o item mais fácil de esquecer do TCC inteiro.** As diretrizes
 > institucionais pedem o Resumo nesta mesma etapa, mas ele **não tem semana
-> própria** no nosso cronograma. Ver [`diretrizes.md`](../diretrizes.md).
+> própria** no nosso cronograma. Ver [`diretrizes.md`](../docs/diretrizes.md).
 
 <!-- Um parágrafo único, sem citação, cobrindo nesta ordem: contexto, objetivo,
      método, resultado principal e conclusão.
@@ -42,8 +42,18 @@
 
 **Palavras-chave:** <!-- de três a cinco, separadas por ponto -->
 
-<!-- Confirmar com o orientador se são necessários também abstract e keywords em
-     inglês. Pendência aberta em ../diretrizes.md. -->
+---
+
+## Abstract
+
+> **Confirmado com o orientador em 04/09/2026: o abstract em inglês é
+> obrigatório**, além do Resumo em português. Norma: **ABNT** — não o template
+> COBEM que o cronograma menciona.
+
+<!-- Versão em inglês do Resumo. Não é tradução literal: é o mesmo conteúdo
+     escrito em inglês. Traduza depois que o Resumo estiver fechado. -->
+
+**Keywords:** <!-- as mesmas palavras-chave, em inglês -->
 
 ---
 

@@ -1,7 +1,7 @@
 # Referências
 
 Formatação **ABNT NBR 6023**, conforme as
-[diretrizes institucionais](../diretrizes.md).
+[diretrizes institucionais](../docs/diretrizes.md).
 
 > **Uma referência só entra aqui depois de alguém abrir a fonte.**
 >
@@ -48,7 +48,7 @@ AUTOR. **Título**. Ano. Disponível em: URL. Acesso em: dia mês ano.
 
 ## Aproveitáveis de outras páginas
 
-[`usabilidade.md`](../usabilidade.md) já traz uma lista formatada em ABNT — ISO
+[`usabilidade.md`](../docs/usabilidade.md) já traz uma lista formatada em ABNT — ISO
 9241-11 e 9241-210, Nielsen, Norman, Shneiderman, WCAG 2.2, Brooke, Adams e
 Sasse, Whitten e Tygar, Cranor e Garfinkel.
 
