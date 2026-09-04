@@ -86,6 +86,22 @@ de disciplina: o GitHub recusa.
 5. **Avise o Davi** — o merge é ele quem faz
 6. Apague a branch
 
+### PR empilhado
+
+Às vezes um PR precisa sair de outro que ainda não entrou — porque os dois mexem
+no mesmo arquivo. Nesse caso a base do segundo é a branch do primeiro, e o
+GitHub reaponta para a `main` sozinho quando o primeiro é mergeado.
+
+Duas coisas para saber:
+
+- **Merge o de baixo primeiro.** Fora de ordem, o segundo leva junto commits que
+  ninguém revisou naquele contexto.
+- Os rulesets protegem **só a `main`**. Uma branch intermediária não tem
+  aprovação obrigatória. O check **Validação** roda em todo PR, mas a trava de
+  revisão só existe na `main` — então PR empilhado depende de disciplina.
+
+Não é para virar hábito. Dois PRs empilhados já são o limite.
+
 ### Quem faz o merge
 
 Só o **Davi**, e isso é trava do GitHub, não combinado de boca: o ruleset

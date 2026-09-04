@@ -5,8 +5,11 @@ name: Validação
 # Settings -> Rules -> Rulesets -> Require status checks to pass.
 
 on:
+  # Todo Pull Request, qualquer que seja a base. Restringir a `branches: [main]`
+  # deixava PR empilhado (aberto contra outra branch) passar sem check nenhum —
+  # e os rulesets so protegem a branch padrao, entao esse PR nao era conferido
+  # por ninguem.
   pull_request:
-    branches: [main]
   push:
     branches: [main]
 
