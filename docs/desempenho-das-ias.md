@@ -101,8 +101,9 @@ que contexto cada uma trabalhou.
 | Quebrou o heredoc do shell com aspas no conteúdo — **pela terceira vez na mesma sessão** | sintaxe | `unexpected EOF while looking for matching '` ao criar as seções do artigo | Passou a escrever pela ferramenta de escrita | a própria IA |
 
 | A checagem de declaração de IA aprovava template em branco quando o corpo vinha com CRLF | processo | O PR #5, o primeiro aberto por outra pessoa, passou no check com os quatro campos vazios | `sem_comentarios` passou a normalizar o fim de linha; cinco testes com o formato real do GitHub | a pessoa — o Davi mandou investigar por que o PR passou |
-| Tornou obrigatório um check que dispara duas vezes e acumula resultados | processo | O PR #3 ficou travado com tudo aprovado: o GitHub soma os check runs e o rollup dava FAILURE por causa de execuções antigas | Runs antigos re-executados; correção estrutural ainda pendente | a pessoa — travou no merge dela |
+| Tornou obrigatório um check que dispara duas vezes e acumula resultados | processo | O PR #3 ficou travado com tudo aprovado: o GitHub soma os check runs e o rollup dava FAILURE por causa de execuções antigas | Runs antigos re-executados na hora. **Correção estrutural em 04/09:** o resultado virou *commit status*, que vale pelo mais recente por contexto | a pessoa — travou no merge dela |
 | Gancho `commit-msg` barrava commit de merge | conteúdo | `git merge origin/main` de rotina foi interrompido pelo gancho pedindo `Assistido-por:` | Sai antes quando existe `MERGE_HEAD`, espelhando o `--no-merges` do validador | a própria IA, ao tropeçar nele |
+| Comentou o PR #5 com uma correção longa em vez de um pedido curto | processo | O Felipe **fechou o próprio PR 45 segundos depois** do comentário e apagou a branch. Era o primeiro PR aberto por alguém da equipe | O conteúdo dele foi recuperado de `refs/pull/5/head` e nada se perdeu. Não há correção técnica: o erro foi de tom e de tamanho | a pessoa — pela reação, não por um aviso |
 
 > **O gancho era mais rigoroso que o próprio check que ele imita.** O
 > `validar.py` ignora commits de merge desde sempre; o gancho, escrito para
@@ -129,17 +130,17 @@ Fechado em 04/09/2026, ainda na fase de configuração.
 
 | Tipo | Ocorrências |
 |---|---|
-| processo | 9 |
+| processo | 10 |
 | conteúdo | 6 |
 | defeito latente | 2 |
 | sintaxe | 2 |
 | desperdício | 2 |
-| **Total** | **21** |
+| **Total** | **22** |
 
 | Quem pegou | Ocorrências |
 |---|---|
 | a própria IA | 17 |
-| **a pessoa** | **3** |
+| **a pessoa** | **4** |
 | o check | 1 |
 | a revisão do PR | 0 |
 
@@ -150,8 +151,8 @@ Fechado em 04/09/2026, ainda na fase de configuração.
 
 ### O que estes números ainda **não** dizem
 
-Treze de quatorze pegos pela própria IA parece um resultado excelente, e seria
-leitura errada. Três ressalvas, todas importantes:
+Dezessete de vinte e dois pegos pela própria IA parece um resultado excelente,
+e seria leitura errada. As ressalvas abaixo importam mais que a proporção:
 
 1. **A rede de segurança humana ainda não foi exercitada.** Nenhum Pull Request
    foi revisado até aqui, e o check `Governança` nem era obrigatório. Zero em
@@ -187,10 +188,21 @@ leitura errada. Três ressalvas, todas importantes:
    trabalho precisou ser refeita. Bastava uma consulta à documentação — que ela
    só fez quando mandaram. **Ela sabe pesquisar; o que faltou foi julgar que
    precisava.**
+8. **Nenhuma métrica aqui mede efeito sobre pessoas.** O comentário no PR #5
+   estava tecnicamente correto em cada parágrafo: explicava a causa, assumia a
+   culpa do guia, admitia o defeito do check. E o autor fechou o próprio PR
+   quarenta e cinco segundos depois. Um texto pode estar certo e ainda assim
+   ser a coisa errada a enviar — o volume de correção sinaliza gravidade,
+   mesmo quando cada frase nega que seja grave. A IA otimiza para completude;
+   a pessoa do outro lado lê tamanho.
 
-A hipótese a testar no resto do TCC é essa: **a IA se corrige bem no detalhe e
-mal no estrutural.** Se ela se sustentar até dezembro, é um achado que vale
-discussão no artigo.
+Duas hipóteses a testar no resto do TCC:
+
+1. **A IA se corrige bem no detalhe e mal no estrutural.**
+2. **A IA calibra o conteúdo e não calibra o efeito.** Acerta o que dizer e
+   erra quanto dizer, para quem e em que momento.
+
+Se as duas se sustentarem até dezembro, valem discussão no artigo.
 
 ---
 
