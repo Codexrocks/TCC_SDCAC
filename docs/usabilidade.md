@@ -266,9 +266,9 @@ referencial cobrir SIEM e SOC.
 
 | Seção do artigo | O que vai | Quem |
 |---|---|---|
-| Referencial teórico | Seções 1 a 5 e 7 desta página — princípios, norma e usabilidade em segurança | Yasmin + Felipe |
-| Metodologia | Seção 6 — os três instrumentos e como foram aplicados | Felipe |
-| Resultados | Escores SUS, tabela de violações heurísticas, métricas de tarefa | Felipe |
+| Referencial teórico | Seções 1 a 5 e 7 desta página — princípios, norma e usabilidade em segurança | Yasmin + Filipe |
+| Metodologia | Seção 6 — os três instrumentos e como foram aplicados | Filipe |
+| Resultados | Escores SUS, tabela de violações heurísticas, métricas de tarefa | Filipe |
 | Discussão | Fadiga de alerta cruzando taxa de falsos positivos com satisfação | Todos |
 
 ---

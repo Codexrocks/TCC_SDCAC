@@ -147,7 +147,7 @@ def test_uma_aprovacao_nao_basta_em_arquivo_protegido():
 def test_duas_aprovacoes_passam():
     governanca.checar_dupla_aprovacao(
         ["scripts/validar.py"],
-        [review("yasmin", "APPROVED"), review("felipe", "APPROVED")],
+        [review("yasmin", "APPROVED"), review("filipe", "APPROVED")],
         "davi",
     )
     assert governanca.erros == []
@@ -179,8 +179,8 @@ def test_quem_aprovou_e_depois_pediu_mudancas_nao_conta():
         ["AGENTS.md"],
         [
             review("yasmin", "APPROVED"),
-            review("felipe", "APPROVED"),
-            review("felipe", "CHANGES_REQUESTED"),
+            review("filipe", "APPROVED"),
+            review("filipe", "CHANGES_REQUESTED"),
         ],
         "davi",
     )
@@ -194,8 +194,8 @@ def test_comentario_nao_derruba_aprovacao_anterior():
         ["AGENTS.md"],
         [
             review("yasmin", "APPROVED"),
-            review("felipe", "APPROVED"),
-            review("felipe", "COMMENTED"),
+            review("filipe", "APPROVED"),
+            review("filipe", "COMMENTED"),
         ],
         "davi",
     )

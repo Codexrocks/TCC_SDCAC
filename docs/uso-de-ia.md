@@ -27,9 +27,9 @@ verificável e não dependa da memória de ninguém.
 |---|---|---|
 | Davi | Claude (Claude Code) | Repositório, automação, backend |
 | Yasmin | <!-- FALTA PREENCHER --> | <!-- FALTA PREENCHER --> |
-| Felipe | <!-- FALTA PREENCHER --> | <!-- FALTA PREENCHER --> |
+| Filipe | <!-- FALTA PREENCHER --> | <!-- FALTA PREENCHER --> |
 
-> **Yasmin e Felipe:** preencham a linha de vocês. Vale qualquer assistente —
+> **Yasmin e Filipe:** preencham a linha de vocês. Vale qualquer assistente —
 > Gemini, ChatGPT, Copilot, Grok, Codex. Não existe resposta errada aqui; a
 > única resposta errada é deixar em branco.
 

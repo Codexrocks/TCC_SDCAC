@@ -10,7 +10,7 @@ https://github.com/Codexrocks/TCC_SDCAC/blob/main/docs/configuracao.md
 ## Por quê
 
 Boa parte do trabalho do TCC é redação, não código. Este caminho existe para que
-Yasmin e Felipe escrevam o artigo num editor de texto de verdade, sem passar por
+Yasmin e Filipe escrevam o artigo num editor de texto de verdade, sem passar por
 branch e Pull Request a cada parágrafo — e sem que a reformatação do GitBook
 alcance as regras, os workflows e os relatórios.
 

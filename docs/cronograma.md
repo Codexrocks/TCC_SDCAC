@@ -18,15 +18,15 @@
 | S1 | 02–03/09 | Setup & alinhamento | Tema aprovado, grupo confirmado, repositório e GitBook criados | Todos (Davi) |
 | S2 | 04–10/09 | **Introdução** | Contextualização, problema, justificativa, pergunta e objetivos | Todos |
 | S3 | 11–17/09 | Referencial teórico I | Pilares da Segurança (CIA), autenticação, autorização, tipos de log | Yasmin |
-| S4 | 18–24/09 | Referencial teórico II | SIEM, SOC, UEBA, ameaças internas, detecção de anomalias | Yasmin + Felipe |
+| S4 | 18–24/09 | Referencial teórico II | SIEM, SOC, UEBA, ameaças internas, detecção de anomalias | Yasmin + Filipe |
 | S5 | 25/09–01/10 | **Metodologia** | Tipo de pesquisa, ferramentas, ambiente controlado | Todos |
 | S6 | 02–08/10 | Banco de dados & logs | Schema PostgreSQL + gerador de massa de dados | Davi |
 | S7 | 09–15/10 | Motor de detecção | Regras heurísticas (horário, frequência, IP) | Davi + Yasmin |
 | S8 | 16–22/10 | Classificação de risco | Algoritmo de Risk Score (0–100) e severidade | Davi + Yasmin |
-| S9 | 23–29/10 | Dashboard | Painel com métricas, tabela de incidentes e gráficos | Felipe |
-| S10 | 30/10–05/11 | Machine Learning *(opcional)* | Isolation Forest como benchmark das regras | Felipe |
+| S9 | 23–29/10 | Dashboard | Painel com métricas, tabela de incidentes e gráficos | Filipe |
+| S10 | 30/10–05/11 | Machine Learning *(opcional)* | Isolation Forest como benchmark das regras | Filipe |
 | S11 | 06–12/11 | Execução de testes | 6 cenários simulados + matriz de confusão | Todos |
-| S12 | 13–19/11 | Métricas & resultados | Taxa de detecção, falsos positivos, MTTD, tabelas e gráficos | Felipe + Davi |
+| S12 | 13–19/11 | Métricas & resultados | Taxa de detecção, falsos positivos, MTTD, tabelas e gráficos | Filipe + Davi |
 | S13 | 20–26/11 | **Resultados e discussão** | Análise da eficiência, limitações e pontos fracos | Todos |
 | S14 | 27/11–03/12 | **Conclusão** | Respostas à pergunta de pesquisa e trabalhos futuros | Todos |
 | S15 | 04–10/12 | Revisão final & ABNT | Formatação, abstract, ortografia, submissão | Todos |

@@ -129,7 +129,7 @@ Texto normal. **Negrito** com dois asteriscos, *itálico* com um.
 > Pare cinco segundos neste campo antes de clicar.
 >
 > Exemplos válidos: `yasmin/docs/referencial-teorico` ·
-> `felipe/docs/uso-de-ia` · `davi/feat/coletor-de-logs`
+> `filipe/docs/uso-de-ia` · `davi/feat/coletor-de-logs`
 
 **6.** **`Propose changes`** e depois **`Create pull request`**.
 

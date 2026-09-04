@@ -234,7 +234,7 @@ O bypass é **por ruleset**, não geral:
 | `Merge restrito ao líder` | só `update` | Sempre — é o papel dele |
 
 Marcar a caixa contorna apenas o que ele **tem permissão** de contornar, ou seja
-a regra `update`, que é justamente a que impede Yasmin e Felipe de mergear. As
+a regra `update`, que é justamente a que impede Yasmin e Filipe de mergear. As
 exigências de revisão e de check continuam valendo para ele, marcando ou não.
 
 Foi por isso que os dois ficaram separados em rulesets distintos. Num ruleset só
@@ -291,10 +291,10 @@ O efeito combinado dos dois rulesets:
 |---|---|---|---|
 | Davi (org owner) | sim | sim, no PR dos outros | **sim** |
 | Yasmin | sim | sim | não |
-| Felipe | sim | sim | não |
+| Filipe | sim | sim | não |
 | Assistente (`@claude`) | sim | não | não |
 
-Yasmin e Felipe veem o botão de merge, mas o GitHub recusa o push resultante.
+Yasmin e Filipe veem o botão de merge, mas o GitHub recusa o push resultante.
 Não é falta de educação com a ferramenta: é a regra funcionando.
 
 > **O Davi não fica acima das regras.** O bypass vale só neste segundo ruleset,
@@ -353,13 +353,13 @@ usuário só vira regra válida depois de ter acesso de escrita ao repositório.
 > `@Codexrocks/lideranca`, que nunca foi criado. O GitHub tratava o arquivo
 > inteiro como inválido, com o erro *Unknown owner*. Foi por isso que trocou.
 
-Quando o Felipe entrar, descubra o usuário GitHub dele, apague o `#` do começo
+Quando o Filipe entrar, descubra o usuário GitHub dele, apague o `#` do começo
 das linhas e troque o placeholder:
 
 ```
-/docs/                @Yas2046 @usuario-do-felipe
+/docs/                @Yas2046 @usuario-do-filipe
 /detection/           @Yas2046
-/frontend/            @usuario-do-felipe
+/frontend/            @usuario-do-filipe
 ```
 
 Para conferir se o arquivo está válido sem precisar abrir um PR:
@@ -379,19 +379,19 @@ revisor na mão.
 
 `Settings → Collaborators and teams → Add people`
 
-Yasmin e Felipe com papel **Write**. Write permite criar branch, abrir PR e
+Yasmin e Filipe com papel **Write**. Write permite criar branch, abrir PR e
 aprovar — e não permite mexer em configuração do repositório.
 
 | Pessoa | Usuário | Papel | Estado |
 |---|---|---|---|
 | Davi | `@DaviSoaresDilly` | Admin · owner da org | ativo |
 | Yasmin | `@Yas2046` | Write | ativo |
-| Felipe | `@FilipeF4guiar` | Write | ativo |
+| Filipe | `@FilipeF4guiar` | Write | ativo |
 
 Equipe completa desde 03/09/2026. Com três pessoas, sempre há alguém que possa
 aprovar o PR de outro — o que era o ponto frágil enquanto o time era de dois.
 
-> Yasmin é membro da organização; Felipe entrou como **colaborador externo** do
+> Yasmin é membro da organização; Filipe entrou como **colaborador externo** do
 > repositório. Para o dia a dia dá no mesmo. A diferença aparece se um dia o
 > `CODEOWNERS` usar time (`@Codexrocks/algum-time`): time só alcança quem é
 > membro da organização.

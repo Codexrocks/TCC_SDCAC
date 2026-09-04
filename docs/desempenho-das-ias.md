@@ -92,7 +92,7 @@ que contexto cada uma trabalhou.
 
 | Erro | Tipo | Como apareceu | Correção | Quem pegou |
 |---|---|---|---|---|
-| Empurrou um commit no PR #1 sem avisar que isso descartaria a aprovação já existente | processo | A revisão do Felipe virou `DISMISSED` e o PR voltou a `REVIEW_REQUIRED` | Nada a corrigir — o efeito é o desejado da regra. Faltou avisar **antes** e deixar a pessoa escolher o momento | a própria IA, depois do fato consumado |
+| Empurrou um commit no PR #1 sem avisar que isso descartaria a aprovação já existente | processo | A revisão do Filipe virou `DISMISSED` e o PR voltou a `REVIEW_REQUIRED` | Nada a corrigir — o efeito é o desejado da regra. Faltou avisar **antes** e deixar a pessoa escolher o momento | a própria IA, depois do fato consumado |
 
 | Recomendou a branch dedicada para o GitBook sem antes verificar o que o GitBook faz com o conteúdo | processo | Nenhum na hora. Só apareceu na primeira sincronização real, quando ele reformatou 11 arquivos e −982 linhas | Caminho de volta desligado; a branch virou espelho de mão única. Uma rodada inteira de trabalho — branch, workflow, documentação — teve de ser refeita | a própria IA, depois de o Davi mandar investigar |
 | Afirmou no corpo do PR #3 que uma aprovação bastava, sem conferir a lista de arquivos protegidos | conteúdo | O check `governanca` reprovou o PR: `docs/processo.md` está na lista e exige duas | Corpo do PR corrigido | **o check** |
@@ -103,9 +103,10 @@ que contexto cada uma trabalhou.
 | A checagem de declaração de IA aprovava template em branco quando o corpo vinha com CRLF | processo | O PR #5, o primeiro aberto por outra pessoa, passou no check com os quatro campos vazios | `sem_comentarios` passou a normalizar o fim de linha; cinco testes com o formato real do GitHub | a pessoa — o Davi mandou investigar por que o PR passou |
 | Tornou obrigatório um check que dispara duas vezes e acumula resultados | processo | O PR #3 ficou travado com tudo aprovado: o GitHub soma os check runs e o rollup dava FAILURE por causa de execuções antigas | Runs antigos re-executados na hora. **Correção estrutural em 04/09:** o resultado virou *commit status*, que vale pelo mais recente por contexto | a pessoa — travou no merge dela |
 | Gancho `commit-msg` barrava commit de merge | conteúdo | `git merge origin/main` de rotina foi interrompido pelo gancho pedindo `Assistido-por:` | Sai antes quando existe `MERGE_HEAD`, espelhando o `--no-merges` do validador | a própria IA, ao tropeçar nele |
-| Comentou o PR #5 com uma correção longa, e o pedido concreto ficou enterrado nela | processo | O Felipe fechou o PR 45 segundos depois e abriu o #7 sem as quatro respostas que o comentário pedia. O texto foi lido; o pedido dentro dele, não | Nada a desfazer. O erro é de proporção: três seções e uma tabela para pedir quatro linhas | a pessoa — pelo que fez em seguida, não por um aviso |
-| **Concluiu, a partir do fechamento do PR, que o Felipe tinha desistido** | conteúdo | Registrou nesta mesma tabela que o comentário "levou o autor a fechar o próprio PR". Onze minutos depois ele abriu o #7, refazendo o trabalho por conta própria | Linha reescrita. A causa era outra: ele fechou para **recomeçar**, não para abandonar | a própria IA, ao ver o PR #7 aparecer |
+| Comentou o PR #5 com uma correção longa, e o pedido concreto ficou enterrado nela | processo | O Filipe fechou o PR 45 segundos depois e abriu o #7 sem as quatro respostas que o comentário pedia. O texto foi lido; o pedido dentro dele, não | Nada a desfazer. O erro é de proporção: três seções e uma tabela para pedir quatro linhas | a pessoa — pelo que fez em seguida, não por um aviso |
+| **Concluiu, a partir do fechamento do PR, que o Filipe tinha desistido** | conteúdo | Registrou nesta mesma tabela que o comentário "levou o autor a fechar o próprio PR". Onze minutos depois ele abriu o #7, refazendo o trabalho por conta própria | Linha reescrita. A causa era outra: ele fechou para **recomeçar**, não para abandonar | a própria IA, ao ver o PR #7 aparecer |
 | Escreveu um assunto de commit com 73 caracteres, um a mais que o limite da própria regra | sintaxe | `aviso  commit e32a05d4: assunto com 73 caracteres (limite 72)` na execução seguinte do validador | Nenhuma — o commit ficou. Reescrever o histórico para esconder um aviso do próprio verificador seria pior que o aviso | **o check** |
+| **Escreveu "Felipe" no lugar de "Filipe" desde a sessão 01** | conteúdo | Nenhum sintoma. Passou por sete sessões, 28 arquivos, o `CODEOWNERS`, a lista de autores do validador e os testes. O login `@FilipeF4guiar` estava certo o tempo todo, a três linhas de distância | Corrigido em todo o repositório. `felipe` ficou como alias transitório na lista de autores, para não reprovar branch enquanto a correção não chega na `main` | **a pessoa** — o Davi, na sessão 07 |
 
 > **O gancho era mais rigoroso que o próprio check que ele imita.** O
 > `validar.py` ignora commits de merge desde sempre; o gancho, escrito para
@@ -133,16 +134,16 @@ Fechado em 04/09/2026, ainda na fase de configuração.
 | Tipo | Ocorrências |
 |---|---|
 | processo | 10 |
-| conteúdo | 7 |
+| conteúdo | 8 |
 | defeito latente | 2 |
 | sintaxe | 3 |
 | desperdício | 2 |
-| **Total** | **24** |
+| **Total** | **25** |
 
 | Quem pegou | Ocorrências |
 |---|---|
 | a própria IA | 18 |
-| **a pessoa** | **4** |
+| **a pessoa** | **5** |
 | o check | 2 |
 | a revisão do PR | 0 |
 
@@ -153,7 +154,7 @@ Fechado em 04/09/2026, ainda na fase de configuração.
 
 ### O que estes números ainda **não** dizem
 
-Dezoito de vinte e quatro pegos pela própria IA parece um resultado excelente,
+Dezoito de vinte e cinco pegos pela própria IA parece um resultado excelente,
 e seria leitura errada. As ressalvas abaixo importam mais que a proporção:
 
 1. **A rede de segurança humana ainda não foi exercitada.** Nenhum Pull Request
@@ -193,7 +194,7 @@ e seria leitura errada. As ressalvas abaixo importam mais que a proporção:
 8. **Nenhuma métrica aqui mede se a mensagem chegou.** O comentário no PR #5
    estava correto em cada parágrafo: explicava a causa, assumia a culpa do
    guia, admitia o defeito do check. Tinha três seções, uma tabela e um pedido
-   de quatro linhas no meio. O Felipe leu, fechou o PR e abriu outro — **sem as
+   de quatro linhas no meio. O Filipe leu, fechou o PR e abriu outro — **sem as
    quatro respostas.** O texto foi entregue; o pedido, não. A IA otimiza para
    completude, e completude enterra a única frase que exigia ação.
 9. **E a IA leu errado a reação.** Do fechamento em 45 segundos ela concluiu
