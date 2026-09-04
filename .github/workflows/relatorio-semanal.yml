@@ -1,0 +1,111 @@
+name: Relatório semanal
+
+# Toda segunda de manhã: coleta a atividade da semana e abre um PR com o
+# relatório em docs/relatorios/.
+#
+# Duas etapas, de propósito:
+#   1. scripts/atividade.py conta — números reproduzíveis, sem IA no meio
+#   2. o assistente lê esses números e escreve a leitura da semana
+#
+# Quem quiser conferir um número do relatório roda o script e compara. Isso é o
+# que separa prova documentada de texto bonito.
+#
+# Também roda sob demanda pelo botão "Run workflow" na aba Actions.
+
+on:
+  schedule:
+    # 11:00 UTC = 08:00 em Brasília. Segunda-feira.
+    - cron: "0 11 * * 1"
+  workflow_dispatch:
+    inputs:
+      dias:
+        description: "Janela em dias"
+        required: false
+        default: "7"
+
+jobs:
+  relatorio:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    permissions:
+      contents: write
+      pull-requests: write
+      issues: read
+      id-token: write
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Preparar Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Coletar atividade da semana
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          python3 scripts/atividade.py \
+            --dias "${{ github.event.inputs.dias || '7' }}" \
+            --repo "${{ github.repository }}" \
+            --saida atividade.md
+          echo "----- dados coletados -----"
+          cat atividade.md
+
+      - name: Escrever o relatório e abrir o PR
+        uses: anthropics/claude-code-action@v1
+        with:
+          claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+          anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
+          prompt: |
+            Você é o assistente do TCC_SDCAC. Escreva em português do Brasil.
+
+            O arquivo `atividade.md` na raiz do checkout tem os números da
+            semana, coletados por `scripts/atividade.py`. Ele é a sua única
+            fonte de dados quantitativos.
+
+            REGRA QUE NÃO SE QUEBRA: não invente número. Se o dado não está em
+            `atividade.md`, ele não entra no relatório. Semana sem atividade é
+            um resultado válido — registre "sem atividade no período" em vez de
+            arredondar para algo que pareça melhor.
+
+            Faça o seguinte:
+
+            1. Leia `atividade.md`, `docs/cronograma.md` e os dois relatórios
+               mais recentes em `docs/relatorios/`.
+
+            2. Crie a branch `claude/docs/relatorio-semanal-AAAA-MM-DD` com a
+               data de hoje. O padrão de branch do projeto é
+               `<autor>/<tipo>/<assunto>` e está em `docs/padroes.md`.
+
+            3. Escreva `docs/relatorios/AAAA-MM-DD-semana.md` seguindo
+               `docs/relatorios/_modelo.md`, com estas seções:
+               - **Números da semana** — as tabelas de `atividade.md`, copiadas
+                 sem alteração
+               - **Leitura** — o que os números mostram: quem avançou em quê,
+                 o que destoa do previsto para a semana no cronograma
+               - **Riscos** — PR parado, semana do cronograma sem entrega
+                 correspondente, pessoa sem atividade nenhuma. Seja direto e
+                 factual, sem julgar ninguém: o relatório é lido pela equipe e
+                 pela banca
+               - **Pendências** — checklist com responsável, olhando o que a
+                 próxima semana do cronograma exige
+
+            4. Acrescente a página nova ao `docs/SUMMARY.md` e à tabela de
+               índice em `docs/relatorios/README.md`. Sem isso ela não existe
+               para o GitBook.
+
+            5. NÃO versione `atividade.md` — ele é arquivo de trabalho, o
+               conteúdo dele já vai dentro do relatório.
+
+            6. Rode `python3 scripts/validar.py --base origin/main` e corrija o
+               que ele apontar antes de seguir.
+
+            7. Abra o PR para a `main` com o título
+               `docs: relatório semanal de AAAA-MM-DD`, preenchendo
+               `.github/pull_request_template.md`.
+
+            Não faça merge e não aprove PR nenhum — o merge na `main` é do Davi.
