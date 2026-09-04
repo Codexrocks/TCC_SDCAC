@@ -1,0 +1,88 @@
+# Configuração única do projeto: dependências e ferramentas.
+# As regras que este arquivo aplica estão explicadas em docs/padroes-codigo.md.
+#
+# O código começa na S6 (02/10). Até lá este arquivo já vale para as
+# ferramentas — quem instalar o ambiente hoje já pega a configuração certa.
+
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "tcc-sdcac"
+version = "0.1.0"
+description = "Sistema de Detecção de Comportamentos Anômalos em Cybersecurity"
+readme = "README.md"
+requires-python = ">=3.12"
+
+dependencies = [
+    "fastapi>=0.115",
+    "uvicorn[standard]>=0.30",
+    "psycopg[binary]>=3.2",
+    "pandas>=2.2",
+    "matplotlib>=3.9",
+    "streamlit>=1.38",
+]
+
+[project.optional-dependencies]
+# Isolation Forest (S10) é opcional no cronograma — instale só se o módulo
+# de Machine Learning for adiante.
+ml = ["scikit-learn>=1.5"]
+dev = [
+    "ruff>=0.6",
+    "pytest>=8.3",
+    "pytest-cov>=5.0",
+]
+
+# Ainda não há pacote para empacotar: as pastas de código nascem na S6 e o
+# CLAUDE.md proíbe criar pasta vazia. Com a lista vazia, `pip install -e .`
+# instala as dependências sem procurar módulo nenhum.
+# Na S6, troque por:  [tool.setuptools.packages.find]  com  where = ["."]
+[tool.setuptools]
+packages = []
+
+# ---------------------------------------------------------------------------
+# Ruff — formatador e linter
+# ---------------------------------------------------------------------------
+
+[tool.ruff]
+line-length = 88
+target-version = "py312"
+extend-exclude = [".venv", "data", "results"]
+
+[tool.ruff.format]
+quote-style = "double"
+indent-style = "space"
+
+[tool.ruff.lint]
+select = [
+    "E",    # pycodestyle — erros
+    "W",    # pycodestyle — avisos
+    "F",    # pyflakes: import não usado, variável morta
+    "I",    # isort: ordem dos imports
+    "N",    # pep8-naming: os nomes da seção 4 de padroes-codigo.md
+    "UP",   # pyupgrade: sintaxe antiga que a 3.12 já dispensa
+    "B",    # flake8-bugbear: armadilhas comuns
+    "S",    # flake8-bandit: problemas de segurança
+    "T20",  # flake8-print: print() esquecido
+]
+ignore = [
+    "E501",  # comprimento de linha: quem decide é o formatador
+]
+
+[tool.ruff.lint.per-file-ignores]
+# Em teste, `assert` é o instrumento de trabalho, não um risco (S101).
+"tests/**" = ["S101"]
+
+[tool.ruff.lint.pydocstyle]
+convention = "google"
+
+# ---------------------------------------------------------------------------
+# pytest
+# ---------------------------------------------------------------------------
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+python_functions = ["test_*"]
+addopts = "-v --strict-markers"

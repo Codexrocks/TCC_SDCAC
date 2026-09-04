@@ -15,8 +15,24 @@ import sys
 
 RAIZ = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 TIPOS = ("docs", "feat", "fix", "chore")
-RE_BRANCH = re.compile(r"^(%s)/[a-z0-9][a-z0-9-]*$" % "|".join(TIPOS))
+# Quem pode abrir branch. O prefixo diz de quem e o trabalho sem precisar abrir
+# o log. Entrou alguem novo no projeto? Acrescente aqui, senao a branch dele
+# nao passa na validacao.
+#
+# "gitbook" nao e pessoa: e a branch permanente do Git Sync, onde o GitBook
+# escreve as edicoes feitas pelo site. Ela nao pode ser apagada depois do merge,
+# ao contrario das outras. Ver docs/configuracao.md.
+AUTORES = ("davi", "yasmin", "felipe", "claude", "gitbook")
+RE_BRANCH = re.compile(
+    r"^(%s)/(%s)/[a-z0-9][a-z0-9-]*$" % ("|".join(AUTORES), "|".join(TIPOS))
+)
 RE_COMMIT = re.compile(r"^(%s): .{3,}$" % "|".join(TIPOS))
+# Toda mensagem de commit declara quem ajudou. "Co-Authored-By" conta porque
+# algumas ferramentas (Claude Code, Copilot) ja acrescentam essa linha sozinhas.
+# Sem IA nenhuma? Escreva "Assistido-por: nenhuma" — silencio nao distingue
+# "nao usei" de "esqueci". Regra em AGENTS.md, secao 3.
+RE_IA = re.compile(r"^[ \t]*(assistido-por|co-authored-by)[ \t]*:[ \t]*\S+",
+                   re.IGNORECASE | re.MULTILINE)
 RE_LINK = re.compile(r"(?<!\!)\[[^\]]*\]\(([^)]+)\)")
 
 SEGREDOS = [
@@ -53,24 +69,52 @@ def checar_branch():
     b = os.environ.get("BRANCH_PR") or git("rev-parse", "--abbrev-ref", "HEAD")
     if not b or b in ("main", "HEAD"):
         return
-    if b.startswith("claude/"):
-        avisos.append(f"branch '{b}' e de sessao do assistente; renomeie antes do PR")
+    if RE_BRANCH.match(b):
         return
-    if not RE_BRANCH.match(b):
-        erros.append(f"branch '{b}' fora do padrao. Use {'/'.join(TIPOS)}/<assunto-com-hifen>")
+    autor = b.split("/")[0]
+    if autor in TIPOS:
+        # Padrao antigo, de antes de 03/09/2026: comecava pelo tipo.
+        erros.append(
+            f"branch '{b}': o padrao mudou, agora comeca pelo autor. "
+            f"Use <autor>/{b}"
+        )
+    elif autor not in AUTORES:
+        erros.append(
+            f"branch '{b}': '{autor}' nao esta na lista de autores "
+            f"({', '.join(AUTORES)}). Se entrou alguem novo, acrescente em "
+            f"scripts/validar.py"
+        )
+    else:
+        erros.append(
+            f"branch '{b}' fora do padrao. Use <autor>/<tipo>/<assunto-com-hifen>, "
+            f"com tipo em {'/'.join(TIPOS)}"
+        )
 
 
 def checar_commits(base):
     intervalo = f"{base}..HEAD"
-    bruto = git("log", "--no-merges", "--format=%H%x1f%s", intervalo)
+    bruto = git("log", "--no-merges", "--format=%H%x1f%B%x1e", intervalo)
     if not bruto:
         return
-    for linha in bruto.splitlines():
-        sha, _, assunto = linha.partition("\x1f")
+    for registro in bruto.split("\x1e"):
+        registro = registro.strip("\n")
+        if not registro:
+            continue
+        sha, _, mensagem = registro.partition("\x1f")
+        linhas = mensagem.strip().splitlines()
+        assunto = linhas[0] if linhas else ""
+
         if not RE_COMMIT.match(assunto):
             erros.append(f"commit {sha[:8]}: '{assunto}' fora do padrao 'tipo: descricao'")
         elif len(assunto) > 72:
             avisos.append(f"commit {sha[:8]}: assunto com {len(assunto)} caracteres (limite 72)")
+
+        if not RE_IA.search(mensagem):
+            erros.append(
+                f"commit {sha[:8]}: falta declarar a IA. Acrescente ao corpo do "
+                f"commit a linha 'Assistido-por: <nome da IA>' — ou "
+                f"'Assistido-por: nenhuma' se trabalhou sem. Ver AGENTS.md secao 3"
+            )
 
 
 def checar_summary():
