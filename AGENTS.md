@@ -279,6 +279,11 @@ validar. **O PR é julgado pelo verificador vigente, não pelo que ele traz
 consigo.** Os testes, esses sim, rodam com o código do PR — o objetivo deles é
 justamente pegar quem quebrou um verificador.
 
+> **Consequência a conhecer:** o PR que *introduz* uma regra nunca é julgado
+> por ela — a base ainda não a tem. A regra passa a valer do PR seguinte em
+> diante. Isso não é falha, é o mesmo princípio: vale o verificador vigente. Só
+> não se assuste ao ver um PR de regra nova passando sem que a regra apareça.
+
 ### O que ainda não está fechado
 
 Honestidade sobre o limite: **o próprio arquivo `.yml` continua vindo do PR.**
