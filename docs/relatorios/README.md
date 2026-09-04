@@ -26,3 +26,4 @@ Use o [modelo](_modelo.md) e adicione a página nova ao
 | 03/09/2026 | [Sessão 05](2026-09-03-sessao-05.md) | Governança de branch e merge, usabilidade, padrões de código e relatório automático |
 | 04/09/2026 | [Sessão 06](2026-09-04-sessao-06.md) | Merge sem revisão no PR #2, login do Filipe e uso de IA no PR #1 |
 | 04/09/2026 | [Sessão 07](2026-09-04-sessao-07.md) | Espaço do artigo, o primeiro PR da equipe e a governança que travava a si mesma |
+| 04/09/2026 | [Sessão 08](2026-09-04-sessao-08.md) | Um site do GitBook tem uma branch só — o desenho de duas não se sustenta |
