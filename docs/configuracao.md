@@ -280,21 +280,35 @@ certo é esse. Não mude o `.github/workflows/validacao.yml`.
 
 ### `claude` não é reconhecido como comando
 
-Quem usa o **aplicativo desktop** do Claude não recebe o `claude` no PATH — o
-executável fica embutido na pasta do aplicativo, com a versão no caminho:
+Quem usa o **aplicativo desktop** do Claude não recebe o `claude` no PATH. O
+executável existe, mas mora dentro do aplicativo — e o aplicativo é empacotado
+(MSIX), o que traz uma armadilha a mais.
+
+Um aplicativo empacotado roda num contêiner com **redirecionamento de sistema
+de arquivos**. Dentro do contêiner o executável aparece em:
 
 ```
 %APPDATA%\Claude\claude-code\<versão>\claude.exe
 ```
 
-Para resolver de vez, peça ao próprio executável que se instale. Assim o
-`claude` passa a funcionar em qualquer terminal, como o resto da documentação
-assume:
+Esse caminho é uma visão virtual. **Num PowerShell comum ele não existe** — o
+erro é `CommandNotFoundException` apontando justamente para o caminho que você
+acabou de ver funcionando em outro lugar. O arquivo de verdade está em:
 
-```powershell
-& (Get-ChildItem "$env:APPDATA\Claude\claude-code\*\claude.exe" | Sort-Object { [version]$_.Directory.Name } -Descending | Select-Object -First 1).FullName install
+```
+%LOCALAPPDATA%\Packages\Claude_pzs8sxrjxfjjc\LocalCache\Roaming\Claude\claude-code\<versão>\claude.exe
 ```
 
-Feche e reabra o terminal depois. Confira com `claude --version`.
+Então, no seu terminal, use o caminho real. Esta versão descobre sozinha qual é
+a versão mais nova, e não quebra quando o aplicativo atualizar:
 
-Quem usa o Claude Code pelo terminal, instalado via `npm`, não passa por isso.
+```powershell
+& (Get-ChildItem "$env:LOCALAPPDATA\Packages\Claude_pzs8sxrjxfjjc\LocalCache\Roaming\Claude\claude-code\*\claude.exe" | Sort-Object { [version]$_.Directory.Name } -Descending | Select-Object -First 1).FullName setup-token
+```
+
+> O sufixo `pzs8sxrjxfjjc` identifica o pacote e pode mudar em outra instalação.
+> Se o caminho não existir, ache o seu com:
+> `Get-ChildItem "$env:LOCALAPPDATA\Packages" -Filter "Claude*"`.
+
+Quem instala o Claude Code pelo `npm`, no terminal, não passa por nada disso —
+o `claude` entra no PATH como qualquer outro programa.
