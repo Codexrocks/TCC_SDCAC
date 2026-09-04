@@ -88,24 +88,36 @@ que contexto cada uma trabalhou.
 > própria sessão** — corrigiu o caso, não o hábito. Se o padrão se repetir com
 > as outras ferramentas, é achado para a discussão do artigo.
 
+### Sessão 06 — Claude Opus 5
+
+| Erro | Tipo | Como apareceu | Correção | Quem pegou |
+|---|---|---|---|---|
+| Empurrou um commit no PR #1 sem avisar que isso descartaria a aprovação já existente | processo | A revisão do Felipe virou `DISMISSED` e o PR voltou a `REVIEW_REQUIRED` | Nada a corrigir — o efeito é o desejado da regra. Faltou avisar **antes** e deixar a pessoa escolher o momento | a própria IA, depois do fato consumado |
+
+> O tipo mais incômodo de erro: a IA **sabia**. Ela mesma configurou
+> `dismiss_stale_reviews_on_push` na sessão 04 e escreveu em `configuracao.md`
+> que *"a aprovação cai a cada novo commit"*. Conhecer a regra e não aplicar a
+> consequência ao próprio ato é diferente de não conhecer — e é o que a coluna
+> **quem pegou** existe para tornar visível.
+
 ---
 
 ## 4. Balanço parcial
 
-Fechado em 03/09/2026, ainda na fase de configuração.
+Fechado em 04/09/2026, ainda na fase de configuração.
 
 | Tipo | Ocorrências |
 |---|---|
-| processo | 5 |
+| processo | 6 |
 | conteúdo | 4 |
 | sintaxe | 2 |
 | desperdício | 2 |
 | defeito latente | 1 |
-| **Total** | **14** |
+| **Total** | **15** |
 
 | Quem pegou | Ocorrências |
 |---|---|
-| a própria IA | 13 |
+| a própria IA | 14 |
 | a pessoa | 1 |
 | o check | 0 |
 | a revisão do PR | 0 |
@@ -127,6 +139,10 @@ leitura errada. Três ressalvas, todas importantes:
    de data — coisas que aparecem na próxima linha de saída. O que escapa é o
    estrutural: o `CODEOWNERS` quebrado sobreviveu a três sessões, e o buraco dos
    workflows sobreviveu até uma provocação direta.
+4. **"Pego pela própria IA" às vezes quer dizer "pego tarde demais".** O erro da
+   sessão 06 foi percebido depois de já ter descartado a aprovação de alguém.
+   Detectar não é o mesmo que evitar, e a tabela ainda não distingue os dois —
+   vale considerar uma coluna a mais se o caso se repetir.
 
 A hipótese a testar no resto do TCC é essa: **a IA se corrige bem no detalhe e
 mal no estrutural.** Se ela se sustentar até dezembro, é um achado que vale

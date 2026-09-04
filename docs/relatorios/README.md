@@ -24,3 +24,4 @@ Use o [modelo](_modelo.md) e adicione a página nova ao
 | 03/09/2026 | [Sessão 03](2026-09-03-sessao-03.md) | Correção do Git Sync e guia de configuração |
 | 03/09/2026 | [Sessão 04](2026-09-03-sessao-04.md) | Proteção da `main` e correção do CODEOWNERS |
 | 03/09/2026 | [Sessão 05](2026-09-03-sessao-05.md) | Governança de branch e merge, usabilidade, padrões de código e relatório automático |
+| 04/09/2026 | [Sessão 06](2026-09-04-sessao-06.md) | Merge sem revisão no PR #2, login do Felipe e uso de IA no PR #1 |
