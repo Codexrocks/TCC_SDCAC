@@ -61,7 +61,7 @@ Dono da leitura dos dados: o que os números mostram.
 
 **Estudar:** Análise exploratória de dados · Pandas · Visualização de dados · Métricas de ML (Precision, Recall, F1)
 
-**GitHub:** [`@filipef4guiar-afk`](https://github.com/filipef4guiar-afk) · branches `felipe/...`
+**GitHub:** [`@FilipeF4guiar`](https://github.com/FilipeF4guiar) · branches `felipe/...`
 
 **No repositório:** dono do dashboard e dos resultados/gráficos do artigo · responsável pela [usabilidade](usabilidade.md) do painel
 
@@ -73,7 +73,7 @@ Dono da leitura dos dados: o que os números mostram.
 |---|---|---|---|
 | Davi | `@DaviSoaresDilly` | Admin · owner da organização | `davi/` |
 | Yasmin | `@Yas2046` | Write | `yasmin/` |
-| Felipe | `@filipef4guiar-afk` | Write | `felipe/` |
+| Felipe | `@FilipeF4guiar` | Write | `felipe/` |
 | Assistente | `@claude` (workflow) | via GitHub Actions | `claude/` |
 
 Todos abrem PR e aprovam PR dos outros. **Só o Davi executa o merge na `main`** —

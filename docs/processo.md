@@ -106,7 +106,7 @@ site do GitBook já é público — então abrir o código não muda a exposiç�
 
 **d) Dar acesso à equipe** — `Settings → Collaborators and teams`
 
-- [x] Yasmin (`@Yas2046`) e Felipe (`@filipef4guiar-afk`) com papel **Write**
+- [x] Yasmin (`@Yas2046`) e Felipe (`@FilipeF4guiar`) com papel **Write**
 
 Tudo isso está feito. O passo a passo de cada item, para conferir ou refazer,
 está em [Configuração passo a passo](configuracao.md).

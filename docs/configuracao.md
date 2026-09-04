@@ -310,7 +310,7 @@ aprovar — e não permite mexer em configuração do repositório.
 |---|---|---|---|
 | Davi | `@DaviSoaresDilly` | Admin · owner da org | ativo |
 | Yasmin | `@Yas2046` | Write | ativo |
-| Felipe | `@filipef4guiar-afk` | Write | ativo |
+| Felipe | `@FilipeF4guiar` | Write | ativo |
 
 Equipe completa desde 03/09/2026. Com três pessoas, sempre há alguém que possa
 aprovar o PR de outro — o que era o ponto frágil enquanto o time era de dois.
