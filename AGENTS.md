@@ -235,6 +235,10 @@ Três exigências:
 python3 scripts/validar.py
 ```
 
+Se o clone estiver com `git config core.hooksPath .githooks`, os ganchos de
+`pre-commit` e `commit-msg` já rodam isso sozinhos a cada commit — inclusive a
+conferência da linha `Assistido-por:`.
+
 Confere nome de branch, formato dos commits, declaração de IA, cobertura do
 `SUMMARY.md`, links internos quebrados e segredo vazado. Só suba se passar.
 

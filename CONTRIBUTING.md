@@ -18,6 +18,29 @@ git push -u origin davi/docs/meu-assunto
 # abra o PR, peça revisão de 1 colega, avise o Davi para fazer o merge
 ```
 
+
+## Ligue as verificações locais
+
+Uma vez por clone, logo depois de baixar o repositório:
+
+```bash
+git config core.hooksPath .githooks
+```
+
+A partir daí, dois ganchos rodam na sua máquina antes de cada commit:
+
+| Gancho | Confere |
+|---|---|
+| `pre-commit` | Nome de branch, cobertura do `SUMMARY.md`, links quebrados, segredo vazado |
+| `commit-msg` | Formato da mensagem e a linha `Assistido-por:` |
+
+Sem isso nada quebra — o check do Pull Request roda igual. A diferença é
+**quando** você descobre o erro: agora, na sua máquina, ou dez minutos depois,
+no PR.
+
+Precisam de Python instalado. Se não houver, os ganchos avisam e saem sem
+atrapalhar. Para pular num commit específico: `git commit --no-verify`.
+
 ## Branch
 
 `<autor>/<tipo>/<assunto>` — começa pelo seu nome, para dar para ver quem está

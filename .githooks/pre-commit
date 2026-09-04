@@ -1,0 +1,45 @@
+#!/bin/sh
+# Roda a validação do repositório antes de cada commit, na sua máquina.
+#
+# Existe para que o erro apareça agora, e não daqui a dez minutos no Pull
+# Request. Confere nome de branch, cobertura do SUMMARY.md, links quebrados e
+# segredo vazado.
+#
+# Para ligar (uma vez por clone):
+#     git config core.hooksPath .githooks
+#
+# Para pular num commit específico, quando você sabe o que está fazendo:
+#     git commit --no-verify
+#
+# Regras em docs/padroes.md · AGENTS.md
+
+# Achar um Python que realmente rode.
+#
+# `command -v python3` NAO basta no Windows: existe um atalho do Microsoft
+# Store com esse nome que passa no teste e, ao ser chamado, so imprime um
+# convite para instalar. Por isso cada candidato e executado de verdade.
+PY=""
+for candidato in python3 python py; do
+  if command -v "$candidato" >/dev/null 2>&1 && "$candidato" -c "" >/dev/null 2>&1; then
+    PY="$candidato"
+    break
+  fi
+done
+
+if [ -z "$PY" ]; then
+  echo "aviso: Python nao encontrado — pulando esta conferencia."
+  echo "       O check do Pull Request roda de qualquer forma."
+  exit 0
+fi
+
+"$PY" scripts/validar.py
+codigo=$?
+
+if [ $codigo -ne 0 ]; then
+  echo ""
+  echo "Commit interrompido: a validação acima falhou."
+  echo "Corrija o que ela apontou e tente de novo."
+  echo "Se precisar commitar mesmo assim: git commit --no-verify"
+fi
+
+exit $codigo

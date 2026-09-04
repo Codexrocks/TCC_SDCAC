@@ -216,7 +216,24 @@ tem prova documentada de como o projeto foi construído.
 
 ## Validação automática
 
-Antes de abrir PR:
+### Na sua máquina, a cada commit
+
+Uma vez por clone:
+
+```bash
+git config core.hooksPath .githooks
+```
+
+Isso liga dois ganchos: o `pre-commit`, que roda a validação do repositório, e o
+`commit-msg`, que confere o formato da mensagem e a declaração de IA. O erro
+passa a aparecer **antes** do commit, em vez de dez minutos depois no Pull
+Request.
+
+Precisa de Python. Sem ele, os ganchos avisam e saem sem atrapalhar — e o check
+do PR roda de qualquer forma. Para pular num commit específico:
+`git commit --no-verify`.
+
+### Antes de abrir PR
 
 ```bash
 python3 scripts/validar.py

@@ -198,6 +198,16 @@ git checkout main && git pull origin main
 git checkout -b yasmin/docs/meu-assunto
 ```
 
+Ligue as verificações locais, uma vez só:
+
+```bash
+git config core.hooksPath .githooks
+```
+
+Com isso o computador confere o commit antes de gravá-lo, e você descobre o
+erro na hora em vez de descobrir no Pull Request. Precisa de Python instalado;
+sem ele, o gancho avisa e não atrapalha.
+
 Trabalhe nos arquivos. Quando terminar:
 
 ```bash

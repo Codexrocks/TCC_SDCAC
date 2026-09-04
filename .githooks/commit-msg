@@ -1,0 +1,87 @@
+#!/bin/sh
+# Confere a mensagem do commit antes de gravá-la.
+#
+# O pre-commit não consegue fazer isso: quando ele roda, a mensagem ainda não
+# existe. Este hook recebe o arquivo com a mensagem em $1.
+#
+# Reaproveita as expressões de scripts/validar.py em vez de copiá-las — assim a
+# regra vive num lugar só, e mudar lá muda aqui.
+#
+# Para ligar (uma vez por clone):
+#     git config core.hooksPath .githooks
+#
+# Regras em AGENTS.md, seções 3 e 7.
+
+# Achar um Python que realmente rode.
+#
+# `command -v python3` NAO basta no Windows: existe um atalho do Microsoft
+# Store com esse nome que passa no teste e, ao ser chamado, so imprime um
+# convite para instalar. Por isso cada candidato e executado de verdade.
+PY=""
+for candidato in python3 python py; do
+  if command -v "$candidato" >/dev/null 2>&1 && "$candidato" -c "" >/dev/null 2>&1; then
+    PY="$candidato"
+    break
+  fi
+done
+
+if [ -z "$PY" ]; then
+  echo "aviso: Python nao encontrado — pulando esta conferencia."
+  echo "       O check do Pull Request roda de qualquer forma."
+  exit 0
+fi
+
+"$PY" - "$1" <<'FIM'
+import io
+import os
+import sys
+
+sys.path.insert(0, os.path.join(os.getcwd(), "scripts"))
+try:
+    import validar
+except ImportError:
+    print("aviso: nao encontrei scripts/validar.py — pulando a conferencia.")
+    sys.exit(0)
+
+mensagem = io.open(sys.argv[1], encoding="utf-8").read()
+# Linhas de comentario que o git acrescenta nao fazem parte da mensagem.
+util = "\n".join(l for l in mensagem.splitlines() if not l.startswith("#"))
+linhas = [l for l in util.strip().splitlines()]
+assunto = linhas[0] if linhas else ""
+
+problemas = []
+
+if not validar.RE_COMMIT.match(assunto):
+    problemas.append(
+        "o assunto precisa ser 'tipo: descricao', com tipo em "
+        + "/".join(validar.TIPOS)
+        + f"\n     seu assunto: {assunto!r}"
+    )
+elif len(assunto) > 72:
+    print(f"aviso: assunto com {len(assunto)} caracteres (limite 72).")
+
+if not validar.RE_IA.search(util):
+    problemas.append(
+        "falta declarar a IA. Acrescente uma linha ao corpo do commit:\n"
+        "       Assistido-por: <nome da IA>\n"
+        "     ou, se trabalhou sem nenhuma:\n"
+        "       Assistido-por: nenhuma"
+    )
+
+if problemas:
+    print("")
+    print("Commit interrompido. A mensagem tem problema:")
+    for p in problemas:
+        print(f"  -> {p}")
+    print("")
+    print("Exemplo de mensagem completa:")
+    print("")
+    print("  docs: adiciona secao sobre UEBA")
+    print("")
+    print("  Corpo opcional, explicando por que — o diff ja mostra o que.")
+    print("")
+    print("  Assistido-por: Gemini 2.5 Pro")
+    print("")
+    print("Regras em AGENTS.md, secoes 3 e 7.")
+    sys.exit(1)
+FIM
