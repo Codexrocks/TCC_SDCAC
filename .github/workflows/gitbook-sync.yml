@@ -1,35 +1,38 @@
 name: Sincroniza GitBook
 
-# O GitBook não escreve mais na `main` — ela é protegida, e o app dele não passa
-# por Pull Request. Ele escreve numa branch própria, `gitbook/docs/documentacao`,
-# e este workflow cuida dos dois sentidos:
+# Mão única: a `main` alimenta a branch que o GitBook lê. Nada volta.
 #
-#   main  ─────────────────>  gitbook/docs/documentacao   (a cada merge na main)
-#   gitbook/docs/... ──────>  Pull Request para a main    (a cada edição no site)
+#   main  ──────>  gitbook/docs/documentacao  ──────>  GitBook lê e publica
 #
-# Sem isso, a branch do GitBook divergiria da `main` em poucos dias e alguém
-# teria que reconciliar na mão.
+# Por que não é de mão dupla, já que o Git Sync do GitBook é:
 #
-# Não há risco de laço: push feito com o GITHUB_TOKEN padrão não dispara outros
-# workflows. Só o push vindo do GitBook aciona a abertura do PR.
+# O GitBook normaliza o Markdown ao exportar, e isso não é configurável — é
+# comportamento documentado do produto ("GitBook is opinionated. If there are
+# different ways to express the same concept in markdown, GitBook will only use
+# one"). Na primeira sincronização ele reescreveu 11 arquivos, −982 linhas:
+# desfez as quebras de linha, trocou `---` por `***`, apagou os comentários do
+# gitbook-docs.yaml e duplicou o índice de relatórios. E a documentação deles é
+# explícita em que ele desfaz qualquer correção "at the next opportunity".
 #
-# Passo a passo e motivo em docs/configuracao.md, seção 7.
+# Somado a isso, os commits dele nunca passariam no `validar.py`: não seguem
+# `tipo: descrição` nem trazem `Assistido-por:`.
+#
+# Então a branch é um **espelho descartável**. O que o GitBook escrever nela é
+# sobrescrito na próxima sincronização, sem dó. Quem quiser mudar a
+# documentação faz isso pelo GitHub, por Pull Request, como todo o resto.
+#
+# Contexto completo em docs/configuracao.md, seção 7.
 
 on:
   push:
-    branches:
-      - main
-      - gitbook/docs/documentacao
+    branches: [main]
+  workflow_dispatch:
 
 env:
   BRANCH_GITBOOK: gitbook/docs/documentacao
 
 jobs:
-  # -------------------------------------------------------------------------
-  # main -> branch do GitBook
-  # -------------------------------------------------------------------------
-  atualiza-branch:
-    if: github.ref == 'refs/heads/main'
+  espelhar:
     runs-on: ubuntu-latest
     timeout-minutes: 10
     permissions:
@@ -41,55 +44,20 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Levar a main para a branch do GitBook
+      - name: Espelhar a main na branch do GitBook
         run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git checkout "$BRANCH_GITBOOK"
-
-          if git merge origin/main --no-edit -m "chore: traz a main para a branch do GitBook"; then
-            git push origin "$BRANCH_GITBOOK"
-            echo "Branch do GitBook atualizada."
-          else
-            git merge --abort
-            echo "::error::Conflito entre a main e $BRANCH_GITBOOK. O mesmo trecho foi editado no GitHub e no GitBook — resolva na mão."
-            exit 1
-          fi
-
-  # -------------------------------------------------------------------------
-  # branch do GitBook -> Pull Request para a main
-  # -------------------------------------------------------------------------
-  abre-pr:
-    if: github.ref == 'refs/heads/gitbook/docs/documentacao'
-    runs-on: ubuntu-latest
-    timeout-minutes: 10
-    permissions:
-      contents: read
-      pull-requests: write
-
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-
-      - name: Abrir o PR, se houver o que levar
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          if [ -z "$(git log "origin/main..origin/$BRANCH_GITBOOK" --oneline)" ]; then
-            echo "Nada a levar para a main."
+          # --force de propósito: a branch é espelho, não fonte. Se o GitBook
+          # escreveu alguma coisa nela, é reformatação nossa de volta — e é
+          # exatamente isso que não queremos na main.
+          if git diff --quiet "origin/$BRANCH_GITBOOK" origin/main 2>/dev/null; then
+            echo "A branch do GitBook já está idêntica à main. Nada a fazer."
             exit 0
           fi
 
-          aberto=$(gh pr list --base main --head "$BRANCH_GITBOOK" --state open --json number --jq '.[].number')
-          if [ -n "$aberto" ]; then
-            echo "Já existe o PR #$aberto para esta branch; os commits novos entram nele."
-            exit 0
+          descartados=$(git rev-list --count "origin/main..origin/$BRANCH_GITBOOK" 2>/dev/null || echo 0)
+          if [ "$descartados" != "0" ]; then
+            echo "::warning::Descartando $descartados commit(s) que o GitBook escreveu na branch. Isso é esperado: a branch é espelho da main, e edição feita pelo site do GitBook não volta para o repositório."
           fi
 
-          gh pr create \
-            --base main \
-            --head "$BRANCH_GITBOOK" \
-            --title "docs: sincroniza edições feitas no GitBook" \
-            --body-file .github/gitbook-sync-pr.md
+          git push --force origin "origin/main:refs/heads/$BRANCH_GITBOOK"
+          echo "Branch do GitBook agora espelha a main."

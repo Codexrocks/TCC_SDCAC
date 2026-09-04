@@ -20,11 +20,14 @@ Regra geral: **simples o suficiente para ninguém esquecer.**
 ```
 
 - **GitHub é a fonte da verdade.** Documentação e código no mesmo lugar.
-- **GitBook espelha a pasta `docs/`.** Editar direto no site também funciona: a
-  alteração volta como commit — mas na branch `gitbook/docs/documentacao`, não
-  na `main`, e de lá entra por Pull Request como todo o resto. O caminho é
-  automático nos dois sentidos; detalhe em
+- **GitBook só lê.** Ele espelha a pasta `docs/` e publica o site. O caminho de
+  volta foi desligado: o GitBook reformata todo o Markdown ao exportar, e isso
+  não é configurável. Editar pelo site não chega ao repositório — o texto se
+  perde. Detalhe em
   [Configuração, seção 7](configuracao.md#7-gitbook-e-a-main-protegida).
+- **Documentação se escreve pelo GitHub**, por Pull Request. O
+  [Guia do GitHub](guia-github.md) mostra como fazer isso sem instalar nada,
+  editando o arquivo no navegador.
 - **Nada de documentação solta** em Word, Drive ou WhatsApp. Se não está em
   `docs/`, não existe.
 
@@ -135,7 +138,7 @@ Dois arquivos, com papéis diferentes — confundir os dois é o que gera o erro
 
 No Git Sync, deixe **Project directory vazio** — o `gitbook-docs.yaml` está na
 raiz do repositório. A **branch é `gitbook/docs/documentacao`**, não a `main`:
-a `main` é protegida e o app do GitBook não passa por Pull Request.
+ela é um espelho descartável, forçado a cada merge, e nada volta dela.
 
 > O plano Pro está em **trial até 17/09/2026**. Confira o que muda no plano
 > gratuito antes dessa data.

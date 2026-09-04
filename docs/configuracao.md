@@ -418,34 +418,58 @@ Vale registrar o que esse erro revelou: enquanto o Git Sync apontava para a
 edição ao site escrevia na `main` sem PR, sem revisão e sem passar pelo líder.
 A trava não quebrou o fluxo — ela expôs um furo que já existia.
 
-### A solução: branch dedicada
+### A solução: espelho de mão única
 
-O GitBook passou a escrever numa branch própria, **`gitbook/docs/documentacao`**,
-que não é protegida. De lá, o conteúdo entra na `main` como todo o resto: por
-Pull Request.
+O GitBook lê de uma branch própria, **`gitbook/docs/documentacao`**, que é um
+**espelho descartável da `main`**. Nada volta dela.
 
 ```
-   edição no site
-        │
-        ▼
-  gitbook/docs/documentacao ──PR──> main ──> (volta para a branch)
-        ▲                                          │
-        └──────────────────────────────────────────┘
+  main ──────> gitbook/docs/documentacao ──────> GitBook lê e publica
+                (espelho, forçado a cada push)
 ```
 
-Os dois sentidos são automáticos, pelo workflow
-[`gitbook-sync.yml`](https://github.com/Codexrocks/TCC_SDCAC/blob/main/.github/workflows/gitbook-sync.yml):
+O workflow
+[`gitbook-sync.yml`](https://github.com/Codexrocks/TCC_SDCAC/blob/main/.github/workflows/gitbook-sync.yml)
+força a branch a espelhar a `main` a cada merge. Se o GitBook tiver escrito
+alguma coisa nela, é sobrescrito.
 
-| Quando | O que acontece |
-|---|---|
-| Alguém edita no GitBook | O GitBook empurra na branch dele → o workflow abre PR para a `main` |
-| Um PR entra na `main` | O workflow leva a `main` de volta para a branch do GitBook |
+### Por que o caminho de volta foi desligado
 
-Sem o segundo sentido a branch divergiria em poucos dias e alguém teria que
-reconciliar na mão.
+A primeira sincronização respondeu isso sozinha. O GitBook não editou conteúdo:
+ele **reformatou 11 arquivos, −982 linhas**. Desfez todas as quebras de linha,
+trocou `---` por `***` e `# Summary` por `# Table of contents`, realinhou as
+tabelas, **apagou os comentários do `gitbook-docs.yaml`** — justamente os que
+explicam a diferença entre os dois arquivos de configuração — e **criou
+`docs/relatorios/relatorios.md`**, deixando o `README.md` órfão.
 
-> **Não apague a branch `gitbook/docs/documentacao`** depois do merge, como se
-> faz com as outras. Ela é permanente: é o outro lado do Git Sync.
+Não é defeito nem configuração errada. É comportamento documentado:
+
+> GitBook is opinionated. If there are different ways to express the same
+> concept or style in markdown, GitBook will only use one.
+
+E, sobre corrigir à mão:
+
+> If you add new content or change existing content to use markup that's not
+> GitBook's flavor, GitBook will change it back at the next opportunity.
+
+Eles mantêm um repositório público,
+[`GitbookIO/git-sync-normalization`](https://github.com/GitbookIO/git-sync-normalization),
+documentando a tradução de cada bloco. **Não existe opção para desligar.**
+
+Some-se a isso que os commits dele nunca passariam no `validar.py`: não seguem
+`tipo: descrição` nem trazem `Assistido-por:`. O caminho de volta estava
+quebrado nas duas pontas.
+
+> **Não apague a branch `gitbook/docs/documentacao`.** Ela é permanente e é o
+> que o GitBook lê. Mas também **não trabalhe nela**: qualquer commit ali é
+> descartado no próximo espelhamento.
+
+### Quem escreve a documentação, então
+
+Pelo GitHub, por Pull Request, como todo o resto do repositório. O
+[Guia do GitHub](guia-github.md) mostra como fazer isso **sem instalar nada**,
+editando o arquivo direto no navegador — que era a conveniência que o GitBook
+oferecia.
 
 ### Trocando a branch no GitBook
 
@@ -458,8 +482,12 @@ reconciliar na mão.
 | Project directory | vazio |
 
 Se ele perguntar a direção da primeira sincronização, escolha **importar do
-Git** (GitHub → GitBook). O GitHub é a fonte da verdade; a branch já foi criada
-a partir da `main`, com o mesmo conteúdo.
+Git** (GitHub → GitBook). O GitHub é a fonte da verdade.
+
+**Trave a edição no espaço.** Como o caminho de volta é descartado, deixar
+alguém editar no site cria trabalho que se perde sem aviso. No GitBook, deixe o
+espaço em modo de leitura para a equipe — quem precisa escrever, escreve pelo
+GitHub.
 
 Para conferir o estado do Git Sync sem abrir o site, incluindo o erro da última
 operação:
@@ -468,21 +496,22 @@ operação:
 curl -s -H "Authorization: Bearer $GITBOOK_TOKEN"   https://api.gitbook.com/v1/spaces/aKvalQTXmABRN7IP3nVq/git/info
 ```
 
-### Se aparecer conflito
+### Se o workflow avisar que descartou commits
 
-O workflow falha com a mensagem de que o mesmo trecho foi editado nos dois
-lados. Acontece quando alguém mexe no mesmo parágrafo pelo GitHub e pelo
-GitBook antes de sincronizar. Resolva na mão:
+Mensagem esperada, não erro:
+
+```
+::warning:: Descartando N commit(s) que o GitBook escreveu na branch.
+```
+
+Significa que alguém editou pelo site. O texto se perdeu — e é por isso que a
+edição no GitBook deve ficar travada. Se acontecer, o conteúdo ainda existe no
+histórico da branch antes do espelhamento, e dá para recuperar:
 
 ```bash
 git fetch origin
-git checkout gitbook/docs/documentacao
-git merge origin/main       # resolva os conflitos
-git push origin gitbook/docs/documentacao
+git log origin/gitbook/docs/documentacao@{1}    # antes do ultimo espelhamento
 ```
-
-A regra que evita isso: **um assunto por vez, num lugar só**. Quem está
-escrevendo pelo GitBook não deve estar com PR aberto no mesmo arquivo.
 
 ---
 

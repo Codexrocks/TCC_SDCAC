@@ -24,9 +24,11 @@ GitHub agrupa por pessoa, e dá para ver quem está com o quê sem abrir o log.
 Autores válidos: `davi` · `yasmin` · `felipe` · `claude`. Só minúsculas,
 números e hífen. Uma branch por tarefa — não acumule assuntos.
 
-> **`gitbook/docs/documentacao` é a exceção.** Não é de ninguém e não se apaga
-> depois do merge: é a branch permanente onde o GitBook escreve as edições
-> feitas pelo site. Ver [Configuração, seção 7](configuracao.md#7-gitbook-e-a-main-protegida).
+> **`gitbook/docs/documentacao` é a exceção.** Não é de ninguém, não se apaga e
+> **não se trabalha nela**: é um espelho da `main`, forçado a cada merge, e
+> serve só para o GitBook ler. Qualquer commit ali é descartado no próximo
+> espelhamento. Ver
+> [Configuração, seção 7](configuracao.md#7-gitbook-e-a-main-protegida).
 
 > **Entrou alguém novo no projeto?** O nome precisa ser acrescentado à lista
 > `AUTORES` em [`scripts/validar.py`](../scripts/validar.py), senão a branch

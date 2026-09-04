@@ -163,7 +163,9 @@ A branch de uma IA leva **o nome de quem a está usando**, não o da IA — quem
 responde pelo trabalho é a pessoa. A exceção é `claude/`, usada pelo assistente
 quando ele age sozinho, por exemplo no relatório semanal automático.
 
-`gitbook/docs/documentacao` é branch permanente do Git Sync e **não se apaga**.
+`gitbook/docs/documentacao` é branch permanente do Git Sync, **não se apaga** e
+**não se trabalha nela**: é um espelho da `main`, forçado a cada merge. Commit
+feito ali é descartado no espelhamento seguinte.
 
 Autor novo precisa entrar na lista `AUTORES` de `scripts/validar.py`.
 
