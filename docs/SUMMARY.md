@@ -10,8 +10,19 @@
 * [Padrões de código](padroes-codigo.md)
 * [Configuração passo a passo](configuracao.md)
 * [Cronograma](cronograma.md)
+* [Diretrizes institucionais](diretrizes.md)
 * [Arquitetura](arquitetura.md)
 * [Usabilidade](usabilidade.md)
+
+## O artigo
+
+* [Como escrever aqui](artigo/README.md)
+* [1. Introdução](artigo/01-introducao.md)
+* [2. Referencial Teórico](artigo/02-referencial-teorico.md)
+* [3. Metodologia](artigo/03-metodologia.md)
+* [4. Resultados e Discussão](artigo/04-resultados.md)
+* [5. Conclusão](artigo/05-conclusao.md)
+* [Referências](artigo/referencias.md)
 
 ## Entregas
 

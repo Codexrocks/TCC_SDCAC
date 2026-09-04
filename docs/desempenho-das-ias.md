@@ -98,6 +98,14 @@ que contexto cada uma trabalhou.
 | Afirmou no corpo do PR #3 que uma aprovação bastava, sem conferir a lista de arquivos protegidos | conteúdo | O check `governanca` reprovou o PR: `docs/processo.md` está na lista e exige duas | Corpo do PR corrigido | **o check** |
 | Detectou o Python nos ganchos com `command -v python3`, que no Windows encontra um atalho falso do Microsoft Store | defeito latente | Os sete casos de teste do gancho reprovaram, inclusive os corretos: o "python3" achado não era Python, só um convite para instalar da loja | Cada candidato passou a ser **executado** antes de ser aceito, e `py` entrou na lista | a própria IA, ao testar o gancho antes de entregá-lo |
 
+| Quebrou o heredoc do shell com aspas no conteúdo — **pela terceira vez na mesma sessão** | sintaxe | `unexpected EOF while looking for matching '` ao criar as seções do artigo | Passou a escrever pela ferramenta de escrita | a própria IA |
+
+> **Três vezes o mesmo erro, no mesmo dia.** Já havia acontecido ao criar
+> `usabilidade.md` e ao editar o `validar.py`. A IA corrige o caso e volta a
+> cometê-lo minutos depois: ela não retém a correção dentro da própria sessão.
+> Se o padrão se repetir com Gemini e Copilot, é achado para a discussão do
+> artigo; se for só aqui, é característica desta ferramenta.
+
 > O tipo mais incômodo de erro: a IA **sabia**. Ela mesma configurou
 > `dismiss_stale_reviews_on_push` na sessão 04 e escreveu em `configuracao.md`
 > que *"a aprovação cai a cada novo commit"*. Conhecer a regra e não aplicar a
