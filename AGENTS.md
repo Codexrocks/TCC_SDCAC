@@ -144,6 +144,7 @@ uma pergunta.
    Score visível.
 9. **Declare a IA** no commit e no PR. Ver seção 3.
 10. **Não afrouxe as próprias regras sozinho.** Ver seção 4.
+11. **Registre os próprios erros** na seção do relatório de sessão. Ver seção 9.
 
 ---
 
@@ -195,10 +196,36 @@ Ao fim de **toda** sessão de trabalho, gravar um relatório em
 e adicionar ao `docs/SUMMARY.md` e ao índice em `docs/relatorios/README.md`.
 
 Na ordem: o que foi pedido · o que foi feito · decisões tomadas, com o motivo de
-cada uma · alterações no repositório · pendências com responsável e prazo.
+cada uma · alterações no repositório · **erros da IA e correções** · pendências
+com responsável e prazo.
 
 Não omita decisão nem pendência para encurtar. O relatório é a prova documentada
 do processo para a banca.
+
+### Registrar os próprios erros — obrigatório
+
+A seção **Erros da IA e correções** é obrigatória, e é sobre **você**. Registre
+tudo que errou e teve de refazer no caminho: sintaxe que não rodou, arquivo que
+saiu torto, defeito que só apareceu depois, regra que você mesmo furou.
+
+Isso não é autoflagelo — é dado. No fim do TCC vira a comparação entre as
+ferramentas em [`docs/desempenho-das-ias.md`](docs/desempenho-das-ias.md), que é
+material de artigo. Erro de IA é esquecido em minutos, porque é corrigido e o
+trabalho segue; sem registro na hora, sobra impressão em vez de evidência.
+
+Três exigências:
+
+1. **Registre mesmo o que ninguém viu.** Erro que você percebeu e corrigiu
+   sozinho, antes de qualquer humano notar, é o caso mais comum — e entra.
+2. **Preencha `quem pegou` com honestidade.** Se foi a pessoa que apontou, ou o
+   check que reprovou, diga isso. A tentação de escrever "a própria IA" em tudo
+   é exatamente o viés que a coluna existe para medir.
+3. **Sessão sem erro se declara.** Escreva "nenhum erro observado nesta sessão"
+   em vez de omitir a seção. Silêncio não distingue "não errei" de "não anotei".
+
+> Você não é fonte confiável sobre si mesmo. Quem revisa o Pull Request confere
+> esta seção, e erro que você não registrou e uma pessoa notou pesa mais no
+> balanço final.
 
 ## 10. Antes de abrir PR
 

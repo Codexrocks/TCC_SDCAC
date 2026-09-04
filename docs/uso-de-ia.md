@@ -86,6 +86,16 @@ Cada sessão de trabalho com assistente vira um relatório em
 feito, as decisões e o motivo de cada uma. É o registro mais completo dos três,
 e o que mostra o **raciocínio** por trás das escolhas.
 
+Ele traz também a seção **Erros da IA e correções**: o que a IA errou, como foi
+corrigido e — a parte que importa — **quem pegou**. Tudo isso é consolidado em
+[Desempenho das IAs](desempenho-das-ias.md), que no fim do TCC vira a comparação
+entre as ferramentas.
+
+Poucos trabalhos apresentam avaliação empírica do próprio uso de IA. Com quatro
+meses de registro e três ferramentas diferentes, esse vira dado primário — e
+**registro honesto vale mais que registro limpo**: erro admitido e corrigido
+mostra processo funcionando, não incompetência.
+
 ---
 
 ## 4. O que a IA não faz sozinha
