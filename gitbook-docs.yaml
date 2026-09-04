@@ -1,7 +1,3 @@
-# Configura o SITE do GitBook e diz qual pasta do repositório alimenta cada espaço.
-# Fica na raiz do repositório (campo "Project directory" do Git Sync vazio).
-# A configuração do espaço em si está em docs/.gitbook.yaml — são arquivos diferentes.
-
 $schema: https://api.gitbook.com/gitbook-docs.yaml
 site:
   title: TCC_SDCAC Docs
