@@ -107,6 +107,7 @@ que contexto cada uma trabalhou.
 | **Concluiu, a partir do fechamento do PR, que o Filipe tinha desistido** | conteúdo | Registrou nesta mesma tabela que o comentário "levou o autor a fechar o próprio PR". Onze minutos depois ele abriu o #7, refazendo o trabalho por conta própria | Linha reescrita. A causa era outra: ele fechou para **recomeçar**, não para abandonar | a própria IA, ao ver o PR #7 aparecer |
 | Escreveu um assunto de commit com 73 caracteres, um a mais que o limite da própria regra | sintaxe | `aviso  commit e32a05d4: assunto com 73 caracteres (limite 72)` na execução seguinte do validador | Nenhuma — o commit ficou. Reescrever o histórico para esconder um aviso do próprio verificador seria pior que o aviso | **o check** |
 | **Escreveu "Felipe" no lugar de "Filipe" desde a sessão 01** | conteúdo | Nenhum sintoma. Passou por sete sessões, 28 arquivos, o `CODEOWNERS`, a lista de autores do validador e os testes. O login `@FilipeF4guiar` estava certo o tempo todo, a três linhas de distância | Corrigido em todo o repositório. `felipe` ficou como alias transitório na lista de autores, para não reprovar branch enquanto a correção não chega na `main` | **a pessoa** — o Davi, na sessão 07 |
+| **Descartou as duas aprovações do PR #6 empurrando commits em cima delas — o mesmo erro da sessão 06, agora em dobro** | processo | O Filipe aprovou às 14:33 e o push das 14:45 derrubou; a Yasmin aprovou às 15:09 e o push das 15:10 derrubou, **1min42 depois**. Com as duas de pé, o PR estaria pronto para merge | Nenhuma possível: aprovação descartada não volta, só se pede de novo. Push congelado no PR #6 | a própria IA — pela notificação de aprovação que chegou **depois** do push, não por ter olhado antes |
 
 > **O gancho era mais rigoroso que o próprio check que ele imita.** O
 > `validar.py` ignora commits de merge desde sempre; o gancho, escrito para
@@ -125,6 +126,22 @@ que contexto cada uma trabalhou.
 > consequência ao próprio ato é diferente de não conhecer — e é o que a coluna
 > **quem pegou** existe para tornar visível.
 
+> **E aconteceu de novo, uma sessão depois, com o registro do primeiro caso
+> aberto na tela.** Na sessão 07 a IA empurrou seis commits no PR #6 ao longo da
+> tarde e derrubou as duas aprovações que chegaram no meio — a do Filipe e a da
+> Yasmin, esta 1min42 depois de ser dada. Não faltava conhecimento: a linha
+> acima é dela, escrita horas antes.
+>
+> É a evidência mais forte do padrão que este documento vinha desenhando. A IA
+> **corrige o caso e não muda o hábito**, mesmo quando o hábito está escrito por
+> ela mesma, no arquivo que ela está editando. Registrar o erro não faz o
+> comportamento mudar — só torna a repetição visível.
+>
+> A consequência prática vale mais que a autocrítica: enquanto um PR estiver
+> juntando aprovações, **push é ato que precisa ser combinado**, não decidido
+> pela IA. Nenhuma trava do repositório impede isso; a única defesa é perguntar
+> antes.
+
 ---
 
 ## 4. Balanço parcial
@@ -133,16 +150,16 @@ Fechado em 04/09/2026, ainda na fase de configuração.
 
 | Tipo | Ocorrências |
 |---|---|
-| processo | 10 |
+| processo | 11 |
 | conteúdo | 8 |
 | defeito latente | 2 |
 | sintaxe | 3 |
 | desperdício | 2 |
-| **Total** | **25** |
+| **Total** | **26** |
 
 | Quem pegou | Ocorrências |
 |---|---|
-| a própria IA | 18 |
+| a própria IA | 19 |
 | **a pessoa** | **5** |
 | o check | 2 |
 | a revisão do PR | 0 |
@@ -154,7 +171,7 @@ Fechado em 04/09/2026, ainda na fase de configuração.
 
 ### O que estes números ainda **não** dizem
 
-Dezoito de vinte e cinco pegos pela própria IA parece um resultado excelente,
+Dezenove de vinte e seis pegos pela própria IA parece um resultado excelente,
 e seria leitura errada. As ressalvas abaixo importam mais que a proporção:
 
 1. **A rede de segurança humana ainda não foi exercitada.** Nenhum Pull Request
