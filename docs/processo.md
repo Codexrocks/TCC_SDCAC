@@ -168,6 +168,12 @@ abre um PR com a alteração.
 @claude implemente a regra 3 (IP não habitual) conforme docs/arquitetura.md
 ```
 
+> **Escrever `@claude` aciona o assistente — sempre.** Inclusive quando você só
+> está explicando a alguém que ele existe: o workflow dispara em qualquer
+> comentário que contenha essa palavra, e cada disparo consome a assinatura.
+> Para citar sem chamar, escreva "o assistente" ou quebre a menção
+> (`@ claude`).
+
 **No GitBook** — como o GitBook espelha o `docs/`, tudo que o Claude escreve na
 documentação aparece lá automaticamente. Ele não precisa de acesso separado.
 
