@@ -100,6 +100,43 @@ def sem_comentarios(texto):
     return re.sub(r"<!--.*?-->", "", texto, flags=re.DOTALL)
 
 
+def sem_blocos_de_codigo(texto):
+    """Remove blocos ``` ou ~~~ do texto.
+
+    Existe porque o PR #11 se auto-reprovou. Ele corrigia um defeito e, para
+    explica-lo, citava o campo do PR #10 dentro de um bloco de codigo:
+
+        - **No que ajudou:** -
+
+    O `search` pega a PRIMEIRA ocorrencia do campo em todo o corpo, entao leu a
+    citacao como se fosse a resposta. Qualquer PR que documente o proprio
+    formulario caia no mesmo buraco — e sao justamente os PRs sobre o guia e
+    sobre as regras.
+
+    Exemplo citado nao e resposta dada.
+    """
+    return re.sub(
+        r"^[ \t]*(```|~~~).*?^[ \t]*\1[ \t]*$",
+        "",
+        texto or "",
+        flags=re.DOTALL | re.MULTILINE,
+    )
+
+
+def secao_uso_de_ia(texto):
+    """Devolve so o trecho da secao 'Uso de IA', ate o proximo cabecalho.
+
+    O formulario e a secao. Procurar os campos no corpo inteiro faz o check
+    aceitar — ou recusar — texto que esta em outra parte do PR.
+    """
+    achado = re.search(
+        r"^#+[ \t]*Uso de IA[ \t]*$(.*?)(?=^#+[ \t]|\Z)",
+        texto,
+        re.IGNORECASE | re.MULTILINE | re.DOTALL,
+    )
+    return achado.group(1) if achado else ""
+
+
 def checar_declaracao_ia(corpo):
     """O corpo do PR precisa ter a secao Uso de IA preenchida de verdade."""
     limpo = sem_comentarios(corpo)
@@ -110,6 +147,10 @@ def checar_declaracao_ia(corpo):
             ".github/pull_request_template.md e preencha. Ver AGENTS.md secao 3"
         )
         return
+
+    # So a secao, e sem os blocos de codigo dela: o que vale e o que foi
+    # respondido no formulario, nao o que foi citado como exemplo.
+    limpo = sem_blocos_de_codigo(secao_uso_de_ia(limpo))
 
     for campo in CAMPOS_IA:
         # Aceita com ou sem negrito, e com o texto na mesma linha do rotulo.

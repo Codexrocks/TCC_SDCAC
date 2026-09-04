@@ -285,6 +285,46 @@ def test_traco_sozinho_e_resposta_valida():
         assert governanca.erros == [], f"{traco!r} sozinho e resposta: 'nao se aplica'"
 
 
+def test_exemplo_citado_em_bloco_de_codigo_nao_conta_como_resposta():
+    """O PR #11 se auto-reprovou citando o campo do PR #10 para explicar o bug.
+
+    O `search` pega a primeira ocorrencia do campo em todo o corpo, entao a
+    citacao dentro do bloco de codigo era lida como se fosse a resposta.
+    Qualquer PR que documente o proprio formulario caia nisso.
+    """
+    corpo = (
+        "## Uso de IA\n\n"
+        "Explicando o que aconteceu no outro PR:\n\n"
+        "```\n"
+        "- **No que ajudou:** \n"
+        "```\n\n"
+        "- **IA usada:** Claude Opus 5\n"
+        "- **No que ajudou:** escreveu os testes\n"
+        "- **O que é meu:** o diagnóstico\n"
+        "- **Conferi tudo que a IA escreveu:** sim\n"
+    )
+    governanca.checar_declaracao_ia(corpo)
+    assert governanca.erros == [], "exemplo citado nao e resposta dada"
+
+
+def test_campo_fora_da_secao_nao_vale():
+    """O formulario e a secao. Campo solto em outra parte do PR nao responde."""
+    corpo = (
+        "## O que muda\n\n"
+        "- **IA usada:** Claude Opus 5\n"
+        "- **No que ajudou:** tudo\n"
+        "- **O que é meu:** nada\n"
+        "- **Conferi tudo que a IA escreveu:** sim\n\n"
+        "## Uso de IA\n\n"
+        "- **IA usada:** \n"
+        "- **No que ajudou:** \n"
+        "- **O que é meu:** \n"
+        "- **Conferi tudo que a IA escreveu:** \n"
+    )
+    governanca.checar_declaracao_ia(corpo)
+    assert len(governanca.erros) == 4, "vale o que esta na secao, nao fora dela"
+
+
 def test_varios_tracos_seguidos_continuam_reprovando():
     """'---' e linha horizontal do Markdown, nao resposta."""
     corpo = (
