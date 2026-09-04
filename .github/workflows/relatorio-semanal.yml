@@ -106,6 +106,14 @@ jobs:
 
             7. Abra o PR para a `main` com o título
                `docs: relatório semanal de AAAA-MM-DD`, preenchendo
-               `.github/pull_request_template.md`.
+               `.github/pull_request_template.md` — **inclusive a seção
+               "Uso de IA"**, que o check `Governança` reprova se ficar em
+               branco. Neste caso as respostas são: IA usada, você; ajudou
+               escrevendo a leitura da semana; os números são do
+               `scripts/atividade.py`, não seus; e sim, foram conferidos contra
+               `atividade.md`.
+
+            8. Todo commit precisa da linha `Assistido-por:` no corpo, senão
+               `scripts/validar.py` reprova. Ver `AGENTS.md`, seção 3.
 
             Não faça merge e não aprove PR nenhum — o merge na `main` é do Davi.

@@ -113,7 +113,7 @@ Texto normal. **Negrito** com dois asteriscos, *itálico* com um.
 | Campo | O que escrever |
 |---|---|
 | Mensagem (primeira linha) | `docs: adiciona seção sobre UEBA` — sempre começando com `docs:`, em minúscula, sem ponto final |
-| Descrição | Opcional. Se usar, explique **por quê**, não o quê |
+| Descrição | **Obrigatório:** a linha `Assistido-por: nome da IA que você usou` — ou `Assistido-por: nenhuma`. Ver abaixo |
 | Onde salvar | Escolha **`Create a new branch for this commit`** — nunca a primeira opção |
 | Nome da branch | `yasmin/docs/assunto-do-texto` |
 
@@ -128,6 +128,27 @@ clique em **`Create pull request`** de novo.
 
 **8.** Na direita da página, em *Reviewers*, escolha um colega. Espere a
 aprovação e o check verde. Depois avise o Davi para fazer o merge.
+
+### Por que declarar a IA
+
+Os três do grupo usam IA, e isso é esperado — o que não pode é esconder. A banca
+vai perguntar o que foi de vocês e o que foi da máquina, e a resposta precisa
+estar no registro, não na memória.
+
+Por isso toda mensagem de commit termina assim:
+
+```
+Assistido-por: Gemini 2.5 Pro
+```
+
+Não usou IA naquela mudança? Escreva `Assistido-por: nenhuma`. É resposta
+válida, e o silêncio não distingue "não usei" de "esqueci".
+
+No Pull Request tem uma seção parecida, com quatro perguntas — a mais
+importante é a última, *"conferi tudo que a IA escreveu"*. O texto entra no TCC
+no seu nome, não no da IA.
+
+A política inteira está em [Uso de IA](uso-de-ia.md).
 
 ---
 
@@ -158,6 +179,8 @@ Os erros mais comuns:
 | `commit ... fora do padrao` | A mensagem precisa começar com `docs:`, `feat:`, `fix:` ou `chore:` |
 | `link quebrado` | Um link aponta para arquivo que não existe. Confira o nome |
 | `possivel senha literal` | Tem algo parecido com senha no texto. **Avise antes de corrigir sozinha** |
+| `falta declarar a IA` | Acrescente `Assistido-por: ...` no corpo do commit |
+| `precisa de 2 aprovacoes` | O PR mexe nas regras ou nas checagens. Peça a segunda aprovação |
 
 ---
 
@@ -182,10 +205,13 @@ Trabalhe nos arquivos. Quando terminar:
 
 ```bash
 git add .
-git commit -m "docs: adiciona seção sobre UEBA"
+git commit -m "docs: adiciona seção sobre UEBA" -m "Assistido-por: nenhuma"
 python3 scripts/validar.py
 git push -u origin yasmin/docs/meu-assunto
 ```
+
+> Repare no segundo `-m`: é a declaração de IA, e sem ela o `validar.py`
+> reprova. Troque `nenhuma` pelo nome do assistente que você usou.
 
 O `validar.py` confere tudo antes de subir. Se ele reclamar, corrija e commite
 de novo — é melhor descobrir aqui do que no PR.
@@ -226,6 +252,7 @@ os erros que doem de verdade.
 
 ## 8. Onde está o resto
 
+- [Uso de IA](uso-de-ia.md) — o que declarar, e por quê
 - [Padrões](padroes.md) — branch, commit e PR em detalhe
 - [Processo de trabalho](processo.md) — como as ferramentas se encaixam
 - [Equipe e papéis](equipe.md) — quem cuida do quê

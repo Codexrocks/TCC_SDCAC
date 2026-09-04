@@ -12,6 +12,18 @@ https://github.com/Codexrocks/TCC_SDCAC/blob/main/docs/configuracao.md
 Mantém o GitBook utilizável para quem prefere escrever no navegador, sem abrir
 exceção na proteção da `main`.
 
+## Uso de IA
+
+> **Este PR abre com os campos em branco de propósito, e o check *Governança*
+> vai ficar vermelho até alguém preencher.** É intencional: o conteúdo veio de
+> uma pessoa editando no GitBook, e só ela sabe se usou IA. Ninguém entra na
+> `main` sem assumir a autoria.
+
+- **IA usada:**
+- **No que ajudou:**
+- **O que é meu:**
+- **Conferi tudo que a IA escreveu:**
+
 ## Checklist
 
 - [x] Branch no padrão — `gitbook/docs/documentacao`, branch permanente do Git Sync

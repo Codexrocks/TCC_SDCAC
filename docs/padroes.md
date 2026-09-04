@@ -50,6 +50,29 @@ tipo: descrição no imperativo, minúscula, sem ponto final
 Máximo 72 caracteres na primeira linha. Se precisar explicar, use o corpo do
 commit — e explique **por quê**, não o quê (o diff já mostra o quê).
 
+### Declare a IA
+
+Toda mensagem termina dizendo quem ajudou naquela mudança:
+
+```
+docs: adiciona seção sobre UEBA
+
+Assistido-por: Gemini 2.5 Pro
+```
+
+Trabalhou sozinho? Declare também — o silêncio não distingue "não usei" de
+"esqueci":
+
+```
+docs: corrige erro de digitação na introdução
+
+Assistido-por: nenhuma
+```
+
+O `validar.py` reprova commit sem essa linha. Ferramentas que já acrescentam
+`Co-Authored-By:` sozinhas — Claude Code, Copilot — satisfazem a regra sem a
+linha extra. Política completa em [Uso de IA](uso-de-ia.md).
+
 Commits pequenos e frequentes. Um commit deve fazer uma coisa só.
 
 ## Pull
@@ -106,6 +129,25 @@ Duas coisas para saber:
 
 Não é para virar hábito. Dois PRs empilhados já são o limite.
 
+### Quando é preciso aprovação de duas pessoas
+
+Mudança nestes arquivos exige **duas** aprovações:
+
+```
+AGENTS.md · CLAUDE.md · GEMINI.md · .github/copilot-instructions.md
+CONTRIBUTING.md
+docs/padroes.md · docs/padroes-codigo.md · docs/processo.md
+.github/**  ·  scripts/**
+```
+
+São as regras do projeto e as checagens que as fazem valer. Sem essa trava,
+bastaria um PR editando o `validar.py` para desligar tudo — e a IA que escreveu
+o PR seria a mesma que sugeriu a mudança. Duas pessoas precisam concordar em
+afrouxar a coleira.
+
+O check **Governança** confere sozinho e reprova o PR. Propor a mudança é livre;
+aprová-la sozinho é que não dá.
+
 ### Quem faz o merge
 
 Só o **Davi**, e isso é trava do GitHub, não combinado de boca: o ruleset
@@ -128,6 +170,8 @@ baixo, sem `wip` nem `corrige typo`.
 - Página nova em `docs/` foi para o `SUMMARY.md`?
 - Tem segredo, senha ou `.env` no diff?
 - O texto está em português e legível?
+- A seção **Uso de IA** está preenchida de verdade, e não com "ajudou"?
+- Se tem texto de IA, quem abriu o PR conseguiria explicar aquilo na banca?
 
 ## Docs
 

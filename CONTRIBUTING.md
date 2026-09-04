@@ -44,6 +44,17 @@ fix: corrige faixa de severidade do Risk Score
 chore: atualiza dependências
 ```
 
+E toda mensagem termina declarando quem ajudou:
+
+```
+docs: adiciona referencial teórico sobre UEBA
+
+Assistido-por: Gemini 2.5 Pro
+```
+
+Sem IA? `Assistido-por: nenhuma`. O `validar.py` reprova quem esquecer. Ver
+[Uso de IA](docs/uso-de-ia.md).
+
 ## Merge
 
 PR para `main` → check **Validação** verde → **1 aprovação** → **o Davi faz o
@@ -64,6 +75,20 @@ ruff format . && ruff check --fix . && pytest
 ```
 
 Mexeu no dashboard? Vale também [`docs/usabilidade.md`](docs/usabilidade.md).
+
+## Uso de IA
+
+Os três usam, e isso é esperado. O que não pode é não declarar:
+
+- No **commit**, a linha `Assistido-por:`
+- No **Pull Request**, a seção *Uso de IA* do template
+
+As duas são conferidas por máquina. Detalhe em
+[`docs/uso-de-ia.md`](docs/uso-de-ia.md); as regras que os assistentes leem
+estão em [`AGENTS.md`](AGENTS.md).
+
+Mexer nas regras (`AGENTS.md`, `docs/padroes*.md`) ou nas checagens
+(`.github/`, `scripts/`) precisa de **duas** aprovações, não uma.
 
 ## Nunca
 

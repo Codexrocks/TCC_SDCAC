@@ -27,6 +27,12 @@ RE_BRANCH = re.compile(
     r"^(%s)/(%s)/[a-z0-9][a-z0-9-]*$" % ("|".join(AUTORES), "|".join(TIPOS))
 )
 RE_COMMIT = re.compile(r"^(%s): .{3,}$" % "|".join(TIPOS))
+# Toda mensagem de commit declara quem ajudou. "Co-Authored-By" conta porque
+# algumas ferramentas (Claude Code, Copilot) ja acrescentam essa linha sozinhas.
+# Sem IA nenhuma? Escreva "Assistido-por: nenhuma" — silencio nao distingue
+# "nao usei" de "esqueci". Regra em AGENTS.md, secao 3.
+RE_IA = re.compile(r"^[ \t]*(assistido-por|co-authored-by)[ \t]*:[ \t]*\S+",
+                   re.IGNORECASE | re.MULTILINE)
 RE_LINK = re.compile(r"(?<!\!)\[[^\]]*\]\(([^)]+)\)")
 
 SEGREDOS = [
@@ -87,15 +93,28 @@ def checar_branch():
 
 def checar_commits(base):
     intervalo = f"{base}..HEAD"
-    bruto = git("log", "--no-merges", "--format=%H%x1f%s", intervalo)
+    bruto = git("log", "--no-merges", "--format=%H%x1f%B%x1e", intervalo)
     if not bruto:
         return
-    for linha in bruto.splitlines():
-        sha, _, assunto = linha.partition("\x1f")
+    for registro in bruto.split("\x1e"):
+        registro = registro.strip("\n")
+        if not registro:
+            continue
+        sha, _, mensagem = registro.partition("\x1f")
+        linhas = mensagem.strip().splitlines()
+        assunto = linhas[0] if linhas else ""
+
         if not RE_COMMIT.match(assunto):
             erros.append(f"commit {sha[:8]}: '{assunto}' fora do padrao 'tipo: descricao'")
         elif len(assunto) > 72:
             avisos.append(f"commit {sha[:8]}: assunto com {len(assunto)} caracteres (limite 72)")
+
+        if not RE_IA.search(mensagem):
+            erros.append(
+                f"commit {sha[:8]}: falta declarar a IA. Acrescente ao corpo do "
+                f"commit a linha 'Assistido-por: <nome da IA>' — ou "
+                f"'Assistido-por: nenhuma' se trabalhou sem. Ver AGENTS.md secao 3"
+            )
 
 
 def checar_summary():

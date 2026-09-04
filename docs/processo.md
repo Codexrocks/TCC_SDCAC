@@ -145,6 +145,16 @@ a `main` é protegida e o app do GitBook não passa por Pull Request.
 
 ---
 
+## 4.1 Uso de IA
+
+Os três integrantes usam assistente de IA, e isso é declarado em cada commit e
+em cada Pull Request — conferido por máquina, não por disciplina. As regras que
+os assistentes leem estão em [`AGENTS.md`](../AGENTS.md); a política escrita
+para gente está em [Uso de IA](uso-de-ia.md).
+
+Mudança nas regras ou nas checagens automáticas exige **duas** aprovações, para
+que nenhuma IA consiga afrouxar a própria coleira com uma aprovação só.
+
 ## 5. O Claude no projeto
 
 O assistente atua em dois lugares:
