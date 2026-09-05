@@ -9,6 +9,7 @@ site:
       default: true
       content:
         directory: ./docs
+        language: pt-br
     - type: space
       key: artigo
       title: Artigo
