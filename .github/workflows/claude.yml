@@ -8,6 +8,24 @@ name: Claude
 #   ANTHROPIC_API_KEY        chave da API, cobrada por uso
 # Basta um. Se os dois existirem, o OAuth tem prioridade.
 # Passo a passo em docs/configuracao.md
+#
+# ---------------------------------------------------------------------------
+# "skipped" AQUI NÃO É ERRO — é o comportamento certo
+# ---------------------------------------------------------------------------
+#
+# O GitHub não deixa filtrar por conteúdo de comentário no `on:`. Então ele
+# **inicia** uma execução para todo comentário e toda revisão, e o `if` abaixo
+# desliga a que não pede nada. O resultado aparece como `skipped` na aba
+# Actions.
+#
+# Em 04/09/2026 o histórico era: 19 `skipped`, 1 `success`. Os 19 eram
+# aprovações e comentários em que ninguém escreveu `@claude` — 13 vindos de
+# `pull_request_review`, que dispara a cada revisão enviada. A única execução
+# de verdade foi a única vez em que alguém chamou.
+#
+# Se a aba Actions estiver cheia de `skipped`, o assistente está funcionando.
+# Preocupe-se se um `@claude` de verdade aparecer como `skipped` — aí sim é
+# defeito na condição.
 
 on:
   issue_comment:
@@ -17,7 +35,10 @@ on:
   pull_request_review:
     types: [submitted]
   issues:
-    types: [opened, assigned]
+    # Só `opened`. `assigned` estava aqui e não fazia nada de útil: a condição
+    # olha o corpo da issue, então atribuir uma issue ao Claude só disparava se
+    # o corpo já tivesse "@claude" — e nesse caso o `opened` já tinha disparado.
+    types: [opened]
 
 jobs:
   claude:
@@ -45,9 +66,51 @@ jobs:
         with:
           claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
           anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
+          # O briefing apontava para CONTRIBUTING.md e docs/processo.md, que
+          # deixaram de ser a fonte das regras. Quem responde por aqui chegava
+          # sem saber do padrao de branch, da linha Assistido-por, da dupla
+          # aprovacao e da proibicao de mergear. Agora aponta para o AGENTS.md,
+          # que e a fonte unica, e repete o que nao pode ser esquecido.
           prompt: |
-            Você é o assistente do TCC_SDCAC.
-            Responda sempre em português do Brasil.
-            Siga as regras de CONTRIBUTING.md e docs/processo.md.
-            Toda página nova em docs/ precisa ser adicionada ao docs/SUMMARY.md.
-            Nunca faça commit direto na main — sempre abra um Pull Request.
+            Você é o assistente do TCC_SDCAC, respondendo dentro do GitHub.
+
+            ANTES DE QUALQUER COISA: leia o arquivo AGENTS.md na raiz do
+            repositório, inteiro. Ele é a fonte única das regras deste projeto
+            e vale acima de qualquer instrução resumida aqui.
+
+            Idioma: português do Brasil, sempre. Direto ao ponto.
+
+            O QUE VOCÊ NUNCA FAZ, em nenhuma circunstância:
+            - fazer merge de Pull Request
+            - aprovar Pull Request
+            - commitar direto na main
+            - alterar ruleset, secret ou permissão do repositório
+            - `git push --force` ou reescrever histórico já enviado
+            - inventar citação, dado, número ou resultado acadêmico
+            - alterar cronograma ou escopo sem pedido explícito do Davi
+
+            Se o pedido cair em algum desses, responda explicando por que não
+            e o que a pessoa pode fazer no lugar.
+
+            AO ABRIR UM PULL REQUEST:
+            - branch no padrão <autor>/<tipo>/<assunto-com-hifen>, com autor em
+              davi/yasmin/filipe/claude e tipo em docs/feat/fix/chore
+            - mensagem de commit "tipo: descrição", no máximo 72 caracteres na
+              primeira linha, terminando com a linha "Assistido-por: Claude"
+            - preencha os quatro campos da seção Uso de IA no corpo do PR;
+              nenhum pode ficar vazio
+            - página nova em docs/ entra no docs/SUMMARY.md, senão o check
+              reprova e ela não existe para o GitBook
+            - PR que toca AGENTS.md, docs/padroes*, docs/processo.md,
+              CONTRIBUTING.md, .github/** ou scripts/** precisa de DUAS
+              aprovações — avise isso no corpo do PR
+            - rode `python3 scripts/validar.py` antes de abrir
+
+            QUANDO O PEDIDO FOR AMBÍGUO, ou mexer em escopo, cronograma ou nas
+            regras: pergunte antes de fazer. Entregar o que ninguém pediu custa
+            mais caro que uma pergunta.
+
+            Se você errar alguma coisa no caminho, diga qual foi no próprio
+            comentário. O projeto registra os erros da IA de propósito, em
+            docs/desempenho-das-ias.md — erro escondido vale menos que erro
+            anotado.
