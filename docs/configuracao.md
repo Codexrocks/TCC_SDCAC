@@ -550,42 +550,28 @@ Mas é um buraco declarado: quem quisesse escapar da declaração de IA poderia
 forjar uma mensagem com esse prefixo. **O que segura esse caso é a revisão do
 Pull Request, onde o diff aparece — não o validador.**
 
-### Um site, uma branch — os dois espaços andam juntos
+### Duas camadas de Git Sync — é isso que separa os regimes
 
-**Não dá para colocar cada espaço numa branch diferente.** O Git Sync deste
-site é *site-wide*: uma instalação só, compartilhada pelos dois espaços. A
-documentação do GitBook é explícita:
+O GitBook tem **duas** camadas de sincronização, e confundir as duas foi a
+origem do problema:
+
+| Camada | Alcance | Branch |
+|---|---|---|
+| **Site Git Sync** | todos os espaços do site de uma vez | **uma só**, para o site inteiro |
+| **Space Git Sync** | um espaço, tirado do sync do site | própria, independente |
+
+Com o Site Git Sync sozinho, **não dá** para colocar cada espaço numa branch
+diferente. A documentação é explícita:
 
 > Use site-wide Git Sync to sync multiple spaces from **one repository and
 > branch**. Map each space to its own directory in `gitbook-docs.yaml`.
 
-O `gitbook-docs.yaml` separa os espaços por **diretório**, nunca por branch.
-Trocar a branch em um espaço troca no outro junto — os dois têm o mesmo
-`parentInstallationId`.
-
-Foi assim que se descobriu: ao apontar o espaço Artigo para
-`gitbook/docs/artigo`, o espaço Documentação foi junto, e exportou todo o
-`docs/` reformatado — inclusive apagando os comentários do `gitbook-docs.yaml` —
-para dentro da branch do artigo.
-
-`GitBook → Configure → Git Sync`
-
-| Campo | Valor |
-|---|---|
-| Repositório | `Codexrocks/TCC_SDCAC` |
-| Branch | **uma só, para o site inteiro** |
-| Project directory | vazio |
-
-Se ele perguntar a direção da primeira sincronização, escolha **importar do
-Git** (GitHub → GitBook). O GitHub é a fonte da verdade.
-
-> **Consequência para o desenho de duas branches.** O
-> [`gitbook-sync.yml`](https://github.com/Codexrocks/TCC_SDCAC/blob/main/.github/workflows/gitbook-sync.yml)
-> pressupõe `gitbook/docs/documentacao` como espelho forçado e
-> `gitbook/docs/artigo` como caminho de escrita. Com uma branch só, esse
-> desenho não se sustenta: ou as duas pastas são espelho — e ninguém escreve
-> pelo GitBook — ou as duas são graváveis, e o `docs/` volta reformatado.
-> **Decisão pendente do Davi**, registrada no relatório da sessão 08.
+O `gitbook-docs.yaml` separa os espaços por **diretório**, nunca por branch —
+os dois compartilham o mesmo `parentInstallationId`. Foi assim que se
+descobriu: ao apontar o espaço Artigo para `gitbook/docs/artigo`, o espaço
+Documentação foi junto, e exportou todo o `docs/` reformatado — inclusive
+apagando os comentários do `gitbook-docs.yaml` — para dentro da branch do
+artigo.
 
 O que segurou o estrago foi a trava do próprio workflow, que recusa levar para
 a `main` qualquer arquivo fora de `artigo/`:
@@ -595,6 +581,64 @@ a `main` qualquer arquivo fora de `artigo/`:
 ```
 
 Os três runs falharam e nenhum Pull Request foi aberto.
+
+### O desenho: o Artigo sai do sync do site
+
+A saída não é criar um segundo site. É **excluir o Artigo do Git Sync do site**
+e dar a ele sincronização própria:
+
+> **Exclude a space from site-wide Git Sync** — In the site's Git Sync content
+> mapping, click the remove icon next to the space you want to exclude. You can
+> then configure Git Sync from that space.
+>
+> * Select an **independent repository and branch** to configure Space Git Sync.
+
+Assim cada espaço fica no regime que o
+[`gitbook-sync.yml`](https://github.com/Codexrocks/TCC_SDCAC/blob/main/.github/workflows/gitbook-sync.yml)
+já pressupõe, sem mudar uma linha do workflow:
+
+| Espaço | Camada | Branch | Regime |
+|---|---|---|---|
+| **Documentação** | Site Git Sync | `gitbook/docs/documentacao` | espelho forçado, só leitura |
+| **Artigo** | Space Git Sync | `gitbook/docs/artigo` | leitura e escrita, volta por PR |
+
+#### Passo a passo
+
+**a) Tirar o Artigo do sync do site**
+
+`GitBook → site TCC_SDCAC Docs → Configure → Git Sync → Content mapping` →
+clicar no ícone de remover ao lado do espaço **Artigo**.
+
+**b) Devolver o site para a branch da documentação**
+
+Ainda no Git Sync do site:
+
+| Campo | Valor |
+|---|---|
+| Repositório | `Codexrocks/TCC_SDCAC` |
+| Branch | `gitbook/docs/documentacao` |
+| Project directory | vazio |
+
+**c) Ligar o Space Git Sync no Artigo**
+
+No espaço **Artigo** → `Set up` ao lado de **Git Sync** no cabeçalho do espaço
+→ **GitHub Sync**. Quando ele perguntar o escopo, escolha **repositório e
+branch independentes**:
+
+| Campo | Valor |
+|---|---|
+| Repositório | `Codexrocks/TCC_SDCAC` |
+| Branch | `gitbook/docs/artigo` |
+
+**d) Destravar a edição — só no Artigo**
+
+Os dois espaços ficam em `editMode: locked` por padrão quando o Git Sync entra.
+Para a Documentação isso é o desejado: o caminho de volta é descartado, e
+editar ali cria trabalho que se perde. **No Artigo, destrave** — é onde a
+equipe redige.
+
+Na primeira sincronização de cada um, escolha **importar do Git**
+(GitHub → GitBook). O GitHub é a fonte da verdade.
 
 ### Conferindo em que branch os espaços estão
 
@@ -614,9 +658,12 @@ curl -s -H "Authorization: Bearer $GITBOOK_TOKEN" \
 O campo `url` mostra a branch, e o `operation.direction` mostra se a última
 sincronização foi `import` (GitHub → GitBook) ou `export` (GitBook → GitHub).
 
-**Os dois respondem a mesma branch** — é o esperado, não defeito: o Git Sync é
-do site, não do espaço. Um `export` partindo do espaço Documentação é o sinal
-de que o `docs/` está voltando reformatado.
+Com o desenho acima, **cada um responde a uma branch diferente**: a
+Documentação em `gitbook/docs/documentacao`, o Artigo em `gitbook/docs/artigo`.
+Se os dois responderem a mesma, o Artigo ainda não saiu do Git Sync do site.
+
+Um `export` partindo do espaço Documentação é sinal de que o `docs/` está
+voltando reformatado — ali só deveria haver `import`.
 
 **Trave a edição no espaço.** Como o caminho de volta é descartado, deixar
 alguém editar no site cria trabalho que se perde sem aviso. No GitBook, deixe o

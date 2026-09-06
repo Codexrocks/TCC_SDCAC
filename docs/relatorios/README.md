@@ -27,3 +27,4 @@ Use o [modelo](_modelo.md) e adicione a página nova ao
 | 04/09/2026 | [Sessão 06](2026-09-04-sessao-06.md) | Merge sem revisão no PR #2, login do Filipe e uso de IA no PR #1 |
 | 04/09/2026 | [Sessão 07](2026-09-04-sessao-07.md) | Espaço do artigo, o primeiro PR da equipe e a governança que travava a si mesma |
 | 04/09/2026 | [Sessão 08](2026-09-04-sessao-08.md) | Um site do GitBook tem uma branch só — o desenho de duas não se sustenta |
+| 06/09/2026 | [Sessão 09](2026-09-06-sessao-09.md) | Space Git Sync: o desenho de duas branches é possível |

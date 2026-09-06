@@ -29,4 +29,5 @@
 * [2026-09-04 — Sessão 06: merge sem revisão e correções no PR #1](relatorios/2026-09-04-sessao-06.md)
 * [2026-09-04 — Sessão 07: o artigo, o primeiro PR da equipe e a governança travada](relatorios/2026-09-04-sessao-07.md)
 * [2026-09-04 — Sessão 08: um site do GitBook tem uma branch só](relatorios/2026-09-04-sessao-08.md)
+* [2026-09-06 — Sessão 09: Space Git Sync resolve o impossível](relatorios/2026-09-06-sessao-09.md)
 * [Modelo de relatório](relatorios/_modelo.md)
