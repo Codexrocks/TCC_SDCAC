@@ -1,4 +1,4 @@
-# Table of contents
+# Summary
 
 * [Início](README.md)
 * [Equipe e papéis](equipe.md)
@@ -20,7 +20,7 @@
 
 ## Relatórios
 
-* [Índice](relatorios/relatorios.md)
+* [Índice](relatorios/README.md)
 * [2026-09-03 — Sessão 01: setup do repositório](relatorios/2026-09-03-sessao-01.md)
 * [2026-09-03 — Sessão 02: padrões, validação e GitBook](relatorios/2026-09-03-sessao-02.md)
 * [2026-09-03 — Sessão 03: correção do GitBook e guia de configuração](relatorios/2026-09-03-sessao-03.md)
@@ -28,4 +28,5 @@
 * [2026-09-03 — Sessão 05: governança, usabilidade e padrões de código](relatorios/2026-09-03-sessao-05.md)
 * [2026-09-04 — Sessão 06: merge sem revisão e correções no PR #1](relatorios/2026-09-04-sessao-06.md)
 * [2026-09-04 — Sessão 07: o artigo, o primeiro PR da equipe e a governança travada](relatorios/2026-09-04-sessao-07.md)
+* [2026-09-04 — Sessão 08: um site do GitBook tem uma branch só](relatorios/2026-09-04-sessao-08.md)
 * [Modelo de relatório](relatorios/_modelo.md)
