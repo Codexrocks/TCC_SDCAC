@@ -12,6 +12,11 @@ Fora daqui, o GitBook só lê. O motivo está em
 > junta as quebras de linha, realinha tabelas, troca `---` por `***`. Aqui isso
 > é aceitável, porque o que importa é o texto. Por isso a divisão existe — para
 > a reformatação não alcançar as regras, os workflows e os relatórios.
+>
+> **O que ele não perdoa é comentário HTML.** Tudo entre `<!--` e `-->`
+> desaparece ao salvar. Por isso as instruções destes capítulos são blocos
+> `> **A escrever:**` visíveis, e não comentários escondidos: elas precisam
+> sobreviver, e quem vai escrever precisa vê-las.
 
 ---
 
@@ -39,15 +44,17 @@ pessoa com comentário linha a linha, que o GitBook não faz tão bem.
 
 ## Duas regras que não mudam aqui
 
-**Referência só entra se você leu a fonte.** Enquanto não conferir, escreva na
-linha:
+**Referência só entra se você leu a fonte.** Enquanto não conferir, registre a
+pendência em [citações pendentes](../docs/citacoes-pendentes.md) — uma linha
+dizendo o capítulo, a seção e o que falta.
 
-```markdown
-<!-- FALTA CITAÇÃO -->
-```
+O marcador **não** vai dentro do artigo, e isso é aprendido na prática: em
+06/09/2026 o GitBook exportou os seis arquivos daqui com todos os comentários
+HTML apagados, marcadores de citação incluídos. Aviso invisível que some sem
+ninguém perceber é pior que aviso nenhum.
 
-A validação deixa passar; a banca não. Modelo de linguagem inventa referência
-plausível — autor real, revista real, ano real, artigo que não existe.
+Modelo de linguagem inventa referência plausível — autor real, revista real, ano
+real, artigo que não existe. A validação não pega isso; a banca pega.
 
 **Número sai de execução real.** Taxa de detecção, falso positivo e MTTD vêm dos
 testes registrados em `results/`, nunca de estimativa.

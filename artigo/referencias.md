@@ -10,13 +10,17 @@ Formatação **ABNT NBR 6023**, conforme as
 > expressamente "qualquer forma de plágio, cópia indevida ou fraude acadêmica" —
 > e referência fabricada cai nessa cláusula.
 >
-> Enquanto não conferir, deixe `<!-- FALTA CITAÇÃO -->` na linha do texto que a
-> usaria, e **não** acrescente a entrada aqui.
+> Enquanto não conferir, registre a pendência em
+> [citações pendentes](../docs/citacoes-pendentes.md), e **não** acrescente a
+> entrada aqui.
+>
+> O marcador não vai dentro do artigo: o GitBook apaga comentário HTML ao
+> salvar, e o aviso sumiria sem ninguém perceber. Aconteceu em 06/09/2026.
 
 Ordem alfabética pelo sobrenome do primeiro autor. Referência que não é citada
 no texto não entra na lista.
 
----
+***
 
 ## Modelos por tipo
 
@@ -38,13 +42,14 @@ Documento eletrônico
 AUTOR. **Título**. Ano. Disponível em: URL. Acesso em: dia mês ano.
 ```
 
----
+***
 
 ## Lista
 
-<!-- Acrescente aqui conforme forem sendo conferidas e citadas. -->
+> **A escrever.** Acrescente aqui conforme forem sendo conferidas e
+> citadas.
 
----
+***
 
 ## Aproveitáveis de outras páginas
 
