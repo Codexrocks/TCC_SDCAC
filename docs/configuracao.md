@@ -651,18 +651,36 @@ Como distinguir os dois pela API:
 | `parentInstallationId` | **ausente** | `gitsync_VZz3S` |
 | branch | `gitbook/docs/artigo` | `gitbook/docs/documentacao` |
 
-**e) Adicionar o Artigo verdadeiro ao site**
+**e) Deixar o Artigo FORA do site — de propósito**
 
-Como ele saiu do Content mapping, o site deixa de publicá-lo. Adicione o espaço
-como variante pela interface do site.
+Esta é a etapa contraintuitiva, e a que custou mais caro para descobrir.
+
+Ao sair do Content mapping, o Artigo deixa de aparecer no site publicado. A
+reação natural é adicioná-lo de volta como variante. **Não faça isso.**
+
+Adicionar um espaço pelo Content mapping *é* colocá-lo no Git Sync do site.
+Feito em 06/09 17:28, o espaço perdeu a sincronização própria — ganhou
+`parentInstallationId` de novo, voltou para `gitbook/docs/documentacao` e
+exportou a documentação inteira para dentro de `artigo/`: 45 arquivos, +4.725
+linhas, e os comentários do `gitbook-docs.yaml` apagados outra vez.
+
+O que desfaz o mal-entendido:
+
+> **Não é preciso publicar o espaço no site para escrever nele.**
+
+Escrever é no app (`app.gitbook.com`), abrindo o espaço. O site é para quem
+**lê**. O Artigo fica fora do site enquanto está sendo redigido; quando o texto
+estiver pronto, ele chega à `main` por Pull Request e o site publica a
+documentação — não o rascunho do artigo.
 
 **f) Destravar a edição — só no Artigo verdadeiro**
 
 Os espaços ficam em `editMode: locked` quando o Git Sync entra. Para a
 Documentação isso é o desejado: o caminho de volta é descartado, e editar ali
-cria trabalho que se perde. **Destrave só o Artigo**, e só depois de (d) e (e):
-destravar antes leva a equipe a escrever no espaço errado, cujo texto some no
-próximo espelhamento.
+cria trabalho que se perde. **Destrave só o Artigo**, e só depois de confirmar
+por (d) que ele está sem `parentInstallationId` e na branch
+`gitbook/docs/artigo`. Destravar antes leva a equipe a escrever num espaço cujo
+texto some no espelhamento seguinte.
 
 Na primeira sincronização de cada um, escolha **importar do Git**
 (GitHub → GitBook). O GitHub é a fonte da verdade.
