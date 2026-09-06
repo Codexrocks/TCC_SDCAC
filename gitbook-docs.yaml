@@ -15,4 +15,4 @@ site:
       title: Artigo
       path: artigo
       content:
-        directory: ./artigo
+        directory: null
