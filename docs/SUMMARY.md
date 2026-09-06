@@ -5,6 +5,7 @@
 * [Guia do GitHub — para quem nunca usou](guia-github.md)
 * [Uso de inteligência artificial](uso-de-ia.md)
 * [Desempenho das IAs](desempenho-das-ias.md)
+* [Citações pendentes](citacoes-pendentes.md)
 * [Processo de trabalho](processo.md)
 * [Padrões](padroes.md)
 * [Padrões de código](padroes-codigo.md)

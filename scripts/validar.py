@@ -57,6 +57,10 @@ RE_COMMIT_GITBOOK = re.compile(r"^(GitBook|GITBOOK-[A-Z]+):", re.IGNORECASE)
 # publicada, e seus .md nao precisam estar em indice nenhum.
 ESPACOS = ("docs", "artigo")
 RE_LINK = re.compile(r"(?<!\!)\[[^\]]*\]\(([^)]+)\)")
+# Pega o marcador em qualquer forma: comentario HTML, negrito, colchete, com ou
+# sem acento. A regra e sobre o LUGAR, nao sobre a grafia — quem escrever
+# "**[FALTA CITACAO]**" dentro do artigo cai na mesma armadilha.
+RE_FALTA_CITACAO = re.compile(r"FALTA[ _-]?CITA[ÇC][ÃA]O", re.IGNORECASE)
 
 SEGREDOS = [
     (re.compile(r"(?i)\b(senha|password|passwd)\s*[=:]\s*['\"]?[^\s'\"<>{}]{6,}"), "senha literal"),
@@ -177,6 +181,53 @@ def checar_links():
                         erros.append(f"{rel}:{n}: link quebrado -> {alvo}")
 
 
+def sem_codigo(texto):
+    """Remove blocos ``` e trechos entre crases, na ordem: bloco antes de linha."""
+    texto = re.sub(r"^[ \t]*(```|~~~).*?^[ \t]*\1[ \t]*$", "", texto,
+                   flags=re.DOTALL | re.MULTILINE)
+    return re.sub(r"`[^`\n]*`", "", texto)
+
+
+def checar_citacoes_pendentes():
+    """Marcador de citacao pendente nao pode viver dentro de artigo/.
+
+    O GitBook apaga comentario HTML ao salvar. Em 06/09/2026 ele exportou os
+    seis arquivos do artigo com todos os marcadores removidos: a divida sumiu
+    do repositorio sem ninguem perceber, e o PR parecia so texto novo.
+
+    Em docs/ o marcador continua valendo e fica na propria linha — o GitBook so
+    le dali, entao nada e reescrito. Ali eles viram aviso, para nao serem
+    esquecidos.
+
+    Regra completa em docs/citacoes-pendentes.md.
+    """
+    for caminho in arquivos_md():
+        rel = os.path.relpath(caminho, RAIZ).replace(os.sep, "/")
+        try:
+            with open(caminho, encoding="utf-8") as fh:
+                texto = fh.read()
+        except (UnicodeDecodeError, OSError):
+            continue
+
+        # Sem os trechos de codigo. Varias paginas EXPLICAM o marcador, sempre
+        # entre crases ou num bloco ```; falar dele nao e usa-lo, e contar essas
+        # mencoes faria a pagina de regra virar pendencia de si mesma.
+        achados = RE_FALTA_CITACAO.findall(sem_codigo(texto))
+        if not achados:
+            continue
+
+        if rel.startswith("artigo/"):
+            erros.append(
+                f"{rel}: {len(achados)} marcador(es) de citacao pendente dentro "
+                f"de artigo/. O GitBook apaga comentario HTML ao salvar — "
+                f"registre em docs/citacoes-pendentes.md"
+            )
+        elif rel == "docs/citacoes-pendentes.md":
+            continue  # a propria pagina explica o marcador; nao e pendencia
+        else:
+            avisos.append(f"{rel}: {len(achados)} citacao(oes) pendente(s)")
+
+
 def checar_segredos():
     rastreados = git("ls-files").splitlines()
     for rel in rastreados:
@@ -220,6 +271,7 @@ def main():
         )
     checar_summary()
     checar_links()
+    checar_citacoes_pendentes()
     checar_segredos()
 
     for a in avisos:
