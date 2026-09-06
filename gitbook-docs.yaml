@@ -5,7 +5,14 @@
 # Dois espaços, com regimes diferentes:
 #
 #   documentacao -> ./docs    só leitura. O GitBook lê e publica; nada volta.
-#   artigo       -> ./artigo  leitura e ESCRITA. É onde a equipe redige.
+#
+# O espaço do ARTIGO não entra aqui de propósito. Ele saiu do Git Sync do site
+# e tem sincronização própria (Space Git Sync) em gitbook/docs/artigo, que é a
+# única forma de dar branch diferente a um espaço.
+#
+# Declarar a chave `artigo` neste arquivo faz o site RECRIAR um espaço com essa
+# chave — foi o que gerou um Artigo duplicado em 06/09, publicado no site e
+# apontando para a branch espelho. Não devolva esta entrada.
 #
 # As pastas precisam ser IRMÃS: o GitBook não aceita o diretório de um espaço
 # aninhado dentro do de outro. Foi isso que tirou o artigo de dentro de docs/.
@@ -23,9 +30,3 @@ site:
       default: true
       content:
         directory: ./docs
-    - type: space
-      key: artigo
-      title: Artigo
-      path: artigo
-      content:
-        directory: ./artigo

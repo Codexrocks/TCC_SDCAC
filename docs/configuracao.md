@@ -630,12 +630,39 @@ branch independentes**:
 | Repositório | `Codexrocks/TCC_SDCAC` |
 | Branch | `gitbook/docs/artigo` |
 
-**d) Destravar a edição — só no Artigo**
+**d) Tirar a chave `artigo` do `gitbook-docs.yaml`**
 
-Os dois espaços ficam em `editMode: locked` por padrão quando o Git Sync entra.
-Para a Documentação isso é o desejado: o caminho de volta é descartado, e
-editar ali cria trabalho que se perde. **No Artigo, destrave** — é onde a
-equipe redige.
+Esta etapa não está na documentação do GitBook, e sem ela as anteriores se
+desfazem sozinhas.
+
+O `gitbook-docs.yaml` declara quais espaços o **site** sincroniza. Enquanto a
+chave `artigo` estiver lá, o site recria um espaço com essa chave a cada
+sincronização — mesmo que você já o tenha removido do Content mapping.
+
+Foi o que aconteceu em 06/09: minutos depois da reconfiguração, o site
+publicava um **Artigo duplicado**, ligado ao Git Sync do site e apontando para
+`gitbook/docs/documentacao`, a branch espelho. O Artigo verdadeiro, com Space
+Git Sync correto, ficou fora do site.
+
+Como distinguir os dois pela API:
+
+| | Artigo verdadeiro | Duplicado |
+|---|---|---|
+| `parentInstallationId` | **ausente** | `gitsync_VZz3S` |
+| branch | `gitbook/docs/artigo` | `gitbook/docs/documentacao` |
+
+**e) Adicionar o Artigo verdadeiro ao site**
+
+Como ele saiu do Content mapping, o site deixa de publicá-lo. Adicione o espaço
+como variante pela interface do site.
+
+**f) Destravar a edição — só no Artigo verdadeiro**
+
+Os espaços ficam em `editMode: locked` quando o Git Sync entra. Para a
+Documentação isso é o desejado: o caminho de volta é descartado, e editar ali
+cria trabalho que se perde. **Destrave só o Artigo**, e só depois de (d) e (e):
+destravar antes leva a equipe a escrever no espaço errado, cujo texto some no
+próximo espelhamento.
 
 Na primeira sincronização de cada um, escolha **importar do Git**
 (GitHub → GitBook). O GitHub é a fonte da verdade.
