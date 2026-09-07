@@ -33,6 +33,43 @@ Estrutura definida pelo professor, conforme o [cronograma](../docs/cronograma.md
 | 5 | [Conclusão](05-conclusao.md) | S14 | Todos |
 | — | [Referências](referencias.md) | contínuo | Quem citar |
 
+## Divisão de páginas
+
+O artigo inteiro tem **de 6 a 10 páginas**, tabelas e figuras incluídas. É o
+limite do [template](../docs/cobem.md), e ele é rígido: trabalho fora do padrão
+é desclassificado antes da revisão.
+
+Orçamento combinado para um artigo de **8 páginas**:
+
+| Seção | Páginas |
+|---|---|
+| Cabeçalho, resumo, palavras-chave, abstract, keywords | 0,5 |
+| **1. Introdução** | **1 a 1,5** |
+| **2. Referencial teórico** (entra em Fundamentação) | **1,5 a 2** |
+| **3. Metodologia** | **2** |
+| **4. Resultados e discussão** | **2 a 2,5** |
+| **5. Conclusões** | **0,5** |
+| Referências e *responsibility notice* | 0,5 |
+
+Três coisas sobre estes números:
+
+**São orçamento, não cota.** Quem terminar em menos devolve o espaço para quem
+precisa de mais. O que não existe é passar de 10 no total.
+
+**A Metodologia e os Resultados são o coração do artigo**, e juntos levam
+metade dele. É onde está o trabalho que a banca vai avaliar — o resto
+contextualiza.
+
+**Quem escrever primeiro tem a régua mais fácil.** Se a Introdução ocupar três
+páginas em setembro, alguém vai ter de cortá-la em dezembro, com o texto já
+revisado e as referências já casadas. Cortar cedo é barato.
+
+> **Meça no template, não no editor.** Uma página do
+> [`COBEM-2025-template.docx`](../templates/COBEM-2025-template.docx) tem
+> Times New Roman 10, entrelinha simples, margens de 3 cm no topo e 2 cm nas
+> outras. Cabe muito mais texto do que numa página do Word em branco — e muito
+> menos do que a contagem de palavras sugere, quando entram figuras.
+
 ## Como escrever aqui
 
 **Pelo GitBook** — abra o espaço do artigo e escreva. O texto chega ao
