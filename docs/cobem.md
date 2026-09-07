@@ -177,17 +177,42 @@ O [`referencias.md`](../artigo/referencias.md) está montado em ABNT e precisa
 ser refeito no formato acima. Os modelos atuais ainda servem para saber **o que
 anotar** de cada fonte; o que muda é a pontuação e a ordem.
 
-### 4. O idioma precisa ser confirmado
+### 4. O idioma: português, com o abstract em inglês
 
-O template diz, com todas as letras: **"Manuscripts should be in English"**.
+**Decidido pelo Davi em 07/09/2026.** O artigo inteiro sai em português; só o
+*abstract* e as *keywords* vão em inglês, ao lado do Resumo e das
+palavras-chave.
 
-Isso vale para a submissão ao congresso. Para o **TCC**, quem define é a
-coordenação — e as [diretrizes](diretrizes.md) admitem *"padrões específicos
-definidos pela coordenação"*, o que permite usar o formato COBEM com o texto em
-português. As próprias referências do template citam obras `(in Portuguese)`.
+O template diz *"Manuscripts should be in English"*, e isso vale para a
+submissão ao congresso. Para o **TCC**, quem define é a coordenação, e as
+[diretrizes](diretrizes.md) admitem *"padrões específicos definidos pela
+coordenação"* — usar o formato COBEM com o texto em português é exatamente esse
+caso. As próprias referências do template citam obras `(in Portuguese)`.
 
-> **Confirme com o orientador antes da S3.** Se o artigo tiver de sair em
-> inglês, muda tudo — e é melhor descobrir agora que na S14.
+O bloco de abertura do artigo fica assim:
+
+| Elemento | Idioma |
+|---|---|
+| Título | Português |
+| Autores e afiliação | Português |
+| **Resumo** e **Palavras-chave** | Português |
+| **Abstract** e **Keywords** | **Inglês** |
+| Corpo, da Introdução às Conclusões | Português |
+| Referências | Como cada obra foi publicada |
+
+> **Se um dia submeterem ao COBEM**, a versão do congresso provavelmente terá de
+> ser traduzida por inteiro. É trabalho de 2027, e só existe se o resumo for
+> aprovado — mas vale saber que o artigo do TCC não é submissível como está.
+
+### 5. O abstract fica no alto, não no fim
+
+No template, o bloco de resumo vem logo depois dos autores — **antes da
+Introdução**. No nosso Markdown ele está em
+[`05-conclusao.md`](../artigo/05-conclusao.md), porque é a **5ª Versão** que a
+instituição cobra e é quando ele é escrito.
+
+Não é contradição: escreve-se por último, diagrama-se no alto. Só não se
+esqueça de mover na hora de montar o documento.
 
 > **O que não muda:** o Markdown de `artigo/` continua sendo a fonte da verdade
 > do texto. O template é formatação, e formatação é o último passo. Texto preso
@@ -232,8 +257,8 @@ Versão é exatamente o que a primeira etapa pede, e ela não exige arquivo nenh
 
 ## O que ainda precisa ser decidido
 
-- [ ] **Confirmar o idioma do artigo com o orientador.** O template pede inglês;
-      o TCC é em português. Muda tudo se for inglês · **Davi** · antes da S3
+- [x] **Idioma definido em 07/09/2026:** artigo em português, abstract e
+      keywords em inglês
 - [ ] **Combinar a divisão de páginas por seção** com a equipe, dentro do teto
       de 10 · **equipe** · antes de 10/09
 - [ ] **Refazer [`referencias.md`](../artigo/referencias.md)** no formato

@@ -58,6 +58,13 @@
 > [COBEM](../docs/cobem.md), que pede Resumo/Abstract e
 > Palavras-chave/Keywords.
 >
+> **É a única parte do artigo em inglês.** O resto é todo em português, decidido
+> em 07/09/2026.
+>
+> No documento final este bloco vai para **o alto**, logo depois dos autores —
+> antes da Introdução. Ele mora aqui porque é a 5ª Versão que a instituição
+> cobra, e porque é quando ele é escrito.
+>
 > **A escrever.** Versão em inglês do Resumo. Não é tradução literal: é o mesmo
 > conteúdo escrito em inglês. Traduza depois que o Resumo estiver fechado.
 >

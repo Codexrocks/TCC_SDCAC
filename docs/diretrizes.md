@@ -113,7 +113,9 @@ Em 04/09/2026:
 
 - ~~**Norma: ABNT.** Não é o template COBEM.~~ **Corrigido em 07/09/2026:** o
   artigo do TCC sai no **formato COBEM**. Ver abaixo.
-- **Abstract em inglês é necessário**, além do Resumo em português.
+- **Abstract em inglês é necessário**, além do Resumo em português. O resto do
+  artigo é **todo em português** — decidido pelo Davi em 07/09/2026, apesar de o
+  template do COBEM pedir inglês. Ver [COBEM](cobem.md#4-o-idioma-portugues-com-o-abstract-em-ingles).
 
 ### Corrigido em 07/09/2026 — o artigo é no formato COBEM
 

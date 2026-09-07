@@ -72,8 +72,8 @@ Três coisas mudam por causa disso, e estão em
 2. **O Referencial Teórico não tem seção própria** no COBEM — entra em
    Fundamentação. Continua sendo entrega da 2ª Versão para a instituição
 3. **As referências são autor-ano**, não ABNT NBR 6023
-4. **O template pede inglês.** Para o TCC em português, falta confirmar com o
-   orientador — está nas pendências
+4. **O texto é em português**, e só o *abstract* e as *keywords* saem em
+   inglês — decidido em 07/09/2026, apesar de o template pedir inglês
 
 O Markdown daqui é a **fonte da verdade do texto**; o template é aplicado na
 hora de montar o documento de entrega. Ele está versionado em
