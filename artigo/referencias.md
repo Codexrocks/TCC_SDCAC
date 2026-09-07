@@ -1,12 +1,26 @@
 # Referências
 
-> **Esta página está no estilo errado desde 07/09/2026.** Ela foi montada em
-> ABNT NBR 6023, e o artigo passou a sair no [formato COBEM](../docs/cobem.md),
-> que traz o próprio estilo de citação no template.
+> **Esta página está no estilo errado desde 07/09/2026.** Foi montada em ABNT
+> NBR 6023; o artigo sai no [formato COBEM](../docs/cobem.md), que é
+> **autor-ano**, não numérico.
 >
-> Os modelos abaixo continuam servindo para **saber o que anotar** de cada
-> fonte — autor, título, veículo, ano, páginas. O que muda é a pontuação e a
-> ordem, na hora de transpor. Corrigir está na lista de pendências do COBEM.
+> No texto: `(Choma and Ugaya, 2017)` ou `Choma and Ugaya (2017)`. Três ou mais
+> autores: `(Porto-Hernandez et al., 2023)`. Mesmo autor e ano: `2017a`,
+> `2017b`.
+>
+> Na lista, ordem alfabética pelo sobrenome do primeiro autor, primeira linha à
+> esquerda e as demais com recuo de 0,5 cm:
+>
+> ```
+> Sestito, G.S., Venter, G.S. and da Silva, M.M., 2022. "In-process chatter
+> detection in micro-milling using acoustic emission via machine learning
+> classifiers". The International Journal of Advanced Manufacturing
+> Technology, Vol. 120, pp. 7293-7303.
+> ```
+>
+> Os modelos ABNT abaixo continuam servindo para **saber o que anotar** de cada
+> fonte. O que muda é a pontuação e a ordem. Refazer está nas pendências do
+> COBEM.
 
 > **Uma referência só entra aqui depois de alguém abrir a fonte.**
 >

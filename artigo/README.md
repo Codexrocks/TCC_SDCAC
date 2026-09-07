@@ -68,10 +68,12 @@ obrigatório**, além do Resumo em português.
 Três coisas mudam por causa disso, e estão em
 [COBEM 2027](../docs/cobem.md#o-que-isto-muda-no-artigo):
 
-1. **O artigo inteiro tem 8 páginas.** Cada seção precisa caber num orçamento
+1. **O artigo inteiro tem de 6 a 10 páginas**, incluindo tabelas e figuras
 2. **O Referencial Teórico não tem seção própria** no COBEM — entra em
    Fundamentação. Continua sendo entrega da 2ª Versão para a instituição
-3. **As referências não são ABNT NBR 6023** — o template traz o próprio estilo
+3. **As referências são autor-ano**, não ABNT NBR 6023
+4. **O template pede inglês.** Para o TCC em português, falta confirmar com o
+   orientador — está nas pendências
 
 O Markdown daqui é a **fonte da verdade do texto**; o template é aplicado na
 hora de montar o documento de entrega.

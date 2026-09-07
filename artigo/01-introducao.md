@@ -3,13 +3,12 @@
 > **Entrega: 10/09/2026** — Tarefa 02 do professor. Responsável: todos. Esta é
 > a seção mais urgente do artigo.
 >
-> **Formato COBEM**, confirmado em 07/09/2026 — o registro anterior dizia ABNT
-> e estava errado. O que muda na prática está em
-> [COBEM 2027](../docs/cobem.md#o-que-isto-muda-no-artigo), e a primeira
-> consequência é de tamanho: **o artigo inteiro tem 8 páginas.**
+> **Formato COBEM**, lido do template oficial em 07/09/2026. O que muda está em
+> [COBEM](../docs/cobem.md#o-que-isto-muda-no-artigo), e a primeira consequência
+> é de tamanho: **o artigo inteiro tem de 6 a 10 páginas.**
 >
-> A Contextualização abaixo pedia "duas ou três páginas". Isso era um terço do
-> artigo. Combine a divisão com a equipe antes de escrever.
+> A Contextualização abaixo pedia "duas ou três páginas" — um terço do artigo
+> antes de chegar ao problema. Combine a divisão com a equipe antes de escrever.
 >
 > O que está abaixo é **estrutura, não conteúdo**. Cada bloco começa com uma
 > instrução **A escrever**. Apague a instrução quando preencher o bloco — ela
