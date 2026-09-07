@@ -1,8 +1,6 @@
 # Summary
 
 * [Início](README.md)
-* [Plano do TCC](plano.md)
-* [Registro de decisões](decisoes.md)
 * [Equipe e papéis](equipe.md)
 * [Guia do GitHub — para quem nunca usou](guia-github.md)
 * [Uso de inteligência artificial](uso-de-ia.md)
