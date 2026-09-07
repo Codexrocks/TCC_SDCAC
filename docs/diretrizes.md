@@ -113,7 +113,8 @@ Em 04/09/2026:
 
 - **Norma: ABNT.** Não é o template COBEM. O
   [cronograma](cronograma.md) menciona COBEM por engano, herdado da primeira
-  versão do plano — vale a ABNT.
+  versão do plano — vale a ABNT. O congresso é destino **posterior** ao TCC, e
+  o que ele exige está em [COBEM 2027](cobem.md).
 - **Abstract em inglês é necessário**, além do Resumo em português.
 
 ## Ainda a confirmar com o orientador

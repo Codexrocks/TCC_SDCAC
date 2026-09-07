@@ -1,7 +1,11 @@
 # 1. Introdução
 
-> **Entrega: 10/09/2026** — Tarefa 02 do professor, no template COBEM 2026.
-> Responsável: todos. Esta é a seção mais urgente do artigo.
+> **Entrega: 10/09/2026** — Tarefa 02 do professor. Responsável: todos. Esta é
+> a seção mais urgente do artigo.
+>
+> Norma **ABNT**, confirmada com o orientador em 04/09/2026. O cronograma diz
+> "template COBEM 2026", que não existe — o congresso é [COBEM 2027](../docs/cobem.md),
+> e é destino posterior ao TCC.
 >
 > O que está abaixo é **estrutura, não conteúdo**. Cada bloco começa com uma
 > instrução **A escrever**. Apague a instrução quando preencher o bloco — ela
@@ -81,4 +85,4 @@
 * [ ] Objetivo geral em uma frase
 * [ ] Objetivos específicos verificáveis, alinhados ao cronograma
 * [ ] Revisão de português por alguém que não escreveu
-* [ ] Conteúdo transposto para o template COBEM 2026
+* [ ] Formatação ABNT aplicada na montagem do documento de entrega
