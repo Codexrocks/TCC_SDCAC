@@ -53,9 +53,10 @@
 
 ## Abstract
 
-> **Confirmado com o orientador em 04/09/2026: o abstract em inglês é
-> obrigatório**, além do Resumo em português. Norma: **ABNT** — não o template
-> COBEM que o cronograma menciona.
+> **O abstract em inglês é obrigatório**, além do Resumo em português —
+> confirmado com o orientador em 04/09/2026, e exigido também pela estrutura do
+> [COBEM](../docs/cobem.md), que pede Resumo/Abstract e
+> Palavras-chave/Keywords.
 >
 > **A escrever.** Versão em inglês do Resumo. Não é tradução literal: é o mesmo
 > conteúdo escrito em inglês. Traduza depois que o Resumo estiver fechado.

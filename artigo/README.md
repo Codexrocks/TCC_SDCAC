@@ -59,14 +59,22 @@ real, artigo que não existe. A validação não pega isso; a banca pega.
 **Número sai de execução real.** Taxa de detecção, falso positivo e MTTD vêm dos
 testes registrados em `results/`, nunca de estimativa.
 
-## Norma: ABNT
+## Formato: COBEM
 
-Confirmado com o orientador em 04/09/2026: o artigo segue as **normas da ABNT**,
-e não o template COBEM que o [cronograma](../docs/cronograma.md) menciona. O
-**abstract em inglês é obrigatório**, além do Resumo em português.
+Confirmado em 07/09/2026 — o registro de 04/09 dizia ABNT e estava errado. O
+artigo do TCC sai no **template da ABCM**, e o **abstract em inglês é
+obrigatório**, além do Resumo em português.
 
-O Markdown daqui é a **fonte da verdade do texto**; a formatação ABNT é aplicada
-na hora de montar o documento de entrega.
+Três coisas mudam por causa disso, e estão em
+[COBEM 2027](../docs/cobem.md#o-que-isto-muda-no-artigo):
+
+1. **O artigo inteiro tem 8 páginas.** Cada seção precisa caber num orçamento
+2. **O Referencial Teórico não tem seção própria** no COBEM — entra em
+   Fundamentação. Continua sendo entrega da 2ª Versão para a instituição
+3. **As referências não são ABNT NBR 6023** — o template traz o próprio estilo
+
+O Markdown daqui é a **fonte da verdade do texto**; o template é aplicado na
+hora de montar o documento de entrega.
 
 Escreva o conteúdo aqui primeiro. Formatar é o último passo, não o primeiro —
 texto preso dentro de um `.docx` não é revisável por ninguém e não aparece no

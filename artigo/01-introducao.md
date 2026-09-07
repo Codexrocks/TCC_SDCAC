@@ -3,9 +3,13 @@
 > **Entrega: 10/09/2026** — Tarefa 02 do professor. Responsável: todos. Esta é
 > a seção mais urgente do artigo.
 >
-> Norma **ABNT**, confirmada com o orientador em 04/09/2026. O cronograma diz
-> "template COBEM 2026", que não existe — o congresso é [COBEM 2027](../docs/cobem.md),
-> e é destino posterior ao TCC.
+> **Formato COBEM**, confirmado em 07/09/2026 — o registro anterior dizia ABNT
+> e estava errado. O que muda na prática está em
+> [COBEM 2027](../docs/cobem.md#o-que-isto-muda-no-artigo), e a primeira
+> consequência é de tamanho: **o artigo inteiro tem 8 páginas.**
+>
+> A Contextualização abaixo pedia "duas ou três páginas". Isso era um terço do
+> artigo. Combine a divisão com a equipe antes de escrever.
 >
 > O que está abaixo é **estrutura, não conteúdo**. Cada bloco começa com uma
 > instrução **A escrever**. Apague a instrução quando preencher o bloco — ela
@@ -15,8 +19,8 @@
 
 ## Contextualização
 
-> **A escrever.** O cenário, do geral para o específico. Umas duas ou três
-> páginas de parágrafo, sem lista.
+> **A escrever.** O cenário, do geral para o específico, em parágrafo corrido —
+> sem lista. **Cerca de meia página**, dentro de uma Introdução de 1 a 1,5.
 >
 > O que precisa aparecer: o volume de logs que ambientes corporativos geram;
 > por que ler isso à mão deixou de ser possível; o que são comportamentos
@@ -85,4 +89,4 @@
 * [ ] Objetivo geral em uma frase
 * [ ] Objetivos específicos verificáveis, alinhados ao cronograma
 * [ ] Revisão de português por alguém que não escreveu
-* [ ] Formatação ABNT aplicada na montagem do documento de entrega
+* [ ] Conteúdo transposto para o template COBEM, dentro do limite de páginas

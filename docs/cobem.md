@@ -1,8 +1,15 @@
 # COBEM 2027 — submissão e formatação
 
 Levantamento trazido pelo Davi em 07/09/2026, com as fontes ao lado de cada
-afirmação. Serve para **depois** do TCC, não durante — ver
-[Por que isto não muda o artigo](#por-que-isto-nao-muda-o-artigo).
+afirmação.
+
+> **O artigo do TCC sai neste formato.** Confirmado pelo Davi em 07/09/2026,
+> corrigindo o registro de 04/09 que dizia ABNT. Ver
+> [diretrizes](diretrizes.md#corrigido-em-07092026--o-artigo-e-no-formato-cobem).
+>
+> Isso muda como se escreve, a partir de agora — leia
+> [O que isto muda no artigo](#o-que-isto-muda-no-artigo) antes da Introdução
+> de 10/09.
 
 O 51º Congresso Brasileiro de Engenharia Mecânica é organizado pela
 [FEM-Unicamp](https://www.fem.unicamp.br/2025/08/21/51a-edicao-do-congresso-brasileiro-de-engenharia-mecanica-cobem-em-2027/)
@@ -93,43 +100,93 @@ Conclusões · Referências
 
 ***
 
-## Por que isto não muda o artigo
+## O que isto muda no artigo
 
-A pergunta óbvia: se o COBEM exige template próprio, por que continuamos
-escrevendo em ABNT?
+Três consequências, e a primeira aperta já nesta semana.
 
-Porque são **dois destinos diferentes, em datas diferentes**:
+### 1. Oito páginas para o artigo inteiro
 
-| | TCC | COBEM 2027 |
-|---|---|---|
-| Norma | **ABNT**, confirmado com o orientador em 04/09/2026 | Template da ABCM |
-| Entrega | S15, 04–10/12/2026 | Resumo a partir de 06/12/2026 |
-| Quem avalia | Banca | Comitê do congresso |
+O COBEM recomenda **8 páginas**, com limite tradicional entre 8 e 10.
 
-**O prazo do COBEM abre praticamente no dia em que o TCC termina.** A janela de
-resumos vai de 06/12/2026 a 01/02/2027, e a S15 do
-[cronograma](cronograma.md) é 04 a 10/12/2026.
+O esqueleto atual pede *"duas ou três páginas de parágrafo"* só na
+Contextualização da [Introdução](../artigo/01-introducao.md) — um terço do
+artigo antes de chegar ao problema. **Não cabe.**
 
-Isso não é coincidência aproveitável por acaso — é uma oportunidade concreta: o
-resumo do TCC, pronto na S14, é exatamente o que a primeira etapa do COBEM pede,
-e ela **não exige arquivo nenhum**. Colar num formulário.
+Isso precisa ser combinado antes da entrega de **10/09**, não depois. Uma
+divisão que costuma funcionar em artigo de 8 páginas:
 
-O trabalho de diagramar no template só existe se o resumo for aprovado, e aí já
-é 2027.
+| Seção | Páginas |
+|---|---|
+| Introdução | 1 a 1,5 |
+| Fundamentação / Referencial | 1,5 a 2 |
+| Metodologia | 2 |
+| Resultados e Discussão | 2 a 2,5 |
+| Conclusões | 0,5 |
+| Referências | 0,5 |
 
-> **O `cronograma.md` diz "template COBEM 2026".** É erro herdado da primeira
-> versão do plano, já registrado em [diretrizes](diretrizes.md): não existe
-> COBEM 2026, e o TCC é ABNT. O cronograma não foi corrigido porque **alterá-lo
-> exige pedido explícito do Davi** — ver `AGENTS.md`, seção 4.
+Números de orientação, não regra — mas a soma é o que existe.
 
-***
+### 2. O Referencial Teórico não tem casa própria
+
+| Estrutura da instituição | Estrutura do COBEM |
+|---|---|
+| 1. Introdução | Introdução |
+| **2. Referencial Teórico** | **— (entra em Fundamentação)** |
+| 3. Metodologia | Metodologia ou Fundamentação |
+| 4. Resultados e Discussão | Resultados e Discussão |
+| 5. Conclusão e Referências | Conclusões · Referências |
+
+O COBEM prevê *"Metodologia (ou Fundamentação)"*. O Referencial Teórico da 2ª
+Versão entra ali, ou diluído na Introdução. **Isso não dispensa escrevê-lo** —
+a instituição cobra a 2ª Versão como entrega própria. Muda só onde ele aparece
+no documento final.
+
+### 3. As referências não são ABNT NBR 6023
+
+O template da ABCM traz o próprio estilo de citação e de lista. O
+[`referencias.md`](../artigo/referencias.md) está montado em ABNT NBR 6023, o
+que era correto até 07/09 e deixou de ser.
+
+Como o template de 2027 ainda não saiu, o estilo precisa ser lido de uma edição
+anterior — e reconferido quando o de 2027 for publicado. Está na lista de
+pendências abaixo.
+
+> **O que não muda:** o Markdown de `artigo/` continua sendo a fonte da verdade
+> do texto. O template é formatação, e formatação é o último passo. Texto preso
+> dentro de um `.docx` não é revisável por ninguém e não aparece no histórico.
+
+## O congresso, além do TCC
+
+Submeter ao COBEM 2027 é possibilidade, não obrigação — e o calendário ajuda:
+
+| | |
+|---|---|
+| S15 do [cronograma](cronograma.md) | 04 a 10/12/2026 |
+| Janela de resumos do COBEM | **06/12/2026** a 01/02/2027 |
+
+A janela abre **dentro** da última semana do TCC. O resumo escrito para a 5ª
+Versão é exatamente o que a primeira etapa do congresso pede, e essa etapa
+**não exige arquivo nenhum** — é colar título, resumo e palavras-chave num
+formulário.
+
+O trabalho de diagramar no template completo só existe se o resumo for
+aprovado, e aí já é 2027.
+
+> **O `cronograma.md` diz "template COBEM 2026".** O formato agora está certo;
+> o ano, não — o congresso é 2027. O arquivo não foi corrigido porque
+> **alterá-lo exige pedido explícito do Davi**, por `AGENTS.md` seção 4.
 
 ## O que ainda precisa ser decidido
 
-- [ ] **Submeter ao COBEM 2027 é intenção da equipe ou só possibilidade?**
-      Muda o esforço da S14 · **equipe** · até a S13
-- [ ] **Em que idioma**, se submeter. Inglês é encorajado, e o abstract em
-      inglês já é obrigatório no TCC — o caminho mais curto é aproveitar ·
-      **equipe**
+- [ ] **Baixar um template de edição anterior e usá-lo já**, em vez de esperar
+      o de 2027. É o único jeito de saber se 8 páginas cabem antes de escrever
+      8 páginas · **Davi** · antes de 10/09
+- [ ] **Combinar a divisão de páginas por seção** com a equipe · **equipe** ·
+      antes de 10/09
+- [ ] **Ler o estilo de referência do template** e ajustar
+      [`referencias.md`](../artigo/referencias.md), hoje em ABNT NBR 6023 ·
+      **Yasmin** · antes da S3
 - [ ] **Conferir o template de 2027 quando sair** e corrigir a tabela de
-      formatação desta página · **quem for submeter** · quando publicado
+      formatação desta página · **equipe** · quando publicado
+- [ ] **Submeter ao COBEM 2027 é intenção ou só possibilidade?** Muda o esforço
+      da S14 · **equipe** · até a S13

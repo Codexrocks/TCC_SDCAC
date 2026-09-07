@@ -49,7 +49,7 @@ linha na tabela do artigo. Escreva o capítulo, a seção e o que falta — "fal
 citação" sozinho não ajuda ninguém daqui a dois meses.
 
 **Ao conferir a fonte:** apague a linha daqui e acrescente a referência em
-[`artigo/referencias.md`](../artigo/referencias.md), em ABNT.
+[`artigo/referencias.md`](../artigo/referencias.md).
 
 **Nunca:** apagar a linha sem ter aberto a fonte. É o único jeito de esta página
 mentir, e ela só serve enquanto for verdadeira.

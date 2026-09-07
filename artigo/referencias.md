@@ -1,7 +1,12 @@
 # Referências
 
-Formatação **ABNT NBR 6023**, conforme as
-[diretrizes institucionais](../docs/diretrizes.md).
+> **Esta página está no estilo errado desde 07/09/2026.** Ela foi montada em
+> ABNT NBR 6023, e o artigo passou a sair no [formato COBEM](../docs/cobem.md),
+> que traz o próprio estilo de citação no template.
+>
+> Os modelos abaixo continuam servindo para **saber o que anotar** de cada
+> fonte — autor, título, veículo, ano, páginas. O que muda é a pontuação e a
+> ordem, na hora de transpor. Corrigir está na lista de pendências do COBEM.
 
 > **Uma referência só entra aqui depois de alguém abrir a fonte.**
 >
