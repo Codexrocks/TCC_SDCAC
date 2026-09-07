@@ -8,8 +8,14 @@
 > [O que isto muda no artigo](#o-que-isto-muda-no-artigo).
 
 Tudo nesta página foi **lido do template oficial em Word**, entregue pelo Davi
-em 07/09/2026: `Template-Word.docx`, da **28ª edição — COBEM 2025**, cujo
-arquivo de exemplo se chama `COB-2025-XXXX`.
+em 07/09/2026 e versionado em
+[`templates/COBEM-2025-template.docx`](../templates/COBEM-2025-template.docx).
+É a **28ª edição — COBEM 2025**, cujo arquivo de exemplo se chama
+`COB-2025-XXXX`.
+
+> **Use o arquivo para diagramar; use esta página para saber o que ele exige.**
+> Ele está na raiz, e não em `artigo/`, porque o GitBook escreve naquela pasta —
+> o motivo está em [`templates/README.md`](../templates/README.md).
 
 > **Uma correção do que estava aqui antes.** A primeira versão desta página foi
 > montada a partir de páginas de eventos e de templates de CREEM e CONEM, e
@@ -234,7 +240,8 @@ Versão é exatamente o que a primeira etapa pede, e ela não exige arquivo nenh
       autor-ano do template · **Yasmin** · antes da S3
 - [ ] **Acrescentar a seção *Responsibility notice*** ao esqueleto do artigo ·
       **Davi** · antes da S5
-- [ ] **Conferir o template de 2027 quando sair.** Este é o da 28ª edição, de
-      2025 · **equipe** · quando publicado
+- [ ] **Conferir o template de 2027 quando sair** e acrescentá-lo em
+      [`templates/`](../templates/README.md) ao lado do de 2025 · **equipe** ·
+      quando publicado
 - [ ] **Submeter ao COBEM 2027 é intenção ou só possibilidade?** Muda o esforço
       da S14 · **equipe** · até a S13

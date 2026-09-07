@@ -76,7 +76,9 @@ Três coisas mudam por causa disso, e estão em
    orientador — está nas pendências
 
 O Markdown daqui é a **fonte da verdade do texto**; o template é aplicado na
-hora de montar o documento de entrega.
+hora de montar o documento de entrega. Ele está versionado em
+[`templates/`](../templates/README.md), para todo mundo diagramar no mesmo
+arquivo.
 
 Escreva o conteúdo aqui primeiro. Formatar é o último passo, não o primeiro —
 texto preso dentro de um `.docx` não é revisável por ninguém e não aparece no
