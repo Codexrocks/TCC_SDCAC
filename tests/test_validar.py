@@ -295,3 +295,95 @@ def test_commit_humano_nao_escapa_pela_isencao(tmp_path, monkeypatch):
 def test_espacos_declarados():
     """Cada espaco do GitBook precisa do proprio SUMMARY conferido."""
     assert validar.ESPACOS == ("docs", "artigo")
+
+
+# ---------------------------------------------------------------------------
+# Citacao pendente: o marcador nao pode viver dentro de artigo/
+#
+# Em 06/09/2026 o GitBook exportou os seis arquivos do artigo com todos os
+# comentarios HTML apagados. As pendencias sumiram do repositorio e o Pull
+# Request parecia so texto novo: +66 -212.
+#
+# Em docs/ o marcador continua valendo — o GitBook so le dali.
+# ---------------------------------------------------------------------------
+
+
+def _arvore(tmp_path, arquivos):
+    """Monta uma arvore de arquivos .md e devolve a raiz."""
+    raiz = tmp_path / "repo"
+    for rel, texto in arquivos.items():
+        alvo = raiz / rel
+        alvo.parent.mkdir(parents=True, exist_ok=True)
+        alvo.write_text(texto, encoding="utf-8")
+    return raiz
+
+
+@pytest.mark.parametrize(
+    "marcador",
+    [
+        "<!-- FALTA CITAÇÃO -->",
+        "<!-- FALTA CITACAO -->",
+        "**[FALTA CITAÇÃO]**",
+        "falta citação",
+        "FALTA-CITACAO",
+    ],
+)
+def test_marcador_dentro_do_artigo_reprova(tmp_path, monkeypatch, marcador):
+    """A regra e sobre o LUGAR, nao sobre a grafia."""
+    raiz = _arvore(tmp_path, {"artigo/01-introducao.md": f"# 1\n\n{marcador}\n"})
+    monkeypatch.setattr(validar, "RAIZ", str(raiz))
+    validar.checar_citacoes_pendentes()
+    assert len(validar.erros) == 1
+    assert "artigo/01-introducao.md" in validar.erros[0]
+    assert "citacoes-pendentes" in validar.erros[0]
+
+
+def test_marcador_em_docs_e_so_aviso(tmp_path, monkeypatch):
+    """Em docs/ o GitBook nao escreve: o marcador fica na linha e vale."""
+    raiz = _arvore(tmp_path, {"docs/usabilidade.md": "# U\n\n<!-- FALTA CITAÇÃO --> conferir\n"})
+    monkeypatch.setattr(validar, "RAIZ", str(raiz))
+    validar.checar_citacoes_pendentes()
+    assert validar.erros == []
+    assert len(validar.avisos) == 1
+
+
+def test_mencao_ao_marcador_nao_conta(tmp_path, monkeypatch):
+    """Explicar o marcador nao e usa-lo.
+
+    Sem isto, toda pagina que documenta a regra virava pendencia de si mesma —
+    AGENTS.md, padroes.md, guia-github.md e uso-de-ia.md, todas de uma vez.
+    """
+    raiz = _arvore(
+        tmp_path,
+        {
+            "docs/padroes.md": "Escreva `<!-- FALTA CITAÇÃO -->` na linha.\n",
+            "artigo/README.md": "Use assim:\n\n```markdown\n<!-- FALTA CITAÇÃO -->\n```\n",
+        },
+    )
+    monkeypatch.setattr(validar, "RAIZ", str(raiz))
+    validar.checar_citacoes_pendentes()
+    assert validar.erros == [], "menção entre crases ou em bloco de código não é marcador"
+    assert validar.avisos == []
+
+
+def test_a_propria_pagina_de_pendencias_nao_conta(tmp_path, monkeypatch):
+    """docs/citacoes-pendentes.md explica o marcador; nao e pendencia."""
+    raiz = _arvore(
+        tmp_path,
+        {"docs/citacoes-pendentes.md": "Marcador: FALTA CITAÇÃO, fora de crase.\n"},
+    )
+    monkeypatch.setattr(validar, "RAIZ", str(raiz))
+    validar.checar_citacoes_pendentes()
+    assert validar.erros == []
+    assert validar.avisos == []
+
+
+def test_artigo_limpo_passa(tmp_path, monkeypatch):
+    raiz = _arvore(
+        tmp_path,
+        {"artigo/01-introducao.md": "# 1\n\n> **A escrever.** O cenário.\n"},
+    )
+    monkeypatch.setattr(validar, "RAIZ", str(raiz))
+    validar.checar_citacoes_pendentes()
+    assert validar.erros == []
+    assert validar.avisos == []

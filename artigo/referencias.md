@@ -1,7 +1,26 @@
 # Referências
 
-Formatação **ABNT NBR 6023**, conforme as
-[diretrizes institucionais](../docs/diretrizes.md).
+> **Esta página está no estilo errado desde 07/09/2026.** Foi montada em ABNT
+> NBR 6023; o artigo sai no [formato COBEM](../docs/cobem.md), que é
+> **autor-ano**, não numérico.
+>
+> No texto: `(Choma and Ugaya, 2017)` ou `Choma and Ugaya (2017)`. Três ou mais
+> autores: `(Porto-Hernandez et al., 2023)`. Mesmo autor e ano: `2017a`,
+> `2017b`.
+>
+> Na lista, ordem alfabética pelo sobrenome do primeiro autor, primeira linha à
+> esquerda e as demais com recuo de 0,5 cm:
+>
+> ```
+> Sestito, G.S., Venter, G.S. and da Silva, M.M., 2022. "In-process chatter
+> detection in micro-milling using acoustic emission via machine learning
+> classifiers". The International Journal of Advanced Manufacturing
+> Technology, Vol. 120, pp. 7293-7303.
+> ```
+>
+> Os modelos ABNT abaixo continuam servindo para **saber o que anotar** de cada
+> fonte. O que muda é a pontuação e a ordem. Refazer está nas pendências do
+> COBEM.
 
 > **Uma referência só entra aqui depois de alguém abrir a fonte.**
 >
@@ -10,13 +29,17 @@ Formatação **ABNT NBR 6023**, conforme as
 > expressamente "qualquer forma de plágio, cópia indevida ou fraude acadêmica" —
 > e referência fabricada cai nessa cláusula.
 >
-> Enquanto não conferir, deixe `<!-- FALTA CITAÇÃO -->` na linha do texto que a
-> usaria, e **não** acrescente a entrada aqui.
+> Enquanto não conferir, registre a pendência em
+> [citações pendentes](../docs/citacoes-pendentes.md), e **não** acrescente a
+> entrada aqui.
+>
+> O marcador não vai dentro do artigo: o GitBook apaga comentário HTML ao
+> salvar, e o aviso sumiria sem ninguém perceber. Aconteceu em 06/09/2026.
 
 Ordem alfabética pelo sobrenome do primeiro autor. Referência que não é citada
 no texto não entra na lista.
 
----
+***
 
 ## Modelos por tipo
 
@@ -38,13 +61,14 @@ Documento eletrônico
 AUTOR. **Título**. Ano. Disponível em: URL. Acesso em: dia mês ano.
 ```
 
----
+***
 
 ## Lista
 
-<!-- Acrescente aqui conforme forem sendo conferidas e citadas. -->
+> **A escrever.** Acrescente aqui conforme forem sendo conferidas e
+> citadas.
 
----
+***
 
 ## Aproveitáveis de outras páginas
 

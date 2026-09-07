@@ -1,0 +1,18 @@
+# Arquivos binários. Sem isto, o git com core.autocrlf ligado — que é o padrão
+# no Windows — pode tentar converter fim de linha dentro do arquivo e corromper
+# o conteúdo. Um template corrompido é do tipo de estrago que só aparece na
+# véspera da entrega.
+*.docx binary
+*.doc  binary
+*.pdf  binary
+*.xlsx binary
+*.png  binary
+*.jpg  binary
+*.jpeg binary
+*.gif  binary
+
+# Texto: fim de linha normalizado no repositório, e o checkout usa o do sistema.
+*.md   text
+*.py   text
+*.yml  text
+*.yaml text

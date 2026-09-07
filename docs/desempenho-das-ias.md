@@ -104,6 +104,7 @@ que contexto cada uma trabalhou.
 | Tornou obrigatório um check que dispara duas vezes e acumula resultados | processo | O PR #3 ficou travado com tudo aprovado: o GitHub soma os check runs e o rollup dava FAILURE por causa de execuções antigas | Runs antigos re-executados na hora. **Correção estrutural em 04/09:** o resultado virou *commit status*, que vale pelo mais recente por contexto | a pessoa — travou no merge dela |
 | Gancho `commit-msg` barrava commit de merge | conteúdo | `git merge origin/main` de rotina foi interrompido pelo gancho pedindo `Assistido-por:` | Sai antes quando existe `MERGE_HEAD`, espelhando o `--no-merges` do validador | a própria IA, ao tropeçar nele |
 | Comentou o PR #5 com uma correção longa, e o pedido concreto ficou enterrado nela | processo | O Filipe fechou o PR 45 segundos depois e abriu o #7 sem as quatro respostas que o comentário pedia. O texto foi lido; o pedido dentro dele, não | Nada a desfazer. O erro é de proporção: três seções e uma tabela para pedir quatro linhas | a pessoa — pelo que fez em seguida, não por um aviso |
+| **Publicou uma tabela de formatação do COBEM a partir de fontes indiretas** | conteúdo | Nenhum sintoma. A página trazia aviso de que os números eram expectativa — e quando o Davi entregou o template oficial, **três estavam errados**: páginas (8 em vez de 6 a 10), resolução de imagem (300/150 dpi, que o COBEM nem menciona) e margens | Página reescrita lendo o `.docx` do template. O aviso de confiabilidade ficou, agora com a tabela do que estava errado | **a pessoa** — o Davi entregou o template |
 | **Concluiu, a partir do fechamento do PR, que o Filipe tinha desistido** | conteúdo | Registrou nesta mesma tabela que o comentário "levou o autor a fechar o próprio PR". Onze minutos depois ele abriu o #7, refazendo o trabalho por conta própria | Linha reescrita. A causa era outra: ele fechou para **recomeçar**, não para abandonar | a própria IA, ao ver o PR #7 aparecer |
 | Escreveu um assunto de commit com 73 caracteres, um a mais que o limite da própria regra | sintaxe | `aviso  commit e32a05d4: assunto com 73 caracteres (limite 72)` na execução seguinte do validador | Nenhuma — o commit ficou. Reescrever o histórico para esconder um aviso do próprio verificador seria pior que o aviso | **o check** |
 | **Escreveu "Felipe" no lugar de "Filipe" desde a sessão 01** | conteúdo | Nenhum sintoma. Passou por sete sessões, 28 arquivos, o `CODEOWNERS`, a lista de autores do validador e os testes. O login `@FilipeF4guiar` estava certo o tempo todo, a três linhas de distância | Corrigido em todo o repositório. `felipe` ficou como alias transitório na lista de autores, para não reprovar branch enquanto a correção não chega na `main` | **a pessoa** — o Davi, na sessão 07 |
@@ -151,16 +152,16 @@ Fechado em 04/09/2026, ainda na fase de configuração.
 | Tipo | Ocorrências |
 |---|---|
 | processo | 11 |
-| conteúdo | 8 |
+| conteúdo | 9 |
 | defeito latente | 2 |
 | sintaxe | 3 |
 | desperdício | 2 |
-| **Total** | **26** |
+| **Total** | **27** |
 
 | Quem pegou | Ocorrências |
 |---|---|
 | a própria IA | 19 |
-| **a pessoa** | **5** |
+| **a pessoa** | **6** |
 | o check | 2 |
 | a revisão do PR | 0 |
 
@@ -171,7 +172,7 @@ Fechado em 04/09/2026, ainda na fase de configuração.
 
 ### O que estes números ainda **não** dizem
 
-Dezenove de vinte e seis pegos pela própria IA parece um resultado excelente,
+Dezenove de vinte e sete pegos pela própria IA parece um resultado excelente,
 e seria leitura errada. As ressalvas abaixo importam mais que a proporção:
 
 1. **A rede de segurança humana ainda não foi exercitada.** Nenhum Pull Request
