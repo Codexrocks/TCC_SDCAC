@@ -123,8 +123,8 @@ só não consegue aprová-la.
 
 - **Referência bibliográfica que a IA produziu e ninguém conferiu na fonte.**
   Modelo de linguagem inventa referência plausível: autor real, revista real,
-  ano real, artigo inexistente. Enquanto não conferir, marque
-  `<!-- FALTA CITAÇÃO -->` na linha
+  ano real, artigo inexistente. Enquanto não conferir, registre a pendência em
+  [citações pendentes](citacoes-pendentes.md)
 - **Dado, resultado ou métrica "estimado" pela IA.** Número do TCC sai de
   execução real, registrada em `results/`
 - **Assinar como seu um texto que você não leu inteiro.** Se não consegue

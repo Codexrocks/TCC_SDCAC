@@ -111,12 +111,30 @@ Iniciante**.
 
 Em 04/09/2026:
 
-- **Norma: ABNT.** Não é o template COBEM. O
-  [cronograma](cronograma.md) menciona COBEM por engano, herdado da primeira
-  versão do plano — vale a ABNT.
-- **Abstract em inglês é necessário**, além do Resumo em português.
+- ~~**Norma: ABNT.** Não é o template COBEM.~~ **Corrigido em 07/09/2026:** o
+  artigo do TCC sai no **formato COBEM**. Ver abaixo.
+- **Abstract em inglês é necessário**, além do Resumo em português. O resto do
+  artigo é **todo em português** — decidido pelo Davi em 07/09/2026, apesar de o
+  template do COBEM pedir inglês. Ver [COBEM](cobem.md#4-o-idioma-portugues-com-o-abstract-em-ingles).
+
+### Corrigido em 07/09/2026 — o artigo é no formato COBEM
+
+O registro de 04/09 dizia o contrário, e estava errado. Fica à vista em vez de
+ser apagado: o que a banca avalia é o processo, e processo inclui a correção.
+
+A [estrutura mínima](#estrutura-minima-do-artigo) desta mesma página já
+permitia — *"conforme normas da ABNT **ou padrões específicos definidos pela
+coordenação**"*. O formato COBEM é um desses padrões, então não há conflito com
+a instituição.
+
+O que ele exige, e as três consequências que mudam como se escreve, estão em
+[COBEM 2027](cobem.md).
 
 ## Ainda a confirmar com o orientador
+
+- [ ] **Datar a confirmação do formato COBEM com o orientador.** A correção veio
+      do Davi em 07/09; falta o registro de quando e como o orientador
+      confirmou, para o processo ficar rastreável.
 
 - [ ] **Plataforma de submissão.** Dreamshaper, RUNA ou outra.
 - [ ] **Mapeamento das versões.** As cinco versões do professor precisam ser

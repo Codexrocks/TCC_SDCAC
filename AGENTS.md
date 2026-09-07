@@ -97,7 +97,7 @@ pergunte — não decida.
 | **Apagar branch de outra pessoa** | Não é sua |
 | **Commitar segredo** — `.env`, senha, token, chave, string de conexão | Repositório público. Achou um? **Pare e avise**, não corrija sozinho |
 | **Alterar cronograma ou escopo** sem pedido explícito do Davi | Define o TCC |
-| **Inventar conteúdo acadêmico** — citação, dado, resultado | Marque `<!-- FALTA CITAÇÃO -->` e avise |
+| **Inventar conteúdo acadêmico** — citação, dado, resultado | Registre a pendência em [`docs/citacoes-pendentes.md`](docs/citacoes-pendentes.md) e avise |
 
 ### Precisa de duas pessoas
 
