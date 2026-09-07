@@ -28,4 +28,5 @@ Use o [modelo](_modelo.md) e adicione a página nova ao
 | 04/09/2026 | [Sessão 07](2026-09-04-sessao-07.md) | Espaço do artigo, o primeiro PR da equipe e a governança que travava a si mesma |
 | 04/09/2026 | [Sessão 08](2026-09-04-sessao-08.md) | Um site do GitBook tem uma branch só — conclusão corrigida na [Sessão 09](2026-09-06-sessao-09.md) |
 | 06/09/2026 | [Sessão 09](2026-09-06-sessao-09.md) | Space Git Sync: o desenho de duas branches é possível |
-| 06/09/2026 | [Sessão 10](2026-09-06-sessao-10.md) | Plano v2 e diagnóstico: roteamento, faseamento e as três primeiras issues |
+| 06/09/2026 | [Sessão 10](2026-09-06-sessao-10.md) | Plano v2 e diagnóstico: roteamento, faseamento e as três primeiras issues — faseamento antecipado e pendência sobre a norma corrigida na [Sessão 12](2026-09-07-sessao-12.md) |
+| 07/09/2026 | [Sessão 12](2026-09-07-sessao-12.md) | Onda 1 no repositório, pergunta reescrita, e a colisão entre duas sessões paralelas |

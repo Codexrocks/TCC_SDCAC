@@ -24,6 +24,8 @@ em tempo hábil.
 
 | Você quer | Vá para |
 |---|---|
+| Saber o que o trabalho é | [Plano do TCC](plano.md) |
+| Ver o que já foi decidido | [Registro de decisões](decisoes.md) |
 | Saber quem faz o quê | [Equipe e papéis](equipe.md) |
 | Trabalhar no repositório | [Processo de trabalho](processo.md) |
 | Ver prazos | [Cronograma](cronograma.md) |

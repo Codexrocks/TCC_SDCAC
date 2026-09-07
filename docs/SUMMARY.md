@@ -1,6 +1,8 @@
 # Summary
 
 * [Início](README.md)
+* [Plano do TCC](plano.md)
+* [Registro de decisões](decisoes.md)
 * [Equipe e papéis](equipe.md)
 * [Guia do GitHub — para quem nunca usou](guia-github.md)
 * [Uso de inteligência artificial](uso-de-ia.md)
@@ -33,4 +35,5 @@
 * [2026-09-04 — Sessão 08: um site do GitBook tem uma branch só](relatorios/2026-09-04-sessao-08.md)
 * [2026-09-06 — Sessão 09: Space Git Sync resolve o impossível](relatorios/2026-09-06-sessao-09.md)
 * [2026-09-06 — Sessão 10: o plano v2 espera a entrega](relatorios/2026-09-06-sessao-10.md)
+* [2026-09-07 — Sessão 12: a onda 1 entra, e duas sessões disputam a mesma árvore](relatorios/2026-09-07-sessao-12.md)
 * [Modelo de relatório](relatorios/_modelo.md)
