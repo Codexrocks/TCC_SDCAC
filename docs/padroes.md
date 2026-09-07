@@ -197,13 +197,21 @@ baixo, sem `wip` nem `corrige typo`.
 
 ### Citações
 
-Referência bibliográfica só entra se você leu a fonte. Enquanto faltar, marque:
+Referência bibliográfica só entra se você leu a fonte. Enquanto faltar, o lugar
+de anotar depende de onde o texto está:
 
-```markdown
-<!-- FALTA CITAÇÃO -->
-```
+| Onde você está escrevendo | Como marcar |
+|---|---|
+| `docs/` | `<!-- FALTA CITAÇÃO -->` na própria linha. O comentário é invisível no site e sobrevive, porque o GitBook só lê daqui |
+| `artigo/` | **Uma linha em [citações pendentes](citacoes-pendentes.md).** Nada dentro do capítulo |
 
-A validação não bloqueia isso, mas a banca bloqueia.
+A diferença não é preciosismo. Em 06/09/2026 o GitBook exportou os seis arquivos
+do artigo com **todos** os comentários HTML apagados — as pendências sumiram do
+repositório e o Pull Request parecia só texto novo. O `validar.py` agora reprova
+marcador dentro de `artigo/` justamente por isso.
+
+A validação não confere se a referência existe. Isso continua sendo trabalho de
+quem assina.
 
 ## Relatórios
 

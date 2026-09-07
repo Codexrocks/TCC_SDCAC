@@ -263,8 +263,8 @@ Depois é só abrir o PR pelo link que o `git push` imprime.
 3. **Página nova em `docs/` entra no `docs/SUMMARY.md`.** Fora dele, não existe
    para o site
 4. **Referência bibliográfica só entra se você leu a fonte.** Enquanto faltar,
-   escreva `<!-- FALTA CITAÇÃO -->` na linha. A validação deixa passar; a banca
-   não
+   anote em [citações pendentes](citacoes-pendentes.md). A validação não
+   confere se a fonte existe; a banca confere
 5. **Uma branch por assunto.** Não junte o referencial teórico com uma correção
    de digitação
 

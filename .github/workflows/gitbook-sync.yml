@@ -105,8 +105,15 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          if [ -z "$(git log "origin/main..origin/$BRANCH_ARTIGO" --oneline)" ]; then
-            echo "Nada a levar para a main."
+          # Compara CONTEUDO, nao commits.
+          #
+          # Antes esta condicao usava `git log origin/main..$BRANCH`, e a branch
+          # esta sempre a frente em commits: o job `espelhar` empurra um
+          # "chore: traz a main para a branch do artigo" a cada merge na main.
+          # Resultado: todo push abria um Pull Request com zero arquivo e zero
+          # linha. Aconteceu no PR #16, em 06/09/2026.
+          if git diff --quiet "origin/main" "origin/$BRANCH_ARTIGO" -- artigo/; then
+            echo "O artigo esta identico ao da main. Nada a levar."
             exit 0
           fi
 
