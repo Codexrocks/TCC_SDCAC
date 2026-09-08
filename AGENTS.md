@@ -269,6 +269,7 @@ Por isso cada regra que importa tem uma trava de verdade atrás:
 | Duas aprovações para mudar as regras | Workflow **Governança** |
 | Os verificadores não podem ser adulterados pelo próprio PR | Workflows usam `scripts/*.py` da base |
 | Os verificadores não quebram em silêncio | `tests/`, rodando a cada PR |
+| O briefing do assistente não pode ser reescrito pelo próprio PR | A ação `claude-code-action` se recusa a rodar workflow alterado |
 
 ### Os verificadores rodam da `main`, não do PR
 
@@ -300,6 +301,32 @@ O que sobra contra esse caso é defesa em camadas, não uma trava: alterar
 `.github/**` exige duas aprovações, e a mudança aparece no diff de quem revisa.
 Por isso a lista de arquivos protegidos inclui os workflows — **quem revisa um
 PR que mexe em `.github/` precisa olhar com atenção redobrada.**
+
+#### Uma exceção: os workflows que chamam o `claude-code-action`
+
+Observado em 08/09/2026. A ação `anthropics/claude-code-action@v1` **se recusa a
+rodar num `pull_request` cujo arquivo de workflow não seja idêntico ao da branch
+padrão**. A mensagem que ela devolve é esta:
+
+> *Workflow validation failed. The workflow file must exist and have identical
+> content to the version on the repository's default branch.*
+
+O efeito é justamente o que faltava. Um PR que reescrevesse o briefing de
+`claude.yml` ou de `relatorio-semanal.yml` — para mandar aprovar, mergear,
+elogiar ou ignorar estas regras — seria **pulado**, não obedecido. O `.yml`
+continua vindo do PR; quem se recusa a executá-lo é a ação.
+
+Três ressalvas, porque isto foi observado uma vez e não é regra nossa:
+
+- Vale só para os workflows que chamam essa ação. `Validação` e `Governança`
+  seguem dependendo das duas aprovações e do olho de quem revisa
+- É comportamento de uma ação de terceiro. Pode mudar de versão para versão, e
+  ninguém aqui controla isso
+- **Não substitui a dupla aprovação em `.github/`.** É camada, não trava
+
+> **Consequência a conhecer:** um PR que cria ou altera um desses workflows
+> nunca consegue demonstrar a versão nova funcionando — ela só roda depois do
+> merge. É o mesmo princípio da caixa acima, por outro caminho.
 
 ### Se a trava e o texto discordarem
 
