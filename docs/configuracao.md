@@ -538,17 +538,30 @@ editar o arquivo.
 
 ### A exceção no validador
 
-Os commits que o GitBook gera — `GitBook: Export content from...` — nunca vão
-seguir `tipo: descrição` nem trazer `Assistido-por:`. O `validar.py` os isenta,
-e essa é a **única exceção da governança**.
+Os commits que o GitBook gera nunca vão seguir `tipo: descrição` nem trazer
+`Assistido-por:`. O `validar.py` os isenta, e essa é a **única exceção da
+governança**.
 
-Ela é estreita de propósito: só alcança mensagens que começam exatamente com
-`GitBook:` ou `GITBOOK-ALGO:`. Uma mensagem como `GitBooking: ...` continua
-reprovando, e há teste garantindo isso.
+São três formas, e ele não deixa configurar nenhuma:
 
-Mas é um buraco declarado: quem quisesse escapar da declaração de IA poderia
-forjar uma mensagem com esse prefixo. **O que segura esse caso é a revisão do
-Pull Request, onde o diff aparece — não o validador.**
+| Mensagem | Quando aparece |
+|---|---|
+| `GitBook: Export content from X` | exportação de um espaço |
+| `GITBOOK-SITE: Changes to Y` | alteração feita pelo site |
+| `GITBOOK-1: docs: o que a pessoa escreveu` | **change request numerado** — é como o texto do artigo volta |
+
+A terceira ficou de fora até 08/09/2026: o padrão exigia letras depois do
+hífen, e o identificador do change request é um número. O commit da Introdução
+foi reprovado por isso, e o caminho do artigo ficou fechado.
+
+Ela continua estreita: uma mensagem como `GitBooking: ...`, `GITBOOK-:` ou
+`GITBOOK 1:` reprova, e há teste garantindo cada caso.
+
+Mas é um buraco declarado, e vale saber o tamanho dele: **a isenção pula as
+duas checagens de uma vez** — o formato `tipo: descrição` *e* a exigência de
+`Assistido-por:`. Quem quisesse escapar da declaração de IA poderia forjar uma
+mensagem com esse prefixo. **O que segura esse caso é a revisão do Pull
+Request, onde o diff aparece — não o validador.**
 
 ### Duas camadas de Git Sync — é isso que separa os regimes
 
