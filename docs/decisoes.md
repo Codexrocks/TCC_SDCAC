@@ -54,6 +54,7 @@ fechada fica enterrada.
 | D-08 | SLA de resposta a Pull Request | 24 horas. PR sem resposta em 24 h é item obrigatório de pauta | 06/09/2026 |
 | D-11 | Formato do artigo: ABNT ou template de evento | **COBEM** — template da ABCM, versionado em [`templates/`](../templates/README.md). Corrige o registro de 04/09, que dizia ABNT. Ver [COBEM](cobem.md) | 07/09/2026 |
 | D-21 | Idioma do artigo | Texto inteiro em **português**; só o *abstract* e as *keywords* em inglês. O template pede inglês, mas quem define para o TCC é a coordenação | 07/09/2026 |
+| D-22 | Onde ficam os insumos das encomendas | **`docs/insumos/`**, não `artigo/insumos/`. O GitBook **escreve** em `artigo/` e normaliza o Markdown ao salvar — foi assim que os comentários dos seis capítulos sumiram em 06/09. Em `docs/` ele só lê. As duas pastas publicam; o que muda é a escrita de volta. Cada insumo entregue entra no `docs/SUMMARY.md` | 07/09/2026 |
 
 ---
 
