@@ -117,3 +117,24 @@ jobs:
                `scripts/validar.py` reprova. Ver `AGENTS.md`, seção 3.
 
             Não faça merge e não aprove PR nenhum — o merge na `main` é do Davi.
+
+          # ---------------------------------------------------------------
+          # LIGADOS PARA QUE A EXECUÇÃO SEJA DIAGNOSTICÁVEL
+          # ---------------------------------------------------------------
+          #
+          # Na primeira execução de verdade — 07/09/2026, disparada na mão —
+          # este passo rodou 104 segundos, terminou `success` e **não criou
+          # branch nem Pull Request**. Não deu para saber por quê: os dois
+          # campos abaixo vinham desligados por padrão, e o que o assistente
+          # fez naqueles 104 segundos não aparecia em lugar nenhum.
+          #
+          # Sobrava só o envelope: autenticou, recebeu o prompt certo, rodou,
+          # saiu limpo. Passo que falha em silêncio é pior que passo que falha.
+          #
+          # show_full_output  -> as ações do assistente vão para o log do job
+          # display_report    -> o resumo vai para a aba Summary da execução
+          #
+          # Não expõem segredo: o token já é mascarado pelo Actions, e o
+          # conteúdo é o relatório da semana, que é público de qualquer forma.
+          show_full_output: "true"
+          display_report: "true"
