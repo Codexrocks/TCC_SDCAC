@@ -1,4 +1,4 @@
-# COBEM — formato do artigo
+# Formato COBEM
 
 > **O artigo do TCC sai neste formato.** Confirmado pelo Davi em 07/09/2026,
 > corrigindo o registro de 04/09 que dizia ABNT. Ver
