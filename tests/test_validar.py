@@ -255,6 +255,10 @@ def test_checar_commits_avalia_cada_commit_do_intervalo(tmp_path, monkeypatch):
         "GitBook: Export content from Documentação",
         "GITBOOK-SITE: Changes to TCC_SDCAC Docs",
         "gitbook: export minusculo",
+        # Change request numerado. Foi o caso real que travou o artigo em
+        # 08/09/2026: o padrao antigo exigia letras depois do hifen.
+        "GITBOOK-1: docs: implementação da introdução parte do Davi",
+        "GITBOOK-42: mais de um digito",
     ],
 )
 def test_reconhece_commit_do_gitbook(assunto):
@@ -268,6 +272,8 @@ def test_reconhece_commit_do_gitbook(assunto):
         "docs: fala sobre o GitBook",            # menciona, mas nao comeca com ele
         "chore: ajusta GitBook: config",         # o prefixo nao esta no inicio
         "Sobre GitBook: alguma coisa",
+        "GITBOOK-: sem identificador nenhum",    # o hifen exige ao menos um caractere
+        "GITBOOK 1: sem o hifen",
     ],
 )
 def test_nao_confunde_com_commit_do_gitbook(assunto):

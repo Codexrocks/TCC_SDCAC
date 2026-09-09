@@ -41,17 +41,28 @@ RE_COMMIT = re.compile(r"^(%s): .{3,}$" % "|".join(TIPOS))
 RE_IA = re.compile(r"^[ \t]*(assistido-por|co-authored-by)[ \t]*:[ \t]*\S+",
                    re.IGNORECASE | re.MULTILINE)
 
-# O GitBook escreve na pasta artigo/ e gera as mensagens de commit sozinho:
-# "GitBook: Export content from X" e "GITBOOK-SITE: Changes to Y". Elas nunca
-# vao seguir "tipo: descricao" nem trazer Assistido-por, e nao ha como
-# configurar isso — e comportamento do produto.
+# O GitBook escreve na pasta artigo/ e gera as mensagens de commit sozinho.
+# Sao tres formas, e ele nao deixa configurar nenhuma — e comportamento do
+# produto:
+#
+#   GitBook: Export content from X        exportacao de um espaco
+#   GITBOOK-SITE: Changes to Y            alteracao pelo site
+#   GITBOOK-<numero>: <o que a pessoa escreveu>   change request numerado
+#
+# A terceira e a que a equipe usa para escrever o artigo, e ficava de fora:
+# o padrao exigia letras depois do hifen, e o identificador do change request
+# e um numero. Em 08/09/2026 o commit "GITBOOK-1: docs: implementação da
+# introdução parte do Davi" foi reprovado por isso, travando o unico caminho
+# que existe para o artigo entrar no repositorio.
 #
 # EXCECAO DECLARADA, e o unico buraco conhecido nesta validacao: quem quisesse
 # escapar da regra poderia forjar uma mensagem com esse prefixo. O que segura o
 # caso e a revisao do Pull Request, onde o diff aparece, e nao esta regra.
+# Aceitar digito alem de letra nao alarga esse buraco — quem forjaria
+# "GITBOOK-SITE:" forjaria "GITBOOK-1:" com o mesmo esforco.
 #
 # Motivo em docs/configuracao.md, secao 7.
-RE_COMMIT_GITBOOK = re.compile(r"^(GitBook|GITBOOK-[A-Z]+):", re.IGNORECASE)
+RE_COMMIT_GITBOOK = re.compile(r"^(GitBook|GITBOOK-[A-Z0-9]+):", re.IGNORECASE)
 
 # Cada espaco do GitBook tem seu proprio SUMMARY. Pasta que nao esta aqui nao e
 # publicada, e seus .md nao precisam estar em indice nenhum.
