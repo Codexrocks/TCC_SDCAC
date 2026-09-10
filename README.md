@@ -2,15 +2,34 @@
 
 Trabalho de Conclusão de Curso · Prof. Euzébio D. de Souza · 2026/2
 
+> **O título está em revisão.** O [plano](docs/plano.md) adota "Sistema de
+> Avaliação Multidimensional de Risco Comportamental". A troca depende da decisão
+> [D-01](docs/decisoes.md), a comunicar ao orientador — até lá vale o título
+> acima, que é o da Tarefa 01 entregue em 03/09.
+
 ## O que é
 
-Protótipo que analisa eventos de usuários, identifica comportamentos fora do
-padrão, calcula um **Risk Score (0–100)** e dispara alertas num dashboard de
-monitoramento. Segurança defensiva (Blue Team), em ambiente corporativo simulado.
+Um **estudo comparativo** em segurança defensiva (Blue Team), sobre ambiente
+corporativo simulado. O protótipo avalia o risco de cada evento em três
+dimensões — o evento em si, o desvio em relação ao comportamento habitual do
+usuário, e a exposição acumulada ao longo de dias — e mede o resultado contra uma
+linha de base de regras fixas.
 
-**Pergunta de pesquisa:** como a análise automatizada de eventos e comportamentos
-de usuários pode contribuir para a identificação de atividades anômalas em
-ambientes corporativos?
+```text
+C0 ──────► C1 ──────► C2 ──────► C3
+regras     + risco    + desvio    + exposição
+fixas      do evento  do usuário  acumulada
+(controle) (D1)       (D1+D2)     (D1+D2+D3)
+```
+
+**Pergunta de pesquisa:** a avaliação combinada do risco do evento individual, do
+desvio comportamental do usuário e da exposição acumulada ao risco reduz a taxa
+de falsos positivos, a uma mesma revocação, e aumenta a revocação em cenários
+longitudinais, quando comparada à análise baseada exclusivamente em regras fixas
+aplicadas a eventos individuais?
+
+A pergunta admite "não", e "não" também é resultado. Formulação completa e
+operacionalização das métricas no [plano](docs/plano.md).
 
 ## Equipe
 
@@ -33,6 +52,9 @@ Detalhes em [`docs/equipe.md`](docs/equipe.md).
 
 | Página | Conteúdo |
 |---|---|
+| [Plano do TCC](docs/plano.md) | O que o trabalho é: pergunta, objetivos, desenho experimental |
+| [Registro de decisões](docs/decisoes.md) | O que já foi decidido, e o que continua aberto |
+| [Formato COBEM](docs/cobem.md) | Como o artigo é diagramado |
 | [Equipe e papéis](docs/equipe.md) | Quem faz o quê |
 | [Processo de trabalho](docs/processo.md) | Como GitHub, GitBook e Claude se encaixam |
 | [Padrões](docs/padroes.md) | Branch, commit, pull, push, merge, docs, relatórios |
