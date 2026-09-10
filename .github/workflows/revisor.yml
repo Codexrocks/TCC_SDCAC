@@ -83,6 +83,29 @@ jobs:
         with:
           claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
           anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
+          # ---------------------------------------------------------------
+          # Sem isto o revisor nunca olha um Pull Request do artigo
+          # ---------------------------------------------------------------
+          #
+          # A ação recusa rodar quando quem dispara é um bot — proteção contra
+          # laço, ligada por padrão. E o PR do artigo é aberto pelo workflow
+          # `Sincroniza GitBook`, não por uma pessoa:
+          #
+          #   Workflow initiated by non-human actor: github-actions (type: Bot)
+          #
+          # O efeito era o pior possível: os PRs que carregam o texto do TCC
+          # eram justamente os únicos que ele pulava — e metade do briefing só
+          # faz sentido num diff de `artigo/`. Aconteceu no PR #28, em
+          # 08/09/2026, com a Introdução dentro.
+          #
+          # Liberado só o `github-actions`, que é o bot deste repositório. NÃO
+          # use `*`: aceitaria qualquer bot que um dia ganhe acesso, e o gasto
+          # de uma revisão é real — a primeira execução custou US$ 0,54.
+          #
+          # O laço com o workflow `Claude` continua fechado por outro caminho:
+          # o briefing proíbe escrever `@claude` no comentário, que é o único
+          # gatilho daquele workflow.
+          allowed_bots: "github-actions"
           # Sem estas duas, o passo roda mudo e um defeito fica indistinguível
           # de "não tinha nada a dizer". Foi o que aconteceu com o relatório
           # semanal em 07/09/2026: 104 segundos, sucesso, nenhuma saída.
