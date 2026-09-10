@@ -2,7 +2,7 @@
 
 > **Entrega: 10/09/2026** — Tarefa 02 do professor. Responsável: todos. Esta é a seção mais urgente do artigo.
 >
-> **Formato COBEM**, lido do template oficial em 07/09/2026. O que muda está em [COBEM](../docs/cobem.md#o-que-isto-muda-no-artigo), e a primeira consequência é de tamanho: **o artigo inteiro tem de 4 a 8 páginas.**
+> **Formato COBEM**, lido do template oficial em 07/09/2026. O que muda está em [COBEM](../docs/cobem.md#o-que-isto-muda-no-artigo), e a primeira consequência é de tamanho: **o artigo inteiro tem de 6 a 10 páginas.**
 >
 > A Contextualização abaixo pedia "duas ou três páginas" — um terço do artigo antes de chegar ao problema. Combine a divisão com a equipe antes de escrever.
 >
@@ -21,8 +21,6 @@
 >
 > A análise desses registros permite identificar padrões de utilização, desvios comportamentais e situações que demandam maior atenção por parte das equipes responsáveis pela segurança e pela gestão dos sistemas. Contudo, a elevada quantidade de eventos produzidos diariamente e a diversidade de comportamentos legítimos tornam a interpretação desses dados uma atividade complexa, especialmente quando o comportamento considerado incomum depende do contexto em que determinado evento ocorre.
 >
->
->
 > **\[COMPLEMENTAÇÃO — YASMIN]**
 >
 > > **Responsabilidade:** contextualização especializada sobre segurança da informação e análise comportamental.
@@ -38,8 +36,6 @@
 > >
 > > **Critério de aceite:** texto acadêmico integrado ao fluxo desta seção, com referências bibliográficas reais e citações no padrão adotado pelo artigo.
 >
->
->
 > **\[COMPLEMENTAÇÃO — FILIPE]**
 >
 > > **Responsabilidade:** fundamentação quantitativa do contexto.
@@ -54,8 +50,6 @@
 > >
 > > **Critério de aceite:** apresentar dados com fonte, ano, contexto e referência bibliográfica verificável.
 >
->
->
 > A análise de eventos isolados pode ser útil para identificar situações previamente conhecidas ou condições que ultrapassam determinados limites. Entretanto, uma atividade considerada incomum segundo uma regra genérica não representa necessariamente uma ameaça ou comportamento malicioso. O conceito de anomalia está relacionado à identificação de observações que divergem de um comportamento esperado, sendo necessário considerar o contexto e as características do conjunto analisado para interpretar adequadamente esses desvios (CHANDOLA; BANERJEE; KUMAR, 2009).
 >
 > Um acesso realizado fora do horário convencional, por exemplo, pode representar uma situação incomum para determinado usuário, mas pode ser compatível com a rotina de outro profissional que exerce atividades em regime de plantão ou possui uma jornada diferenciada. Dessa forma, a utilização de parâmetros genéricos pode apresentar limitações quando aplicada a usuários que possuem padrões de comportamento distintos.
@@ -64,8 +58,6 @@
 
 ## Problema
 
->
->
 > A análise de segurança baseada exclusivamente em eventos individuais e regras fixas apresenta limitações relacionadas à interpretação do contexto em que as atividades ocorrem. Uma divergência em relação a uma regra previamente estabelecida não representa, necessariamente, uma ameaça, uma vez que atividades legítimas podem apresentar características consideradas incomuns por mecanismos genéricos de detecção.
 >
 > Essa limitação está relacionada ao próprio desafio de definir o que caracteriza um comportamento anômalo em ambientes complexos. Conforme discutido por Chandola, Banerjee e Kumar (2009), a identificação de anomalias depende da compreensão dos padrões considerados normais dentro do contexto analisado, podendo diferentes métodos apresentar interpretações distintas sobre os desvios observados.
@@ -77,8 +69,6 @@
 > A problemática central deste trabalho consiste, portanto, em investigar em que medida a incorporação de informações contextuais relacionadas ao comportamento individual dos usuários e à evolução temporal dos eventos pode contribuir para a avaliação de comportamentos potencialmente anômalos em comparação com uma abordagem baseada exclusivamente em regras fixas aplicadas a eventos isolados.
 >
 > Nesse sentido, busca-se analisar se a integração das diferentes dimensões de risco permite uma avaliação mais contextualizada dos eventos e contribui para a diferenciação entre comportamentos legítimos e atividades que apresentam características potencialmente divergentes no ambiente corporativo simulado.
->
->
 >
 > **\[COMPLEMENTAÇÃO — YASMIN]**
 >
@@ -93,8 +83,6 @@
 > > * desafios da identificação de comportamentos suspeitos.
 > >
 > > **Critério de aceite:** fundamentar os argumentos com referências científicas, evitando repetir conceitos já apresentados na contextualização.
->
->
 >
 > **\[COMPLEMENTAÇÃO — FILIPE]**
 >
@@ -111,8 +99,6 @@
 
 ## Justificativa
 
->
->
 > A necessidade de aprimorar os mecanismos de interpretação de eventos computacionais torna relevante a investigação de abordagens capazes de considerar diferentes níveis de contexto durante a avaliação de riscos. Enquanto a análise isolada permite identificar características específicas de cada evento, a inclusão do histórico comportamental possibilita considerar as particularidades associadas a cada usuário. Adicionalmente, a análise temporal permite observar situações em que o risco não se manifesta de forma imediata, mas pode se desenvolver progressivamente por meio da recorrência e da combinação de atividades.
 >
 > A proposta deste trabalho busca contribuir para essa discussão por meio do desenvolvimento de um modelo experimental de avaliação multidimensional de risco comportamental. A abordagem será estruturada para permitir a comparação entre diferentes configurações de avaliação, partindo de uma linha de base baseada em regras fixas e incorporando progressivamente novas dimensões de análise.
@@ -122,8 +108,6 @@
 > A relevância científica da proposta está na possibilidade de avaliar separadamente a contribuição das dimensões consideradas por meio de uma comparação experimental realizada sobre os mesmos eventos e cenários. Dessa forma, busca-se analisar o efeito da inclusão progressiva das diferentes dimensões de avaliação, evitando atribuir os resultados observados a uma única solução sem a possibilidade de comparação com uma linha de base.
 >
 > Do ponto de vista tecnológico, o trabalho também possibilita a aplicação integrada de conceitos de Engenharia de Software, análise de dados e sistemas de avaliação de risco. A construção de uma arquitetura capaz de gerar, ingerir, armazenar e avaliar eventos de forma estruturada permite a realização de experimentos controlados e reprodutíveis, mantendo condições equivalentes entre as diferentes configurações analisadas.
->
->
 >
 > **\[COMPLEMENTAÇÃO — YASMIN]**
 >
@@ -137,8 +121,6 @@
 > > * contribuição da proposta para os processos de monitoramento e análise.
 > >
 > > **Critério de aceite:** conectar diretamente a relevância da segurança ao problema apresentado na seção anterior.
->
->
 >
 > **\[COMPLEMENTAÇÃO — FILIPE]**
 >

@@ -52,4 +52,5 @@
 * [2026-09-06 — Sessão 10: o plano v2 espera a entrega](relatorios/2026-09-06-sessao-10.md)
 * [2026-09-07 — Sessão 11: o esqueleto que se apagava, e o formato do artigo](relatorios/2026-09-07-sessao-11.md)
 * [2026-09-07 — Sessão 12: a onda 1 entra, e duas sessões disputam a mesma árvore](relatorios/2026-09-07-sessao-12.md)
+* [2026-09-08 — Sessão 13: o caminho do artigo abre](relatorios/2026-09-08-sessao-13.md)
 * [Modelo de relatório](relatorios/_modelo.md)
