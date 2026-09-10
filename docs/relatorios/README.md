@@ -31,3 +31,4 @@ Use o [modelo](_modelo.md) e adicione a página nova ao
 | 06/09/2026 | [Sessão 10](2026-09-06-sessao-10.md) | Plano v2 e diagnóstico: roteamento, faseamento e as três primeiras issues — faseamento antecipado e pendência sobre a norma corrigida na [Sessão 12](2026-09-07-sessao-12.md) |
 | 07/09/2026 | [Sessão 11](2026-09-07-sessao-11.md) | O esqueleto do artigo se apagava no GitBook; formato COBEM lido do template |
 | 07/09/2026 | [Sessão 12](2026-09-07-sessao-12.md) | Onda 1 no repositório, pergunta reescrita, e a colisão entre duas sessões paralelas |
+| 08/09/2026 | [Sessão 13](2026-09-08-sessao-13.md) | O caminho do artigo abre de ponta a ponta; o revisor estreia apontando erro da própria IA |
