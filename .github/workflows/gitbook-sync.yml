@@ -112,7 +112,18 @@ jobs:
           # "chore: traz a main para a branch do artigo" a cada merge na main.
           # Resultado: todo push abria um Pull Request com zero arquivo e zero
           # linha. Aconteceu no PR #16, em 06/09/2026.
-          if git diff --quiet "origin/main" "origin/$BRANCH_ARTIGO" -- artigo/; then
+          # Tres pontos, e a diferenca nao e cosmetica.
+          #
+          #   A..B  compara as PONTAS. Tudo que mudou na main e ainda nao
+          #         chegou nesta branch conta como diferenca.
+          #   A...B compara a partir de onde as duas se separaram. So aparece
+          #         o que ESTA branch acrescentou.
+          #
+          # Com dois pontos, um merge na main fazia esta condicao dizer "ha
+          # texto novo" quando ninguem tinha escrito nada — bastava a main
+          # andar na frente. E a branch do artigo passa boa parte do tempo
+          # atras, porque o job `espelhar` so a atualiza depois.
+          if git diff --quiet "origin/main...origin/$BRANCH_ARTIGO" -- artigo/; then
             echo "O artigo esta identico ao da main. Nada a levar."
             exit 0
           fi
@@ -120,7 +131,13 @@ jobs:
           # Só o artigo pode vir por este caminho. Arquivo fora de artigo/ é
           # sinal de espaço do GitBook mal configurado — e a documentação
           # técnica não pode entrar reformatada pela porta do artigo.
-          fora=$(git diff --name-only "origin/main..origin/$BRANCH_ARTIGO" | grep -v '^artigo/' || true)
+          # Tres pontos pelo mesmo motivo da condicao acima. Com dois, esta
+          # guarda acusava como "arquivo de fora" qualquer coisa que a main
+          # tivesse mudado e a branch ainda nao. Em 08/09/2026 ela barrou o PR
+          # da Introducao acusando `.github/workflows/revisor.yml`, que ninguem
+          # havia tocado naquela branch: o PR #27 tinha entrado na main
+          # segundos antes.
+          fora=$(git diff --name-only "origin/main...origin/$BRANCH_ARTIGO" | grep -v '^artigo/' || true)
           if [ -n "$fora" ]; then
             echo "::error::A branch do artigo traz arquivos fora de artigo/:"
             echo "$fora"
