@@ -1,4 +1,4 @@
-# Uso de inteligência artificial
+# Política de uso de IA
 
 Os três integrantes usam IA neste projeto. Esta página diz **como** — e como
 qualquer pessoa pode conferir, inclusive a banca.
