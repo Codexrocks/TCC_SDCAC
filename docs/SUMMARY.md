@@ -1,22 +1,37 @@
 # Summary
 
 * [Início](README.md)
+
+## O trabalho
+
 * [Plano do TCC](plano.md)
 * [Registro de decisões](decisoes.md)
+* [Cronograma](cronograma.md)
 * [Equipe e papéis](equipe.md)
-* [Guia do GitHub — para quem nunca usou](guia-github.md)
-* [Uso de inteligência artificial](uso-de-ia.md)
-* [Desempenho das IAs](desempenho-das-ias.md)
-* [Citações pendentes](citacoes-pendentes.md)
-* [COBEM 2027](cobem.md)
+* [Diretrizes institucionais](diretrizes.md)
+
+## O sistema
+
+* [Arquitetura](arquitetura.md)
+* [Usabilidade](usabilidade.md)
+
+## Como trabalhamos
+
 * [Processo de trabalho](processo.md)
 * [Padrões](padroes.md)
 * [Padrões de código](padroes-codigo.md)
+* [Guia do GitHub — para quem nunca usou](guia-github.md)
 * [Configuração passo a passo](configuracao.md)
-* [Cronograma](cronograma.md)
-* [Diretrizes institucionais](diretrizes.md)
-* [Arquitetura](arquitetura.md)
-* [Usabilidade](usabilidade.md)
+
+## O artigo
+
+* [Formato COBEM](cobem.md)
+* [Citações pendentes](citacoes-pendentes.md)
+
+## Uso de IA
+
+* [Política de uso de IA](uso-de-ia.md)
+* [Desempenho das IAs](desempenho-das-ias.md)
 
 ## Entregas
 
