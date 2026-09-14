@@ -227,9 +227,13 @@ def test_arquivo_parecido_nao_e_protegido():
 #
 # Status, filename e previous_filename abaixo sao os de uma entrada real, nao
 # inventada: a renomeacao de .gitbook.yaml para gitbook-docs.yaml (commit
-# 04c68fb), como a API de compare do GitHub a devolve — os arquivos dela seguem
-# o mesmo esquema de /pulls/{n}/files. Nenhum PR deste repositorio renomeou
-# arquivo ate hoje, entao nao havia exemplo vindo de PR.
+# 04c68fb), como a API de compare do GitHub a devolve. Nenhum PR deste
+# repositorio renomeou arquivo ate hoje, entao nao havia exemplo vindo de PR.
+#
+# Que /pulls/{n}/files traz os mesmos tres campos foi conferido numa resposta
+# real, e nao presumido: no PR cli/cli#14116, a entrada de
+# .github/skills/code-review/SKILL.md vem com status "renamed", filename e
+# previous_filename.
 # ---------------------------------------------------------------------------
 
 RENOMEACAO_REAL = {
@@ -285,6 +289,19 @@ def test_renomear_entre_caminhos_comuns_basta_uma_aprovacao():
     arquivos = governanca.caminhos_tocados([renomeacao("docs/a.md", "docs/b.md")])
     governanca.checar_dupla_aprovacao(arquivos, [], "davi")
     assert governanca.erros == []
+
+
+def test_caminhos_tocados_nao_repete_caminho():
+    """Renomear A para B e criar outro A no mesmo PR deixa A duas vezes na API.
+
+    Apontado pelo revisor automatico no PR #34: sem tirar a repeticao, o log
+    listava o mesmo arquivo protegido duas vezes.
+    """
+    itens = [
+        renomeacao("AGENTS.md", "docs/regras.md"),
+        {"status": "added", "filename": "AGENTS.md"},
+    ]
+    assert governanca.caminhos_tocados(itens) == ["docs/regras.md", "AGENTS.md"]
 
 
 # ---------------------------------------------------------------------------

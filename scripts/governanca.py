@@ -197,7 +197,10 @@ def caminhos_tocados(itens):
         caminhos.append(item["filename"])
         if item.get("previous_filename"):
             caminhos.append(item["previous_filename"])
-    return caminhos
+    # O mesmo caminho pode vir duas vezes: renomear A para B e criar outro A no
+    # mesmo PR. Sem tirar a repeticao, o log listava o arquivo protegido em
+    # dobro. A ordem continua a da API.
+    return list(dict.fromkeys(caminhos))
 
 
 def checar_dupla_aprovacao(arquivos, reviews, autor):
