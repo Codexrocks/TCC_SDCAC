@@ -21,7 +21,10 @@ name: Sincroniza GitBook
 # No artigo isso é aceitável: o que importa ali é o texto, e a reformatação não
 # sai da pasta — espaços do GitBook são limitados ao diretório que recebem.
 #
-# Push feito com o GITHUB_TOKEN não dispara outros workflows, então não há laço.
+# Push feito com o GITHUB_TOKEN não dispara workflows de `push`, então não há
+# laço aqui. Mas, se houver PR do artigo aberto, o push do `espelhar` cria os
+# runs de `pull_request` dele — Validação, Governança e Revisor —, e esses
+# ficam esperando alguém aprovar. Detalhe em revisor.yml.
 
 on:
   push:
@@ -105,39 +108,85 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          # Compara CONTEUDO, nao commits.
+          # O QUE ESTE PASSO DECIDE
           #
-          # Antes esta condicao usava `git log origin/main..$BRANCH`, e a branch
-          # esta sempre a frente em commits: o job `espelhar` empurra um
-          # "chore: traz a main para a branch do artigo" a cada merge na main.
-          # Resultado: todo push abria um Pull Request com zero arquivo e zero
-          # linha. Aconteceu no PR #16, em 06/09/2026.
-          # Tres pontos, e a diferenca nao e cosmetica.
+          # Duas perguntas, e as duas são sobre a mesma coisa: se esta branch
+          # entrasse na main agora, o que mudaria na main?
           #
-          #   A..B  compara as PONTAS. Tudo que mudou na main e ainda nao
-          #         chegou nesta branch conta como diferenca.
-          #   A...B compara a partir de onde as duas se separaram. So aparece
-          #         o que ESTA branch acrescentou.
+          #   1. Muda alguma coisa em artigo/?   Não: nada a levar.
+          #   2. Muda alguma coisa fora dele?     Sim: a guarda barra.
           #
-          # Com dois pontos, um merge na main fazia esta condicao dizer "ha
-          # texto novo" quando ninguem tinha escrito nada — bastava a main
-          # andar na frente. E a branch do artigo passa boa parte do tempo
-          # atras, porque o job `espelhar` so a atualiza depois.
-          if git diff --quiet "origin/main...origin/$BRANCH_ARTIGO" -- artigo/; then
-            echo "O artigo esta identico ao da main. Nada a levar."
+          # `git merge-tree --write-tree` calcula esse merge sem tocar em branch
+          # nenhuma e devolve a árvore resultante. Comparar a main com ela é ver
+          # exatamente o que o merge traria — nem mais, nem menos.
+          #
+          # POR QUE NÃO COMPARAR AS BRANCHES DIRETO
+          #
+          # Foi o que se fez antes, e cada forma errou de um jeito:
+          #
+          #   git log main..branch  Contava commits, e a branch está sempre à
+          #                         frente: o `espelhar` empurra um merge a cada
+          #                         merge na main. Todo push abria PR vazio
+          #                         (PR #16, 06/09/2026).
+          #   main..branch          Compara as pontas. O que a main ganhou e a
+          #                         branch ainda não recebeu virava "arquivo de
+          #                         fora": barrou a Introdução por um workflow
+          #                         que ninguém tocou ali (08/09/2026).
+          #   main...branch         Compara desde o merge-base. Só que o PR do
+          #                         artigo entra por squash, que não liga o
+          #                         histórico: logo depois do merge, o texto já
+          #                         mergeado voltava a parecer novo, até o
+          #                         `espelhar` trazer a main. E arquivo que a
+          #                         branch devolveu idêntico ao da main seguia
+          #                         acusado como "de fora".
+          #
+          # O merge calculado não cai em nenhum dos três: o que já está na main,
+          # por qualquer caminho, não muda nada ao entrar de novo.
+          saida=$(git merge-tree --write-tree --no-messages --name-only \
+            origin/main "origin/$BRANCH_ARTIGO") && rc=0 || rc=$?
+          case "$rc" in
+            0)
+              arvore=$saida
+              ;;
+            1)
+              echo "::error::A branch $BRANCH_ARTIGO conflita com a main nestes arquivos:"
+              printf '%s\n' "$saida" | tail -n +2
+              echo "::error::O mesmo trecho foi mexido nos dois lados. O artigo só se escreve pelo GitBook — edição de artigo/ pelo GitHub provoca isto."
+              exit 1
+              ;;
+            *)
+              # Inclui a branch sem ancestral comum com a main. Erro aqui não pode
+              # virar "nada a levar" nem "guarda passou": sem o merge calculado,
+              # nada foi conferido.
+              echo "::error::Não foi possível calcular o merge de $BRANCH_ARTIGO na main (git merge-tree saiu com $rc)."
+              exit 1
+              ;;
+          esac
+
+          if git diff --quiet origin/main "$arvore" -- artigo/; then
+            echo "Levar esta branch para a main não mudaria nada em artigo/. Nada a levar."
             exit 0
           fi
 
           # Só o artigo pode vir por este caminho. Arquivo fora de artigo/ é
           # sinal de espaço do GitBook mal configurado — e a documentação
           # técnica não pode entrar reformatada pela porta do artigo.
-          # Tres pontos pelo mesmo motivo da condicao acima. Com dois, esta
-          # guarda acusava como "arquivo de fora" qualquer coisa que a main
-          # tivesse mudado e a branch ainda nao. Em 08/09/2026 ela barrou o PR
-          # da Introducao acusando `.github/workflows/revisor.yml`, que ninguem
-          # havia tocado naquela branch: o PR #27 tinha entrado na main
-          # segundos antes.
-          fora=$(git diff --name-only "origin/main...origin/$BRANCH_ARTIGO" | grep -v '^artigo/' || true)
+          #
+          # Três detalhes desta linha, cada um já custou uma falha:
+          #
+          #   --no-renames     Com detecção de rename, arquivo MOVIDO de docs/
+          #                    para artigo/ aparece só com o destino, e a guarda
+          #                    não via que o PR apagava o original.
+          #   :(exclude)       Quem filtra é o git, não um grep na saída. O git
+          #                    põe entre aspas caminho com acento, e o antigo
+          #                    `grep -v '^artigo/'` tomava uma figura de artigo/
+          #                    com "às" no nome por arquivo de fora.
+          #   sem pipe         O antigo `| grep ... || true` engolia erro do git
+          #                    e deixava a lista vazia: guarda passando sem ter
+          #                    conferido nada. Sem pipe, erro do git derruba o
+          #                    passo.
+          fora=$(git -c core.quotePath=false diff --name-only --no-renames \
+            origin/main "$arvore" -- . ':(exclude)artigo/')
           if [ -n "$fora" ]; then
             echo "::error::A branch do artigo traz arquivos fora de artigo/:"
             echo "$fora"
