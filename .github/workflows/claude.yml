@@ -66,6 +66,18 @@ jobs:
         with:
           claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
           anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
+          # ---------------------------------------------------------------
+          # SEM `allowed_bots`, e isso é trava, não esquecimento
+          # ---------------------------------------------------------------
+          #
+          # O workflow Revisor comenta nos PRs como `claude[bot]`. Se um
+          # comentário dele trouxer "@claude", este workflow começa a rodar — e
+          # quem para a execução é esta ação: ela recusa rodar para bot que não
+          # esteja em `allowed_bots`, e sem o campo a lista fica vazia.
+          #
+          # Acrescentar `claude` (ou `*`) aqui abre conversa de bot com bot,
+          # paga a cada volta. O briefing do Revisor também proíbe escrever
+          # "@claude", mas isso é instrução em texto, não trava (AGENTS.md §12).
           # O briefing apontava para CONTRIBUTING.md e docs/processo.md, que
           # deixaram de ser a fonte das regras. Quem responde por aqui chegava
           # sem saber do padrao de branch, da linha Assistido-por, da dupla
