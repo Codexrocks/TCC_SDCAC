@@ -219,6 +219,75 @@ def test_arquivo_parecido_nao_e_protegido():
 
 
 # ---------------------------------------------------------------------------
+# Renomeacao
+#
+# A API de arquivos do PR poe o caminho novo em `filename` e o antigo em
+# `previous_filename`. O verificador lia so o novo, entao mover um arquivo
+# protegido para fora da lista escapava da dupla aprovacao.
+#
+# Status, filename e previous_filename abaixo sao os de uma entrada real, nao
+# inventada: a renomeacao de .gitbook.yaml para gitbook-docs.yaml (commit
+# 04c68fb), como a API de compare do GitHub a devolve — os arquivos dela seguem
+# o mesmo esquema de /pulls/{n}/files. Nenhum PR deste repositorio renomeou
+# arquivo ate hoje, entao nao havia exemplo vindo de PR.
+# ---------------------------------------------------------------------------
+
+RENOMEACAO_REAL = {
+    "status": "renamed",
+    "filename": "gitbook-docs.yaml",
+    "previous_filename": ".gitbook.yaml",
+}
+
+
+def renomeacao(de, para):
+    """A entrada real acima, com outros caminhos."""
+    return {**RENOMEACAO_REAL, "previous_filename": de, "filename": para}
+
+
+def test_caminhos_tocados_inclui_a_origem_da_renomeacao():
+    assert governanca.caminhos_tocados([RENOMEACAO_REAL]) == [
+        "gitbook-docs.yaml",
+        ".gitbook.yaml",
+    ]
+
+
+def test_caminhos_tocados_sem_renomeacao_devolve_so_o_filename():
+    """Entrada que nao e renomeacao nao traz a chave — e nada de None na lista."""
+    itens = [
+        {"status": "added", "filename": "docs/novo.md"},
+        {"status": "removed", "filename": "docs/velho.md"},
+        {"status": "modified", "filename": "README.md"},
+    ]
+    assert governanca.caminhos_tocados(itens) == [
+        "docs/novo.md",
+        "docs/velho.md",
+        "README.md",
+    ]
+
+
+@pytest.mark.parametrize(
+    ("de", "para"),
+    [
+        ("AGENTS.md", "docs/regras.md"),
+        (".github/workflows/validacao.yml", "docs/validacao.yml"),
+        ("scripts/validar.py", "ferramentas/validar.py"),
+    ],
+)
+def test_mover_arquivo_protegido_para_fora_exige_duas_aprovacoes(de, para):
+    """O caso que escapava: so o destino era lido, e o destino nao e protegido."""
+    arquivos = governanca.caminhos_tocados([renomeacao(de, para)])
+    governanca.checar_dupla_aprovacao(arquivos, [review("yasmin", "APPROVED")], "davi")
+    assert len(governanca.erros) == 1
+    assert "faltam 1" in governanca.erros[0]
+
+
+def test_renomear_entre_caminhos_comuns_basta_uma_aprovacao():
+    arquivos = governanca.caminhos_tocados([renomeacao("docs/a.md", "docs/b.md")])
+    governanca.checar_dupla_aprovacao(arquivos, [], "davi")
+    assert governanca.erros == []
+
+
+# ---------------------------------------------------------------------------
 # Fim de linha CRLF
 #
 # O GitHub devolve o corpo do Pull Request com CRLF. Os testes acima usam "\n"

@@ -181,6 +181,25 @@ def checar_declaracao_ia(corpo):
             )
 
 
+def caminhos_tocados(itens):
+    """Caminhos que o PR toca, incluindo a origem de cada renomeacao.
+
+    Recebe a lista devolvida por /pulls/{numero}/files.
+
+    Renomear tira o arquivo do caminho antigo tanto quanto apaga-lo: um PR que
+    mova AGENTS.md para docs/regras.md mexe no AGENTS.md. So que a API poe o
+    caminho novo em `filename` e guarda o antigo em `previous_filename`. Lendo so
+    o primeiro, a dupla aprovacao nao via o arquivo protegido saindo do lugar, e
+    o PR passava com uma aprovacao.
+    """
+    caminhos = []
+    for item in itens:
+        caminhos.append(item["filename"])
+        if item.get("previous_filename"):
+            caminhos.append(item["previous_filename"])
+    return caminhos
+
+
 def checar_dupla_aprovacao(arquivos, reviews, autor):
     """PR que toca as regras ou as checagens precisa de duas aprovacoes."""
     tocados = sorted(
@@ -230,10 +249,11 @@ def main():
 
     pr = api(f"/repos/{repo}/pulls/{numero}", tok)[0]
     autor = (pr.get("user") or {}).get("login", "")
-    arquivos = [a["filename"] for a in api(f"/repos/{repo}/pulls/{numero}/files", tok)]
+    itens = api(f"/repos/{repo}/pulls/{numero}/files", tok)
+    arquivos = caminhos_tocados(itens)
     reviews = api(f"/repos/{repo}/pulls/{numero}/reviews", tok)
 
-    print(f"PR #{numero} de @{autor} — {len(arquivos)} arquivo(s)\n")
+    print(f"PR #{numero} de @{autor} — {len(itens)} arquivo(s)\n")
 
     checar_declaracao_ia(pr.get("body") or "")
     checar_dupla_aprovacao(arquivos, reviews, autor)
