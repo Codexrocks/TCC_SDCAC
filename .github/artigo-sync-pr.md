@@ -34,6 +34,7 @@ alcance as regras, os workflows e os relatórios.
 - [ ] O diff traz **só** arquivos de `artigo/`
 - [ ] Nenhuma referência bibliográfica entrou sem alguém ter aberto a fonte
 - [ ] Nenhum número de resultado veio de estimativa
+- [ ] Aprovar os workflows pendentes do push que trouxe o texto. O PR é aberto por bot, e Validação, Governança e Revisor ficam parados esperando aprovação. O merge "chore: traz a main" não é revisado: aprovar só ele, na hora do merge, libera os checks, mas não a revisão
 - [ ] Pedir revisão de 1 colega
 
 ## Responsável
