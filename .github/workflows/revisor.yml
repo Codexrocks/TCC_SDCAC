@@ -54,9 +54,25 @@ concurrency:
 
 jobs:
   revisar:
-    # Rascunho não é revisado: quem marcou "draft" está dizendo que ainda não
-    # terminou. O gatilho `ready_for_review` pega o PR quando ele sai de lá.
-    if: github.event.pull_request.draft == false
+    # Duas coisas não são revisadas:
+    #
+    #   rascunho           Quem marcou "draft" está dizendo que ainda não
+    #                      terminou. O gatilho `ready_for_review` pega o PR
+    #                      quando ele sai de lá.
+    #   merge do espelhar  Cada merge na main faz o job `espelhar`, do
+    #                      gitbook-sync.yml, empurrar um "chore: traz a main
+    #                      para a branch do artigo" no PR do artigo que
+    #                      estiver aberto. É `synchronize` do
+    #                      github-actions[bot] sem texto novo, e cada
+    #                      aprovação dele comprava outra revisão paga do
+    #                      mesmo texto. Hoje é o único push que o
+    #                      github-actions faz em branch de PR.
+    #
+    # O `github.actor` continua sendo o bot mesmo depois que uma pessoa aprova
+    # o run: o log do run 34429298761, liberado à mão, confirma.
+    if: >-
+      github.event.pull_request.draft == false &&
+      !(github.event.action == 'synchronize' && github.actor == 'github-actions[bot]')
     runs-on: ubuntu-latest
     timeout-minutes: 15
     permissions:
@@ -84,28 +100,55 @@ jobs:
           claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
           anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
           # ---------------------------------------------------------------
-          # Sem isto o revisor nunca olha um Pull Request do artigo
+          # Os dois bots que trazem o texto do artigo
           # ---------------------------------------------------------------
           #
           # A ação recusa rodar quando quem dispara é um bot — proteção contra
-          # laço, ligada por padrão. E o PR do artigo é aberto pelo workflow
-          # `Sincroniza GitBook`, não por uma pessoa:
+          # laço, ligada por padrão. Só que o texto do TCC chega por dois bots,
+          # e por nenhuma pessoa:
           #
-          #   Workflow initiated by non-human actor: github-actions (type: Bot)
+          #   github-actions  abre o PR do artigo (job `abre-pr-do-artigo` do
+          #                   gitbook-sync.yml). Sem ele liberado, os PRs que
+          #                   carregam o texto eram justamente os únicos que o
+          #                   revisor pulava — "Workflow initiated by
+          #                   non-human actor", no PR #28, em 08/09/2026.
+          #   gitbook-com     empurra para o PR já aberto o texto escrito
+          #                   depois. Com só o github-actions na lista, o push
+          #                   que trazia texto novo continuava recusado.
           #
-          # O efeito era o pior possível: os PRs que carregam o texto do TCC
-          # eram justamente os únicos que ele pulava — e metade do briefing só
-          # faz sentido num diff de `artigo/`. Aconteceu no PR #28, em
-          # 08/09/2026, com a Introdução dentro.
+          # O github-actions também empurra o merge "chore: traz a main" do
+          # `espelhar`, que não traz texto nenhum. Esse é pulado pelo `if:` do
+          # job, lá em cima.
           #
-          # Liberado só o `github-actions`, que é o bot deste repositório. NÃO
-          # use `*`: aceitaria qualquer bot que um dia ganhe acesso, e o gasto
-          # de uma revisão é real — a primeira execução custou US$ 0,54.
+          # NÃO use `*`: aceitaria qualquer bot que um dia ganhe acesso, e cada
+          # revisão custa de verdade — a primeira custou US$ 0,54.
           #
-          # O laço com o workflow `Claude` continua fechado por outro caminho:
-          # o briefing proíbe escrever `@claude` no comentário, que é o único
-          # gatilho daquele workflow.
-          allowed_bots: "github-actions"
+          # ---------------------------------------------------------------
+          # Liberar o bot não basta: o GitHub pede aprovação
+          # ---------------------------------------------------------------
+          #
+          # Run de `pull_request` causado pelo github-actions[bot] fica parado
+          # até alguém com permissão de escrita aprovar. No PR #33, o run da
+          # abertura expirou sem aprovação ("This workflow run required approval
+          # but was not approved before it expired") e a revisão nunca rodou.
+          #
+          # Aprovar libera Validação, Governança e Revisor de uma vez. Para a
+          # revisão chegar enquanto ainda serve, aprove os runs do push que
+          # trouxe o texto, e não só os do último, na hora do merge. O corpo do
+          # PR do artigo (.github/artigo-sync-pr.md) lembra isso no checklist.
+          #
+          # Se os runs do gitbook-com também esperam aprovação, ainda não se
+          # sabe: até 14/09/2026, nenhum push do GitBook caiu com PR aberto.
+          #
+          # ---------------------------------------------------------------
+          # O laço com o workflow `Claude` fecha no claude.yml
+          # ---------------------------------------------------------------
+          #
+          # Aquele workflow não tem `allowed_bots`, então a ação de lá recusa o
+          # `claude[bot]` — que é quem publica esta revisão. O briefing abaixo
+          # também proíbe escrever "@claude", mas isso é instrução em texto,
+          # não trava (AGENTS.md §12).
+          allowed_bots: "github-actions,gitbook-com"
           # Sem estas duas, o passo roda mudo e um defeito fica indistinguível
           # de "não tinha nada a dizer". Foi o que aconteceu com o relatório
           # semanal em 07/09/2026: 104 segundos, sucesso, nenhuma saída.
@@ -168,14 +211,21 @@ jobs:
             1. `AGENTS.md` na raiz — a fonte única das regras. Inteiro.
             2. O diff:
                git diff "origin/${{ github.event.pull_request.base.ref }}...HEAD"
-               E a lista de commits:
+            3. A lista de commits:
                git log --format='%s%n%b' "origin/${{ github.event.pull_request.base.ref }}..HEAD"
-            3. Só os critérios que o diff toca:
+               Exceção: o PR vem da branch do artigo, `gitbook/docs/artigo`?
+               Resposta do workflow: ${{ github.event.pull_request.head.ref == 'gitbook/docs/artigo' }}
+               Se `true`, pule este passo. Aquela branch só volta para a main
+               por squash, que não liga o histórico: o `git log` acima traz
+               todo commit que ela já teve, inclusive os de PRs mergeados há
+               semanas, e não os deste PR. O que este PR muda está inteiro no
+               diff.
+            4. Só os critérios que o diff toca:
                - mexeu em `artigo/` → `artigo/README.md` e `docs/cobem.md`
                - mexeu em `docs/` → `docs/padroes.md`
                - mexeu em código → `docs/padroes-codigo.md`
                - mexeu no dashboard → `docs/usabilidade.md`
-            4. `docs/decisoes.md`, se existir — é o registro das decisões já
+            5. `docs/decisoes.md`, se existir — é o registro das decisões já
                tomadas, e contradizer uma delas em silêncio é o erro mais caro
                que um PR comete aqui.
 
