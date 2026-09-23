@@ -112,10 +112,11 @@ de disciplina: o GitHub recusa.
 ## Merge
 
 1. Abra o PR para `main`
-2. Preencha o template
-3. Peça revisão de **1 colega**
-4. Espere o check **Validação** ficar verde
-5. **Avise o Davi** — o merge é ele quem faz
+2. Preencha o template, inclusive o checklist — ele é a autorrevisão
+3. Espere os checks **Validação** e **Governança** ficarem verdes
+4. Mexeu em arquivo de regra ou de checagem? Espere as **24 h** da seção
+   `Arquivo protegido`
+5. Faça o merge
 6. Apague a branch
 
 ### PR empilhado
@@ -128,15 +129,15 @@ Duas coisas para saber:
 
 - **Merge o de baixo primeiro.** Fora de ordem, o segundo leva junto commits que
   ninguém revisou naquele contexto.
-- Os rulesets protegem **só a `main`**. Uma branch intermediária não tem
-  aprovação obrigatória. O check **Validação** roda em todo PR, mas a trava de
-  revisão só existe na `main` — então PR empilhado depende de disciplina.
+- Os rulesets protegem **só a `main`**. O check **Validação** roda em todo PR,
+  mas as travas de merge só existem na `main` — então PR empilhado depende de
+  disciplina.
 
 Não é para virar hábito. Dois PRs empilhados já são o limite.
 
-### Quando é preciso aprovação de duas pessoas
+### Quando é preciso esperar e se explicar
 
-Mudança nestes arquivos exige **duas** aprovações:
+Mudança nestes arquivos não entra na hora em que foi escrita:
 
 ```
 AGENTS.md · CLAUDE.md · GEMINI.md · .github/copilot-instructions.md
@@ -145,23 +146,28 @@ docs/padroes.md · docs/padroes-codigo.md · docs/processo.md
 .github/**  ·  scripts/**
 ```
 
-São as regras do projeto e as checagens que as fazem valer. Sem essa trava,
-bastaria um PR editando o `validar.py` para desligar tudo — e a IA que escreveu
-o PR seria a mesma que sugeriu a mudança. Duas pessoas precisam concordar em
-afrouxar a coleira.
+São as regras do projeto e as checagens que as fazem valer. Sem trava, bastaria
+um PR editando o `validar.py` para desligar tudo — e a IA que escreveu o PR
+seria a mesma que sugeriu a mudança.
 
-O check **Governança** confere sozinho e reprova o PR. Propor a mudança é livre;
-aprová-la sozinho é que não dá.
+Até 23/09/2026 a trava eram duas aprovações. Com uma pessoa só ela virou
+impossível de cumprir, porque o GitHub não deixa ninguém aprovar o próprio PR.
+No lugar entraram **24 h de Pull Request aberto** e a seção
+**`Arquivo protegido`** no corpo, com o que muda, por que agora e o que segura
+no lugar do que foi afrouxado.
+
+O check **Governança** confere as duas e reprova o PR. Propor a mudança é livre;
+entrar com ela no mesmo impulso é que não dá.
 
 ### Quem faz o merge
 
 Só o **Davi**, e isso é trava do GitHub, não combinado de boca: o ruleset
 `Merge restrito ao líder` recusa qualquer atualização da `main` que não venha
-dele. Yasmin e Filipe abrem PR e aprovam normalmente — o botão de merge é que
-falha para os dois.
+dele. Hoje ele é o único com acesso de escrita em uso.
 
-O Davi não escapa do resto: PR, 1 aprovação de outra pessoa e check verde valem
-para ele igual. Ele decide **quando** entra, não **se** passou pelas regras.
+O Davi não escapa do resto: PR, check verde e, em arquivo de regra, as 24 h de
+espera valem para ele igual. Ele decide **quando** entra, não **se** passou
+pelas regras.
 
 O GitHub também só oferece **Squash and merge** — as outras opções foram
 desligadas no ruleset. Um PR = um commit na `main`.

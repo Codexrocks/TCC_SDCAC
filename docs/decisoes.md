@@ -201,5 +201,6 @@ sobre monitoramento no ambiente de trabalho e no controle 8.16 da ISO/IEC
 3. Quando fechar: mover para **Fechadas**, com a data e o que ficou combinado
 4. Se a decisão mudar o [plano](plano.md), alterar o plano no mesmo Pull Request
 
-Decisão que muda regra de processo, padrão ou workflow exige **duas** aprovações
-— ver [`AGENTS.md`](../AGENTS.md), seção 4.
+Decisão que muda regra de processo, padrão ou workflow entra por Pull Request que
+espera **24 h** e traz a seção `Arquivo protegido` — ver
+[`AGENTS.md`](../AGENTS.md), seção 4.
