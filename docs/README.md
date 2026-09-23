@@ -60,6 +60,6 @@ operacionalização das duas métricas estão no [plano](plano.md).
 | Trabalhar no repositório | [Processo de trabalho](processo.md) |
 | Ver prazos | [Cronograma](cronograma.md) |
 | Entender o sistema | [Arquitetura](arquitetura.md) |
-| Saber como o artigo é formatado | [Formato COBEM](cobem.md) |
+| Saber como o artigo é formatado | [Formato do artigo](formato-do-artigo.md) |
 | Ver o que o professor pediu | [Entregas](entregas/tarefa-01.md) |
 | Ler o histórico das sessões | [Relatórios](relatorios/README.md) |
