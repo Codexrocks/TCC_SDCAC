@@ -26,6 +26,20 @@ seu nome, não no da IA. Referência bibliográfica que ninguém abriu na fonte 
 entra — marque a linha com o aviso de citação pendente e siga.
 -->
 
+## Arquivo protegido
+
+<!--
+Obrigatória só quando o PR toca AGENTS.md, CLAUDE.md, GEMINI.md,
+.github/copilot-instructions.md, CONTRIBUTING.md, docs/padroes*.md,
+docs/processo.md, .github/** ou scripts/**. Nesse caso o PR também fica 24 h
+aberto antes de entrar, e o check "Governança" confere as duas coisas.
+Não tocou nenhum desses? Apague esta seção.
+-->
+
+- **O que muda:** <!-- a regra ou a checagem, em uma linha -->
+- **Por que agora:** <!-- o que aconteceu para ela mudar hoje -->
+- **O que segura no lugar:** <!-- se afrouxou, o que passa a impedir o abuso -->
+
 ## Checklist
 
 - [ ] Branch no padrão `<autor>/<tipo>/<assunto>` — ex.: `yasmin/docs/referencial-teorico`
@@ -33,8 +47,11 @@ entra — marque a linha com o aviso de citação pendente e siga.
 - [ ] Se criei página em `docs/`, adicionei ao `docs/SUMMARY.md`
 - [ ] Não há `.env`, senha, token ou chave no diff
 - [ ] `python3 scripts/validar.py` passou
-- [ ] Pedi revisão de 1 colega — **2, se mexi em regras, `.github/` ou `scripts/`**
+- [ ] Li o diff inteiro antes de abrir — é a autorrevisão que ficou no lugar da
+      revisão de colega
+- [ ] Mexi em regra ou checagem? Preenchi a seção **Arquivo protegido** e sei
+      que o PR fica **24 h** aberto antes de entrar
 
 ## Responsável
 
-<!-- Davi / Yasmin / Filipe -->
+<!-- Davi -->

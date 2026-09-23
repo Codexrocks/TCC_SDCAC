@@ -147,14 +147,16 @@ O que ficou valendo:
 |---|---|
 | Restrict deletions | ninguém apaga a `main` |
 | Block force pushes | ninguém reescreve o histórico |
-| Require a pull request | 1 aprovação, e aprovação cai a cada novo commit |
+| Require a pull request | PR obrigatório; **zero aprovações** desde 23/09/2026 |
 | Require status checks | `validar` e `governanca` precisam passar, com a branch atualizada |
 | Allowed merge methods | só **Squash and merge** — as outras opções somem do botão |
 | Bypass list | **vazia** — a regra vale para todo mundo, inclusive o dono |
 
-Como a lista de bypass está vazia e o GitHub não pede revisão ao autor do
-próprio PR, **quem abre o PR sempre depende de outra pessoa para mergear**.
-Hoje isso significa: Davi depende da Yasmin, e vice-versa.
+Até 23/09/2026 a regra pedia 1 aprovação e, como o GitHub não deixa ninguém
+aprovar o próprio PR, quem abria dependia de outra pessoa. Com o trabalho
+passando a ser de uma pessoa só, a exigência de aprovação saiu do ruleset. O
+que segura no lugar está em [`AGENTS.md`](../AGENTS.md), seção 4: checks
+obrigatórios, autorrevisão e 24 h de espera nos arquivos de regra.
 
 ### Os dois checks obrigatórios não são da mesma espécie
 
@@ -169,9 +171,10 @@ O motivo está em como o GitHub soma cada uma. **Check runs de mesmo nome se
 acumulam** no mesmo commit: uma reprovação antiga continua contando depois de
 uma aprovação nova. Já o **commit status vale pelo mais recente por contexto**.
 
-Isso importa porque o workflow da governança roda de novo **a cada revisão
-enviada**, sempre no mesmo commit. O caminho normal é reprovar primeiro (ainda
-sem aprovação) e passar depois (com as aprovações) — exatamente o padrão que
+Isso importa porque o workflow da governança roda de novo **a cada edição do
+corpo e a cada revisão enviada**, sempre no mesmo commit. O caminho normal é
+reprovar primeiro (ainda dentro das 24 h de espera) e passar depois (cumprido
+o prazo) — exatamente o padrão que
 quebra com check run. Foi o que travou o [PR #3](https://github.com/Codexrocks/TCC_SDCAC/pull/3)
 com tudo aprovado na tela, e exigiu re-executar runs antigos na mão.
 
@@ -230,7 +233,7 @@ O bypass é **por ruleset**, não geral:
 
 | Ruleset | Regras | O Davi pode contornar? |
 |---|---|---|
-| `Proteção da main` | PR obrigatório, 1 aprovação, checks verdes | **Nunca** — `bypass_actors` vazio |
+| `Proteção da main` | PR obrigatório, checks verdes | **Nunca** — `bypass_actors` vazio |
 | `Merge restrito ao líder` | só `update` | Sempre — é o papel dele |
 
 Marcar a caixa contorna apenas o que ele **tem permissão** de contornar, ou seja
@@ -287,20 +290,20 @@ de bypass com **Organization admin**.
 
 O efeito combinado dos dois rulesets:
 
-| Pessoa | Abre PR | Aprova PR | Executa o merge |
-|---|---|---|---|
-| Davi (org owner) | sim | sim, no PR dos outros | **sim** |
-| Yasmin | sim | sim | não |
-| Filipe | sim | sim | não |
-| Assistente (`@claude`) | sim | não | não |
+| Pessoa | Abre PR | Executa o merge |
+|---|---|---|
+| Davi (org owner) | sim | **sim** |
+| Assistente (`@claude`) | sim | não |
 
-Yasmin e Filipe veem o botão de merge, mas o GitHub recusa o push resultante.
-Não é falta de educação com a ferramenta: é a regra funcionando.
+A coluna de aprovação saiu junto com a exigência do ruleset, em 23/09/2026.
+Quem tiver acesso de escrita vê o botão de merge, mas o GitHub recusa o push
+resultante de quem não é dono da organização.
 
 > **O Davi não fica acima das regras.** O bypass vale só neste segundo ruleset,
 > o do merge. O primeiro — `Proteção da main` — continua sem bypass nenhum, então
-> ele também precisa de PR, de 1 aprovação de outra pessoa e do check verde. Ele
-> decide **quando** entra, não **se** passou pelas regras.
+> ele também precisa de PR e de check verde, e das 24 h de espera quando o PR
+> toca arquivo de regra. Ele decide **quando** entra, não **se** passou pelas
+> regras.
 
 Para recriar pela API, se alguém apagar:
 
@@ -388,8 +391,9 @@ aprovar — e não permite mexer em configuração do repositório.
 | Yasmin | `@Yas2046` | Write | ativo |
 | Filipe | `@FilipeF4guiar` | Write | ativo |
 
-Equipe completa desde 03/09/2026. Com três pessoas, sempre há alguém que possa
-aprovar o PR de outro — o que era o ponto frágil enquanto o time era de dois.
+Equipe completa desde 03/09/2026. Desde 23/09/2026 o trabalho é conduzido só
+pelo Davi; os acessos ficam como estão, e o que entrou no lugar da aprovação de
+outra pessoa está em [`AGENTS.md`](../AGENTS.md), seção 4.
 
 > Yasmin é membro da organização; Filipe entrou como **colaborador externo** do
 > repositório. Para o dia a dia dá no mesmo. A diferença aparece se um dia o

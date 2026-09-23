@@ -13,8 +13,9 @@ As seções 3 e 4 dizem o que você não pode fazer sozinho.
 ## 1. Contexto
 
 TCC 2026/2 · Prof. Euzébio D. de Souza · Sistema de Detecção de Comportamentos
-Anômalos em Cybersecurity. Equipe de três: **Davi** (líder & backend),
-**Yasmin** (cybersecurity), **Filipe** (data & dashboard).
+Anômalos em Cybersecurity. Desde 23/09/2026 o **Davi** conduz o trabalho
+sozinho. Até ali a equipe era de três, com Yasmin (cybersecurity) e Filipe
+(data & dashboard); os relatórios de sessão guardam o que foi de cada um.
 
 O repositório é **público**. A pasta `docs/` é publicada no GitBook. Tudo que
 entra em `docs/` vira site público.
@@ -34,7 +35,7 @@ linguagem.
 
 ## 3. Uso de IA — o que precisa ser declarado
 
-Usar IA neste projeto é **esperado**, não tolerado. Os três integrantes usam.
+Usar IA neste projeto é **esperado**, não tolerado. O Davi usa o tempo todo.
 Esconder o uso é que é problema — e é problema sério num trabalho avaliado.
 
 ### Em todo commit
@@ -99,9 +100,9 @@ pergunte — não decida.
 | **Alterar cronograma ou escopo** sem pedido explícito do Davi | Define o TCC |
 | **Inventar conteúdo acadêmico** — citação, dado, resultado | Registre a pendência em [`docs/citacoes-pendentes.md`](docs/citacoes-pendentes.md) e avise |
 
-### Precisa de duas pessoas
+### Precisa de espera e de justificativa
 
-Mudança nestes arquivos exige **duas aprovações**, não uma:
+Mudança nestes arquivos não entra na hora em que foi escrita:
 
 ```
 AGENTS.md · CLAUDE.md · GEMINI.md · .github/copilot-instructions.md
@@ -110,13 +111,32 @@ docs/padroes.md · docs/padroes-codigo.md · docs/processo.md
 .github/**  ·  scripts/**
 ```
 
-O motivo é direto: são as regras e as checagens automáticas. Sem isso, bastaria
-um PR editando o `validar.py` para desligar todas as travas — e a IA que
-escreveu o PR seria a mesma que sugeriu a mudança. Duas pessoas precisam
-concordar em afrouxar a coleira.
+São as regras e as checagens automáticas. Sem trava, bastaria um PR editando o
+`validar.py` para desligar tudo — e a IA que escreveu o PR seria a mesma que
+sugeriu a mudança.
 
-O workflow **Governança** confere isso e reprova o PR sozinho. Você pode
-perfeitamente propor a mudança; só não entra com uma aprovação só.
+Até 23/09/2026 a trava eram **duas aprovações**. O trabalho passou a ser de uma
+pessoa só, e o GitHub não deixa ninguém aprovar o próprio Pull Request: a regra
+virou impossível de cumprir, não rigorosa. Regra que não se cumpre não protege
+nada — só ensina a passar por cima.
+
+No lugar entraram duas exigências que uma pessoa sozinha cumpre, e que continuam
+sendo trava porque quem confere é o `scripts/governanca.py`:
+
+1. **24 horas de espera.** O PR fica aberto um dia antes de poder entrar. A
+   mudança é lida em dois momentos diferentes, e a segunda leitura é a que pega
+   o que a pressa escreveu.
+2. **A seção `Arquivo protegido` no corpo do PR**, com três respostas: **o que
+   muda**, **por que agora** e **o que segura no lugar** do que foi afrouxado.
+   O terceiro campo é o que importa: se nada segura no lugar, a mudança tirou
+   uma trava sem repor.
+
+O workflow **Governança** confere as duas e reprova o PR sozinho. Passadas as
+24 h, edite o corpo do PR ou reexecute o check para ele contar o prazo de novo.
+
+Emergência — um check quebrado que trava todo o resto — entra por liberação de
+administrador, e **o relatório da sessão registra qual PR entrou assim e por
+quê**.
 
 ### Na dúvida, pergunte
 
@@ -187,9 +207,11 @@ linha.
 - Base sempre `main`
 - Título no mesmo padrão do commit
 - Preencher o template inteiro, **incluindo a seção Uso de IA**
-- 1 aprovação — ou **2**, se tocar nos arquivos da seção 4
+- Sem aprovação de outra pessoa: não há outra pessoa. O que vale é o check
+  verde, a autorrevisão do checklist e, nos arquivos da seção 4, a espera de
+  24 h com a seção `Arquivo protegido` preenchida
 - **Squash and merge**, sempre (é a única opção que o GitHub oferece)
-- **Nunca faça o merge.** Deixe pronto e aprovado, e avise
+- **Nunca faça o merge.** Deixe pronto e avise
 
 ## 9. Relatório de sessão — obrigatório
 
@@ -266,7 +288,7 @@ Por isso cada regra que importa tem uma trava de verdade atrás:
 | Branch no padrão, sem segredo, SUMMARY em dia | `scripts/validar.py` no check **Validação** |
 | Declarar a IA no commit | `scripts/validar.py` |
 | Declarar a IA no PR | Workflow **Governança** |
-| Duas aprovações para mudar as regras | Workflow **Governança** |
+| Espera de 24 h e justificativa para mudar as regras | Workflow **Governança** |
 | Os verificadores não podem ser adulterados pelo próprio PR | Workflows usam `scripts/*.py` da base |
 | Os verificadores não quebram em silêncio | `tests/`, rodando a cada PR |
 | O briefing do assistente não pode ser reescrito pelo próprio PR | A ação `claude-code-action` se recusa a rodar workflow alterado |
@@ -298,7 +320,8 @@ Um Pull Request pode alterar o workflow para não fazer essa substituição. Nã
 como impedir isso pelo GitHub Actions comum.
 
 O que sobra contra esse caso é defesa em camadas, não uma trava: alterar
-`.github/**` exige duas aprovações, e a mudança aparece no diff de quem revisa.
+`.github/**` passa pela espera de 24 h e pela justificativa escrita, e a mudança
+aparece no diff na segunda leitura.
 Por isso a lista de arquivos protegidos inclui os workflows — **quem revisa um
 PR que mexe em `.github/` precisa olhar com atenção redobrada.**
 
@@ -319,10 +342,10 @@ continua vindo do PR; quem se recusa a executá-lo é a ação.
 Três ressalvas, porque isto foi observado uma vez e não é regra nossa:
 
 - Vale só para os workflows que chamam essa ação. `Validação` e `Governança`
-  seguem dependendo das duas aprovações e do olho de quem revisa
+  seguem dependendo da espera, da justificativa e do olho de quem revisa
 - É comportamento de uma ação de terceiro. Pode mudar de versão para versão, e
   ninguém aqui controla isso
-- **Não substitui a dupla aprovação em `.github/`.** É camada, não trava
+- **Não substitui a espera e a justificativa em `.github/`.** É camada, não trava
 
 > **Consequência a conhecer:** um PR que cria ou altera um desses workflows
 > nunca consegue demonstrar a versão nova funcionando — ela só roda depois do

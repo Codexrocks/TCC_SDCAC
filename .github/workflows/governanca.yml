@@ -3,12 +3,13 @@ name: Governança
 # Confere as duas regras que protegem as próprias regras:
 #
 #   1. O corpo do PR declara qual IA foi usada e o que é de quem
-#   2. PR que mexe em AGENTS.md, docs/padroes*, .github/ ou scripts/ precisa de
-#      DUAS aprovações, não uma
+#   2. PR que mexe em AGENTS.md, docs/padroes*, .github/ ou scripts/ fica 24 h
+#      aberto e traz a seção "Arquivo protegido" respondida
 #
 # A segunda existe porque, sem ela, bastaria um PR editando o validar.py para
 # desligar todas as checagens — e a IA que escreveu o PR seria a mesma que
-# sugeriu a mudança.
+# sugeriu a mudança. Até 23/09/2026 a trava eram duas aprovações; com uma
+# pessoa só, virou impossível de cumprir, e o tempo tomou o lugar delas.
 #
 # ---------------------------------------------------------------------------
 # POR QUE O RESULTADO VAI PARA UM COMMIT STATUS, E NÃO PARA O CHECK DO JOB
@@ -16,7 +17,7 @@ name: Governança
 #
 # Este workflow roda várias vezes no MESMO commit: quando o PR abre, quando o
 # corpo é editado, e a cada revisão enviada. O caminho normal é falhar primeiro
-# (ainda sem aprovação) e passar depois (com as aprovações).
+# (ainda dentro das 24 h de espera) e passar depois (cumprido o prazo).
 #
 # O problema: o GitHub SOMA os check runs de mesmo nome. Um `failure` antigo
 # continua contando mesmo depois de o mais recente passar, e o PR trava com
@@ -44,7 +45,8 @@ on:
     # o PR não faria o check rodar de novo, e ele ficaria vermelho para sempre.
     types: [opened, edited, synchronize, reopened, ready_for_review]
   pull_request_review:
-    # Sem isto, aprovar não recalcularia a contagem de aprovações.
+    # A contagem de aprovações saiu em 23/09/2026. O gatilho fica porque enviar
+    # uma revisão é a forma barata de reexecutar o check depois das 24 h.
     types: [submitted, dismissed]
 
 jobs:
