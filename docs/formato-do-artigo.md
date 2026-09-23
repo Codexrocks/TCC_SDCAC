@@ -31,8 +31,15 @@ NÃO use a forma ABNT:       (CHANG; PAKZAD, 2013)
 
 Lista no fim — ABNT NBR 6023:
 CHANG, M.; PAKZAD, S. N. Modified natural excitation technique for stochastic
-modal identification. **Journal of Structural Engineering**, v. 139, n. 10, 2013.
+modal identification. Journal of Structural Engineering, v. 139, n. 10, 2013.
 ```
+
+> **De onde vem este exemplo.** A obra e as duas formas de chamada são
+> **transcrição do template CREEM 2026** — ele usa Chang e Pakzad (2013) para
+> ilustrar a citação e traz a referência completa na sua lista. **A versão em
+> ABNT acima é conversão feita aqui**, não está no template: ele lista a obra no
+> estilo da ABCM. Serve de modelo de forma, não de referência a citar — nenhuma
+> destas entrou no artigo, e nenhuma deve entrar sem alguém abrir a fonte.
 
 ***
 
@@ -147,18 +154,15 @@ referências**, no fim do documento:
 A versão anterior desta página trabalhava com 6 a 10 páginas. O CREEM pede
 **mínimo 8**. O artigo precisa ser **maior** do que estava planejado, não menor.
 
-Orçamento sugerido para um artigo de 10 páginas — números de orientação, não
-regra, mas a soma é o que existe:
+> **A divisão de páginas por seção mora em
+> [`artigo/README.md`](../artigo/README.md), e só lá.** Esta página diz o que o
+> template exige; quanto cada seção ocupa dentro disso é combinado da equipe, não
+> exigência do congresso. Dois lugares com a mesma tabela viram dois números
+> diferentes na primeira vez que um for atualizado sozinho.
 
-| Seção | Páginas |
-|---|---|
-| Cabeçalho, resumo e palavras-chave | 0,5 |
-| Introdução | 1 a 1,5 |
-| Referencial teórico | 2 a 2,5 |
-| Metodologia | 2 a 2,5 |
-| Resultados e discussão | 2,5 a 3 |
-| Conclusão | 0,5 |
-| Referências, responsabilidade autoral e bloco em inglês | 1 |
+O orçamento que está lá foi fechado para **8 páginas** — que era o teto suposto e
+virou o piso. Precisa ser recombinado pela equipe, agora dentro da faixa de 8 a
+12.
 
 ### 2. A lista de referências é ABNT — e já está certa
 

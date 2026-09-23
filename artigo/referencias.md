@@ -17,6 +17,10 @@
 > Três ou mais autores na chamada: `(Bordalo et al., 1989)`. Mesmo autor e ano:
 > `2017a`, `2017b`.
 >
+> Chang e Pakzad (2013) e Bordalo et al. (1989) são os exemplos **do próprio
+> template** — servem de modelo de forma, não de referência a citar. A conversão
+> da primeira para ABNT foi feita aqui; o template a lista no estilo da ABCM.
+>
 > **Não** escreva a chamada em caixa alta com ponto e vírgula — `(CHANG;
 > PAKZAD, 2013)` é NBR 10520, e essa norma não se aplica aqui.
 >
