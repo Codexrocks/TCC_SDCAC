@@ -35,11 +35,16 @@ Estrutura definida pelo professor, conforme o [cronograma](../docs/cronograma.md
 
 ## Divisão de páginas
 
-O artigo inteiro tem **de 6 a 10 páginas**, tabelas e figuras incluídas. É o
-limite do [template](../docs/cobem.md), e ele é rígido: trabalho fora do padrão
+O artigo inteiro tem **de 8 a 12 páginas**, tabelas e figuras incluídas. É o
+limite do [template](../docs/formato-do-artigo.md), e ele é rígido: trabalho fora do padrão
 é desclassificado antes da revisão.
 
-Orçamento combinado para um artigo de **8 páginas**:
+> **Este orçamento precisa ser recombinado.** Ele foi fechado quando se supunha
+> um teto de 10 páginas e um piso inexistente. O CREEM pede **no mínimo 8** — a
+> soma abaixo dá exatamente o piso, sem folga. Com 12 de teto, há espaço para
+> distribuir; quem decide como é a equipe.
+
+Orçamento combinado para um artigo de **8 páginas** — o piso:
 
 | Seção | Páginas |
 |---|---|
@@ -54,7 +59,7 @@ Orçamento combinado para um artigo de **8 páginas**:
 Três coisas sobre estes números:
 
 **São orçamento, não cota.** Quem terminar em menos devolve o espaço para quem
-precisa de mais. O que não existe é passar de 10 no total.
+precisa de mais. O que não existe é fechar abaixo de **8** ou passar de **12**.
 
 **A Metodologia e os Resultados são o coração do artigo**, e juntos levam
 metade dele. É onde está o trabalho que a banca vai avaliar — o resto
@@ -65,7 +70,7 @@ páginas em setembro, alguém vai ter de cortá-la em dezembro, com o texto já
 revisado e as referências já casadas. Cortar cedo é barato.
 
 > **Meça no template, não no editor.** Uma página do
-> [`COBEM-2025-template.docx`](../templates/COBEM-2025-template.docx) tem
+> [`CREEM-2026-template.docx`](../templates/CREEM-2026-template.docx) tem
 > Times New Roman 10, entrelinha simples, margens de 3 cm no topo e 2 cm nas
 > outras. Cabe muito mais texto do que numa página do Word em branco — e muito
 > menos do que a contagem de palavras sugere, quando entram figuras.
@@ -96,21 +101,33 @@ real, artigo que não existe. A validação não pega isso; a banca pega.
 **Número sai de execução real.** Taxa de detecção, falso positivo e MTTD vêm dos
 testes registrados em `results/`, nunca de estimativa.
 
-## Formato: COBEM
+## Formato: CREEM 2026, com referências em ABNT
 
-Confirmado em 07/09/2026 — o registro de 04/09 dizia ABNT e estava errado. O
-artigo do TCC sai no **template da ABCM**, e o **abstract em inglês é
-obrigatório**, além do Resumo em português.
+Confirmado pelo **professor em 23/09/2026**, que disponibilizou o template. É a
+terceira redação desta seção — o histórico das três está em
+[formato do artigo](../docs/formato-do-artigo.md).
 
-Três coisas mudam por causa disso, e estão em
-[COBEM 2027](../docs/cobem.md#o-que-isto-muda-no-artigo):
+A regra de convivência entre os dois padrões:
 
-1. **O artigo inteiro tem de 6 a 10 páginas**, incluindo tabelas e figuras
-2. **O Referencial Teórico não tem seção própria** no COBEM — entra em
-   Fundamentação. Continua sendo entrega da 2ª Versão para a instituição
-3. **As referências são autor-ano**, não ABNT NBR 6023
-4. **O texto é em português**, e só o *abstract* e as *keywords* saem em
-   inglês — decidido em 07/09/2026, apesar de o template pedir inglês
+| O quê | Segue |
+|---|---|
+| A **lista de referências**, no fim | **ABNT NBR 6023** |
+| **Todo o resto** — inclusive a **chamada de citação dentro do texto** | **Template CREEM 2026** |
+
+Quatro coisas para saber antes de escrever, detalhadas em
+[formato do artigo](../docs/formato-do-artigo.md#o-que-isto-muda-no-artigo):
+
+1. **O artigo inteiro tem de 8 a 12 páginas**, incluindo tabelas e figuras —
+   oito é o **piso**
+2. **A chamada no texto é `(Chang e Pakzad, 2013)`**, não `(CHANG; PAKZAD,
+   2013)`. A NBR 10520 **não** se aplica; só a NBR 6023, e só na lista
+3. **O bloco em inglês vai no fim**, depois das referências: título, autores,
+   *Abstract* e *Keywords*
+4. **Faltam três seções de fechamento** no esqueleto: AGRADECIMENTOS (opcional),
+   REFERÊNCIAS e RESPONSABILIDADE AUTORAL (obrigatórias)
+
+O template **não prescreve** quais seções de conteúdo o artigo tem — a estrutura
+de cinco seções da instituição cabe sem ajuste.
 
 O Markdown daqui é a **fonte da verdade do texto**; o template é aplicado na
 hora de montar o documento de entrega. Ele está versionado em

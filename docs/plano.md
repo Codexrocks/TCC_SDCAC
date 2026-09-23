@@ -197,15 +197,16 @@ a resposta "não".
 
 ## 3. Produtos finais
 
-1. **Artigo científico** completo, no [formato COBEM](cobem.md) — 6 a 10
-   páginas no total, referências em autor-ano, texto em português com *abstract*
-   em inglês —, com a tabela de ablação de quatro linhas. Decisão **D-11**,
-   fechada em 07/09.
+1. **Artigo científico** completo, no [formato CREEM 2026](formato-do-artigo.md)
+   — 8 a 12 páginas no total, **lista de referências em ABNT NBR 6023** e
+   chamadas de citação no formato do CREEM, texto em português com o bloco em
+   inglês no fim —, com a tabela de ablação de quatro linhas. Decisão **D-11**,
+   fechada em **23/09**.
 
-   > **O limite de páginas é restrição de projeto, não detalhe de formatação.**
-   > O artigo inteiro cabe em 6 a 10 páginas, tabelas e figuras incluídas. Isso
-   > condiciona quanto cada seção pode ocupar e desaconselha acrescentar
-   > capítulos à estrutura — ver decisão **D-20**.
+   > **A extensão é restrição de projeto, não detalhe de formatação.** O artigo
+   > inteiro tem de 8 a 12 páginas, tabelas e figuras incluídas, e **oito é o
+   > piso**: ele precisa ser maior do que a versão anterior deste plano supunha,
+   > não menor. Isso condiciona quanto cada seção pode ocupar.
 2. **Protótipo funcional:** API, gerador de logs, quatro configurações de risco
    selecionáveis, dashboard.
 3. **Repositório documentado:** código, [decisões](decisoes.md), relatórios de
