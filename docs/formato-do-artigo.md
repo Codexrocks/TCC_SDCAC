@@ -211,6 +211,12 @@ página foi montada a partir de páginas de eventos e de templates de CREEM 2022
 CONEM 2020, com números que se provaram errados. **Fonte parecida não é a mesma
 fonte** — e é por isso que esta versão só afirma o que está no arquivo entregue.
 
+> **Se houver uma quarta volta:** acrescente a linha na tabela acima e reescreva
+> o corpo da página lendo o arquivo novo. A tabela guarda o histórico; o corpo
+> descreve **só o que vale hoje**. Se um dia ela passar de cinco linhas, o
+> histórico migra para [decisões](decisoes.md) e aqui fica apenas a volta atual,
+> com o ponteiro.
+
 ## Sobre o COBEM 2027 — outro evento
 
 Informação levantada quando se supunha que o formato era COBEM. Fica registrada
