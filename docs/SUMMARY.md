@@ -54,4 +54,5 @@
 * [2026-09-07 — Sessão 12: a onda 1 entra, e duas sessões disputam a mesma árvore](relatorios/2026-09-07-sessao-12.md)
 * [2026-09-08 — Sessão 13: o caminho do artigo abre](relatorios/2026-09-08-sessao-13.md)
 * [2026-09-14 — Sessão 14: a revisão do PR #32 e a aprovação que ninguém via](relatorios/2026-09-14-sessao-14.md)
+* [2026-09-23 — Sessão 15: o trabalho fica com uma pessoa](relatorios/2026-09-23-sessao-15.md)
 * [Modelo de relatório](relatorios/_modelo.md)

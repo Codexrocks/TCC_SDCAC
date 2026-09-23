@@ -33,3 +33,4 @@ Use o [modelo](_modelo.md) e adicione a página nova ao
 | 07/09/2026 | [Sessão 12](2026-09-07-sessao-12.md) | Onda 1 no repositório, pergunta reescrita, e a colisão entre duas sessões paralelas |
 | 08/09/2026 | [Sessão 13](2026-09-08-sessao-13.md) | O caminho do artigo abre de ponta a ponta; o revisor estreia apontando erro da própria IA |
 | 14/09/2026 | [Sessão 14](2026-09-14-sessao-14.md) | A revisão do PR #32 acha dez defeitos e a aprovação manual que ninguém via; os PRs #34 e #35 corrigem |
+| 23/09/2026 | [Sessão 15](2026-09-23-sessao-15.md) | O trabalho fica com uma pessoa: as duas aprovações viram 24 h de espera e justificativa |
