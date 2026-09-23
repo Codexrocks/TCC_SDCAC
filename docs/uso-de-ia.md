@@ -1,7 +1,7 @@
 # Política de uso de IA
 
-Os três integrantes usam IA neste projeto. Esta página diz **como** — e como
-qualquer pessoa pode conferir, inclusive a banca.
+Usa-se IA neste projeto, e muito. Esta página diz **como** — e como qualquer
+pessoa pode conferir, inclusive a banca.
 
 As regras que os assistentes leem estão em [`AGENTS.md`](../AGENTS.md), na raiz
 do repositório. Esta página é a mesma política escrita para gente.
@@ -14,8 +14,8 @@ Usar IA é **esperado**, não tolerado. Ela redige rascunho, revisa texto, suger
 código, explica conceito e acelera trabalho repetitivo.
 
 O que ela **não** faz: pensar pelo grupo, decidir o escopo, escolher as fontes
-ou responder pela banca. Um TCC assistido por IA continua sendo um TCC de três
-pessoas — e é isso que precisa aparecer no registro.
+ou responder pela banca. Um TCC assistido por IA continua sendo um TCC de quem
+assina — e é isso que precisa aparecer no registro.
 
 A pergunta que a banca faz não é *se* usamos IA. É **o que foi nosso e o que foi
 da máquina**. Esta página existe para que a resposta esteja documentada,
@@ -26,12 +26,12 @@ verificável e não dependa da memória de ninguém.
 | Pessoa | Assistente | Onde usa |
 |---|---|---|
 | Davi | Claude (Claude Code) | Repositório, automação, backend |
-| Yasmin | <!-- FALTA PREENCHER --> | <!-- FALTA PREENCHER --> |
-| Filipe | <!-- FALTA PREENCHER --> | <!-- FALTA PREENCHER --> |
+| Yasmin | não declarado | equipe de três, até 23/09/2026 |
+| Filipe | não declarado | equipe de três, até 23/09/2026 |
 
-> **Yasmin e Filipe:** preencham a linha de vocês. Vale qualquer assistente —
-> Gemini, ChatGPT, Copilot, Grok, Codex. Não existe resposta errada aqui; a
-> única resposta errada é deixar em branco.
+> **As duas linhas ficam como registro.** Desde 23/09/2026 o trabalho é só do
+> Davi, e a declaração de Yasmin e Filipe nunca chegou. Apagar as linhas faria a
+> tabela parecer completa desde sempre; deixá-las diz o que houve.
 
 Trocar de ferramenta no meio do TCC é normal. Atualize a tabela quando trocar.
 
@@ -107,15 +107,17 @@ pergunta — não decide.
 permissão, `push --force`, apagar branch alheia, commitar segredo, alterar
 cronograma ou escopo, inventar citação ou dado.
 
-**Precisa de duas pessoas:** mudança nas regras (`AGENTS.md`, `CONTRIBUTING.md`,
-`docs/padroes*.md`, `docs/processo.md`) ou nas checagens automáticas
-(`.github/`, `scripts/`).
+**Precisa de espera e de justificativa:** mudança nas regras (`AGENTS.md`,
+`CONTRIBUTING.md`, `docs/padroes*.md`, `docs/processo.md`) ou nas checagens
+automáticas (`.github/`, `scripts/`) fica 24 h em Pull Request aberto e responde,
+na seção `Arquivo protegido`, o que muda, por que agora e o que segura no lugar.
 
 O motivo dessa segunda lista é o que mais importa aqui. Sem ela, bastaria um
 Pull Request editando o `validar.py` para desligar todas as travas — e a IA que
-escreveu esse PR seria a mesma que sugeriu a mudança. **Duas pessoas precisam
-concordar em afrouxar a coleira.** Uma IA pode perfeitamente propor a mudança;
-só não consegue aprová-la.
+escreveu esse PR seria a mesma que sugeriu a mudança. Até 23/09/2026 a trava
+eram duas aprovações; com uma pessoa só ela deixou de ser cumprível, e o que
+ficou no lugar é o tempo: **a mudança é lida em dois momentos diferentes, e a
+segunda leitura é a que pega o que a pressa escreveu.**
 
 ---
 
@@ -141,7 +143,7 @@ isso cada regra que importa tem uma verificação de verdade atrás.
 |---|---|---|
 | Declarar a IA no commit | Reprova o check | `scripts/validar.py` |
 | Declarar a IA no PR | Reprova o check | workflow **Governança** |
-| Duas aprovações para mudar as regras | Reprova o check | workflow **Governança** |
+| Espera de 24 h e justificativa para mudar as regras | Reprova o check | workflow **Governança** |
 | Não commitar na `main` | GitHub recusa o push | ruleset |
 | Só o líder faz merge | GitHub recusa o push | ruleset |
 | Sem segredo, branch no padrão | Reprova o check | `scripts/validar.py` |
@@ -152,9 +154,9 @@ Nenhuma delas depende de a IA "se comportar bem".
 
 > **Um limite que fica em aberto.** O arquivo do workflow em si vem do Pull
 > Request, então um PR pode alterar o próprio workflow. Não há como impedir isso
-> tecnicamente no GitHub Actions. O que existe contra esse caso é a dupla
-> aprovação em `.github/**` e a visibilidade no diff — defesa em camadas, não
-> trava. Vale registrar em vez de fingir que o cerco é perfeito.
+> tecnicamente no GitHub Actions. O que existe contra esse caso é a espera de
+> 24 h em `.github/**` e a visibilidade no diff — defesa em camadas, não trava.
+> Vale registrar em vez de fingir que o cerco é perfeito.
 
 ---
 
@@ -163,10 +165,13 @@ Nenhuma delas depende de a IA "se comportar bem".
 Se a banca perguntar sobre o uso de IA, a resposta não precisa ser ensaiada —
 está registrada:
 
-- **"Usaram IA?"** Sim, os três, declarado em cada commit e cada Pull Request
+- **"Usaram IA?"** Sim, declarado em cada commit e cada Pull Request
 - **"Em quê?"** O histórico do repositório responde por mudança
-- **"Como sabemos que vocês entenderam o que foi entregue?"** Todo PR foi lido e
-  aprovado por outra pessoa, e o merge passou pelo líder. Nada entrou sozinho
+- **"Como sabemos que vocês entenderam o que foi entregue?"** Até 23/09/2026,
+  todo PR foi lido e aprovado por outra pessoa. De lá em diante o trabalho é de
+  uma pessoa só: respondem por isso os checks, o checklist de autorrevisão, as
+  24 h de espera nos arquivos de regra e o comentário do revisor automático —
+  que é sugestão, não aprovação
 - **"E as referências?"** Só entram conferidas na fonte; o que falta conferir
   está marcado no próprio texto
 

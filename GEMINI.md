@@ -7,8 +7,8 @@ um arquivo só: **`AGENTS.md`**, na raiz.
 ponteiro — ele existe porque esta ferramenta procura por um arquivo com este
 nome.
 
-Não duplique regra aqui. Regra nova entra no `AGENTS.md`, e mudá-lo exige duas
-aprovações no Pull Request.
+Não duplique regra aqui. Regra nova entra no `AGENTS.md`, e mudá-lo exige 24 h
+de Pull Request aberto e a seção `Arquivo protegido` preenchida.
 
 O resumo do que mais pega, sem substituir a leitura:
 
@@ -16,5 +16,5 @@ O resumo do que mais pega, sem substituir a leitura:
 - Nunca commitar na `main` — sempre branch + Pull Request
 - **Nunca fazer merge nem aprovar PR**
 - Declarar a IA usada no commit (`Assistido-por:`) e no PR
-- Mudar regra, workflow ou script exige **duas** aprovações
+- Mudar regra, workflow ou script espera **24 h** e se explica na seção `Arquivo protegido`
 - Na dúvida, perguntar antes de fazer

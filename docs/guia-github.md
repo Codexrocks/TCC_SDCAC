@@ -19,7 +19,7 @@ fim, para quando fizer falta.
 | **Pull Request** (PR) | O pedido: "terminei, dá uma olhada e deixa entrar". É onde a conversa acontece |
 | **Merge** | O momento em que o trabalho aprovado entra de verdade no projeto |
 
-O caminho é sempre o mesmo: **branch → commit → Pull Request → alguém aprova →
+O caminho é sempre o mesmo: **branch → commit → Pull Request → checks verdes →
 merge**.
 
 A `main` é a versão oficial. Ninguém escreve nela direto — nem o Davi. Tudo
@@ -30,7 +30,11 @@ quem fez o quê, que a banca vai querer ver.
 
 ## 2. Aprovar um Pull Request
 
-A tarefa mais comum, e a que destrava o trabalho dos outros. Leva dois minutos.
+> Desde 23/09/2026 o trabalho é de uma pessoa só, e não há aprovação de outra
+> pessoa para esperar. Esta seção fica como referência, para quando alguém
+> voltar a revisar — e porque ler um diff é a mesma coisa, aprovando ou não.
+
+Leva dois minutos.
 
 **1.** Abra o link do PR. Você chega numa página com abas: *Conversation*,
 *Commits*, *Files changed*.
@@ -66,11 +70,12 @@ arquivos. Abre uma caixinha com três opções:
 
 **7.** Escreva uma linha na caixa de texto e clique em **`Submit review`**.
 
-Pronto. Se você aprovou, o botão de merge destrava — **para o Davi**. Só ele
-executa o merge, e é uma trava do GitHub, não combinado.
+Pronto. O botão de merge fica com o **Davi**: só ele executa o merge, e é uma
+trava do GitHub, não combinado.
 
-> **Você não consegue aprovar o próprio PR.** O GitHub não permite, de
-> propósito. Por isso todo mundo depende de outra pessoa para avançar.
+> **Ninguém aprova o próprio PR.** O GitHub não permite, de propósito — e foi
+> por isso que a exigência de aprovação saiu do ruleset quando o trabalho
+> passou a ser de uma pessoa só.
 
 ---
 
@@ -151,14 +156,14 @@ seção que **precisa** ser respondida:
 
 Depois clique em **`Create pull request`** de novo.
 
-**8.** Na direita da página, em *Reviewers*, escolha um colega. Espere a
-aprovação e o check verde. Depois avise o Davi para fazer o merge.
+**8.** Espere os checks ficarem verdes. Não há aprovação de outra pessoa a
+esperar; o merge é do Davi.
 
 ### Por que declarar a IA
 
-Os três do grupo usam IA, e isso é esperado — o que não pode é esconder. A banca
-vai perguntar o que foi de vocês e o que foi da máquina, e a resposta precisa
-estar no registro, não na memória.
+Usar IA aqui é esperado — o que não pode é esconder. A banca vai perguntar o que
+foi seu e o que foi da máquina, e a resposta precisa estar no registro, não na
+memória.
 
 Por isso toda mensagem de commit termina assim:
 
@@ -205,7 +210,7 @@ Os erros mais comuns:
 | `link quebrado` | Um link aponta para arquivo que não existe. Confira o nome |
 | `possivel senha literal` | Tem algo parecido com senha no texto. **Avise antes de corrigir sozinha** |
 | `falta declarar a IA` | Acrescente `Assistido-por: ...` no corpo do commit |
-| `precisa de 2 aprovacoes` | O PR mexe nas regras ou nas checagens. Peça a segunda aprovação |
+| `fica 24 h aberto antes de entrar` | O PR mexe nas regras ou nas checagens. Espere o prazo e preencha a seção `Arquivo protegido` |
 
 ---
 
