@@ -5,13 +5,18 @@ Duas checagens, ambas descritas em AGENTS.md:
 
 1. **Declaracao de IA** (secao 3) — o corpo do PR precisa dizer qual assistente
    foi usado, no que ajudou, o que e da pessoa, e se ela conferiu o resultado.
-2. **Dupla aprovacao** (secao 4) — PR que mexe nas regras do projeto ou nas
-   checagens automaticas exige duas aprovacoes, nao uma.
+2. **Arquivo protegido** (secao 4) — PR que mexe nas regras do projeto ou nas
+   checagens automaticas espera 24 h e se explica na secao "Arquivo
+   protegido" do corpo do PR.
 
 A segunda existe por um motivo especifico: sem ela, bastaria um PR editando o
 validar.py para desligar todas as travas — e a IA que escreveu o PR seria a
-mesma que sugeriu a mudanca. Duas pessoas precisam concordar em afrouxar a
-coleira.
+mesma que sugeriu a mudanca.
+
+Ate 23/09/2026 essa trava eram duas aprovacoes. O trabalho passou a ser de uma
+pessoa so, e o GitHub nao deixa ninguem aprovar o proprio PR: a regra virou
+impossivel de cumprir, nao rigorosa. A espera e a justificativa sao o que uma
+pessoa sozinha cumpre sem deixar de ser trava — quem confere e este script.
 
 Uso, dentro do GitHub Actions:
     PR_NUMERO=12 REPO=dono/nome GITHUB_TOKEN=... python3 scripts/governanca.py
@@ -22,12 +27,13 @@ import re
 import sys
 import urllib.error
 import urllib.request
+from datetime import datetime, timezone
 
 API = "https://api.github.com"
 
-# Mexer nestes arquivos exige duas aprovacoes. Sao as regras do projeto e as
-# checagens que as fazem valer. Mudou esta lista? Voce esta mexendo nas regras,
-# entao o proprio PR ja cai na regra.
+# Mexer nestes arquivos pede espera e justificativa. Sao as regras do projeto e
+# as checagens que as fazem valer. Mudou esta lista? Voce esta mexendo nas
+# regras, entao o proprio PR ja cai na regra.
 ARQUIVOS_PROTEGIDOS = {
     "AGENTS.md",
     "CLAUDE.md",
@@ -40,13 +46,25 @@ ARQUIVOS_PROTEGIDOS = {
 }
 PREFIXOS_PROTEGIDOS = (".github/", "scripts/")
 
-APROVACOES_EXIGIDAS = 2
+# Quanto tempo um PR que toca arquivo protegido fica aberto antes de poder
+# entrar. Um dia: a mudanca e lida em dois momentos diferentes, e nao duas
+# vezes na mesma pressa. Mudar este numero e mudar a regra — e este arquivo e
+# protegido, entao o proprio PR que mexer aqui espera as 24 h.
+HORAS_DE_ESPERA = 24
 
+SECAO_IA = "Uso de IA"
 CAMPOS_IA = (
     "IA usada",
     "No que ajudou",
     "O que é meu",
     "Conferi tudo que a IA escreveu",
+)
+
+SECAO_PROTEGIDO = "Arquivo protegido"
+CAMPOS_PROTEGIDO = (
+    "O que muda",
+    "Por que agora",
+    "O que segura no lugar",
 )
 
 # Dois ou mais tracos seguidos sao enfeite de Markdown, nao resposta. Um traco
@@ -123,44 +141,31 @@ def sem_blocos_de_codigo(texto):
     )
 
 
-def secao_uso_de_ia(texto):
-    """Devolve so o trecho da secao 'Uso de IA', ate o proximo cabecalho.
+def secao(texto, titulo):
+    """Devolve so o trecho da secao com este titulo, ate o proximo cabecalho.
 
     O formulario e a secao. Procurar os campos no corpo inteiro faz o check
     aceitar — ou recusar — texto que esta em outra parte do PR.
     """
     achado = re.search(
-        r"^#+[ \t]*Uso de IA[ \t]*$(.*?)(?=^#+[ \t]|\Z)",
+        r"^#+[ \t]*" + re.escape(titulo) + r"[ \t]*$(.*?)(?=^#+[ \t]|\Z)",
         texto,
         re.IGNORECASE | re.MULTILINE | re.DOTALL,
     )
     return achado.group(1) if achado else ""
 
 
-def checar_declaracao_ia(corpo):
-    """O corpo do PR precisa ter a secao Uso de IA preenchida de verdade."""
-    limpo = sem_comentarios(corpo)
-
-    if not re.search(r"^#+\s*Uso de IA\s*$", limpo, re.IGNORECASE | re.MULTILINE):
-        erros.append(
-            "o corpo do PR nao tem a secao 'Uso de IA'. Copie o bloco de "
-            ".github/pull_request_template.md e preencha. Ver AGENTS.md secao 3"
-        )
-        return
-
-    # So a secao, e sem os blocos de codigo dela: o que vale e o que foi
-    # respondido no formulario, nao o que foi citado como exemplo.
-    limpo = sem_blocos_de_codigo(secao_uso_de_ia(limpo))
-
-    for campo in CAMPOS_IA:
+def checar_campos(trecho, campos, onde):
+    """Confere que cada campo do formulario tem resposta de verdade."""
+    for campo in campos:
         # Aceita com ou sem negrito, e com o texto na mesma linha do rotulo.
         padrao = re.compile(
             r"^[ \t]*[-*][ \t]*\**[ \t]*" + re.escape(campo) + r"[ \t]*:?\**[ \t]*:?(.*)$",
             re.IGNORECASE | re.MULTILINE,
         )
-        achado = padrao.search(limpo)
+        achado = padrao.search(trecho)
         if not achado:
-            erros.append(f"falta o campo '{campo}' na secao Uso de IA do PR")
+            erros.append(f"falta o campo '{campo}' na secao {onde} do PR")
         # Cobre espaco, tabulacao e os enfeites de Markdown. O retorno de carro
         # ja saiu em sem_comentarios; fica aqui como segunda barreira.
         #
@@ -181,6 +186,24 @@ def checar_declaracao_ia(corpo):
             )
 
 
+def checar_declaracao_ia(corpo):
+    """O corpo do PR precisa ter a secao Uso de IA preenchida de verdade."""
+    limpo = sem_comentarios(corpo)
+
+    if not re.search(
+        rf"^#+\s*{re.escape(SECAO_IA)}\s*$", limpo, re.IGNORECASE | re.MULTILINE
+    ):
+        erros.append(
+            "o corpo do PR nao tem a secao 'Uso de IA'. Copie o bloco de "
+            ".github/pull_request_template.md e preencha. Ver AGENTS.md secao 3"
+        )
+        return
+
+    # So a secao, e sem os blocos de codigo dela: o que vale e o que foi
+    # respondido no formulario, nao o que foi citado como exemplo.
+    checar_campos(sem_blocos_de_codigo(secao(limpo, SECAO_IA)), CAMPOS_IA, SECAO_IA)
+
+
 def caminhos_tocados(itens):
     """Caminhos que o PR toca, incluindo a origem de cada renomeacao.
 
@@ -189,8 +212,8 @@ def caminhos_tocados(itens):
     Renomear tira o arquivo do caminho antigo tanto quanto apaga-lo: um PR que
     mova AGENTS.md para docs/regras.md mexe no AGENTS.md. So que a API poe o
     caminho novo em `filename` e guarda o antigo em `previous_filename`. Lendo so
-    o primeiro, a dupla aprovacao nao via o arquivo protegido saindo do lugar, e
-    o PR passava com uma aprovacao.
+    o primeiro, a checagem de arquivo protegido nao via o arquivo saindo do
+    lugar, e o PR escapava da regra.
     """
     caminhos = []
     for item in itens:
@@ -203,44 +226,56 @@ def caminhos_tocados(itens):
     return list(dict.fromkeys(caminhos))
 
 
-def checar_dupla_aprovacao(arquivos, reviews, autor):
-    """PR que toca as regras ou as checagens precisa de duas aprovacoes."""
+def checar_arquivo_protegido(arquivos, corpo, criado_em, agora):
+    """PR que toca as regras ou as checagens espera 24 h e se explica.
+
+    Ate 23/09/2026 a trava eram duas aprovacoes. Com uma pessoa so, e o GitHub
+    recusando que alguem aprove o proprio PR, a regra virou impossivel de
+    cumprir. No lugar dela: o PR fica aberto HORAS_DE_ESPERA antes de entrar, e
+    o corpo responde o que muda, por que agora e o que segura no lugar.
+    """
     tocados = sorted(
         a
         for a in arquivos
         if a in ARQUIVOS_PROTEGIDOS or a.startswith(PREFIXOS_PROTEGIDOS)
     )
     if not tocados:
-        print("Nenhum arquivo de governanca tocado: 1 aprovacao basta.")
+        print("Nenhum arquivo de governanca tocado: basta o check verde.")
         return
 
     print("Arquivos de governanca neste PR:")
     for a in tocados:
         print(f"  - {a}")
 
-    # Cada pessoa conta uma vez, pelo seu review mais recente: quem aprovou e
-    # depois pediu mudancas nao esta mais aprovando.
-    ultimo = {}
-    for r in reviews:
-        estado = r.get("state")
-        if estado == "COMMENTED":
-            continue  # comentario nao é posicao
-        login = (r.get("user") or {}).get("login")
-        if login and login != autor:
-            ultimo[login] = estado
-
-    aprovadores = sorted(k for k, v in ultimo.items() if v == "APPROVED")
-    print(f"Aprovacoes validas: {len(aprovadores)} de {APROVACOES_EXIGIDAS}")
-    for a in aprovadores:
-        print(f"  + {a}")
-
-    if len(aprovadores) < APROVACOES_EXIGIDAS:
-        faltam = APROVACOES_EXIGIDAS - len(aprovadores)
+    horas = (agora - criado_em).total_seconds() / 3600
+    print(f"Aberto ha {horas:.1f} h; a regra pede {HORAS_DE_ESPERA} h.")
+    if horas < HORAS_DE_ESPERA:
         erros.append(
             f"este PR mexe nas regras do projeto ou nas checagens automaticas, "
-            f"entao precisa de {APROVACOES_EXIGIDAS} aprovacoes — faltam "
-            f"{faltam}. Motivo em AGENTS.md secao 4"
+            f"entao fica {HORAS_DE_ESPERA} h aberto antes de entrar — faltam "
+            f"{HORAS_DE_ESPERA - horas:.1f} h. Passado o prazo, edite o corpo do "
+            f"PR ou reexecute este check para ele contar de novo. Motivo em "
+            f"AGENTS.md secao 4"
         )
+
+    limpo = sem_comentarios(corpo)
+    if not re.search(
+        rf"^#+\s*{re.escape(SECAO_PROTEGIDO)}\s*$",
+        limpo,
+        re.IGNORECASE | re.MULTILINE,
+    ):
+        erros.append(
+            f"o corpo do PR nao tem a secao '{SECAO_PROTEGIDO}', obrigatoria em "
+            f"PR que toca arquivo de regra ou de checagem. Copie o bloco de "
+            f".github/pull_request_template.md e responda. Ver AGENTS.md secao 4"
+        )
+        return
+
+    checar_campos(
+        sem_blocos_de_codigo(secao(limpo, SECAO_PROTEGIDO)),
+        CAMPOS_PROTEGIDO,
+        SECAO_PROTEGIDO,
+    )
 
 
 def main():
@@ -254,12 +289,18 @@ def main():
     autor = (pr.get("user") or {}).get("login", "")
     itens = api(f"/repos/{repo}/pulls/{numero}/files", tok)
     arquivos = caminhos_tocados(itens)
-    reviews = api(f"/repos/{repo}/pulls/{numero}/reviews", tok)
+    corpo = pr.get("body") or ""
+    criado = pr.get("created_at")
+    if not criado:
+        sys.exit(
+            "A API nao devolveu created_at do PR; sem isso nao da para contar a espera."
+        )
+    criado_em = datetime.fromisoformat(criado.replace("Z", "+00:00"))
 
     print(f"PR #{numero} de @{autor} — {len(itens)} arquivo(s)\n")
 
-    checar_declaracao_ia(pr.get("body") or "")
-    checar_dupla_aprovacao(arquivos, reviews, autor)
+    checar_declaracao_ia(corpo)
+    checar_arquivo_protegido(arquivos, corpo, criado_em, datetime.now(timezone.utc))
 
     print()
     if erros:

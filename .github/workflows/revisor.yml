@@ -11,8 +11,8 @@ name: Revisor
 #
 #   Validação   nome de branch, formato de commit, linha Assistido-por,
 #               cobertura do SUMMARY, link quebrado, segredo vazado
-#   Governança  os quatro campos de Uso de IA, e a dupla aprovação nos
-#               arquivos protegidos
+#   Governança  os quatro campos de Uso de IA, e a espera de 24 h com a
+#               seção Arquivo protegido
 #
 # Todas têm resposta binária, e qualquer pessoa reproduz rodando o script.
 #
@@ -26,8 +26,8 @@ name: Revisor
 #      e não deve entrar
 #   3. o comentário se declara sugestão de IA no próprio cabeçalho
 #
-# Tornar este check obrigatório é mudança de regra: `.github/**` exige duas
-# aprovações, e a justificativa precisa estar escrita no Pull Request.
+# Tornar este check obrigatório é mudança de regra: `.github/**` espera 24 h, e
+# a justificativa precisa estar escrita no Pull Request.
 #
 # ---------------------------------------------------------------------------
 # `pull_request`, nunca `pull_request_target`
@@ -247,8 +247,8 @@ jobs:
             - **Toca arquivo protegido** — `AGENTS.md`, `CLAUDE.md`,
               `GEMINI.md`, `.github/copilot-instructions.md`, `CONTRIBUTING.md`,
               `docs/padroes.md`, `docs/padroes-codigo.md`, `docs/processo.md`,
-              `.github/**`, `scripts/**` — e o corpo do PR não avisa que precisa
-              de duas aprovações.
+              `.github/**`, `scripts/**` — e o corpo do PR não traz a seção
+              `Arquivo protegido` respondida.
             - **Afrouxa uma trava?** Mudança em `scripts/` ou `.github/` que
               torne um check mais permissivo. Diga exatamente o que deixa de ser
               conferido.

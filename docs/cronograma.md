@@ -7,7 +7,7 @@
 | Data | Entrega |
 |---|---|
 | **03/09/26** | PDF com tema, composição do grupo e e-mail do líder — *Tarefa 01* |
-| **10/09/26** | Introdução do artigo no template COBEM 2026 — *Tarefa 02* |
+| **10/09/26** | Introdução do artigo no template CREEM 2026 — *Tarefa 02* |
 | Quinzenal | Reunião de acompanhamento com o orientador |
 | Dezembro | Apresentação final online |
 

@@ -3,13 +3,19 @@
 Modelos oficiais para a entrega do artigo. **Arquivo de terceiro** — não é
 material da equipe, e não deve ser editado aqui.
 
-| Arquivo | O que é |
-|---|---|
-| `COBEM-2025-template.docx` | Template oficial da ABCM, 28ª edição do COBEM. O arquivo de exemplo dentro dele se chama `COB-2025-XXXX` |
+| Arquivo | O que é | Vale? |
+|---|---|---|
+| **`CREEM-2026-template.docx`** | Template do **XXXII CREEM 2026**, disponibilizado pelo professor em 23/09/2026 | **Sim — é este** |
+| `COBEM-2025-template.docx` | Template da ABCM, 28ª edição do COBEM. Encontrado pela equipe em 07/09/2026, antes de o professor se pronunciar | Não. Guardado para rastreabilidade |
 
-O que ele exige está lido e traduzido em
-[`docs/cobem.md`](../docs/cobem.md) — margens, fontes, número de páginas,
-estilo de citação. **Consulte a página; use o arquivo para diagramar.**
+O que o template em vigor exige está lido e traduzido em
+[`docs/formato-do-artigo.md`](../docs/formato-do-artigo.md) — margens, fontes,
+número de páginas, estilo de citação. **Consulte a página; use o arquivo para
+diagramar.**
+
+> **Os dois são parecidos e não são iguais.** São eventos irmãos da ABCM, com
+> templates de mesma família. A diferença que mais pega é a extensão: o COBEM
+> pede 6 a 10 páginas, o CREEM **8 a 12**. Confira sempre pelo arquivo do CREEM.
 
 ## Por que esta pasta fica na raiz
 
@@ -25,11 +31,12 @@ normalização faz com um binário que ela não entende.
 
 ## Ao trocar o template
 
-Quando o template do COBEM 2027 for publicado:
+Já aconteceu uma vez, em 23/09/2026. O procedimento que funcionou:
 
 1. Acrescente o novo arquivo **ao lado** do antigo, não por cima
 2. Atualize a tabela acima e a
-   [página do COBEM](../docs/cobem.md), lendo o arquivo novo
+   [página de formato](../docs/formato-do-artigo.md), **lendo o arquivo novo** —
+   não presuma que a família de templates é idêntica
 3. Só apague o antigo quando o artigo estiver diagramado no novo
 
 O `.gitattributes` da raiz marca `.docx` como binário. Sem isso, o git no

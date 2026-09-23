@@ -54,7 +54,7 @@ Detalhes em [`docs/equipe.md`](docs/equipe.md).
 |---|---|
 | [Plano do TCC](docs/plano.md) | O que o trabalho é: pergunta, objetivos, desenho experimental |
 | [Registro de decisões](docs/decisoes.md) | O que já foi decidido, e o que continua aberto |
-| [Formato COBEM](docs/cobem.md) | Como o artigo é diagramado |
+| [Formato do artigo](docs/formato-do-artigo.md) | Como o artigo é diagramado |
 | [Equipe e papéis](docs/equipe.md) | Quem faz o quê |
 | [Processo de trabalho](docs/processo.md) | Como GitHub, GitBook e Claude se encaixam |
 | [Padrões](docs/padroes.md) | Branch, commit, pull, push, merge, docs, relatórios |

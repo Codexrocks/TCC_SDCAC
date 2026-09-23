@@ -15,7 +15,7 @@ git checkout -b davi/docs/meu-assunto   # <seu-nome>/<tipo>/<assunto>
 git commit -m "docs: adiciona seção sobre SIEM"
 python3 scripts/validar.py              # tem que passar
 git push -u origin davi/docs/meu-assunto
-# abra o PR, peça revisão de 1 colega, avise o Davi para fazer o merge
+# abra o PR; com os checks verdes, o merge é seu
 ```
 
 
@@ -80,12 +80,13 @@ Sem IA? `Assistido-por: nenhuma`. O `validar.py` reprova quem esquecer. Ver
 
 ## Merge
 
-PR para `main` → check **Validação** verde → **1 aprovação** → **o Davi faz o
+PR para `main` → checks **Validação** e **Governança** verdes → **o Davi faz o
 merge** → apaga a branch.
 
-Só o Davi consegue mergear: o GitHub recusa a atualização da `main` vinda de
-qualquer outra pessoa. Você abre o PR e aprova normalmente — quando estiver
-verde e aprovado, avise.
+Não há aprovação de outra pessoa: o trabalho é de uma pessoa só, e o GitHub não
+deixa ninguém aprovar o próprio PR. O que segura no lugar é o check verde, o
+checklist do template lido de verdade e, nos arquivos de regra, as 24 h de
+espera da seção 4 do [`AGENTS.md`](AGENTS.md).
 
 ## Código
 
@@ -101,7 +102,7 @@ Mexeu no dashboard? Vale também [`docs/usabilidade.md`](docs/usabilidade.md).
 
 ## Uso de IA
 
-Os três usam, e isso é esperado. O que não pode é não declarar:
+Usar IA é esperado. O que não pode é não declarar:
 
 - No **commit**, a linha `Assistido-por:`
 - No **Pull Request**, a seção *Uso de IA* do template
@@ -111,7 +112,8 @@ As duas são conferidas por máquina. Detalhe em
 estão em [`AGENTS.md`](AGENTS.md).
 
 Mexer nas regras (`AGENTS.md`, `docs/padroes*.md`) ou nas checagens
-(`.github/`, `scripts/`) precisa de **duas** aprovações, não uma.
+(`.github/`, `scripts/`) pede 24 h de PR aberto e a seção `Arquivo protegido`
+respondida — ver [`AGENTS.md`](AGENTS.md), seção 4.
 
 ## Nunca
 

@@ -55,8 +55,9 @@
 
 > **O abstract em inglês é obrigatório**, além do Resumo em português —
 > confirmado com o orientador em 04/09/2026, e exigido também pela estrutura do
-> [COBEM](../docs/cobem.md), que pede Resumo/Abstract e
-> Palavras-chave/Keywords.
+> [template CREEM 2026](../docs/formato-do-artigo.md), que pede Resumo e
+> Palavras-chave no alto, e o bloco em inglês — título, autores, *Abstract* e
+> *Keywords* — **depois da lista de referências**, no fim do artigo.
 >
 > **É a única parte do artigo em inglês.** O resto é todo em português, decidido
 > em 07/09/2026.

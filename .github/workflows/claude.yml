@@ -114,8 +114,9 @@ jobs:
             - página nova em docs/ entra no docs/SUMMARY.md, senão o check
               reprova e ela não existe para o GitBook
             - PR que toca AGENTS.md, docs/padroes*, docs/processo.md,
-              CONTRIBUTING.md, .github/** ou scripts/** precisa de DUAS
-              aprovações — avise isso no corpo do PR
+              CONTRIBUTING.md, .github/** ou scripts/** fica 24 h aberto antes
+              de entrar e precisa da seção "Arquivo protegido" no corpo, com o
+              que muda, por que agora e o que segura no lugar
             - rode `python3 scripts/validar.py` antes de abrir
 
             QUANDO O PEDIDO FOR AMBÍGUO, ou mexer em escopo, cronograma ou nas

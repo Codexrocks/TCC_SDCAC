@@ -36,7 +36,7 @@ fechada fica enterrada.
 | D-17 | Janela de constituição do baseline da D2 | Janela de treino anterior e disjunta da janela de avaliação | Davi | 01/10 |
 | D-18 | Dupla contagem e escala na integração | Excluir o evento atual da janela de exposição | Davi | 01/10 |
 | D-19 | Vertente LGPD e ISO/IEC 27001 | Entra como limitação e trabalho futuro na S13 | Yasmin | 01/10 |
-| D-20 | Sexto capítulo do artigo (`04-desenvolvimento`), proposto pelo plano | Não acrescentar. A estrutura de cinco seções é da instituição, e o [COBEM](cobem.md) limita o artigo inteiro a 6–10 páginas — um capítulo a mais agrava o orçamento de páginas em vez de resolvê-lo | Davi | Próxima reunião |
+| D-20 | Sexto capítulo do artigo (`04-desenvolvimento`), proposto pelo plano | Não acrescentar: a estrutura de cinco seções é da instituição, e quem a altera é o orientador. O argumento de espaço **caiu** — o [template CREEM](formato-do-artigo.md) dá de 8 a 12 páginas, não 6 a 10, e um sexto capítulo caberia. O que decide agora é só a autoridade sobre a estrutura | Davi | Próxima reunião |
 
 ## Adotadas, a confirmar
 
@@ -52,7 +52,7 @@ fechada fica enterrada.
 | D-03 | Operacionalização de "resultados diferentes" | FPR a revocação fixa **e** revocação longitudinal, com a **direção declarada** na pergunta. Precisão@k é secundária. Ver [plano, seção 1.3](plano.md) | 07/09/2026 |
 | D-04 | Dono da Justificativa | Evidência de Yasmin e Filipe; tese e redação de Davi | 06/09/2026 |
 | D-08 | SLA de resposta a Pull Request | 24 horas. PR sem resposta em 24 h é item obrigatório de pauta | 06/09/2026 |
-| D-11 | Formato do artigo: ABNT ou template de evento | **COBEM** — template da ABCM, versionado em [`templates/`](../templates/README.md). Corrige o registro de 04/09, que dizia ABNT. Ver [COBEM](cobem.md) | 07/09/2026 |
+| D-11 | Formato do artigo | **CREEM 2026 para tudo, ABNT só para a lista de referências.** Template disponibilizado pelo professor. As chamadas de citação dentro do texto seguem o CREEM (`Chang e Pakzad, 2013`), **não** a NBR 10520. Terceira volta nesta decisão — o histórico das três está em [formato do artigo](formato-do-artigo.md) | 23/09/2026 |
 | D-21 | Idioma do artigo | Texto inteiro em **português**; só o *abstract* e as *keywords* em inglês. O template pede inglês, mas quem define para o TCC é a coordenação | 07/09/2026 |
 | D-22 | Onde ficam os insumos das encomendas | **`docs/insumos/`**, não `artigo/insumos/`. O GitBook **escreve** em `artigo/` e normaliza o Markdown ao salvar — foi assim que os comentários dos seis capítulos sumiram em 06/09. Em `docs/` ele só lê. As duas pastas publicam; o que muda é a escrita de volta. Cada insumo entregue entra no `docs/SUMMARY.md` | 07/09/2026 |
 
@@ -201,5 +201,6 @@ sobre monitoramento no ambiente de trabalho e no controle 8.16 da ISO/IEC
 3. Quando fechar: mover para **Fechadas**, com a data e o que ficou combinado
 4. Se a decisão mudar o [plano](plano.md), alterar o plano no mesmo Pull Request
 
-Decisão que muda regra de processo, padrão ou workflow exige **duas** aprovações
-— ver [`AGENTS.md`](../AGENTS.md), seção 4.
+Decisão que muda regra de processo, padrão ou workflow entra por Pull Request que
+espera **24 h** e traz a seção `Arquivo protegido` — ver
+[`AGENTS.md`](../AGENTS.md), seção 4.

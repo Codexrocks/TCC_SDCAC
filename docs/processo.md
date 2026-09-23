@@ -41,8 +41,8 @@ Regra geral: **simples o suficiente para ninguém esquecer.**
 3. ... trabalhe ...
 4. git add . && git commit            commits pequenos e frequentes
 5. git push -u origin davi/docs/tema  suba
-6. abra o Pull Request                peça revisão de 1 colega
-7. avise o Davi                       o merge é ele quem faz
+6. abra o Pull Request                confira o checklist do template
+7. espere os checks verdes            o merge é seu, depois deles
 8. apague a branch
 ```
 
@@ -75,8 +75,11 @@ chore: adiciona dependência do Pandas
 ### Regras de merge
 
 - PR sempre para `main`
-- **1 aprovação** obrigatória de um colega — ninguém aprova o próprio PR
-- Check **Validação** verde
+- **Sem aprovação de outra pessoa** — o trabalho é de uma pessoa só, e o
+  GitHub não deixa ninguém aprovar o próprio PR
+- Checks **Validação** e **Governança** verdes
+- Arquivo de regra ou de checagem: **24 h de PR aberto** e a seção
+  `Arquivo protegido` preenchida (ver [Padrões](padroes.md))
 - **Só o Davi executa o merge** — trava do GitHub, não combinado
 - Sempre **Squash and merge**, e é a única opção que o GitHub oferece
 - Branch apagada depois do merge
@@ -98,9 +101,10 @@ site do GitBook já é público — então abrir o código não muda a exposiç�
 
 **b) Proteger a `main`** — dois rulesets, ambos `Active`:
 
-- [x] `Proteção da main` — PR obrigatório com 1 aprovação, checks **Validação**
-      e **Governança**, sem force push, sem deleção, só *Squash and merge*. Sem
-      bypass para ninguém
+- [x] `Proteção da main` — PR obrigatório, checks **Validação** e
+      **Governança**, sem force push, sem deleção, só *Squash and merge*. Sem
+      bypass para ninguém. A exigência de aprovação saiu em 23/09/2026, com o
+      trabalho passando a ser de uma pessoa
 - [x] `Merge restrito ao líder` — só o dono da organização atualiza a `main`
 
 **c) Adicionar o secret do assistente** — `Settings → Secrets and variables → Actions`
@@ -150,13 +154,14 @@ ela é um espelho descartável, forçado a cada merge, e nada volta dela.
 
 ## 4.1 Uso de IA
 
-Os três integrantes usam assistente de IA, e isso é declarado em cada commit e
+O assistente de IA é usado o tempo todo, e isso é declarado em cada commit e
 em cada Pull Request — conferido por máquina, não por disciplina. As regras que
 os assistentes leem estão em [`AGENTS.md`](../AGENTS.md); a política escrita
 para gente está em [Uso de IA](uso-de-ia.md).
 
-Mudança nas regras ou nas checagens automáticas exige **duas** aprovações, para
-que nenhuma IA consiga afrouxar a própria coleira com uma aprovação só.
+Mudança nas regras ou nas checagens automáticas espera **24 h** de Pull Request
+aberto e se explica na seção `Arquivo protegido`, para que nem a IA nem a pressa
+afrouxem a coleira na mesma sentada em que a mudança foi escrita.
 
 ## 5. O Claude no projeto
 

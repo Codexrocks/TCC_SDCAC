@@ -25,7 +25,7 @@
 
 ## O artigo
 
-* [Formato COBEM](cobem.md)
+* [Formato do artigo](formato-do-artigo.md)
 * [Citações pendentes](citacoes-pendentes.md)
 
 ## Uso de IA

@@ -1,12 +1,14 @@
 """Testes do verificador de governanca.
 
 Duas regras sao testadas aqui: a declaracao de IA no corpo do Pull Request e a
-exigencia de duas aprovacoes para mexer nas regras do projeto.
+espera de 24 h com justificativa para mexer nas regras do projeto.
 
 A segunda e a que protege todas as outras. Se ela quebrar em silencio, um unico
 PR passa a conseguir desligar as travas — que e exatamente o cenario que ela
 existe para impedir.
 """
+from datetime import datetime, timedelta, timezone
+
 import pytest
 
 import governanca
@@ -17,10 +19,6 @@ def limpa_estado():
     governanca.erros.clear()
     yield
     governanca.erros.clear()
-
-
-def review(login, estado):
-    return {"user": {"login": login}, "state": estado}
 
 
 # ---------------------------------------------------------------------------
@@ -102,15 +100,32 @@ def test_aceita_sem_negrito():
 
 
 # ---------------------------------------------------------------------------
-# Dupla aprovacao
+# Arquivo protegido: espera e justificativa
+#
+# Ate 23/09/2026 esta secao testava duas aprovacoes. Com uma pessoa so, e o
+# GitHub recusando que alguem aprove o proprio PR, aquela regra virou
+# impossivel de cumprir. No lugar dela entraram a espera de 24 h e a secao
+# "Arquivo protegido" no corpo do PR.
+#
+# O relogio entra por parametro justamente para o teste nao depender da hora em
+# que ele roda.
 # ---------------------------------------------------------------------------
 
+AGORA = datetime(2026, 9, 23, 12, 0, tzinfo=timezone.utc)
+RECEM_ABERTO = AGORA - timedelta(hours=1)
+ESPERA_CUMPRIDA = AGORA - timedelta(hours=25)
 
-def test_arquivo_comum_basta_uma_aprovacao():
-    governanca.checar_dupla_aprovacao(
-        ["docs/arquitetura.md", "docs/relatorios/2026-09-03-sessao-01.md"],
-        [],
-        "davi",
+PROTEGIDO_OK = """## Arquivo protegido
+
+- **O que muda:** o governanca.py conta espera em vez de aprovacao
+- **Por que agora:** o trabalho passou a ser de uma pessoa so
+- **O que segura no lugar:** as 24 h de espera e esta justificativa
+"""
+
+
+def test_arquivo_comum_nao_exige_nada():
+    governanca.checar_arquivo_protegido(
+        ["docs/arquitetura.md"], "", RECEM_ABERTO, AGORA
     )
     assert governanca.erros == []
 
@@ -130,90 +145,83 @@ def test_arquivo_comum_basta_uma_aprovacao():
         "scripts/governanca.py",
     ],
 )
-def test_arquivo_protegido_exige_duas_aprovacoes(arquivo):
-    governanca.checar_dupla_aprovacao([arquivo], [], "davi")
+def test_arquivo_protegido_recem_aberto_espera(arquivo):
+    governanca.checar_arquivo_protegido([arquivo], PROTEGIDO_OK, RECEM_ABERTO, AGORA)
     assert len(governanca.erros) == 1
-    assert "2 aprovacoes" in governanca.erros[0]
+    assert "faltam 23.0 h" in governanca.erros[0]
 
 
-def test_uma_aprovacao_nao_basta_em_arquivo_protegido():
-    governanca.checar_dupla_aprovacao(
-        ["scripts/validar.py"], [review("yasmin", "APPROVED")], "davi"
-    )
-    assert len(governanca.erros) == 1
-    assert "faltam 1" in governanca.erros[0]
-
-
-def test_duas_aprovacoes_passam():
-    governanca.checar_dupla_aprovacao(
-        ["scripts/validar.py"],
-        [review("yasmin", "APPROVED"), review("filipe", "APPROVED")],
-        "davi",
+def test_espera_cumprida_com_a_secao_preenchida_passa():
+    governanca.checar_arquivo_protegido(
+        ["scripts/validar.py"], PROTEGIDO_OK, ESPERA_CUMPRIDA, AGORA
     )
     assert governanca.erros == []
 
 
-def test_autor_nao_conta_como_aprovador():
-    """Ninguem se auto-aprova, nem quando o GitHub deixa registrar o review."""
-    governanca.checar_dupla_aprovacao(
-        ["AGENTS.md"],
-        [review("davi", "APPROVED"), review("yasmin", "APPROVED")],
-        "davi",
-    )
-    assert len(governanca.erros) == 1
-    assert "faltam 1" in governanca.erros[0]
-
-
-def test_mesma_pessoa_aprovando_duas_vezes_conta_uma():
-    governanca.checar_dupla_aprovacao(
-        ["AGENTS.md"],
-        [review("yasmin", "APPROVED"), review("yasmin", "APPROVED")],
-        "davi",
-    )
-    assert len(governanca.erros) == 1
-
-
-def test_quem_aprovou_e_depois_pediu_mudancas_nao_conta():
-    """Vale a posicao mais recente de cada pessoa, nao a primeira."""
-    governanca.checar_dupla_aprovacao(
-        ["AGENTS.md"],
-        [
-            review("yasmin", "APPROVED"),
-            review("filipe", "APPROVED"),
-            review("filipe", "CHANGES_REQUESTED"),
-        ],
-        "davi",
-    )
-    assert len(governanca.erros) == 1
-    assert "faltam 1" in governanca.erros[0]
-
-
-def test_comentario_nao_derruba_aprovacao_anterior():
-    """Comentar depois de aprovar nao e mudar de posicao."""
-    governanca.checar_dupla_aprovacao(
-        ["AGENTS.md"],
-        [
-            review("yasmin", "APPROVED"),
-            review("filipe", "APPROVED"),
-            review("filipe", "COMMENTED"),
-        ],
-        "davi",
+def test_o_limite_exato_das_24_h_ja_passa():
+    """24 h cravadas contam como cumpridas; abaixo disso, nao."""
+    governanca.checar_arquivo_protegido(
+        ["AGENTS.md"], PROTEGIDO_OK, AGORA - timedelta(hours=24), AGORA
     )
     assert governanca.erros == []
+
+
+def test_sem_a_secao_reprova_mesmo_depois_da_espera():
+    governanca.checar_arquivo_protegido(
+        ["scripts/validar.py"], "## O que muda\n\nmexi num script\n", ESPERA_CUMPRIDA, AGORA
+    )
+    assert len(governanca.erros) == 1
+    assert "Arquivo protegido" in governanca.erros[0]
+
+
+def test_campos_em_branco_reprovam():
+    corpo = (
+        "## Arquivo protegido\n\n"
+        "- **O que muda:**\n"
+        "- **Por que agora:**\n"
+        "- **O que segura no lugar:**\n"
+    )
+    governanca.checar_arquivo_protegido(["AGENTS.md"], corpo, ESPERA_CUMPRIDA, AGORA)
+    assert len(governanca.erros) == 3
+    assert all("em branco" in e for e in governanca.erros)
+
+
+def test_falta_o_campo_do_que_segura_no_lugar():
+    """O campo que importa: afrouxar sem repor e o que a regra existe para pegar."""
+    corpo = PROTEGIDO_OK.replace(
+        "- **O que segura no lugar:** as 24 h de espera e esta justificativa\n", ""
+    )
+    governanca.checar_arquivo_protegido(["AGENTS.md"], corpo, ESPERA_CUMPRIDA, AGORA)
+    assert len(governanca.erros) == 1
+    assert "O que segura no lugar" in governanca.erros[0]
 
 
 def test_qualquer_arquivo_dentro_de_github_ou_scripts_conta():
-    governanca.checar_dupla_aprovacao(["scripts/atividade.py"], [], "davi")
+    governanca.checar_arquivo_protegido(
+        ["scripts/atividade.py"], PROTEGIDO_OK, RECEM_ABERTO, AGORA
+    )
     assert governanca.erros != []
     governanca.erros.clear()
-    governanca.checar_dupla_aprovacao([".github/CODEOWNERS"], [], "davi")
+    governanca.checar_arquivo_protegido(
+        [".github/CODEOWNERS"], PROTEGIDO_OK, RECEM_ABERTO, AGORA
+    )
     assert governanca.erros != []
 
 
 def test_arquivo_parecido_nao_e_protegido():
     """A regra vale para os caminhos exatos, nao para nomes parecidos."""
-    governanca.checar_dupla_aprovacao(
-        ["docs/padroes-de-escrita.md", "documentacao/scripts/algo.py"], [], "davi"
+    governanca.checar_arquivo_protegido(
+        ["docs/padroes-de-escrita.md", "documentacao/scripts/algo.py"],
+        "",
+        RECEM_ABERTO,
+        AGORA,
+    )
+    assert governanca.erros == []
+
+
+def test_a_secao_protegido_tambem_vale_com_crlf():
+    governanca.checar_arquivo_protegido(
+        ["AGENTS.md"], crlf(PROTEGIDO_OK), ESPERA_CUMPRIDA, AGORA
     )
     assert governanca.erros == []
 
@@ -277,17 +285,17 @@ def test_caminhos_tocados_sem_renomeacao_devolve_so_o_filename():
         ("scripts/validar.py", "ferramentas/validar.py"),
     ],
 )
-def test_mover_arquivo_protegido_para_fora_exige_duas_aprovacoes(de, para):
+def test_mover_arquivo_protegido_para_fora_cai_na_regra(de, para):
     """O caso que escapava: so o destino era lido, e o destino nao e protegido."""
     arquivos = governanca.caminhos_tocados([renomeacao(de, para)])
-    governanca.checar_dupla_aprovacao(arquivos, [review("yasmin", "APPROVED")], "davi")
+    governanca.checar_arquivo_protegido(arquivos, PROTEGIDO_OK, RECEM_ABERTO, AGORA)
     assert len(governanca.erros) == 1
-    assert "faltam 1" in governanca.erros[0]
+    assert "faltam" in governanca.erros[0]
 
 
-def test_renomear_entre_caminhos_comuns_basta_uma_aprovacao():
+def test_renomear_entre_caminhos_comuns_nao_cai_na_regra():
     arquivos = governanca.caminhos_tocados([renomeacao("docs/a.md", "docs/b.md")])
-    governanca.checar_dupla_aprovacao(arquivos, [], "davi")
+    governanca.checar_arquivo_protegido(arquivos, "", RECEM_ABERTO, AGORA)
     assert governanca.erros == []
 
 
