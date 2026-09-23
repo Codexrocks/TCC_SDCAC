@@ -1,26 +1,28 @@
 # Referências
 
-> **Esta página está no estilo errado desde 07/09/2026.** Foi montada em ABNT
-> NBR 6023; o artigo sai no [formato COBEM](../docs/cobem.md), que é
-> **autor-ano**, não numérico.
+> **Esta página está no estilo certo.** O professor confirmou em 23/09/2026 que
+> a **ABNT vale para a lista de referências** — e é em ABNT NBR 6023 que os
+> modelos abaixo estão montados. Não há nada a refazer aqui; falta preencher.
 >
-> No texto: `(Choma and Ugaya, 2017)` ou `Choma and Ugaya (2017)`. Três ou mais
-> autores: `(Porto-Hernandez et al., 2023)`. Mesmo autor e ano: `2017a`,
-> `2017b`.
+> Um aviso anterior dizia o contrário e foi retirado. Ver
+> [formato do artigo](../docs/formato-do-artigo.md).
+
+> **Cuidado com a pegadinha: a lista é ABNT, a chamada no texto não.**
 >
-> Na lista, ordem alfabética pelo sobrenome do primeiro autor, primeira linha à
-> esquerda e as demais com recuo de 0,5 cm:
+> | Onde | Formato | Exemplo |
+> |---|---|---|
+> | **Chamada no texto** | **CREEM**, não NBR 10520 | `(Chang e Pakzad, 2013)` · `Chang e Pakzad (2013) demonstram que ...` |
+> | **Lista, aqui** | **ABNT NBR 6023** | `CHANG, M.; PAKZAD, S. N. Título...` |
 >
-> ```
-> Sestito, G.S., Venter, G.S. and da Silva, M.M., 2022. "In-process chatter
-> detection in micro-milling using acoustic emission via machine learning
-> classifiers". The International Journal of Advanced Manufacturing
-> Technology, Vol. 120, pp. 7293-7303.
-> ```
+> Três ou mais autores na chamada: `(Bordalo et al., 1989)`. Mesmo autor e ano:
+> `2017a`, `2017b`.
 >
-> Os modelos ABNT abaixo continuam servindo para **saber o que anotar** de cada
-> fonte. O que muda é a pontuação e a ordem. Refazer está nas pendências do
-> COBEM.
+> **Não** escreva a chamada em caixa alta com ponto e vírgula — `(CHANG;
+> PAKZAD, 2013)` é NBR 10520, e essa norma não se aplica aqui.
+>
+> A lista vai em ordem alfabética pelo sobrenome do primeiro autor, primeira
+> linha alinhada à esquerda e as demais com recuo. **Toda referência da lista
+> precisa aparecer no texto, e toda chamada do texto precisa estar na lista.**
 
 > **Uma referência só entra aqui depois de alguém abrir a fonte.**
 >

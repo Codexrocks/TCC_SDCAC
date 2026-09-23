@@ -2,7 +2,7 @@
 
 > **Entrega: 10/09/2026** — Tarefa 02 do professor. Responsável: todos. Esta é a seção mais urgente do artigo.
 >
-> **Formato COBEM**, lido do template oficial em 07/09/2026. O que muda está em [COBEM](../docs/cobem.md#o-que-isto-muda-no-artigo), e a primeira consequência é de tamanho: **o artigo inteiro tem de 6 a 10 páginas.**
+> **Formato CREEM 2026**, lido do template que o professor disponibilizou em 23/09/2026. O que muda está em [formato do artigo](../docs/formato-do-artigo.md#o-que-isto-muda-no-artigo), e a primeira consequência é de tamanho: **o artigo inteiro tem de 8 a 12 páginas** — oito é o piso, não o teto.
 >
 > A Contextualização abaixo pedia "duas ou três páginas" — um terço do artigo antes de chegar ao problema. Combine a divisão com a equipe antes de escrever.
 >
@@ -193,4 +193,4 @@
 * [x] Objetivo geral em uma frase
 * [x] Objetivos específicos verificáveis, alinhados ao cronograma
 * [ ] Revisão de português por alguém que não escreveu
-* [ ] Conteúdo transposto para o template COBEM, dentro do limite de páginas
+* [ ] Conteúdo transposto para o template CREEM 2026, dentro das 8 a 12 páginas
