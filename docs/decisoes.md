@@ -23,7 +23,6 @@ fechada fica enterrada.
 
 | ID | Decisão | Proposta | Dono | Prazo |
 |---|---|---|---|---|
-| D-01 | Mudança de título | Adotar "Avaliação Multidimensional de Risco Comportamental"; atualizar README e comunicar ao orientador | Davi | Próxima reunião |
 | D-02 | Dashboard: objetivo, instrumento ou fora do escopo | Instrumento de análise, descrito na Metodologia e na [arquitetura](arquitetura.md) | Davi + Filipe | 08/09 |
 | D-06 | Cenários de contexto (B) e longitudinais (L) | Adotados; desenho detalhado na S5 | Yasmin | 01/10 |
 | D-07 | Caneta rotativa por seção | Uma pessoa redige, duas revisam, a caneta gira | Os três | Ratificação na [issue #20](https://github.com/Codexrocks/TCC_SDCAC/issues/20) |
@@ -36,7 +35,7 @@ fechada fica enterrada.
 | D-17 | Janela de constituição do baseline da D2 | Janela de treino anterior e disjunta da janela de avaliação | Davi | 01/10 |
 | D-18 | Dupla contagem e escala na integração | Excluir o evento atual da janela de exposição | Davi | 01/10 |
 | D-19 | Vertente LGPD e ISO/IEC 27001 | Entra como limitação e trabalho futuro na S13 | Yasmin | 01/10 |
-| D-20 | Sexto capítulo do artigo (`04-desenvolvimento`), proposto pelo plano | Não acrescentar: a estrutura de cinco seções é da instituição, e quem a altera é o orientador. O argumento de espaço **caiu** — o [template CREEM](formato-do-artigo.md) dá de 8 a 12 páginas, não 6 a 10, e um sexto capítulo caberia. O que decide agora é só a autoridade sobre a estrutura | Davi | Próxima reunião |
+| D-20 | Sexto capítulo do artigo (`04-desenvolvimento`), proposto pelo plano | Não acrescentar: a estrutura de cinco seções é da instituição, e quem a altera é o orientador. O argumento de espaço **caiu** — o professor pede de 8 a 12 páginas, não 6 a 10, e um sexto capítulo caberia. O que decide agora é só a autoridade sobre a estrutura | Davi | Próxima reunião |
 
 ## Adotadas, a confirmar
 
@@ -49,10 +48,11 @@ fechada fica enterrada.
 
 | ID | Decisão | O que ficou | Data |
 |---|---|---|---|
+| D-01 | Mudança de título | **Adotado "Sistema de Avaliação Multidimensional de Risco Comportamental"**, comunicado ao orientador. O título anterior fica na [Tarefa 01](entregas/tarefa-01.md) como registro do que foi entregue em 03/09 | 23/09/2026 |
 | D-03 | Operacionalização de "resultados diferentes" | FPR a revocação fixa **e** revocação longitudinal, com a **direção declarada** na pergunta. Precisão@k é secundária. Ver [plano, seção 1.3](plano.md) | 07/09/2026 |
 | D-04 | Dono da Justificativa | Evidência de Yasmin e Filipe; tese e redação de Davi | 06/09/2026 |
 | D-08 | SLA de resposta a Pull Request | 24 horas. PR sem resposta em 24 h é item obrigatório de pauta | 06/09/2026 |
-| D-11 | Formato do artigo | **CREEM 2026 para tudo, ABNT só para a lista de referências.** Template disponibilizado pelo professor. As chamadas de citação dentro do texto seguem o CREEM (`Chang e Pakzad, 2013`), **não** a NBR 10520. Terceira volta nesta decisão — o histórico das três está em [formato do artigo](formato-do-artigo.md) | 23/09/2026 |
+| D-11 | Formato do artigo | **COBEM 2026 para tudo, ABNT só para a lista de referências.** Consta duas vezes nas orientações do professor, versionadas em [`templates/`](../templates/README.md). A volta anterior, que dizia CREEM 2026, foi engano de arquivo: o `.docx` tratado como sendo do professor era de evento irmão. ⚠️ **O template do COBEM 2026 ainda não está no repositório.** Quarta volta nesta decisão — o histórico das quatro está em [formato do artigo](formato-do-artigo.md) | 23/09/2026 |
 | D-21 | Idioma do artigo | Texto inteiro em **português**; só o *abstract* e as *keywords* em inglês. O template pede inglês, mas quem define para o TCC é a coordenação | 07/09/2026 |
 | D-22 | Onde ficam os insumos das encomendas | **`docs/insumos/`**, não `artigo/insumos/`. O GitBook **escreve** em `artigo/` e normaliza o Markdown ao salvar — foi assim que os comentários dos seis capítulos sumiram em 06/09. Em `docs/` ele só lê. As duas pastas publicam; o que muda é a escrita de volta. Cada insumo entregue entra no `docs/SUMMARY.md` | 07/09/2026 |
 | D-23 | Volume de eventos da simulação | **20 a 50 eventos por dia útil**, faixa média por persona, 250 funcionários, 1 ano. Dá 1,15 a 2,9 milhões de eventos por semente. A média ponderada das personas precisa cair dentro da faixa. Ver [banco simulado](banco-simulado.md) | 23/09/2026 |

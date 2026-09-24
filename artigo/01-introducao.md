@@ -1,10 +1,10 @@
 # 1. Introdução
 
-> **Entrega: 10/09/2026** — Tarefa 02 do professor. Responsável: todos. Esta é a seção mais urgente do artigo.
+> **Entrega: 24/09/2026** — Tarefa 02 do professor. Responsável: todos. Esta é a seção mais urgente do artigo.
 >
-> **Formato CREEM 2026**, lido do template que o professor disponibilizou em 23/09/2026. O que muda está em [formato do artigo](../docs/formato-do-artigo.md#o-que-isto-muda-no-artigo), e a primeira consequência é de tamanho: **o artigo inteiro tem de 8 a 12 páginas** — oito é o piso, não o teto.
+> **Formato COBEM 2026**, conforme as orientações do professor. O detalhe está em [formato do artigo](../docs/formato-do-artigo.md). Dois limites decidem esta seção: o artigo inteiro tem de **8 a 12 páginas**, e **a Introdução tem de 1 a 2** — sem figura, gráfico ou tabela.
 >
-> A Contextualização abaixo pedia "duas ou três páginas" — um terço do artigo antes de chegar ao problema. Combine a divisão com a equipe antes de escrever.
+> A Contextualização abaixo pedia "duas ou três páginas". **Não cabe:** a seção inteira tem no máximo duas. As orientações também definem a ordem — cenário com as lacunas, justificativa, e então o objetivo, que é onde o problema de pesquisa é declarado.
 >
 > O que está abaixo é **estrutura, não conteúdo**. Cada bloco começa com uma instrução **A escrever**. Apague a instrução quando preencher o bloco — ela existe para ser substituída pelo seu texto.\
 > <br>
@@ -193,4 +193,6 @@
 * [x] Objetivo geral em uma frase
 * [x] Objetivos específicos verificáveis, alinhados ao cronograma
 * [ ] Revisão de português por alguém que não escreveu
-* [ ] Conteúdo transposto para o template CREEM 2026, dentro das 8 a 12 páginas
+* [ ] Conteúdo transposto para o template COBEM 2026, dentro de 1 a 2 páginas
+* [ ] Referências do contexto com publicação de **até 5 anos**
+* [ ] Sem figura, gráfico ou tabela

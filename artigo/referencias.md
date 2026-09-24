@@ -11,7 +11,7 @@
 >
 > | Onde | Formato | Exemplo |
 > |---|---|---|
-> | **Chamada no texto** | **CREEM**, não NBR 10520 | `(Chang e Pakzad, 2013)` · `Chang e Pakzad (2013) demonstram que ...` |
+> | **Chamada no texto** | Autor-ano do template, **não** NBR 10520 — confirmar quando o COBEM 2026 chegar | `(Chang e Pakzad, 2013)` · `Chang e Pakzad (2013) demonstram que ...` |
 > | **Lista, aqui** | **ABNT NBR 6023** | `CHANG, M.; PAKZAD, S. N. Título...` |
 >
 > Três ou mais autores na chamada: `(Bordalo et al., 1989)`. Mesmo autor e ano:
