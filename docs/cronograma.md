@@ -30,7 +30,8 @@ não:
 | 5. Conclusão | Esqueleto | S14 |
 
 **Nenhuma linha de código existe ainda.** O que existe é a especificação do
-gerador, em `docs/banco-simulado.md`.
+gerador — que chega ao repositório pelo Pull Request #43, e ainda não está na
+`main`.
 
 A S5 carrega, além da Metodologia, o que ficou de S2 a S4. É a única semana com
 acúmulo declarado — depois dela o cronograma volta a ter uma entrega por semana.
@@ -45,7 +46,7 @@ acúmulo declarado — depois dela o cronograma volta a ter uma entrega por sema
 | **S8** | 16–22/10 | D2 (desvio do padrão) e D3 (exposição + higiene) | C2 e C3 executam ponta a ponta · cenário longitudinal gera exposição crescente **sem** alerta pontual · D3 reporta as duas parcelas separadas | Davi + Yasmin |
 | **S9** | 23–29/10 | Dashboard Streamlit | Leitor externo identifica em **menos de 1 min** por que um usuário está em risco alto · risco decomponível por dimensão | Filipe |
 | **S10** | 30/10–05/11 | Isolation Forest — **opcional** | Documentado como benchmark · o TCC não depende dele | Filipe |
-| **S11** | 06–12/11 | Execução de todos os cenários nas quatro configurações | Reprodutível por script único · **10 a 20 sementes**, as mesmas nas quatro configurações | Todos (Yasmin) |
+| **S11** | 06–12/11 | Execução de todos os cenários nas quatro configurações | Reprodutível por script único · o número de sementes definido pela **D-13**, as mesmas nas quatro configurações | Todos (Yasmin) |
 | **S12** | 13–19/11 | Tabela de ablação, sensibilidade dos pesos, gráficos | Cada número sai de notebook versionado · Wilcoxon pareado sobre as diferenças | Filipe + Davi |
 | **S13** | 20–26/11 | `artigo/04-resultados.md` | Cada limitação nomeada tem proposta de trabalho futuro · LGPD e ISO 27001 entram aqui | Filipe (caneta) |
 | **S14** | 27/11–03/12 | `artigo/05-conclusao.md` | A pergunta é respondida com **sim, não ou parcialmente — e um número** | Davi (caneta) |
@@ -130,7 +131,7 @@ Dashboard, Isolation Forest e referencial teórico correm em paralelo e têm fol
 | Risco | Onde aperta | Mitigação |
 |---|---|---|
 | **M2 em 8 dias** com 14 decisões abertas | D-12 a D-19 vencem em 01/10, e os cenários também | Fechar as sete lacunas metodológicas antes de escrever a Metodologia |
-| **Gerador sem parâmetros** | 26 definições abertas em `docs/banco-simulado.md` — personas, matriz cargo × sistema, faixas de rede | P06 a P10 e P24 a P31 precisam de resposta antes da S6 |
+| **Gerador sem parâmetros** | 26 definições abertas na especificação do gerador — personas, matriz cargo × sistema, faixas de rede | P06 a P10 e P24 a P31 precisam de resposta antes da S6 |
 | **Nenhum código em 23/09** | S6 a S8 são três semanas para banco, gerador e quatro motores | A S10 é o único corte disponível: o Isolation Forest é opcional por definição |
 | **Referencial fora do repositório** | O rascunho existe e não está versionado | Entra na S5, convertido para ABNT |
 
