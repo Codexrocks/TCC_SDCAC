@@ -29,7 +29,7 @@ fechada fica enterrada.
 | D-07 | Caneta rotativa por seção | Uma pessoa redige, duas revisam, a caneta gira | Os três | Ratificação na [issue #20](https://github.com/Codexrocks/TCC_SDCAC/issues/20) |
 | D-09 | Pesos preliminares e análise de sensibilidade | Valores preliminares; sensibilidade na S12 | Yasmin | S8 |
 | D-12 | Unidade de análise das métricas | Duas unidades declaradas separadamente: evento para os cenários pontuais, episódio para os de contexto e longitudinais | Davi + Filipe | 01/10 |
-| D-13 | Tratamento estatístico dos resultados | **10 a 20 sementes** (era 20 a 30), as mesmas nas quatro configurações; Wilcoxon pareado. Com 10 pares o menor *p* que o teste produz é ≈ 0,002, então 10 ainda permitem afirmar significância; abaixo de 6, não. O número final sai da medição da primeira execução completa (**P31**) | Davi — era Filipe | 01/10 |
+| D-13 | Tratamento estatístico dos resultados | **10 a 20 sementes** (era 20 a 30), as mesmas nas quatro configurações; Wilcoxon pareado. O piso de 10 vem da aritmética do teste, não de convenção — ver o detalhamento abaixo. O número final sai da medição da primeira execução completa (**P31**) | Davi | 01/10 |
 | D-14 | O que fazer se a C0 não alcançar revocação 0,90 | Comparar curvas precisão-revocação, em vez de pontos únicos | Filipe | 01/10 |
 | D-15 | Critério de relevância declarado a priori | Uma frase na Metodologia dizendo qual redução de FPR e qual revocação longitudinal contam como resposta afirmativa | Os três | 01/10 |
 | D-16 | Controle negativo longitudinal | Acrescentar cenário de escalada legítima aos cenários de teste | Yasmin | 01/10 |
@@ -57,7 +57,7 @@ fechada fica enterrada.
 | D-22 | Onde ficam os insumos das encomendas | **`docs/insumos/`**, não `artigo/insumos/`. O GitBook **escreve** em `artigo/` e normaliza o Markdown ao salvar — foi assim que os comentários dos seis capítulos sumiram em 06/09. Em `docs/` ele só lê. As duas pastas publicam; o que muda é a escrita de volta. Cada insumo entregue entra no `docs/SUMMARY.md` | 07/09/2026 |
 | D-23 | Volume de eventos da simulação | **20 a 50 eventos por dia útil**, faixa média por persona, 250 funcionários, 1 ano. Dá 1,15 a 2,9 milhões de eventos por semente. A média ponderada das personas precisa cair dentro da faixa. Ver [banco simulado](banco-simulado.md) | 23/09/2026 |
 | D-24 | Qual dimensão compara o funcionário com o próprio padrão | **A dimensão 2.** Um conjunto de eventos de uma janela comparado ao padrão individual dos 3 primeiros meses. É o que mantém a pergunta de pesquisa respondível — sem isso, nenhuma dimensão compara o funcionário com ele mesmo | 23/09/2026 |
-| D-25 | O que é a dimensão 3 | **Exposição acumulada e higiene de segurança**, com as **duas parcelas reportadas separadas** — nunca somadas num número só, cujo peso seria impossível de justificar. Atende também a regra de risco decomponível da [usabilidade](usabilidade.md). **Muda o texto da Introdução**, que hoje fala só em exposição acumulada | 23/09/2026 |
+| D-25 | O que é a dimensão 3 | **Exposição acumulada e higiene de segurança**, com as **duas parcelas reportadas separadas** — nunca somadas num número só, cujo peso seria impossível de justificar. Atende também a regra de risco decomponível da [usabilidade](usabilidade.md). ⚠️ **Pendente:** ajustar `artigo/01-introducao.md`, que descreve a dimensão 3 só como exposição acumulada · **Davi** · antes da Metodologia, na S5 | 23/09/2026 |
 | D-26 | A linha de base vira dimensão 1 ou continua separada | **Continua separada**: quatro configurações, C0 a C3, como no plano v2. Confirma a **D-05**. Abre a **P30**: duas das quatro regras da C0 usavam histórico do funcionário e contaminavam o grupo de controle — a C0 precisa ser puramente estática | 23/09/2026 |
 
 ---
@@ -101,18 +101,39 @@ números. Com isso não há como distinguir "a C3 é melhor" de "a C3 deu sorte
 nesta semente".
 
 ```text
-PROPOSTA: N sementes (20 a 30) × 4 configurações
+DECIDIDO: N sementes (10 a 20) × 4 configurações
           cada célula vira média ± desvio
           as MESMAS sementes nas quatro configurações → comparação pareada
           teste de Wilcoxon pareado sobre as N diferenças
 
 CUSTO:    um laço no script da S11. Horas de CPU, não de pessoa.
 GANHO:    a diferença entre "a tabela mostra" e "a diferença é
-          estatisticamente significativa (p < 0,05, n = 30)".
+          estatisticamente significativa (p < 0,05, n = 10)".
 ```
 
 A semente já é configurável no gerador e já é gravada em cada execução. Falta
 usar.
+
+#### Por que o piso é 10, e não um número escolhido a esmo
+
+No teste de Wilcoxon pareado **exato**, o menor valor de *p* bilateral que se
+consegue com *n* pares é `2 / 2ⁿ` — o caso em que todas as diferenças têm o
+mesmo sinal. Daí:
+
+| *n* pares | Menor *p* bilateral possível | Alcança p < 0,05? |
+|---|---|---|
+| 5 | 2/32 = 0,0625 | **Não** — nem no melhor caso |
+| 6 | 2/64 ≈ 0,031 | Sim, no limite |
+| 10 | 2/1024 ≈ **0,002** | Sim, com folga |
+| 20 | 2/1.048.576 ≈ 0,000002 | Sim |
+
+Com menos de 6 sementes, **nenhum resultado seria declarável significativo,
+mesmo que a C3 vencesse em todas as execuções.** Dez dá folga confortável; vinte
+não acrescenta poder na prática, e custa o dobro de CPU.
+
+> A aritmética está aqui em vez de uma citação porque é derivável em duas
+> linhas, e derivação verificável vale mais que fonte que ninguém abre. Se algum
+> revisor discordar, o que se confere é a conta.
 
 ### D-14 · A métrica primária pode não existir para a C0
 
