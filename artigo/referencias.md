@@ -11,18 +11,20 @@
 >
 > | Onde | Formato | Exemplo |
 > |---|---|---|
-> | **Chamada no texto** | Autor-ano do template, **não** NBR 10520 — confirmar quando o COBEM 2026 chegar | `(Chang e Pakzad, 2013)` · `Chang e Pakzad (2013) demonstram que ...` |
+> | **Chamada no texto** | **Em aberto até o template COBEM 2026 chegar.** O que está escrito hoje usa a NBR 10520, e é consistente com a lista em ABNT — ver [formato do artigo](../docs/formato-do-artigo.md) | `(CHANDOLA; BANERJEE; KUMAR, 2009)` hoje · possivelmente `(Chandola et al., 2009)` depois |
 > | **Lista, aqui** | **ABNT NBR 6023** | `CHANG, M.; PAKZAD, S. N. Título...` |
 >
 > Três ou mais autores na chamada: `(Bordalo et al., 1989)`. Mesmo autor e ano:
 > `2017a`, `2017b`.
 >
-> Chang e Pakzad (2013) e Bordalo et al. (1989) são os exemplos **do próprio
-> template** — servem de modelo de forma, não de referência a citar. A conversão
-> da primeira para ABNT foi feita aqui; o template a lista no estilo da ABCM.
+> Chang e Pakzad (2013) e Bordalo et al. (1989) vieram do template do **CREEM
+> 2026**, que foi tratado por engano como sendo o do professor em 23/09. Servem
+> de modelo de forma, não de referência a citar — e a conversão para ABNT foi
+> feita aqui, não está em template nenhum.
 >
-> **Não** escreva a chamada em caixa alta com ponto e vírgula — `(CHANG;
-> PAKZAD, 2013)` é NBR 10520, e essa norma não se aplica aqui.
+> **Até o template do COBEM 2026 chegar, mantenha a forma que já está no texto.**
+> A NBR 10520 é a norma ABNT da chamada, e "ABNT" é a única instrução escrita
+> que existe sobre as referências deste trabalho.
 >
 > A lista vai em ordem alfabética pelo sobrenome do primeiro autor, primeira
 > linha alinhada à esquerda e as demais com recuo. **Toda referência da lista

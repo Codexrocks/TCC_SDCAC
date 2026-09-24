@@ -23,8 +23,8 @@ não:
 
 | Capítulo | Estado | Semana prevista |
 |---|---|---|
-| 1. Introdução | Escrita, com **seis blocos de complementação vazios** | S2 — venceu 10/09 |
-| 2. Referencial teórico | Rascunho pronto, **fora do repositório** | S3 e S4 — vence 24/09 |
+| 1. Introdução | Escrita, com **seis blocos de complementação vazios** | **vence 24/09 — amanhã** |
+| 2. Referencial teórico | Rascunho pronto, **fora do repositório** | S3 e S4 |
 | 3. Metodologia | Esqueleto | S5 |
 | 4. Resultados | Esqueleto | S13 |
 | 5. Conclusão | Esqueleto | S14 |
@@ -129,7 +129,7 @@ Três consequências que valem saber:
 
 | Marco | Data | O que fecha | Por que é marco |
 |---|---|---|---|
-| **M1** Introdução | 10/09 | Problema, pergunta, objetivos, delimitação | ⚠️ Entregue com seis blocos vazios. Fecha de verdade na S5 |
+| **M1** Introdução | **24/09** | Problema, pergunta, objetivos, delimitação | É a Tarefa 02 do professor. Seis blocos de complementação continuam vazios |
 | **M2** Metodologia congelada | **01/10** | Cenários, métricas, quatro configurações, atributos | Congela o que será medido **antes** de existir código a defender |
 | **M3** Modelo executável | **22/10** | C0 a C3 rodando sobre o mesmo gerador | Última data em que uma dimensão pode ser cortada sem comprometer a comparação |
 | **M4** Tabela de ablação | **19/11** | Números finais das quatro configurações | A partir daqui o trabalho é escrita. Nenhuma alteração de código é aceita |

@@ -82,10 +82,31 @@ CHANG, M.; PAKZAD, S. N. Modified natural excitation technique for stochastic
 modal identification. Journal of Structural Engineering, v. 139, n. 10, 2013.
 ```
 
-> **A forma da chamada dentro do texto depende do template**, que ainda não
-> temos. Na família COBEM/ABCM ela é autor-ano em caixa normal —
-> `(Chang e Pakzad, 2013)` —, e **não** a forma da NBR 10520 em caixa alta.
-> Confirmar quando o arquivo chegar.
+#### E a chamada dentro do texto? **Não converta nada até o template chegar**
+
+A Introdução já escrita usa a forma da **NBR 10520** — `(CHANDOLA; BANERJEE;
+KUMAR, 2009)`, caixa alta e ponto e vírgula. Enquanto se supunha que o formato
+era CREEM, a orientação aqui era converter para `(Chandola et al., 2009)`.
+**Essa orientação caiu, e converter agora seria andar para trás.**
+
+| | |
+|---|---|
+| O professor disse | "As referências seguem a **ABNT**" |
+| A NBR 10520 é | **a norma ABNT da chamada no texto** |
+| O template COBEM 2026 | **não está no repositório** |
+
+Ou seja: a forma que está escrita é **consistente com a ABNT**, que é a única
+instrução escrita que existe sobre referências. A forma autor-ano em caixa
+normal é o costume da família ABCM — costume, não instrução que alguém tenha
+dado a este trabalho.
+
+**Para a entrega de 24/09:** deixe como está. Texto internamente consistente com
+a ABNT é defensável; texto convertido para uma forma que ninguém pediu, e que não
+casa com a lista, não é.
+
+**Quando o template chegar:** se ele exigir autor-ano em caixa normal, a conversão
+é mecânica e vale para o artigo inteiro de uma vez — não para três citações
+isoladas na véspera de uma entrega.
 
 ### Entrega final
 
@@ -107,13 +128,13 @@ modal identification. Journal of Structural Engineering, v. 139, n. 10, 2013.
 
 ***
 
-## Prazos do professor
+## Prazos
 
-| Data | Entrega | Estado |
-|---|---|---|
-| **05/09/26** | Tema do trabalho e composição do grupo | ✅ Entregue em 03/09 |
-| **24/09/26** | **Introdução do artigo no template COBEM 2026** | ⏳ |
-| Dezembro | Entrega final e apresentação | — |
+Ficam no [cronograma](cronograma.md), e só lá — inclusive os do professor, que
+esta página leu do PDF e passou para lá. Duas tabelas de prazo em dois arquivos
+viram duas datas diferentes na primeira vez que uma for atualizada sozinha.
+
+O que vale saber aqui: a **Tarefa 02 é a Introdução no template COBEM 2026**.
 
 ***
 
@@ -155,8 +176,10 @@ do arquivo errado.
 
 - [ ] **Obter o template COBEM 2026 com o professor** e versionar em
       `templates/` · **Davi** · antes da diagramação
-- [ ] **Confirmar a forma da chamada de citação** quando o template chegar ·
-      **Davi**
+- [ ] **Decidir a forma da chamada no texto** quando o template chegar, e
+      converter o artigo inteiro de uma vez se for o caso · **Davi**
+      · ⚠️ **não converter as três citações da Introdução antes disso** — ver a
+      seção de referências acima
 - [ ] Combinar a divisão de páginas por seção dentro de 8 a 12, no
       [`artigo/README.md`](../artigo/README.md) · **os três**
 - [ ] Conferir se as referências do contexto da Introdução têm **até 5 anos** ·
