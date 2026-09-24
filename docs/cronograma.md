@@ -52,6 +52,64 @@ acúmulo declarado — depois dela o cronograma volta a ter uma entrega por sema
 | **S15** | 04–10/12 | Versão final diagramada · **ENTREGA 10/12** | 8 a 12 páginas no template CREEM · zero referência não conferida · bloco em inglês depois das referências · responsabilidade autoral | Todos |
 | **S16** | 11/12 em diante | Slides, ensaio cronometrado, defesa | Cada integrante apresenta qualquer seção sob sorteio | Todos |
 
+## Como o trabalho chega ao repositório
+
+A equipe e os papéis continuam os mesmos. **O que mudou é só o caminho:** a
+Yasmin e o Filipe produzem fora do GitHub — documento, planilha, rascunho — e o
+Davi versiona.
+
+| | |
+|---|---|
+| **Quem produz** | Yasmin e Filipe, na ferramenta que preferirem |
+| **Quem versiona** | Davi, por Pull Request |
+| **Quem responde pelo conteúdo** | Quem produziu — a autoria não muda por causa do caminho |
+
+Três consequências que valem saber:
+
+- **A declaração de IA continua obrigatória.** Quem produz precisa dizer se usou
+  assistente, e o Davi transcreve isso no Pull Request. Sem essa informação, o
+  campo do PR fica sem resposta honesta
+- **A aprovação de PR ficou com uma pessoa só.** Foi por isso que as duas
+  aprovações viraram 24 h de espera e justificativa, em 23/09
+- **O que não está no repositório não existe para a banca.** Rascunho em pasta
+  local não entra no histórico, e o histórico é a prova do processo
+
+## O que cada um faz
+
+### Davi — líder, backend e redação constitutiva
+
+| Semana | Entregável |
+|---|---|
+| S5 | Metodologia (caneta) · arquitetura v2 · fechar D-12 a D-19 |
+| S6 | Schema, migrações, carga e ingestão |
+| S7 | C0 (regras fixas, sem histórico) e motor D1 |
+| S8 | D2, D3 e a integração |
+| S11 | Execução dos cenários |
+| S12 | Tabela de ablação, junto do Filipe |
+| S14 | Conclusão (caneta) |
+| Contínuo | Versionar o trabalho dos outros dois · prazos · orientador |
+
+### Yasmin — cybersecurity
+
+| Semana | Entregável |
+|---|---|
+| S5 | **Cenários**: pontuais, de contexto, longitudinais e de escalada legítima (D-06 e D-16) · desenho **sem ver as fórmulas** |
+| S5 | Referencial teórico — converter o rascunho para ABNT e fechar as citações pendentes |
+| S7 | Regras e pesos preliminares da C0 e da D1 |
+| S8 | Validação do comportamento da D2 e da D3 contra os cenários |
+| S11 | Execução dos cenários — é a dona do desenho |
+| S13 | Interpretação dos resultados · LGPD e ISO 27001 nas limitações |
+
+### Filipe — dados e dashboard
+
+| Semana | Entregável |
+|---|---|
+| S6 | **Gerador de eventos** — personas, calendário, rotina, ruído legítimo. É a peça de maior superfície da especificação |
+| S9 | Dashboard Streamlit, com risco decomponível por dimensão |
+| S10 | Isolation Forest — opcional, e é a folga do cronograma |
+| S12 | Métricas, tabelas e gráficos · Wilcoxon pareado |
+| S13 | Resultados e discussão (caneta) |
+
 ## Marcos e caminho crítico
 
 | Marco | Data | O que fecha | Por que é marco |
