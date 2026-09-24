@@ -25,7 +25,7 @@ fechada fica enterrada.
 |---|---|---|---|---|
 | D-02 | Dashboard: objetivo, instrumento ou fora do escopo | Instrumento de análise, descrito na Metodologia e na [arquitetura](arquitetura.md) | Davi + Filipe | 08/09 |
 | D-06 | Cenários de contexto (B) e longitudinais (L) | Adotados; desenho detalhado na S5 | Yasmin | 01/10 |
-| D-07 | Caneta rotativa por seção | Uma pessoa redige, duas revisam, a caneta gira | Os três | Ratificação na [issue #20](https://github.com/Codexrocks/TCC_SDCAC/issues/20) |
+| D-07 | Caneta rotativa por seção | Uma pessoa redige, duas revisam, a caneta gira. A ratificação foi pedida numa issue que depois foi apagada; como Yasmin e Filipe não operam o GitHub, ela passa a ser registrada aqui pelo Davi quando os dois confirmarem | Os três | Pendente |
 | D-09 | Pesos preliminares e análise de sensibilidade | Valores preliminares; sensibilidade na S12 | Yasmin | S8 |
 | D-12 | Unidade de análise das métricas | Duas unidades declaradas separadamente: evento para os cenários pontuais, episódio para os de contexto e longitudinais | Davi + Filipe | 01/10 |
 | D-13 | Tratamento estatístico dos resultados | **10 a 20 sementes** (era 20 a 30), as mesmas nas quatro configurações; Wilcoxon pareado. O piso de 10 vem da aritmética do teste, não de convenção — ver o detalhamento abaixo. O número final sai da medição da primeira execução completa (**P31**) | Davi | 01/10 |
@@ -35,7 +35,6 @@ fechada fica enterrada.
 | D-17 | Janela de constituição do baseline da D2 | Janela de treino anterior e disjunta da janela de avaliação | Davi | 01/10 |
 | D-18 | Dupla contagem e escala na integração | Excluir o evento atual da janela de exposição | Davi | 01/10 |
 | D-19 | Vertente LGPD e ISO/IEC 27001 | Entra como limitação e trabalho futuro na S13 | Yasmin | 01/10 |
-| D-20 | Sexto capítulo do artigo (`04-desenvolvimento`), proposto pelo plano | Não acrescentar: a estrutura de cinco seções é da instituição, e quem a altera é o orientador. O argumento de espaço **caiu** — o professor pede de 8 a 12 páginas, não 6 a 10, e um sexto capítulo caberia. O que decide agora é só a autoridade sobre a estrutura | Davi | Próxima reunião |
 
 ## Adotadas, a confirmar
 
@@ -53,6 +52,7 @@ fechada fica enterrada.
 | D-04 | Dono da Justificativa | Evidência de Yasmin e Filipe; tese e redação de Davi | 06/09/2026 |
 | D-08 | SLA de resposta a Pull Request | 24 horas. PR sem resposta em 24 h é item obrigatório de pauta | 06/09/2026 |
 | D-11 | Formato do artigo | **COBEM 2026 para tudo, ABNT só para a lista de referências.** Consta duas vezes nas orientações do professor, versionadas em [`templates/`](../templates/README.md). A volta anterior, que dizia CREEM 2026, foi engano de arquivo: o `.docx` tratado como sendo do professor era de evento irmão. ⚠️ **O template do COBEM 2026 ainda não está no repositório.** Quarta volta nesta decisão — o histórico das quatro está em [formato do artigo](formato-do-artigo.md) | 23/09/2026 |
+| D-20 | Sexto capítulo do artigo (`04-desenvolvimento`), proposto pelo plano | **Não entra.** As orientações escritas do professor definem **cinco seções**, com a quinta juntando Conclusão e Referências. É a palavra de quem tem autoridade sobre a estrutura, e ela já estava no repositório — não precisava esperar reunião. O argumento de espaço, que já tinha caído quando a extensão virou 8 a 12 páginas, deixa de importar | 23/09/2026 |
 | D-21 | Idioma do artigo | Texto inteiro em **português**; só o *abstract* e as *keywords* em inglês. O template pede inglês, mas quem define para o TCC é a coordenação | 07/09/2026 |
 | D-22 | Onde ficam os insumos das encomendas | **`docs/insumos/`**, não `artigo/insumos/`. O GitBook **escreve** em `artigo/` e normaliza o Markdown ao salvar — foi assim que os comentários dos seis capítulos sumiram em 06/09. Em `docs/` ele só lê. As duas pastas publicam; o que muda é a escrita de volta. Cada insumo entregue entra no `docs/SUMMARY.md` | 07/09/2026 |
 | D-23 | Volume de eventos da simulação | **20 a 50 eventos por dia útil**, faixa média por persona, 250 funcionários, 1 ano. Dá 1,15 a 2,9 milhões de eventos por semente. A média ponderada das personas precisa cair dentro da faixa. Ver [banco simulado](banco-simulado.md) | 23/09/2026 |
