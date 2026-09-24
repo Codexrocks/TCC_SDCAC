@@ -40,7 +40,7 @@ acúmulo declarado — depois dela o cronograma volta a ter uma entrega por sema
 
 | # | Período | Entregável | Critério de aceite | Quem |
 |---|---|---|---|---|
-| **S5** | 25/09–01/10 | `artigo/03-metodologia.md` + arquitetura v2 · **e o atrasado de S2 a S4** | Teste de coerência pergunta ↔ objetivos ↔ métricas aprovado · **D-12 a D-19 fechadas** · cenários definidos | Davi (caneta) · Yasmin (cenários) · Filipe (métricas) |
+| **S5** | 25/09–01/10 | `artigo/03-metodologia.md` + arquitetura v2 · **o atrasado de S2 a S4** · ajustar a Introdução à **D-25**, que amplia a dimensão 3 | Teste de coerência pergunta ↔ objetivos ↔ métricas aprovado · **D-12 a D-19 fechadas** · cenários definidos | Davi (caneta) · Yasmin (cenários) · Filipe (métricas) |
 | **S6** | 02–08/10 | Schema, migrações, **gerador de eventos** e ingestão | Uma semente completa gerada · as **sete checagens** do catálogo passando · carga por `COPY` | **Filipe** (gerador) · Davi (schema e ingestão) |
 | **S7** | 09–15/10 | C0 (regras fixas) e motor D1 | Cenários pontuais produzem o score esperado · C0 e C1 selecionáveis por flag · **C0 sem nenhum histórico do funcionário** | Davi + Yasmin |
 | **S8** | 16–22/10 | D2 (desvio do padrão) e D3 (exposição + higiene) | C2 e C3 executam ponta a ponta · cenário longitudinal gera exposição crescente **sem** alerta pontual · D3 reporta as duas parcelas separadas | Davi + Yasmin |
@@ -59,6 +59,13 @@ A equipe e os papéis continuam os mesmos. **O que mudou é só o caminho:** a
 Yasmin e o Filipe produzem fora do GitHub — documento, planilha, rascunho — e o
 Davi versiona.
 
+> **Dois arquivos ainda dizem o contrário.** O [`AGENTS.md`](../AGENTS.md) e a
+> [política de uso de IA](uso-de-ia.md) afirmam que, desde 23/09, o Davi conduz
+> o trabalho sozinho. A frase descreve mal o que houve: quem ficou com uma
+> pessoa foi a **aprovação de Pull Request**, não o trabalho. Os dois são
+> arquivos protegidos e entram em Pull Request próprio, com as 24 h de espera.
+> Até lá, **vale o que está escrito aqui**.
+
 | | |
 |---|---|
 | **Quem produz** | Yasmin e Filipe, na ferramenta que preferirem |
@@ -67,9 +74,16 @@ Davi versiona.
 
 Três consequências que valem saber:
 
-- **A declaração de IA continua obrigatória.** Quem produz precisa dizer se usou
-  assistente, e o Davi transcreve isso no Pull Request. Sem essa informação, o
-  campo do PR fica sem resposta honesta
+- **A declaração de IA continua obrigatória**, e não vira frase genérica. Quem
+  produz diz se usou assistente e no quê; o Davi transcreve. Os quatro campos do
+  Pull Request passam a ser respondidos assim:
+
+  | Campo | O que responder |
+  |---|---|
+  | Qual IA | A que **quem produziu** usou — não a que o Davi usou para versionar |
+  | No que ajudou | O que ela fez no material recebido. Se quem produziu não informou, **escreva isso**: "não declarado por quem produziu" |
+  | O que é seu | Nomear a pessoa e o que ela decidiu. "Versionado por Davi" não responde |
+  | Conferiu tudo? | Responde quem versiona, sobre o que leu. Se não leu inteiro, diz que não leu |
 - **A aprovação de PR ficou com uma pessoa só.** Foi por isso que as duas
   aprovações viraram 24 h de espera e justificativa, em 23/09
 - **O que não está no repositório não existe para a banca.** Rascunho em pasta
@@ -131,7 +145,7 @@ Dashboard, Isolation Forest e referencial teórico correm em paralelo e têm fol
 | Risco | Onde aperta | Mitigação |
 |---|---|---|
 | **M2 em 8 dias** com 14 decisões abertas | D-12 a D-19 vencem em 01/10, e os cenários também | Fechar as sete lacunas metodológicas antes de escrever a Metodologia |
-| **Gerador sem parâmetros** | 26 definições abertas na especificação do gerador — personas, matriz cargo × sistema, faixas de rede | P06 a P10 e P24 a P31 precisam de resposta antes da S6 |
+| **Gerador sem parâmetros** | 26 definições abertas na especificação do gerador — personas, matriz cargo × sistema, faixas de rede | As perguntas P06 a P10 e P24 a P31, numeradas na especificação que chega pelo PR #43, precisam de resposta antes da S6 |
 | **Nenhum código em 23/09** | S6 a S8 são três semanas para banco, gerador e quatro motores | A S10 é o único corte disponível: o Isolation Forest é opcional por definição |
 | **Referencial fora do repositório** | O rascunho existe e não está versionado | Entra na S5, convertido para ABNT |
 
