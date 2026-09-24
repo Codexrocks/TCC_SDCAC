@@ -1,43 +1,95 @@
 # Cronograma
 
-16 semanas, de setembro a dezembro de 2026.
+**Entrega do TCC: 10/12/2026.** Onze semanas a partir de 24/09.
+
+Cada semana tem um entregável, um responsável e um **critério de aceite** — a
+condição que permite dizer "pronto" sem discussão. Sem critério escrito não há
+como recusar uma entrega, e a recusa vira atrito.
 
 ## Prazos do professor
 
 | Data | Entrega |
 |---|---|
-| **03/09/26** | PDF com tema, composição do grupo e e-mail do líder — *Tarefa 01* |
-| **10/09/26** | Introdução do artigo no template CREEM 2026 — *Tarefa 02* |
+| 03/09/26 | PDF com tema, composição do grupo e e-mail do líder — *Tarefa 01* ✅ |
+| 10/09/26 | Introdução do artigo no template CREEM 2026 — *Tarefa 02* ⚠️ entregue incompleta |
 | Quinzenal | Reunião de acompanhamento com o orientador |
-| Dezembro | Apresentação final online |
+| **10/12/26** | **Entrega do TCC** |
+| Dezembro | Apresentação e defesa |
 
-## Semanas
+## Onde estamos, em 23/09
 
-| # | Período | Foco | Entregável | Quem |
+Honestidade sobre o ponto de partida, porque é o que torna o resto realizável ou
+não:
+
+| Capítulo | Estado | Semana prevista |
+|---|---|---|
+| 1. Introdução | Escrita, com **seis blocos de complementação vazios** | S2 — venceu 10/09 |
+| 2. Referencial teórico | Rascunho pronto, **fora do repositório** | S3 e S4 — vence 24/09 |
+| 3. Metodologia | Esqueleto | S5 |
+| 4. Resultados | Esqueleto | S13 |
+| 5. Conclusão | Esqueleto | S14 |
+
+**Nenhuma linha de código existe ainda.** O que existe é a especificação do
+gerador, em `docs/banco-simulado.md`.
+
+A S5 carrega, além da Metodologia, o que ficou de S2 a S4. É a única semana com
+acúmulo declarado — depois dela o cronograma volta a ter uma entrega por semana.
+
+## As onze semanas
+
+| # | Período | Entregável | Critério de aceite | Quem |
 |---|---|---|---|---|
-| S1 | 02–03/09 | Setup & alinhamento | Tema aprovado, grupo confirmado, repositório e GitBook criados | Todos (Davi) |
-| S2 | 04–10/09 | **Introdução** | Contextualização, problema, justificativa, pergunta e objetivos | Todos |
-| S3 | 11–17/09 | Referencial teórico I | Pilares da Segurança (CIA), autenticação, autorização, tipos de log | Yasmin |
-| S4 | 18–24/09 | Referencial teórico II | SIEM, SOC, UEBA, ameaças internas, detecção de anomalias | Yasmin + Filipe |
-| S5 | 25/09–01/10 | **Metodologia** | Tipo de pesquisa, ferramentas, ambiente controlado | Todos |
-| S6 | 02–08/10 | Banco de dados & logs | Schema PostgreSQL + gerador de massa de dados | Davi |
-| S7 | 09–15/10 | Motor de detecção | Regras heurísticas (horário, frequência, IP) | Davi + Yasmin |
-| S8 | 16–22/10 | Classificação de risco | Algoritmo de Risk Score (0–100) e severidade | Davi + Yasmin |
-| S9 | 23–29/10 | Dashboard | Painel com métricas, tabela de incidentes e gráficos | Filipe |
-| S10 | 30/10–05/11 | Machine Learning *(opcional)* | Isolation Forest como benchmark das regras | Filipe |
-| S11 | 06–12/11 | Execução de testes | 6 cenários simulados + matriz de confusão | Todos |
-| S12 | 13–19/11 | Métricas & resultados | Taxa de detecção, falsos positivos, MTTD, tabelas e gráficos | Filipe + Davi |
-| S13 | 20–26/11 | **Resultados e discussão** | Análise da eficiência, limitações e pontos fracos | Todos |
-| S14 | 27/11–03/12 | **Conclusão** | Respostas à pergunta de pesquisa e trabalhos futuros | Todos |
-| S15 | 04–10/12 | Revisão final & ABNT | Formatação, abstract, ortografia, submissão | Todos |
-| S16 | Dezembro | Apresentação e defesa | Slides, ensaio cronometrado, defesa pública | Todos |
+| **S5** | 25/09–01/10 | `artigo/03-metodologia.md` + arquitetura v2 · **e o atrasado de S2 a S4** | Teste de coerência pergunta ↔ objetivos ↔ métricas aprovado · **D-12 a D-19 fechadas** · cenários definidos | Davi (caneta) · Yasmin (cenários) · Filipe (métricas) |
+| **S6** | 02–08/10 | Schema, migrações, **gerador de eventos** e ingestão | Uma semente completa gerada · as **sete checagens** do catálogo passando · carga por `COPY` | **Filipe** (gerador) · Davi (schema e ingestão) |
+| **S7** | 09–15/10 | C0 (regras fixas) e motor D1 | Cenários pontuais produzem o score esperado · C0 e C1 selecionáveis por flag · **C0 sem nenhum histórico do funcionário** | Davi + Yasmin |
+| **S8** | 16–22/10 | D2 (desvio do padrão) e D3 (exposição + higiene) | C2 e C3 executam ponta a ponta · cenário longitudinal gera exposição crescente **sem** alerta pontual · D3 reporta as duas parcelas separadas | Davi + Yasmin |
+| **S9** | 23–29/10 | Dashboard Streamlit | Leitor externo identifica em **menos de 1 min** por que um usuário está em risco alto · risco decomponível por dimensão | Filipe |
+| **S10** | 30/10–05/11 | Isolation Forest — **opcional** | Documentado como benchmark · o TCC não depende dele | Filipe |
+| **S11** | 06–12/11 | Execução de todos os cenários nas quatro configurações | Reprodutível por script único · **10 a 20 sementes**, as mesmas nas quatro configurações | Todos (Yasmin) |
+| **S12** | 13–19/11 | Tabela de ablação, sensibilidade dos pesos, gráficos | Cada número sai de notebook versionado · Wilcoxon pareado sobre as diferenças | Filipe + Davi |
+| **S13** | 20–26/11 | `artigo/04-resultados.md` | Cada limitação nomeada tem proposta de trabalho futuro · LGPD e ISO 27001 entram aqui | Filipe (caneta) |
+| **S14** | 27/11–03/12 | `artigo/05-conclusao.md` | A pergunta é respondida com **sim, não ou parcialmente — e um número** | Davi (caneta) |
+| **S15** | 04–10/12 | Versão final diagramada · **ENTREGA 10/12** | 8 a 12 páginas no template CREEM · zero referência não conferida · bloco em inglês depois das referências · responsabilidade autoral | Todos |
+| **S16** | 11/12 em diante | Slides, ensaio cronometrado, defesa | Cada integrante apresenta qualquer seção sob sorteio | Todos |
+
+## Marcos e caminho crítico
+
+| Marco | Data | O que fecha | Por que é marco |
+|---|---|---|---|
+| **M1** Introdução | 10/09 | Problema, pergunta, objetivos, delimitação | ⚠️ Entregue com seis blocos vazios. Fecha de verdade na S5 |
+| **M2** Metodologia congelada | **01/10** | Cenários, métricas, quatro configurações, atributos | Congela o que será medido **antes** de existir código a defender |
+| **M3** Modelo executável | **22/10** | C0 a C3 rodando sobre o mesmo gerador | Última data em que uma dimensão pode ser cortada sem comprometer a comparação |
+| **M4** Tabela de ablação | **19/11** | Números finais das quatro configurações | A partir daqui o trabalho é escrita. Nenhuma alteração de código é aceita |
+| **M5** Entrega | **10/12** | Artigo diagramado e submetido | — |
+
+**Caminho crítico:** M2 → S6 (gerador com histórico de um ano) → S8 (D3) → S11 (execução) → S12 (tabela) → M4.
+
+Um atraso em qualquer desses pontos atrasa a resposta à pergunta de pesquisa.
+Dashboard, Isolation Forest e referencial teórico correm em paralelo e têm folga.
+
+## O que está em risco, e o que fazer
+
+| Risco | Onde aperta | Mitigação |
+|---|---|---|
+| **M2 em 8 dias** com 14 decisões abertas | D-12 a D-19 vencem em 01/10, e os cenários também | Fechar as sete lacunas metodológicas antes de escrever a Metodologia |
+| **Gerador sem parâmetros** | 26 definições abertas em `docs/banco-simulado.md` — personas, matriz cargo × sistema, faixas de rede | P06 a P10 e P24 a P31 precisam de resposta antes da S6 |
+| **Nenhum código em 23/09** | S6 a S8 são três semanas para banco, gerador e quatro motores | A S10 é o único corte disponível: o Isolation Forest é opcional por definição |
+| **Referencial fora do repositório** | O rascunho existe e não está versionado | Entra na S5, convertido para ABNT |
+
+> **A S10 é a folga do cronograma.** Se a S6, a S7 ou a S8 estourarem, o
+> Isolation Forest sai e a semana é reaproveitada. Foi declarado opcional desde o
+> começo, na decisão **D-10**, justamente para isso.
 
 ## Estrutura do artigo
 
-Conforme o escopo definido pelo professor:
+Cinco seções, conforme o escopo definido pelo professor:
 
 1. Introdução
 2. Referencial Teórico
 3. Metodologia
 4. Resultados e Discussões
 5. Conclusão
+
+O [formato do artigo](formato-do-artigo.md) — CREEM 2026, com as referências em
+ABNT — define o resto: de 8 a 12 páginas, títulos de seção em maiúsculas, e o
+bloco em inglês depois das referências.
