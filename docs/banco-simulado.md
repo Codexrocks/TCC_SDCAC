@@ -12,6 +12,18 @@ experimental. **O código começa depois da aprovação desta página.**
 | Escala | 250 funcionários · 1 ano simulado · 1,15 a 2,9 milhões de eventos por semente |
 | Substitui | `atributos.docx` e as versões anteriores em `.docx`, que não estavam versionadas |
 
+## Quem faz
+
+| Frente | Quem |
+|---|---|
+| **Gerador de eventos** — personas, calendário, rotina, ruído legítimo | **Filipe** |
+| Schema, migrações, carga e ingestão | Davi |
+| Cenários e rótulos — a injeção sobre o tráfego normal | Yasmin, pelas [D-06 e D-16](decisoes.md) |
+
+O gerador é a peça de maior superfície desta página: as seções 3, 5 e 10 são o
+contrato do que ele precisa produzir, e as checagens da seção 9 são os testes que
+ele precisa passar.
+
 > **O que está fechado e o que não está.** As cinco decisões de fundo — volume,
 > dimensões, linha de base e sementes — estão em [decisões](decisoes.md), de
 > **D-23 a D-26**. Restam **26 definições abertas**, listadas no fim desta
