@@ -13,9 +13,13 @@ As seções 3 e 4 dizem o que você não pode fazer sozinho.
 ## 1. Contexto
 
 TCC 2026/2 · Prof. Euzébio D. de Souza · Sistema de Detecção de Comportamentos
-Anômalos em Cybersecurity. Desde 23/09/2026 o **Davi** conduz o trabalho
-sozinho. Até ali a equipe era de três, com Yasmin (cybersecurity) e Filipe
-(data & dashboard); os relatórios de sessão guardam o que foi de cada um.
+Anômalos em Cybersecurity. Equipe de três: **Davi** (líder & backend),
+**Yasmin** (cybersecurity), **Filipe** (data & dashboard).
+
+Desde 23/09/2026, **só o Davi opera o GitHub**. Yasmin e Filipe produzem fora —
+documento, planilha, rascunho — e ele versiona por Pull Request. A autoria não
+muda por causa do caminho: quem produziu responde pelo conteúdo, e o Pull
+Request precisa dizer de quem é o quê.
 
 O repositório é **público**. A pasta `docs/` é publicada no GitBook. Tudo que
 entra em `docs/` vira site público.
@@ -115,9 +119,9 @@ São as regras e as checagens automáticas. Sem trava, bastaria um PR editando o
 `validar.py` para desligar tudo — e a IA que escreveu o PR seria a mesma que
 sugeriu a mudança.
 
-Até 23/09/2026 a trava eram **duas aprovações**. O trabalho passou a ser de uma
-pessoa só, e o GitHub não deixa ninguém aprovar o próprio Pull Request: a regra
-virou impossível de cumprir, não rigorosa. Regra que não se cumpre não protege
+Até 23/09/2026 a trava eram **duas aprovações**. A **operação do repositório**
+passou a ser de uma pessoa só, e o GitHub não deixa ninguém aprovar o próprio
+Pull Request: a regra virou impossível de cumprir, não rigorosa. Regra que não se cumpre não protege
 nada — só ensina a passar por cima.
 
 No lugar entraram duas exigências que uma pessoa sozinha cumpre, e que continuam
