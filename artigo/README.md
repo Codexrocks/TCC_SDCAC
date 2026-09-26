@@ -26,11 +26,11 @@ Estrutura definida pelo professor, conforme o [cronograma](../docs/cronograma.md
 
 | # | Seção | Quando | Quem |
 |---|---|---|---|
-| 1 | [Introdução](01-introducao.md) | **entrega 24/09** | Todos |
-| 2 | [Referencial teórico](02-referencial-teorico.md) | S3 e S4 | Yasmin, com Filipe na S4 |
+| 1 | [Introdução](01-introducao.md) | ✅ entregue parcial em 24/09 · complementos na S5 | Todos |
+| 2 | [Referencial teórico](02-referencial-teorico.md) | S5 — atrasado de S3 e S4 | Yasmin |
 | 3 | [Metodologia](03-metodologia.md) | S5 | Todos |
-| 4 | [Resultados e discussão](04-resultados.md) | S12 e S13 | Filipe e Davi, discussão com todos |
-| 5 | [Conclusão](05-conclusao.md) | S14 | Todos |
+| 4 | [Resultados e discussão](04-resultados.md) | S13, com os números da S12 | Filipe (caneta) |
+| 5 | [Conclusão](05-conclusao.md) | S14 | Davi (caneta) |
 | — | [Referências](referencias.md) | contínuo | Quem citar |
 
 ## Divisão de páginas
@@ -99,8 +99,10 @@ ninguém perceber é pior que aviso nenhum.
 Modelo de linguagem inventa referência plausível — autor real, revista real, ano
 real, artigo que não existe. A validação não pega isso; a banca pega.
 
-**Número sai de execução real.** Taxa de detecção, falso positivo e MTTD vêm dos
-testes registrados em `results/`, nunca de estimativa.
+**Número sai de execução real.** Taxa de falsos positivos a revocação fixa e
+revocação nos cenários longitudinais — as duas grandezas da
+[pergunta de pesquisa](../docs/plano.md) — vêm dos testes registrados em
+`results/`, nunca de estimativa.
 
 ## Formato: COBEM 2026, com referências em ABNT
 
@@ -122,8 +124,13 @@ Quatro coisas para saber antes de escrever:
 2. **As referências do contexto precisam ter até 5 anos de publicação.** Fonte
    mais antiga continua válida em outras partes, mas o contexto mostra o estado
    atual
-3. **A chamada no texto não é a da NBR 10520** — nada de `(CHANG; PAKZAD,
-   2013)`. A forma exata depende do template, que ainda não temos
+3. **A chamada no texto fica como está, na forma da NBR 10520** —
+   `(CHANDOLA; BANERJEE; KUMAR, 2009)`, caixa alta e ponto e vírgula. É a norma
+   ABNT da chamada, e "ABNT" é a única instrução escrita que existe sobre as
+   referências deste trabalho. Se o template do COBEM 2026 pedir outra forma, a
+   conversão é mecânica e vale para o artigo inteiro de uma vez — **não para
+   citações isoladas na véspera de uma entrega**. Ver
+   [formato do artigo](../docs/formato-do-artigo.md)
 4. ⚠️ **O template do COBEM 2026 ainda não está no repositório.** O que está
    versionado é o COBEM 2025 e o CREEM 2026, e nenhum dos dois é o que o
    professor pede

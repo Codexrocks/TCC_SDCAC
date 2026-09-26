@@ -1,7 +1,8 @@
 # 5. Conclusão
 
-> **5ª Versão** na numeração do professor — que pede **Conclusão, Resumo e
-> Referências** juntos · S14 do [cronograma](../docs/cronograma.md) · Todos.
+> **5ª Versão** na numeração do professor — que junta **Conclusão e
+> Referências** numa seção só, pela decisão **D-20** · S14 do
+> [cronograma](../docs/cronograma.md) · Davi (caneta).
 
 ***
 
