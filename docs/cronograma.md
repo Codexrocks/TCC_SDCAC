@@ -11,27 +11,26 @@ como recusar uma entrega, e a recusa vira atrito.
 | Data | Entrega | Estado |
 |---|---|---|
 | **05/09/26** | Tema do trabalho e composição do grupo — *Tarefa 01* | ✅ **Entregue em 03/09** |
-| **24/09/26** | Introdução do artigo no template **COBEM 2026** — *Tarefa 02* | ⏳ **amanhã** |
+| **24/09/26** | Introdução do artigo no template **COBEM 2026** — *Tarefa 02* | ✅ **Entregue parcial em 24/09** — [registro](entregas/tarefa-02.md) |
 | Quinzenal | Reunião de acompanhamento com o orientador | — |
 | **10/12/26** | **Entrega do TCC** | — |
 | Dezembro | Apresentação e defesa | — |
 
-## Onde estamos, em 23/09
+## Onde estamos, em 26/09
 
 Honestidade sobre o ponto de partida, porque é o que torna o resto realizável ou
 não:
 
 | Capítulo | Estado | Semana prevista |
 |---|---|---|
-| 1. Introdução | Escrita, com **seis blocos de complementação vazios** | **vence 24/09 — amanhã** |
+| 1. Introdução | **Entregue parcial em 24/09** — os **seis blocos de complementação** continuam vazios, e a parcialidade foi declarada no arquivo entregue | ✅ entregue · complementos na S5 |
 | 2. Referencial teórico | Rascunho pronto, **fora do repositório** | S3 e S4 |
 | 3. Metodologia | Esqueleto | S5 |
 | 4. Resultados | Esqueleto | S13 |
 | 5. Conclusão | Esqueleto | S14 |
 
 **Nenhuma linha de código existe ainda.** O que existe é a especificação do
-gerador — que chega ao repositório pelo Pull Request #43, e ainda não está na
-`main`.
+gerador, que entrou na `main` pelo Pull Request #43, em 24/09.
 
 A S5 carrega, além da Metodologia, o que ficou de S2 a S4. É a única semana com
 acúmulo declarado — depois dela o cronograma volta a ter uma entrega por semana.
@@ -59,12 +58,12 @@ A equipe e os papéis continuam os mesmos. **O que mudou é só o caminho:** a
 Yasmin e o Filipe produzem fora do GitHub — documento, planilha, rascunho — e o
 Davi versiona.
 
-> **Dois arquivos ainda dizem o contrário.** O [`AGENTS.md`](../AGENTS.md) e a
-> [política de uso de IA](uso-de-ia.md) afirmam que, desde 23/09, o Davi conduz
-> o trabalho sozinho. A frase descreve mal o que houve: quem ficou com uma
-> pessoa foi a **aprovação de Pull Request**, não o trabalho. Os dois são
-> arquivos protegidos e entram em Pull Request próprio, com as 24 h de espera.
-> Até lá, **vale o que está escrito aqui**.
+> **Os dois arquivos já foram corrigidos.** O [`AGENTS.md`](../AGENTS.md) e a
+> [política de uso de IA](uso-de-ia.md) afirmavam que, desde 23/09, o Davi
+> conduzia o trabalho sozinho. A frase descrevia mal o que houve: quem ficou
+> com uma pessoa foi a **aprovação de Pull Request**, não o trabalho. São
+> arquivos protegidos, entraram em Pull Request próprio e hoje dizem o mesmo
+> que esta página.
 
 | | |
 |---|---|
@@ -129,7 +128,7 @@ Três consequências que valem saber:
 
 | Marco | Data | O que fecha | Por que é marco |
 |---|---|---|---|
-| **M1** Introdução | **24/09** | Problema, pergunta, objetivos, delimitação | É a Tarefa 02 do professor. Seis blocos de complementação continuam vazios |
+| **M1** Introdução | **24/09** | Problema, pergunta, objetivos, delimitação | ✅ **Entregue parcial.** Era a Tarefa 02 do professor. Os seis blocos de complementação continuam vazios e vencem na S5 — [registro](entregas/tarefa-02.md) |
 | **M2** Metodologia congelada | **01/10** | Cenários, métricas, quatro configurações, atributos | Congela o que será medido **antes** de existir código a defender |
 | **M3** Modelo executável | **22/10** | C0 a C3 rodando sobre o mesmo gerador | Última data em que uma dimensão pode ser cortada sem comprometer a comparação |
 | **M4** Tabela de ablação | **19/11** | Números finais das quatro configurações | A partir daqui o trabalho é escrita. Nenhuma alteração de código é aceita |
@@ -144,9 +143,9 @@ Dashboard, Isolation Forest e referencial teórico correm em paralelo e têm fol
 
 | Risco | Onde aperta | Mitigação |
 |---|---|---|
-| **M2 em 8 dias** com 14 decisões abertas | D-12 a D-19 vencem em 01/10, e os cenários também | Fechar as sete lacunas metodológicas antes de escrever a Metodologia |
+| **M2 em 01/10** com **12 decisões abertas**, 9 delas vencendo nessa data | D-12 a D-19 vencem em 01/10, e os cenários também | Fechar as sete lacunas metodológicas antes de escrever a Metodologia |
 | **Gerador sem parâmetros** | 26 definições abertas na especificação do gerador — personas, matriz cargo × sistema, faixas de rede | As perguntas P06 a P10 e P24 a P31, numeradas na especificação que chega pelo PR #43, precisam de resposta antes da S6 |
-| **Nenhum código em 23/09** | S6 a S8 são três semanas para banco, gerador e quatro motores | A S10 é o único corte disponível: o Isolation Forest é opcional por definição |
+| **Nenhuma linha de código na `main`** | S6 a S8 são três semanas para banco, gerador e quatro motores | A S10 é o único corte disponível: o Isolation Forest é opcional por definição |
 | **Referencial fora do repositório** | O rascunho existe e não está versionado | Entra na S5, convertido para ABNT |
 
 > **A S10 é a folga do cronograma.** Se a S6, a S7 ou a S8 estourarem, o

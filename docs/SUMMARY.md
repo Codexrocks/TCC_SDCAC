@@ -37,6 +37,7 @@
 ## Entregas
 
 * [Tarefa 01 — Tema e grupo](entregas/tarefa-01.md)
+* [Tarefa 02 — Introdução do artigo](entregas/tarefa-02.md)
 
 ## Relatórios
 
