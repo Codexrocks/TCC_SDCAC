@@ -85,7 +85,7 @@ jobs:
             fi
           done
 
-      - name: Conferir declaração de IA e aprovações
+      - name: Conferir declaração de IA e arquivo protegido
         id: conferir
         # O passo não derruba o job aqui: o resultado precisa virar commit
         # status antes, senão uma falha deixaria o PR sem status nenhum e o
@@ -104,10 +104,10 @@ jobs:
         run: |
           if [ "${{ steps.conferir.outcome }}" = "success" ]; then
             estado="success"
-            descricao="Declaração de IA e aprovações em ordem"
+            descricao="Declaração de IA e arquivo protegido em ordem"
           else
             estado="failure"
-            descricao="Falta declarar a IA no PR, ou faltam aprovações"
+            descricao="Falta a declaração de IA, ou a espera e a justificativa do arquivo protegido"
           fi
 
           gh api --method POST \
