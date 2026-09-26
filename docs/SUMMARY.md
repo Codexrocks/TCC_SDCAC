@@ -56,4 +56,5 @@
 * [2026-09-08 — Sessão 13: o caminho do artigo abre](relatorios/2026-09-08-sessao-13.md)
 * [2026-09-14 — Sessão 14: a revisão do PR #32 e a aprovação que ninguém via](relatorios/2026-09-14-sessao-14.md)
 * [2026-09-23 — Sessão 15: o trabalho fica com uma pessoa](relatorios/2026-09-23-sessao-15.md)
+* [2026-09-23 — Sessão 16: o formato deu duas voltas, e a equipe não tinha ido embora](relatorios/2026-09-23-sessao-16.md)
 * [Modelo de relatório](relatorios/_modelo.md)
