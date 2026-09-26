@@ -28,13 +28,13 @@ não:
 <!-- QUADRO:inicio capitulos -->
 <!-- Bloco gerado por scripts/quadro.py a partir de quadro.toml. Editar aqui nao adianta: a proxima execucao reescreve. -->
 
-| Capítulo | Estado | Semana prevista | Situação |
-|---|---|---|---|
-| 1. Introdução | Entregue parcial em 24/09 — os seis blocos de complementação continuam vazios | S5 · ▶️ em curso | ⏳ Vence em 5 dias |
-| 2. Referencial teórico | Rascunho pronto, fora do repositório | S5 · ▶️ em curso | ⏳ Vence em 5 dias |
-| 3. Metodologia | Esqueleto | S5 · ▶️ em curso | ⏳ Vence em 5 dias |
-| 4. Resultados | Esqueleto | S13 | 🗓️ Em 61 dias |
-| 5. Conclusão | Esqueleto | S14 | 🗓️ Em 68 dias |
+| Capítulo | Estado | Quem | Semana prevista | Situação |
+|---|---|---|---|---|
+| 1. Introdução | Entregue parcial em 24/09 — os seis blocos de complementação continuam vazios | Yasmin, Filipe | S5 · ▶️ em curso | ⏳ Vence em 5 dias |
+| 2. Referencial teórico | Rascunho pronto, fora do repositório | Yasmin | S5 · ▶️ em curso | ⏳ Vence em 5 dias |
+| 3. Metodologia | Esqueleto | Davi (caneta) | S5 · ▶️ em curso | ⏳ Vence em 5 dias |
+| 4. Resultados | Esqueleto | Filipe (caneta) | S13 | 🗓️ Em 61 dias |
+| 5. Conclusão | Esqueleto | Davi (caneta) | S14 | 🗓️ Em 68 dias |
 <!-- QUADRO:fim capitulos -->
 
 **Nenhuma linha de código existe ainda.** O que existe é a especificação do

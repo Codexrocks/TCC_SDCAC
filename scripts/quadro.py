@@ -274,7 +274,7 @@ def cartoes(dados: Dados, hoje: datetime.date) -> list[Cartao]:
                 "Capítulo",
                 f"{capitulo['numero']}. {capitulo['titulo']}",
                 capitulo["estado"],
-                "Todos",
+                ", ".join(capitulo.get("donos", [])) or "Todos",
                 capitulo.get("semana", "—"),
                 situacao,
             )
@@ -525,11 +525,14 @@ def bloco_capitulos(dados: Dados, hoje: datetime.date) -> str:
             [
                 f"{capitulo['numero']}. {capitulo['titulo']}",
                 capitulo["estado"],
+                ", ".join(capitulo.get("donos", [])) or "Todos",
                 prevista,
                 "✅ Escrito" if capitulo.get("pronto") else frase_de_prazo(prazo, hoje),
             ]
         )
-    return tabela(["Capítulo", "Estado", "Semana prevista", "Situação"], linhas)
+    return tabela(
+        ["Capítulo", "Estado", "Quem", "Semana prevista", "Situação"], linhas
+    )
 
 
 def bloco_marcos(dados: Dados, hoje: datetime.date) -> str:

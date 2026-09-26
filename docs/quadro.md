@@ -48,9 +48,9 @@
 | Tipo | Item | O que é | Quem | Prazo | Situação |
 |---|---|---|---|---|---|
 | Marco | **M2 · Metodologia congelada** | Cenários, métricas, quatro configurações, atributos | Todos | 01/10/2026 | ⏳ Vence em 5 dias |
-| Capítulo | **1. Introdução** | Entregue parcial em 24/09 — os seis blocos de complementação continuam vazios | Todos | S5 | ⏳ Vence em 5 dias |
-| Capítulo | **2. Referencial teórico** | Rascunho pronto, fora do repositório | Todos | S5 | ⏳ Vence em 5 dias |
-| Capítulo | **3. Metodologia** | Esqueleto | Todos | S5 | ⏳ Vence em 5 dias |
+| Capítulo | **1. Introdução** | Entregue parcial em 24/09 — os seis blocos de complementação continuam vazios | Yasmin, Filipe | S5 | ⏳ Vence em 5 dias |
+| Capítulo | **2. Referencial teórico** | Rascunho pronto, fora do repositório | Yasmin | S5 | ⏳ Vence em 5 dias |
+| Capítulo | **3. Metodologia** | Esqueleto | Davi (caneta) | S5 | ⏳ Vence em 5 dias |
 | Decisão | **D-06** | Cenários de contexto (B) e longitudinais (L) | Yasmin | 01/10/2026 | ⏳ Vence em 5 dias |
 | Decisão | **D-12** | Unidade de análise das métricas | Davi, Filipe | 01/10/2026 | ⏳ Vence em 5 dias |
 | Decisão | **D-13** | Tratamento estatístico dos resultados | Davi | 01/10/2026 | ⏳ Vence em 5 dias |
@@ -85,8 +85,8 @@
 | Semana | **S14** | artigo/05-conclusao.md | Davi (caneta) | 27/11/2026 a 03/12/2026 | 🗓️ Em 68 dias |
 | Semana | **S15** | Versão final diagramada · ENTREGA 10/12 | Todos | 04/12/2026 a 10/12/2026 | 🗓️ Em 75 dias |
 | Semana | **S16** | Slides, ensaio cronometrado, defesa | Todos | a partir de 11/12/2026 | 🗓️ Em 76 dias |
-| Capítulo | **4. Resultados** | Esqueleto | Todos | S13 | 🗓️ Em 61 dias |
-| Capítulo | **5. Conclusão** | Esqueleto | Todos | S14 | 🗓️ Em 68 dias |
+| Capítulo | **4. Resultados** | Esqueleto | Filipe (caneta) | S13 | 🗓️ Em 61 dias |
+| Capítulo | **5. Conclusão** | Esqueleto | Davi (caneta) | S14 | 🗓️ Em 68 dias |
 | Decisão | **D-07** | Caneta rotativa por seção | Davi, Yasmin, Filipe | — | 🗓️ Sem prazo |
 | Decisão | **D-09** | Pesos preliminares e análise de sensibilidade | Yasmin | S8 | 🗓️ Em 26 dias |
 | Decisão | **D-10** | Isolation Forest como benchmark opcional | Filipe | S10 | 🗓️ Em 40 dias · a confirmar |

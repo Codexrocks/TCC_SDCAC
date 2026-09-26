@@ -83,6 +83,7 @@ estado = "pendente"
 [[capitulo]]
 numero = 1
 titulo = "Introdução"
+donos = ["Yasmin", "Filipe"]
 estado = "Entregue parcial em 24/09 — os seis blocos de complementação continuam vazios"
 pronto = false
 semana = "S5"
@@ -91,6 +92,7 @@ registro = "entregas/tarefa-02.md"
 [[capitulo]]
 numero = 2
 titulo = "Referencial teórico"
+donos = ["Yasmin"]
 estado = "Rascunho pronto, fora do repositório"
 pronto = false
 semana = "S5"
@@ -98,6 +100,7 @@ semana = "S5"
 [[capitulo]]
 numero = 3
 titulo = "Metodologia"
+donos = ["Davi (caneta)"]
 estado = "Esqueleto"
 pronto = false
 semana = "S5"
@@ -105,6 +108,7 @@ semana = "S5"
 [[capitulo]]
 numero = 4
 titulo = "Resultados"
+donos = ["Filipe (caneta)"]
 estado = "Esqueleto"
 pronto = false
 semana = "S13"
@@ -112,6 +116,7 @@ semana = "S13"
 [[capitulo]]
 numero = 5
 titulo = "Conclusão"
+donos = ["Davi (caneta)"]
 estado = "Esqueleto"
 pronto = false
 semana = "S14"
