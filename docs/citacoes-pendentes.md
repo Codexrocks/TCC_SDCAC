@@ -26,6 +26,8 @@ As páginas de `docs/` não têm esse problema, porque o GitBook só lê daqui.
 | Onde | O que falta | Quem | Desde |
 |---|---|---|---|
 | `02-referencial-teorico.md` § 2.1 | Fonte para os pilares da segurança da informação — confidencialidade, integridade, disponibilidade | Yasmin | 04/09/2026 |
+| `01-introducao.md` § Contextualização | Entrada na lista para `(NATIONAL INSTITUTE OF STANDARDS AND TECHNOLOGY, 2006)`. A chamada foi entregue ao professor em 24/09 e a `## Lista` de `referencias.md` está vazia. Conferir a fonte antes de acrescentar | Davi | 26/09/2026 |
+| `01-introducao.md` § Problema | Entrada na lista para `(CHANDOLA; BANERJEE; KUMAR, 2009)`. Mesma situação da linha acima | Davi | 26/09/2026 |
 
 ## Pendentes — documentação
 
@@ -35,9 +37,10 @@ escreve em `docs/`.
 
 | Onde | O que falta | Desde |
 |---|---|---|
-| [`usabilidade.md`](usabilidade.md) § 3 | Formulação exata e porcentagem de Nielsen e Landauer | 03/09/2026 |
-| [`usabilidade.md`](usabilidade.md) § 4 | Limites exatos de cada faixa adjetiva do SUS | 03/09/2026 |
-| [`usabilidade.md`](usabilidade.md) § 5 | Literatura de carga de trabalho e fadiga de alerta em analistas de SOC | 03/09/2026 |
+| [`usabilidade.md`](usabilidade.md) § 6.2 | Formulação exata e porcentagem de Nielsen e Landauer | 03/09/2026 |
+| [`usabilidade.md`](usabilidade.md) § 6.3 | Limites exatos de cada faixa adjetiva do SUS, em Bangor, Kortum e Miller (2009) | 03/09/2026 |
+| [`usabilidade.md`](usabilidade.md) § 7 | Literatura de carga de trabalho e fadiga de alerta em analistas de SOC | 03/09/2026 |
+| [`usabilidade.md`](usabilidade.md) § 9 | Edição e ano de Shneiderman efetivamente consultados. **Nunca esteve indexado aqui**: o marcador já existia no arquivo e esta linha faltava | 26/09/2026 |
 | [`usabilidade.md`](usabilidade.md) § 7 | Edição e ano da obra de Shneiderman efetivamente consultada | 03/09/2026 |
 
 ***

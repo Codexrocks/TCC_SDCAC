@@ -35,3 +35,4 @@ Use o [modelo](_modelo.md) e adicione a página nova ao
 | 14/09/2026 | [Sessão 14](2026-09-14-sessao-14.md) | A revisão do PR #32 acha dez defeitos e a aprovação manual que ninguém via; os PRs #34 e #35 corrigem |
 | 23/09/2026 | [Sessão 15](2026-09-23-sessao-15.md) | O trabalho fica com uma pessoa: as duas aprovações viram 24 h de espera e justificativa — leitura corrigida na [Sessão 16](2026-09-23-sessao-16.md) |
 | 23/09/2026 | [Sessão 16](2026-09-23-sessao-16.md) | O formato do artigo era CREEM, não COBEM; a equipe não tinha ido embora; e dezesseis erros da IA, dois deles trocando fato certo por errado |
+| 26/09/2026 | [Sessão 17](2026-09-26-sessao-17.md) | O cronograma dizia "amanhã" dois dias depois do prazo; nasce o quadro que recalcula a situação contra a data de hoje |

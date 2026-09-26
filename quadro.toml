@@ -1,0 +1,535 @@
+# Fonte de verdade do quadro do TCC_SDCAC.
+#
+# Este arquivo se edita à mão. A página `docs/quadro.md` é **gerada** a partir
+# dele por `scripts/quadro.py` — editar a página é trabalho que a próxima
+# execução apaga.
+#
+# A regra que faz este arquivo valer a pena
+# -----------------------------------------
+# Aqui entra **fato**: data, dono, critério, e um estado que só muda quando uma
+# pessoa decide que mudou.
+#
+# Aqui **não** entra estado calculável: "atrasado", "em curso", "vence em 5
+# dias", "amanhã". Isso o script calcula contra a data de hoje, toda vez que
+# roda.
+#
+# O motivo não é elegância. Em 26/09/2026 o `docs/cronograma.md` afirmava que a
+# Tarefa 02 vencia "amanhã" — o prazo era 24/09, dois dias antes. A frase estava
+# certa no dia em que foi escrita, e nunca mais. Contagem regressiva escrita à
+# mão envelhece em silêncio; contagem calculada não envelhece nunca.
+#
+# Como usar
+# ---------
+#     python scripts/quadro.py              # regenera docs/quadro.md
+#     python scripts/quadro.py --conferir   # não escreve; falha se estiver velho
+#
+# Regras do projeto em AGENTS.md.
+
+[projeto]
+nome = "TCC_SDCAC"
+entrega = 2026-12-10
+disciplina = "TCC 2026/2 · Prof. Euzébio D. de Souza"
+
+
+# ---------------------------------------------------------------------------
+# Tarefas entregues ao professor
+#
+# estado: "entregue" | "entregue-parcial" | "pendente"
+# ---------------------------------------------------------------------------
+
+[[tarefa_professor]]
+id = "tarefa-01"
+titulo = "Tema do trabalho e composição do grupo — *Tarefa 01*"
+prazo = 2026-09-05
+estado = "entregue"
+entregue_em = 2026-09-03
+registro = "entregas/tarefa-01.md"
+
+[[tarefa_professor]]
+id = "tarefa-02"
+titulo = "Introdução do artigo no template **COBEM 2026** — *Tarefa 02*"
+prazo = 2026-09-24
+estado = "entregue-parcial"
+entregue_em = 2026-09-24
+registro = "entregas/tarefa-02.md"
+ressalva = "Seis blocos de complementação vazios; a parcialidade foi declarada no arquivo entregue"
+
+[[tarefa_professor]]
+id = "acompanhamento"
+titulo = "Reunião de acompanhamento com o orientador"
+quando = "Quinzenal"
+estado = "recorrente"
+
+[[tarefa_professor]]
+id = "entrega-final"
+titulo = "**Entrega do TCC**"
+prazo = 2026-12-10
+estado = "pendente"
+
+[[tarefa_professor]]
+id = "defesa"
+titulo = "Apresentação e defesa"
+quando = "Dezembro"
+estado = "pendente"
+
+
+# ---------------------------------------------------------------------------
+# Capítulos do artigo
+#
+# `pronto = true` quando o capítulo está escrito e conferido, não quando existe
+# um arquivo com título dentro.
+# ---------------------------------------------------------------------------
+
+[[capitulo]]
+numero = 1
+titulo = "Introdução"
+estado = "Entregue parcial em 24/09 — os seis blocos de complementação continuam vazios"
+pronto = false
+semana = "S5"
+registro = "entregas/tarefa-02.md"
+
+[[capitulo]]
+numero = 2
+titulo = "Referencial teórico"
+estado = "Rascunho pronto, fora do repositório"
+pronto = false
+semana = "S5"
+
+[[capitulo]]
+numero = 3
+titulo = "Metodologia"
+estado = "Esqueleto"
+pronto = false
+semana = "S5"
+
+[[capitulo]]
+numero = 4
+titulo = "Resultados"
+estado = "Esqueleto"
+pronto = false
+semana = "S13"
+
+[[capitulo]]
+numero = 5
+titulo = "Conclusão"
+estado = "Esqueleto"
+pronto = false
+semana = "S14"
+
+
+# ---------------------------------------------------------------------------
+# Marcos
+#
+# estado: "fechado" | "parcial" | "aberto"
+# ---------------------------------------------------------------------------
+
+[[marco]]
+id = "M1"
+titulo = "Introdução"
+data = 2026-09-24
+fecha = "Problema, pergunta, objetivos, delimitação"
+estado = "parcial"
+porque = "Era a Tarefa 02 do professor. Os seis blocos de complementação continuam vazios e vencem na S5"
+
+[[marco]]
+id = "M2"
+titulo = "Metodologia congelada"
+data = 2026-10-01
+fecha = "Cenários, métricas, quatro configurações, atributos"
+estado = "aberto"
+porque = "Congela o que será medido antes de existir código a defender"
+
+[[marco]]
+id = "M3"
+titulo = "Modelo executável"
+data = 2026-10-22
+fecha = "C0 a C3 rodando sobre o mesmo gerador"
+estado = "aberto"
+porque = "Última data em que uma dimensão pode ser cortada sem comprometer a comparação"
+
+[[marco]]
+id = "M4"
+titulo = "Tabela de ablação"
+data = 2026-11-19
+fecha = "Números finais das quatro configurações"
+estado = "aberto"
+porque = "A partir daqui o trabalho é escrita. Nenhuma alteração de código é aceita"
+
+[[marco]]
+id = "M5"
+titulo = "Entrega"
+data = 2026-12-10
+fecha = "Artigo diagramado e submetido"
+estado = "aberto"
+
+
+# ---------------------------------------------------------------------------
+# Semanas
+#
+# Transcritas de `docs/cronograma.md`. A tabela das onze semanas continua
+# escrita à mão nesta versão — ver "O que ficou fora" em `docs/quadro.md`.
+# ---------------------------------------------------------------------------
+
+[[semana]]
+id = "S5"
+inicio = 2026-09-25
+fim = 2026-10-01
+marco = "M2"
+pronto = false
+entregavel = "artigo/03-metodologia.md + arquitetura v2 · o atrasado de S2 a S4 · ajustar a Introdução à D-25"
+criterio = "Teste de coerência pergunta ↔ objetivos ↔ métricas aprovado · D-12 a D-19 fechadas · cenários definidos"
+donos = ["Davi (caneta)", "Yasmin (cenários)", "Filipe (métricas)"]
+
+[[semana]]
+id = "S6"
+inicio = 2026-10-02
+fim = 2026-10-08
+pronto = false
+entregavel = "Schema, migrações, gerador de eventos e ingestão"
+criterio = "Uma semente completa gerada · as sete checagens do catálogo passando · carga por COPY"
+donos = ["Filipe (gerador)", "Davi (schema e ingestão)"]
+
+[[semana]]
+id = "S7"
+inicio = 2026-10-09
+fim = 2026-10-15
+pronto = false
+entregavel = "C0 (regras fixas) e motor D1"
+criterio = "Cenários pontuais produzem o score esperado · C0 e C1 selecionáveis por flag · C0 sem nenhum histórico do funcionário"
+donos = ["Davi", "Yasmin"]
+
+[[semana]]
+id = "S8"
+inicio = 2026-10-16
+fim = 2026-10-22
+marco = "M3"
+pronto = false
+entregavel = "D2 (desvio do padrão) e D3 (exposição + higiene)"
+criterio = "C2 e C3 executam ponta a ponta · cenário longitudinal gera exposição crescente sem alerta pontual · D3 reporta as duas parcelas separadas"
+donos = ["Davi", "Yasmin"]
+
+[[semana]]
+id = "S9"
+inicio = 2026-10-23
+fim = 2026-10-29
+pronto = false
+entregavel = "Dashboard Streamlit"
+criterio = "Leitor externo identifica em menos de 1 min por que um usuário está em risco alto · risco decomponível por dimensão"
+donos = ["Filipe"]
+
+[[semana]]
+id = "S10"
+inicio = 2026-10-30
+fim = 2026-11-05
+pronto = false
+opcional = true
+entregavel = "Isolation Forest — opcional"
+criterio = "Documentado como benchmark · o TCC não depende dele"
+donos = ["Filipe"]
+
+[[semana]]
+id = "S11"
+inicio = 2026-11-06
+fim = 2026-11-12
+pronto = false
+entregavel = "Execução de todos os cenários nas quatro configurações"
+criterio = "Reprodutível por script único · o número de sementes definido pela D-13, as mesmas nas quatro configurações"
+donos = ["Todos (Yasmin)"]
+
+[[semana]]
+id = "S12"
+inicio = 2026-11-13
+fim = 2026-11-19
+marco = "M4"
+pronto = false
+entregavel = "Tabela de ablação, sensibilidade dos pesos, gráficos"
+criterio = "Cada número sai de notebook versionado · Wilcoxon pareado sobre as diferenças"
+donos = ["Filipe", "Davi"]
+
+[[semana]]
+id = "S13"
+inicio = 2026-11-20
+fim = 2026-11-26
+pronto = false
+entregavel = "artigo/04-resultados.md"
+criterio = "Cada limitação nomeada tem proposta de trabalho futuro · LGPD e ISO 27001 entram aqui"
+donos = ["Filipe (caneta)"]
+
+[[semana]]
+id = "S14"
+inicio = 2026-11-27
+fim = 2026-12-03
+pronto = false
+entregavel = "artigo/05-conclusao.md"
+criterio = "A pergunta é respondida com sim, não ou parcialmente — e um número"
+donos = ["Davi (caneta)"]
+
+[[semana]]
+id = "S15"
+inicio = 2026-12-04
+fim = 2026-12-10
+marco = "M5"
+pronto = false
+entregavel = "Versão final diagramada · ENTREGA 10/12"
+criterio = "8 a 12 páginas no template COBEM 2026 · zero referência não conferida · bloco em inglês depois das referências · responsabilidade autoral"
+donos = ["Todos"]
+
+[[semana]]
+id = "S16"
+inicio = 2026-12-11
+pronto = false
+entregavel = "Slides, ensaio cronometrado, defesa"
+criterio = "Cada integrante apresenta qualquer seção sob sorteio"
+donos = ["Todos"]
+
+
+# ---------------------------------------------------------------------------
+# Decisões
+#
+# estado: "aberta" | "a-confirmar" | "fechada"
+#
+# `prazo`        → uma data
+# `prazo_semana` → quando o combinado é uma semana, não um dia. O script resolve
+#                  para o fim daquela semana
+# nenhum dos dois → decisão sem prazo. Cai na coluna "Depois" e fica visível
+#                   ali, em vez de desaparecer
+#
+# As decisões fechadas entram com id, título e data. A prosa do "o que ficou"
+# fica em `docs/decisoes.md`: ela não envelhece, e duplicar texto longo aqui
+# trocaria um risco de divergência por outro.
+# ---------------------------------------------------------------------------
+
+[[decisao]]
+id = "D-02"
+titulo = "Dashboard: objetivo, instrumento ou fora do escopo"
+proposta = "Instrumento de análise, descrito na Metodologia e na arquitetura"
+donos = ["Davi", "Filipe"]
+prazo = 2026-09-08
+estado = "aberta"
+
+[[decisao]]
+id = "D-06"
+titulo = "Cenários de contexto (B) e longitudinais (L)"
+proposta = "Adotados; desenho detalhado na S5"
+donos = ["Yasmin"]
+prazo = 2026-10-01
+estado = "aberta"
+
+[[decisao]]
+id = "D-07"
+titulo = "Caneta rotativa por seção"
+proposta = "Uma pessoa redige, duas revisam, a caneta gira. Registrada pelo Davi quando Yasmin e Filipe confirmarem"
+donos = ["Davi", "Yasmin", "Filipe"]
+estado = "aberta"
+
+[[decisao]]
+id = "D-09"
+titulo = "Pesos preliminares e análise de sensibilidade"
+proposta = "Valores preliminares; sensibilidade na S12"
+donos = ["Yasmin"]
+prazo_semana = "S8"
+estado = "aberta"
+
+[[decisao]]
+id = "D-12"
+titulo = "Unidade de análise das métricas"
+proposta = "Duas unidades declaradas separadamente: evento para os cenários pontuais, episódio para os de contexto e longitudinais"
+donos = ["Davi", "Filipe"]
+prazo = 2026-10-01
+estado = "aberta"
+
+[[decisao]]
+id = "D-13"
+titulo = "Tratamento estatístico dos resultados"
+proposta = "10 a 20 sementes, as mesmas nas quatro configurações; Wilcoxon pareado"
+donos = ["Davi"]
+prazo = 2026-10-01
+estado = "aberta"
+alerta = "O número final sai da medição da primeira execução completa (P31), que é a S11. Em 01/10 esta decisão fecha como **faixa e regra de fechamento**, nunca como número final — o critério de aceite da S5 que exigir o número é impossível de cumprir"
+
+[[decisao]]
+id = "D-14"
+titulo = "O que fazer se a C0 não alcançar revocação 0,90"
+proposta = "Comparar curvas precisão-revocação, em vez de pontos únicos"
+donos = ["Filipe"]
+prazo = 2026-10-01
+estado = "aberta"
+
+[[decisao]]
+id = "D-15"
+titulo = "Critério de relevância declarado a priori"
+proposta = "Uma frase na Metodologia dizendo qual redução de FPR e qual revocação longitudinal contam como resposta afirmativa"
+donos = ["Davi", "Yasmin", "Filipe"]
+prazo = 2026-10-01
+estado = "aberta"
+
+[[decisao]]
+id = "D-16"
+titulo = "Controle negativo longitudinal"
+proposta = "Acrescentar cenário de escalada legítima aos cenários de teste"
+donos = ["Yasmin"]
+prazo = 2026-10-01
+estado = "aberta"
+
+[[decisao]]
+id = "D-17"
+titulo = "Janela de constituição do baseline da D2"
+proposta = "Janela de treino anterior e disjunta da janela de avaliação"
+donos = ["Davi"]
+prazo = 2026-10-01
+estado = "aberta"
+
+[[decisao]]
+id = "D-18"
+titulo = "Dupla contagem e escala na integração"
+proposta = "Excluir o evento atual da janela de exposição"
+donos = ["Davi"]
+prazo = 2026-10-01
+estado = "aberta"
+
+[[decisao]]
+id = "D-19"
+titulo = "Vertente LGPD e ISO/IEC 27001"
+proposta = "Entra como limitação e trabalho futuro na S13"
+donos = ["Yasmin"]
+prazo = 2026-10-01
+estado = "aberta"
+
+[[decisao]]
+id = "D-05"
+titulo = "Ablação em quatro configurações (C0 a C3)"
+proposta = "Confirmar no M2"
+donos = ["Davi"]
+prazo = 2026-10-01
+estado = "a-confirmar"
+
+[[decisao]]
+id = "D-10"
+titulo = "Isolation Forest como benchmark opcional"
+proposta = "Cortável na S10, se as métricas estiverem em risco"
+donos = ["Filipe"]
+prazo_semana = "S10"
+estado = "a-confirmar"
+
+[[decisao]]
+id = "D-01"
+titulo = "Mudança de título"
+estado = "fechada"
+fechada_em = 2026-09-23
+
+[[decisao]]
+id = "D-03"
+titulo = "Operacionalização de \"resultados diferentes\""
+estado = "fechada"
+fechada_em = 2026-09-07
+
+[[decisao]]
+id = "D-04"
+titulo = "Dono da Justificativa"
+estado = "fechada"
+fechada_em = 2026-09-06
+
+[[decisao]]
+id = "D-08"
+titulo = "SLA de resposta a Pull Request"
+estado = "fechada"
+fechada_em = 2026-09-06
+
+[[decisao]]
+id = "D-11"
+titulo = "Formato do artigo"
+estado = "fechada"
+fechada_em = 2026-09-23
+
+[[decisao]]
+id = "D-20"
+titulo = "Sexto capítulo do artigo"
+estado = "fechada"
+fechada_em = 2026-09-23
+
+[[decisao]]
+id = "D-21"
+titulo = "Idioma do artigo"
+estado = "fechada"
+fechada_em = 2026-09-07
+
+[[decisao]]
+id = "D-22"
+titulo = "Onde ficam os insumos das encomendas"
+estado = "fechada"
+fechada_em = 2026-09-07
+
+[[decisao]]
+id = "D-23"
+titulo = "Volume de eventos da simulação"
+estado = "fechada"
+fechada_em = 2026-09-23
+
+[[decisao]]
+id = "D-24"
+titulo = "Qual dimensão compara o funcionário com o próprio padrão"
+estado = "fechada"
+fechada_em = 2026-09-23
+
+[[decisao]]
+id = "D-25"
+titulo = "O que é a dimensão 3"
+estado = "fechada"
+fechada_em = 2026-09-23
+
+[[decisao]]
+id = "D-26"
+titulo = "A linha de base vira dimensão 1 ou continua separada"
+estado = "fechada"
+fechada_em = 2026-09-23
+
+
+# ---------------------------------------------------------------------------
+# Citações pendentes
+#
+# Espelha `docs/citacoes-pendentes.md` para que a dívida bibliográfica apareça
+# no quadro. Referência não conferida é o único item desta lista que pode
+# reprovar o TCC por fraude acadêmica — e é o que some mais fácil de vista.
+# ---------------------------------------------------------------------------
+
+[[citacao]]
+onde = "artigo/01-introducao.md § Contextualização"
+o_que = "Entrada na lista para (NATIONAL INSTITUTE OF STANDARDS AND TECHNOLOGY, 2006)"
+dono = "Davi"
+desde = 2026-09-26
+
+[[citacao]]
+onde = "artigo/01-introducao.md § Problema"
+o_que = "Entrada na lista para (CHANDOLA; BANERJEE; KUMAR, 2009)"
+dono = "Davi"
+desde = 2026-09-26
+
+[[citacao]]
+onde = "artigo/02-referencial-teorico.md § 2.1"
+o_que = "Fonte para os pilares da segurança da informação"
+dono = "Yasmin"
+desde = 2026-09-04
+
+[[citacao]]
+onde = "docs/usabilidade.md § 6.2"
+o_que = "Formulação exata e porcentagem de Nielsen e Landauer"
+dono = "Davi"
+desde = 2026-09-03
+
+[[citacao]]
+onde = "docs/usabilidade.md § 6.3"
+o_que = "Limites exatos de cada faixa adjetiva do SUS"
+dono = "Davi"
+desde = 2026-09-03
+
+[[citacao]]
+onde = "docs/usabilidade.md § 7"
+o_que = "Literatura de carga de trabalho e fadiga de alerta em analistas de SOC"
+dono = "Yasmin"
+desde = 2026-09-03
+
+[[citacao]]
+onde = "docs/usabilidade.md § 9"
+o_que = "Edição e ano de Shneiderman efetivamente consultados"
+dono = "Davi"
+desde = 2026-09-26
