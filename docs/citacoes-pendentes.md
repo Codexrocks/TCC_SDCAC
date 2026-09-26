@@ -40,8 +40,7 @@ escreve em `docs/`.
 | [`usabilidade.md`](usabilidade.md) § 6.2 | Formulação exata e porcentagem de Nielsen e Landauer | 03/09/2026 |
 | [`usabilidade.md`](usabilidade.md) § 6.3 | Limites exatos de cada faixa adjetiva do SUS, em Bangor, Kortum e Miller (2009) | 03/09/2026 |
 | [`usabilidade.md`](usabilidade.md) § 7 | Literatura de carga de trabalho e fadiga de alerta em analistas de SOC | 03/09/2026 |
-| [`usabilidade.md`](usabilidade.md) § 9 | Edição e ano de Shneiderman efetivamente consultados. **Nunca esteve indexado aqui**: o marcador já existia no arquivo e esta linha faltava | 26/09/2026 |
-| [`usabilidade.md`](usabilidade.md) § 7 | Edição e ano da obra de Shneiderman efetivamente consultada | 03/09/2026 |
+| [`usabilidade.md`](usabilidade.md) § 9 | Edição e ano da obra de Shneiderman efetivamente consultada | 03/09/2026 |
 
 ***
 
