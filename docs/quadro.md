@@ -138,13 +138,13 @@ que some mais fácil de vista.
 
 | Onde | O que falta | Quem | Aberta desde | Idade |
 |---|---|---|---|---|
-| `docs/usabilidade.md § 6.2` | Formulação exata e porcentagem de Nielsen e Landauer | Davi | 03/09/2026 | 23 dias |
-| `docs/usabilidade.md § 6.3` | Limites exatos de cada faixa adjetiva do SUS | Davi | 03/09/2026 | 23 dias |
+| `docs/usabilidade.md § 6.2` | Formulação exata e porcentagem de Nielsen e Landauer | Filipe | 03/09/2026 | 23 dias |
+| `docs/usabilidade.md § 6.3` | Limites exatos de cada faixa adjetiva do SUS | Filipe | 03/09/2026 | 23 dias |
 | `docs/usabilidade.md § 7` | Literatura de carga de trabalho e fadiga de alerta em analistas de SOC | Yasmin | 03/09/2026 | 23 dias |
+| `docs/usabilidade.md § 9` | Edição e ano da obra de Shneiderman efetivamente consultada | Filipe | 03/09/2026 | 23 dias |
 | `artigo/02-referencial-teorico.md § 2.1` | Fonte para os pilares da segurança da informação | Yasmin | 04/09/2026 | 22 dias |
-| `artigo/01-introducao.md § Contextualização` | Entrada na lista para (NATIONAL INSTITUTE OF STANDARDS AND TECHNOLOGY, 2006) | Davi | 26/09/2026 | 0 dias |
-| `artigo/01-introducao.md § Problema` | Entrada na lista para (CHANDOLA; BANERJEE; KUMAR, 2009) | Davi | 26/09/2026 | 0 dias |
-| `docs/usabilidade.md § 9` | Edição e ano de Shneiderman efetivamente consultados | Davi | 26/09/2026 | 0 dias |
+| `artigo/01-introducao.md § Contextualização` | Entrada na lista para (NATIONAL INSTITUTE OF STANDARDS AND TECHNOLOGY, 2006) | Yasmin | 26/09/2026 | 0 dias |
+| `artigo/01-introducao.md § Problema` | Entrada na lista para (CHANDOLA; BANERJEE; KUMAR, 2009) | Yasmin | 26/09/2026 | 0 dias |
 
 ## O que ficou fora desta versão
 
