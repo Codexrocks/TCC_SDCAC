@@ -8,26 +8,34 @@ como recusar uma entrega, e a recusa vira atrito.
 
 ## Prazos do professor
 
+<!-- QUADRO:inicio prazos-do-professor -->
+<!-- Bloco gerado por scripts/quadro.py a partir de quadro.toml. Editar aqui nao adianta: a proxima execucao reescreve. -->
+
 | Data | Entrega | Estado |
 |---|---|---|
-| **05/09/26** | Tema do trabalho e composição do grupo — *Tarefa 01* | ✅ **Entregue em 03/09** |
-| **24/09/26** | Introdução do artigo no template **COBEM 2026** — *Tarefa 02* | ✅ **Entregue parcial em 24/09** — [registro](entregas/tarefa-02.md) |
-| Quinzenal | Reunião de acompanhamento com o orientador | — |
-| **10/12/26** | **Entrega do TCC** | — |
-| Dezembro | Apresentação e defesa | — |
+| **05/09/26** | Tema do trabalho e composição do grupo — *Tarefa 01* | ✅ **Entregue em 03/09/2026** — [registro](entregas/tarefa-01.md) |
+| **24/09/26** | Introdução do artigo no template **COBEM 2026** — *Tarefa 02* | ✅ **Entregue parcial em 24/09/2026** — [registro](entregas/tarefa-02.md) |
+| Quinzenal | Reunião de acompanhamento com o orientador | 🔁 Recorrente |
+| **10/12/26** | **Entrega do TCC** | 🗓️ Em 75 dias |
+| Dezembro | Apresentação e defesa | 🗓️ Sem prazo |
+<!-- QUADRO:fim prazos-do-professor -->
 
 ## Onde estamos, em 26/09
 
 Honestidade sobre o ponto de partida, porque é o que torna o resto realizável ou
 não:
 
-| Capítulo | Estado | Semana prevista |
-|---|---|---|
-| 1. Introdução | **Entregue parcial em 24/09** — os **seis blocos de complementação** continuam vazios, e a parcialidade foi declarada no arquivo entregue | ✅ entregue · complementos na S5 |
-| 2. Referencial teórico | Rascunho pronto, **fora do repositório** | S3 e S4 |
-| 3. Metodologia | Esqueleto | S5 |
-| 4. Resultados | Esqueleto | S13 |
-| 5. Conclusão | Esqueleto | S14 |
+<!-- QUADRO:inicio capitulos -->
+<!-- Bloco gerado por scripts/quadro.py a partir de quadro.toml. Editar aqui nao adianta: a proxima execucao reescreve. -->
+
+| Capítulo | Estado | Semana prevista | Situação |
+|---|---|---|---|
+| 1. Introdução | Entregue parcial em 24/09 — os seis blocos de complementação continuam vazios | S5 · ▶️ em curso | ⏳ Vence em 5 dias |
+| 2. Referencial teórico | Rascunho pronto, fora do repositório | S5 · ▶️ em curso | ⏳ Vence em 5 dias |
+| 3. Metodologia | Esqueleto | S5 · ▶️ em curso | ⏳ Vence em 5 dias |
+| 4. Resultados | Esqueleto | S13 | 🗓️ Em 61 dias |
+| 5. Conclusão | Esqueleto | S14 | 🗓️ Em 68 dias |
+<!-- QUADRO:fim capitulos -->
 
 **Nenhuma linha de código existe ainda.** O que existe é a especificação do
 gerador, que entrou na `main` pelo Pull Request #43, em 24/09.
@@ -126,13 +134,17 @@ Três consequências que valem saber:
 
 ## Marcos e caminho crítico
 
-| Marco | Data | O que fecha | Por que é marco |
-|---|---|---|---|
-| **M1** Introdução | **24/09** | Problema, pergunta, objetivos, delimitação | ✅ **Entregue parcial.** Era a Tarefa 02 do professor. Os seis blocos de complementação continuam vazios e vencem na S5 — [registro](entregas/tarefa-02.md) |
-| **M2** Metodologia congelada | **01/10** | Cenários, métricas, quatro configurações, atributos | Congela o que será medido **antes** de existir código a defender |
-| **M3** Modelo executável | **22/10** | C0 a C3 rodando sobre o mesmo gerador | Última data em que uma dimensão pode ser cortada sem comprometer a comparação |
-| **M4** Tabela de ablação | **19/11** | Números finais das quatro configurações | A partir daqui o trabalho é escrita. Nenhuma alteração de código é aceita |
-| **M5** Entrega | **10/12** | Artigo diagramado e submetido | — |
+<!-- QUADRO:inicio marcos -->
+<!-- Bloco gerado por scripts/quadro.py a partir de quadro.toml. Editar aqui nao adianta: a proxima execucao reescreve. -->
+
+| Marco | Data | O que fecha | Por que é marco | Situação |
+|---|---|---|---|---|
+| **M1** Introdução | **24/09** | Problema, pergunta, objetivos, delimitação | Era a Tarefa 02 do professor. Os seis blocos de complementação continuam vazios e vencem na S5 | ✅ Fechado em parte |
+| **M2** Metodologia congelada | **01/10** | Cenários, métricas, quatro configurações, atributos | Congela o que será medido antes de existir código a defender | ⏳ Vence em 5 dias |
+| **M3** Modelo executável | **22/10** | C0 a C3 rodando sobre o mesmo gerador | Última data em que uma dimensão pode ser cortada sem comprometer a comparação | 🗓️ Em 26 dias |
+| **M4** Tabela de ablação | **19/11** | Números finais das quatro configurações | A partir daqui o trabalho é escrita. Nenhuma alteração de código é aceita | 🗓️ Em 54 dias |
+| **M5** Entrega | **10/12** | Artigo diagramado e submetido | — | 🗓️ Em 75 dias |
+<!-- QUADRO:fim marcos -->
 
 **Caminho crítico:** M2 → S6 (gerador com histórico de um ano) → S8 (D3) → S11 (execução) → S12 (tabela) → M4.
 
