@@ -26,7 +26,7 @@ Estrutura definida pelo professor, conforme o [cronograma](../docs/cronograma.md
 
 | # | Seção | Quando | Quem |
 |---|---|---|---|
-| 1 | [Introdução](01-introducao.md) | S2 — **entrega 10/09** | Todos |
+| 1 | [Introdução](01-introducao.md) | **entrega 24/09** | Todos |
 | 2 | [Referencial teórico](02-referencial-teorico.md) | S3 e S4 | Yasmin, com Filipe na S4 |
 | 3 | [Metodologia](03-metodologia.md) | S5 | Todos |
 | 4 | [Resultados e discussão](04-resultados.md) | S12 e S13 | Filipe e Davi, discussão com todos |
@@ -40,7 +40,7 @@ limite do [template](../docs/formato-do-artigo.md), e ele é rígido: trabalho f
 é desclassificado antes da revisão.
 
 > **Este orçamento precisa ser recombinado.** Ele foi fechado quando se supunha
-> um teto de 10 páginas e um piso inexistente. O CREEM pede **no mínimo 8** — a
+> um teto de 10 páginas e um piso inexistente. O professor pede **no mínimo 8** — a
 > soma abaixo dá exatamente o piso, sem folga. Com 12 de teto, há espaço para
 > distribuir; quem decide como é a equipe.
 
@@ -50,11 +50,11 @@ Orçamento combinado para um artigo de **8 páginas** — o piso:
 |---|---|
 | Cabeçalho, resumo, palavras-chave, abstract, keywords | 0,5 |
 | **1. Introdução** | **1 a 1,5** |
-| **2. Referencial teórico** (entra em Fundamentação) | **1,5 a 2** |
+| **2. Referencial teórico** | **1,5 a 2** |
 | **3. Metodologia** | **2** |
 | **4. Resultados e discussão** | **2 a 2,5** |
 | **5. Conclusões** | **0,5** |
-| Referências e *responsibility notice* | 0,5 |
+| Referências e o que o template exigir de fechamento | 0,5 |
 
 Três coisas sobre estes números:
 
@@ -70,7 +70,8 @@ páginas em setembro, alguém vai ter de cortá-la em dezembro, com o texto já
 revisado e as referências já casadas. Cortar cedo é barato.
 
 > **Meça no template, não no editor.** Uma página do
-> [`CREEM-2026-template.docx`](../templates/CREEM-2026-template.docx) tem
+> [`COBEM-2025-template.docx`](../templates/COBEM-2025-template.docx) — a
+> aproximação disponível até o de 2026 chegar — tem
 > Times New Roman 10, entrelinha simples, margens de 3 cm no topo e 2 cm nas
 > outras. Cabe muito mais texto do que numa página do Word em branco — e muito
 > menos do que a contagem de palavras sugere, quando entram figuras.
@@ -101,10 +102,10 @@ real, artigo que não existe. A validação não pega isso; a banca pega.
 **Número sai de execução real.** Taxa de detecção, falso positivo e MTTD vêm dos
 testes registrados em `results/`, nunca de estimativa.
 
-## Formato: CREEM 2026, com referências em ABNT
+## Formato: COBEM 2026, com referências em ABNT
 
-Confirmado pelo **professor em 23/09/2026**, que disponibilizou o template. É a
-terceira redação desta seção — o histórico das três está em
+Consta duas vezes nas orientações do professor. É a quarta redação desta seção —
+o histórico das quatro está em
 [formato do artigo](../docs/formato-do-artigo.md).
 
 A regra de convivência entre os dois padrões:
@@ -112,27 +113,29 @@ A regra de convivência entre os dois padrões:
 | O quê | Segue |
 |---|---|
 | A **lista de referências**, no fim | **ABNT NBR 6023** |
-| **Todo o resto** — inclusive a **chamada de citação dentro do texto** | **Template CREEM 2026** |
+| **Todo o resto** | **Template COBEM 2026** |
 
-Quatro coisas para saber antes de escrever, detalhadas em
-[formato do artigo](../docs/formato-do-artigo.md#o-que-isto-muda-no-artigo):
+Quatro coisas para saber antes de escrever:
 
-1. **O artigo inteiro tem de 8 a 12 páginas**, incluindo tabelas e figuras —
-   oito é o **piso**
-2. **A chamada no texto é `(Chang e Pakzad, 2013)`**, não `(CHANG; PAKZAD,
-   2013)`. A NBR 10520 **não** se aplica; só a NBR 6023, e só na lista
-3. **O bloco em inglês vai no fim**, depois das referências: título, autores,
-   *Abstract* e *Keywords*
-4. **Faltam três seções de fechamento** no esqueleto: AGRADECIMENTOS (opcional),
-   REFERÊNCIAS e RESPONSABILIDADE AUTORAL (obrigatórias)
+1. **O artigo inteiro tem de 8 a 12 páginas**, e **a Introdução tem de 1 a 2** —
+   sem figura, gráfico ou tabela nela
+2. **As referências do contexto precisam ter até 5 anos de publicação.** Fonte
+   mais antiga continua válida em outras partes, mas o contexto mostra o estado
+   atual
+3. **A chamada no texto não é a da NBR 10520** — nada de `(CHANG; PAKZAD,
+   2013)`. A forma exata depende do template, que ainda não temos
+4. ⚠️ **O template do COBEM 2026 ainda não está no repositório.** O que está
+   versionado é o COBEM 2025 e o CREEM 2026, e nenhum dos dois é o que o
+   professor pede
 
-O template **não prescreve** quais seções de conteúdo o artigo tem — a estrutura
-de cinco seções da instituição cabe sem ajuste.
+A estrutura de cinco seções é a do professor, e a quinta junta **Conclusão e
+Referências** — aqui elas ficam em arquivos separados só por organização de
+escrita.
 
 O Markdown daqui é a **fonte da verdade do texto**; o template é aplicado na
-hora de montar o documento de entrega. Ele está versionado em
-[`templates/`](../templates/README.md), para todo mundo diagramar no mesmo
-arquivo.
+hora de montar o documento de entrega. O que existe hoje em
+[`templates/`](../templates/README.md) é aproximação; o arquivo do COBEM 2026
+precisa ser obtido com o professor.
 
 Escreva o conteúdo aqui primeiro. Formatar é o último passo, não o primeiro —
 texto preso dentro de um `.docx` não é revisável por ninguém e não aparece no

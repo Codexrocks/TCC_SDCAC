@@ -36,10 +36,10 @@ qualquer documento, inclusive deste. Regra do [`AGENTS.md`](../AGENTS.md), seç�
 Sistema de Avaliação Multidimensional de Risco Comportamental em ambientes
 corporativos simulados.
 
-> **O título ainda não mudou no repositório.** O anterior — "Detecção de
-> Comportamentos Anômalos" — consta na [Tarefa 01](entregas/tarefa-01.md),
-> entregue em 03/09, e no README. A mudança precisa ser comunicada ao orientador
-> antes de valer. Decisão **D-01**, ainda aberta.
+> **Título adotado em 23/09/2026**, comunicado ao orientador. Decisão **D-01**,
+> fechada. O anterior — "Detecção de Comportamentos Anômalos" — consta na
+> [Tarefa 01](entregas/tarefa-01.md), entregue em 03/09, e fica lá como registro
+> do que foi entregue naquela data.
 
 ### 1.2 Problema
 
@@ -197,11 +197,9 @@ a resposta "não".
 
 ## 3. Produtos finais
 
-1. **Artigo científico** completo, no [formato CREEM 2026](formato-do-artigo.md)
-   — 8 a 12 páginas no total, **lista de referências em ABNT NBR 6023** e
-   chamadas de citação no formato do CREEM, texto em português com o bloco em
-   inglês no fim —, com a tabela de ablação de quatro linhas. Decisão **D-11**,
-   fechada em **23/09**.
+1. **Artigo científico** completo, no [formato COBEM 2026](formato-do-artigo.md)
+   — 8 a 12 páginas no total e **lista de referências em ABNT NBR 6023** —, com a
+   tabela de ablação de quatro linhas. Decisão **D-11**, fechada em **23/09**.
 
    > **A extensão é restrição de projeto, não detalhe de formatação.** O artigo
    > inteiro tem de 8 a 12 páginas, tabelas e figuras incluídas, e **oito é o

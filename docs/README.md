@@ -1,14 +1,15 @@
 # TCC_SDCAC
 
-**Sistema de Detecção de Comportamentos Anômalos em Cybersecurity**
+**Sistema de Avaliação Multidimensional de Risco Comportamental**
 
 Trabalho de Conclusão de Curso · Prof. Euzébio D. de Souza · 2026/2
 Davi · Yasmin · Filipe
 
-> **O título está em revisão.** O [plano](plano.md) adota "Sistema de Avaliação
-> Multidimensional de Risco Comportamental". A troca depende da decisão
-> [D-01](decisoes.md), que precisa ser comunicada ao orientador — até lá, vale o
-> título acima, que é o da Tarefa 01 entregue em 03/09.
+> **O título mudou em 23/09/2026**, comunicado ao orientador e registrado na
+> decisão [D-01](decisoes.md). O anterior — "Sistema de Detecção de
+> Comportamentos Anômalos em Cybersecurity" — consta na
+> [Tarefa 01](entregas/tarefa-01.md), entregue em 03/09, e fica lá como registro
+> do que foi entregue naquela data.
 
 ---
 

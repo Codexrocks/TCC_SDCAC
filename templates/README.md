@@ -5,17 +5,21 @@ material da equipe, e não deve ser editado aqui.
 
 | Arquivo | O que é | Vale? |
 |---|---|---|
-| **`CREEM-2026-template.docx`** | Template do **XXXII CREEM 2026**, disponibilizado pelo professor em 23/09/2026 | **Sim — é este** |
-| `COBEM-2025-template.docx` | Template da ABCM, 28ª edição do COBEM. Encontrado pela equipe em 07/09/2026, antes de o professor se pronunciar | Não. Guardado para rastreabilidade |
+| **`orientacoes-tcc-reuniao-02.pdf`** | Orientações do professor, 2ª reunião. Diz o formato, a extensão, a estrutura e os prazos | **Sim — é a fonte** |
+| `COBEM-2026-template.docx` | **Ainda não obtido.** É o que o professor pede | **Falta** |
+| `CREEM-2026-template.docx` | Evento irmão da ABCM. Foi tratado por engano como sendo o do professor em 23/09 | Não |
+| `COBEM-2025-template.docx` | Template da ABCM, 28ª edição. Encontrado pela equipe em 07/09 | Aproximação da família, até o de 2026 chegar |
 
 O que o template em vigor exige está lido e traduzido em
 [`docs/formato-do-artigo.md`](../docs/formato-do-artigo.md) — margens, fontes,
 número de páginas, estilo de citação. **Consulte a página; use o arquivo para
 diagramar.**
 
-> **Os dois são parecidos e não são iguais.** São eventos irmãos da ABCM, com
-> templates de mesma família. A diferença que mais pega é a extensão: o COBEM
-> pede 6 a 10 páginas, o CREEM **8 a 12**. Confira sempre pelo arquivo do CREEM.
+> **Parecidos não é igual, e isso já custou uma volta inteira.** COBEM, CREEM e
+> CONEM são eventos irmãos da ABCM, com templates de mesma família e números
+> diferentes. Em 23/09 o arquivo do CREEM 2026 foi tratado como sendo o do
+> professor, e não era. **Confira o nome do evento contra o que o professor
+> escreveu, não contra o que o template parece ser.**
 
 ## Por que esta pasta fica na raiz
 
