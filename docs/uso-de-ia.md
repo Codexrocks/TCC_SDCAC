@@ -26,12 +26,17 @@ verificável e não dependa da memória de ninguém.
 | Pessoa | Assistente | Onde usa |
 |---|---|---|
 | Davi | Claude (Claude Code) | Repositório, automação, backend |
-| Yasmin | não declarado | equipe de três, até 23/09/2026 |
-| Filipe | não declarado | equipe de três, até 23/09/2026 |
+| Yasmin | **não declarado** | Referencial, cenários, regras — produzidos fora do GitHub |
+| Filipe | **não declarado** | Gerador, dashboard, métricas — produzidos fora do GitHub |
 
-> **As duas linhas ficam como registro.** Desde 23/09/2026 o trabalho é só do
-> Davi, e a declaração de Yasmin e Filipe nunca chegou. Apagar as linhas faria a
-> tabela parecer completa desde sempre; deixá-las diz o que houve.
+> **As duas lacunas ficam à vista, porque são lacunas de verdade.** Desde
+> 23/09/2026 só o Davi opera o repositório: Yasmin e Filipe produzem fora e ele
+> versiona. Isso **não** dispensa a declaração — só muda quem a transcreve. Até
+> hoje ela não chegou de nenhum dos dois, e enquanto não chegar o campo do Pull
+> Request responde exatamente isso: *"não declarado por quem produziu"*.
+>
+> Preencher com "nenhuma" seria inventar; apagar as linhas faria a tabela
+> parecer completa desde sempre. Deixá-las em branco diz o que há.
 
 Trocar de ferramenta no meio do TCC é normal. Atualize a tabela quando trocar.
 
@@ -115,8 +120,8 @@ na seção `Arquivo protegido`, o que muda, por que agora e o que segura no luga
 O motivo dessa segunda lista é o que mais importa aqui. Sem ela, bastaria um
 Pull Request editando o `validar.py` para desligar todas as travas — e a IA que
 escreveu esse PR seria a mesma que sugeriu a mudança. Até 23/09/2026 a trava
-eram duas aprovações; com uma pessoa só ela deixou de ser cumprível, e o que
-ficou no lugar é o tempo: **a mudança é lida em dois momentos diferentes, e a
+eram duas aprovações; com uma pessoa só operando o repositório ela deixou de ser
+cumprível, e o que ficou no lugar é o tempo: **a mudança é lida em dois momentos diferentes, e a
 segunda leitura é a que pega o que a pressa escreveu.**
 
 ---
@@ -168,10 +173,13 @@ está registrada:
 - **"Usaram IA?"** Sim, declarado em cada commit e cada Pull Request
 - **"Em quê?"** O histórico do repositório responde por mudança
 - **"Como sabemos que vocês entenderam o que foi entregue?"** Até 23/09/2026,
-  todo PR foi lido e aprovado por outra pessoa. De lá em diante o trabalho é de
-  uma pessoa só: respondem por isso os checks, o checklist de autorrevisão, as
-  24 h de espera nos arquivos de regra e o comentário do revisor automático —
-  que é sugestão, não aprovação
+  todo PR foi lido e aprovado por outra pessoa. De lá em diante só uma pessoa
+  opera o repositório: respondem por isso os checks, o checklist de
+  autorrevisão, as 24 h de espera nos arquivos de regra e o comentário do
+  revisor automático — que é sugestão, não aprovação
+- **"E o que os outros dois fizeram?"** Está no [cronograma](cronograma.md),
+  semana a semana, e no histórico de cada Pull Request que versionou o material
+  deles
 - **"E as referências?"** Só entram conferidas na fonte; o que falta conferir
   está marcado no próprio texto
 
