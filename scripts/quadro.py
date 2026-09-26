@@ -415,6 +415,33 @@ def render_quadro(dados: Dados, hoje: datetime.date) -> str:
         )
         linhas.append("")
 
+    andando = []
+    for chave, rotulo in (
+        ("semana", "Semana"), ("capitulo", "Capítulo"),
+        ("decisao", "Decisão"), ("tarefa_professor", "Professor"),
+    ):
+        for item in dados.get(chave, []):
+            if item.get("andamento"):
+                nome = item.get("id") or f"{item.get('numero', '')}. {item.get('titulo', '')}"
+                andando.append((rotulo, nome, item["andamento"],
+                                ", ".join(item.get("donos", [])) or "—"))
+    if andando:
+        linhas.append("## O que está em andamento")
+        linhas.append("")
+        linhas.append(
+            "Escrito pelas próprias pessoas no quadro compartilhado e trazido para cá"
+        )
+        linhas.append("pela tarefa agendada. Não é estado calculado: é declaração de quem")
+        linhas.append("está fazendo.")
+        linhas.append("")
+        linhas.append(
+            tabela(
+                ["Tipo", "Item", "Quem", "O que está fazendo"],
+                [[tp, f"**{nm}**", qm, txt] for tp, nm, txt, qm in andando],
+            )
+        )
+        linhas.append("")
+
     alertas = [d for d in dados.get("decisao", []) if d.get("alerta")]
     if alertas:
         linhas.append("## Alertas registrados nas decisões")

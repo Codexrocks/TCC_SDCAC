@@ -18,6 +18,16 @@
 # certa no dia em que foi escrita, e nunca mais. Contagem regressiva escrita à
 # mão envelhece em silêncio; contagem calculada não envelhece nunca.
 #
+# O campo `andamento`
+# -------------------
+# Opcional, em qualquer semana, capítulo, decisão ou tarefa do professor. Carrega
+# o que a pessoa declarou estar fazendo, escrito por ela no quadro compartilhado
+# e trazido para cá pela tarefa agendada. Aparece em `docs/quadro.md` na seção
+# "O que está em andamento".
+#
+# É o único campo deste arquivo que **não** é fato combinado: é declaração de
+# quem está com a tarefa na mão. Apague quando o item ficar pronto.
+#
 # Como usar
 # ---------
 #     python scripts/quadro.py              # regenera docs/quadro.md
