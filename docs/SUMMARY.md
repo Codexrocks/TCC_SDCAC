@@ -13,6 +13,7 @@
 ## O sistema
 
 * [Arquitetura](arquitetura.md)
+* [Banco da corporação simulada](banco-simulado.md)
 * [Usabilidade](usabilidade.md)
 
 ## Como trabalhamos
