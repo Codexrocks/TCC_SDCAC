@@ -112,26 +112,27 @@ Iniciante**.
 Em 04/09/2026:
 
 - ~~**Norma: ABNT.**~~ **Substituído em 23/09/2026:** o artigo sai no **formato
-  CREEM 2026**, com a lista de referências em **ABNT**. Ver abaixo.
+  COBEM 2026**, com a lista de referências em **ABNT**. Ver abaixo.
 - **Abstract em inglês é necessário**, além do Resumo em português. O resto do
   artigo é **todo em português** — decidido pelo Davi em 07/09/2026, e
   compatível com o template, cuja língua oficial é o português. Ver
-  [formato do artigo](formato-do-artigo.md#4-o-idioma-portugues-com-o-bloco-em-ingles-no-fim).
+  [formato do artigo](formato-do-artigo.md).
 
-### Corrigido em 23/09/2026 — CREEM 2026, com referências em ABNT
+### Corrigido em 23/09/2026 — COBEM 2026, com referências em ABNT
 
-A questão deu três voltas. As três ficam à vista em vez de serem apagadas: o que
+A questão deu quatro voltas. As quatro ficam à vista em vez de serem apagadas: o que
 a banca avalia é o processo, e processo inclui a correção.
 
 | Data | O que ficou | Fonte |
 |---|---|---|
 | 04/09 | ABNT | Registro da equipe |
 | 07/09 | COBEM 2025 — *"não é ABNT"* | Template encontrado pela equipe |
-| **23/09** | **CREEM 2026, com referências em ABNT** | **Template do professor** |
+| 23/09 | ~~CREEM 2026~~ — engano de arquivo | `.docx` de evento irmão |
+| **23/09** | **COBEM 2026, com referências em ABNT** | **Orientações escritas do professor** |
 
 A [estrutura mínima](#estrutura-minima-do-artigo) desta mesma página já
 permitia — *"conforme normas da ABNT **ou padrões específicos definidos pela
-coordenação**"*. O formato CREEM é um desses padrões, então não há conflito com
+coordenação**"*. O formato COBEM é um desses padrões, então não há conflito com
 a instituição. E a ABNT não sai de cena: ela rege a lista bibliográfica.
 
 O que o template exige está em [formato do artigo](formato-do-artigo.md).
@@ -139,7 +140,7 @@ O que o template exige está em [formato do artigo](formato-do-artigo.md).
 ## Ainda a confirmar com o orientador
 
 - [x] ~~**Datar a confirmação do formato com o orientador.**~~ **Resolvido em
-      23/09/2026:** o professor disponibilizou o template do CREEM 2026 e
+      23/09/2026:** as orientações escritas do professor dizem COBEM 2026, e ele
       confirmou que a ABNT vale só para as referências bibliográficas.
 
 - [ ] **Plataforma de submissão.** Dreamshaper, RUNA ou outra.

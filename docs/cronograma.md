@@ -8,13 +8,13 @@ como recusar uma entrega, e a recusa vira atrito.
 
 ## Prazos do professor
 
-| Data | Entrega |
-|---|---|
-| 03/09/26 | PDF com tema, composição do grupo e e-mail do líder — *Tarefa 01* ✅ |
-| 10/09/26 | Introdução do artigo no template CREEM 2026 — *Tarefa 02* ⚠️ entregue incompleta |
-| Quinzenal | Reunião de acompanhamento com o orientador |
-| **10/12/26** | **Entrega do TCC** |
-| Dezembro | Apresentação e defesa |
+| Data | Entrega | Estado |
+|---|---|---|
+| **05/09/26** | Tema do trabalho e composição do grupo — *Tarefa 01* | ✅ **Entregue em 03/09** |
+| **24/09/26** | Introdução do artigo no template **COBEM 2026** — *Tarefa 02* | ⏳ **amanhã** |
+| Quinzenal | Reunião de acompanhamento com o orientador | — |
+| **10/12/26** | **Entrega do TCC** | — |
+| Dezembro | Apresentação e defesa | — |
 
 ## Onde estamos, em 23/09
 
@@ -23,8 +23,8 @@ não:
 
 | Capítulo | Estado | Semana prevista |
 |---|---|---|
-| 1. Introdução | Escrita, com **seis blocos de complementação vazios** | S2 — venceu 10/09 |
-| 2. Referencial teórico | Rascunho pronto, **fora do repositório** | S3 e S4 — vence 24/09 |
+| 1. Introdução | Escrita, com **seis blocos de complementação vazios** | **vence 24/09 — amanhã** |
+| 2. Referencial teórico | Rascunho pronto, **fora do repositório** | S3 e S4 |
 | 3. Metodologia | Esqueleto | S5 |
 | 4. Resultados | Esqueleto | S13 |
 | 5. Conclusão | Esqueleto | S14 |
@@ -50,7 +50,7 @@ acúmulo declarado — depois dela o cronograma volta a ter uma entrega por sema
 | **S12** | 13–19/11 | Tabela de ablação, sensibilidade dos pesos, gráficos | Cada número sai de notebook versionado · Wilcoxon pareado sobre as diferenças | Filipe + Davi |
 | **S13** | 20–26/11 | `artigo/04-resultados.md` | Cada limitação nomeada tem proposta de trabalho futuro · LGPD e ISO 27001 entram aqui | Filipe (caneta) |
 | **S14** | 27/11–03/12 | `artigo/05-conclusao.md` | A pergunta é respondida com **sim, não ou parcialmente — e um número** | Davi (caneta) |
-| **S15** | 04–10/12 | Versão final diagramada · **ENTREGA 10/12** | 8 a 12 páginas no template CREEM · zero referência não conferida · bloco em inglês depois das referências · responsabilidade autoral | Todos |
+| **S15** | 04–10/12 | Versão final diagramada · **ENTREGA 10/12** | 8 a 12 páginas no template COBEM 2026 · zero referência não conferida · bloco em inglês depois das referências · responsabilidade autoral | Todos |
 | **S16** | 11/12 em diante | Slides, ensaio cronometrado, defesa | Cada integrante apresenta qualquer seção sob sorteio | Todos |
 
 ## Como o trabalho chega ao repositório
@@ -129,7 +129,7 @@ Três consequências que valem saber:
 
 | Marco | Data | O que fecha | Por que é marco |
 |---|---|---|---|
-| **M1** Introdução | 10/09 | Problema, pergunta, objetivos, delimitação | ⚠️ Entregue com seis blocos vazios. Fecha de verdade na S5 |
+| **M1** Introdução | **24/09** | Problema, pergunta, objetivos, delimitação | É a Tarefa 02 do professor. Seis blocos de complementação continuam vazios |
 | **M2** Metodologia congelada | **01/10** | Cenários, métricas, quatro configurações, atributos | Congela o que será medido **antes** de existir código a defender |
 | **M3** Modelo executável | **22/10** | C0 a C3 rodando sobre o mesmo gerador | Última data em que uma dimensão pode ser cortada sem comprometer a comparação |
 | **M4** Tabela de ablação | **19/11** | Números finais das quatro configurações | A partir daqui o trabalho é escrita. Nenhuma alteração de código é aceita |
@@ -163,6 +163,6 @@ Cinco seções, conforme o escopo definido pelo professor:
 4. Resultados e Discussões
 5. Conclusão
 
-O [formato do artigo](formato-do-artigo.md) — CREEM 2026, com as referências em
+O [formato do artigo](formato-do-artigo.md) — COBEM 2026, com as referências em
 ABNT — define o resto: de 8 a 12 páginas, títulos de seção em maiúsculas, e o
 bloco em inglês depois das referências.
