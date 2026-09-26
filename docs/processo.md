@@ -58,8 +58,9 @@ para ver quem está com o quê sem abrir o log.
 | `fix` | correção | `filipe/fix/faixa-risco-medio` |
 | `chore` | configuração, manutenção | `davi/chore/atualiza-dependencias` |
 
-Autores: `davi` · `yasmin` · `filipe` · `claude`. Detalhe em
-[Padrões](padroes.md#branch).
+Autores: `davi` · `yasmin` · `filipe` · `claude` · `gitbook`. A lista é a mesma
+de `AUTORES`, em [`scripts/validar.py`](../scripts/validar.py), e um teste
+compara as duas. Detalhe em [Padrões](padroes.md#branch).
 
 ### Mensagens de commit
 
@@ -75,8 +76,9 @@ chore: adiciona dependência do Pandas
 ### Regras de merge
 
 - PR sempre para `main`
-- **Sem aprovação de outra pessoa** — o trabalho é de uma pessoa só, e o
-  GitHub não deixa ninguém aprovar o próprio PR
+- **Sem aprovação de outra pessoa** — só o Davi opera o repositório, e o
+  GitHub não deixa ninguém aprovar o próprio PR. O **trabalho** continua sendo
+  de três: ver [cronograma](cronograma.md#como-o-trabalho-chega-ao-repositório)
 - Checks **Validação** e **Governança** verdes
 - Arquivo de regra ou de checagem: **24 h de PR aberto** e a seção
   `Arquivo protegido` preenchida (ver [Padrões](padroes.md))
@@ -103,8 +105,8 @@ site do GitBook já é público — então abrir o código não muda a exposiç�
 
 - [x] `Proteção da main` — PR obrigatório, checks **Validação** e
       **Governança**, sem force push, sem deleção, só *Squash and merge*. Sem
-      bypass para ninguém. A exigência de aprovação saiu em 23/09/2026, com o
-      trabalho passando a ser de uma pessoa
+      bypass para ninguém. A exigência de aprovação saiu em 23/09/2026, quando
+      a operação do repositório passou a ser de uma pessoa
 - [x] `Merge restrito ao líder` — só o dono da organização atualiza a `main`
 
 **c) Adicionar o secret do assistente** — `Settings → Secrets and variables → Actions`
@@ -113,7 +115,11 @@ site do GitBook já é público — então abrir o código não muda a exposiç�
 
 **d) Dar acesso à equipe** — `Settings → Collaborators and teams`
 
-- [x] Yasmin (`@Yas2046`) e Filipe (`@FilipeF4guiar`) com papel **Write**
+- [x] Yasmin (`@Yas2046`) e Filipe (`@FilipeF4guiar`) tiveram papel **Write**
+      entre 03/09 e 23/09/2026. Hoje **só o Davi tem acesso de escrita** — os
+      dois produzem fora e ele versiona. Conferido contra o repositório, não
+      contra a memória: `gh api repos/Codexrocks/TCC_SDCAC/collaborators`
+      devolve só `DaviSoaresDilly`
 
 Tudo isso está feito. O passo a passo de cada item, para conferir ou refazer,
 está em [Configuração passo a passo](configuracao.md).

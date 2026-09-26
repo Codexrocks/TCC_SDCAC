@@ -31,7 +31,8 @@ entra — marque a linha com o aviso de citação pendente e siga.
 <!--
 Obrigatória só quando o PR toca AGENTS.md, CLAUDE.md, GEMINI.md,
 .github/copilot-instructions.md, CONTRIBUTING.md, docs/padroes*.md,
-docs/processo.md, .github/** ou scripts/**. Nesse caso o PR também fica 24 h
+docs/processo.md, docs/uso-de-ia.md, .github/** ou scripts/**. Nesse caso o PR
+também fica 24 h
 aberto antes de entrar, e o check "Governança" confere as duas coisas.
 Não tocou nenhum desses? Apague esta seção.
 -->

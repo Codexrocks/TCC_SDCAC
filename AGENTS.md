@@ -12,9 +12,14 @@ As seções 3 e 4 dizem o que você não pode fazer sozinho.
 
 ## 1. Contexto
 
-TCC 2026/2 · Prof. Euzébio D. de Souza · Sistema de Detecção de Comportamentos
-Anômalos em Cybersecurity. Equipe de três: **Davi** (líder & backend),
-**Yasmin** (cybersecurity), **Filipe** (data & dashboard).
+TCC 2026/2 · Prof. Euzébio D. de Souza · **Sistema de Avaliação
+Multidimensional de Risco Comportamental**. Equipe de três: **Davi** (líder &
+backend), **Yasmin** (cybersecurity), **Filipe** (data & dashboard).
+
+> O título anterior — *Sistema de Detecção de Comportamentos Anômalos em
+> Cybersecurity* — mudou em 23/09/2026 pela decisão **D-01**, comunicada ao
+> orientador. Ele continua na [Tarefa 01](docs/entregas/tarefa-01.md) como
+> registro do que foi entregue em 03/09. A sigla do repositório não muda.
 
 Desde 23/09/2026, **só o Davi opera o GitHub**. Yasmin e Filipe produzem fora —
 documento, planilha, rascunho — e ele versiona por Pull Request. A autoria não
@@ -70,10 +75,18 @@ regra sem precisar da linha extra.
 O template tem uma seção **Uso de IA** com quatro perguntas. Preencher é
 obrigatório, e um workflow reprova o PR se ficar em branco:
 
-- **Qual IA** foi usada
-- **No que ela ajudou** — seja específico: "rascunhou a seção 2", não "ajudou"
-- **O que é seu** — a parte que você pensou, decidiu, leu ou verificou
-- **Você conferiu tudo que ela escreveu?**
+Os rótulos abaixo são **literais**: é por eles que o check procura, e um campo
+renomeado conta como campo em branco.
+
+- **IA usada:** qual assistente foi usado — ou `nenhuma`
+- **No que ajudou:** seja específico — "rascunhou a seção 2", não "ajudou"
+- **O que é meu:** a parte que você pensou, decidiu, leu ou verificou
+- **Conferi tudo que a IA escreveu:** sim ou não
+
+Os mesmos quatro estão no
+[template de Pull Request](.github/pull_request_template.md), prontos para
+preencher — **copie de lá, não daqui**. Um teste em `tests/` compara os três
+lugares e reprova se um deles mudar sozinho.
 
 A última pergunta é a que importa. Texto de IA entra no TCC sob a
 responsabilidade de quem abriu o PR, não da IA.
@@ -112,10 +125,14 @@ Mudança nestes arquivos não entra na hora em que foi escrita:
 AGENTS.md · CLAUDE.md · GEMINI.md · .github/copilot-instructions.md
 CONTRIBUTING.md
 docs/padroes.md · docs/padroes-codigo.md · docs/processo.md
+docs/uso-de-ia.md
 .github/**  ·  scripts/**
 ```
 
-São as regras e as checagens automáticas. Sem trava, bastaria um PR editando o
+São as regras e as checagens automáticas. O `docs/uso-de-ia.md` entrou na lista
+em 26/09/2026: é a política de uso de IA escrita por extenso — a regra que esta
+seção resume —, e mudá-la no mesmo impulso em que se muda o comportamento é
+exatamente o que a espera existe para impedir. Sem trava, bastaria um PR editando o
 `validar.py` para desligar tudo — e a IA que escreveu o PR seria a mesma que
 sugeriu a mudança.
 

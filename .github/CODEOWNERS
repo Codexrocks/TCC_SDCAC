@@ -2,7 +2,10 @@
 # Descomente e ajuste as linhas abaixo conforme a equipe entrar no
 # repositório. Usuário só vira regra depois de ter acesso de escrita —
 # antes disso o GitHub marca o arquivo com erro 'Unknown owner'.
-# Yasmin = @Yas2046 · Filipe = @FilipeF4guiar. Os dois ja tem acesso de escrita.
+# Yasmin = @Yas2046 · Filipe = @FilipeF4guiar. Os dois tiveram acesso de
+# escrita entre 03/09 e 23/09/2026 e hoje nao tem: descomentar as linhas abaixo
+# faria o GitHub marcar o arquivo com 'Unknown owner' de novo. So descomente
+# depois de devolver o acesso. Ver docs/configuracao.md, secao 5.
 
 # Padrão: o líder revisa qualquer coisa
 *                       @DaviSoaresDilly
