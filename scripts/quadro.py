@@ -29,6 +29,15 @@ import pathlib
 import re
 import sys
 import tomllib
+from collections.abc import Sequence
+from typing import Any
+
+# Apelidos de tipo. As estruturas vem do tomllib, entao sao dicionarios de
+# chave em texto; nomea-las aqui evita repetir a assinatura inteira em vinte
+# funcoes e diz o que cada dicionario representa.
+Dados = dict[str, Any]
+Registro = dict[str, Any]
+Cartao = tuple[str, str, str, str, str, str, str]
 
 RAIZ = pathlib.Path(__file__).resolve().parent.parent
 FONTE = RAIZ / "quadro.toml"
@@ -65,7 +74,7 @@ AVISO_GERADO = (
 # ---------------------------------------------------------------------------
 
 
-def ler_se_existir(caminho):
+def ler_se_existir(caminho: str) -> str:
     """Le o arquivo, ou devolve vazio se ele ainda nao nasceu.
 
     A primeira execucao gera docs/quadro.md do zero: comparar com um arquivo
@@ -75,7 +84,7 @@ def ler_se_existir(caminho):
     return alvo.read_text(encoding="utf-8") if alvo.exists() else ""
 
 
-def carregar():
+def carregar() -> Dados:
     """Le o quadro.toml. Sai com erro legivel se ele nao existir ou nao casar."""
     if not FONTE.exists():
         sys.exit(f"Nao encontrei {FONTE.name} na raiz do repositorio.")
@@ -86,7 +95,7 @@ def carregar():
         sys.exit(f"{FONTE.name} esta malformado: {erro}")
 
 
-def data_registrada():
+def data_registrada() -> datetime.date | None:
     """Devolve a data do ultimo retrato gravado em docs/quadro.md, ou None.
 
     O --conferir usa isto para comparar conteudo contra conteudo. Sem ele, a
@@ -104,11 +113,13 @@ def data_registrada():
 # ---------------------------------------------------------------------------
 
 
-def semanas_por_id(dados):
+def semanas_por_id(dados: Dados) -> dict[str, Registro]:
     return {s["id"]: s for s in dados.get("semana", [])}
 
 
-def resolver_prazo(item, semanas):
+def resolver_prazo(
+    item: Registro, semanas: dict[str, Registro]
+) -> datetime.date | None:
     """Devolve a data limite do item, venha ela de `prazo` ou de `prazo_semana`.
 
     Prazo que e uma semana ("fecha na S8") vira o ultimo dia daquela semana.
@@ -123,7 +134,7 @@ def resolver_prazo(item, semanas):
     return None
 
 
-def coluna_de_prazo(prazo, hoje):
+def coluna_de_prazo(prazo: datetime.date | None, hoje: datetime.date) -> str:
     if prazo is None:
         return "depois"
     dias = (prazo - hoje).days
@@ -134,7 +145,7 @@ def coluna_de_prazo(prazo, hoje):
     return "depois"
 
 
-def frase_de_prazo(prazo, hoje):
+def frase_de_prazo(prazo: datetime.date | None, hoje: datetime.date) -> str:
     """Situacao em texto. Sempre com palavra junto do icone, nunca so o icone."""
     if prazo is None:
         return "🗓️ Sem prazo"
@@ -148,17 +159,17 @@ def frase_de_prazo(prazo, hoje):
     return f"🗓️ Em {dias} dias"
 
 
-def plural(quantidade, singular, plural_):
+def plural(quantidade: int, singular: str, plural_: str) -> str:
     """Concorda o numero com o substantivo. Pagina publica nao diz "1 item(ns)"."""
     return f"{quantidade} {singular if quantidade == 1 else plural_}"
 
 
-def br(data):
+def br(data: datetime.date | None) -> str:
     """Data no formato que se le em portugues."""
     return data.strftime("%d/%m/%Y") if data else "—"
 
 
-def celula(texto):
+def celula(texto: object) -> str:
     """Protege o conteudo de quebrar a tabela markdown."""
     return str(texto).replace("|", "\\|").replace("\n", " ").strip()
 
@@ -168,7 +179,7 @@ def celula(texto):
 # ---------------------------------------------------------------------------
 
 
-def cartoes(dados, hoje):
+def cartoes(dados: Dados, hoje: datetime.date) -> list[Cartao]:
     """Monta todo cartao do quadro e diz em que coluna ele cai.
 
     Cada cartao e uma tupla pronta para virar linha de tabela:
@@ -300,7 +311,7 @@ def cartoes(dados, hoje):
 # ---------------------------------------------------------------------------
 
 
-def tabela(cabecalho, linhas):
+def tabela(cabecalho: Sequence[str], linhas: Sequence[Sequence[object]]) -> str:
     partes = ["| " + " | ".join(cabecalho) + " |"]
     partes.append("|" + "---|" * len(cabecalho))
     for linha in linhas:
@@ -308,7 +319,7 @@ def tabela(cabecalho, linhas):
     return "\n".join(partes)
 
 
-def render_quadro(dados, hoje):
+def render_quadro(dados: Dados, hoje: datetime.date) -> str:
     """Desenha docs/quadro.md inteiro."""
     todos = cartoes(dados, hoje)
     contagem = {chave: 0 for chave, _, _ in COLUNAS}
@@ -478,7 +489,7 @@ def render_quadro(dados, hoje):
 # ---------------------------------------------------------------------------
 
 
-def bloco_prazos_do_professor(dados, hoje):
+def bloco_prazos_do_professor(dados: Dados, hoje: datetime.date) -> str:
     linhas = []
     for tarefa in dados.get("tarefa_professor", []):
         estado = tarefa["estado"]
@@ -499,7 +510,7 @@ def bloco_prazos_do_professor(dados, hoje):
     return tabela(["Data", "Entrega", "Estado"], linhas)
 
 
-def bloco_capitulos(dados, hoje):
+def bloco_capitulos(dados: Dados, hoje: datetime.date) -> str:
     semanas = semanas_por_id(dados)
     linhas = []
     for capitulo in dados.get("capitulo", []):
@@ -521,7 +532,7 @@ def bloco_capitulos(dados, hoje):
     return tabela(["Capítulo", "Estado", "Semana prevista", "Situação"], linhas)
 
 
-def bloco_marcos(dados, hoje):
+def bloco_marcos(dados: Dados, hoje: datetime.date) -> str:
     linhas = []
     for marco in dados.get("marco", []):
         if marco["estado"] == "fechado":
@@ -544,7 +555,7 @@ def bloco_marcos(dados, hoje):
     )
 
 
-def _tabela_de_decisoes(dados, hoje, estado):
+def _tabela_de_decisoes(dados: Dados, hoje: datetime.date, estado: str) -> str:
     semanas = semanas_por_id(dados)
     linhas = []
     for decisao in dados.get("decisao", []):
@@ -566,11 +577,11 @@ def _tabela_de_decisoes(dados, hoje, estado):
     )
 
 
-def bloco_decisoes_abertas(dados, hoje):
+def bloco_decisoes_abertas(dados: Dados, hoje: datetime.date) -> str:
     return _tabela_de_decisoes(dados, hoje, "aberta")
 
 
-def bloco_decisoes_a_confirmar(dados, hoje):
+def bloco_decisoes_a_confirmar(dados: Dados, hoje: datetime.date) -> str:
     return _tabela_de_decisoes(dados, hoje, "a-confirmar")
 
 
@@ -583,7 +594,7 @@ DESENHISTAS = {
 }
 
 
-def injetar(texto, nome, conteudo):
+def injetar(texto: str, nome: str, conteudo: str) -> str:
     """Troca o miolo entre os marcadores do bloco `nome`. Fora deles, nada muda.
 
     O marcador e comentario HTML. Em docs/ isso e seguro: o GitBook so LE dessa
@@ -600,7 +611,7 @@ def injetar(texto, nome, conteudo):
     return f"{antes}{abre}\n{AVISO_GERADO}\n\n{conteudo}\n{fecha}{depois}"
 
 
-def render_tudo(dados, hoje):
+def render_tudo(dados: Dados, hoje: datetime.date) -> dict[str, str]:
     """Devolve {caminho relativo: conteudo final} para todo arquivo gerado."""
     saidas = {"docs/quadro.md": render_quadro(dados, hoje)}
     for caminho, nomes in BLOCOS.items():
@@ -616,7 +627,7 @@ def render_tudo(dados, hoje):
 # ---------------------------------------------------------------------------
 
 
-def checar_semanas_no_cronograma(dados):
+def checar_semanas_no_cronograma(dados: Dados) -> list[str]:
     """A tabela das onze semanas continua a mao. Aqui se confere que nao divergiu.
 
     Nao tenta entender markdown: so exige que o intervalo de cada semana do TOML
@@ -646,7 +657,7 @@ def checar_semanas_no_cronograma(dados):
 # ---------------------------------------------------------------------------
 
 
-def main():
+def main() -> None:
     analisador = argparse.ArgumentParser(
         description="Gera o quadro do TCC a partir de quadro.toml."
     )
