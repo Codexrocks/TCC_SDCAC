@@ -1,7 +1,7 @@
 # 2. Referencial Teórico
 
-> **2ª Versão** na numeração do professor · S3 e S4 do
-> [cronograma](../docs/cronograma.md) · Yasmin, com Filipe na S4.
+> **2ª Versão** na numeração do professor · era S3 e S4, e entra na **S5** do
+> [cronograma](../docs/cronograma.md) como atrasado · Yasmin.
 >
 > Estrutura, não conteúdo. Cada bloco **A escrever** é para ser substituído
 > pelo seu texto.

@@ -382,18 +382,29 @@ revisor na mão.
 
 `Settings → Collaborators and teams → Add people`
 
-Yasmin e Filipe com papel **Write**. Write permite criar branch, abrir PR e
-aprovar — e não permite mexer em configuração do repositório.
+Entre 03/09 e 23/09/2026, Yasmin e Filipe tiveram papel **Write** — criar
+branch, abrir PR e aprovar, sem mexer em configuração do repositório.
 
-| Pessoa | Usuário | Papel | Estado |
+| Pessoa | Usuário | Papel hoje | Desde |
 |---|---|---|---|
-| Davi | `@DaviSoaresDilly` | Admin · owner da org | ativo |
-| Yasmin | `@Yas2046` | Write | ativo |
-| Filipe | `@FilipeF4guiar` | Write | ativo |
+| Davi | `@DaviSoaresDilly` | **Admin** · owner da org | 03/09/2026 |
+| Yasmin | `@Yas2046` | Leitura — sem acesso de escrita | 23/09/2026 |
+| Filipe | `@FilipeF4guiar` | Leitura — sem acesso de escrita | 23/09/2026 |
 
-Equipe completa desde 03/09/2026. Desde 23/09/2026 o trabalho é conduzido só
-pelo Davi; os acessos ficam como estão, e o que entrou no lugar da aprovação de
-outra pessoa está em [`AGENTS.md`](../AGENTS.md), seção 4.
+> **Conferido contra o repositório em 26/09/2026**, e não contra a memória de
+> ninguém:
+>
+> ```bash
+> gh api repos/Codexrocks/TCC_SDCAC/collaborators --jq '.[].login'
+> ```
+>
+> Devolve **só** `DaviSoaresDilly`. Leitura é o que qualquer pessoa tem num
+> repositório público — não é acesso concedido.
+
+Desde 23/09/2026 só o Davi opera o GitHub: Yasmin e Filipe produzem fora e ele
+versiona por Pull Request, como descreve o
+[cronograma](cronograma.md#como-o-trabalho-chega-ao-repositório). O que entrou no
+lugar da aprovação de outra pessoa está em [`AGENTS.md`](../AGENTS.md), seção 4.
 
 > Yasmin é membro da organização; Filipe entrou como **colaborador externo** do
 > repositório. Para o dia a dia dá no mesmo. A diferença aparece se um dia o

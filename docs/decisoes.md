@@ -172,9 +172,11 @@ D3. Ela já é a dona dos cenários; a separação sai de graça.
 
 ### D-17 · Vazamento no baseline da D2
 
-Se o baseline de cada usuário for calculado sobre os mesmos 30 dias que já
-contêm os cenários injetados, o comportamento anômalo entra na definição do que
-é normal. O resultado fica bom pelo motivo errado.
+Se o baseline de cada usuário for calculado sobre a mesma janela que já contém
+os cenários injetados, o comportamento anômalo entra na definição do que é
+normal. O resultado fica bom pelo motivo errado. A **D-24** fixou o baseline nos
+**três primeiros meses** do ano simulado; o que falta é garantir que a janela de
+avaliação venha depois dela.
 
 **Proposta:** separação temporal explícita — janela de constituição do baseline
 anterior e disjunta da janela de avaliação. Precisa aparecer no artigo: é
