@@ -143,8 +143,8 @@ Dashboard, Isolation Forest e referencial teórico correm em paralelo e têm fol
 
 | Risco | Onde aperta | Mitigação |
 |---|---|---|
-| **M2 em 01/10** com **12 decisões abertas**, 9 delas vencendo nessa data | D-12 a D-19 vencem em 01/10, e os cenários também | Fechar as sete lacunas metodológicas antes de escrever a Metodologia |
-| **Gerador sem parâmetros** | 26 definições abertas na especificação do gerador — personas, matriz cargo × sistema, faixas de rede | As perguntas P06 a P10 e P24 a P31, numeradas na especificação que chega pelo PR #43, precisam de resposta antes da S6 |
+| **M2 em 01/10** com **12 decisões abertas**, 9 delas vencendo nessa data | D-12 a D-19 vencem em 01/10, e os cenários também | Fechar as oito lacunas metodológicas antes de escrever a Metodologia |
+| **Gerador sem parâmetros** | 25 definições abertas na especificação do gerador — personas, matriz cargo × sistema, faixas de rede | As **25 perguntas abertas** da [especificação](banco-simulado.md), que entrou pelo PR #43, precisam de resposta antes da S6 |
 | **Nenhuma linha de código na `main`** | S6 a S8 são três semanas para banco, gerador e quatro motores | A S10 é o único corte disponível: o Isolation Forest é opcional por definição |
 | **Referencial fora do repositório** | O rascunho existe e não está versionado | Entra na S5, convertido para ABNT |
 

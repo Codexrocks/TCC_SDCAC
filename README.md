@@ -59,9 +59,9 @@ Detalhes em [`docs/equipe.md`](docs/equipe.md).
 | [Processo de trabalho](docs/processo.md) | Como GitHub, GitBook e Claude se encaixam |
 | [Padrões](docs/padroes.md) | Branch, commit, pull, push, merge, docs, relatórios |
 | [Configuração](docs/configuracao.md) | GitBook, secrets, ruleset, CODEOWNERS — passo a passo |
-| [Cronograma](docs/cronograma.md) | As 16 semanas |
+| [Cronograma](docs/cronograma.md) | As onze semanas até a entrega de 10/12 |
 | [Arquitetura](docs/arquitetura.md) | Fluxo, regras de risco, cenários de teste |
-| [Entregas](docs/entregas/tarefa-01.md) | O que o professor pediu |
+| Entregas — [Tarefa 01](docs/entregas/tarefa-01.md) · [Tarefa 02](docs/entregas/tarefa-02.md) | O que o professor pediu, e o que foi entregue |
 | [Relatórios](docs/relatorios/) | Histórico das sessões com o Claude |
 
 ## Antes de abrir um Pull Request

@@ -21,7 +21,8 @@
 
 ## 4.3 Métricas de desempenho
 
-> **A escrever.** Taxa de detecção, taxa de falsos positivos e MTTD, com os
+> **A escrever.** Taxa de falsos positivos a revocação fixa e revocação
+> longitudinal, as duas da decisão D-03, com os
 > números reais.
 
 ## 4.4 Resultados de usabilidade
