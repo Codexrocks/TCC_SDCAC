@@ -7,15 +7,16 @@
 > Um aviso anterior dizia o contrário e foi retirado. Ver
 > [formato do artigo](../docs/formato-do-artigo.md).
 
-> **Cuidado com a pegadinha: a lista é ABNT, a chamada no texto não.**
+> **A lista é ABNT NBR 6023; a chamada no texto é ABNT NBR 10520 — e fica como
+> está até o template do COBEM 2026 chegar.**
 >
 > | Onde | Formato | Exemplo |
 > |---|---|---|
 > | **Chamada no texto** | **Em aberto até o template COBEM 2026 chegar.** O que está escrito hoje usa a NBR 10520, e é consistente com a lista em ABNT — ver [formato do artigo](../docs/formato-do-artigo.md) | `(CHANDOLA; BANERJEE; KUMAR, 2009)` hoje · possivelmente `(Chandola et al., 2009)` depois |
 > | **Lista, aqui** | **ABNT NBR 6023** | `CHANG, M.; PAKZAD, S. N. Título...` |
 >
-> Três ou mais autores na chamada: `(Bordalo et al., 1989)`. Mesmo autor e ano:
-> `2017a`, `2017b`.
+> Três ou mais autores na chamada, na forma que o texto usa hoje:
+> `(BORDALO et al., 1989)`. Mesmo autor e ano: `2017a`, `2017b`.
 >
 > Chang e Pakzad (2013) e Bordalo et al. (1989) vieram do template do **CREEM
 > 2026**, que foi tratado por engano como sendo o do professor em 23/09. Servem
