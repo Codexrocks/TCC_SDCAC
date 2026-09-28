@@ -21,27 +21,35 @@ fechada fica enterrada.
 
 ## Abertas
 
-| ID | Decisão | Proposta | Dono | Prazo |
-|---|---|---|---|---|
-| D-02 | Dashboard: objetivo, instrumento ou fora do escopo | Instrumento de análise, descrito na Metodologia e na [arquitetura](arquitetura.md) | Davi + Filipe | 08/09 |
-| D-06 | Cenários de contexto (B) e longitudinais (L) | Adotados; desenho detalhado na S5 | Yasmin | 01/10 |
-| D-07 | Caneta rotativa por seção | Uma pessoa redige, duas revisam, a caneta gira. A ratificação foi pedida numa issue que depois foi apagada; como Yasmin e Filipe não operam o GitHub, ela passa a ser registrada aqui pelo Davi quando os dois confirmarem | Os três | Pendente |
-| D-09 | Pesos preliminares e análise de sensibilidade | Valores preliminares; sensibilidade na S12 | Yasmin | S8 |
-| D-12 | Unidade de análise das métricas | Duas unidades declaradas separadamente: evento para os cenários pontuais, episódio para os de contexto e longitudinais | Davi + Filipe | 01/10 |
-| D-13 | Tratamento estatístico dos resultados | **10 a 20 sementes** (era 20 a 30), as mesmas nas quatro configurações; Wilcoxon pareado. O piso de 10 vem da aritmética do teste, não de convenção — ver o detalhamento abaixo. O número final sai da medição da primeira execução completa (**P31**) | Davi | 01/10 |
-| D-14 | O que fazer se a C0 não alcançar revocação 0,90 | Comparar curvas precisão-revocação, em vez de pontos únicos | Filipe | 01/10 |
-| D-15 | Critério de relevância declarado a priori | Uma frase na Metodologia dizendo qual redução de FPR e qual revocação longitudinal contam como resposta afirmativa | Os três | 01/10 |
-| D-16 | Controle negativo longitudinal | Acrescentar cenário de escalada legítima aos cenários de teste | Yasmin | 01/10 |
-| D-17 | Janela de constituição do baseline da D2 | Janela de treino anterior e disjunta da janela de avaliação | Davi | 01/10 |
-| D-18 | Dupla contagem e escala na integração | Excluir o evento atual da janela de exposição | Davi | 01/10 |
-| D-19 | Vertente LGPD e ISO/IEC 27001 | Entra como limitação e trabalho futuro na S13 | Yasmin | 01/10 |
+<!-- QUADRO:inicio decisoes-abertas -->
+<!-- Bloco gerado por scripts/quadro.py a partir de quadro.toml. Editar aqui nao adianta: a proxima execucao reescreve. -->
+
+| ID | Decisão | Proposta | Dono | Prazo | Situação |
+|---|---|---|---|---|---|
+| D-02 | Dashboard: objetivo, instrumento ou fora do escopo | Instrumento de análise, descrito na Metodologia e na arquitetura | Davi, Filipe | 08/09/2026 | ⚠️ Atrasado há 18 dias |
+| D-06 | Cenários de contexto (B) e longitudinais (L) | Adotados; desenho detalhado na S5 | Yasmin | 01/10/2026 | ⏳ Vence em 5 dias |
+| D-07 | Caneta rotativa por seção | Uma pessoa redige, duas revisam, a caneta gira. Registrada pelo Davi quando Yasmin e Filipe confirmarem | Davi, Yasmin, Filipe | — | 🗓️ Sem prazo |
+| D-09 | Pesos preliminares e análise de sensibilidade | Valores preliminares; sensibilidade na S12 | Yasmin | S8 | 🗓️ Em 26 dias |
+| D-12 | Unidade de análise das métricas | Duas unidades declaradas separadamente: evento para os cenários pontuais, episódio para os de contexto e longitudinais | Davi, Filipe | 01/10/2026 | ⏳ Vence em 5 dias |
+| D-13 | Tratamento estatístico dos resultados | 10 a 20 sementes, as mesmas nas quatro configurações; Wilcoxon pareado | Davi | 01/10/2026 | ⏳ Vence em 5 dias |
+| D-14 | O que fazer se a C0 não alcançar revocação 0,90 | Comparar curvas precisão-revocação, em vez de pontos únicos | Filipe | 01/10/2026 | ⏳ Vence em 5 dias |
+| D-15 | Critério de relevância declarado a priori | Uma frase na Metodologia dizendo qual redução de FPR e qual revocação longitudinal contam como resposta afirmativa | Davi, Yasmin, Filipe | 01/10/2026 | ⏳ Vence em 5 dias |
+| D-16 | Controle negativo longitudinal | Acrescentar cenário de escalada legítima aos cenários de teste | Yasmin | 01/10/2026 | ⏳ Vence em 5 dias |
+| D-17 | Janela de constituição do baseline da D2 | Janela de treino anterior e disjunta da janela de avaliação | Davi | 01/10/2026 | ⏳ Vence em 5 dias |
+| D-18 | Dupla contagem e escala na integração | Excluir o evento atual da janela de exposição | Davi | 01/10/2026 | ⏳ Vence em 5 dias |
+| D-19 | Vertente LGPD e ISO/IEC 27001 | Entra como limitação e trabalho futuro na S13 | Yasmin | 01/10/2026 | ⏳ Vence em 5 dias |
+<!-- QUADRO:fim decisoes-abertas -->
 
 ## Adotadas, a confirmar
 
-| ID | Decisão | Confirmação |
-|---|---|---|
-| D-05 | Ablação em quatro configurações (C0 a C3) | M2 — 01/10 |
-| D-10 | Isolation Forest como benchmark opcional | Cortável na S10, se as métricas estiverem em risco |
+<!-- QUADRO:inicio decisoes-a-confirmar -->
+<!-- Bloco gerado por scripts/quadro.py a partir de quadro.toml. Editar aqui nao adianta: a proxima execucao reescreve. -->
+
+| ID | Decisão | Proposta | Dono | Prazo | Situação |
+|---|---|---|---|---|---|
+| D-05 | Ablação em quatro configurações (C0 a C3) | Confirmar no M2 | Davi | 01/10/2026 | ⏳ Vence em 5 dias |
+| D-10 | Isolation Forest como benchmark opcional | Cortável na S10, se as métricas estiverem em risco | Filipe | S10 | 🗓️ Em 40 dias |
+<!-- QUADRO:fim decisoes-a-confirmar -->
 
 ## Fechadas
 
