@@ -29,7 +29,7 @@ não:
 |---|---|---|
 | 1. Introdução | **Entregue parcial em 24/09** — os **seis blocos de complementação** continuam vazios, e a parcialidade foi declarada no arquivo entregue | ✅ entregue · complementos na S5 |
 | 2. Referencial teórico | **Escrito e versionado em 28/09** pela Yasmin — 4 subseções, ≈1.150 palavras. Faltam as 13 fontes confirmadas | S5 — atrasado de S3 e S4 |
-| 3. Metodologia | Esqueleto | S5 |
+| 3. Metodologia | **Escrita e versionada em 28/09** — 9 subseções. Faltam as **4 lacunas da M2** e as 7 fontes conferidas | S5 |
 | 4. Resultados | Esqueleto | S13 |
 | 5. Conclusão | Esqueleto | S14 |
 
@@ -98,7 +98,7 @@ Três consequências que valem saber:
 
 | Semana | Entregável |
 |---|---|
-| S5 | Metodologia (caneta) · arquitetura v2 · fechar D-12 a D-19 |
+| S5 | Metodologia (caneta) — ✅ **escrita em 28/09**, com 4 lacunas abertas · arquitetura v2 ✅ · fechar D-12 a D-19 |
 | S6 | Schema, migrações, carga e ingestão |
 | S7 | C0 (regras fixas, sem histórico) e motor D1 |
 | S8 | D2, D3 e a integração |
