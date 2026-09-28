@@ -1,0 +1,173 @@
+name: Quadro
+
+# Toda manhã: recalcula o quadro contra a data de hoje e abre um Pull Request se
+# alguma coisa mudou de situação.
+#
+# POR QUE ISTO EXISTE
+# -------------------
+# Em 26/09/2026 o docs/cronograma.md afirmava que a Tarefa 02 vencia "amanhã".
+# O prazo era 24/09. A frase estava certa no dia em que foi escrita e nunca mais,
+# e ninguém notou por dois dias. Estado escrito à mão envelhece em silêncio.
+#
+# Este workflow não escreve estado: ele recalcula. O que é fato mora no
+# quadro.toml — data, dono, critério, e um estado que só muda quando uma pessoa
+# decide que mudou. O que é situação sai do scripts/quadro.py, contra a data de
+# hoje.
+#
+# SEM IA, DE PROPÓSITO
+# --------------------
+# Diferente do relatorio-semanal.yml, aqui não há texto a escrever: é aritmética
+# de data. Nenhum assistente participa, o resultado é determinístico, e quem
+# quiser conferir um número roda `python3 scripts/quadro.py` e compara. É o que
+# separa prova documentada de texto bonito.
+#
+# O PR que este workflow abre não toca arquivo protegido — só as três páginas
+# geradas — então ele não cai nas 24 h de espera da seção 4 do AGENTS.md.
+#
+# Ele também não faz merge. O merge na main é do Davi.
+#
+# Roda sob demanda pelo botão "Run workflow" na aba Actions.
+
+on:
+  schedule:
+    # 11:00 UTC = 08:00 em Brasília, todo dia.
+    - cron: "0 11 * * *"
+  workflow_dispatch:
+
+# Duas execuções ao mesmo tempo empurrariam a mesma branch e uma perderia.
+concurrency:
+  group: quadro
+  cancel-in-progress: false
+
+jobs:
+  quadro:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: write
+      pull-requests: write
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Preparar Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Preparar a branch do quadro
+        env:
+          BRANCH: claude/chore/quadro-diario
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          # Se a branch já existe, continua nela e traz o que entrou na main.
+          # Nunca reescreve histórico: `git push --force` é proibido pelo
+          # AGENTS.md, seção 4. Conflito aqui falha alto, e uma pessoa olha.
+          if git ls-remote --exit-code --heads origin "$BRANCH" >/dev/null 2>&1; then
+            git fetch origin "$BRANCH"
+            git checkout -B "$BRANCH" "origin/$BRANCH"
+            git merge --no-edit origin/main
+          else
+            git checkout -b "$BRANCH"
+          fi
+
+      - name: Recalcular o quadro
+        run: |
+          python3 scripts/quadro.py
+          echo "----- situação de hoje -----"
+          sed -n '/^## Resumo/,/^## /p' docs/quadro.md | head -20
+
+      - name: Commitar, se mudou
+        id: commit
+        env:
+          BRANCH: claude/chore/quadro-diario
+        run: |
+          if git diff --quiet; then
+            echo "mudou=nao" >> "$GITHUB_OUTPUT"
+            echo "Nada mudou de situação hoje. Nenhum commit, nenhum PR."
+            exit 0
+          fi
+
+          echo "mudou=sim" >> "$GITHUB_OUTPUT"
+          git diff --stat
+          git add -A
+
+          # "Assistido-por: nenhuma" é a resposta honesta: este commit é
+          # aritmética de data, não texto de assistente. O silêncio não
+          # distinguiria "não usei" de "esqueci" — AGENTS.md, seção 3.
+          git commit -m "chore: atualiza o quadro para $(date -u +%d/%m/%Y)" \
+                     -m "Recalculado por scripts/quadro.py contra a data de hoje. O que mudou está no diff das três páginas geradas." \
+                     -m "Assistido-por: nenhuma"
+
+          git push origin "$BRANCH"
+
+      - name: Abrir o PR, se ainda não houver um
+        if: steps.commit.outputs.mudou == 'sim'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          BRANCH: claude/chore/quadro-diario
+        run: |
+          aberto="$(gh pr list --state open --head "$BRANCH" --json number -q '.[0].number')"
+          if [ -n "$aberto" ]; then
+            echo "PR #$aberto já está aberto para esta branch: o commit novo entrou nele."
+            exit 0
+          fi
+
+          cat > corpo.md <<'CORPO'
+## O que muda
+
+Recalcula o quadro contra a data de hoje. As três páginas geradas são
+`docs/quadro.md` e os blocos marcados de `docs/cronograma.md` e
+`docs/decisoes.md`.
+
+Este PR foi aberto pelo workflow **Quadro**, sem nenhum assistente no meio: o
+conteúdo sai de `scripts/quadro.py` lendo o `quadro.toml`. Para reproduzir:
+
+```
+python3 scripts/quadro.py
+```
+
+## Por quê
+
+Situação de prazo escrita à mão envelhece em silêncio. Em 26/09/2026 o
+cronograma dizia que a Tarefa 02 vencia "amanhã" — o prazo tinha sido 24/09.
+
+Nada de **fato** muda aqui. Data, dono, critério e estado moram no `quadro.toml`
+e só mudam quando uma pessoa edita. O que muda neste PR é só o que se calcula:
+que dia é hoje, o que venceu, o que entra na semana.
+
+## Uso de IA
+
+- **IA usada:** nenhuma
+- **No que ajudou:** nada. O conteúdo é aritmética de data feita por
+  `scripts/quadro.py`, determinística e reproduzível por qualquer pessoa que rode
+  o script
+- **O que é meu:** os fatos do `quadro.toml`, que são editados à mão por pessoas
+  em Pull Request próprio. Este PR não inventa nem altera nenhum deles
+- **Conferi tudo que a IA escreveu:** não se aplica — nenhuma IA escreveu.
+  Quem for mergear confere o diff, que é curto por construção
+
+## Checklist
+
+- [x] Branch no padrão `<autor>/<tipo>/<assunto>`
+- [x] Commits no padrão `tipo: descrição`, com a linha `Assistido-por:`
+- [x] Não criei página nova em `docs/`
+- [x] Não há `.env`, senha, token ou chave no diff
+- [x] Nenhum arquivo protegido no diff — só as três páginas geradas
+- [ ] Alguém leu o diff antes do merge
+
+## Responsável
+
+Davi
+CORPO
+
+          gh pr create \
+            --base main \
+            --head "$BRANCH" \
+            --title "chore: atualiza o quadro do cronograma" \
+            --body-file corpo.md
