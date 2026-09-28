@@ -28,6 +28,8 @@
 
 * [Formato do artigo](formato-do-artigo.md)
 * [Citações pendentes](citacoes-pendentes.md)
+* [Insumos das encomendas](insumos/README.md)
+  * [Referencial teórico — Yasmin, 28/09](insumos/referencial-teorico-yasmin-v2.md)
 
 ## Uso de IA
 
