@@ -268,5 +268,10 @@ python3 scripts/validar.py
 ```
 
 Confere nome de branch, formato dos commits, cobertura do `SUMMARY.md`, links
-internos quebrados e segredo vazado. O mesmo script roda no GitHub Actions a
-cada PR — o check aparece como **Validação**.
+internos quebrados, segredo vazado e **sintaxe dos workflows**. O mesmo script
+roda no GitHub Actions a cada PR — o check aparece como **Validação**.
+
+> **A conferência dos workflows tem duas camadas.** A da margem não depende de
+> biblioteca nenhuma e roda sempre; o parse completo usa **PyYAML**, que o CI
+> instala. Sem a biblioteca, a falta é **erro em CI** e aviso no seu clone —
+> check que não roda não é trava. Instale com `pip install pyyaml`.

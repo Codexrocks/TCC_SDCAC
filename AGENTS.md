@@ -283,7 +283,8 @@ Se o clone estiver com `git config core.hooksPath .githooks`, os ganchos de
 conferência da linha `Assistido-por:`.
 
 Confere nome de branch, formato dos commits, declaração de IA, cobertura do
-`SUMMARY.md`, links internos quebrados e segredo vazado. Só suba se passar.
+`SUMMARY.md`, links internos quebrados, segredo vazado e **sintaxe dos
+workflows**. Só suba se passar.
 
 ## 11. Ao responder no GitHub (`@claude`)
 

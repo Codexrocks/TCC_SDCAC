@@ -71,6 +71,7 @@ python3 scripts/validar.py
 ```
 
 Confere nome de branch, formato dos commits, cobertura do `SUMMARY.md`, links
-quebrados e segredo vazado. O mesmo script roda no CI a cada PR.
+quebrados, segredo vazado e sintaxe dos workflows. O mesmo script roda no CI a
+cada PR.
 
 Resumo das regras: [`CONTRIBUTING.md`](CONTRIBUTING.md) · Regras do assistente: [`CLAUDE.md`](CLAUDE.md)
