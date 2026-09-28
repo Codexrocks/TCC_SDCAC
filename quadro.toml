@@ -94,7 +94,7 @@ estado = "pendente"
 numero = 1
 titulo = "Introdução"
 donos = ["Yasmin", "Filipe"]
-estado = "Entregue parcial em 24/09 — os seis blocos de complementação continuam vazios"
+estado = "Entregue parcial em 24/09 — os seis blocos de complementação continuam vazios, e a parcialidade foi declarada no arquivo entregue"
 pronto = false
 semana = "S5"
 registro = "entregas/tarefa-02.md"
@@ -103,7 +103,7 @@ registro = "entregas/tarefa-02.md"
 numero = 2
 titulo = "Referencial teórico"
 donos = ["Yasmin"]
-estado = "Rascunho pronto, fora do repositório"
+estado = "Escrito e versionado em 28/09 pela Yasmin — 4 subseções, ≈1.150 palavras, atrasado de S3 e S4. Faltam as 13 fontes confirmadas"
 pronto = false
 semana = "S5"
 
