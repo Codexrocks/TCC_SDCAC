@@ -25,17 +25,13 @@ como recusar uma entrega, e a recusa vira atrito.
 Honestidade sobre o ponto de partida, porque é o que torna o resto realizável ou
 não:
 
-<!-- QUADRO:inicio capitulos -->
-<!-- Bloco gerado por scripts/quadro.py a partir de quadro.toml. Editar aqui nao adianta: a proxima execucao reescreve. -->
-
-| Capítulo | Estado | Quem | Semana prevista | Situação |
-|---|---|---|---|---|
-| 1. Introdução | Entregue parcial em 24/09 — os seis blocos de complementação continuam vazios | Yasmin, Filipe | S5 · ▶️ em curso | ⏳ Vence em 5 dias |
-| 2. Referencial teórico | Rascunho pronto, fora do repositório | Yasmin | S5 · ▶️ em curso | ⏳ Vence em 5 dias |
-| 3. Metodologia | Esqueleto | Davi (caneta) | S5 · ▶️ em curso | ⏳ Vence em 5 dias |
-| 4. Resultados | Esqueleto | Filipe (caneta) | S13 | 🗓️ Em 61 dias |
-| 5. Conclusão | Esqueleto | Davi (caneta) | S14 | 🗓️ Em 68 dias |
-<!-- QUADRO:fim capitulos -->
+| Capítulo | Estado | Semana prevista |
+|---|---|---|
+| 1. Introdução | **Entregue parcial em 24/09** — os **seis blocos de complementação** continuam vazios, e a parcialidade foi declarada no arquivo entregue | ✅ entregue · complementos na S5 |
+| 2. Referencial teórico | **Escrito e versionado em 28/09** pela Yasmin — 4 subseções, ≈1.150 palavras. Faltam as 13 fontes confirmadas | S5 — atrasado de S3 e S4 |
+| 3. Metodologia | Esqueleto | S5 |
+| 4. Resultados | Esqueleto | S13 |
+| 5. Conclusão | Esqueleto | S14 |
 
 **Nenhuma linha de código existe ainda.** O que existe é a especificação do
 gerador, que entrou na `main` pelo Pull Request #43, em 24/09.
@@ -116,7 +112,7 @@ Três consequências que valem saber:
 | Semana | Entregável |
 |---|---|
 | S5 | **Cenários**: pontuais, de contexto, longitudinais e de escalada legítima (D-06 e D-16) · desenho **sem ver as fórmulas** |
-| S5 | Referencial teórico — converter o rascunho para ABNT e fechar as citações pendentes |
+| S5 | Referencial teórico — ✅ **entregue em 28/09**. Falta confirmar as 13 fontes na fonte e decidir se a usabilidade aplicada à segurança entra na seção |
 | S7 | Regras e pesos preliminares da C0 e da D1 |
 | S8 | Validação do comportamento da D2 e da D3 contra os cenários |
 | S11 | Execução dos cenários — é a dona do desenho |
@@ -155,10 +151,10 @@ Dashboard, Isolation Forest e referencial teórico correm em paralelo e têm fol
 
 | Risco | Onde aperta | Mitigação |
 |---|---|---|
-| **M2 em 01/10** com **12 decisões abertas**, 9 delas vencendo nessa data | D-12 a D-19 vencem em 01/10, e os cenários também | Fechar as sete lacunas metodológicas antes de escrever a Metodologia |
-| **Gerador sem parâmetros** | 26 definições abertas na especificação do gerador — personas, matriz cargo × sistema, faixas de rede | As perguntas P06 a P10 e P24 a P31, numeradas na especificação que chega pelo PR #43, precisam de resposta antes da S6 |
+| **M2 em 01/10** com **12 decisões abertas**, 9 delas vencendo nessa data | D-12 a D-19 vencem em 01/10, e os cenários também | Fechar as oito lacunas metodológicas antes de escrever a Metodologia |
+| **Gerador sem parâmetros** | 25 definições abertas na especificação do gerador — personas, matriz cargo × sistema, faixas de rede | As **25 perguntas abertas** da [especificação](banco-simulado.md), que entrou pelo PR #43, precisam de resposta antes da S6 |
 | **Nenhuma linha de código na `main`** | S6 a S8 são três semanas para banco, gerador e quatro motores | A S10 é o único corte disponível: o Isolation Forest é opcional por definição |
-| **Referencial fora do repositório** | O rascunho existe e não está versionado | Entra na S5, convertido para ABNT |
+| **Referencial fora do repositório** | ✅ **Resolvido em 28/09** — o texto entrou pelo insumo da Yasmin | Resta o levantamento v1, de 17 fontes, que continua fora |
 
 > **A S10 é a folga do cronograma.** Se a S6, a S7 ou a S8 estourarem, o
 > Isolation Forest sai e a semana é reaproveitada. Foi declarado opcional desde o

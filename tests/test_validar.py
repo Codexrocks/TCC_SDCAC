@@ -4,9 +4,13 @@ Estes testes existem porque `scripts/validar.py` e o que faz as regras valerem.
 Se uma expressao regular dele quebrar, o check continua verde e ninguem percebe
 — e a partir dai qualquer coisa entra na main.
 """
+from pathlib import Path
+
 import pytest
 
 import validar
+
+RAIZ = Path(__file__).resolve().parent.parent
 
 
 @pytest.fixture(autouse=True)
@@ -147,10 +151,10 @@ def test_declaracao_de_ia_recusada(mensagem):
 
 
 def test_lista_de_autores_bate_com_a_documentacao():
-    """Autor novo entra aqui e em docs/padroes.md — os dois nao podem divergir.
+    """Autor novo entra aqui e nas duas paginas — os tres nao podem divergir.
 
-    "felipe" e transitorio: a grafia errada do nome do Filipe, aceita so ate
-    esta correcao chegar na main. Ao remove-la de validar.py, remova daqui.
+    O alias "felipe" saiu em 26/09/2026, depois de a correcao da grafia ter
+    dado a volta de merge que o comentario em validar.py descreve.
     """
     assert set(validar.AUTORES) == {
         "davi",
@@ -158,8 +162,20 @@ def test_lista_de_autores_bate_com_a_documentacao():
         "filipe",
         "claude",
         "gitbook",
-        "felipe",
     }
+
+
+@pytest.mark.parametrize("pagina", ["docs/padroes.md", "docs/processo.md"])
+def test_autores_documentados_em_cada_pagina(pagina):
+    """A lista escrita nas paginas tem de citar todos os autores aceitos.
+
+    Sem isto, acrescentar um autor no script e esquecer a pagina — ou o
+    contrario — passa despercebido ate alguem abrir uma branch e ser reprovado
+    por um motivo que a documentacao nao explica.
+    """
+    texto = (RAIZ / pagina).read_text(encoding="utf-8")
+    faltando = [a for a in validar.AUTORES if f"`{a}`" not in texto]
+    assert not faltando, f"{pagina} nao cita: {faltando}"
 
 
 # ---------------------------------------------------------------------------

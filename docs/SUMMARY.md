@@ -29,6 +29,8 @@
 
 * [Formato do artigo](formato-do-artigo.md)
 * [Citações pendentes](citacoes-pendentes.md)
+* [Insumos das encomendas](insumos/README.md)
+  * [Referencial teórico — Yasmin, 28/09](insumos/referencial-teorico-yasmin-v2.md)
 
 ## Uso de IA
 
@@ -60,4 +62,6 @@
 * [2026-09-23 — Sessão 15: o trabalho fica com uma pessoa](relatorios/2026-09-23-sessao-15.md)
 * [2026-09-23 — Sessão 16: o formato deu duas voltas, e a equipe não tinha ido embora](relatorios/2026-09-23-sessao-16.md)
 * [2026-09-26 — Sessão 17: o quadro que se recalcula](relatorios/2026-09-26-sessao-17.md)
+* [2026-09-26 — Sessão 18: uma revisão de coerência, arquivo contra arquivo](relatorios/2026-09-26-sessao-18.md)
+* [2026-09-28 — Sessão 19: o referencial teórico da Yasmin entra no repositório](relatorios/2026-09-28-sessao-19.md)
 * [Modelo de relatório](relatorios/_modelo.md)

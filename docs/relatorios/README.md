@@ -36,3 +36,5 @@ Use o [modelo](_modelo.md) e adicione a página nova ao
 | 23/09/2026 | [Sessão 15](2026-09-23-sessao-15.md) | O trabalho fica com uma pessoa: as duas aprovações viram 24 h de espera e justificativa — leitura corrigida na [Sessão 16](2026-09-23-sessao-16.md) |
 | 23/09/2026 | [Sessão 16](2026-09-23-sessao-16.md) | O formato do artigo era CREEM, não COBEM; a equipe não tinha ido embora; e dezesseis erros da IA, dois deles trocando fato certo por errado |
 | 26/09/2026 | [Sessão 17](2026-09-26-sessao-17.md) | O cronograma dizia "amanhã" dois dias depois do prazo; nasce o quadro que recalcula a situação contra a data de hoje |
+| 26/09/2026 | [Sessão 18](2026-09-26-sessao-18.md) | Revisão de coerência arquivo contra arquivo: 23 achados, a arquitetura ainda no modelo v1, e um acesso de escrita que a documentação afirmava e o GitHub negava |
+| 28/09/2026 | [Sessão 19](2026-09-28-sessao-19.md) | O referencial teórico da Yasmin entra pelo primeiro insumo versionado; as 13 referências viram pendência em vez de virarem lista |

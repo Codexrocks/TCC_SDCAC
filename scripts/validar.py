@@ -23,13 +23,15 @@ TIPOS = ("docs", "feat", "fix", "chore")
 # escreve as edicoes feitas pelo site. Ela nao pode ser apagada depois do merge,
 # ao contrario das outras. Ver docs/configuracao.md.
 #
-# "felipe" e a grafia errada do nome do Filipe, e esta aqui SO enquanto esta
-# correcao nao chega na main. O motivo e mecanico: os workflows validam cada PR
-# com o validar.py da BASE, nao com o do proprio PR. Enquanto a main tiver a
-# lista antiga, uma branch "filipe/..." seria reprovada com "nao esta na lista
-# de autores" — e quem abriu ela nao teria como adivinhar por que.
-# REMOVER assim que este arquivo estiver na main. Ver docs/equipe.md.
-AUTORES = ("davi", "yasmin", "filipe", "claude", "gitbook", "felipe")
+# O alias "felipe" — a grafia errada do nome do Filipe — viveu aqui da sessao 07
+# a 26/09/2026. Existia por um motivo mecanico: os workflows validam cada PR com
+# o validar.py da BASE, nao com o do proprio PR, entao a correcao da grafia
+# precisava de uma volta de merge antes de valer. A volta aconteceu, nenhuma
+# branch "felipe/..." foi aberta, e o alias saiu.
+#
+# Esta lista e a mesma de docs/padroes.md e docs/processo.md. Autor novo entra
+# nos tres, e um teste em tests/test_validar.py reprova se divergirem.
+AUTORES = ("davi", "yasmin", "filipe", "claude", "gitbook")
 RE_BRANCH = re.compile(
     r"^(%s)/(%s)/[a-z0-9][a-z0-9-]*$" % ("|".join(AUTORES), "|".join(TIPOS))
 )

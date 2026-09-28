@@ -225,7 +225,7 @@ Viram teste do gerador e falham **antes** de qualquer dado entrar no banco:
 
 ## 10. O que ainda falta decidir
 
-**Sete abertas pelas decisões D-23 a D-26**, e são as que o gerador encontra
+**Oito abertas pelas decisões D-23 a D-26**, e são as que o gerador encontra
 primeiro:
 
 | # | Pergunta | Recomendação |
@@ -239,7 +239,7 @@ primeiro:
 | P30 | O que a C0 tem que a D1 não tem? | C0 só com configuração estática. Nada de histórico |
 | P31 | 10 ou 20 sementes? | Medir a primeira execução completa e decidir pelo tempo |
 
-**Dezenove que já estavam abertas:**
+**Dezessete que já estavam abertas:**
 
 | Grupo | Perguntas | O que trava |
 |---|---|---|

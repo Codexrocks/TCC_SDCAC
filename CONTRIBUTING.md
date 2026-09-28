@@ -111,9 +111,10 @@ As duas são conferidas por máquina. Detalhe em
 [`docs/uso-de-ia.md`](docs/uso-de-ia.md); as regras que os assistentes leem
 estão em [`AGENTS.md`](AGENTS.md).
 
-Mexer nas regras (`AGENTS.md`, `docs/padroes*.md`) ou nas checagens
-(`.github/`, `scripts/`) pede 24 h de PR aberto e a seção `Arquivo protegido`
-respondida — ver [`AGENTS.md`](AGENTS.md), seção 4.
+Mexer nas regras (`AGENTS.md`, `docs/padroes*.md`, `docs/processo.md`,
+`docs/uso-de-ia.md`) ou nas checagens (`.github/`, `scripts/`) pede 24 h de PR
+aberto e a seção `Arquivo protegido` respondida — ver
+[`AGENTS.md`](AGENTS.md), seção 4.
 
 ## Nunca
 

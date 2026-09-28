@@ -113,7 +113,7 @@ objetivo → semana vive aqui.
 
 | # | Objetivo específico | Dimensão | Semana | Frente |
 |---|---|---|---|---|
-| OE1 | Definir e modelar os tipos de eventos e os atributos necessários para representar atividades de usuários em um ambiente corporativo simulado, e gerar logs sintéticos normais, divergentes e suspeitos. | — | S6 | Davi |
+| OE1 | Definir e modelar os tipos de eventos e os atributos necessários para representar atividades de usuários em um ambiente corporativo simulado, e gerar logs sintéticos normais, divergentes e suspeitos. | — | S6 | Filipe (gerador) · Davi (schema e ingestão) |
 | OE2 | Implementar uma linha de base de regras fixas aplicadas a eventos individuais, que servirá como grupo de controle da comparação. | Base | S7 | Davi + Yasmin |
 | OE3 | Desenvolver um mecanismo de classificação de risco do evento individual a partir de características previamente definidas (horário, IP, dispositivo, localização, origem, VPN). | D1 | S7 | Davi + Yasmin |
 | OE4 | Implementar mecanismos para identificar divergências entre eventos observados e o padrão comportamental previamente estabelecido para cada usuário. | D2 | S8 | Davi + Yasmin |
@@ -217,23 +217,24 @@ a resposta "não".
 
 | Risco | Prob. | Impacto | Mitigação | Dono |
 |---|---|---|---|---|
-| Cenários longitudinais não são criados, e a D3 fica sem teste | Média | Alto — a contribuição original não é avaliada | Definir L1–L3 na S5 (M2); o gerador da S6 já produz 30 dias de histórico | Yasmin |
+| Cenários longitudinais não são criados, e a D3 fica sem teste | Média | Alto — a contribuição original não é avaliada | Definir L1–L3 na S5 (M2); o gerador da S6 produz **um ano** de histórico por semente (**D-23**) | Yasmin |
 | Pesos arbitrários, e a banca pergunta de onde saíram | Alta | Médio | Declarar como preliminares; análise de sensibilidade na S12; AHP se houver tempo | Yasmin |
 | Dados sintéticos fáceis demais inflam os resultados | Média | Alto | Ruído legítimo — viagem, plantão, home office; discutir na S13 citando Sommer & Paxson | Davi |
 | Vazão de PRs baixa trava contribuições dos colegas | Alta — já ocorreu | Alto | SLA de 24 h; congelar infraestrutura em semana de capítulo | Davi |
 | Líder redige tudo e os demais deixam de ser coautores | Média | Alto na defesa | Caneta rotativa combinada agora, não em outubro | Davi |
 | Isolation Forest consome tempo da frente de dados | Média | Baixo | Opcional por definição; cortar na S10 se as métricas estiverem em risco | Filipe |
-| Repositório e artigo divergem — título, dimensões | Alta — já ocorre | Médio | Atualizar README e arquitetura na S5; este plano é a fonte de verdade | Davi |
+| Repositório e artigo divergem — título, dimensões | Alta — já ocorreu | Médio | README e [arquitetura](arquitetura.md) atualizados em 26/09; este plano é a fonte de verdade, e divergência nova entra como achado de revisão | Davi |
 | Escopo cresce — bloqueio, resposta automática, dados reais | Baixa | Alto | Delimitação explícita (1.6); toda ampliação passa pelas [decisões](decisoes.md) | Davi |
 
-Não há risco listado para "a Introdução não sai em 10/09". É o marco mais
-próximo e o único sem plano B.
+A Introdução saiu parcial em **24/09**, com os seis blocos de complementação
+vazios. Não há risco listado para "os seis blocos não são preenchidos na S5" —
+e a **M2, em 01/10**, passou a ser o marco mais próximo e o único sem plano B.
 
 ---
 
 ## 5. O que este plano ainda não decide
 
-O plano define o trabalho; ele não fecha sozinho tudo que o trabalho exige. Sete
+O plano define o trabalho; ele não fecha sozinho tudo que o trabalho exige. Oito
 lacunas metodológicas continuam abertas e vencem em **M2 (01/10)** — nenhuma
 delas muda o texto da Introdução, e todas mudam o que a S12 conseguirá afirmar.
 

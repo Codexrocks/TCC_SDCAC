@@ -43,7 +43,7 @@ Dona do conteúdo de segurança: o que o sistema procura e por quê.
 
 **GitHub:** [`@Yas2046`](https://github.com/Yas2046) · branches `yasmin/...`
 
-**No repositório:** dona de `docs/arquitetura.md` (regras e cenários) e do referencial teórico
+**No repositório:** dona das **regras de detecção e dos cenários**, que vivem em `docs/arquitetura.md`, e do referencial teórico. A **arquitetura v2** — as três dimensões e as quatro configurações — é do Davi, na S5
 
 ---
 
@@ -72,12 +72,21 @@ Dono da leitura dos dados: o que os números mostram.
 | Pessoa | Usuário | Papel no repositório | Prefixo de branch |
 |---|---|---|---|
 | Davi | `@DaviSoaresDilly` | Admin · owner da organização | `davi/` |
-| Yasmin | `@Yas2046` | Write | `yasmin/` |
-| Filipe | `@FilipeF4guiar` | Write | `filipe/` |
+| Yasmin | `@Yas2046` | Leitura — produz fora e o Davi versiona | `yasmin/` (reservado) |
+| Filipe | `@FilipeF4guiar` | Leitura — produz fora e o Davi versiona | `filipe/` (reservado) |
 | Assistente | `@claude` (workflow) | via GitHub Actions | `claude/` |
 
-Todos abrem PR e aprovam PR dos outros. **Só o Davi executa o merge na `main`** —
-é trava do GitHub, explicada em [Configuração](configuracao.md#quem-pode-executar-o-merge).
+**Desde 23/09/2026 só o Davi opera o GitHub.** Yasmin e Filipe produzem fora —
+documento, planilha, rascunho — e ele versiona por Pull Request. A autoria não
+muda por causa do caminho: quem produziu responde pelo conteúdo, e o Pull Request
+precisa dizer de quem é o quê. O caminho completo está no
+[cronograma](cronograma.md#como-o-trabalho-chega-ao-repositório).
+
+Com uma pessoa só operando, **não há aprovação de outra pessoa** — o GitHub não
+deixa ninguém aprovar o próprio Pull Request. No lugar entraram as 24 h de espera
+e a seção `Arquivo protegido` nos arquivos de regra, conferidas pelo check
+**Governança**. **Só o Davi executa o merge na `main`** — é trava do GitHub,
+explicada em [Configuração](configuracao.md#quem-pode-executar-o-merge).
 
 > Primeira vez no GitHub? O [Guia do GitHub](guia-github.md) parte do zero: o que
 > é branch, como aprovar um PR e como escrever documentação sem instalar nada.
@@ -85,6 +94,9 @@ Todos abrem PR e aprovam PR dos outros. **Só o Davi executa o merge na `main`**
 ## Responsabilidade de todos
 
 - Escrever a parte do artigo que corresponde à sua frente
-- Revisar pelo menos 1 PR por semana
+- Entregar o material da sua frente a tempo de o Davi versionar na semana
+- **Declarar a IA que usou**, no que ela ajudou e o que é seu — quem versiona
+  transcreve, e campo em branco vira "não declarado por quem produziu" no Pull
+  Request. Ver [política de uso de IA](uso-de-ia.md)
 - Comparecer à reunião semanal de 30 min
 - Saber explicar o projeto inteiro na defesa
