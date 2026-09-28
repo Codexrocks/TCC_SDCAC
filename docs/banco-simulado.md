@@ -93,7 +93,7 @@ Atributo que já está no envelope não se repete no `jsonb`.
 | | `initiated_by` | `self` · `admin` | Quem mandou fazer |
 | | `target_employee_id` | Inteiro, opcional | Administrador mexendo em conta alheia |
 | **PHISHING_SIM** | `campaign_id` | Identificador da campanha simulada | Agrupar a simulação. Uma campanha por mês basta |
-| | `outcome` | `ignored` · `reported` · `clicked` · `submitted_credentials` | Conduta do funcionário, do melhor ao pior caso. Entra pela D-25 |
+| | `outcome` | `reported` · `ignored` · `clicked` · `submitted_credentials` | Conduta do funcionário, **do melhor ao pior caso, nesta ordem**. Entra pela D-25 |
 
 > **`sensitivity` não entra no `jsonb`.** Ela é atributo do **recurso**, e precisa
 > valer igual em todo tipo de evento. Na versão original ela só existia no
@@ -110,6 +110,10 @@ Atributo que já está no envelope não se repete no `jsonb`.
 > itens de higiene entram no básico* — se o phishing entra como evento, se MFA e
 > privilégio ficam como estado, se o alerta de antivírus fica de fora. Os
 > atributos do evento são outra coisa, e estão fechados acima.
+>
+> Se a D3 vier a transformar o desfecho em número, **a ordem da lista é a fonte
+> da verdade**: do melhor ao pior caso. Reportar é melhor que ignorar — quem
+> reporta identificou o ataque e agiu. A escala entra com a **P29**.
 
 > **A navegação é justificada por segurança, não por produtividade.** Interessam
 > armazenamento em nuvem, webmail e categorias de risco, porque são canais de
@@ -199,7 +203,7 @@ define o grupo de controle.
 | `domain` + `category` | — | Categoria de risco | Navegação e download juntos | Exposição acumulada a categorias |
 | `action_subtype` | — | Escalada de privilégio | Escalada seguida de acesso novo | Privilégio acumulado |
 | `session_id` | — | — | Recorte do conjunto | Duração e frequência das sessões |
-| `outcome` (phishing) | — | — | — | Conduta de higiene: clicou, reportou ou ignorou |
+| `outcome` (phishing) | — | — | — | Conduta de higiene: reportou, ignorou, clicou ou entregou credencial |
 | Estado de conta e de dispositivo (seção 4) | — | — | — | Postura na data do evento: MFA, privilégio e atualização |
 
 > **A P30, que a D-26 abriu.** Duas das quatro regras da linha de base original
