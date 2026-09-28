@@ -43,6 +43,10 @@ ARQUIVOS_PROTEGIDOS = {
     "docs/padroes.md",
     "docs/padroes-codigo.md",
     "docs/processo.md",
+    # A politica de uso de IA por extenso — a regra que o AGENTS.md secao 3
+    # resume. Entrou em 26/09/2026: mudar a politica no mesmo impulso em que se
+    # muda o comportamento e o que a espera existe para impedir.
+    "docs/uso-de-ia.md",
 }
 PREFIXOS_PROTEGIDOS = (".github/", "scripts/")
 
@@ -52,6 +56,10 @@ PREFIXOS_PROTEGIDOS = (".github/", "scripts/")
 # protegido, entao o proprio PR que mexer aqui espera as 24 h.
 HORAS_DE_ESPERA = 24
 
+# Os rotulos sao literais e aparecem em TRES lugares: aqui, no
+# .github/pull_request_template.md e no AGENTS.md secao 3. Renomear um campo
+# num so deles faz o check cobrar uma pergunta que ninguem escreveu — por isso
+# tests/test_governanca.py compara os tres e reprova se divergirem.
 SECAO_IA = "Uso de IA"
 CAMPOS_IA = (
     "IA usada",

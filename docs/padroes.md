@@ -21,8 +21,8 @@ GitHub agrupa por pessoa, e dá para ver quem está com o quê sem abrir o log.
 | `fix` | correção | `filipe/fix/faixa-risco-medio` |
 | `chore` | configuração, manutenção | `davi/chore/atualiza-dependencias` |
 
-Autores válidos: `davi` · `yasmin` · `filipe` · `claude`. Só minúsculas,
-números e hífen. Uma branch por tarefa — não acumule assuntos.
+Autores válidos: `davi` · `yasmin` · `filipe` · `claude` · `gitbook`. Só
+minúsculas, números e hífen. Uma branch por tarefa — não acumule assuntos.
 
 > **As branches `gitbook/` são exceção.** Não são de ninguém e não se apagam:
 >
@@ -143,6 +143,7 @@ Mudança nestes arquivos não entra na hora em que foi escrita:
 AGENTS.md · CLAUDE.md · GEMINI.md · .github/copilot-instructions.md
 CONTRIBUTING.md
 docs/padroes.md · docs/padroes-codigo.md · docs/processo.md
+docs/uso-de-ia.md
 .github/**  ·  scripts/**
 ```
 
@@ -150,8 +151,9 @@ São as regras do projeto e as checagens que as fazem valer. Sem trava, bastaria
 um PR editando o `validar.py` para desligar tudo — e a IA que escreveu o PR
 seria a mesma que sugeriu a mudança.
 
-Até 23/09/2026 a trava eram duas aprovações. Com uma pessoa só ela virou
-impossível de cumprir, porque o GitHub não deixa ninguém aprovar o próprio PR.
+Até 23/09/2026 a trava eram duas aprovações. Com uma pessoa só **operando o
+repositório** ela virou impossível de cumprir, porque o GitHub não deixa ninguém
+aprovar o próprio PR.
 No lugar entraram **24 h de Pull Request aberto** e a seção
 **`Arquivo protegido`** no corpo, com o que muda, por que agora e o que segura
 no lugar do que foi afrouxado.

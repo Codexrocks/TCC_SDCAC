@@ -8,10 +8,15 @@ PR passa a conseguir desligar as travas — que e exatamente o cenario que ela
 existe para impedir.
 """
 from datetime import datetime, timedelta, timezone
+from pathlib import Path
 
 import pytest
 
 import governanca
+
+RAIZ = Path(__file__).resolve().parent.parent
+TEMPLATE_PR = RAIZ / ".github" / "pull_request_template.md"
+AGENTS = RAIZ / "AGENTS.md"
 
 
 @pytest.fixture(autouse=True)
@@ -434,3 +439,46 @@ def test_varios_tracos_seguidos_continuam_reprovando():
 
 def test_sem_comentarios_normaliza_fim_de_linha():
     assert "\r" not in governanca.sem_comentarios("linha\r\noutra\rterceira")
+
+
+# ---------------------------------------------------------------------------
+# Os rotulos dos campos vivem em tres lugares e precisam ser o mesmo texto
+#
+# Em 26/09/2026 o AGENTS.md secao 3 chamava os campos de "Qual IA", "No que ela
+# ajudou", "O que e seu" e "Voce conferiu tudo que ela escreveu?" — nenhum deles
+# igual ao que o check procura. Quem copiasse os rotulos de la para o corpo do
+# PR seria reprovado por campo em branco, sem entender por que.
+# ---------------------------------------------------------------------------
+
+
+@pytest.mark.parametrize("campo", governanca.CAMPOS_IA)
+def test_campo_de_ia_aparece_no_template_do_pr(campo):
+    """O template tem de trazer, literal, cada campo que o check cobra."""
+    texto = TEMPLATE_PR.read_text(encoding="utf-8")
+    assert f"**{campo}:**" in texto, f"o template nao traz o campo {campo!r}"
+
+
+@pytest.mark.parametrize("campo", governanca.CAMPOS_IA)
+def test_campo_de_ia_aparece_no_agents(campo):
+    """O AGENTS.md descreve a regra; se ele renomear o campo, ensina errado."""
+    texto = AGENTS.read_text(encoding="utf-8")
+    assert f"**{campo}:**" in texto, f"o AGENTS.md nao traz o campo {campo!r}"
+
+
+@pytest.mark.parametrize("campo", governanca.CAMPOS_PROTEGIDO)
+def test_campo_protegido_aparece_no_template_do_pr(campo):
+    texto = TEMPLATE_PR.read_text(encoding="utf-8")
+    assert f"**{campo}:**" in texto, f"o template nao traz o campo {campo!r}"
+
+
+@pytest.mark.parametrize("arquivo", sorted(governanca.ARQUIVOS_PROTEGIDOS))
+def test_arquivo_protegido_existe_e_esta_documentado(arquivo):
+    """Lista de arquivo protegido so protege o que existe e esta escrito.
+
+    Os dois sentidos importam: um caminho errado na lista nao protege nada, e um
+    arquivo protegido que o AGENTS.md nao cita e uma regra que ninguem leu.
+    """
+    assert (RAIZ / arquivo).exists(), f"{arquivo} esta na lista e nao existe"
+    assert arquivo in AGENTS.read_text(encoding="utf-8"), (
+        f"{arquivo} e protegido e nao aparece no AGENTS.md secao 4"
+    )
