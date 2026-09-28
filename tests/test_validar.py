@@ -4,6 +4,7 @@ Estes testes existem porque `scripts/validar.py` e o que faz as regras valerem.
 Se uma expressao regular dele quebrar, o check continua verde e ninguem percebe
 — e a partir dai qualquer coisa entra na main.
 """
+import sys
 from pathlib import Path
 
 import pytest
@@ -409,3 +410,165 @@ def test_artigo_limpo_passa(tmp_path, monkeypatch):
     validar.checar_citacoes_pendentes()
     assert validar.erros == []
     assert validar.avisos == []
+
+
+# ---------------------------------------------------------------------------
+# Sintaxe dos workflows
+#
+# Em 26/09/2026 o .github/workflows/quadro.yml entrou na main com o heredoc do
+# corpo do PR na coluna 0, dentro de um bloco `run: |`. O YAML fechava o bloco
+# ali e o GitHub recusava o arquivo inteiro: cinco execucoes, cinco falhas,
+# nenhum passo rodou. Nada no repositorio pegava isso — o check `revisar` le o
+# diff, nao carrega o arquivo.
+# ---------------------------------------------------------------------------
+
+WORKFLOW_BOM = """name: Exemplo
+on:
+  pull_request:
+jobs:
+  verificar:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Escrever um corpo
+        run: |
+          cat > corpo.md <<'CORPO'
+          ## Titulo
+
+          Texto do corpo.
+          CORPO
+"""
+
+# O mesmo arquivo com o heredoc na margem: foi exatamente esta a forma do
+# defeito. O `## Titulo` na coluna 0 fecha o bloco `run: |`.
+WORKFLOW_COM_HEREDOC_NA_MARGEM = """name: Exemplo
+on:
+  pull_request:
+jobs:
+  verificar:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Escrever um corpo
+        run: |
+          cat > corpo.md <<'CORPO'
+## Titulo
+
+Texto do corpo.
+CORPO
+"""
+
+
+def test_margem_aceita_workflow_valido(tmp_path):
+    arquivo = tmp_path / "bom.yml"
+    arquivo.write_text(WORKFLOW_BOM, encoding="utf-8")
+    validar.checar_margem_do_workflow(str(arquivo), WORKFLOW_BOM)
+    assert not validar.erros
+
+
+def test_margem_recusa_heredoc_encostado_na_margem(tmp_path):
+    """O defeito de 26/09, na forma exata em que ele entrou."""
+    arquivo = tmp_path / "ruim.yml"
+    arquivo.write_text(WORKFLOW_COM_HEREDOC_NA_MARGEM, encoding="utf-8")
+    validar.checar_margem_do_workflow(str(arquivo), WORKFLOW_COM_HEREDOC_NA_MARGEM)
+    assert len(validar.erros) == 1
+    assert "margem" in validar.erros[0]
+    # A linha 11 e "## Titulo", que na coluna 0 e COMENTARIO YAML valido — parte
+    # do motivo de o defeito ser dificil de ver a olho. Quem quebra e a primeira
+    # linha que nao e comentario, a 13. No arquivo real foi igual: o erro do
+    # YAML apontou a linha 124, e nao a 122, onde comecava o Markdown.
+    assert ":13:" in validar.erros[0], "aponta a primeira linha que nao e comentario"
+
+
+def test_margem_aceita_comentario_e_marcador_de_documento(tmp_path):
+    texto = "---\n# comentario na margem\nname: Exemplo\non:\n  push:\n"
+    arquivo = tmp_path / "comentado.yml"
+    arquivo.write_text(texto, encoding="utf-8")
+    validar.checar_margem_do_workflow(str(arquivo), texto)
+    assert not validar.erros
+
+
+@pytest.mark.parametrize("chave", validar.CHAVES_DE_TOPO)
+def test_margem_aceita_toda_chave_de_topo(chave, tmp_path):
+    texto = f"{chave}: valor\n"
+    arquivo = tmp_path / "topo.yml"
+    arquivo.write_text(texto, encoding="utf-8")
+    validar.checar_margem_do_workflow(str(arquivo), texto)
+    assert not validar.erros, f"{chave} e chave de topo valida"
+
+
+def test_workflows_do_repositorio_passam():
+    """Regressao contra os arquivos de verdade, nao contra exemplo inventado.
+
+    Se um workflow deste repositorio parar de carregar, este teste reprova o
+    PR — que e o que faltava em 26/09.
+    """
+    pytest.importorskip("yaml", reason="PyYAML nao instalado neste ambiente")
+    assert validar.workflows(), "nao achei workflow nenhum para conferir"
+    validar.checar_workflows()
+    assert not validar.erros, validar.erros
+
+
+def test_yaml_invalido_de_outra_natureza_tambem_reprova(tmp_path, monkeypatch):
+    """A margem pega o caso conhecido; o parse pega o resto."""
+    pytest.importorskip("yaml", reason="PyYAML nao instalado neste ambiente")
+    pasta = tmp_path / ".github" / "workflows"
+    pasta.mkdir(parents=True)
+    # Indentacao quebrada: passa pela conferencia da margem e morre no parse.
+    (pasta / "torto.yml").write_text(
+        "name: Exemplo\njobs:\n  um:\n   runs-on: x\n     steps: []\n", encoding="utf-8"
+    )
+    monkeypatch.setattr(validar, "RAIZ", str(tmp_path))
+    validar.checar_workflows()
+    assert len(validar.erros) == 1
+    assert "YAML invalido" in validar.erros[0]
+
+
+def _sem_pyyaml(monkeypatch, tmp_path):
+    """Deixa o `import yaml` falhar, com um workflow valido em cena."""
+    pasta = tmp_path / ".github" / "workflows"
+    pasta.mkdir(parents=True)
+    (pasta / "ok.yml").write_text("name: X\non:\n  push:\n", encoding="utf-8")
+    monkeypatch.setattr(validar, "RAIZ", str(tmp_path))
+    monkeypatch.setitem(sys.modules, "yaml", None)
+
+
+def test_sem_pyyaml_em_ci_e_erro(monkeypatch, tmp_path):
+    """Em CI a biblioteca existe. Se faltar, e falha — nao silencio.
+
+    Este teste e a diferenca entre trava e enfeite: sem ele, um CI que
+    parasse de instalar o PyYAML passaria a aprovar workflow quebrado sem
+    que ninguem percebesse.
+    """
+    _sem_pyyaml(monkeypatch, tmp_path)
+    monkeypatch.setenv("CI", "true")
+    validar.checar_workflows()
+    assert len(validar.erros) == 1
+    assert "PyYAML" in validar.erros[0]
+    assert not validar.avisos
+
+
+def test_sem_pyyaml_fora_de_ci_e_so_aviso(monkeypatch, tmp_path):
+    """No clone de quem nao instalou nada, o gancho nao pode travar o commit.
+
+    A conferencia da margem — que nao depende de biblioteca — ja rodou.
+    """
+    _sem_pyyaml(monkeypatch, tmp_path)
+    monkeypatch.delenv("CI", raising=False)
+    validar.checar_workflows()
+    assert not validar.erros
+    assert len(validar.avisos) == 1
+    assert "PyYAML" in validar.avisos[0]
+
+
+def test_sem_pyyaml_a_margem_continua_reprovando(monkeypatch, tmp_path):
+    """Sem a biblioteca, o defeito de 26/09 ainda seria pego."""
+    pasta = tmp_path / ".github" / "workflows"
+    pasta.mkdir(parents=True)
+    (pasta / "ruim.yml").write_text(
+        WORKFLOW_COM_HEREDOC_NA_MARGEM, encoding="utf-8"
+    )
+    monkeypatch.setattr(validar, "RAIZ", str(tmp_path))
+    monkeypatch.setitem(sys.modules, "yaml", None)
+    monkeypatch.delenv("CI", raising=False)
+    validar.checar_workflows()
+    assert len(validar.erros) == 1
+    assert "margem" in validar.erros[0]

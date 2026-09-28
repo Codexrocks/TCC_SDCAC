@@ -32,6 +32,9 @@ dev = [
     "ruff>=0.6",
     "pytest>=8.3",
     "pytest-cov>=5.0",
+    # Usado por scripts/validar.py para carregar os workflows e recusar YAML
+    # que o GitHub nao aceitaria. Ver docs/padroes.md.
+    "pyyaml>=6.0",
 ]
 
 # Ainda não há pacote para empacotar: as pastas de código nascem na S6 e o
