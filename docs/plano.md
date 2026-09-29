@@ -2,7 +2,7 @@
 
 | | |
 |---|---|
-| Versão | **2.1 — 29/09/2026** |
+| Versão | **2.1 — 28/09/2026** |
 | Período | 02/09 a dezembro de 2026 (16 semanas) |
 | Equipe | Davi · Yasmin · Filipe |
 | Substitui | Plano Executivo e Manual Técnico v1 — modelo de uma dimensão |

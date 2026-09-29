@@ -20,7 +20,7 @@ como recusar uma entrega, e a recusa vira atrito.
 | Dezembro | Apresentação e defesa | 🗓️ Sem prazo |
 <!-- QUADRO:fim prazos-do-professor -->
 
-## Onde estamos, em 29/09
+## Onde estamos, em 28/09
 
 Honestidade sobre o ponto de partida, porque é o que torna o resto realizável ou
 não:
