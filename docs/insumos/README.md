@@ -29,6 +29,7 @@ de afirmado.
 | Insumo | Quem produziu | Entregue | Onde foi usado |
 |---|---|---|---|
 | [Referencial teórico — versão enxuta](referencial-teorico-yasmin-v2.md) | **Yasmin** | 28/09/2026 | [`artigo/02-referencial-teorico.md`](../../artigo/02-referencial-teorico.md) |
+| [Metodologia — 1º rascunho](metodologia-davi-v1.md) | **Davi**, com rascunho assistido por IA | 28/09/2026 | [`artigo/03-metodologia.md`](../../artigo/03-metodologia.md) |
 
 ## Ao acrescentar um insumo
 

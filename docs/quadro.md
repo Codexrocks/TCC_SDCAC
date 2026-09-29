@@ -23,7 +23,7 @@
 | ▶️ Em curso | 1 |
 | ⏳ A vencer em 7 dias | 14 |
 | 🗓️ Depois | 22 |
-| ✅ Feito | 15 |
+| ✅ Feito | 20 |
 
 ## ⚠️ Atrasado
 
@@ -50,7 +50,7 @@
 | Marco | **M2 · Metodologia congelada** | Cenários, métricas, quatro configurações, atributos | Todos | 01/10/2026 | ⏳ Vence em 3 dias |
 | Capítulo | **1. Introdução** | Entregue parcial em 24/09 — os seis blocos de complementação continuam vazios, e a parcialidade foi declarada no arquivo entregue | Yasmin, Filipe | S5 | ⏳ Vence em 3 dias |
 | Capítulo | **2. Referencial teórico** | Escrito e versionado em 28/09 pela Yasmin — 4 subseções, ≈1.150 palavras, atrasado de S3 e S4. Faltam as 13 fontes confirmadas | Yasmin | S5 | ⏳ Vence em 3 dias |
-| Capítulo | **3. Metodologia** | Esqueleto | Davi (caneta) | S5 | ⏳ Vence em 3 dias |
+| Capítulo | **3. Metodologia** | Escrita e versionada em 28/09 — 9 subseções. Faltam as 4 lacunas da M2 e as 7 fontes conferidas | Davi (caneta) | S5 | ⏳ Vence em 3 dias |
 | Decisão | **D-06** | Cenários de contexto (B) e longitudinais (L) | Yasmin | 01/10/2026 | ⏳ Vence em 3 dias |
 | Decisão | **D-12** | Unidade de análise das métricas | Davi, Filipe | 01/10/2026 | ⏳ Vence em 3 dias |
 | Decisão | **D-13** | Tratamento estatístico dos resultados | Davi | 01/10/2026 | ⏳ Vence em 3 dias |
@@ -93,7 +93,7 @@
 
 ## ✅ Feito
 
-15 itens.
+20 itens.
 
 | Tipo | Item | O que é | Quem | Prazo | Situação |
 |---|---|---|---|---|---|
@@ -112,6 +112,11 @@
 | Decisão | **D-24** | Qual dimensão compara o funcionário com o próprio padrão | — | 23/09/2026 | ✅ Fechada em 23/09/2026 |
 | Decisão | **D-25** | O que é a dimensão 3 | — | 23/09/2026 | ✅ Fechada em 23/09/2026 |
 | Decisão | **D-26** | A linha de base vira dimensão 1 ou continua separada | — | 23/09/2026 | ✅ Fechada em 23/09/2026 |
+| Decisão | **D-27** | Calendário do gerador: dia útil, feriado e férias | — | 28/09/2026 | ✅ Fechada em 28/09/2026 |
+| Decisão | **D-28** | As janelas da dimensão 2 | — | 28/09/2026 | ✅ Fechada em 28/09/2026 |
+| Decisão | **D-29** | Como o padrão é medido e como o desvio é calculado | — | 28/09/2026 | ✅ Fechada em 28/09/2026 |
+| Decisão | **D-30** | Escopo da higiene e as duas parcelas da dimensão 3 | — | 28/09/2026 | ✅ Fechada em 28/09/2026 |
+| Decisão | **D-31** | O que separa a C0 da dimensão 1 | — | 28/09/2026 | ✅ Fechada em 28/09/2026 |
 
 ## Critério de aceite do que está aberto
 
