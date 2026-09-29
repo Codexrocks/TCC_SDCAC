@@ -528,6 +528,36 @@ titulo = "O que separa a C0 da dimensão 1"
 estado = "fechada"
 fechada_em = 2026-09-28
 
+[[decisao]]
+id = "D-32"
+titulo = "As duas versões do software, e a ordem"
+estado = "fechada"
+fechada_em = 2026-09-28
+
+[[decisao]]
+id = "D-33"
+titulo = "Presets canônicos contra configuração exploratória"
+estado = "fechada"
+fechada_em = 2026-09-28
+
+[[decisao]]
+id = "D-34"
+titulo = "Configuração é versão imutável, presa ao resultado"
+estado = "fechada"
+fechada_em = 2026-09-28
+
+[[decisao]]
+id = "D-35"
+titulo = "Execução é job, não requisição"
+estado = "fechada"
+fechada_em = 2026-09-28
+
+[[decisao]]
+id = "D-36"
+titulo = "O contrato de leitura da API"
+estado = "fechada"
+fechada_em = 2026-09-28
+
 
 # ---------------------------------------------------------------------------
 # Citações pendentes
