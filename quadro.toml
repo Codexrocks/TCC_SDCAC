@@ -598,22 +598,142 @@ fechada_em = 2026-09-28
 # ---------------------------------------------------------------------------
 
 [[citacao]]
-onde = "artigo/01-introducao.md § Contextualização"
-o_que = "Entrada na lista para (NATIONAL INSTITUTE OF STANDARDS AND TECHNOLOGY, 2006)"
+onde = "artigo/02-referencial-teorico.md § 2.1"
+o_que = "**Fonte proposta na entrega de 28/09:** `(INTERNATIONAL ORGANIZATION FOR STANDARDIZATION, 2022)`."
 dono = "Yasmin"
+desde = 2026-09-04
+
+[[citacao]]
+onde = "artigo/01-introducao.md § Contextualização"
+o_que = "Entrada na lista para `(NATIONAL INSTITUTE OF STANDARDS AND TECHNOLOGY, 2006)`."
+dono = "Davi"
 desde = 2026-09-26
 
 [[citacao]]
 onde = "artigo/01-introducao.md § Problema"
-o_que = "Entrada na lista para (CHANDOLA; BANERJEE; KUMAR, 2009)"
-dono = "Yasmin"
+o_que = "Entrada na lista para `(CHANDOLA; BANERJEE; KUMAR, 2009)`. Mesma situação da linha acima."
+dono = "Davi"
 desde = 2026-09-26
 
 [[citacao]]
-onde = "artigo/02-referencial-teorico.md § 2.1"
-o_que = "Fonte para os pilares da segurança da informação"
+onde = "artigo/02-referencial-teorico.md § 2.4"
+o_que = "Confirmar na fonte: (AXELSSON, 2000)"
 dono = "Yasmin"
-desde = 2026-09-04
+desde = 2026-09-28
+
+[[citacao]]
+onde = "artigo/02-referencial-teorico.md § 2.3"
+o_que = "Confirmar na fonte: Cappelli, Moore e Trzeciak (2012)"
+dono = "Yasmin"
+desde = 2026-09-28
+
+[[citacao]]
+onde = "artigo/02-referencial-teorico.md § 2.4"
+o_que = "Confirmar na fonte: Chandola, Banerjee e Kumar (2009)"
+dono = "Yasmin"
+desde = 2026-09-28
+
+[[citacao]]
+onde = "artigo/02-referencial-teorico.md § 2.4"
+o_que = "Confirmar na fonte: Denning (1987)"
+dono = "Yasmin"
+desde = 2026-09-28
+
+[[citacao]]
+onde = "artigo/02-referencial-teorico.md § 2.2"
+o_que = "Confirmar na fonte: (GONZALEZ-GRANADILLO; GONZALEZ-ZARZOSA; DIAZ, 2021)"
+dono = "Yasmin"
+desde = 2026-09-28
+
+[[citacao]]
+onde = "artigo/02-referencial-teorico.md § 2.1"
+o_que = "Confirmar na fonte: (GRASSI et al., 2017)"
+dono = "Yasmin"
+desde = 2026-09-28
+
+[[citacao]]
+onde = "artigo/02-referencial-teorico.md § 2.3"
+o_que = "Confirmar na fonte: Homoliak et al. (2019)"
+dono = "Yasmin"
+desde = 2026-09-28
+
+[[citacao]]
+onde = "artigo/02-referencial-teorico.md § 2.1"
+o_que = "Confirmar na fonte: (INTERNATIONAL ORGANIZATION FOR STANDARDIZATION, 2022)"
+dono = "Yasmin"
+desde = 2026-09-28
+
+[[citacao]]
+onde = "artigo/02-referencial-teorico.md § 2.1"
+o_que = "Confirmar na fonte: (KENT; SOUPPAYA, 2006)"
+dono = "Yasmin"
+desde = 2026-09-28
+
+[[citacao]]
+onde = "artigo/02-referencial-teorico.md § 2.1"
+o_que = "Confirmar na fonte: (SANDHU et al., 1996)"
+dono = "Yasmin"
+desde = 2026-09-28
+
+[[citacao]]
+onde = "artigo/02-referencial-teorico.md § 2.3"
+o_que = "Confirmar na fonte: (SHASHANKA; SHEN; WAN, 2016)"
+dono = "Yasmin"
+desde = 2026-09-28
+
+[[citacao]]
+onde = "artigo/02-referencial-teorico.md § 2.4"
+o_que = "Confirmar na fonte: (SUNDARAMURTHY et al., 2015)"
+dono = "Yasmin"
+desde = 2026-09-28
+
+[[citacao]]
+onde = "artigo/02-referencial-teorico.md § 2.2"
+o_que = "Confirmar na fonte: Vielberth et al. (2020)"
+dono = "Yasmin"
+desde = 2026-09-28
+
+[[citacao]]
+onde = "artigo/03-metodologia.md § 3.8"
+o_que = "Confirmar na fonte: (WOHLIN et al., 2012) — A taxonomia das quatro categorias de validade. **O ano está marcado como duvidoso pelo…"
+dono = "Davi"
+desde = 2026-09-28
+
+[[citacao]]
+onde = "artigo/03-metodologia.md § 3.7"
+o_que = "Confirmar na fonte: (DEMŠAR, 2006) — A escolha do Wilcoxon pareado para comparar configurações"
+dono = "Davi"
+desde = 2026-09-28
+
+[[citacao]]
+onde = "artigo/03-metodologia.md § 3.7"
+o_que = "Confirmar na fonte: (WILCOXON, 1945) — O teste em si"
+dono = "Davi"
+desde = 2026-09-28
+
+[[citacao]]
+onde = "artigo/03-metodologia.md § 3.6"
+o_que = "Confirmar na fonte: (DAVIS; GOADRICH, 2006) — Curva PR sobre ROC em classe desbalanceada"
+dono = "Davi"
+desde = 2026-09-28
+
+[[citacao]]
+onde = "artigo/03-metodologia.md § 3.6"
+o_que = "Confirmar na fonte: (SAITO; REHMSMEIER, 2015) — O mesmo ponto da linha acima"
+dono = "Davi"
+desde = 2026-09-28
+
+[[citacao]]
+onde = "artigo/03-metodologia.md § 3.8"
+o_que = "Confirmar na fonte: (KAUFMAN et al., 2012) — Vazamento na constituição do padrão individual"
+dono = "Davi"
+desde = 2026-09-28
+
+[[citacao]]
+onde = "artigo/03-metodologia.md § 3.8"
+o_que = "Confirmar na fonte: (SOMMER; PAXSON, 2010) — Limite das avaliações sobre dado sintético"
+dono = "Davi"
+desde = 2026-09-28
 
 [[citacao]]
 onde = "docs/usabilidade.md § 6.2"
@@ -623,7 +743,7 @@ desde = 2026-09-03
 
 [[citacao]]
 onde = "docs/usabilidade.md § 6.3"
-o_que = "Limites exatos de cada faixa adjetiva do SUS"
+o_que = "Limites exatos de cada faixa adjetiva do SUS, em Bangor, Kortum e Miller (2009)"
 dono = "Filipe"
 desde = 2026-09-03
 

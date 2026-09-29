@@ -147,19 +147,39 @@ promete e o prazo em que ela foi cobrada.
 
 ## Dívida bibliográfica
 
-7 pendências. Referência não conferida na fonte é o único
+27 pendências. Referência não conferida na fonte é o único
 item deste quadro que pode reprovar o trabalho por fraude acadêmica, e é o
 que some mais fácil de vista.
 
 | Onde | O que falta | Quem | Aberta desde | Idade |
 |---|---|---|---|---|
 | `docs/usabilidade.md § 6.2` | Formulação exata e porcentagem de Nielsen e Landauer | Filipe | 03/09/2026 | 26 dias |
-| `docs/usabilidade.md § 6.3` | Limites exatos de cada faixa adjetiva do SUS | Filipe | 03/09/2026 | 26 dias |
+| `docs/usabilidade.md § 6.3` | Limites exatos de cada faixa adjetiva do SUS, em Bangor, Kortum e Miller (2009) | Filipe | 03/09/2026 | 26 dias |
 | `docs/usabilidade.md § 7` | Literatura de carga de trabalho e fadiga de alerta em analistas de SOC | Yasmin | 03/09/2026 | 26 dias |
 | `docs/usabilidade.md § 9` | Edição e ano da obra de Shneiderman efetivamente consultada | Filipe | 03/09/2026 | 26 dias |
-| `artigo/02-referencial-teorico.md § 2.1` | Fonte para os pilares da segurança da informação | Yasmin | 04/09/2026 | 25 dias |
-| `artigo/01-introducao.md § Contextualização` | Entrada na lista para (NATIONAL INSTITUTE OF STANDARDS AND TECHNOLOGY, 2006) | Yasmin | 26/09/2026 | 3 dias |
-| `artigo/01-introducao.md § Problema` | Entrada na lista para (CHANDOLA; BANERJEE; KUMAR, 2009) | Yasmin | 26/09/2026 | 3 dias |
+| `artigo/02-referencial-teorico.md § 2.1` | **Fonte proposta na entrega de 28/09:** `(INTERNATIONAL ORGANIZATION FOR STANDARDIZATION, 2022)`. | Yasmin | 04/09/2026 | 25 dias |
+| `artigo/01-introducao.md § Contextualização` | Entrada na lista para `(NATIONAL INSTITUTE OF STANDARDS AND TECHNOLOGY, 2006)`. | Davi | 26/09/2026 | 3 dias |
+| `artigo/01-introducao.md § Problema` | Entrada na lista para `(CHANDOLA; BANERJEE; KUMAR, 2009)`. Mesma situação da linha acima. | Davi | 26/09/2026 | 3 dias |
+| `artigo/02-referencial-teorico.md § 2.4` | Confirmar na fonte: (AXELSSON, 2000) | Yasmin | 28/09/2026 | 1 dias |
+| `artigo/02-referencial-teorico.md § 2.3` | Confirmar na fonte: Cappelli, Moore e Trzeciak (2012) | Yasmin | 28/09/2026 | 1 dias |
+| `artigo/02-referencial-teorico.md § 2.4` | Confirmar na fonte: Chandola, Banerjee e Kumar (2009) | Yasmin | 28/09/2026 | 1 dias |
+| `artigo/02-referencial-teorico.md § 2.4` | Confirmar na fonte: Denning (1987) | Yasmin | 28/09/2026 | 1 dias |
+| `artigo/02-referencial-teorico.md § 2.2` | Confirmar na fonte: (GONZALEZ-GRANADILLO; GONZALEZ-ZARZOSA; DIAZ, 2021) | Yasmin | 28/09/2026 | 1 dias |
+| `artigo/02-referencial-teorico.md § 2.1` | Confirmar na fonte: (GRASSI et al., 2017) | Yasmin | 28/09/2026 | 1 dias |
+| `artigo/02-referencial-teorico.md § 2.3` | Confirmar na fonte: Homoliak et al. (2019) | Yasmin | 28/09/2026 | 1 dias |
+| `artigo/02-referencial-teorico.md § 2.1` | Confirmar na fonte: (INTERNATIONAL ORGANIZATION FOR STANDARDIZATION, 2022) | Yasmin | 28/09/2026 | 1 dias |
+| `artigo/02-referencial-teorico.md § 2.1` | Confirmar na fonte: (KENT; SOUPPAYA, 2006) | Yasmin | 28/09/2026 | 1 dias |
+| `artigo/02-referencial-teorico.md § 2.1` | Confirmar na fonte: (SANDHU et al., 1996) | Yasmin | 28/09/2026 | 1 dias |
+| `artigo/02-referencial-teorico.md § 2.3` | Confirmar na fonte: (SHASHANKA; SHEN; WAN, 2016) | Yasmin | 28/09/2026 | 1 dias |
+| `artigo/02-referencial-teorico.md § 2.4` | Confirmar na fonte: (SUNDARAMURTHY et al., 2015) | Yasmin | 28/09/2026 | 1 dias |
+| `artigo/02-referencial-teorico.md § 2.2` | Confirmar na fonte: Vielberth et al. (2020) | Yasmin | 28/09/2026 | 1 dias |
+| `artigo/03-metodologia.md § 3.8` | Confirmar na fonte: (WOHLIN et al., 2012) — A taxonomia das quatro categorias de validade. **O ano está marcado como duvidoso pelo… | Davi | 28/09/2026 | 1 dias |
+| `artigo/03-metodologia.md § 3.7` | Confirmar na fonte: (DEMŠAR, 2006) — A escolha do Wilcoxon pareado para comparar configurações | Davi | 28/09/2026 | 1 dias |
+| `artigo/03-metodologia.md § 3.7` | Confirmar na fonte: (WILCOXON, 1945) — O teste em si | Davi | 28/09/2026 | 1 dias |
+| `artigo/03-metodologia.md § 3.6` | Confirmar na fonte: (DAVIS; GOADRICH, 2006) — Curva PR sobre ROC em classe desbalanceada | Davi | 28/09/2026 | 1 dias |
+| `artigo/03-metodologia.md § 3.6` | Confirmar na fonte: (SAITO; REHMSMEIER, 2015) — O mesmo ponto da linha acima | Davi | 28/09/2026 | 1 dias |
+| `artigo/03-metodologia.md § 3.8` | Confirmar na fonte: (KAUFMAN et al., 2012) — Vazamento na constituição do padrão individual | Davi | 28/09/2026 | 1 dias |
+| `artigo/03-metodologia.md § 3.8` | Confirmar na fonte: (SOMMER; PAXSON, 2010) — Limite das avaliações sobre dado sintético | Davi | 28/09/2026 | 1 dias |
 
 ## O que ficou fora desta versão
 
