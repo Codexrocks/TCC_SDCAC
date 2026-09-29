@@ -20,10 +20,11 @@ como recusar uma entrega, e a recusa vira atrito.
 | Dezembro | Apresentação e defesa | 🗓️ Sem prazo |
 <!-- QUADRO:fim prazos-do-professor -->
 
-## Onde estamos, em 28/09
+## Onde estamos
 
 Honestidade sobre o ponto de partida, porque é o que torna o resto realizável ou
-não:
+não. A coluna **Situação** é calculada contra o dia em que a página foi gerada —
+não há data escrita à mão aqui, porque data escrita à mão envelhece:
 
 <!-- QUADRO:inicio capitulos -->
 <!-- Bloco gerado por scripts/quadro.py a partir de quadro.toml. Editar aqui nao adianta: a proxima execucao reescreve. -->
