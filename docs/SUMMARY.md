@@ -64,5 +64,5 @@
 * [2026-09-26 — Sessão 17: o quadro que se recalcula](relatorios/2026-09-26-sessao-17.md)
 * [2026-09-26 — Sessão 18: uma revisão de coerência, arquivo contra arquivo](relatorios/2026-09-26-sessao-18.md)
 * [2026-09-28 — Sessão 19: o referencial teórico da Yasmin entra no repositório](relatorios/2026-09-28-sessao-19.md)
-* [2026-09-28 — Sessão 20: a fila de PRs entra, e o quadro nunca tinha rodado](relatorios/2026-09-28-sessao-20.md)
+* [2026-09-28 — Sessão 21: a fila de PRs entra, e o quadro nunca tinha rodado](relatorios/2026-09-28-sessao-21.md)
 * [Modelo de relatório](relatorios/_modelo.md)
