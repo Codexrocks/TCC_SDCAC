@@ -230,6 +230,7 @@ começa. Registrada aqui para não haver divergência depois:
 TCC_SDCAC/
 ├── backend/          api/ · models/ · services/ · main.py
 ├── detection/        c0/ · d1/ · d2/ · d3/ · integracao/   ← a flag C0..C3 mora aqui
+├── runner/           executor do experimento               ← a entrada sem HTTP
 ├── generator/        personas/ · calendario/ · cenarios/   ← a peça da S6
 ├── frontend/         dashboard/ · components/
 ├── database/         corp/ · ground_truth/ · sdcac/ — schema e migrações
@@ -245,6 +246,12 @@ TCC_SDCAC/
 
 > **`tests/` já existe** e guarda os testes de `scripts/`. Os testes dos cenários
 > entram ao lado deles, não no lugar.
+
+> **Por que `runner/` existe.** A tabela de ablação sai de uma execução em lote,
+> não de uma requisição HTTP. As duas entradas — `runner/` e `backend/` — chamam
+> o mesmo núcleo em `detection/`, e é isso que garante que o painel mostre o
+> mesmo código que produziu a tabela. O desenho das duas versões do software está
+> em [o software de análise](software.md).
 
 **Os três bancos** — `corp`, `ground_truth` e `sdcac` — e todas as tabelas estão
 na [especificação do banco](banco-simulado.md), que é a fonte para o schema da
