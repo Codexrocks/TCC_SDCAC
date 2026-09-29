@@ -111,7 +111,7 @@ semana = "S5"
 numero = 3
 titulo = "Metodologia"
 donos = ["Davi (caneta)"]
-estado = "Esqueleto"
+estado = "Escrita e versionada em 28/09 — 9 subseções. Faltam as 4 lacunas da M2 e as 7 fontes conferidas"
 pronto = false
 semana = "S5"
 
@@ -356,7 +356,7 @@ estado = "aberta"
 [[decisao]]
 id = "D-13"
 titulo = "Tratamento estatístico dos resultados"
-proposta = "10 a 20 sementes, as mesmas nas quatro configurações; Wilcoxon pareado"
+proposta = "10 a 20 sementes, as mesmas nas quatro configurações; Wilcoxon pareado. Regra de corte declarada em 28/09, respondendo à P31: ciclo completo de uma semente até 30 min → 20 sementes; acima disso → 10, com o motivo registrado"
 donos = ["Davi"]
 prazo = 2026-10-01
 estado = "aberta"
@@ -497,6 +497,36 @@ id = "D-26"
 titulo = "A linha de base vira dimensão 1 ou continua separada"
 estado = "fechada"
 fechada_em = 2026-09-23
+
+[[decisao]]
+id = "D-27"
+titulo = "Calendário do gerador: dia útil, feriado e férias"
+estado = "fechada"
+fechada_em = 2026-09-28
+
+[[decisao]]
+id = "D-28"
+titulo = "As janelas da dimensão 2"
+estado = "fechada"
+fechada_em = 2026-09-28
+
+[[decisao]]
+id = "D-29"
+titulo = "Como o padrão é medido e como o desvio é calculado"
+estado = "fechada"
+fechada_em = 2026-09-28
+
+[[decisao]]
+id = "D-30"
+titulo = "Escopo da higiene e as duas parcelas da dimensão 3"
+estado = "fechada"
+fechada_em = 2026-09-28
+
+[[decisao]]
+id = "D-31"
+titulo = "O que separa a C0 da dimensão 1"
+estado = "fechada"
+fechada_em = 2026-09-28
 
 
 # ---------------------------------------------------------------------------

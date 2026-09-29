@@ -1,22 +1,56 @@
+<!-- ARQUIVO DE REGISTRO — NÃO EDITAR O CORPO. Ver docs/insumos/README.md -->
+
+# Insumo — Metodologia, 1º rascunho
+
+| | |
+|---|---|
+| **Quem entregou** | **Davi** — caneta da Metodologia pelo cronograma |
+| **Como foi produzido** | **Rascunho assistido por Claude Opus 5**, a partir das fontes do próprio repositório. Declarado pelo autor no cabeçalho do arquivo entregue |
+| **Entregue em** | 28/09/2026 |
+| **Arquivo recebido** | `03-metodologia.md` |
+| **Para onde foi** | [`artigo/03-metodologia.md`](../../artigo/03-metodologia.md) |
+
+> **O corpo abaixo está como foi entregue.** Nada foi cortado, acrescentado ou
+> reescrito. O que mudou na passagem para o artigo está listado logo abaixo.
+
+## O que mudou ao levar para o artigo
+
+| O que | Por quê |
+|---|---|
+| **Os quatro comentários `<!-- LACUNA -->` viraram blocos visíveis** | **O GitBook apaga comentário HTML ao salvar.** Em 06/09 ele exportou os seis capítulos com todos os marcadores apagados. Deixá-los como comentário dentro de `artigo/` seria perdê-los sem ninguém perceber — é a regra do [`artigo/README.md`](../../artigo/README.md) |
+| **A chamada no texto foi convertida para a NBR 10520** — `(WOHLIN et al., 2012)` no lugar de `(Wohlin et al., 2012)` | Mesma conversão feita no referencial teórico. A Introdução entregue em 24/09 usa essa forma, e o [formato do artigo](../formato-do-artigo.md) manda mantê-la até o template do COBEM 2026 chegar. **É conversão de forma, não de conteúdo** |
+| **As sete referências não foram para `artigo/referencias.md`** | O próprio insumo declara que **nenhuma foi conferida na fonte**. Aquela página só aceita entrada depois de alguém abrir a obra. As sete estão em [citações pendentes](../citacoes-pendentes.md) |
+| **Os três blocos finais não vão para o artigo** | Lacunas, citações a conferir e procedência são registro de trabalho. Ficam aqui, e as partes acionáveis foram distribuídas para os arquivos que as cobram |
+| **Dois links relativos foram reapontados** | `../docs/cronograma.md` e `referencias.md` valiam a partir de `artigo/` e quebravam aqui. Link quebrado em página publicada é defeito, e o `validar.py` reprova. Só o caminho mudou — o destino é o mesmo |
+
+## Três observações sobre o insumo, sem alterá-lo
+
+- **A divergência nº 1 está desatualizada.** O insumo diz que a **D-11** e o
+  `docs/cronograma.md` apontam CREEM 2026. Não apontam mais: a D-11 foi fechada
+  em **23/09** como **COBEM 2026**, e o CREEM está registrado ali como engano de
+  arquivo. A divergência que o insumo levanta já estava resolvida quando ele foi
+  escrito
+- **A divergência nº 2 procede**, e virou pendência: o [plano](../plano.md) §1.5
+  lista **OE1 a OE6** e a [Introdução](../../artigo/01-introducao.md) lista
+  **a) a h)**. É granularidade, não contradição — mas quem lê o artigo é a banca
+- **O `docs/cobem.md` citado no insumo não existe** com esse nome. É a segunda
+  vez que esse arquivo é citado por um insumo; o equivalente é
+  [`docs/formato-do-artigo.md`](../formato-do-artigo.md)
+
+---
+
 # 3. Metodologia
 
 > **3ª Versão** na numeração do professor · S5 do
-> [cronograma](../docs/cronograma.md) · caneta: **Davi**.
+> [cronograma](../cronograma.md) · caneta: Davi.
 >
-> **Rascunho assistido**, declarado pelo autor: a redação foi rascunhada por
-> Claude Opus 5 a partir das fontes do próprio repositório, e o insumo como
-> entregue está em
-> [`docs/insumos/metodologia-davi-v1.md`](../docs/insumos/metodologia-davi-v1.md),
-> com a procedência de cada subseção.
+> **Este bloco de citação e os três blocos ao final não fazem parte do artigo —
+> apague-os antes de diagramar.** O que está entre eles é texto de seção.
 >
-> ⚠️ **Nenhuma das sete citações foi conferida na fonte.** Elas estão
-> registradas em [citações pendentes](../docs/citacoes-pendentes.md) e **não**
-> entraram em [`referencias.md`](referencias.md), que só aceita entrada depois
-> de alguém abrir a obra.
->
-> Os quatro blocos **A escrever** abaixo são lacunas conhecidas, com dono e
-> prazo. Estão visíveis de propósito: comentário HTML desaparece quando o
-> GitBook salva.
+> **Rascunho assistido.** A redação desta seção foi rascunhada por Claude Opus 5
+> a partir das fontes do próprio repositório, listadas no bloco *Procedência*.
+> Nenhuma citação foi conferida na fonte, e nenhum número foi estimado. Ler
+> inteiro e reescrever o que não for seu antes de assinar.
 
 ***
 
@@ -136,16 +170,15 @@ identificador e seu rótulo na base `ground_truth`, à qual a aplicação não t
 acesso. A avaliação compara, portanto, a saída do sistema a um gabarito que ele
 não pode consultar.
 
-> **A escrever — lacuna 1 · Yasmin · 01/10.** A relação nominal dos cenários de
-> cada família depende da **D-06** e da **D-16**. Entra aqui uma tabela com, no
-> mínimo, um cenário nomeado por família e ao menos um de escalada legítima.
-> **Não escrever antes de existir.**
+<!-- LACUNA 1 — a relação nominal dos cenários de cada família depende da D-06 e
+da D-16, de responsabilidade da Yasmin, com prazo em 01/10. Inserir aqui uma
+tabela com, no mínimo, um cenário nomeado por família e ao menos um cenário de
+escalada legítima. Não escrever antes de existir. -->
 
-> **A escrever — lacuna 2 · Davi e Yasmin · 01/10.** Desenho cego. Se a
-> especificação dos cenários tiver de fato ocorrido sem acesso às fórmulas de
-> pontuação, acrescentar uma frase declarando isso — é a resposta mais forte à
-> objeção de circularidade tratada na Seção 3.8. **Se não tiver ocorrido, não
-> escrever.**
+<!-- LACUNA 2 — desenho cego. Se a especificação dos cenários tiver de fato
+ocorrido sem acesso às fórmulas de pontuação, acrescentar uma frase declarando
+isso: é a resposta mais forte à objeção de circularidade tratada na Seção 3.8.
+Se não tiver ocorrido, não escrever. -->
 
 ## 3.5 Unidade de análise
 
@@ -197,18 +230,16 @@ de regras discretas e não dispara em cenários longitudinais, essa condição p
 não se verificar. Nesse caso a comparação passa a ser feita entre **curvas de
 precisão e revocação** completas, e não entre pontos isolados; em problemas de
 classe fortemente desbalanceada, como é o caso, a curva de precisão-revocação é
-mais informativa que a curva ROC (DAVIS; GOADRICH, 2006; SAITO; REHMSMEIER,
+mais informativa que a curva ROC (Davis e Goadrich, 2006; Saito e Rehmsmeier,
 2015).
 
-> **A escrever — lacuna 3 · os três · 01/10.** O critério de sucesso declarado a
-> priori, da **D-15**. Falta a frase que fixa, **em números**, qual redução de
-> falsos positivos e qual revocação longitudinal contam como resposta afirmativa
-> à pergunta de pesquisa.
->
-> A frase está deliberadamente em branco: **seu valor metodológico está em ser
-> escolhida antes de existir resultado.** O número precisa ter origem
-> declarável — literatura, linha de base medida da C0, ou argumento operacional
-> de quantos falsos positivos um analista absorve por turno.
+<!-- LACUNA 3 — o critério de sucesso declarado a priori (D-15). Falta a frase
+que fixa, EM NÚMEROS, qual redução de falsos positivos e qual revocação
+longitudinal contam como resposta afirmativa à pergunta de pesquisa. A frase é
+deliberadamente deixada em branco: seu valor metodológico está em ser escolhida
+pelos autores antes de existir resultado, e o número precisa ter origem
+declarável — literatura, linha de base medida da C0, ou argumento operacional de
+quantos falsos positivos um analista absorve por turno. Escrever antes da S6. -->
 
 ## 3.7 Execução e reprodutibilidade
 
@@ -220,9 +251,9 @@ as *N* execuções, e não como valor único.
 O uso das mesmas sementes nas quatro configurações torna a comparação **pareada**:
 para cada semente existe uma diferença observada entre configurações, e o
 conjunto dessas *N* diferenças é submetido ao teste de Wilcoxon para amostras
-pareadas (WILCOXON, 1945), adequado por não pressupor normalidade das diferenças
+pareadas (Wilcoxon, 1945), adequado por não pressupor normalidade das diferenças
 e recomendado para a comparação de configurações sobre múltiplos conjuntos de
-dados (DEMŠAR, 2006).
+dados (Demšar, 2006).
 
 O piso de dez sementes decorre da aritmética do próprio teste, e não de
 convenção. No teste de Wilcoxon pareado exato, o menor valor de *p* bilateral
@@ -245,7 +276,7 @@ inspeção dos resultados é construída em Streamlit.
 
 Esta seção declara as ameaças à validade identificadas e as medidas adotadas,
 organizadas segundo as quatro categorias usuais em experimentação em engenharia
-de software (WOHLIN et al., 2012).
+de software (Wohlin *et al.*, 2012).
 
 **Validade de construto.** O risco comportamental é um construto, e não uma
 grandeza diretamente observável; o que se mede é a concordância entre a saída do
@@ -259,7 +290,7 @@ os três primeiros meses do período simulado, janela **anterior e disjunta** da
 janela de avaliação. Calculá-lo sobre os mesmos dias que contêm os cenários
 injetados faria o comportamento anômalo integrar a definição do que é normal para
 aquele funcionário, e o desempenho observado seria bom pelo motivo errado
-(KAUFMAN et al., 2012). Pela mesma razão, os atributos de estado são lidos na
+(Kaufman *et al.*, 2012). Pela mesma razão, os atributos de estado são lidos na
 condição vigente na data do evento, e não em seu estado final. Ainda no mesmo
 eixo, o termo de exposição acumulada é calculado sobre a janela que **antecede** o
 evento avaliado, excluindo-o: incluí-lo faria o risco do evento corrente ser
@@ -283,7 +314,7 @@ fórmulas de pontuação.
 **Validade externa.** Os resultados valem para o ambiente simulado descrito e não
 são extrapoláveis a dados de produção. Acurácia elevada sobre dados sintéticos
 deve ser lida como indício de que o gerador pode ser demasiadamente previsível,
-e não como evidência de qualidade do modelo (SOMMER; PAXSON, 2010). A mitigação
+e não como evidência de qualidade do modelo (Sommer e Paxson, 2010). A mitigação
 adotada é a presença de ruído legítimo no tráfego de fundo — viagens, trabalho
 remoto, afastamentos e mudanças de cargo —, de modo que o comportamento normal
 não seja artificialmente homogêneo.
@@ -311,38 +342,84 @@ participantes, e nenhum dado de pessoa real é coletado, em coerência com a
 declaração da Seção 3.2. O critério de aceite do painel é funcional e está
 registrado na documentação do projeto.
 
-> **A escrever — lacuna 4 · Davi e Filipe · 01/10.** Esta subseção pressupõe a
-> **opção A da D-02** — painel como instrumento —, que é a proposta registrada
-> no [plano](../docs/plano.md), seção 1.5, mas a decisão está **aberta desde
-> 08/09**.
->
-> Se a escolha for a **opção B** — segundo experimento, com avaliação heurística
-> e SUS —, esta subseção é reescrita por inteiro **e passa a contradizer a
-> declaração de ausência de dado de pessoa real da Seção 3.2**. Se for a **C**, a
-> subseção é removida. **Decidir antes de congelar a M2.**
+<!-- LACUNA 4 — esta subseção pressupõe a opção A da D-02 (painel como
+instrumento), que é a proposta registrada no plano, seção 1.5, mas a decisão está
+aberta desde 08/09. Se a escolha for a opção B — segundo experimento, com
+avaliação heurística e SUS —, esta subseção é reescrita por inteiro e passa a
+contradizer a declaração de ausência de dado de pessoa real da Seção 3.2. Se a
+escolha for C, a subseção é removida. Decidir antes de congelar o M2. -->
 
 ***
 
-## O que esta seção ainda precisa
+## Lacunas marcadas no texto
 
-* [ ] **As quatro lacunas acima**, todas com prazo em **01/10** — são a M2
-* [ ] **As sete fontes conferidas na fonte** · **Davi** · antes de qualquer uma
-      entrar em [`referencias.md`](referencias.md). As pendências estão em
-      [citações pendentes](../docs/citacoes-pendentes.md), e o ano de
-      `WOHLIN et al., 2012` está marcado como merecedor de atenção redobrada
-* [ ] **Fundamentação da Seção 3.1, se o professor exigir.** Não há citação ali;
-      a via usual é uma obra de metodologia científica em computação · **Davi**
-* [ ] **Alinhar a granularidade dos objetivos** com a
-      [Introdução](01-introducao.md), que lista **a) a h)** onde o
-      [plano](../docs/plano.md) §1.5 lista **OE1 a OE6**. Não é contradição, é
-      recorte — mas quem lê o artigo é a banca · **Davi**
-* [ ] **A Introdução ainda descreve a dimensão 3 só como exposição acumulada**,
-      e esta seção a descreve como exposição **e higiene**, com duas parcelas
-      separadas (**D-25**). Enquanto não for ajustada, os dois capítulos se
-      contradizem · **Davi** · S5
-* [ ] **Confirmar se o template aceita fórmula em `$$…$$`**; se não aceitar,
-      viram imagem ou texto corrido · **Davi** · quando o template do COBEM 2026
-      chegar
-* [ ] **Confirmar o tempo verbal.** A seção está no presente — "o ambiente
-      representa", "cada configuração é executada" —, que lê corretamente antes
-      e depois da execução. Se preferir futuro, a troca é mecânica · **Davi**
+| # | Onde | O que falta | Dono | Prazo |
+|---|---|---|---|---|
+| 1 | 3.4 | Relação nominal dos cenários por família | Yasmin | 01/10 |
+| 2 | 3.4 | Confirmar se o desenho cego ocorreu de fato | Davi + Yasmin | 01/10 |
+| 3 | 3.6 | **A frase da D-15, com número** | Os três | 01/10 |
+| 4 | 3.9 | Fechar a D-02 antes de validar a subseção | Davi + Filipe | 01/10 |
+
+## Citações a conferir na fonte
+
+Nenhuma das entradas abaixo foi verificada. Conferir cada uma, registrar quem
+conferiu e quando em [referências](../../artigo/referencias.md) e remover deste bloco. Os anos
+marcados com `?` são os que merecem atenção redobrada — podem corresponder a
+outra edição.
+
+| Chamada no texto | Obra | Sustenta | Conferida |
+|---|---|---|---|
+| Wohlin *et al.*, 2012 `?` | *Experimentation in Software Engineering*, Springer | A taxonomia das quatro categorias de validade | [ ] |
+| Demšar, 2006 | *Statistical Comparisons of Classifiers over Multiple Data Sets*, JMLR | A escolha do Wilcoxon pareado | [ ] |
+| Wilcoxon, 1945 | *Individual Comparisons by Ranking Methods*, Biometrics Bulletin | O teste em si | [ ] |
+| Davis e Goadrich, 2006 | *The Relationship Between Precision-Recall and ROC Curves*, ICML | Curva PR sobre ROC em classe desbalanceada | [ ] |
+| Saito e Rehmsmeier, 2015 | *The Precision-Recall Plot Is More Informative…*, PLOS ONE | idem | [ ] |
+| Kaufman *et al.*, 2012 | *Leakage in Data Mining*, ACM TKDD | Vazamento na constituição do padrão | [ ] |
+| Sommer e Paxson, 2010 | *Outside the Closed World*, IEEE S&P | Limite das avaliações sobre dado sintético | [ ] |
+
+Não há citação na Seção 3.1. Se o professor exigir fundamentação para a
+classificação do tipo de pesquisa, a via usual é uma obra de metodologia
+científica em computação — o mapa de trabalho aponta Wazlawick, também a
+conferir.
+
+## Procedência — de onde saiu cada afirmação
+
+Para que a revisão possa conferir sem reabrir tudo, e para separar o que veio do
+repositório do que foi formulado na redação.
+
+| Subseção | Fonte no repositório |
+|---|---|
+| 3.1 | `docs/diretrizes.md` §Natureza · `docs/plano.md` §1.8 |
+| 3.2 | `docs/banco-simulado.md` §2 a §9 · D-23, D-25 |
+| 3.3 | `docs/plano.md` §2 · D-05, D-25, D-26 · P30 |
+| 3.4 | D-06, D-16 · `docs/banco-simulado.md` §6 (`hr_calendar`), §8 |
+| 3.5 | D-12, incluindo o exemplo numérico do cenário longitudinal |
+| 3.6 | D-03, D-14 |
+| 3.7 | D-13, incluindo a derivação do piso de dez sementes |
+| 3.8 | D-16, D-17, D-18, D-19 · `docs/plano.md` §1.6 · `banco-simulado.md` §4 |
+| 3.9 | `docs/plano.md` §1.5, nota sobre a D-02 |
+
+### Três divergências encontradas nas fontes, não resolvidas aqui
+
+1. **CREEM ou COBEM.** A **D-11** e o `docs/cronograma.md` dizem **CREEM 2026**;
+   o mapa de trabalho da S5 diz **COBEM 2026** em todas as menções, e a
+   contradição nº 5 do próprio mapa cita um `docs/cobem.md` numa branch. Esta
+   seção não nomeia o template, para não propagar o erro — mas a divergência
+   precisa ser resolvida antes de diagramar.
+2. **Seis objetivos ou oito.** O `docs/plano.md` §1.5 lista **OE1 a OE6**; o
+   `artigo/01-introducao.md` lista **a) a h)**. Não é contradição, é granularidade:
+   as alíneas f, g e h correspondem ao OE6. Vale alinhar a redação dos dois, já
+   que a banca lê o artigo.
+3. **MTTD removido.** O esqueleto anterior pedia MTTD entre as métricas. A
+   especificação do ambiente declara `ingested_at` como "latência de engenharia,
+   **nunca métrica do TCC**". Seguiu-se a especificação: o MTTD **não** aparece
+   nesta seção. Se a decisão for mantê-lo como informativo, é preciso reintroduzi-lo
+   declarando a limitação de medi-lo em ambiente simulado.
+
+### Duas escolhas de redação, para você confirmar ou trocar
+
+- **Tempo verbal: presente.** "O ambiente representa", "cada configuração é
+  executada". Lê corretamente antes e depois da execução, e poupa uma revisão em
+  dezembro. Se preferir futuro, a troca é mecânica.
+- **Fórmulas em `$$…$$`.** Conferir se o template aceita; se não, viram imagem ou
+  texto corrido.
