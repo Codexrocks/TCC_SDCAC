@@ -181,10 +181,22 @@ Duas ressalvas que mudam o que a tabela final pode afirmar:
 
 ## Cenários de teste
 
-O desenho dos cenários é da **Yasmin**, na S5, e cobre quatro famílias:
-pontuais, de contexto, longitudinais e de **escalada legítima** — decisões
-**D-06** e **D-16**. A última é o controle negativo: sem ela, o falso positivo da
-D3 fica sem medida, e a D3 é a contribuição original.
+O desenho dos cenários é da **Yasmin**, na S5, e cobre quatro famílias.
+Os nomes abaixo são os que a [Metodologia](../artigo/03-metodologia.md) fixou na
+seção 3.4, e é por eles que o artigo se refere a elas — decisões **D-06** e
+**D-16**:
+
+| Família | Exercita | Papel |
+|---|---|---|
+| **P** — pontuais | D1 | Verdadeiros positivos de evento isolado |
+| **B** — de contexto | D2 | Redução de falso positivo por contexto individual |
+| **L** — longitudinais | D3 | Escalada gradual sem evento individualmente notável |
+| **N** — controle negativo | Todas | Falsos positivos sobre comportamento legítimo |
+
+A **escalada legítima** é um cenário **dentro da família N**, e não uma família
+em si: um funcionário que, por mudança de projeto, passa a acessar mais recursos,
+em faixa horária mais ampla e com maior volume, sem conduta indevida. Sem ele o
+falso positivo da D3 fica sem medida, e a D3 é a contribuição original.
 
 > **Desenho cego, se der para organizar.** A Yasmin especifica os cenários **sem
 > ver a fórmula da D3**. Senão a D3 é projetada para capturar escalada gradual, o

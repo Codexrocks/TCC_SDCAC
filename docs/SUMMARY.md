@@ -31,6 +31,7 @@
 * [Citações pendentes](citacoes-pendentes.md)
 * [Insumos das encomendas](insumos/README.md)
   * [Referencial teórico — Yasmin, 28/09](insumos/referencial-teorico-yasmin-v2.md)
+  * [Metodologia — Davi, 28/09](insumos/metodologia-davi-v1.md)
 
 ## Uso de IA
 
@@ -64,4 +65,5 @@
 * [2026-09-26 — Sessão 17: o quadro que se recalcula](relatorios/2026-09-26-sessao-17.md)
 * [2026-09-26 — Sessão 18: uma revisão de coerência, arquivo contra arquivo](relatorios/2026-09-26-sessao-18.md)
 * [2026-09-28 — Sessão 19: o referencial teórico da Yasmin entra no repositório](relatorios/2026-09-28-sessao-19.md)
+* [2026-09-28 — Sessão 23: a Metodologia entra no artigo](relatorios/2026-09-28-sessao-23.md)
 * [Modelo de relatório](relatorios/_modelo.md)
