@@ -6,7 +6,8 @@ Uso:
     python3 scripts/validar.py --base X   # compara com outra base
 
 Confere: nome de branch, formato dos commits, cobertura do SUMMARY.md,
-links internos e segredos vazados. Sai com codigo 1 se algo falhar.
+links internos, segredos vazados e sintaxe dos workflows. Sai com
+codigo 1 se algo falhar.
 """
 import os
 import re
@@ -241,6 +242,109 @@ def checar_citacoes_pendentes():
             avisos.append(f"{rel}: {len(achados)} citacao(oes) pendente(s)")
 
 
+# As unicas chaves que o GitHub Actions aceita na coluna 0 de um workflow. E
+# lista fechada: qualquer outra coisa encostada na margem e bloco que vazou.
+CHAVES_DE_TOPO = (
+    "name",
+    "run-name",
+    "on",
+    "permissions",
+    "env",
+    "defaults",
+    "concurrency",
+    "jobs",
+)
+RE_CHAVE_DE_TOPO = re.compile(r"^(%s):" % "|".join(CHAVES_DE_TOPO))
+
+
+def workflows():
+    """Os .yml e .yaml de .github/workflows, em ordem."""
+    pasta = os.path.join(RAIZ, ".github", "workflows")
+    if not os.path.isdir(pasta):
+        return []
+    return sorted(
+        os.path.join(pasta, f)
+        for f in os.listdir(pasta)
+        if f.endswith((".yml", ".yaml"))
+    )
+
+
+def checar_margem_do_workflow(caminho, texto):
+    """Acusa linha encostada na margem que nao seja chave de topo.
+
+    E a conferencia que nao depende de biblioteca nenhuma, e por isso roda
+    sempre — inclusive no gancho de pre-commit de quem nao instalou nada.
+
+    Dentro de um bloco escalar (`run: |`), o YAML exige que todo conteudo seja
+    mais indentado que a chave que o abriu. Logo, linha nao vazia na coluna 0
+    so pode ser chave de topo, comentario ou marcador de documento. Qualquer
+    outra coisa ali dentro fechou o bloco antes da hora.
+    """
+    nome = os.path.relpath(caminho, RAIZ).replace(os.sep, "/")
+    for numero, linha in enumerate(texto.splitlines(), start=1):
+        if not linha.strip():
+            continue
+        if linha[0].isspace() or linha[0] == "#":
+            continue
+        if linha.startswith("---") or RE_CHAVE_DE_TOPO.match(linha):
+            continue
+        erros.append(
+            f"{nome}:{numero}: linha encostada na margem que nao e chave de topo "
+            f"do workflow — {linha[:40]!r}. Dentro de um bloco `run: |` isso fecha "
+            f"o bloco, e o GitHub recusa o arquivo inteiro"
+        )
+        return  # um por arquivo basta: o resto e consequencia do mesmo vazamento
+
+
+def checar_workflows():
+    """Recusa workflow que o GitHub nao conseguiria carregar.
+
+    Existe por um caso concreto. Em 26/09/2026 o `quadro.yml` entrou na main
+    com o heredoc do corpo do PR na coluna 0, dentro de um bloco `run: |`. O
+    YAML fechava o bloco ali; o GitHub recusava o arquivo inteiro e nenhum
+    passo chegava a rodar. Foram cinco execucoes falhadas antes de alguem
+    notar, e o check `revisar` passou verde nas cinco — ele le o diff, nao
+    carrega o arquivo.
+
+    Sao duas conferencias, nesta ordem:
+
+    1. A da margem, sem dependencia, que pega exatamente aquele defeito
+    2. O parse de verdade, com PyYAML, que pega o resto
+
+    Sem o PyYAML a falta vira ERRO em CI e aviso no clone de quem nao o tem:
+    em CI ele esta instalado, e check que nao roda nao e trava. A conferencia
+    da margem roda de um jeito ou de outro.
+    """
+    arquivos = workflows()
+    if not arquivos:
+        return
+
+    for caminho in arquivos:
+        with open(caminho, encoding="utf-8") as f:
+            checar_margem_do_workflow(caminho, f.read())
+
+    try:
+        import yaml
+    except ImportError:
+        falta = (
+            "PyYAML nao instalado: a sintaxe dos workflows nao foi conferida "
+            "por inteiro, so a margem. Instale com 'pip install pyyaml'"
+        )
+        (erros if os.environ.get("CI") else avisos).append(falta)
+        return
+
+    for caminho in arquivos:
+        nome = os.path.relpath(caminho, RAIZ).replace(os.sep, "/")
+        try:
+            with open(caminho, encoding="utf-8") as f:
+                yaml.safe_load(f)
+        except yaml.YAMLError as e:
+            detalhe = " ".join(str(e).split())
+            erros.append(
+                f"{nome}: YAML invalido — o GitHub recusa o arquivo. {detalhe}"
+            )
+
+
 def checar_segredos():
     rastreados = git("ls-files").splitlines()
     for rel in rastreados:
@@ -286,6 +390,7 @@ def main():
     checar_links()
     checar_citacoes_pendentes()
     checar_segredos()
+    checar_workflows()
 
     for a in avisos:
         print(f"  aviso  {a}")

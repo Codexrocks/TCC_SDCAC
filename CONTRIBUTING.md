@@ -31,7 +31,7 @@ A partir daí, dois ganchos rodam na sua máquina antes de cada commit:
 
 | Gancho | Confere |
 |---|---|
-| `pre-commit` | Nome de branch, cobertura do `SUMMARY.md`, links quebrados, segredo vazado |
+| `pre-commit` | Nome de branch, cobertura do `SUMMARY.md`, links quebrados, segredo vazado, sintaxe dos workflows |
 | `commit-msg` | Formato da mensagem e a linha `Assistido-por:` |
 
 Sem isso nada quebra — o check do Pull Request roda igual. A diferença é
