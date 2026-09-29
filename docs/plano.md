@@ -2,10 +2,17 @@
 
 | | |
 |---|---|
-| Versão | 2.0 — 06/09/2026 |
+| Versão | **2.1 — 29/09/2026** |
 | Período | 02/09 a dezembro de 2026 (16 semanas) |
 | Equipe | Davi · Yasmin · Filipe |
 | Substitui | Plano Executivo e Manual Técnico v1 — modelo de uma dimensão |
+
+> **O que a 2.1 mudou em relação à 2.0.** Nada de escopo, pergunta, objetivos ou
+> desenho experimental — esses continuam como em 06/09. O que mudou é a seção 5:
+> sete das oito lacunas metodológicas passaram a estar **escritas como método**
+> na [Metodologia](../artigo/03-metodologia.md), e o plano precisava dizer isso.
+> Correções de fato anteriores, sem número de versão, estão no histórico do
+> repositório.
 
 Esta página define **o que o trabalho é**: tema, problema, pergunta, objetivos,
 delimitação e desenho experimental. Como ele será executado está no
@@ -239,7 +246,24 @@ lacunas metodológicas continuam abertas e vencem em **M2 (01/10)** — nenhuma
 delas muda o texto da Introdução, e todas mudam o que a S12 conseguirá afirmar.
 
 Estão registradas como **D-12 a D-19** em [decisões](decisoes.md), com dono e
-prazo. As duas de maior consequência:
+prazo.
+
+> ⚠️ **Sete das oito já estão escritas como método, e continuam abertas no
+> registro.** A [Metodologia](../artigo/03-metodologia.md), versionada em 28/09,
+> incorpora ao texto do artigo a **D-12** (seção 3.5), a **D-13** (3.7), a
+> **D-14** (3.6) e as **D-16 a D-19** (3.4 e 3.8) — todas na forma que a proposta
+> registrada previa.
+>
+> Isso deixa o artigo afirmando como método o que o registro ainda chama de
+> proposta. **Fechar as sete é decisão do Davi**, não consequência automática de
+> o texto existir; enquanto não fecharem, vale a regra da própria página de
+> decisões: *"enquanto uma decisão estiver aberta, o plano descreve a proposta,
+> não o combinado."*
+>
+> A exceção é a **D-15**, que continua genuinamente em branco — é a lacuna 3 da
+> Metodologia, e o número que ela pede não existe ainda.
+
+As duas de maior consequência:
 
 - **Unidade de análise** (D-12) — evento, usuário-dia ou episódio. A escolha
   muda o valor das métricas, não só a apresentação: o mesmo cenário

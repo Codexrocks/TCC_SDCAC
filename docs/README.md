@@ -62,5 +62,7 @@ operacionalização das duas métricas estão no [plano](plano.md).
 | Ver prazos | [Cronograma](cronograma.md) |
 | Entender o sistema | [Arquitetura](arquitetura.md) |
 | Saber como o artigo é formatado | [Formato do artigo](formato-do-artigo.md) |
+| Ler o que já está escrito do artigo | [`artigo/`](../artigo/README.md) — Introdução, Referencial teórico e Metodologia |
+| Ver o material que a equipe entregou | [Insumos das encomendas](insumos/README.md) |
 | Ver o que o professor pediu | [Tarefa 01](entregas/tarefa-01.md) · [Tarefa 02](entregas/tarefa-02.md) |
 | Ler o histórico das sessões | [Relatórios](relatorios/README.md) |
