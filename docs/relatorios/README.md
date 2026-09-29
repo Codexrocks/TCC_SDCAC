@@ -39,4 +39,4 @@ Use o [modelo](_modelo.md) e adicione a página nova ao
 | 26/09/2026 | [Sessão 18](2026-09-26-sessao-18.md) | Revisão de coerência arquivo contra arquivo: 23 achados, a arquitetura ainda no modelo v1, e um acesso de escrita que a documentação afirmava e o GitHub negava |
 | 28/09/2026 | [Sessão 19](2026-09-28-sessao-19.md) | O referencial teórico da Yasmin entra pelo primeiro insumo versionado; as 13 referências viram pendência em vez de virarem lista |
 | 28/09/2026 | [Sessão 20](2026-09-28-sessao-20.md) | A fila de quatro PRs entra; e o workflow do quadro, que nunca carregou uma vez sequer, é YAML inválido desde 26/09 |
-| 28/09/2026 | [Sessão 21](2026-09-28-sessao-21.md) | O `validar.py` passa a conferir a sintaxe dos workflows, em duas camadas — e o teste pega a IA antes da pessoa |
+| 28/09/2026 | [Sessão 22](2026-09-28-sessao-22.md) | O `validar.py` passa a conferir a sintaxe dos workflows, em duas camadas — e o teste pega a IA antes da pessoa |
