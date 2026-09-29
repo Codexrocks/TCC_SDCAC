@@ -558,6 +558,36 @@ titulo = "O contrato de leitura da API"
 estado = "fechada"
 fechada_em = 2026-09-28
 
+[[decisao]]
+id = "D-37"
+titulo = "Departamentos e efetivo da corporação simulada"
+estado = "fechada"
+fechada_em = 2026-09-28
+
+[[decisao]]
+id = "D-38"
+titulo = "Personas, calendários e faixa de eventos"
+estado = "fechada"
+fechada_em = 2026-09-28
+
+[[decisao]]
+id = "D-39"
+titulo = "Sistemas e matriz de acesso"
+estado = "fechada"
+fechada_em = 2026-09-28
+
+[[decisao]]
+id = "D-40"
+titulo = "Sede, filial e fusos horários"
+estado = "fechada"
+fechada_em = 2026-09-28
+
+[[decisao]]
+id = "D-41"
+titulo = "Dispositivos e estado inicial de higiene"
+estado = "fechada"
+fechada_em = 2026-09-28
+
 
 # ---------------------------------------------------------------------------
 # Citações pendentes

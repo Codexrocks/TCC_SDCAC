@@ -27,7 +27,8 @@ ele precisa passar.
 > **O que está fechado e o que não está.** As decisões de fundo — volume,
 > dimensões, linha de base, sementes, calendário, janelas da D2, forma do desvio
 > e escopo da higiene — estão em [decisões](decisoes.md), de **D-23 a D-31**.
-> Restam **17 definições abertas**, listadas no fim desta página. Nenhuma delas impede escrever a especificação; várias impedem rodar o
+> Restam **dez definições abertas**, listadas no fim desta página, com o
+> responsável de cada grupo. Nenhuma delas impede escrever a especificação; várias impedem rodar o
 > gerador.
 
 ***
@@ -252,6 +253,90 @@ em teste.
 | `sensitivity` | `public` · `internal` · `confidential` · `restricted` |
 | Tipo de faixa de rede | `office` · `vpn` · `home` · `external` |
 
+### A organização simulada (D-37 a D-41)
+
+Os números abaixo são **parâmetros declarados da simulação**. Nenhum deles é
+estatística do mundo real, e nenhum vai ao artigo como dado empírico.
+
+**Departamentos** (D-37):
+
+| Departamento | Pessoas | | Departamento | Pessoas |
+|---|---|---|---|---|
+| Operações e Atendimento | 70 | | TI e Infraestrutura | 25 |
+| Comercial | 45 | | Recursos Humanos | 15 |
+| Engenharia e Produto | 40 | | Jurídico | 10 |
+| Administrativo e Financeiro | 35 | | Diretoria | 10 |
+| | | | **Total** | **250** |
+
+**Personas** (D-38) — cada uma com seu calendário, pela D-27:
+
+| Persona | Pessoas | Faixa/dia útil | Calendário | Ruído legítimo que produz |
+|---|---|---|---|---|
+| Administrativo diurno | 95 | 20–35 | Seg–sex, 08–18 | O caso base |
+| Operação em turno | 45 | 25–40 | Escala 24×7, **inclui fim de semana e feriado** | Madrugada legítima |
+| TI privilegiado | 25 | 45–70 | Seg–sex + **12 janelas de manutenção** noturnas | Acesso privilegiado noturno legítimo |
+| Comercial viajante | 45 | 20–35 | Seg–sex, ~30% dos dias fora | Origem de outra cidade; pico de fim de mês |
+| Híbrido (engenharia) | 30 | 30–50 | Seg–sex, 2 dias de casa | Origem `home` recorrente |
+| Gestão e diretoria | 10 | 15–30 | Seg–sex com cauda até 22h | Aprovação noturna |
+
+O TI é a única persona acima do teto de 50, e isso é permitido porque a **D-23**
+restringe a *média ponderada*, não cada persona: quem administra dez sistemas
+gera mais evento que quem usa dois.
+
+| Verificação da D-23 | Resultado |
+|---|---|
+| Média ponderada de eventos por dia útil | **32,7** — dentro da faixa de 20 a 50 |
+| Volume anual por semente | **≈ 1,93 milhão** — dentro de 1,15 a 2,9 milhões |
+
+**Sistemas e matriz de acesso** (D-39) — é esta tabela que dá definição a "acesso
+incomum", e é sobre ela que os cenários são desenhados:
+
+| Sistema | Sigilo | Quem acessa |
+|---|---|---|
+| Portal interno | `public` | Todos |
+| E-mail e agenda | `internal` | Todos |
+| Atendimento (CRM operacional) | `internal` | Operações, Comercial |
+| Repositório de código | `internal` | Engenharia, TI |
+| Servidor de arquivos — pasta do próprio departamento | `internal` | Todos, na própria pasta |
+| Servidor de arquivos — pastas de Financeiro e Jurídico | `confidential` | Financeiro, Jurídico, Diretoria |
+| ERP financeiro | `confidential` | Financeiro, Diretoria |
+| Contratos jurídicos | `confidential` | Jurídico, Diretoria |
+| Folha de pagamento | `restricted` | RH (5 de 15), Diretoria |
+| Dossiê de pessoal | `restricted` | RH |
+| Console de infraestrutura | `restricted` | TI privilegiado |
+
+São onze linhas para dez sistemas de propósito: o servidor de arquivos tem dois
+níveis de sigilo, e é o caso que separa "acessou o servidor" de "acessou o que não
+devia".
+
+**Sede, filial e fusos** (D-40): **São Paulo (UTC−3) com 210 pessoas** e
+**Manaus (UTC−4) com 40**, todas de Operações e Atendimento.
+
+> **Por que dois fusos, e não um.** A **D-31** faz a C0 usar horário fixo no fuso
+> da sede e a D1 usar o fuso do funcionário. Com um fuso só, essa diferença é
+> decorativa. Com dois, ela produz o caso que a pergunta de pesquisa alega
+> resolver: quem encerra o expediente às 21:30 em Manaus são 22:30 em São Paulo
+> — **a C0 dispara por horário atípico e a D1 não**. É falso positivo legítimo,
+> fabricado por desenho e mensurável.
+
+**Dispositivos e estado inicial de higiene** (D-41):
+
+| Item | Quantidade | Observação |
+|---|---|---|
+| Notebook corporativo | 250 | Um por pessoa |
+| Celular corporativo | 150 | 60%, nas funções com acesso móvel |
+| Celular pessoal **autorizado** | 25 | 10%, só e-mail e portal |
+| **Total** | **425** | |
+
+MFA ligado em ~87% no início: 100% em TI e Diretoria, 85% nos demais. Mediana de
+atraso de atualização: 3 dias no TI, 12 na sede, 25 em quem viaja.
+
+> **O dispositivo pessoal precisa existir no tráfego legítimo.** Se aparecesse só
+> em cenário, "evento de dispositivo pessoal" viraria detector perfeito e a C0
+> acertaria sem olhar mais nada — a mesma armadilha que a D-27 evitou em férias e
+> feriado. Vale igual para desligar o MFA, que acontece legitimamente na troca de
+> aparelho.
+
 ## 7. Matriz atributo → configuração e dimensão
 
 **É esta tabela que prova que o catálogo está completo.** Linha vazia é atributo
@@ -350,14 +435,19 @@ pelas decisões **D-27 a D-31**:
 > **A D-27 é regra, não lista.** O calendário por persona só vira parâmetro
 > quando as personas existirem, e elas são a **P07**, ainda aberta.
 
-**Dezessete que já estavam abertas:**
+**Fechadas em 28/09 pelas decisões D-37 a D-41:** P06 a P10 — departamentos,
+personas, matriz de acesso, sede e filial, dispositivos. A **P11** fecha junto,
+porque a lista de sistemas com sigilo saiu na mesma decisão, e a **P14** também:
+com os atributos do `PHISHING_SIM` definidos e a P28 decidida, os oito tipos
+estão completos.
 
-| Grupo | Perguntas | O que trava |
-|---|---|---|
-| A empresa | P06 a P10 | Departamentos, personas e a **matriz cargo × sistema** — sem ela, "acesso incomum" não tem definição |
-| O ambiente | P11 a P13 | Lista de sistemas com sigilo, faixas de rede, calendário do ano simulado |
-| Os eventos | P14, P15, P17 | Proporção por persona e a **taxa normal de senha errada** — sem ela a força bruta só enxerga ataque, nunca erro de digitação |
-| Os cenários | P18 a P23 | Vencem em **01/10** pelas decisões [D-06](decisoes.md) e [D-16](decisoes.md) |
+**Dez que continuam abertas, e quem responde por elas:**
+
+| Grupo | Perguntas | O que trava | Quem |
+|---|---|---|---|
+| O ambiente | P12, P13 | Faixas de rede com país e cidade fictícios; ano simulado, feriados e férias | **Davi** |
+| Os eventos | P15, P17 | Proporção de cada tipo por persona e a **taxa normal de senha errada** — sem ela a força bruta só enxerga ataque, nunca erro de digitação | Sem dono registrado. **Proposta: Filipe**, que faz o gerador, com ratificação do Davi |
+| Os cenários | P18 a P23 | Catálogo, prevalência, modo de injeção, rótulos e desenho cego. Vencem em **01/10** pelas decisões [D-06](decisoes.md) e [D-16](decisoes.md) | **Yasmin** |
 
 ## 11. O que pode esperar
 
