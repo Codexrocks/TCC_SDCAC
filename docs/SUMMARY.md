@@ -70,4 +70,5 @@
 * [2026-09-28 — Sessão 21: a fila de PRs entra, e o quadro nunca tinha rodado](relatorios/2026-09-28-sessao-21.md)
 * [2026-09-28 — Sessão 22: o repositório passa a conferir os próprios workflows](relatorios/2026-09-28-sessao-22.md)
 * [2026-09-28 — Sessão 23: a Metodologia entra no artigo](relatorios/2026-09-28-sessao-23.md)
+* [2026-09-29 — Sessão 24: o quadro subdeclarava a dívida bibliográfica](relatorios/2026-09-29-sessao-24.md)
 * [Modelo de relatório](relatorios/_modelo.md)
