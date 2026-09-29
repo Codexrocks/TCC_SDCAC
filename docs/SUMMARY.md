@@ -15,6 +15,7 @@
 
 * [Arquitetura](arquitetura.md)
 * [Banco da corporação simulada](banco-simulado.md)
+* [O software de análise](software.md)
 * [Usabilidade](usabilidade.md)
 
 ## Como trabalhamos
