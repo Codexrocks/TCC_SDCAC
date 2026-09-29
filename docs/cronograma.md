@@ -16,25 +16,26 @@ como recusar uma entrega, e a recusa vira atrito.
 | **05/09/26** | Tema do trabalho e composição do grupo — *Tarefa 01* | ✅ **Entregue em 03/09/2026** — [registro](entregas/tarefa-01.md) |
 | **24/09/26** | Introdução do artigo no template **COBEM 2026** — *Tarefa 02* | ✅ **Entregue parcial em 24/09/2026** — [registro](entregas/tarefa-02.md) |
 | Quinzenal | Reunião de acompanhamento com o orientador | 🔁 Recorrente |
-| **10/12/26** | **Entrega do TCC** | 🗓️ Em 73 dias |
+| **10/12/26** | **Entrega do TCC** | 🗓️ Em 72 dias |
 | Dezembro | Apresentação e defesa | 🗓️ Sem prazo |
 <!-- QUADRO:fim prazos-do-professor -->
 
-## Onde estamos, em 28/09
+## Onde estamos
 
 Honestidade sobre o ponto de partida, porque é o que torna o resto realizável ou
-não:
+não. A coluna **Situação** é calculada contra o dia em que a página foi gerada —
+não há data escrita à mão aqui, porque data escrita à mão envelhece:
 
 <!-- QUADRO:inicio capitulos -->
 <!-- Bloco gerado por scripts/quadro.py a partir de quadro.toml. Editar aqui nao adianta: a proxima execucao reescreve. -->
 
 | Capítulo | Estado | Quem | Semana prevista | Situação |
 |---|---|---|---|---|
-| 1. Introdução | Entregue parcial em 24/09 — os seis blocos de complementação continuam vazios, e a parcialidade foi declarada no arquivo entregue | Yasmin, Filipe | S5 · ▶️ em curso | ⏳ Vence em 3 dias |
-| 2. Referencial teórico | Escrito e versionado em 28/09 pela Yasmin — 4 subseções, ≈1.150 palavras, atrasado de S3 e S4. Faltam as 13 fontes confirmadas | Yasmin | S5 · ▶️ em curso | ⏳ Vence em 3 dias |
-| 3. Metodologia | Escrita e versionada em 28/09 — 9 subseções. Faltam as 4 lacunas da M2 e as 7 fontes conferidas | Davi (caneta) | S5 · ▶️ em curso | ⏳ Vence em 3 dias |
-| 4. Resultados | Esqueleto | Filipe (caneta) | S13 | 🗓️ Em 59 dias |
-| 5. Conclusão | Esqueleto | Davi (caneta) | S14 | 🗓️ Em 66 dias |
+| 1. Introdução | Entregue parcial em 24/09 — os seis blocos de complementação continuam vazios, e a parcialidade foi declarada no arquivo entregue | Yasmin, Filipe | S5 · ▶️ em curso | ⏳ Vence em 2 dias |
+| 2. Referencial teórico | Escrito e versionado em 28/09 pela Yasmin — 4 subseções, ≈1.150 palavras, atrasado de S3 e S4. Faltam as 13 fontes confirmadas | Yasmin | S5 · ▶️ em curso | ⏳ Vence em 2 dias |
+| 3. Metodologia | Escrita e versionada em 28/09 — 9 subseções. Faltam as 4 lacunas da M2 e as 7 fontes conferidas | Davi (caneta) | S5 · ▶️ em curso | ⏳ Vence em 2 dias |
+| 4. Resultados | Esqueleto | Filipe (caneta) | S13 | 🗓️ Em 58 dias |
+| 5. Conclusão | Esqueleto | Davi (caneta) | S14 | 🗓️ Em 65 dias |
 <!-- QUADRO:fim capitulos -->
 
 **Nenhuma linha de código existe ainda.** O que existe é a especificação do
@@ -140,10 +141,10 @@ Três consequências que valem saber:
 | Marco | Data | O que fecha | Por que é marco | Situação |
 |---|---|---|---|---|
 | **M1** Introdução | **24/09** | Problema, pergunta, objetivos, delimitação | Era a Tarefa 02 do professor. Os seis blocos de complementação continuam vazios e vencem na S5 | ✅ Fechado em parte |
-| **M2** Metodologia congelada | **01/10** | Cenários, métricas, quatro configurações, atributos | Congela o que será medido antes de existir código a defender | ⏳ Vence em 3 dias |
-| **M3** Modelo executável | **22/10** | C0 a C3 rodando sobre o mesmo gerador | Última data em que uma dimensão pode ser cortada sem comprometer a comparação | 🗓️ Em 24 dias |
-| **M4** Tabela de ablação | **19/11** | Números finais das quatro configurações | A partir daqui o trabalho é escrita. Nenhuma alteração de código é aceita | 🗓️ Em 52 dias |
-| **M5** Entrega | **10/12** | Artigo diagramado e submetido | — | 🗓️ Em 73 dias |
+| **M2** Metodologia congelada | **01/10** | Cenários, métricas, quatro configurações, atributos | Congela o que será medido antes de existir código a defender | ⏳ Vence em 2 dias |
+| **M3** Modelo executável | **22/10** | C0 a C3 rodando sobre o mesmo gerador | Última data em que uma dimensão pode ser cortada sem comprometer a comparação | 🗓️ Em 23 dias |
+| **M4** Tabela de ablação | **19/11** | Números finais das quatro configurações | A partir daqui o trabalho é escrita. Nenhuma alteração de código é aceita | 🗓️ Em 51 dias |
+| **M5** Entrega | **10/12** | Artigo diagramado e submetido | — | 🗓️ Em 72 dias |
 <!-- QUADRO:fim marcos -->
 
 **Caminho crítico:** M2 → S6 (gerador com histórico de um ano) → S8 (D3) → S11 (execução) → S12 (tabela) → M4.
