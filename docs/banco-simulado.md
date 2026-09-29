@@ -8,7 +8,7 @@ experimental. **O código começa depois da aprovação desta página.**
 
 | | |
 |---|---|
-| Versão | 23/09/2026 — incorpora as decisões D-23 a D-26 |
+| Versão | 28/09/2026 — incorpora as decisões D-23 a D-31 |
 | Escala | 250 funcionários · 1 ano simulado · 1,15 a 2,9 milhões de eventos por semente |
 | Substitui | `atributos.docx` e as versões anteriores em `.docx`, que não estavam versionadas |
 
@@ -24,15 +24,15 @@ O gerador é a peça de maior superfície desta página: as seções 3, 5 e 10 s
 contrato do que ele precisa produzir, e as checagens da seção 9 são os testes que
 ele precisa passar.
 
-> **O que está fechado e o que não está.** As cinco decisões de fundo — volume,
-> dimensões, linha de base e sementes — estão em [decisões](decisoes.md), de
-> **D-23 a D-26**. Restam **26 definições abertas**, listadas no fim desta
-> página. Nenhuma delas impede escrever a especificação; várias impedem rodar o
+> **O que está fechado e o que não está.** As decisões de fundo — volume,
+> dimensões, linha de base, sementes, calendário, janelas da D2, forma do desvio
+> e escopo da higiene — estão em [decisões](decisoes.md), de **D-23 a D-31**.
+> Restam **17 definições abertas**, listadas no fim desta página. Nenhuma delas impede escrever a especificação; várias impedem rodar o
 > gerador.
 
 ***
 
-## 1. As cinco decisões que moldam esta página
+## 1. As decisões que moldam esta página
 
 | Decisão | O que ficou | Consequência aqui |
 |---|---|---|
@@ -40,7 +40,12 @@ ele precisa passar.
 | **D-24** | A **dimensão 2** compara o funcionário com o próprio padrão de 3 meses | Exige a tabela `baselines` (seção 5) |
 | **D-25** | A **dimensão 3** combina exposição acumulada **e** higiene de segurança, com as duas parcelas reportadas separadas | Entra o evento `PHISHING_SIM` e entram as duas tabelas de estado (seção 4) |
 | **D-26** | A **linha de base continua separada**: quatro configurações, C0 a C3 | A matriz da seção 7 ganha a coluna C0, e nada nela pode usar histórico |
-| **D-13** (alterada) | De 20 a 30 sementes para **10 a 20** | `run_id` passa a ser obrigatório no envelope |
+| **D-13** (alterada) | De 20 a 30 sementes para **10 a 20**, com a regra de corte pelo tempo do ciclo | `run_id` passa a ser obrigatório no envelope |
+| **D-27** | Calendário **por persona**; feriado e férias com atividade residual declarada | Seção 10: é regra, e só vira parâmetro quando as personas existirem (P07) |
+| **D-28** | A D2 tem duas janelas: **sessão** e **usuário-dia**. Semana não | Seção 5. Se a D2 olhasse a semana, ela e a D3 mediriam a mesma coisa |
+| **D-29** | Padrão com **mediana e MAD**; desvio robusto com piso, teto e grupo de pares | Seção 5, que deixa de ser lista de características e passa a ser contrato |
+| **D-30** | Higiene em **cinco sinais**, antivírus fora; D3 em duas parcelas, conduta e postura | Seção 4 |
+| **D-31** | A **C0 é puramente estática**, e a D1 é pontuação ponderada sobre o evento | Seção 7, e é o critério de aceite da S7 |
 
 > **Por que a D-26 importa mais do que parece.** Se a linha de base virasse a
 > dimensão 1, nenhuma dimensão compararia o funcionário com ele mesmo — e a
@@ -135,26 +140,91 @@ diário inflaria o volume sem acrescentar informação.
 > **D-17** por outro caminho: o resultado fica bom porque o futuro vazou para o
 > passado.
 
+### O básico da higiene são cinco sinais (D-30)
+
+| Sinal | De onde vem |
+|---|---|
+| Desfecho de campanha de phishing | Evento `PHISHING_SIM`, uma campanha por mês |
+| Segundo fator e nível de privilégio | `account_state` |
+| Atualização do equipamento e antivírus ativo | `device_state_daily` |
+| Uso de dispositivo removível | Evento `EXTERNAL_DEVICE`, que já existe |
+| Navegação de categoria de risco | Evento `WEB_BROWSING`, que já existe |
+
+**O alerta de antivírus fica de fora.** Ele exigiria modelar a detecção do
+próprio antivírus — uma segunda ferramenta dentro da simulação — e a informação
+que importa para a postura, se o equipamento está protegido, já está no estado
+diário. Custo alto, informação repetida. Assim, o "básico das duas" da **D-25**
+não acrescenta nenhum tipo de evento além do `PHISHING_SIM`.
+
+### As duas parcelas da dimensão 3 (D-30)
+
+| Parcela | O que mede | Dinâmica |
+|---|---|---|
+| **Conduta** | Exposição acumulada pelo que a pessoa fez | Janela deslizante com decaimento, **excluindo o evento atual** (D-18) |
+| **Postura** | Estado de conta e equipamento na data do evento | Persiste até alguém mudar; lida como estava naquele dia |
+
+As duas normalizadas de 0 a 100 e mostradas lado a lado, com pesos declarados.
+Somá-las antes de exibir esconderia qual das duas causou o alerta — e risco
+decomponível é exigência da [usabilidade](usabilidade.md), não preferência.
+
 ## 5. O padrão do funcionário
 
 A dimensão 2 compara um conjunto de eventos com o padrão individual dos três
 primeiros meses. Isso exige uma tabela `baselines`, com estas características por
 funcionário:
 
-| Característica | Como se mede | Divergência que revela |
+| Característica | O que o baseline guarda | Divergência que revela |
 |---|---|---|
-| Volume diário | Média e dispersão de eventos por dia útil | Dia muito acima do próprio hábito |
-| Faixa horária | Distribuição das horas de trabalho | Atividade fora do horário **daquela pessoa** |
-| Recursos habituais | Conjunto de sistemas e pastas acessados | Acesso a área que a pessoa nunca tocou |
-| Mistura de sigilo | Proporção de acesso por nível de sensibilidade | Subida repentina de acesso a restrito |
-| Origem e dispositivo | Faixas de rede e máquinas habituais | Origem nova, sem ser viagem declarada |
-| Taxa de falha | Falhas de autenticação por dia | Erro humano contra tentativa de invasão |
-| Conduta de higiene | Campanhas e uso de dispositivo removível | Insumo da D3, junto do estado da seção 4 |
+| Volume diário | **Mediana e MAD** de eventos por dia útil | Dia muito acima do próprio hábito |
+| Faixa horária | Histograma de 24 posições, com hora mediana de início e fim | Atividade fora do horário **daquela pessoa** |
+| Recursos habituais | Conjunto de `resource_id`, com frequência | Acesso a área que a pessoa nunca tocou |
+| Mistura de sigilo | Proporção de eventos por nível de sensibilidade | Subida repentina de acesso a restrito |
+| Origem e dispositivo | Faixas de rede e `device_id` habituais, com frequência | Origem nova, sem ser viagem declarada |
+| Taxa de falha | Mediana e MAD de falhas de autenticação por dia | Erro humano contra tentativa de invasão |
+| Conduta de higiene | Desfechos de campanha e uso de dispositivo removível | Insumo da D3, junto do estado da seção 4 |
 
-> **O cuidado técnico que decide se a D2 funciona.** Funcionário muito regular
-> tem dispersão quase zero no padrão, e qualquer desvio vira um número enorme. A
-> comparação precisa de um **piso de dispersão declarado** — senão a dimensão 2
-> alarma justamente sobre as pessoas mais previsíveis. É a **P27**.
+> **Mediana e MAD, não média e desvio padrão (D-29).** Um único dia de pico
+> dentro da janela de treino infla o desvio padrão e mascara divergência real
+> pelos nove meses seguintes. Mediana e MAD não se mexem com um ponto extremo.
+
+### As duas janelas da dimensão 2 (D-28)
+
+| Janela | O que captura |
+|---|---|
+| **Sessão** | "Esta sessão está estranha": volume, horário, origem e sequência dentro do mesmo login |
+| **Usuário-dia** | O que atravessa sessões no mesmo dia. É o denominador de falso positivo da **D-12** |
+
+A nota da D2 de um evento é o **maior** dos dois desvios, não a soma — soma
+contaria o mesmo desvio duas vezes. Os dois são calculados com corte em
+`as_of`: nada depois do evento.
+
+**Semana fica de fora**, e é isso que faz a ablação funcionar: acumulação ao
+longo de dias é o que a D3 existe para medir. Se a D2 olhasse sete dias, as duas
+mediriam quase a mesma coisa, e a tabela de ablação não separaria a contribuição
+de cada uma.
+
+### Como o desvio é medido (D-29)
+
+| Tipo de característica | Como compara |
+|---|---|
+| Contagem — volume, falhas | Desvio robusto: `(x − mediana) / (1,4826 × MAD)`. A constante põe o MAD na escala de um desvio padrão |
+| Conjunto — recursos, origens, dispositivos | **Novidade**: apareceu na janela de treino ou não, com peso maior quando o recurso é de sigilo alto |
+| Proporção — mistura de sigilo | Distância entre a distribuição do dia e a do baseline, não desvio por categoria |
+
+> **O piso de dispersão, que decide se a D2 funciona.** O divisor é
+> `máximo(1,4826 × MAD; piso)`, com **piso = máximo(1 evento; 10% da mediana)**.
+> Funcionário perfeitamente regular tem MAD zero: sem piso, a divisão explode e
+> a D2 alarma justamente sobre as pessoas mais previsíveis da empresa.
+
+Mais duas travas da mesma decisão:
+
+- **Teto por componente.** Cada desvio entra limitado a 6 antes de compor a
+  nota. Sem teto, um atributo sozinho domina e os pesos da **D-09** viram
+  enfeite.
+- **Quem não tem histórico suficiente não recebe baseline próprio.** Admitido no
+  meio da janela de treino, ou de férias durante boa parte dela, cai no padrão
+  do **grupo de pares** — mesmo cargo e departamento —, e isso é declarado. Sem
+  essa regra, todo funcionário novo vira alarme.
 
 ## 6. Tabelas de apoio
 
@@ -206,10 +276,30 @@ define o grupo de controle.
 | `outcome` (phishing) | — | — | — | Conduta de higiene: reportou, ignorou, clicou ou entregou credencial |
 | Estado de conta e de dispositivo (seção 4) | — | — | — | Postura na data do evento: MFA, privilégio e atualização |
 
-> **A P30, que a D-26 abriu.** Duas das quatro regras da linha de base original
-> usavam histórico — *"IP habitual"* e a janela de falhas. Isso **contamina o
-> grupo de controle**. A C0 precisa ser puramente estática: horário fixo, faixas
-> corporativas cadastradas, limite fixo de falhas.
+> **A P30, que a D-26 abriu, está fechada pela D-31.** Duas das quatro regras da
+> linha de base original usavam histórico — *"IP habitual"* e a janela de falhas
+> — e isso **contaminava o grupo de controle**.
+
+### O que a C0 tem, e o que a D1 acrescenta (D-31)
+
+**C0 — quatro regras binárias, limiar fixo, configuração estática:**
+
+1. Horário fora de 06:00–22:00, **no fuso da sede** — genérico de propósito
+2. Mais de N falhas de autenticação em 2 minutos na mesma conta, com N fixo
+3. Origem fora das faixas corporativas **cadastradas** (`office` e `vpn`) — lista
+   estática, e **não** "o IP habitual daquela pessoa"
+4. Acesso a recurso com `sensitivity = restricted`
+
+**D1 acrescenta, sobre o mesmo evento isolado:** dispositivo corporativo ou
+pessoal, tipo de faixa com peso graduado — `home` não é o mesmo que `external` —,
+VPN, MFA, subtipo do `SYSTEM_CONFIG`, tamanho e destino do download e categoria
+de navegação. E troca ponto fixo por **peso por atributo**, com o horário
+ponderado e **no fuso do funcionário**.
+
+Em uma frase: **a C0 é uma lista de quatro regras com limiar fixo; a D1 é
+pontuação ponderada sobre todos os atributos do evento.** Nenhuma das duas olha
+o passado do funcionário, e o teste que prova isso é o mesmo para as duas:
+embaralhar o histórico não pode mudar nota nenhuma.
 
 ## 8. Três bancos, não um
 
@@ -243,19 +333,22 @@ Viram teste do gerador e falham **antes** de qualquer dado entrar no banco:
 
 ## 10. O que ainda falta decidir
 
-**Oito abertas pelas decisões D-23 a D-26**, e são as que o gerador encontra
-primeiro:
+**As oito que as decisões D-23 a D-26 tinham aberto estão fechadas** em 28/09,
+pelas decisões **D-27 a D-31**:
 
-| # | Pergunta | Recomendação |
+| # | Onde a resposta vive agora | Decisão |
 |---|---|---|
-| P24 | O que é "dia útil" por persona, e o que acontece em feriado e férias? | Calendário por persona; férias sem atividade, salvo cenário |
-| P25 | Qual é a janela da dimensão 2: sessão, dia ou semana? | Começar por duas — sessão e usuário-dia — e declarar qual vale por cenário |
-| P26 | Quais características entram no padrão? | As sete da seção 5 |
-| P27 | Como a divergência é medida, e qual o piso de dispersão? | Desvio vs. a própria distribuição, com piso declarado |
-| P28 | O que entra no "básico" da higiene? | Phishing como evento; MFA e privilégio como estado de conta; atualização como estado de dispositivo. Alerta de antivírus fica fora |
-| P29 | A D3 reporta conduta e postura separadas? | Sim, duas parcelas visíveis, não um número só |
-| P30 | O que a C0 tem que a D1 não tem? | C0 só com configuração estática. Nada de histórico |
-| P31 | 10 ou 20 sementes? | Medir a primeira execução completa e decidir pelo tempo |
+| P24 | Calendário por persona; feriado e férias com atividade residual, nunca zero absoluto | **D-27** |
+| P25 | Seção 5 — janelas de sessão e usuário-dia; semana é terreno da D3 | **D-28** |
+| P26 | Seção 5 — as sete características, com mediana e MAD | **D-29** |
+| P27 | Seção 5 — desvio robusto, piso de dispersão, teto e grupo de pares | **D-29** |
+| P28 | Seção 4 — os cinco sinais da higiene; antivírus fica fora | **D-30** |
+| P29 | Seção 4 — conduta e postura, separadas | **D-30** |
+| P30 | Seção 7 — a C0 estática e o que a D1 acrescenta | **D-31** |
+| P31 | Regra de corte declarada agora: ciclo completo de uma semente **≤ 30 min → 20 sementes**; acima → 10, com o motivo registrado. **O número sai da S11**, que é a primeira execução completa; na S6 mede-se só o que existe — geração e carga | **D-13** |
+
+> **A D-27 é regra, não lista.** O calendário por persona só vira parâmetro
+> quando as personas existirem, e elas são a **P07**, ainda aberta.
 
 **Dezessete que já estavam abertas:**
 
