@@ -29,8 +29,11 @@ jobs:
         with:
           python-version: "3.12"
 
-      - name: Instalar pytest
-        run: pip install --quiet pytest
+      - name: Instalar pytest e PyYAML
+        # O PyYAML e do validar.py: sem ele a sintaxe dos workflows so e
+        # conferida pela margem, e a falta vira ERRO em CI de proposito.
+        # Check que nao roda nao e trava.
+        run: pip install --quiet pytest pyyaml
 
       # A ORDEM DOS DOIS PROXIMOS PASSOS IMPORTA.
       #

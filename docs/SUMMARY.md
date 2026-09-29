@@ -68,5 +68,6 @@
 * [2026-09-28 — Sessão 19: o referencial teórico da Yasmin entra no repositório](relatorios/2026-09-28-sessao-19.md)
 * [2026-09-28 — Sessão 20: um parecer de backend por fora, e catorze dias sem relatório](relatorios/2026-09-28-sessao-20.md)
 * [2026-09-28 — Sessão 21: a fila de PRs entra, e o quadro nunca tinha rodado](relatorios/2026-09-28-sessao-21.md)
+* [2026-09-28 — Sessão 22: o repositório passa a conferir os próprios workflows](relatorios/2026-09-28-sessao-22.md)
 * [2026-09-28 — Sessão 23: a Metodologia entra no artigo](relatorios/2026-09-28-sessao-23.md)
 * [Modelo de relatório](relatorios/_modelo.md)
