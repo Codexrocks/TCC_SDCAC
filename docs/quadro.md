@@ -23,7 +23,7 @@
 | ▶️ Em curso | 1 |
 | ⏳ A vencer em 7 dias | 14 |
 | 🗓️ Depois | 22 |
-| ✅ Feito | 20 |
+| ✅ Feito | 25 |
 
 ## ⚠️ Atrasado
 
@@ -93,7 +93,7 @@
 
 ## ✅ Feito
 
-20 itens.
+25 itens.
 
 | Tipo | Item | O que é | Quem | Prazo | Situação |
 |---|---|---|---|---|---|
@@ -117,6 +117,11 @@
 | Decisão | **D-29** | Como o padrão é medido e como o desvio é calculado | — | 28/09/2026 | ✅ Fechada em 28/09/2026 |
 | Decisão | **D-30** | Escopo da higiene e as duas parcelas da dimensão 3 | — | 28/09/2026 | ✅ Fechada em 28/09/2026 |
 | Decisão | **D-31** | O que separa a C0 da dimensão 1 | — | 28/09/2026 | ✅ Fechada em 28/09/2026 |
+| Decisão | **D-32** | As duas versões do software, e a ordem | — | 28/09/2026 | ✅ Fechada em 28/09/2026 |
+| Decisão | **D-33** | Presets canônicos contra configuração exploratória | — | 28/09/2026 | ✅ Fechada em 28/09/2026 |
+| Decisão | **D-34** | Configuração é versão imutável, presa ao resultado | — | 28/09/2026 | ✅ Fechada em 28/09/2026 |
+| Decisão | **D-35** | Execução é job, não requisição | — | 28/09/2026 | ✅ Fechada em 28/09/2026 |
+| Decisão | **D-36** | O contrato de leitura da API | — | 28/09/2026 | ✅ Fechada em 28/09/2026 |
 
 ## Critério de aceite do que está aberto
 
