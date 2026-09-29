@@ -56,6 +56,37 @@ acrescente a referência em ABNT NBR 6023 na `## Lista`.
 | `(SUNDARAMURTHY et al., 2015)` | § 2.4 | Yasmin | 28/09/2026 |
 | `Vielberth et al. (2020)` | § 2.2 | Yasmin | 28/09/2026 |
 
+### As 7 da metodologia
+
+Situação diferente, e mais exigente. O
+[insumo entregue pelo Davi](insumos/metodologia-davi-v1.md) em 28/09 declara, no
+próprio cabeçalho, que a redação foi **rascunhada por IA** e que **nenhuma das
+sete citações foi conferida na fonte**.
+
+> O [`AGENTS.md`](../AGENTS.md), seção 3, é categórico: *"referência
+> bibliográfica que a IA produziu e ninguém conferiu na fonte"* está entre o que
+> **nunca é aceitável**. Por isso as sete estão aqui, e não em
+> [`referencias.md`](../artigo/referencias.md) — e o capítulo avisa disso no
+> cabeçalho, à vista de quem for escrever.
+
+Ao conferir, apague a linha e acrescente a referência em ABNT NBR 6023 na
+`## Lista`.
+
+| Chamada, como está no texto | Onde | O que sustenta | Quem | Desde |
+|---|---|---|---|---|
+| `(WOHLIN et al., 2012)` ⚠️ | § 3.8 | A taxonomia das quatro categorias de validade. **O ano está marcado como duvidoso pelo próprio insumo** — pode ser outra edição | Davi | 28/09/2026 |
+| `(DEMŠAR, 2006)` | § 3.7 | A escolha do Wilcoxon pareado para comparar configurações | Davi | 28/09/2026 |
+| `(WILCOXON, 1945)` | § 3.7 | O teste em si | Davi | 28/09/2026 |
+| `(DAVIS; GOADRICH, 2006)` | § 3.6 | Curva PR sobre ROC em classe desbalanceada | Davi | 28/09/2026 |
+| `(SAITO; REHMSMEIER, 2015)` | § 3.6 | O mesmo ponto da linha acima | Davi | 28/09/2026 |
+| `(KAUFMAN et al., 2012)` | § 3.8 | Vazamento na constituição do padrão individual | Davi | 28/09/2026 |
+| `(SOMMER; PAXSON, 2010)` | § 3.8 | Limite das avaliações sobre dado sintético | Davi | 28/09/2026 |
+
+> **A `SOMMER; PAXSON, 2010` já era conhecida do repositório:** ela aparece no
+> [plano](plano.md), seção 4, como apoio ao risco de dados sintéticos fáceis
+> demais, e o insumo da Yasmin a descartou do referencial por já estar citada
+> ali. **Uma conferência resolve os dois usos.**
+
 ## Pendentes — documentação
 
 Estas ficam marcadas **na própria linha**, com `<!-- FALTA CITAÇÃO -->`. O

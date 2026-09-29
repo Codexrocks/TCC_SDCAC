@@ -20,7 +20,7 @@ como recusar uma entrega, e a recusa vira atrito.
 | Dezembro | Apresentação e defesa | 🗓️ Sem prazo |
 <!-- QUADRO:fim prazos-do-professor -->
 
-## Onde estamos, em 26/09
+## Onde estamos, em 28/09
 
 Honestidade sobre o ponto de partida, porque é o que torna o resto realizável ou
 não:
@@ -32,7 +32,7 @@ não:
 |---|---|---|---|---|
 | 1. Introdução | Entregue parcial em 24/09 — os seis blocos de complementação continuam vazios, e a parcialidade foi declarada no arquivo entregue | Yasmin, Filipe | S5 · ▶️ em curso | ⏳ Vence em 3 dias |
 | 2. Referencial teórico | Escrito e versionado em 28/09 pela Yasmin — 4 subseções, ≈1.150 palavras, atrasado de S3 e S4. Faltam as 13 fontes confirmadas | Yasmin | S5 · ▶️ em curso | ⏳ Vence em 3 dias |
-| 3. Metodologia | Esqueleto | Davi (caneta) | S5 · ▶️ em curso | ⏳ Vence em 3 dias |
+| 3. Metodologia | Escrita e versionada em 28/09 — 9 subseções. Faltam as 4 lacunas da M2 e as 7 fontes conferidas | Davi (caneta) | S5 · ▶️ em curso | ⏳ Vence em 3 dias |
 | 4. Resultados | Esqueleto | Filipe (caneta) | S13 | 🗓️ Em 59 dias |
 | 5. Conclusão | Esqueleto | Davi (caneta) | S14 | 🗓️ Em 66 dias |
 <!-- QUADRO:fim capitulos -->
@@ -102,7 +102,7 @@ Três consequências que valem saber:
 
 | Semana | Entregável |
 |---|---|
-| S5 | Metodologia (caneta) · arquitetura v2 · fechar D-12 a D-19 |
+| S5 | Metodologia (caneta) — ✅ **escrita em 28/09**, com 4 lacunas abertas · arquitetura v2 ✅ · fechar D-12 a D-19 |
 | S6 | Schema, migrações, carga e ingestão |
 | S7 | C0 (regras fixas, sem histórico) e motor D1 |
 | S8 | D2, D3 e a integração |
