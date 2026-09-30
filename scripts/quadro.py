@@ -657,6 +657,130 @@ def render_tudo(dados: Dados, hoje: datetime.date) -> dict[str, str]:
 # ---------------------------------------------------------------------------
 
 
+RE_TITULO_DATADO = re.compile(r"^#{1,4} .*,? em \d{2}/\d{2}(?:/\d{4})?\s*$", re.M)
+RE_BLOCO_DE_CODIGO = re.compile(r"```.*?```", re.S)
+RE_CODIGO_NA_LINHA = re.compile(r"`[^`]*`")
+
+
+def tabelas_de_pendencia(texto: str) -> list[tuple[list[str], list[str]]]:
+    """Linhas das tabelas de pendencia do indice, cada uma com seu cabecalho.
+
+    Uma tabela e de pendencia quando tem coluna `Desde`. O indice tem quatro
+    formatos diferentes — artigo, referencial, metodologia e documentacao — e
+    todos passam por aqui sem que este codigo precise conhecer cada um.
+    """
+    linhas = texto.splitlines()
+    fora: list[tuple[list[str], list[str]]] = []
+    i = 0
+    while i < len(linhas):
+        separador = (
+            i + 1 < len(linhas)
+            and set(linhas[i + 1].replace("|", "").strip()) <= {"-", " "}
+            and linhas[i + 1].strip().startswith("|")
+        )
+        if linhas[i].startswith("| ") and separador:
+            cab = [c.strip() for c in linhas[i].strip().strip("|").split("|")]
+            j = i + 2
+            while j < len(linhas) and linhas[j].startswith("| "):
+                if "Desde" in cab:
+                    corpo = [c.strip() for c in linhas[j].strip().strip("|").split("|")]
+                    fora.append((cab, corpo))
+                j += 1
+            i = j
+        else:
+            i += 1
+    return fora
+
+
+def checar_citacoes_no_indice(dados: Dados) -> list[str]:
+    """Toda pendencia do indice tem linha no quadro.toml, e o contrario tambem.
+
+    Esta e a checagem que faltava em 28/09. O docs/citacoes-pendentes.md ganhou
+    duas tabelas novas — 20 linhas — e o quadro.toml nao. Por um dia inteiro a
+    pagina publicada anunciou 7 pendencias bibliograficas onde o repositorio
+    registrava 27, e nenhum check reparou: cada um olhava so o seu lado.
+
+    E a divida que o AGENTS.md, secao 3, chama de inaceitavel se ninguem
+    conferir na fonte. Subdeclarar tira da vista justamente o que precisa ficar
+    a vista, entao aqui e erro, nunca aviso.
+    """
+    texto = (RAIZ / "docs" / "citacoes-pendentes.md").read_text(encoding="utf-8")
+    do_indice = tabelas_de_pendencia(texto)
+    no_toml = dados.get("citacao", [])
+    problemas = []
+
+    if len(do_indice) != len(no_toml):
+        problemas.append(
+            f"o indice tem {len(do_indice)} pendencia(s) bibliografica(s) e o "
+            f"quadro.toml tem {len(no_toml)}"
+        )
+
+    def por_dono(pares: list[tuple[list[str], list[str]]]) -> dict[str, int]:
+        conta: dict[str, int] = {}
+        for cab, linha in pares:
+            quem = linha[cab.index("Quem")] if "Quem" in cab else "?"
+            conta[quem] = conta.get(quem, 0) + 1
+        return conta
+
+    do_indice_por_dono = por_dono(do_indice)
+    do_toml_por_dono: dict[str, int] = {}
+    for c in no_toml:
+        do_toml_por_dono[c["dono"]] = do_toml_por_dono.get(c["dono"], 0) + 1
+
+    if do_indice_por_dono != do_toml_por_dono:
+        problemas.append(
+            f"as pendencias por dono divergem: indice {do_indice_por_dono} "
+            f"contra quadro.toml {do_toml_por_dono}"
+        )
+    return problemas
+
+
+def sem_codigo(texto: str) -> str:
+    """Tira bloco e trecho de codigo. Falar do marcador nao e usa-lo."""
+    return RE_CODIGO_NA_LINHA.sub("", RE_BLOCO_DE_CODIGO.sub("", texto))
+
+
+def checar_marcadores_no_indice(dados: Dados) -> list[str]:
+    """Cada `FALTA CITACAO` de docs/ tem uma linha correspondente no TOML.
+
+    O validar.py ja conta os marcadores e avisa, mas nao os confronta com o
+    indice: em 26/09 um marcador estava indexado com o numero de secao errado, a
+    contagem bateu e a divergencia passou — junto de uma linha duplicada criada
+    por cima dela.
+    """
+    problemas = []
+    for arquivo in sorted((RAIZ / "docs").glob("*.md")):
+        if arquivo.name == "citacoes-pendentes.md":
+            continue
+        rel = "docs/" + arquivo.name
+        marcadores = sem_codigo(arquivo.read_text(encoding="utf-8")).count("FALTA CITAÇÃO")
+        no_toml = sum(1 for c in dados.get("citacao", []) if c["onde"].startswith(rel))
+        if marcadores != no_toml:
+            problemas.append(
+                f"{rel}: {marcadores} marcador(es) no arquivo e {no_toml} "
+                f"linha(s) no quadro.toml"
+            )
+    return problemas
+
+
+def checar_titulo_datado() -> list[str]:
+    """Titulo com data e retrato escrito a mao, e retrato a mao envelhece.
+
+    Aconteceu tres vezes com o mesmo titulo do cronograma: "Onde estamos, em
+    23/09", depois 26/09, depois 28/09, cada um lido dias depois. A terceira vez
+    a data saiu em vez de ser redatada — o bloco gerado logo abaixo ja diz a
+    situacao, calculada. Isto aqui existe para a quarta nao acontecer.
+    """
+    achados = []
+    for arquivo in sorted((RAIZ / "docs").rglob("*.md")):
+        rel = arquivo.relative_to(RAIZ).as_posix()
+        if "relatorios/" in rel or "entregas/" in rel:
+            continue  # relatorio e entrega SAO datados, e por isso valem
+        for titulo in RE_TITULO_DATADO.findall(arquivo.read_text(encoding="utf-8")):
+            achados.append(f"{rel}: {titulo.strip()}")
+    return achados
+
+
 def checar_semanas_no_cronograma(dados: Dados) -> list[str]:
     """A tabela das onze semanas continua a mao. Aqui se confere que nao divergiu.
 
@@ -721,27 +845,45 @@ def main() -> None:
         for caminho, conteudo in saidas.items()
         if ler_se_existir(caminho) != conteudo
     ]
-    faltando = checar_semanas_no_cronograma(dados)
+    # Coerencia entre o quadro.toml e as paginas escritas a mao. Cada uma destas
+    # checagens nasceu de uma divergencia real que passou por todos os checks
+    # que ja existiam.
+    erros = [f"{c} desatualizado em relacao ao quadro.toml" for c in divergentes]
+    erros += [
+        f"semana {s} nao aparece em docs/cronograma.md"
+        for s in checar_semanas_no_cronograma(dados)
+    ]
+    erros += checar_citacoes_no_indice(dados)
+    erros += checar_marcadores_no_indice(dados)
+    avisos = [f"titulo com data escrita a mao — {a}" for a in checar_titulo_datado()]
 
     if argumentos.conferir:
-        for caminho in divergentes:
-            print(f"  desatualizado  {caminho}")
-        for item in faltando:
-            print(f"  divergente     semana {item} nao aparece em docs/cronograma.md")
-        if divergentes or faltando:
+        for e in erros:
+            print(f"  divergencia  {e}")
+        for a in avisos:
+            print(f"  aviso        {a}")
+        if erros:
             print("")
-            print("O quadro nao corresponde ao quadro.toml.")
-            print("Rode: python scripts/quadro.py")
+            print("O quadro nao esta coerente com as paginas.")
+            print("Gerado para tras?  python scripts/quadro.py")
+            print("Divergencia de conteudo? O quadro.toml e a fonte: acerte-o e")
+            print("gere de novo, em vez de editar a pagina gerada.")
             sys.exit(1)
-        print(f"Quadro em dia (retrato de {br(hoje)}).")
+        print(f"Quadro coerente (retrato de {br(hoje)}), {len(avisos)} aviso(s).")
         return
+
+    # No modo de gravar, o que o proprio script conserta nao se anuncia como
+    # divergencia: so o que depende de uma pessoa.
+    for e in erros:
+        if "desatualizado em relacao" not in e:
+            print(f"  divergencia  {e}")
+    for a in avisos:
+        print(f"  aviso        {a}")
 
     for caminho, conteudo in saidas.items():
         (RAIZ / caminho).write_text(conteudo, encoding="utf-8", newline="\n")
         marca = "atualizado" if caminho in divergentes else "sem mudanca"
         print(f"  {marca:12} {caminho}")
-    for item in faltando:
-        print(f"  aviso        semana {item} nao aparece em docs/cronograma.md")
     print(f"\nQuadro gerado para {br(hoje)}.")
 
 
