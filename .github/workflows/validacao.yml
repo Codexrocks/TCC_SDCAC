@@ -66,3 +66,23 @@ jobs:
         env:
           BRANCH_PR: ${{ github.head_ref }}
         run: python3 scripts/validar.py --base origin/main
+
+      # Coerencia entre o quadro.toml e as paginas escritas a mao.
+      #
+      # ESTE roda com o codigo DO PR, ao contrario do passo acima, e e de
+      # proposito. O quadro.py nao e so verificador: ele GERA as paginas que
+      # estao no diff. Julgar com a versao da base reprovaria todo PR que
+      # mudasse o formato do quadro, porque a base renderiza diferente do que o
+      # PR acabou de gravar.
+      #
+      # O que impede um PR de desligar a propria checagem nao e a base, sao os
+      # testes: `tests/test_quadro.py` exige que cada verificador ACUSE quando
+      # ha divergencia, e eles ja rodaram acima, com o codigo do PR. Neutralizar
+      # uma checagem quebra o teste dela.
+      #
+      # Por que existe: em 28/09 vinte pendencias bibliograficas entraram no
+      # docs/citacoes-pendentes.md e nao no quadro.toml. A pagina publica
+      # anunciou 7 onde o repositorio registrava 27, por um dia inteiro, e
+      # nenhum check reparou — cada um olhava so o seu lado.
+      - name: Conferir a coerência do quadro (código do PR)
+        run: python3 scripts/quadro.py --conferir

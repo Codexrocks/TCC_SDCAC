@@ -216,3 +216,92 @@ def test_nenhum_item_do_toml_desaparece(dados):
 def test_celula_nao_quebra_a_tabela():
     assert quadro.celula("a | b") == "a \\| b"
     assert quadro.celula("linha\nquebrada") == "linha quebrada"
+
+
+# ---------------------------------------------------------------------------
+# Coerencia entre o quadro.toml e as paginas escritas a mao
+#
+# Cada uma destas checagens nasceu de uma divergencia real que passou por todos
+# os checks que ja existiam. Os testes vem em par: o repositorio esta limpo E o
+# verificador sabe acusar. So o primeiro seria um check que nunca dispara.
+# ---------------------------------------------------------------------------
+
+
+def test_citacoes_batem_com_o_indice(dados):
+    assert quadro.checar_citacoes_no_indice(dados) == []
+
+
+def test_citacao_a_menos_e_apontada(dados):
+    """Foi o caso de 28/09: 20 linhas entraram no indice e nao no TOML."""
+    magro = dict(dados)
+    magro["citacao"] = dados["citacao"][:-1]
+    problemas = quadro.checar_citacoes_no_indice(magro)
+    assert problemas, "tirar uma citacao do TOML tem de acusar"
+    assert any("pendencia" in p for p in problemas)
+
+
+def test_citacao_com_dono_trocado_e_apontada(dados):
+    """Contagem igual e dono diferente tambem e divergencia."""
+    trocado = dict(dados)
+    copia = [dict(c) for c in dados["citacao"]]
+    copia[0]["dono"] = "Ninguem"
+    trocado["citacao"] = copia
+    assert quadro.checar_citacoes_no_indice(trocado), "dono trocado tem de acusar"
+
+
+def test_marcadores_batem_com_o_indice(dados):
+    assert quadro.checar_marcadores_no_indice(dados) == []
+
+
+def test_marcador_sem_linha_e_apontado(dados):
+    """Foi o caso de 26/09: marcador indexado na secao errada, contagem cega."""
+    magro = dict(dados)
+    magro["citacao"] = [c for c in dados["citacao"]
+                        if not c["onde"].startswith("docs/usabilidade.md")]
+    assert quadro.checar_marcadores_no_indice(magro), "marcador orfao tem de acusar"
+
+
+def test_nenhum_titulo_datado_a_mao():
+    assert quadro.checar_titulo_datado() == []
+
+
+@pytest.mark.parametrize(
+    "titulo",
+    [
+        "## Onde estamos, em 28/09",
+        "### Situacao em 01/10/2026",
+        "# Retrato, em 05/12",
+    ],
+)
+def test_titulo_datado_e_reconhecido(titulo):
+    assert quadro.RE_TITULO_DATADO.findall(titulo), f"deveria pegar {titulo!r}"
+
+
+@pytest.mark.parametrize(
+    "titulo",
+    ["## Onde estamos", "## Prazos do professor", "### D-13 · Tratamento"],
+)
+def test_titulo_sem_data_passa(titulo):
+    assert not quadro.RE_TITULO_DATADO.findall(titulo)
+
+
+def test_tabelas_de_pendencia_le_os_quatro_formatos():
+    """O indice tem quatro formatos de tabela; o parser nao conhece nenhum."""
+    texto = (
+        "| Onde | O que falta | Quem | Desde |\n|---|---|---|---|\n"
+        "| a.md | falta x | Yasmin | 01/01/2026 |\n\n"
+        "| Chamada | Onde | Quem | Desde |\n|---|---|---|---|\n"
+        "| (X, 2020) | 2.1 | Davi | 02/01/2026 |\n\n"
+        "| Coluna | Sem | Data |\n|---|---|---|\n"
+        "| nao | conta | aqui |\n"
+    )
+    linhas = quadro.tabelas_de_pendencia(texto)
+    assert len(linhas) == 2, "so as tabelas com coluna Desde contam"
+    cab, corpo = linhas[0]
+    assert corpo[cab.index("Quem")] == "Yasmin"
+
+
+def test_sem_codigo_ignora_mencao_ao_marcador():
+    """Explicar o marcador nao e usa-lo — a pagina de regra nao vira pendencia."""
+    assert "FALTA" not in quadro.sem_codigo("use `FALTA CITAÇÃO` na linha")
+    assert "FALTA" in quadro.sem_codigo("<!-- FALTA CITAÇÃO --> conferir")
