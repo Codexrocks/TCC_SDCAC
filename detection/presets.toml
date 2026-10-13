@@ -41,11 +41,17 @@ description = "Evento, desvio e exposicao acumulada com higiene"
 site_timezone = "America/Sao_Paulo"
 business_hour_start = 6
 business_hour_end = 22
+# A janela de correlacao da D-42. Limiar fixo, igual para as 250 pessoas, sem
+# nada estimado do comportamento de ninguem: a C0 continua sem parametro
+# aprendido, e a memoria dela nao passa destes dois minutos.
+auth_failure_window_minutes = 2
+auth_failure_threshold = 10
 
 [c0.points]
 off_hours = 30
 external_origin = 30
 restricted_access = 35
+brute_force = 40
 
 # ---------------------------------------------------------------------------
 # D1 — risco do evento, ponderado

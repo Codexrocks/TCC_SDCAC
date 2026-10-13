@@ -210,7 +210,7 @@ inicio = 2026-10-09
 fim = 2026-10-15
 pronto = false
 entregavel = "C0 (regras fixas) e motor D1"
-criterio = "Cenários pontuais produzem o score esperado · C0 e C1 selecionáveis por flag · C0 sem nenhum histórico do funcionário"
+criterio = "Cenários pontuais produzem o score esperado · C0 e C1 selecionáveis por flag · C0 sem parâmetro aprendido, pela D-42"
 donos = ["Davi", "Yasmin"]
 
 [[semana]]
@@ -587,6 +587,12 @@ id = "D-41"
 titulo = "Dispositivos e estado inicial de higiene"
 estado = "fechada"
 fechada_em = 2026-09-28
+
+[[decisao]]
+id = "D-42"
+titulo = "A quarta regra da C0: janela de falhas ou evento isolado"
+estado = "fechada"
+fechada_em = 2026-10-13
 
 
 # ---------------------------------------------------------------------------

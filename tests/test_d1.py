@@ -108,7 +108,7 @@ def test_a_c0_alarma_quem_esta_em_manaus_e_a_d1_nao():
     manaus_21h30 = datetime(2026, 3, 11, 1, 30, tzinfo=UTC)
     evento_manaus = evento(employee_id=8, device_id=80, occurred_at=manaus_21h30)
 
-    nota_c0 = score_c0(evento_manaus, catalogo(), C0)
+    nota_c0 = score_c0(evento_manaus, catalogo(), C0, ())
     nota_d1 = score_d1(evento_manaus, catalogo(), C1)
 
     assert "off_hours" in nota_c0.fired
@@ -165,7 +165,7 @@ def test_a_c0_so_ve_o_restrito_e_a_d1_ve_os_quatro_niveis():
     """A diferenca de granularidade entre a linha de base e a D1."""
     confidencial = evento(resource_id=2)
 
-    assert score_c0(confidencial, catalogo(), C0).points == 0
+    assert score_c0(confidencial, catalogo(), C0, ()).points == 0
     assert score_d1(confidencial, catalogo(), C1).points == 20
 
 

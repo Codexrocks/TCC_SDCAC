@@ -1,26 +1,27 @@
 """As regras fixas da linha de base.
 
-Tres das quatro regras da **D-31** estao aqui. A quarta — contagem de falhas de
-autenticacao — **nao esta, e a falta e deliberada**: as duas paginas que a
-definem discordam entre si.
+As quatro regras da **D-31**, com a quarta decidida pela **D-42**: a janela de
+contagem de falhas **fica**, e o texto da Metodologia foi corrigido para dizer
+com precisao o que "estatica" significa aqui.
 
-- A **D-31**, em docs/banco-simulado.md, mantem "mais de N falhas de
-  autenticacao em 2 minutos na mesma conta, com N fixo".
-- A **Metodologia**, secao 3.3, afirma que a C0 e puramente estatica e que
-  "duas das quatro regras da linha de base — a nocao de endereco de origem
-  habitual e a janela de contagem de falhas de autenticacao — utilizavam
-  historico individual", e que mante-las contaminaria o grupo de controle.
+A distincao que a D-42 fixa, e que vale repetir onde o codigo mora:
 
-Uma janela de dois minutos sobre a mesma conta olha o passado daquela conta.
-Entao a invariante que a propria D-31 declara — "embaralhar o historico nao
-pode mudar nota nenhuma" — seria falsa com a regra ligada. Implementar uma das
-duas versoes agora seria escolher pelo Davi qual texto esta certo, e o que esta
-em disputa aparece no artigo. A escolha esta no Pull Request, a decidir.
+- **Parametro aprendido** — media, mediana, conjunto de recursos habituais,
+  endereco de origem habitual — e o que a C0 nao tem. Isso e padrao individual,
+  e medir a contribuicao dele e o objetivo do experimento. Pontuar o controle
+  com a mesma informacao seria contaminar a comparacao.
+- **Correlacao de curto prazo** e outra coisa: a janela de dois minutos aplica o
+  mesmo limiar as 250 pessoas, nao estima nada de ninguem, e nao guarda
+  informacao alem do proprio intervalo. Sem ela, o grupo de controle nao
+  detectaria tentativa sucessiva de autenticacao — cenario que regra fixa pega
+  com facilidade —, e o ganho apareceria nas dimensoes por falta de adversario.
 
-As tres regras implementadas sao estaticamente verificaveis: nenhuma delas
-recebe o funcionario.
+Tres das quatro regras nao recebem nem o funcionario nem o passado. A quarta
+recebe eventos recentes **da mesma conta**, e recusa receber de outra conta ou
+do futuro: as duas recusas sao verificadas em teste.
 """
 
+from datetime import timedelta
 from zoneinfo import ZoneInfo
 
 from detection.configuration import Configuration, ConfigurationError
@@ -28,12 +29,17 @@ from detection.model import (
     Catalog,
     DimensionScore,
     Event,
+    EventResult,
+    EventType,
     NetworkKind,
     RuleHit,
     Sensitivity,
 )
 
 FAIXAS_CORPORATIVAS = (NetworkKind.OFFICE, NetworkKind.VPN)
+
+# Eventos de autenticacao, que e onde a contagem de falhas faz sentido.
+AUTENTICACAO = (EventType.LOGIN,)
 
 
 def off_hours(event: Event, config: Configuration) -> RuleHit | None:
@@ -126,7 +132,84 @@ def restricted_access(
     )
 
 
-def score_c0(event: Event, catalog: Catalog, config: Configuration) -> DimensionScore:
+def brute_force(
+    event: Event, recent: tuple[Event, ...], config: Configuration
+) -> RuleHit | None:
+    """Falhas de autenticacao acima do limite, na mesma conta, em janela fixa.
+
+    A regra dispara **no evento que cruza o limite**, e so em evento de
+    autenticacao que falhou: e a forma literal da D-31, e e como regra de
+    correlacao de SIEM funciona. Acesso bem-sucedido depois de uma rajada nao
+    dispara aqui — quem avalia sequencia e a D2.
+
+    O limiar e a janela vem da configuracao e sao iguais para todos. Nada e
+    estimado do comportamento de ninguem: e isso que mantem a C0 sem parametro
+    aprendido, pela **D-42**.
+
+    Args:
+        event: O evento a avaliar.
+        recent: Eventos anteriores **da mesma conta**, em qualquer ordem. Quem
+            chama decide de onde eles vem; a contagem e a janela sao daqui.
+        config: Um preset que ligue a dimensao `c0`.
+
+    Returns:
+        A regra disparada, ou None.
+
+    Raises:
+        ValueError: Se `recent` trouxer evento de outra conta, ou evento
+            posterior ao avaliado. A primeira recusa pega mistura de contas; a
+            segunda e a regra de nao olhar para o futuro, aplicada na fronteira
+            em vez de confiada a quem chama.
+    """
+    if event.event_type not in AUTENTICACAO or event.result is not EventResult.FAILURE:
+        return None
+
+    parametros = config.dimension("c0")
+    janela = timedelta(minutes=parametros["auth_failure_window_minutes"])
+    limite = parametros["auth_failure_threshold"]
+    inicio = event.occurred_at - janela
+
+    falhas = 1  # o proprio evento, que e uma falha
+    for anterior in recent:
+        if anterior.employee_id != event.employee_id:
+            raise ValueError(
+                f"janela de falhas do funcionario {event.employee_id} recebeu "
+                f"evento do funcionario {anterior.employee_id}"
+            )
+        if anterior.occurred_at > event.occurred_at:
+            raise ValueError(
+                f"janela de falhas recebeu evento posterior ao avaliado: "
+                f"{anterior.event_id} ocorreu depois de {event.event_id}"
+            )
+        if anterior.event_id == event.event_id:
+            continue
+        if anterior.event_type not in AUTENTICACAO:
+            continue
+        if anterior.result is not EventResult.FAILURE:
+            continue
+        if anterior.occurred_at >= inicio:
+            falhas += 1
+
+    if falhas <= limite:
+        return None
+
+    return RuleHit(
+        rule="brute_force",
+        points=parametros["points"]["brute_force"],
+        reason=(
+            f"{falhas} falhas de autenticacao em "
+            f"{parametros['auth_failure_window_minutes']} min, acima do limite "
+            f"de {limite}"
+        ),
+    )
+
+
+def score_c0(
+    event: Event,
+    catalog: Catalog,
+    config: Configuration,
+    recent: tuple[Event, ...],
+) -> DimensionScore:
     """Soma os pontos das regras fixas disparadas pelo evento.
 
     Nao ha teto: o score bruto e o que a avaliacao usa, porque faixa empatada
@@ -137,6 +220,9 @@ def score_c0(event: Event, catalog: Catalog, config: Configuration) -> Dimension
         event: O evento a avaliar.
         catalog: Recursos e faixas de rede. O funcionario nao e consultado.
         config: Um preset que ligue a dimensao `c0`.
+        recent: Eventos anteriores da mesma conta, para a janela de falhas.
+            E obrigatorio de proposito: com valor padrao, quem esquecesse de
+            passar desligaria a quarta regra em silencio.
 
     Returns:
         A nota da C0, com as regras que a formaram.
@@ -151,6 +237,7 @@ def score_c0(event: Event, catalog: Catalog, config: Configuration) -> Dimension
         off_hours(event, config),
         external_origin(event, catalog, config),
         restricted_access(event, catalog, config),
+        brute_force(event, recent, config),
     ]
     disparadas = tuple(hit for hit in hits if hit is not None)
     return DimensionScore(

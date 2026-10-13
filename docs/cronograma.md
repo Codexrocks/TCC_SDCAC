@@ -105,7 +105,7 @@ Três consequências que valem saber:
 |---|---|
 | S5 | Metodologia (caneta) — ✅ **escrita em 28/09**, com 4 lacunas abertas · arquitetura v2 ✅ · fechar D-12 a D-19 |
 | S6 | Schema, migrações, carga e ingestão |
-| S7 | C0 (regras fixas, sem histórico) e motor D1 |
+| S7 | C0 (regras fixas, sem parâmetro aprendido) e motor D1 |
 | S8 | D2, D3 e a integração |
 | S11 | Execução dos cenários |
 | S12 | Tabela de ablação, junto do Filipe |

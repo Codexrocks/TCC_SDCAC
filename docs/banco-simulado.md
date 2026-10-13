@@ -46,7 +46,8 @@ ele precisa passar.
 | **D-28** | A D2 tem duas janelas: **sessão** e **usuário-dia**. Semana não | Seção 5. Se a D2 olhasse a semana, ela e a D3 mediriam a mesma coisa |
 | **D-29** | Padrão com **mediana e MAD**; desvio robusto com piso, teto e grupo de pares | Seção 5, que deixa de ser lista de características e passa a ser contrato |
 | **D-30** | Higiene em **cinco sinais**, antivírus fora; D3 em duas parcelas, conduta e postura | Seção 4 |
-| **D-31** | A **C0 é puramente estática**, e a D1 é pontuação ponderada sobre o evento | Seção 7, e é o critério de aceite da S7 |
+| **D-31** | A **C0 não tem parâmetro aprendido**, e a D1 é pontuação ponderada sobre o evento | Seção 7, e é o critério de aceite da S7 |
+| **D-42** | A **janela de falhas fica** na C0, com limiar fixo igual para todos | Seção 7: a quarta regra existe, e a invariante foi reformulada |
 
 > **Por que a D-26 importa mais do que parece.** Se a linha de base virasse a
 > dimensão 1, nenhuma dimensão compararia o funcionário com ele mesmo — e a
@@ -382,9 +383,16 @@ de navegação. E troca ponto fixo por **peso por atributo**, com o horário
 ponderado e **no fuso do funcionário**.
 
 Em uma frase: **a C0 é uma lista de quatro regras com limiar fixo; a D1 é
-pontuação ponderada sobre todos os atributos do evento.** Nenhuma das duas olha
-o passado do funcionário, e o teste que prova isso é o mesmo para as duas:
-embaralhar o histórico não pode mudar nota nenhuma.
+pontuação ponderada sobre todos os atributos do evento.** Nenhuma das duas tem
+parâmetro aprendido — nem média, nem conjunto habitual, nem endereço de origem
+habitual —, e é isso que as mantém fora do terreno da D2.
+
+> **A invariante, na forma que a D-42 deixou.** "Embaralhar o histórico não pode
+> mudar nota nenhuma" era a formulação anterior, e ela deixou de valer quando a
+> janela de falhas ficou: dois minutos da própria conta entram na conta da C0. A
+> forma verificável é esta, e está em teste: a nota da C0 depende apenas do
+> evento, do cadastro e dos dois minutos anteriores **da mesma conta** — nada
+> mais antigo, e nada de outra pessoa. A D1 continua sem passado nenhum.
 
 ## 8. Três bancos, não um
 
