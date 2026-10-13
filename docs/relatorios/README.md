@@ -43,3 +43,4 @@ Use o [modelo](_modelo.md) e adicione a página nova ao
 | 28/09/2026 | [Sessão 22](2026-09-28-sessao-22.md) | O `validar.py` passa a conferir a sintaxe dos workflows, em duas camadas — e o teste pega a IA antes da pessoa |
 | 28/09/2026 | [Sessão 23](2026-09-28-sessao-23.md) | A Metodologia entra com 9 subseções; quatro lacunas da M2 saem de comentário HTML, que o GitBook apagaria, e viram bloco visível |
 | 29/09/2026 | [Sessão 24](2026-09-29-sessao-24.md) | Auditoria de coerência: o quadro dizia 7 pendências bibliográficas e eram 27; o workflow do quadro nunca tinha sido YAML válido |
+| 13/10/2026 | [Sessão 25](2026-10-13-sessao-25.md) | O `.docx` entregue estava à frente do repositório; o referencial vira a estrutura do slide 3 sem ganhar fonte nova; Introdução e Referencial entram nos tamanhos exigidos |

@@ -71,4 +71,5 @@
 * [2026-09-28 — Sessão 22: o repositório passa a conferir os próprios workflows](relatorios/2026-09-28-sessao-22.md)
 * [2026-09-28 — Sessão 23: a Metodologia entra no artigo](relatorios/2026-09-28-sessao-23.md)
 * [2026-09-29 — Sessão 24: o quadro subdeclarava a dívida bibliográfica](relatorios/2026-09-29-sessao-24.md)
+* [2026-10-13 — Sessão 25: o artigo ganha a estrutura que o professor pediu](relatorios/2026-10-13-sessao-25.md)
 * [Modelo de relatório](relatorios/_modelo.md)
