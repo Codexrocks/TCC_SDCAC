@@ -13,9 +13,10 @@
 >
 > **2ª Versão** na numeração do professor · **entrega em 18/10/2026**.
 >
-> ⚠️ **As treze referências continuam sem conferência na fonte** e por isso não
-> entraram em [`referencias.md`](referencias.md). Ver
-> [citações pendentes](../docs/citacoes-pendentes.md).
+> ✅ **As treze foram conferidas na fonte e entraram em
+> [`referencias.md`](referencias.md)** em 13/10/2026, em ABNT NBR 6023. A
+> conferência é declaração da **Yasmin**, confirmada pelo **Davi**; a conversão
+> de formato foi assistida por IA, a partir dos dados do insumo.
 
 ***
 
@@ -37,7 +38,7 @@ categorias arbitrárias.
 
 O registro dessas evidências ocorre por meio de logs de segurança, cuja gestão
 cobre geração, armazenamento e análise dos eventos relevantes à postura de
-segurança de um sistema (National Institute of Standards and Technology, 2006).
+segurança de um sistema (Kent e Souppaya, 2006).
 Entre os campos que tipicamente apoiam a identificação de comportamento suspeito
 estão a identidade do sujeito, o instante do evento, a origem de rede, o
 dispositivo e o recurso afetado. A mesma fonte observa que o crescimento em

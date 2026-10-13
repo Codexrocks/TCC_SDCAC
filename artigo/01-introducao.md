@@ -33,8 +33,7 @@ desvios comportamentais e situações que demandam maior atenção das equipes
 responsáveis pela segurança. Entretanto, o aumento da quantidade e da diversidade
 dos dados registrados amplia a complexidade associada à sua interpretação,
 especialmente quando o comportamento considerado incomum depende do contexto em
-que determinado evento ocorre (National Institute of Standards and Technology,
-2006).
+que determinado evento ocorre (Kent e Souppaya, 2006).
 
 A análise de eventos isolados pode ser útil para identificar situações
 previamente conhecidas ou condições que ultrapassam determinados limites.
