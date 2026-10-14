@@ -93,6 +93,46 @@ restricted = 35
 large_download_bytes = 52428800
 
 # ---------------------------------------------------------------------------
+# D2 — desvio do padrao do proprio funcionario
+#
+# O padrao vem dos tres primeiros meses (D-24), e a janela de treino e anterior
+# e disjunta da de avaliacao (D-17). O teto e o piso abaixo sao as duas travas
+# da D-29: sem teto um atributo domina a nota, e sem piso o funcionario
+# perfeitamente regular vira o mais alarmado da empresa.
+# ---------------------------------------------------------------------------
+
+[d2]
+# Minimo de dias com atividade na janela de treino para ter padrao proprio.
+# Abaixo disso, cai no grupo de pares, e isso vai marcado no resultado.
+min_active_days = 20
+# Hora que responde por menos que isso do padrao da pessoa conta como incomum.
+unusual_hour_share = 0.01
+# Minimo de eventos na janela para a mistura de sigilo valer. Com um evento, a
+# proporcao e sempre 0% ou 100%, e um unico acesso sigiloso num dia tranquilo
+# apareceria como divergencia maxima. Proporcao precisa de denominador.
+min_window_events_for_mix = 5
+deviation_cap = 6.0
+volume_floor_fraction = 0.1
+volume_absolute_floor = 1.0
+
+[d2.points]
+volume = 25
+failures = 30
+sensitive_mix = 25
+new_resource = 30
+new_origin = 20
+new_device = 20
+unusual_hour = 20
+
+# Recurso novo pesa mais quando o sigilo e alto: area restrita que a pessoa
+# nunca abriu nao e o mesmo que uma pasta interna nova.
+[d2.sensitivity_multiplier]
+public = 0.5
+internal = 1.0
+confidential = 1.5
+restricted = 2.0
+
+# ---------------------------------------------------------------------------
 # Faixas de exibicao
 #
 # A avaliacao usa o score bruto, sem teto: faixa empatada em 100 viraria degrau

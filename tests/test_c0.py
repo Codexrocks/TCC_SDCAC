@@ -404,7 +404,7 @@ def test_so_a_janela_de_dois_minutos_muda_a_nota_c0():
 
 
 def test_as_configuracoes_de_hoje_carregam():
-    """C0 e C1 na S7. A D2 e a D3 entram na S8, e ai esta lista cresce."""
+    """C0, C1 e C2. Falta a C3, que depende da D3."""
     nomes = [c.name for c in load_implemented()]
 
-    assert nomes == ["C0", "C1"]
+    assert nomes == ["C0", "C1", "C2"]

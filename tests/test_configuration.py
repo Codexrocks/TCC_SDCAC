@@ -59,19 +59,19 @@ def test_cada_configuracao_liga_as_dimensoes_da_metodologia():
     assert dimensoes["C3"] == ("d1", "d2", "d3")
 
 
-def test_hoje_carregam_a_c0_e_a_c1():
-    """O estado da S7, declarado em teste em vez de suposto.
+def test_hoje_carregam_a_c0_a_c1_e_a_c2():
+    """O estado declarado em teste, em vez de suposto.
 
-    Quando a D2 e a D3 entrarem na S8, este teste falha — e falhar e o aviso de
-    que a lista precisa crescer. Teste que acompanha o escopo sem reclamar
-    esconde escopo.
+    Valia ["C0", "C1"] e passou a valer ["C0", "C1", "C2"] quando a D2 entrou —
+    o teste falhou e o aviso foi esse. Teste que acompanha o escopo sem
+    reclamar esconde escopo, e a C3 ainda falta.
     """
-    assert [c.name for c in load_implemented()] == ["C0", "C1"]
+    assert [c.name for c in load_implemented()] == ["C0", "C1", "C2"]
 
 
 def test_configuracao_sem_parametro_diz_qual_secao_falta():
-    with pytest.raises(ConfigurationError, match=r"C2 liga d2, mas falta a secao"):
-        load_canonical("C2")
+    with pytest.raises(ConfigurationError, match=r"C3 liga d3, mas falta a secao"):
+        load_canonical("C3")
 
 
 def test_carregar_as_quatro_de_uma_vez_falha_enquanto_faltar_parametro():
