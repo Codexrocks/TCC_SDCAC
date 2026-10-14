@@ -33,7 +33,7 @@ direita é o que no software a sustenta:
 | O artigo afirma | O que sustenta aqui |
 |---|---|
 | "Um único código executado sob quatro parâmetros" (3.3) | Seção 2: as configurações são composição de módulos, não quatro sistemas |
-| "A C0 é puramente estática" (3.3) | Seção 4: presets canônicos imutáveis, e a C0 sem acesso a histórico |
+| "A C0 não possui parâmetro aprendido" (3.3) | Seção 4: presets canônicos imutáveis, e a C0 sem acesso ao padrão individual |
 | "A terceira dimensão reporta duas parcelas separadas" (3.3) | Seção 6: a resposta de leitura carrega D3 partida em conduta e postura |
 | "Cada execução grava identificador, semente, configuração e pesos" (3.7) | Seção 4: configuração versionada, com hash preso ao resultado |
 | "Comparar duas configurações é comparar dois identificadores de execução" (3.7) | Seção 5: execução é registro, não requisição |

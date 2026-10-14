@@ -23,7 +23,7 @@
 | ▶️ Em curso | 1 |
 | ⏳ A vencer em 7 dias | 0 |
 | 🗓️ Depois | 20 |
-| ✅ Feito | 30 |
+| ✅ Feito | 31 |
 
 ## ⚠️ Atrasado
 
@@ -90,7 +90,7 @@ Nada nesta coluna.
 
 ## ✅ Feito
 
-30 itens.
+31 itens.
 
 | Tipo | Item | O que é | Quem | Prazo | Situação |
 |---|---|---|---|---|---|
@@ -124,6 +124,7 @@ Nada nesta coluna.
 | Decisão | **D-39** | Sistemas e matriz de acesso | — | 28/09/2026 | ✅ Fechada em 28/09/2026 |
 | Decisão | **D-40** | Sede, filial e fusos horários | — | 28/09/2026 | ✅ Fechada em 28/09/2026 |
 | Decisão | **D-41** | Dispositivos e estado inicial de higiene | — | 28/09/2026 | ✅ Fechada em 28/09/2026 |
+| Decisão | **D-42** | A quarta regra da C0: janela de falhas ou evento isolado | — | 13/10/2026 | ✅ Fechada em 13/10/2026 |
 
 ## Critério de aceite do que está aberto
 
@@ -133,7 +134,7 @@ atrito.
 
 | Semana | Entregável | Critério de aceite | Quem |
 |---|---|---|---|
-| **S7** | C0 (regras fixas) e motor D1 | Cenários pontuais produzem o score esperado · C0 e C1 selecionáveis por flag · C0 sem nenhum histórico do funcionário | Davi, Yasmin |
+| **S7** | C0 (regras fixas) e motor D1 | Cenários pontuais produzem o score esperado · C0 e C1 selecionáveis por flag · C0 sem parâmetro aprendido, pela D-42 | Davi, Yasmin |
 
 ## Alertas registrados nas decisões
 

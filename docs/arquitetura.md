@@ -16,7 +16,7 @@ responde está no [plano](plano.md); os dados sobre os quais ele roda, na
 |---|---|---|
 | O que o sistema é | Um detector | **Quatro configurações do mesmo código** |
 | O que se mede | Se o detector funciona | **Quanto cada dimensão acrescenta** |
-| Linha de base | Não existia | **C0**, grupo de controle, puramente estática |
+| Linha de base | Não existia | **C0**, grupo de controle, sem parâmetro aprendido |
 | Score | Um número | **Decomponível por dimensão**, e a D3 reporta duas parcelas separadas |
 
 ---

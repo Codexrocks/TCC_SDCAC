@@ -90,18 +90,30 @@ os mesmos cenários e as mesmas métricas.
 
 | Configuração | Composição | Papel no experimento |
 |---|---|---|
-| **C0** | Regras fixas sobre o evento isolado, sem histórico do funcionário | Grupo de controle |
+| **C0** | Regras fixas sobre o evento isolado, com limiares idênticos para todos os usuários | Grupo de controle |
 | **C1** | D1 — risco do evento individual | Ganho de atributos mais ricos sobre a mesma lógica pontual |
 | **C2** | D1 + D2 — desvio em relação ao padrão do próprio funcionário | Ganho de contexto individual |
 | **C3** | D1 + D2 + D3 — exposição acumulada e higiene de segurança | Contribuição original do trabalho |
 
-A configuração C0 cumpre a função de grupo de controle e é **puramente
-estática**: nenhuma de suas regras consulta o histórico do funcionário. A
-restrição é deliberada e corrige uma formulação anterior, em que duas das quatro
-regras da linha de base — a noção de endereço de origem habitual e a janela de
-contagem de falhas de autenticação — utilizavam histórico individual. Mantê-las
-contaminaria o grupo de controle com a própria informação cuja contribuição o
-experimento pretende medir.
+A configuração C0 cumpre a função de grupo de controle e **não possui
+parâmetro aprendido**: seus limiares são fixos, idênticos para todos os
+usuários, e nenhuma de suas regras consulta o padrão comportamental individual.
+A formulação anterior da linha de base incluía a noção de endereço de origem
+habitual, obtida do histórico de cada usuário; essa regra foi substituída pela
+verificação de pertencimento a faixas de rede corporativas previamente
+cadastradas, de modo que a informação cuja contribuição o experimento pretende
+medir não esteja presente no grupo de controle.
+
+Mantém-se, por outro lado, a regra de contagem de falhas de autenticação em
+janela fixa de dois minutos. A distinção relevante é entre correlação de curto
+prazo e perfil individual: a janela não possui parâmetro estimado a partir do
+comportamento do usuário, aplica o mesmo limiar a todos os usuários e não retém
+informação além de seu próprio intervalo. Trata-se da forma usual de regra de
+correlação em ferramentas de gestão de eventos de segurança, e sua remoção
+produziria um grupo de controle incapaz de identificar tentativas sucessivas de
+autenticação — cenário cuja detecção é trivial para regras fixas e cujo
+reconhecimento, portanto, não poderia ser atribuído como ganho às dimensões
+avaliadas.
 
 As quatro configurações não correspondem a quatro sistemas distintos, mas a um
 único código executado sob quatro parâmetros. Essa decisão garante que a única
