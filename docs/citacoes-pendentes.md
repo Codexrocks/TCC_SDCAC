@@ -23,40 +23,42 @@ As páginas de `docs/` não têm esse problema, porque o GitBook só lê daqui.
 
 ## Pendentes — artigo
 
+> **As três linhas que estavam aqui saíram em 13/10/2026**, e saíram pelo mesmo
+> fato: as três apontavam para obras que **já estavam entre as 13 do
+> referencial**.
+>
+> | Linha que saiu | Por quê |
+> |---|---|
+> | ISO 2022, no referencial § 2.1 | É `INTERNATIONAL ORGANIZATION FOR STANDARDIZATION, 2022`, uma das 13 |
+> | NIST 2006, na Introdução | É a **mesma obra** que `KENT; SOUPPAYA, 2006` — a NIST SP 800-92. A suspeita estava registrada aqui desde 26/09 e se confirmou. A chamada da Introdução passou a `(Kent e Souppaya, 2006)`, que é o que a ABNT pede quando a obra tem autor pessoal |
+> | Chandola 2009, na Introdução | Mesma obra citada no referencial. Uma conferência resolveu as duas, como a linha previa |
+
+**Duas entraram em 13/10/2026**, com a reescrita da seção 3.3 que a D-42
+trouxe. Nenhuma das duas tem chamada: são afirmações soltas, e é por isso
+que estão aqui e não na lista de referências.
+
 | Onde | O que falta | Quem | Desde |
 |---|---|---|---|
-| `02-referencial-teorico.md` § 2.1 | **Fonte proposta na entrega de 28/09:** `(INTERNATIONAL ORGANIZATION FOR STANDARDIZATION, 2022)`. A pendência deixa de ser "qual fonte" e passa a ser a confirmação de que ela foi aberta — ver a tabela do referencial, abaixo | Yasmin | 04/09/2026 |
-| `01-introducao.md` § Contextualização | Entrada na lista para `(NATIONAL INSTITUTE OF STANDARDS AND TECHNOLOGY, 2006)`. A chamada foi entregue ao professor em 24/09 e a `## Lista` de `referencias.md` está vazia. Conferir a fonte antes de acrescentar. ⚠️ **Pode ser a mesma obra** que `KENT; SOUPPAYA, 2006` do referencial — a NIST SP 800-92 é de 2006. Se for, a chamada da Introdução precisa mudar para os autores, que é o que a ABNT pede. **Conferir antes de acrescentar qualquer uma das duas** | Davi | 26/09/2026 |
-| `01-introducao.md` § Problema | Entrada na lista para `(CHANDOLA; BANERJEE; KUMAR, 2009)`. Mesma situação da linha acima. A mesma obra é citada no referencial, § 2.4 — uma confirmação resolve as duas | Davi | 26/09/2026 |
 | `03-metodologia.md` § 3.3 | Afirmação **sem chamada nenhuma**: "forma usual de regra de correlação em ferramentas de gestão de eventos de segurança". Entrou com a **D-42**, em 13/10, para justificar a janela de falhas na C0. Candidata: `KENT; SOUPPAYA, 2006` (NIST SP 800-92), que já está na fila do referencial — **conferir se ela sustenta a afirmação**, e não só o tema. Se não sustentar, a frase sai: a decisão não depende dela | Davi | 13/10/2026 |
 | `03-metodologia.md` § 3.3 | Afirmação sem fonte: a detecção de tentativa sucessiva de autenticação é "trivial para regras fixas". **Alternativa sem fonte:** reformular como consequência do próprio desenho — a C0 tem a regra, logo o reconhecimento não pode ser atribuído às dimensões. O argumento se sustenta sem a afirmação de dificuldade | Davi | 13/10/2026 |
 
-### As 13 do referencial teórico
+### As 13 do referencial teórico — **conferidas em 13/10/2026**
 
-O [insumo entregue pela Yasmin](insumos/referencial-teorico-yasmin-v2.md) em
-28/09 traz as 13 referências já formatadas, e declara que **nenhuma foi
-descartada por dúvida quanto à existência da fonte**. Não declara que cada uma
-foi aberta — e é isso que
-[`artigo/referencias.md`](../artigo/referencias.md) exige para aceitar a entrada.
-
-**A pendência é de confirmação, não de busca.** Ao confirmar, apague a linha e
-acrescente a referência em ABNT NBR 6023 na `## Lista`.
-
-| Chamada, como está no texto | Onde | Quem | Desde |
-|---|---|---|---|
-| `(AXELSSON, 2000)` | § 2.4 | Yasmin | 28/09/2026 |
-| `Cappelli, Moore e Trzeciak (2012)` | § 2.3 | Yasmin | 28/09/2026 |
-| `Chandola, Banerjee e Kumar (2009)` | § 2.4 | Yasmin | 28/09/2026 |
-| `Denning (1987)` | § 2.4 | Yasmin | 28/09/2026 |
-| `(GONZALEZ-GRANADILLO; GONZALEZ-ZARZOSA; DIAZ, 2021)` | § 2.2 | Yasmin | 28/09/2026 |
-| `(GRASSI et al., 2017)` | § 2.1 | Yasmin | 28/09/2026 |
-| `Homoliak et al. (2019)` | § 2.3 | Yasmin | 28/09/2026 |
-| `(INTERNATIONAL ORGANIZATION FOR STANDARDIZATION, 2022)` | § 2.1 | Yasmin | 28/09/2026 |
-| `(KENT; SOUPPAYA, 2006)` | § 2.1 | Yasmin | 28/09/2026 |
-| `(SANDHU et al., 1996)` | § 2.1 | Yasmin | 28/09/2026 |
-| `(SHASHANKA; SHEN; WAN, 2016)` | § 2.3 | Yasmin | 28/09/2026 |
-| `(SUNDARAMURTHY et al., 2015)` | § 2.4 | Yasmin | 28/09/2026 |
-| `Vielberth et al. (2020)` | § 2.2 | Yasmin | 28/09/2026 |
+> **A Yasmin declarou ter conferido cada uma na fonte**, e o **Davi confirmou a
+> declaração**. As 13 entraram em
+> [`artigo/referencias.md`](../artigo/referencias.md), em ABNT NBR 6023.
+>
+> **O que a IA fez e o que a IA não fez.** A conversão de formato — do autor-ano
+> do COBEM, como estava no
+> [insumo de 28/09](insumos/referencial-teorico-yasmin-v2.md), para a NBR 6023 —
+> foi assistida por IA, e cada dado veio do insumo. **A conferência na fonte não
+> foi feita por IA, e não poderia ser:** quem abre a fonte é quem assume a
+> referência.
+>
+> Ficou uma divergência de **paginação**, não de existência: o insumo registra
+> `Article 15` para Chandola, Banerjee e Kumar (2009), e o `.docx` entregue ao
+> professor registra `pp. 1–58`. Está anotada em
+> [`referencias.md`](../artigo/referencias.md) para o Davi fechar.
 
 ### As 7 da metodologia
 
@@ -120,3 +122,11 @@ mentir, e ela só serve enquanto for verdadeira.
 
 Esta tabela precisa estar **vazia** — as duas. Página com pendência aberta é
 seção que ainda não pode ser entregue.
+
+**Situação em 13/10/2026:** das 27 pendências de 28/09 restam **11** — as **7 da
+metodologia** e as **4 da documentação**. As 13 do referencial e as 3 do artigo
+saíram juntas, porque as 3 apontavam para obras entre as 13.
+
+As 7 da metodologia são o que ainda impede a entrega de 18/10: a § 3.6, a § 3.7 e
+a § 3.8 têm chamada no texto **sem entrada na lista**, e a página de referências
+diz isso por escrito em vez de fingir que está completa.

@@ -74,8 +74,83 @@ AUTOR. **Título**. Ano. Disponível em: URL. Acesso em: dia mês ano.
 
 ## Lista
 
-> **A escrever.** Acrescente aqui conforme forem sendo conferidas e
-> citadas.
+> **As 13 do Referencial Teórico entraram em 13/10/2026**, depois de a **Yasmin
+> declarar que conferiu cada uma na fonte** e o **Davi confirmar a declaração**.
+> Quem conferiu foram eles; a conversão de formato — do autor-ano do COBEM, como
+> estava no [insumo entregue em 28/09](../docs/insumos/referencial-teorico-yasmin-v2.md),
+> para a ABNT NBR 6023 — foi assistida por IA, e os dados de cada entrada vêm do
+> insumo, não de busca nova.
+>
+> **As 7 da Metodologia continuam fora.** Seguem em
+> [citações pendentes](../docs/citacoes-pendentes.md) até alguém abrir a fonte, e
+> por isso a § 3.6, a § 3.7 e a § 3.8 têm chamada no texto sem entrada aqui. É
+> estado conhecido e declarado, não esquecimento.
+
+AXELSSON, S. The base-rate fallacy and the difficulty of intrusion detection.
+**ACM Transactions on Information and System Security**, v. 3, n. 3, p. 186-205,
+2000.
+
+CAPPELLI, D. M.; MOORE, A. P.; TRZECIAK, R. F. **The CERT guide to insider
+threats**: how to prevent, detect, and respond to information technology crimes.
+Boston: Addison-Wesley, 2012.
+
+CHANDOLA, V.; BANERJEE, A.; KUMAR, V. Anomaly detection: a survey. **ACM
+Computing Surveys**, v. 41, n. 3, art. 15, 2009.
+
+DENNING, D. E. An intrusion-detection model. **IEEE Transactions on Software
+Engineering**, v. SE-13, n. 2, p. 222-232, 1987.
+
+GONZALEZ-GRANADILLO, G.; GONZALEZ-ZARZOSA, S.; DIAZ, R. Security information and
+event management (SIEM): analysis, trends, and usage in critical infrastructures.
+**Sensors**, v. 21, n. 14, art. 4759, 2021.
+
+GRASSI, P. A. et al. **Digital identity guidelines**. Gaithersburg: NIST, 2017.
+(NIST Special Publication 800-63-3).
+
+HOMOLIAK, I. et al. Insight into insiders and IT: a survey of insider threat
+taxonomies, analysis, modeling, and countermeasures. **ACM Computing Surveys**,
+v. 52, n. 2, art. 30, p. 30:1-30:40, 2019.
+
+INTERNATIONAL ORGANIZATION FOR STANDARDIZATION. **ISO/IEC 27001:2022**:
+information security, cybersecurity and privacy protection — information security
+management systems — requirements. Genebra: ISO, 2022.
+
+KENT, K.; SOUPPAYA, M. **Guide to computer security log management**.
+Gaithersburg: NIST, 2006. (NIST Special Publication 800-92).
+
+SANDHU, R. S. et al. Role-based access control models. **IEEE Computer**, v. 29,
+n. 2, p. 38-47, 1996.
+
+SHASHANKA, M.; SHEN, M.-Y.; WAN, J. User and entity behavior analytics for
+enterprise security. In: **2016 IEEE International Conference on Big Data**.
+Washington, D.C.: IEEE, 2016. p. 1867-1874.
+
+SUNDARAMURTHY, S. C. et al. A human capital model for mitigating security
+analyst burnout. In: **Proceedings of the Eleventh Symposium on Usable Privacy
+and Security (SOUPS 2015)**. Ottawa: USENIX Association, 2015. p. 347-359.
+
+VIELBERTH, M. et al. Security operations center: a systematic study and open
+challenges. **IEEE Access**, v. 8, p. 227756-227779, 2020.
+
+### Critérios aplicados na conversão
+
+* **Mais de três autores:** primeiro autor e `et al.`, que é a forma que a NBR
+  6023 admite e a que casa com a chamada no texto. Até três, todos. O insumo
+  listava os sete de `SUNDARAMURTHY` e os cinco de `HOMOLIAK` por extenso — a
+  NBR admite as duas formas, e o que não se admite é misturar
+* **Relatório técnico do NIST:** título em destaque e a série entre parênteses no
+  fim, como a NBR pede, em vez do `Special Publication 800-XX — Título` do COBEM
+* **Número de artigo em vez de faixa de páginas:** `art. 15` e `art. 4759`
+  entraram como estão no insumo. O periódico numera por artigo, não por página
+  inicial
+
+> ⚠️ **Uma divergência a resolver, e ela não é de formato.** Para
+> `CHANDOLA; BANERJEE; KUMAR, 2009`, o insumo da Yasmin registra
+> **`Vol. 41, No. 3, Article 15`** e o `.docx` que o Davi entregou ao professor
+> registra **`Vol. 41, No. 3, pp. 1–58`**. As duas descrevem o mesmo artigo por
+> convenções diferentes de paginação. Ficou a do insumo, porque é quem declarou
+> ter aberto a fonte — **o Davi confirma qual está na página do artigo** ·
+> **Davi**
 
 ***
 
