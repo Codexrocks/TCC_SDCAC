@@ -71,4 +71,5 @@
 * [2026-09-28 — Sessão 22: o repositório passa a conferir os próprios workflows](relatorios/2026-09-28-sessao-22.md)
 * [2026-09-28 — Sessão 23: a Metodologia entra no artigo](relatorios/2026-09-28-sessao-23.md)
 * [2026-09-29 — Sessão 24: o quadro subdeclarava a dívida bibliográfica](relatorios/2026-09-29-sessao-24.md)
+* [2026-10-14 — Sessão 26: o workflow do quadro falhava há oito dias](relatorios/2026-10-14-sessao-26.md)
 * [Modelo de relatório](relatorios/_modelo.md)
