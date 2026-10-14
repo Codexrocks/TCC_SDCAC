@@ -61,6 +61,8 @@ OpenAPI estável desde o primeiro dia.
 
 ```text
 detection/     c0/ · d1/ · d2/ · d3/ · integracao/     o núcleo, em Python puro
+               ports.py                               o contrato de entrada e saída
+storage/       arquivos.py                             adaptadores das portas
 runner/        executor do experimento                 entrada sem HTTP
 backend/       api/ · models/ · services/ · main.py    adaptador HTTP
 database/      corp/ · ground_truth/ · sdcac/          schema e migrações
@@ -69,11 +71,50 @@ frontend/      dashboard/                              a peça da S9
 ```
 
 **A regra de dependência, conferida no CI:** `detection/` não importa
-`backend/`, `database/` nem `generator/`, e não consulta o relógio. As duas
-entradas — `runner/` e `backend/` — importam `detection/`.
+`backend/`, `storage/`, `database/` nem `generator/`, e não consulta o relógio.
+As duas entradas — `runner/` e `backend/` — importam `detection/`.
+
+> **Até 14/10/2026 isso era frase, e nada conferia.** Agora
+> [`tests/test_arquitetura.py`](https://github.com/Codexrocks/TCC_SDCAC/blob/main/tests/test_arquitetura.py)
+> lê a árvore sintática de cada arquivo do núcleo e reprova import de
+> infraestrutura, chamada de relógio, sorteio e leitura de ambiente. O
+> `validar` roda os testes, então a conferência é de verdade. Trava e texto que
+> discordam resolvem-se corrigindo o texto — ou, como aqui, pondo a trava.
 
 É essa regra que faz valer a frase do artigo sobre um único código sob quatro
 parâmetros: **o que o painel mostra é o mesmo código que produziu a tabela.**
+
+### As portas, e por que elas moram no núcleo
+
+`detection/ports.py` declara **o que** entra e sai, sem dizer de onde vem. Sete
+portas: três de entrada — catálogo, eventos, estado de conta e equipamento —,
+três de saída — registro de execução, padrões, notas e alertas — e uma de
+leitura, que é o contrato do painel.
+
+Uma porta é só um `Protocol`: nome de método, tipo de entrada, tipo de saída.
+Declará-las no núcleo mantém o motor dono do próprio contrato, e impede o
+inverso — o motor sendo moldado pelo formato de tabela que alguém escolheu.
+
+O que isso compra, concretamente:
+
+- **o executor roda hoje**, contra arquivo, sem banco nenhum;
+- quem escrever o adaptador de PostgreSQL recebe **especificação executável**:
+  [`tests/test_portas.py`](https://github.com/Codexrocks/TCC_SDCAC/blob/main/tests/test_portas.py)
+  roda as mesmas asserções contra qualquer implementação, e reprova a que mentir
+  sobre ordem cronológica, recorte de janela ou a exigência do hash;
+- **o painel começa antes do banco existir.** A API depende da porta de leitura,
+  não de SQL.
+
+> **O gabarito não tem porta.** Não existe em `ports.py` nada que leia rótulo de
+> cenário, e um teste reprova se alguém acrescentar. O `ground_truth` é lido
+> **só** pelo avaliador — porta de leitura de rótulo seria o vazamento de rótulo
+> com nome de arquitetura.
+
+**Por que ainda não existe adaptador de PostgreSQL.** O banco não existe: não há
+servidor, e o gerador é a frente da S6. Escrever o adaptador agora produziria
+algumas centenas de linhas de SQL que ninguém consegue executar — e que
+*pareceriam* prontas. A porta mais o teste de contrato valem mais que isso: eles
+dizem exatamente o que o adaptador tem de cumprir no dia em que o banco subir.
 
 ## 4. O que é ajustável, e o que é imutável (D-33 e D-34)
 

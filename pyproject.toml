@@ -83,6 +83,9 @@ ignore = [
 [tool.ruff.lint.per-file-ignores]
 # Em teste, `assert` é o instrumento de trabalho, não um risco (S101).
 "tests/**" = ["S101"]
+# Numa interface de linha de comando, `print` é a saída — não um resto de
+# depuração esquecido (T201), que é o que a regra existe para pegar.
+"runner/cli.py" = ["T201"]
 
 [tool.ruff.lint.pydocstyle]
 convention = "google"

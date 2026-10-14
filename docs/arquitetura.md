@@ -221,21 +221,25 @@ não como expectativa a conferir:
 
 ---
 
-## Estrutura planejada do código
+## Estrutura do código
 
-Ainda não criada — entra a partir da **S6 (02/10)**, quando o desenvolvimento
-começa. Registrada aqui para não haver divergência depois:
+**Parte dela existe desde 13/10**, na fila de Pull Requests #65 a #71: o schema,
+o núcleo com as quatro dimensões, as portas, o adaptador de arquivo e o
+executor. O que ainda não existe está marcado abaixo — e a marca é o que impede
+esta página de dizer "planejado" para o que já está escrito:
 
 ```text
 TCC_SDCAC/
-├── backend/          api/ · models/ · services/ · main.py
 ├── detection/        c0/ · d1/ · d2/ · d3/ · integracao/   ← a flag C0..C3 mora aqui
+│                     ports.py                             ← o contrato de entrada e saída
+├── storage/          arquivos.py                          ← adaptador que roda sem banco
 ├── runner/           executor do experimento               ← a entrada sem HTTP
-├── generator/        personas/ · calendario/ · cenarios/   ← a peça da S6
-├── frontend/         dashboard/ · components/
 ├── database/         corp/ · ground_truth/ · sdcac/ — schema e migrações
-├── data/             sementes geradas, por run_id
-├── results/          graphs/ · tables/ — de onde sai todo número do artigo
+├── backend/          api/ · models/ · services/ · main.py  ← falta
+├── generator/        personas/ · calendario/ · cenarios/   ← falta (S6, Filipe)
+├── frontend/         dashboard/ · components/              ← falta (S9, Filipe)
+├── data/             sementes geradas, por run_id          ← falta
+├── results/          graphs/ · tables/ — de onde sai todo número do artigo  ← falta
 │
 ├── artigo/           ← o artigo (o GitBook escreve aqui)
 ├── docs/             ← documentação (o GitBook só lê)
@@ -244,8 +248,9 @@ TCC_SDCAC/
 └── tests/            ← hoje, os testes dos verificadores; na S6, também os do sistema
 ```
 
-> **`tests/` já existe** e guarda os testes de `scripts/`. Os testes dos cenários
-> entram ao lado deles, não no lugar.
+> **`tests/` guardava só os testes de `scripts/`;** desde 13/10 guarda também os
+> do sistema — schema, modelo, configuração, as quatro dimensões, as portas e o
+> executor. Os testes dos cenários entram ao lado deles, não no lugar.
 
 > **Por que `runner/` existe.** A tabela de ablação sai de uma execução em lote,
 > não de uma requisição HTTP. As duas entradas — `runner/` e `backend/` — chamam
