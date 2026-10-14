@@ -33,6 +33,15 @@ As páginas de `docs/` não têm esse problema, porque o GitBook só lê daqui.
 > | NIST 2006, na Introdução | É a **mesma obra** que `KENT; SOUPPAYA, 2006` — a NIST SP 800-92. A suspeita estava registrada aqui desde 26/09 e se confirmou. A chamada da Introdução passou a `(Kent e Souppaya, 2006)`, que é o que a ABNT pede quando a obra tem autor pessoal |
 > | Chandola 2009, na Introdução | Mesma obra citada no referencial. Uma conferência resolveu as duas, como a linha previa |
 
+**Duas entraram em 13/10/2026**, com a reescrita da seção 3.3 que a D-42
+trouxe. Nenhuma das duas tem chamada: são afirmações soltas, e é por isso
+que estão aqui e não na lista de referências.
+
+| Onde | O que falta | Quem | Desde |
+|---|---|---|---|
+| `03-metodologia.md` § 3.3 | Afirmação **sem chamada nenhuma**: "forma usual de regra de correlação em ferramentas de gestão de eventos de segurança". Entrou com a **D-42**, em 13/10, para justificar a janela de falhas na C0. Candidata: `KENT; SOUPPAYA, 2006` (NIST SP 800-92), que já está na fila do referencial — **conferir se ela sustenta a afirmação**, e não só o tema. Se não sustentar, a frase sai: a decisão não depende dela | Davi | 13/10/2026 |
+| `03-metodologia.md` § 3.3 | Afirmação sem fonte: a detecção de tentativa sucessiva de autenticação é "trivial para regras fixas". **Alternativa sem fonte:** reformular como consequência do próprio desenho — a C0 tem a regra, logo o reconhecimento não pode ser atribuído às dimensões. O argumento se sustenta sem a afirmação de dificuldade | Davi | 13/10/2026 |
+
 ### As 13 do referencial teórico — **conferidas em 13/10/2026**
 
 > **A Yasmin declarou ter conferido cada uma na fonte**, e o **Davi confirmou a

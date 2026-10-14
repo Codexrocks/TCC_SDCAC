@@ -403,8 +403,15 @@ def test_so_a_janela_de_dois_minutos_muda_a_nota_c0():
     assert com_rajada == sem_passado + 40
 
 
-def test_as_configuracoes_de_hoje_carregam():
-    """C0, C1 e C2. Falta a C3, que depende da D3."""
-    nomes = [c.name for c in load_implemented()]
+def test_so_a_c0_liga_a_linha_de_base():
+    """A C0 nao e somada as outras linhas: ela e uma delas (D-26).
 
-    assert nomes == ["C0", "C1", "C2"]
+    Enquanto as dimensoes entravam uma a uma, este teste conferia quais
+    configuracoes carregavam. Agora que as quatro carregam, o que resta de util
+    e a garantia que importa para esta pasta: as regras fixas rodam na linha de
+    base e em nenhuma outra configuracao. Se a C3 passasse a ligar `c0`, a
+    tabela de ablacao mediria a D1 somada ao controle, e nao contra ele.
+    """
+    ligam_c0 = [c.name for c in load_implemented() if c.enables("c0")]
+
+    assert ligam_c0 == ["C0"]

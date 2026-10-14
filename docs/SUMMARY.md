@@ -72,4 +72,5 @@
 * [2026-09-28 — Sessão 23: a Metodologia entra no artigo](relatorios/2026-09-28-sessao-23.md)
 * [2026-09-29 — Sessão 24: o quadro subdeclarava a dívida bibliográfica](relatorios/2026-09-29-sessao-24.md)
 * [2026-10-13 — Sessão 25: a estrutura pedida, e a lista de referências sai do zero](relatorios/2026-10-13-sessao-25.md)
+* [2026-10-13 — Sessão 27: o motor sai do papel, e a tabela ganha as quatro linhas](relatorios/2026-10-13-sessao-27.md)
 * [Modelo de relatório](relatorios/_modelo.md)
