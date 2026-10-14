@@ -22,6 +22,7 @@ total esconderia qual delas causou o alerta.
 """
 
 from dataclasses import dataclass, field
+from datetime import datetime
 
 from detection.c0 import score_c0
 from detection.configuration import Configuration, ConfigurationError
@@ -78,6 +79,69 @@ class RiskScore:
     @property
     def fired(self) -> tuple[str, ...]:
         return tuple(hit.rule for hit in self.hits)
+
+
+@dataclass(frozen=True, slots=True)
+class Alert:
+    """Um alerta levantado, por evento OU por pessoa numa janela.
+
+    Espelha `sdcac.alerts`, inclusive a restricao: alerta de evento nao tem
+    funcionario, e alerta de janela nao tem evento. E a **D-12** aparecendo
+    aqui, porque a D3 alarma sobre alguem num periodo, nao sobre um evento, e
+    as duas unidades de analise precisam ser distinguiveis na contagem.
+
+    O limiar vai gravado junto. Sem ele, "quantos alertas a C2 levantou" seria
+    pergunta sem resposta: o numero depende do corte, e o corte varia na curva
+    precisao-revocacao da D-14.
+    """
+
+    band: RiskBand
+    threshold: float
+    raised_at: datetime
+    event_id: str | None = None
+    employee_id: int | None = None
+    window_start: datetime | None = None
+    window_end: datetime | None = None
+
+    def __post_init__(self) -> None:
+        por_evento = self.event_id is not None
+        por_janela = (
+            self.employee_id is not None
+            and self.window_start is not None
+            and self.window_end is not None
+        )
+        if por_evento == por_janela:
+            raise ValueError(
+                "alerta precisa ser de um evento OU de um funcionario numa "
+                "janela, nunca dos dois nem de nenhum: as duas unidades de "
+                "analise da D-12 ficariam indistinguiveis na contagem"
+            )
+        if por_evento and self.employee_id is not None:
+            raise ValueError(
+                "alerta de evento nao leva funcionario: o evento ja diz de quem e"
+            )
+        if self.raised_at.tzinfo is None:
+            raise ValueError("alerta com raised_at sem fuso horario")
+
+
+def alert_for(
+    score: RiskScore, *, threshold: float, raised_at: datetime
+) -> Alert | None:
+    """O alerta de uma nota, se ela passar do limiar — ou None.
+
+    Devolver None em vez de alerta de faixa normal e deliberado: a fila de
+    alerta e lida por gente, e alerta que nao pede acao treina quem le a
+    ignorar a fila.
+    """
+    if score.final_raw < threshold:
+        return None
+
+    return Alert(
+        band=score.band,
+        threshold=threshold,
+        raised_at=raised_at,
+        event_id=score.event_id,
+    )
 
 
 def band_of(points: float, config: Configuration) -> RiskBand:

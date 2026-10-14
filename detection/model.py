@@ -10,7 +10,7 @@ Tudo e imutavel. O motor pontua eventos; ele nao corrige log.
 
 from collections.abc import Mapping
 from dataclasses import dataclass, field
-from datetime import datetime
+from datetime import date, datetime
 from enum import StrEnum
 from ipaddress import IPv4Address, IPv4Network, IPv6Address, IPv6Network
 from types import MappingProxyType
@@ -159,6 +159,54 @@ class NetworkRange:
     kind: NetworkKind
     country: str
     city: str
+
+
+@dataclass(frozen=True, slots=True)
+class AccountState:
+    """O estado da conta num intervalo — espelha `corp.account_state`.
+
+    E a tabela que torna a leitura ponto-no-tempo possivel: o MFA de hoje nao
+    e o MFA de marco, e ler o estado final para avaliar um evento antigo e a
+    falha da **D-17** por outro caminho. `valid_to` nulo significa "ainda
+    vigente".
+    """
+
+    employee_id: int
+    valid_from: datetime
+    mfa_enabled: bool
+    privilege: Privilege
+    valid_to: datetime | None = None
+
+    def __post_init__(self) -> None:
+        if self.valid_from.tzinfo is None:
+            raise ValueError(
+                f"estado da conta {self.employee_id}: valid_from sem fuso horario"
+            )
+        if self.valid_to is not None and self.valid_to.tzinfo is None:
+            raise ValueError(
+                f"estado da conta {self.employee_id}: valid_to sem fuso horario"
+            )
+
+    def covers(self, instante: datetime) -> bool:
+        """Verdadeiro quando este estado vale no instante dado."""
+        if instante < self.valid_from:
+            return False
+        return self.valid_to is None or instante < self.valid_to
+
+
+@dataclass(frozen=True, slots=True)
+class DeviceState:
+    """O estado do equipamento num dia — espelha `corp.device_state_daily`.
+
+    Diario, e nao por intervalo: atualizacao e antivirus mudam de um dia para
+    o outro, e a granularidade de dia e a que o gerador consegue produzir sem
+    inventar precisao que ninguem mediria.
+    """
+
+    device_id: int
+    state_date: date
+    patch_age_days: int
+    antivirus_on: bool
 
 
 class Catalog:
