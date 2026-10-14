@@ -188,7 +188,7 @@ fixas      do evento  do usuário  acumulada
 
 | Configuração | O que avalia | Papel no experimento |
 |---|---|---|
-| **C0** Linha de base | Regras fixas sobre o evento isolado, sem histórico do usuário — as quatro regras da v1. | Grupo de controle. Sem ela, a Conclusão só pode dizer "o modelo funcionou". |
+| **C0** Linha de base | Regras fixas sobre o evento isolado, com limiar fixo igual para todos e sem parâmetro aprendido — as quatro regras da v1, com a de origem habitual trocada por faixas cadastradas (**D-31**) e a janela de falhas mantida (**D-42**). | Grupo de controle. Sem ela, a Conclusão só pode dizer "o modelo funcionou". |
 | **C1** D1 | Características do evento: horário, IP, dispositivo, localização, origem, VPN. | Mede o ganho de atributos mais ricos sobre a mesma lógica pontual. |
 | **C2** D1 + D2 | Desvio em relação ao baseline histórico do próprio usuário. | Mede o ganho de contexto individual — redução de falsos positivos esperada. |
 | **C3** D1 + D2 + D3 | Recorrência, combinação e evolução temporal ao longo de dias, **mais a postura de segurança do funcionário** — as duas parcelas reportadas separadas (decisão **D-25**). | Mede a contribuição original do trabalho — cobertura de cenários longitudinais. |

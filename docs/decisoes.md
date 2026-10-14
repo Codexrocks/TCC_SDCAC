@@ -26,18 +26,18 @@ fechada fica enterrada.
 
 | ID | Decisão | Proposta | Dono | Prazo | Situação |
 |---|---|---|---|---|---|
-| D-02 | Dashboard: objetivo, instrumento ou fora do escopo | Instrumento de análise, descrito na Metodologia e na arquitetura | Davi, Filipe | 08/09/2026 | ⚠️ Atrasado há 35 dias |
-| D-06 | Cenários de contexto (B) e longitudinais (L) | Adotados; desenho detalhado na S5 | Yasmin | 01/10/2026 | ⚠️ Atrasado há 12 dias |
+| D-02 | Dashboard: objetivo, instrumento ou fora do escopo | Instrumento de análise, descrito na Metodologia e na arquitetura | Davi, Filipe | 08/09/2026 | ⚠️ Atrasado há 36 dias |
+| D-06 | Cenários de contexto (B) e longitudinais (L) | Adotados; desenho detalhado na S5 | Yasmin | 01/10/2026 | ⚠️ Atrasado há 13 dias |
 | D-07 | Caneta rotativa por seção | Uma pessoa redige, duas revisam, a caneta gira. Registrada pelo Davi quando Yasmin e Filipe confirmarem | Davi, Yasmin, Filipe | — | 🗓️ Sem prazo |
-| D-09 | Pesos preliminares e análise de sensibilidade | Valores preliminares; sensibilidade na S12 | Yasmin | S8 | 🗓️ Em 9 dias |
-| D-12 | Unidade de análise das métricas | Duas unidades declaradas separadamente: evento para os cenários pontuais, episódio para os de contexto e longitudinais | Davi, Filipe | 01/10/2026 | ⚠️ Atrasado há 12 dias |
-| D-13 | Tratamento estatístico dos resultados | 10 a 20 sementes, as mesmas nas quatro configurações; Wilcoxon pareado. Regra de corte declarada em 28/09, respondendo à P31: ciclo completo de uma semente até 30 min → 20 sementes; acima disso → 10, com o motivo registrado | Davi | 01/10/2026 | ⚠️ Atrasado há 12 dias |
-| D-14 | O que fazer se a C0 não alcançar revocação 0,90 | Comparar curvas precisão-revocação, em vez de pontos únicos | Filipe | 01/10/2026 | ⚠️ Atrasado há 12 dias |
-| D-15 | Critério de relevância declarado a priori | Uma frase na Metodologia dizendo qual redução de FPR e qual revocação longitudinal contam como resposta afirmativa | Davi, Yasmin, Filipe | 01/10/2026 | ⚠️ Atrasado há 12 dias |
-| D-16 | Controle negativo longitudinal | Acrescentar cenário de escalada legítima aos cenários de teste | Yasmin | 01/10/2026 | ⚠️ Atrasado há 12 dias |
-| D-17 | Janela de constituição do baseline da D2 | Janela de treino anterior e disjunta da janela de avaliação | Davi | 01/10/2026 | ⚠️ Atrasado há 12 dias |
-| D-18 | Dupla contagem e escala na integração | Excluir o evento atual da janela de exposição | Davi | 01/10/2026 | ⚠️ Atrasado há 12 dias |
-| D-19 | Vertente LGPD e ISO/IEC 27001 | Entra como limitação e trabalho futuro na S13 | Yasmin | 01/10/2026 | ⚠️ Atrasado há 12 dias |
+| D-09 | Pesos preliminares e análise de sensibilidade | Valores preliminares; sensibilidade na S12 | Yasmin | S8 | 🗓️ Em 8 dias |
+| D-12 | Unidade de análise das métricas | Duas unidades declaradas separadamente: evento para os cenários pontuais, episódio para os de contexto e longitudinais | Davi, Filipe | 01/10/2026 | ⚠️ Atrasado há 13 dias |
+| D-13 | Tratamento estatístico dos resultados | 10 a 20 sementes, as mesmas nas quatro configurações; Wilcoxon pareado. Regra de corte declarada em 28/09, respondendo à P31: ciclo completo de uma semente até 30 min → 20 sementes; acima disso → 10, com o motivo registrado | Davi | 01/10/2026 | ⚠️ Atrasado há 13 dias |
+| D-14 | O que fazer se a C0 não alcançar revocação 0,90 | Comparar curvas precisão-revocação, em vez de pontos únicos | Filipe | 01/10/2026 | ⚠️ Atrasado há 13 dias |
+| D-15 | Critério de relevância declarado a priori | Uma frase na Metodologia dizendo qual redução de FPR e qual revocação longitudinal contam como resposta afirmativa | Davi, Yasmin, Filipe | 01/10/2026 | ⚠️ Atrasado há 13 dias |
+| D-16 | Controle negativo longitudinal | Acrescentar cenário de escalada legítima aos cenários de teste | Yasmin | 01/10/2026 | ⚠️ Atrasado há 13 dias |
+| D-17 | Janela de constituição do baseline da D2 | Janela de treino anterior e disjunta da janela de avaliação | Davi | 01/10/2026 | ⚠️ Atrasado há 13 dias |
+| D-18 | Dupla contagem e escala na integração | Excluir o evento atual da janela de exposição | Davi | 01/10/2026 | ⚠️ Atrasado há 13 dias |
+| D-19 | Vertente LGPD e ISO/IEC 27001 | Entra como limitação e trabalho futuro na S13 | Yasmin | 01/10/2026 | ⚠️ Atrasado há 13 dias |
 <!-- QUADRO:fim decisoes-abertas -->
 
 ## Adotadas, a confirmar
@@ -47,8 +47,8 @@ fechada fica enterrada.
 
 | ID | Decisão | Proposta | Dono | Prazo | Situação |
 |---|---|---|---|---|---|
-| D-05 | Ablação em quatro configurações (C0 a C3) | Confirmar no M2 | Davi | 01/10/2026 | ⚠️ Atrasado há 12 dias |
-| D-10 | Isolation Forest como benchmark opcional | Cortável na S10, se as métricas estiverem em risco | Filipe | S10 | 🗓️ Em 23 dias |
+| D-05 | Ablação em quatro configurações (C0 a C3) | Confirmar no M2 | Davi | 01/10/2026 | ⚠️ Atrasado há 13 dias |
+| D-10 | Isolation Forest como benchmark opcional | Cortável na S10, se as métricas estiverem em risco | Filipe | S10 | 🗓️ Em 22 dias |
 <!-- QUADRO:fim decisoes-a-confirmar -->
 
 ## Fechadas
@@ -82,6 +82,7 @@ fechada fica enterrada.
 | D-39 | Sistemas e matriz de acesso | **Dez sistemas em onze níveis** — o servidor de arquivos tem pasta `internal` e pastas `confidential`, que é o caso que separa "acessou o servidor" de "acessou o que não devia". Folha de pagamento, dossiê de pessoal e console de infraestrutura são `restricted`, com **15 pessoas de 250** alcançando algum deles. É a matriz que dá definição a "acesso incomum" e é sobre ela que os cenários da **D-06** são desenhados. Fecha também o que faltava da **P11** | 28/09/2026 |
 | D-40 | Sede, filial e fusos horários | **São Paulo (UTC−3) com 210 pessoas e Manaus (UTC−4) com 40.** Corrige a recomendação anterior, de um fuso só: a **D-31** faz a C0 usar o fuso da sede e a D1 o fuso do funcionário, e com um fuso único essa diferença é decorativa. Com dois, quem encerra às 21:30 em Manaus são 22:30 em São Paulo — a C0 dispara e a D1 não. É falso positivo legítimo, fabricado por desenho, que é o mecanismo que a pergunta de pesquisa alega resolver | 28/09/2026 |
 | D-41 | Dispositivos e estado inicial de higiene | **425 dispositivos**: 250 notebooks corporativos, 150 celulares corporativos e **25 celulares pessoais autorizados**. MFA ligado em ~87% no início. O dispositivo pessoal precisa existir no tráfego legítimo: se aparecesse só em cenário, viraria detector perfeito e a C0 acertaria sem olhar mais nada — a mesma armadilha que a D-27 evitou em férias e feriado | 28/09/2026 |
+| D-42 | A quarta regra da C0: janela de falhas ou evento isolado | **A janela fica**, com limiar fixo igual para todos e memória de dois minutos. E "puramente estática" passa a ser dito com precisão: a C0 não tem **parâmetro aprendido** — nada estimado do comportamento de ninguém. A distinção é entre correlação de curto prazo e perfil individual: a primeira é regra de SIEM, a segunda é a D2. Tirar a janela produziria um grupo de controle incapaz de pegar tentativa sucessiva de autenticação, e o ganho apareceria nas dimensões por falta de adversário — a banca chamaria isso de comparação com adversário de palha. O custo foi reescrever a seção 3.3 da [Metodologia](../artigo/03-metodologia.md) e reformular a invariante da **D-31**: a nota da C0 depende do evento, do cadastro e dos dois minutos anteriores da mesma conta — nada mais antigo, nada de outra pessoa. Verificado em teste | 13/10/2026 |
 
 ---
 

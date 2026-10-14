@@ -14,7 +14,13 @@ from ipaddress import ip_address, ip_network
 
 import pytest
 
-from detection.c0 import external_origin, off_hours, restricted_access, score_c0
+from detection.c0 import (
+    brute_force,
+    external_origin,
+    off_hours,
+    restricted_access,
+    score_c0,
+)
 from detection.configuration import (
     ConfigurationError,
     load_canonical,
@@ -36,6 +42,10 @@ from detection.model import (
 )
 
 C0 = load_canonical("C0")
+
+# Instante de referencia das rajadas: 14:30 em Sao Paulo, dentro do horario
+# comercial, para a janela de falhas ser a unica regra a disparar.
+INSTANTE = datetime(2026, 3, 10, 17, 30, tzinfo=UTC)
 
 
 # ---------------------------------------------------------------------------
@@ -208,7 +218,7 @@ def test_sensibilidade_vem_do_catalogo_e_nao_do_evento():
 
 
 def test_evento_normal_soma_zero():
-    score = score_c0(evento(), catalogo(), C0)
+    score = score_c0(evento(), catalogo(), C0, ())
 
     assert score.points == 0
     assert score.hits == ()
@@ -226,7 +236,7 @@ def test_pontos_se_somam_sem_teto():
         resource_id=3,
     )
 
-    score = score_c0(pior_caso, catalogo(), C0)
+    score = score_c0(pior_caso, catalogo(), C0, ())
 
     assert score.points == 95
     assert set(score.fired) == {"off_hours", "external_origin", "restricted_access"}
@@ -236,7 +246,7 @@ def test_configuracao_que_nao_liga_a_c0_e_recusada():
     c1 = load_canonical("C1")
 
     with pytest.raises(ConfigurationError, match="nao liga a dimensao c0"):
-        score_c0(evento(), catalogo(), c1)
+        score_c0(evento(), catalogo(), c1, ())
 
 
 # ---------------------------------------------------------------------------
@@ -261,39 +271,136 @@ def test_a_c0_nao_consulta_o_funcionario():
     evento_qualquer = evento(occurred_at=datetime(2026, 3, 10, 6, 17, tzinfo=UTC))
 
     assert (
-        score_c0(evento_qualquer, sem_pessoas, C0).points
-        == score_c0(evento_qualquer, com_pessoas, C0).points
+        score_c0(evento_qualquer, sem_pessoas, C0, ()).points
+        == score_c0(evento_qualquer, com_pessoas, C0, ()).points
     )
 
 
-def test_o_passado_do_funcionario_nao_muda_a_nota_c0():
-    """Mesmo evento, histórico diferente, nota igual.
+def falha(segundos_antes: int, *, employee_id: int = 7, sufixo: str = "") -> Event:
+    """Uma falha de autenticacao, `segundos_antes` do instante de referencia."""
+    return evento(
+        event_id=f"falha-{segundos_antes}{sufixo}",
+        employee_id=employee_id,
+        occurred_at=INSTANTE - timedelta(seconds=segundos_antes),
+        event_type=EventType.LOGIN,
+        result=EventResult.FAILURE,
+        resource_id=None,
+        attributes={"mfa_used": False, "failure_reason": "wrong_password"},
+    )
 
-    Aqui o "historico" e simulado do jeito que ele chegaria: uma sequencia de
-    eventos anteriores da mesma pessoa. A C0 pontua cada evento isoladamente,
-    entao a nota do ultimo nao pode depender dos anteriores.
+
+def test_falhas_abaixo_do_limite_nao_disparam():
+    """Dez falhas e o limite; o limite nao e ultrapassado por igualdade."""
+    anteriores = tuple(falha(s) for s in range(10, 100, 10))  # nove anteriores
+    alvo = falha(0)
+
+    assert len(anteriores) == 9
+    assert brute_force(alvo, anteriores, C0) is None
+
+
+def test_falhas_acima_do_limite_disparam():
+    anteriores = tuple(falha(s) for s in range(5, 55, 5))  # dez anteriores
+    alvo = falha(0)
+
+    hit = brute_force(alvo, anteriores, C0)
+
+    assert hit is not None
+    assert hit.rule == "brute_force"
+    assert hit.points == 40
+    assert "11 falhas" in hit.reason
+
+
+def test_falha_fora_da_janela_nao_conta():
+    """A memoria da C0 e de dois minutos, e nao do dia inteiro.
+
+    Vinte falhas espalhadas por uma hora nao disparam; e o que separa uma
+    rajada de alguem que erra a senha de vez em quando. Quem enxerga a
+    recorrencia ao longo do dia e a D3.
+    """
+    espalhadas = tuple(falha(s) for s in range(180, 180 * 21, 180))
+    alvo = falha(0)
+
+    assert len(espalhadas) == 20
+    assert brute_force(alvo, espalhadas, C0) is None
+
+
+def test_sucesso_depois_da_rajada_nao_dispara():
+    """A regra e sobre falha de autenticacao, na forma literal da D-31.
+
+    Login bem-sucedido logo depois de uma rajada e sequencia, e sequencia e o
+    que a D2 avalia. Esticar a C0 para cobrir isso seria dar contexto ao grupo
+    de controle.
+    """
+    rajada = tuple(falha(s) for s in range(5, 55, 5))
+    sucesso = evento(
+        event_id="entrou",
+        event_type=EventType.LOGIN,
+        result=EventResult.SUCCESS,
+        resource_id=None,
+    )
+
+    assert brute_force(sucesso, rajada, C0) is None
+
+
+def test_a_janela_recusa_evento_de_outra_conta():
+    """Mistura de contas inflaria a contagem e alarmaria o inocente."""
+    de_outro = (falha(10, employee_id=8, sufixo="-b"),)
+
+    with pytest.raises(ValueError, match="funcionario 8"):
+        brute_force(falha(0), de_outro, C0)
+
+
+def test_a_janela_recusa_evento_do_futuro():
+    """Nao olhar para o futuro, verificado na fronteira.
+
+    Com evento posterior na janela, a nota de um evento passado passaria a
+    depender do que veio depois — a falha da D-17, por outro caminho.
+    """
+    do_futuro = (falha(-30),)
+
+    with pytest.raises(ValueError, match="posterior ao avaliado"):
+        brute_force(falha(0), do_futuro, C0)
+
+
+def test_a_janela_vale_igual_para_qualquer_conta():
+    """O que a D-42 chama de "sem parametro aprendido", em teste.
+
+    Duas pessoas diferentes, com a mesma sequencia de falhas, recebem a mesma
+    nota. A C0 nao estima nada de ninguem: o limiar e o mesmo para as 250.
+    """
+    rajada_de_sete = tuple(falha(s, employee_id=7) for s in range(5, 55, 5))
+    rajada_de_oito = tuple(
+        falha(s, employee_id=8, sufixo="-b") for s in range(5, 55, 5)
+    )
+
+    nota_sete = brute_force(falha(0, employee_id=7), rajada_de_sete, C0)
+    nota_oito = brute_force(falha(0, employee_id=8, sufixo="-b"), rajada_de_oito, C0)
+
+    assert nota_sete is not None and nota_oito is not None
+    assert nota_sete.points == nota_oito.points
+
+
+def test_so_a_janela_de_dois_minutos_muda_a_nota_c0():
+    """A invariante da C0, na forma que a D-42 deixou.
+
+    "Embaralhar o historico nao muda nota nenhuma" deixou de ser verdade com a
+    janela ligada, e a formulacao honesta e esta: a nota da C0 depende apenas do
+    evento, do cadastro e dos dois minutos anteriores da propria conta. Nada
+    mais antigo que isso entra, e nada de outra pessoa entra.
     """
     catalogo_fixo = catalogo()
-    alvo = evento(event_id="alvo", ip_address=ip_address("192.0.2.10"))
+    alvo = falha(0)
 
-    sozinho = score_c0(alvo, catalogo_fixo, C0).points
+    sem_passado = score_c0(alvo, catalogo_fixo, C0, ()).points
 
-    anteriores = [
-        evento(
-            event_id=f"antigo-{i}",
-            occurred_at=alvo.occurred_at - timedelta(minutes=i),
-            result=EventResult.FAILURE,
-            event_type=EventType.LOGIN,
-            resource_id=None,
-        )
-        for i in range(1, 30)
-    ]
-    for anterior in anteriores:
-        score_c0(anterior, catalogo_fixo, C0)
+    passado_antigo = tuple(falha(s) for s in range(300, 300 * 31, 300))
+    com_passado_antigo = score_c0(alvo, catalogo_fixo, C0, passado_antigo).points
 
-    depois = score_c0(alvo, catalogo_fixo, C0).points
+    dentro_da_janela = tuple(falha(s) for s in range(5, 55, 5))
+    com_rajada = score_c0(alvo, catalogo_fixo, C0, dentro_da_janela).points
 
-    assert sozinho == depois
+    assert com_passado_antigo == sem_passado
+    assert com_rajada == sem_passado + 40
 
 
 def test_as_configuracoes_de_hoje_carregam():
