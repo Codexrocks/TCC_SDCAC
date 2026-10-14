@@ -1,0 +1,99 @@
+# Presets canonicos das quatro configuracoes
+#
+# ESTE ARQUIVO E A CONFIGURACAO DO EXPERIMENTO. Alterar um numero aqui muda o
+# que a tabela de resultados do artigo vai dizer.
+#
+# Pela D-33, os quatro presets abaixo sao somente leitura: nenhuma rota da API
+# os altera, e configuracao criada por usuario nasce marcada como exploratoria
+# e nao vai ao artigo. Pela D-34, toda execucao grava o hash deste arquivo
+# junto do resultado — execucao sem hash e erro, nao aviso.
+#
+# OS PESOS SAO PRELIMINARES. Eles vem da versao 1 da arquitetura, que os tinha
+# como ponto de partida, e a definicao final e a decisao D-09 — com analise de
+# sensibilidade na S12. Nenhum numero daqui vai ao artigo como valor
+# justificado antes daquela analise.
+
+[configurations.C0]
+dimensions = ["c0"]
+description = "Linha de base: regras fixas sobre o evento isolado"
+
+[configurations.C1]
+dimensions = ["d1"]
+description = "Risco do evento, com peso por atributo"
+
+[configurations.C2]
+dimensions = ["d1", "d2"]
+description = "Evento mais desvio do padrao do proprio funcionario"
+
+[configurations.C3]
+dimensions = ["d1", "d2", "d3"]
+description = "Evento, desvio e exposicao acumulada com higiene"
+
+# ---------------------------------------------------------------------------
+# C0 — a linha de base
+#
+# Configuracao estatica, pela D-31: horario fixo no fuso da SEDE, faixas
+# corporativas cadastradas e sensibilidade do recurso. Nada aqui depende do
+# passado de quem gerou o evento.
+# ---------------------------------------------------------------------------
+
+[c0]
+site_timezone = "America/Sao_Paulo"
+business_hour_start = 6
+business_hour_end = 22
+
+[c0.points]
+off_hours = 30
+external_origin = 30
+restricted_access = 35
+
+# ---------------------------------------------------------------------------
+# D1 — risco do evento, ponderado
+#
+# Mesmo evento isolado da C0, com mais atributos e peso por atributo em vez de
+# ponto fixo. O horario aqui usa o fuso do FUNCIONARIO, e e essa diferenca que
+# produz o falso positivo legitimo da D-40: quem encerra as 21:30 em Manaus
+# aparece as 22:30 no fuso da sede.
+# ---------------------------------------------------------------------------
+
+[d1]
+employee_timezone = true
+business_hour_start = 6
+business_hour_end = 22
+
+[d1.points]
+off_hours_employee = 20
+personal_device = 25
+login_without_mfa = 15
+privilege_change = 40
+large_download = 20
+download_to_external = 25
+removable_device = 20
+risky_browsing = 10
+
+[d1.network_kind]
+office = 0
+vpn = 0
+home = 10
+external = 30
+
+[d1.sensitivity]
+public = 0
+internal = 5
+confidential = 20
+restricted = 35
+
+[d1.thresholds]
+large_download_bytes = 52428800
+
+# ---------------------------------------------------------------------------
+# Faixas de exibicao
+#
+# A avaliacao usa o score bruto, sem teto: faixa empatada em 100 viraria degrau
+# na curva precisao-revocacao da D-14. As faixas abaixo servem para a tela.
+# ---------------------------------------------------------------------------
+
+[bands]
+normal_max = 20
+low_max = 50
+medium_max = 75

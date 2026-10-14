@@ -10,6 +10,7 @@ diferentes, e o `SYSTEM_CONFIG` ficou sem o valor que religa o MFA. Ninguem
 percebeu por dias. Divergencia entre o documento e a implementacao nao se
 resolve com atencao — se resolve com teste.
 """
+
 import re
 from pathlib import Path
 
@@ -20,9 +21,9 @@ ESPECIFICACAO = (RAIZ / "docs" / "banco-simulado.md").read_text(encoding="utf-8"
 CORP = (BANCO / "corp" / "001_schema.sql").read_text(encoding="utf-8")
 CORP_PRIV = (BANCO / "corp" / "002_privilegios.sql").read_text(encoding="utf-8")
 GABARITO = (BANCO / "ground_truth" / "001_schema.sql").read_text(encoding="utf-8")
-GABARITO_PRIV = (
-    BANCO / "ground_truth" / "002_privilegios.sql"
-).read_text(encoding="utf-8")
+GABARITO_PRIV = (BANCO / "ground_truth" / "002_privilegios.sql").read_text(
+    encoding="utf-8"
+)
 SDCAC = (BANCO / "sdcac" / "001_schema.sql").read_text(encoding="utf-8")
 SDCAC_PRIV = (BANCO / "sdcac" / "002_privilegios.sql").read_text(encoding="utf-8")
 BANCOS = (BANCO / "00_bancos_e_papeis.sql").read_text(encoding="utf-8")
