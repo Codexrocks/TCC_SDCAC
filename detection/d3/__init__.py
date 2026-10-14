@@ -12,6 +12,7 @@ Duas recusas moram aqui, e as duas sao decisoes virando codigo:
   ler o estado final e a falha da D-17 por outro caminho.
 """
 
+from detection.d3.posture import build_posture
 from detection.d3.scoring import (
     DESFECHOS_DE_PHISHING,
     Posture,
@@ -27,6 +28,7 @@ __all__ = [
     "Posture",
     "PriorScore",
     "ThirdDimension",
+    "build_posture",
     "score_conduct",
     "score_d3",
     "score_posture",

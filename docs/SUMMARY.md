@@ -73,4 +73,5 @@
 * [2026-09-29 — Sessão 24: o quadro subdeclarava a dívida bibliográfica](relatorios/2026-09-29-sessao-24.md)
 * [2026-10-13 — Sessão 25: a estrutura pedida, e a lista de referências sai do zero](relatorios/2026-10-13-sessao-25.md)
 * [2026-10-13 — Sessão 27: o motor sai do papel, e a tabela ganha as quatro linhas](relatorios/2026-10-13-sessao-27.md)
+* [2026-10-14 — Sessão 28: as portas fecham, e o experimento roda de ponta a ponta](relatorios/2026-10-14-sessao-28.md)
 * [Modelo de relatório](relatorios/_modelo.md)
