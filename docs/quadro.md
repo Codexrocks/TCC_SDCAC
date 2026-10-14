@@ -146,7 +146,7 @@ promete e o prazo em que ela foi cobrada.
 
 ## Dívida bibliográfica
 
-27 pendências. Referência não conferida na fonte é o único
+29 pendências. Referência não conferida na fonte é o único
 item deste quadro que pode reprovar o trabalho por fraude acadêmica, e é o
 que some mais fácil de vista.
 
@@ -179,6 +179,8 @@ que some mais fácil de vista.
 | `artigo/03-metodologia.md § 3.6` | Confirmar na fonte: (SAITO; REHMSMEIER, 2015) — O mesmo ponto da linha acima | Davi | 28/09/2026 | 16 dias |
 | `artigo/03-metodologia.md § 3.8` | Confirmar na fonte: (KAUFMAN et al., 2012) — Vazamento na constituição do padrão individual | Davi | 28/09/2026 | 16 dias |
 | `artigo/03-metodologia.md § 3.8` | Confirmar na fonte: (SOMMER; PAXSON, 2010) — Limite das avaliações sobre dado sintético | Davi | 28/09/2026 | 16 dias |
+| `artigo/03-metodologia.md § 3.3 — a janela de falhas` | Afirmação sem chamada: "forma usual de regra de correlação em ferramentas de gestão de eventos de segurança". Entrou com a D-42 | Davi | 13/10/2026 | 1 dias |
+| `artigo/03-metodologia.md § 3.3 — "trivial para regras fixas"` | Afirmação sem fonte: detecção de tentativa sucessiva é "trivial para regras fixas". Pode ser reformulada sem fonte | Davi | 13/10/2026 | 1 dias |
 
 ## O que ficou fora desta versão
 

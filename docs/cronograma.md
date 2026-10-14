@@ -38,8 +38,12 @@ não há data escrita à mão aqui, porque data escrita à mão envelhece:
 | 5. Conclusão | Esqueleto | Davi (caneta) | S14 | 🗓️ Em 50 dias |
 <!-- QUADRO:fim capitulos -->
 
-**Nenhuma linha de código existe ainda.** O que existe é a especificação do
-gerador, que entrou na `main` pelo Pull Request #43, em 24/09.
+**O código existe, e ainda não está na `main`.** O motor de análise — schema
+dos três bancos, as quatro dimensões e a composição da nota — está na fila de
+Pull Requests #65 a #70, aberta em 13/10. Na `main` o que existe é a
+especificação do gerador, que entrou pelo Pull Request #43, em 24/09. **O
+gerador de eventos, que é a S6, não começou** — enquanto ele não existir, o
+motor roda contra fixture e nenhum número do artigo sai dali.
 
 A S5 carrega, além da Metodologia, o que ficou de S2 a S4. É a única semana com
 acúmulo declarado — depois dela o cronograma volta a ter uma entrega por semana.
@@ -158,7 +162,7 @@ Dashboard, Isolation Forest e referencial teórico correm em paralelo e têm fol
 |---|---|---|
 | **M2 em 01/10** com **12 decisões abertas**, 9 delas vencendo nessa data | D-12 a D-19 vencem em 01/10, e os cenários também | Fechar as oito lacunas metodológicas antes de escrever a Metodologia |
 | **Gerador sem parâmetros** | 25 definições abertas na especificação do gerador — personas, matriz cargo × sistema, faixas de rede | As **25 perguntas abertas** da [especificação](banco-simulado.md), que entrou pelo PR #43, precisam de resposta antes da S6 |
-| **Nenhuma linha de código na `main`** | S6 a S8 são três semanas para banco, gerador e quatro motores | A S10 é o único corte disponível: o Isolation Forest é opcional por definição |
+| **O código não está na `main`** | Os quatro motores estão prontos na fila dos PRs #65 a #70, e o gerador da S6 não começou: sem ele o motor roda contra fixture | A S10 é o único corte disponível: o Isolation Forest é opcional por definição |
 | **Referencial fora do repositório** | ✅ **Resolvido em 28/09** — o texto entrou pelo insumo da Yasmin | Resta o levantamento v1, de 17 fontes, que continua fora |
 
 > **A S10 é a folga do cronograma.** Se a S6, a S7 ou a S8 estourarem, o

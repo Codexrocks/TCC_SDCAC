@@ -772,3 +772,15 @@ onde = "docs/usabilidade.md § 9"
 o_que = "Edição e ano da obra de Shneiderman efetivamente consultada"
 dono = "Filipe"
 desde = 2026-09-03
+
+[[citacao]]
+onde = "artigo/03-metodologia.md § 3.3 — a janela de falhas"
+o_que = "Afirmação sem chamada: \"forma usual de regra de correlação em ferramentas de gestão de eventos de segurança\". Entrou com a D-42"
+dono = "Davi"
+desde = 2026-10-13
+
+[[citacao]]
+onde = "artigo/03-metodologia.md § 3.3 — \"trivial para regras fixas\""
+o_que = "Afirmação sem fonte: detecção de tentativa sucessiva é \"trivial para regras fixas\". Pode ser reformulada sem fonte"
+dono = "Davi"
+desde = 2026-10-13
