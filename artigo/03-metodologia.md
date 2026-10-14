@@ -9,6 +9,11 @@
 > [`docs/insumos/metodologia-davi-v1.md`](../docs/insumos/metodologia-davi-v1.md),
 > com a procedência de cada subseção.
 >
+> **A chamada no texto segue a forma do template COBEM**, que chegou em
+> 13/10/2026: autor-ano em caixa normal. A conversão valeu para o artigo
+> inteiro de uma vez, como o [formato do artigo](../docs/formato-do-artigo.md)
+> previa.
+>
 > ⚠️ **Nenhuma das sete citações foi conferida na fonte.** Elas estão
 > registradas em [citações pendentes](../docs/citacoes-pendentes.md) e **não**
 > entraram em [`referencias.md`](referencias.md), que só aceita entrada depois
@@ -197,7 +202,7 @@ de regras discretas e não dispara em cenários longitudinais, essa condição p
 não se verificar. Nesse caso a comparação passa a ser feita entre **curvas de
 precisão e revocação** completas, e não entre pontos isolados; em problemas de
 classe fortemente desbalanceada, como é o caso, a curva de precisão-revocação é
-mais informativa que a curva ROC (DAVIS; GOADRICH, 2006; SAITO; REHMSMEIER,
+mais informativa que a curva ROC (Davis e Goadrich, 2006; Saito e Rehmsmeier,
 2015).
 
 > **A escrever — lacuna 3 · os três · 01/10.** O critério de sucesso declarado a
@@ -220,9 +225,9 @@ as *N* execuções, e não como valor único.
 O uso das mesmas sementes nas quatro configurações torna a comparação **pareada**:
 para cada semente existe uma diferença observada entre configurações, e o
 conjunto dessas *N* diferenças é submetido ao teste de Wilcoxon para amostras
-pareadas (WILCOXON, 1945), adequado por não pressupor normalidade das diferenças
+pareadas (Wilcoxon, 1945), adequado por não pressupor normalidade das diferenças
 e recomendado para a comparação de configurações sobre múltiplos conjuntos de
-dados (DEMŠAR, 2006).
+dados (Demšar, 2006).
 
 O piso de dez sementes decorre da aritmética do próprio teste, e não de
 convenção. No teste de Wilcoxon pareado exato, o menor valor de *p* bilateral
@@ -245,7 +250,7 @@ inspeção dos resultados é construída em Streamlit.
 
 Esta seção declara as ameaças à validade identificadas e as medidas adotadas,
 organizadas segundo as quatro categorias usuais em experimentação em engenharia
-de software (WOHLIN et al., 2012).
+de software (Wohlin et al., 2012).
 
 **Validade de construto.** O risco comportamental é um construto, e não uma
 grandeza diretamente observável; o que se mede é a concordância entre a saída do
@@ -259,7 +264,7 @@ os três primeiros meses do período simulado, janela **anterior e disjunta** da
 janela de avaliação. Calculá-lo sobre os mesmos dias que contêm os cenários
 injetados faria o comportamento anômalo integrar a definição do que é normal para
 aquele funcionário, e o desempenho observado seria bom pelo motivo errado
-(KAUFMAN et al., 2012). Pela mesma razão, os atributos de estado são lidos na
+(Kaufman et al., 2012). Pela mesma razão, os atributos de estado são lidos na
 condição vigente na data do evento, e não em seu estado final. Ainda no mesmo
 eixo, o termo de exposição acumulada é calculado sobre a janela que **antecede** o
 evento avaliado, excluindo-o: incluí-lo faria o risco do evento corrente ser
@@ -283,7 +288,7 @@ fórmulas de pontuação.
 **Validade externa.** Os resultados valem para o ambiente simulado descrito e não
 são extrapoláveis a dados de produção. Acurácia elevada sobre dados sintéticos
 deve ser lida como indício de que o gerador pode ser demasiadamente previsível,
-e não como evidência de qualidade do modelo (SOMMER; PAXSON, 2010). A mitigação
+e não como evidência de qualidade do modelo (Sommer e Paxson, 2010). A mitigação
 adotada é a presença de ruído legítimo no tráfego de fundo — viagens, trabalho
 remoto, afastamentos e mudanças de cargo —, de modo que o comportamento normal
 não seja artificialmente homogêneo.
