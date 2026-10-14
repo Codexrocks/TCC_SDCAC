@@ -32,11 +32,11 @@ from detection.configuration import (
 
 
 def test_as_quatro_configuracoes_da_ablacao_estao_declaradas():
-    """As quatro existem no arquivo, mesmo que duas ainda nao carreguem.
+    """As quatro existem no arquivo, e nenhuma a mais.
 
-    A ablacao e de quatro configuracoes pela D-05 e pela D-26. A C2 e a C3
-    declaram dimensoes que so ganham parametro na S8, e por isso sao lidas aqui
-    do arquivo, sem passar pelo carregador.
+    A ablacao e de quatro configuracoes pela D-05 e pela D-26. A leitura e feita
+    direto do arquivo, sem passar pelo carregador: o que se confere aqui e a
+    declaracao, e nao se ela carrega.
     """
     declaradas = tomllib.loads(PRESETS.read_text(encoding="utf-8"))["configurations"]
 
@@ -59,25 +59,45 @@ def test_cada_configuracao_liga_as_dimensoes_da_metodologia():
     assert dimensoes["C3"] == ("d1", "d2", "d3")
 
 
-def test_hoje_carregam_a_c0_a_c1_e_a_c2():
+def test_as_quatro_carregam():
     """O estado declarado em teste, em vez de suposto.
 
-    Valia ["C0", "C1"] e passou a valer ["C0", "C1", "C2"] quando a D2 entrou —
-    o teste falhou e o aviso foi esse. Teste que acompanha o escopo sem
-    reclamar esconde escopo, e a C3 ainda falta.
+    Valeu ["C0", "C1"], depois ["C0", "C1", "C2"] quando a D2 entrou, e agora as
+    quatro, com a D3. Cada vez o teste falhou primeiro, e o aviso foi esse.
+    Teste que acompanha o escopo sem reclamar esconde escopo.
     """
-    assert [c.name for c in load_implemented()] == ["C0", "C1", "C2"]
+    assert [c.name for c in load_implemented()] == ["C0", "C1", "C2", "C3"]
 
 
-def test_configuracao_sem_parametro_diz_qual_secao_falta():
+def test_configuracao_sem_parametro_diz_qual_secao_falta(tmp_path: Path):
+    """A mensagem aponta a secao, e nao so recusa.
+
+    Os quatro presets canonicos estao completos desde que a D3 entrou, entao o
+    caso agora e arquivo exploratorio parcial — que e justamente quem vai
+    aparecer na analise de sensibilidade da D-09.
+    """
+    arquivo = tmp_path / "sem-d3.toml"
+    texto = PRESETS.read_text(encoding="utf-8")
+    declaradas = tomllib.loads(texto)["configurations"]
+    assert "d3" in declaradas["C3"]["dimensions"]
+
+    # As duas secoes da D3 saem de uma vez. Renomear so o cabecalho [d3]
+    # nao bastaria: [d3.posture] recriaria a tabela pai sozinho, e o
+    # carregador acharia que a secao existe.
+    arquivo.write_text(texto.replace("[d3", "[d3_desligada"), encoding="utf-8")
+
     with pytest.raises(ConfigurationError, match=r"C3 liga d3, mas falta a secao"):
-        load_canonical("C3")
+        load_exploratory(arquivo, "C3")
 
 
-def test_carregar_as_quatro_de_uma_vez_falha_enquanto_faltar_parametro():
-    """Devolver duas configuracoes caladas faria a tabela sair com duas linhas."""
-    with pytest.raises(ConfigurationError, match="falta a secao"):
-        load_all_canonical()
+def test_carregar_as_quatro_de_uma_vez_devolve_a_tabela_inteira():
+    """A tabela de ablacao sai completa, ou nao sai.
+
+    Devolver tres configuracoes caladas faria a tabela sair com tres linhas e
+    ninguem notar. Agora que as quatro tem parametro, o que este teste guarda e
+    o contrario: que nenhuma sumiu.
+    """
+    assert [c.name for c in load_all_canonical()] == ["C0", "C1", "C2", "C3"]
 
 
 def test_nenhum_preset_canonico_e_exploratorio():
@@ -143,19 +163,63 @@ def test_o_hash_e_do_conteudo_e_nao_do_arquivo(tmp_path: Path):
 def test_mexer_na_d3_nao_muda_o_hash_de_uma_execucao_da_c0(tmp_path: Path):
     """So entra no hash o que aquela configuracao usa.
 
-    Sem isso, acrescentar um peso da D3 invalidaria o registro de execucoes da
-    C0 que nunca leram aquele numero — e a analise de sensibilidade da D-09
-    obrigaria a reexecutar o experimento inteiro.
+    Sem isso, mexer num peso da D3 invalidaria o registro de execucoes da C0
+    que nunca leram aquele numero — e a analise de sensibilidade da D-09
+    obrigaria a reexecutar o experimento inteiro a cada ajuste.
+
+    Enquanto a D3 nao tinha parametro, este teste acrescentava a secao ao
+    arquivo. A secao existe agora, e o que se mexe e o valor — que e o caso
+    real, e o que tambem permite conferir o outro lado: na C3 o hash muda.
     """
-    arquivo = tmp_path / "com-d3.toml"
+    arquivo = tmp_path / "outra-d3.toml"
     arquivo.write_text(
-        PRESETS.read_text(encoding="utf-8") + "\n[d3]\nfator = 0.9\n",
+        PRESETS.read_text(encoding="utf-8").replace(
+            "decay_per_day = 0.85", "decay_per_day = 0.5"
+        ),
         encoding="utf-8",
     )
 
     assert (
         load_exploratory(arquivo, "C0").config_hash == load_canonical("C0").config_hash
     )
+    assert (
+        load_exploratory(arquivo, "C3").config_hash != load_canonical("C3").config_hash
+    )
+
+    assert (
+        load_exploratory(arquivo, "C0").config_hash == load_canonical("C0").config_hash
+    )
+
+
+def test_mexer_no_peso_de_integracao_muda_o_hash_de_quem_pondera(tmp_path: Path):
+    """O peso de integracao e parametro de execucao, e entra no registro.
+
+    Trocar o peso da D2 muda a nota final da C2 e da C3. Se o hash nao mudasse,
+    duas execucoes com notas diferentes ficariam gravadas como "mesma
+    configuracao" — exatamente o que a D-34 existe para impedir.
+    """
+    arquivo = tmp_path / "peso-de-integracao.toml"
+    arquivo.write_text(
+        PRESETS.read_text(encoding="utf-8").replace("d2 = 1.0", "d2 = 0.5"),
+        encoding="utf-8",
+    )
+
+    assert (
+        load_exploratory(arquivo, "C2").config_hash != load_canonical("C2").config_hash
+    )
+    assert (
+        load_exploratory(arquivo, "C0").config_hash == load_canonical("C0").config_hash
+    )
+
+
+def test_a_c0_nao_tem_peso_de_integracao():
+    """A linha de base soma os pontos das regras fixas, sem ponderacao.
+
+    Peso para a C0 seria um botao capaz de mexer no grupo de controle, e grupo
+    de controle que alguem ajusta deixa de medir.
+    """
+    assert "integration" not in load_canonical("C0").parameters
+    assert "integration" in load_canonical("C1").parameters
 
 
 # ---------------------------------------------------------------------------

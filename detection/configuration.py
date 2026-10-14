@@ -78,10 +78,11 @@ def _valida(dados: Mapping[str, Any]) -> None:
     """Confere a forma do arquivo, sem exigir parametro de dimensao.
 
     A exigencia dos parametros e por configuracao, em `_monta`, e nao aqui: as
-    quatro configuracoes convivem no mesmo arquivo, e a D2 e a D3 so ganham
-    parametro na S8. Validar o arquivo inteiro de uma vez faria carregar a C0
-    falhar por causa da C3 — foi o que aconteceu na primeira execucao dos
-    testes.
+    quatro configuracoes convivem no mesmo arquivo, e cada uma usa so uma parte
+    dele. Validar o arquivo inteiro de uma vez faria carregar a C0 falhar por
+    causa de uma secao da C3 — foi o que aconteceu na primeira execucao dos
+    testes, quando a D2 e a D3 ainda nao tinham parametro. Vale igual para
+    arquivo exploratorio parcial, que e o caso que sobrou.
     """
     if "configurations" not in dados:
         raise ConfigurationError("falta a secao [configurations]")
@@ -111,6 +112,13 @@ def _monta(nome: str, dados: Mapping[str, Any], *, exploratory: bool) -> Configu
     # mexer no peso da D3 nao invalida o resultado de uma execucao da C0.
     usados = {d: dados[d] for d in dimensoes}
     usados["bands"] = dados.get("bands", {})
+
+    # Os pesos de integracao entram no hash de quem usa ponderacao. A C0 fica
+    # de fora: a nota dela e a soma dos pontos das regras fixas, sem peso, e
+    # mexer num peso de integracao nao pode invalidar o registro de uma
+    # execucao da linha de base que nunca leu aquele numero.
+    if dimensoes != ("c0",):
+        usados["integration"] = dados.get("integration", {})
 
     return Configuration(
         name=nome,
@@ -149,11 +157,11 @@ def load_all_canonical() -> tuple[Configuration, ...]:
     """As quatro configuracoes da ablacao, na ordem da tabela de resultados.
 
     Raises:
-        ConfigurationError: Enquanto alguma das quatro nao tiver parametros. Hoje
-            a C2 e a C3 param aqui, porque a D2 e a D3 entram na S8 — e a
-            mensagem diz qual secao falta. Falhar e o comportamento certo:
-            devolver duas configuracoes caladas faria a tabela de ablacao sair
-            com duas linhas e ninguem notar.
+        ConfigurationError: Se alguma das quatro nao tiver parametros, com a
+            mensagem dizendo qual secao falta. Falhar e o comportamento certo:
+            devolver tres configuracoes caladas faria a tabela de ablacao sair
+            com tres linhas e ninguem notar. Desde que a D3 entrou, as quatro
+            carregam — o que esta funcao protege agora e arquivo editado.
     """
     return tuple(load_canonical(nome) for nome in CONFIGURACOES_CANONICAS)
 
@@ -161,8 +169,10 @@ def load_all_canonical() -> tuple[Configuration, ...]:
 def load_implemented() -> tuple[Configuration, ...]:
     """As configuracoes canonicas que ja tem parametro, na ordem da tabela.
 
-    Serve ao executor enquanto o experimento esta incompleto: na S7 ele roda a
-    C0 e a C1, e a lista cresce sozinha quando a D2 e a D3 entrarem.
+    Serviu ao executor enquanto o experimento estava incompleto, e a lista
+    cresceu sozinha conforme a D2 e a D3 entraram: hoje devolve as quatro.
+    Continua existindo porque configuracao pode ficar sem parametro de novo —
+    arquivo exploratorio parcial, ou dimensao nova declarada antes de ter peso.
     """
     prontas = []
     for nome in CONFIGURACOES_CANONICAS:

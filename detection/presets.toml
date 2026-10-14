@@ -133,6 +133,52 @@ confidential = 1.5
 restricted = 2.0
 
 # ---------------------------------------------------------------------------
+# D3 — exposicao acumulada e postura de seguranca
+#
+# Duas parcelas separadas, pela D-25 e pela D-30. A conduta soma o risco dos
+# eventos anteriores com decaimento por dia, excluindo o evento atual (D-18). A
+# postura le o estado da conta e do equipamento no dia do evento.
+#
+# `exposure_reference` e a soma ponderada que mapeia para 100. E valor
+# preliminar, como todos os outros: quem fecha e a D-09, com analise de
+# sensibilidade na S12.
+# ---------------------------------------------------------------------------
+
+[d3]
+window_days = 14
+decay_per_day = 0.85
+exposure_reference = 300
+
+[d3.posture]
+mfa_disabled = 30
+privilege_admin = 15
+patch_age_days_limit = 30
+patch_overdue = 20
+antivirus_off = 20
+phishing_clicked = 25
+phishing_submitted = 35
+removable_use = 10
+risky_browsing = 5
+
+# ---------------------------------------------------------------------------
+# Integracao das dimensoes na nota final
+#
+# Um conjunto so de pesos, igual para C1, C2 e C3. Peso diferente por
+# configuracao faria a tabela de ablacao medir duas coisas ao mesmo tempo — a
+# Metodologia promete que "a unica variavel entre as linhas seja a dimensao
+# acrescentada", e peso proprio por linha quebraria isso.
+#
+# A C0 nao aparece aqui: a nota dela e a soma dos pontos das quatro regras
+# fixas, sem ponderacao.
+# ---------------------------------------------------------------------------
+
+[integration]
+d1 = 1.0
+d2 = 1.0
+d3_conduct = 1.0
+d3_posture = 0.5
+
+# ---------------------------------------------------------------------------
 # Faixas de exibicao
 #
 # A avaliacao usa o score bruto, sem teto: faixa empatada em 100 viraria degrau
