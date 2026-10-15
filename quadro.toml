@@ -210,7 +210,7 @@ inicio = 2026-10-09
 fim = 2026-10-15
 pronto = false
 entregavel = "C0 (regras fixas) e motor D1"
-criterio = "Cenários pontuais produzem o score esperado · C0 e C1 selecionáveis por flag · C0 sem nenhum histórico do funcionário"
+criterio = "Cenários pontuais produzem o score esperado · C0 e C1 selecionáveis por flag · C0 sem parâmetro aprendido, pela D-42"
 donos = ["Davi", "Yasmin"]
 
 [[semana]]
@@ -588,6 +588,20 @@ titulo = "Dispositivos e estado inicial de higiene"
 estado = "fechada"
 fechada_em = 2026-09-28
 
+[[decisao]]
+id = "D-42"
+titulo = "A quarta regra da C0: janela de falhas ou evento isolado"
+estado = "fechada"
+fechada_em = 2026-10-13
+
+[[decisao]]
+id = "D-43"
+titulo = "Pesos de integração das dimensões na nota final"
+proposta = "Um conjunto só de pesos para C1, C2 e C3 — D1 1,0; D2 1,0; conduta 1,0; postura 0,5 — e a C0 sem ponderação nenhuma. Peso próprio por configuração faria a tabela de ablação medir duas coisas ao mesmo tempo: a dimensão acrescentada e o peso trocado. A postura entra com metade porque é estado, e não ação. Valores preliminares, sujeitos à análise de sensibilidade da D-09"
+donos = ["Davi", "Yasmin"]
+prazo_semana = "S8"
+estado = "a-confirmar"
+
 
 # ---------------------------------------------------------------------------
 # Citações pendentes
@@ -662,3 +676,15 @@ onde = "docs/usabilidade.md § 9"
 o_que = "Edição e ano da obra de Shneiderman efetivamente consultada"
 dono = "Filipe"
 desde = 2026-09-03
+
+[[citacao]]
+onde = "artigo/03-metodologia.md § 3.3 — a janela de falhas"
+o_que = "Afirmação sem chamada: \"forma usual de regra de correlação em ferramentas de gestão de eventos de segurança\". Entrou com a D-42"
+dono = "Davi"
+desde = 2026-10-13
+
+[[citacao]]
+onde = "artigo/03-metodologia.md § 3.3 — \"trivial para regras fixas\""
+o_que = "Afirmação sem fonte: detecção de tentativa sucessiva é \"trivial para regras fixas\". Pode ser reformulada sem fonte"
+dono = "Davi"
+desde = 2026-10-13

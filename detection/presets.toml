@@ -1,0 +1,191 @@
+# Presets canonicos das quatro configuracoes
+#
+# ESTE ARQUIVO E A CONFIGURACAO DO EXPERIMENTO. Alterar um numero aqui muda o
+# que a tabela de resultados do artigo vai dizer.
+#
+# Pela D-33, os quatro presets abaixo sao somente leitura: nenhuma rota da API
+# os altera, e configuracao criada por usuario nasce marcada como exploratoria
+# e nao vai ao artigo. Pela D-34, toda execucao grava o hash deste arquivo
+# junto do resultado — execucao sem hash e erro, nao aviso.
+#
+# OS PESOS SAO PRELIMINARES. Eles vem da versao 1 da arquitetura, que os tinha
+# como ponto de partida, e a definicao final e a decisao D-09 — com analise de
+# sensibilidade na S12. Nenhum numero daqui vai ao artigo como valor
+# justificado antes daquela analise.
+
+[configurations.C0]
+dimensions = ["c0"]
+description = "Linha de base: regras fixas sobre o evento isolado"
+
+[configurations.C1]
+dimensions = ["d1"]
+description = "Risco do evento, com peso por atributo"
+
+[configurations.C2]
+dimensions = ["d1", "d2"]
+description = "Evento mais desvio do padrao do proprio funcionario"
+
+[configurations.C3]
+dimensions = ["d1", "d2", "d3"]
+description = "Evento, desvio e exposicao acumulada com higiene"
+
+# ---------------------------------------------------------------------------
+# C0 — a linha de base
+#
+# Configuracao estatica, pela D-31: horario fixo no fuso da SEDE, faixas
+# corporativas cadastradas e sensibilidade do recurso. Nada aqui depende do
+# passado de quem gerou o evento.
+# ---------------------------------------------------------------------------
+
+[c0]
+site_timezone = "America/Sao_Paulo"
+business_hour_start = 6
+business_hour_end = 22
+# A janela de correlacao da D-42. Limiar fixo, igual para as 250 pessoas, sem
+# nada estimado do comportamento de ninguem: a C0 continua sem parametro
+# aprendido, e a memoria dela nao passa destes dois minutos.
+auth_failure_window_minutes = 2
+auth_failure_threshold = 10
+
+[c0.points]
+off_hours = 30
+external_origin = 30
+restricted_access = 35
+brute_force = 40
+
+# ---------------------------------------------------------------------------
+# D1 — risco do evento, ponderado
+#
+# Mesmo evento isolado da C0, com mais atributos e peso por atributo em vez de
+# ponto fixo. O horario aqui usa o fuso do FUNCIONARIO, e e essa diferenca que
+# produz o falso positivo legitimo da D-40: quem encerra as 21:30 em Manaus
+# aparece as 22:30 no fuso da sede.
+# ---------------------------------------------------------------------------
+
+[d1]
+employee_timezone = true
+business_hour_start = 6
+business_hour_end = 22
+
+[d1.points]
+off_hours_employee = 20
+personal_device = 25
+login_without_mfa = 15
+privilege_change = 40
+large_download = 20
+download_to_external = 25
+removable_device = 20
+risky_browsing = 10
+
+[d1.network_kind]
+office = 0
+vpn = 0
+home = 10
+external = 30
+
+[d1.sensitivity]
+public = 0
+internal = 5
+confidential = 20
+restricted = 35
+
+[d1.thresholds]
+large_download_bytes = 52428800
+
+# ---------------------------------------------------------------------------
+# D2 — desvio do padrao do proprio funcionario
+#
+# O padrao vem dos tres primeiros meses (D-24), e a janela de treino e anterior
+# e disjunta da de avaliacao (D-17). O teto e o piso abaixo sao as duas travas
+# da D-29: sem teto um atributo domina a nota, e sem piso o funcionario
+# perfeitamente regular vira o mais alarmado da empresa.
+# ---------------------------------------------------------------------------
+
+[d2]
+# Minimo de dias com atividade na janela de treino para ter padrao proprio.
+# Abaixo disso, cai no grupo de pares, e isso vai marcado no resultado.
+min_active_days = 20
+# Hora que responde por menos que isso do padrao da pessoa conta como incomum.
+unusual_hour_share = 0.01
+# Minimo de eventos na janela para a mistura de sigilo valer. Com um evento, a
+# proporcao e sempre 0% ou 100%, e um unico acesso sigiloso num dia tranquilo
+# apareceria como divergencia maxima. Proporcao precisa de denominador.
+min_window_events_for_mix = 5
+deviation_cap = 6.0
+volume_floor_fraction = 0.1
+volume_absolute_floor = 1.0
+
+[d2.points]
+volume = 25
+failures = 30
+sensitive_mix = 25
+new_resource = 30
+new_origin = 20
+new_device = 20
+unusual_hour = 20
+
+# Recurso novo pesa mais quando o sigilo e alto: area restrita que a pessoa
+# nunca abriu nao e o mesmo que uma pasta interna nova.
+[d2.sensitivity_multiplier]
+public = 0.5
+internal = 1.0
+confidential = 1.5
+restricted = 2.0
+
+# ---------------------------------------------------------------------------
+# D3 — exposicao acumulada e postura de seguranca
+#
+# Duas parcelas separadas, pela D-25 e pela D-30. A conduta soma o risco dos
+# eventos anteriores com decaimento por dia, excluindo o evento atual (D-18). A
+# postura le o estado da conta e do equipamento no dia do evento.
+#
+# `exposure_reference` e a soma ponderada que mapeia para 100. E valor
+# preliminar, como todos os outros: quem fecha e a D-09, com analise de
+# sensibilidade na S12.
+# ---------------------------------------------------------------------------
+
+[d3]
+window_days = 14
+decay_per_day = 0.85
+exposure_reference = 300
+
+[d3.posture]
+mfa_disabled = 30
+privilege_admin = 15
+patch_age_days_limit = 30
+patch_overdue = 20
+antivirus_off = 20
+phishing_clicked = 25
+phishing_submitted = 35
+removable_use = 10
+risky_browsing = 5
+
+# ---------------------------------------------------------------------------
+# Integracao das dimensoes na nota final
+#
+# Um conjunto so de pesos, igual para C1, C2 e C3. Peso diferente por
+# configuracao faria a tabela de ablacao medir duas coisas ao mesmo tempo — a
+# Metodologia promete que "a unica variavel entre as linhas seja a dimensao
+# acrescentada", e peso proprio por linha quebraria isso.
+#
+# A C0 nao aparece aqui: a nota dela e a soma dos pontos das quatro regras
+# fixas, sem ponderacao.
+# ---------------------------------------------------------------------------
+
+[integration]
+d1 = 1.0
+d2 = 1.0
+d3_conduct = 1.0
+d3_posture = 0.5
+
+# ---------------------------------------------------------------------------
+# Faixas de exibicao
+#
+# A avaliacao usa o score bruto, sem teto: faixa empatada em 100 viraria degrau
+# na curva precisao-revocacao da D-14. As faixas abaixo servem para a tela.
+# ---------------------------------------------------------------------------
+
+[bands]
+normal_max = 20
+low_max = 50
+medium_max = 75

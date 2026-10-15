@@ -22,6 +22,13 @@ dependencies = [
     "pandas>=2.2",
     "matplotlib>=3.9",
     "streamlit>=1.38",
+    # O banco de fusos horários IANA. O Linux já traz um; o Windows não traz
+    # nenhum, e sem esta dependência o `zoneinfo` estoura com
+    # `ZoneInfoNotFoundError: America/Sao_Paulo` na máquina de quem trabalha —
+    # enquanto o CI, que roda Linux, passa verde. Não é detalhe de ambiente: a
+    # regra de horário da C0 usa o fuso da sede e a da D1 o fuso do
+    # funcionário, pelas decisões D-31 e D-40.
+    "tzdata>=2024.1",
 ]
 
 [project.optional-dependencies]
@@ -37,12 +44,12 @@ dev = [
     "pyyaml>=6.0",
 ]
 
-# Ainda não há pacote para empacotar: as pastas de código nascem na S6 e o
-# CLAUDE.md proíbe criar pasta vazia. Com a lista vazia, `pip install -e .`
-# instala as dependências sem procurar módulo nenhum.
-# Na S6, troque por:  [tool.setuptools.packages.find]  com  where = ["."]
-[tool.setuptools]
-packages = []
+# A S6 chegou e `detection/` existe, então a lista vazia saiu. A descoberta é
+# explícita, e não automática: a raiz tem `docs/`, `artigo/` e `templates/`, e o
+# setuptools recusa adivinhar qual delas é pacote num layout assim.
+# `runner/` e `backend/` entram aqui quando nascerem.
+[tool.setuptools.packages.find]
+include = ["detection*"]
 
 # ---------------------------------------------------------------------------
 # Ruff — formatador e linter
@@ -76,6 +83,9 @@ ignore = [
 [tool.ruff.lint.per-file-ignores]
 # Em teste, `assert` é o instrumento de trabalho, não um risco (S101).
 "tests/**" = ["S101"]
+# Numa interface de linha de comando, `print` é a saída — não um resto de
+# depuração esquecido (T201), que é o que a regra existe para pegar.
+"runner/cli.py" = ["T201"]
 
 [tool.ruff.lint.pydocstyle]
 convention = "google"

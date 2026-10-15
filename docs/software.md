@@ -33,7 +33,7 @@ direita é o que no software a sustenta:
 | O artigo afirma | O que sustenta aqui |
 |---|---|
 | "Um único código executado sob quatro parâmetros" (3.3) | Seção 2: as configurações são composição de módulos, não quatro sistemas |
-| "A C0 é puramente estática" (3.3) | Seção 4: presets canônicos imutáveis, e a C0 sem acesso a histórico |
+| "A C0 não possui parâmetro aprendido" (3.3) | Seção 4: presets canônicos imutáveis, e a C0 sem acesso ao padrão individual |
 | "A terceira dimensão reporta duas parcelas separadas" (3.3) | Seção 6: a resposta de leitura carrega D3 partida em conduta e postura |
 | "Cada execução grava identificador, semente, configuração e pesos" (3.7) | Seção 4: configuração versionada, com hash preso ao resultado |
 | "Comparar duas configurações é comparar dois identificadores de execução" (3.7) | Seção 5: execução é registro, não requisição |
@@ -61,6 +61,8 @@ OpenAPI estável desde o primeiro dia.
 
 ```text
 detection/     c0/ · d1/ · d2/ · d3/ · integracao/     o núcleo, em Python puro
+               ports.py                               o contrato de entrada e saída
+storage/       arquivos.py                             adaptadores das portas
 runner/        executor do experimento                 entrada sem HTTP
 backend/       api/ · models/ · services/ · main.py    adaptador HTTP
 database/      corp/ · ground_truth/ · sdcac/          schema e migrações
@@ -69,11 +71,50 @@ frontend/      dashboard/                              a peça da S9
 ```
 
 **A regra de dependência, conferida no CI:** `detection/` não importa
-`backend/`, `database/` nem `generator/`, e não consulta o relógio. As duas
-entradas — `runner/` e `backend/` — importam `detection/`.
+`backend/`, `storage/`, `database/` nem `generator/`, e não consulta o relógio.
+As duas entradas — `runner/` e `backend/` — importam `detection/`.
+
+> **Até 14/10/2026 isso era frase, e nada conferia.** Agora
+> [`tests/test_arquitetura.py`](https://github.com/Codexrocks/TCC_SDCAC/blob/main/tests/test_arquitetura.py)
+> lê a árvore sintática de cada arquivo do núcleo e reprova import de
+> infraestrutura, chamada de relógio, sorteio e leitura de ambiente. O
+> `validar` roda os testes, então a conferência é de verdade. Trava e texto que
+> discordam resolvem-se corrigindo o texto — ou, como aqui, pondo a trava.
 
 É essa regra que faz valer a frase do artigo sobre um único código sob quatro
 parâmetros: **o que o painel mostra é o mesmo código que produziu a tabela.**
+
+### As portas, e por que elas moram no núcleo
+
+`detection/ports.py` declara **o que** entra e sai, sem dizer de onde vem. Sete
+portas: três de entrada — catálogo, eventos, estado de conta e equipamento —,
+três de saída — registro de execução, padrões, notas e alertas — e uma de
+leitura, que é o contrato do painel.
+
+Uma porta é só um `Protocol`: nome de método, tipo de entrada, tipo de saída.
+Declará-las no núcleo mantém o motor dono do próprio contrato, e impede o
+inverso — o motor sendo moldado pelo formato de tabela que alguém escolheu.
+
+O que isso compra, concretamente:
+
+- **o executor roda hoje**, contra arquivo, sem banco nenhum;
+- quem escrever o adaptador de PostgreSQL recebe **especificação executável**:
+  [`tests/test_portas.py`](https://github.com/Codexrocks/TCC_SDCAC/blob/main/tests/test_portas.py)
+  roda as mesmas asserções contra qualquer implementação, e reprova a que mentir
+  sobre ordem cronológica, recorte de janela ou a exigência do hash;
+- **o painel começa antes do banco existir.** A API depende da porta de leitura,
+  não de SQL.
+
+> **O gabarito não tem porta.** Não existe em `ports.py` nada que leia rótulo de
+> cenário, e um teste reprova se alguém acrescentar. O `ground_truth` é lido
+> **só** pelo avaliador — porta de leitura de rótulo seria o vazamento de rótulo
+> com nome de arquitetura.
+
+**Por que ainda não existe adaptador de PostgreSQL.** O banco não existe: não há
+servidor, e o gerador é a frente da S6. Escrever o adaptador agora produziria
+algumas centenas de linhas de SQL que ninguém consegue executar — e que
+*pareceriam* prontas. A porta mais o teste de contrato valem mais que isso: eles
+dizem exatamente o que o adaptador tem de cumprir no dia em que o banco subir.
 
 ## 4. O que é ajustável, e o que é imutável (D-33 e D-34)
 
@@ -111,6 +152,21 @@ quando a interface passa a disparar execução.
 
 ## 6. O contrato de leitura (D-36)
 
+> **Existe desde 14/10/2026**, no Pull Request #72. O contrato publicado está
+> versionado em
+> [`backend/openapi.json`](https://github.com/Codexrocks/TCC_SDCAC/blob/main/backend/openapi.json)
+> — **nove rotas, todas `GET`** — e um teste reprova se ele ficar defasado do
+> código, do mesmo jeito que o `docs/quadro.md` é comparado com o `quadro.toml`.
+> O painel lê o arquivo sem precisar que a API esteja de pé.
+>
+> ```bash
+> SDCAC_DADOS=dados/semente-1 python -m uvicorn backend.main:app --host 127.0.0.1
+> ```
+>
+> As rotas: `/api/v1/health` · `/configurations` · `/runs` ·
+> `/runs/{id}` · `/runs/{id}/employees` · `/runs/{id}/employees/{employee_id}` ·
+> `/runs/{id}/alerts` · `/runs/{id}/events/{event_id}` · `/runs/{id}/metrics`.
+
 Quatro grupos, prefixo `/api/v1` desde o primeiro dia:
 
 | Grupo | O que entrega |
@@ -135,6 +191,25 @@ Duas proibições que vêm de decisões anteriores:
   conectar naquele banco
 - **A API não calcula métrica.** Precisão e revocação vêm da tabela
   `sdcac.metrics`, gravada pelo avaliador, que é o único que enxerga o gabarito
+
+### O que a API protege, e o que não protege
+
+Não há login na v1, pela **D-32**. Dizer que isso é seguro porque a API é só de
+leitura seria mentira confortável, então o desenho é explícito:
+
+| Medida | O que ela impede |
+|---|---|
+| **Escuta em `127.0.0.1`** | A trava é de rede, não de código. Expor na rede exige dizer isso em voz alta, com `--host` |
+| **O papel de banco** | É **isto** que protege o experimento, e não a aplicação: `sdcac_app` não conecta no `ground_truth`. O login protegeria a tela; o papel protege o resultado |
+| **CORS com lista explícita** | `*` deixaria qualquer página aberta no navegador de quem analisa consultar esta API. A lista vem do ambiente, e o padrão é só o desenvolvimento local do painel |
+| **Paginação com teto duro de 200** | Sem teto, uma requisição puxa dois milhões de eventos — a negação de serviço mais barata que existe |
+| **Envelope de erro único** | Nenhuma mensagem carrega SQL, caminho de arquivo ou rastreio de pilha. O repositório é público; isso não é motivo para a API narrar como é feita por dentro |
+| **Nenhuma rota de escrita** | Um teste varre o contrato e reprova qualquer verbo que não seja `GET` |
+
+O que **não** está lá, e nem finge estar: limitação de taxa, cabeçalho de
+segurança de navegador, auditoria de consulta. Nenhum deles faz sentido num
+instrumento que roda em `localhost` para uma pessoa — e a **D-19** registra a
+auditoria como o que a implantação real exigiria.
 
 ## 7. O que entra no `sdcac` na v2
 
@@ -170,14 +245,22 @@ ambiente simulado não tem por que tê-los.
 Além dos invariantes da especificação do banco — nada do futuro, exposição sem o
 evento atual, determinismo:
 
-- **A C0 não olha histórico:** apagar o passado do funcionário não muda a nota C0
-  nem a D1. É a **D-31** virando teste
-- **Preset canônico é imutável:** alterar C0 a C3 pela API falha
-- **Configuração presa ao resultado:** execução gravada sem hash de configuração
-  falha
-- **A aplicação não alcança o gabarito:** o teste tenta conectar com o usuário da
-  aplicação no `ground_truth` e **espera** erro de permissão
-- **Score decomposto:** toda resposta de leitura traz as cinco parcelas
+- ✅ **A C0 não olha histórico:** apagar o passado do funcionário não muda a nota
+  C0 nem a D1. É a **D-31** virando teste — hoje na forma precisada pela
+  **D-42**: só a janela de dois minutos muda a nota
+- ✅ **Preset canônico é imutável:** a API não tem rota de escrita, e um teste
+  varre o contrato e reprova qualquer verbo que não seja `GET`
+- ✅ **Configuração presa ao resultado:** `open_run` exige o hash. Quem grava sem
+  ele não consegue — não por disciplina, por falta do argumento
+- ⏳ **A aplicação não alcança o gabarito:** hoje verificado por leitura do SQL e
+  pela ausência de qualquer porta que leia rótulo. **Falta** a versão que tenta
+  conectar de verdade e espera erro de permissão — ela depende de haver servidor
+- ✅ **Score decomposto:** toda resposta de leitura traz as cinco parcelas, e
+  nulo é diferente de zero
+
+> **O que esses vistos não dizem.** Eles valem contra fixtures, não contra o
+> banco carregado: o gerador é a frente da S6 e não existe. Nenhum número do
+> artigo sai do que está verde aqui.
 
 ## 10. O que a v1 deliberadamente não tem
 

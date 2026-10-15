@@ -16,7 +16,7 @@ como recusar uma entrega, e a recusa vira atrito.
 | **05/09/26** | Tema do trabalho e composição do grupo — *Tarefa 01* | ✅ **Entregue em 03/09/2026** — [registro](entregas/tarefa-01.md) |
 | **24/09/26** | Introdução do artigo no template **COBEM 2026** — *Tarefa 02* | ✅ **Entregue parcial em 24/09/2026** — [registro](entregas/tarefa-02.md) |
 | Quinzenal | Reunião de acompanhamento com o orientador | 🔁 Recorrente |
-| **10/12/26** | **Entrega do TCC** | 🗓️ Em 58 dias |
+| **10/12/26** | **Entrega do TCC** | 🗓️ Em 57 dias |
 | Dezembro | Apresentação e defesa | 🗓️ Sem prazo |
 <!-- QUADRO:fim prazos-do-professor -->
 
@@ -31,15 +31,19 @@ não há data escrita à mão aqui, porque data escrita à mão envelhece:
 
 | Capítulo | Estado | Quem | Semana prevista | Situação |
 |---|---|---|---|---|
-| 1. Introdução | Entregue parcial em 24/09 — os seis blocos de complementação continuam vazios, e a parcialidade foi declarada no arquivo entregue | Yasmin, Filipe | S5 | ⚠️ Atrasado há 12 dias |
-| 2. Referencial teórico | Escrito e versionado em 28/09 pela Yasmin — 4 subseções, ≈1.150 palavras, atrasado de S3 e S4. Faltam as 13 fontes confirmadas | Yasmin | S5 | ⚠️ Atrasado há 12 dias |
-| 3. Metodologia | Escrita e versionada em 28/09 — 9 subseções. Faltam as 4 lacunas da M2 e as 7 fontes conferidas | Davi (caneta) | S5 | ⚠️ Atrasado há 12 dias |
-| 4. Resultados | Esqueleto | Filipe (caneta) | S13 | 🗓️ Em 44 dias |
-| 5. Conclusão | Esqueleto | Davi (caneta) | S14 | 🗓️ Em 51 dias |
+| 1. Introdução | Entregue parcial em 24/09 — os seis blocos de complementação continuam vazios, e a parcialidade foi declarada no arquivo entregue | Yasmin, Filipe | S5 | ⚠️ Atrasado há 13 dias |
+| 2. Referencial teórico | Escrito e versionado em 28/09 pela Yasmin — 4 subseções, ≈1.150 palavras, atrasado de S3 e S4. Faltam as 13 fontes confirmadas | Yasmin | S5 | ⚠️ Atrasado há 13 dias |
+| 3. Metodologia | Escrita e versionada em 28/09 — 9 subseções. Faltam as 4 lacunas da M2 e as 7 fontes conferidas | Davi (caneta) | S5 | ⚠️ Atrasado há 13 dias |
+| 4. Resultados | Esqueleto | Filipe (caneta) | S13 | 🗓️ Em 43 dias |
+| 5. Conclusão | Esqueleto | Davi (caneta) | S14 | 🗓️ Em 50 dias |
 <!-- QUADRO:fim capitulos -->
 
-**Nenhuma linha de código existe ainda.** O que existe é a especificação do
-gerador, que entrou na `main` pelo Pull Request #43, em 24/09.
+**O código existe, e ainda não está na `main`.** O motor de análise — schema
+dos três bancos, as quatro dimensões e a composição da nota — está na fila de
+Pull Requests #65 a #70, aberta em 13/10. Na `main` o que existe é a
+especificação do gerador, que entrou pelo Pull Request #43, em 24/09. **O
+gerador de eventos, que é a S6, não começou** — enquanto ele não existir, o
+motor roda contra fixture e nenhum número do artigo sai dali.
 
 A S5 carrega, além da Metodologia, o que ficou de S2 a S4. É a única semana com
 acúmulo declarado — depois dela o cronograma volta a ter uma entrega por semana.
@@ -105,7 +109,7 @@ Três consequências que valem saber:
 |---|---|
 | S5 | Metodologia (caneta) — ✅ **escrita em 28/09**, com 4 lacunas abertas · arquitetura v2 ✅ · fechar D-12 a D-19 |
 | S6 | Schema, migrações, carga e ingestão |
-| S7 | C0 (regras fixas, sem histórico) e motor D1 |
+| S7 | C0 (regras fixas, sem parâmetro aprendido) e motor D1 |
 | S8 | D2, D3 e a integração |
 | S11 | Execução dos cenários |
 | S12 | Tabela de ablação, junto do Filipe |
@@ -141,10 +145,10 @@ Três consequências que valem saber:
 | Marco | Data | O que fecha | Por que é marco | Situação |
 |---|---|---|---|---|
 | **M1** Introdução | **24/09** | Problema, pergunta, objetivos, delimitação | Era a Tarefa 02 do professor. Os seis blocos de complementação continuam vazios e vencem na S5 | ✅ Fechado em parte |
-| **M2** Metodologia congelada | **01/10** | Cenários, métricas, quatro configurações, atributos | Congela o que será medido antes de existir código a defender | ⚠️ Atrasado há 12 dias |
-| **M3** Modelo executável | **22/10** | C0 a C3 rodando sobre o mesmo gerador | Última data em que uma dimensão pode ser cortada sem comprometer a comparação | 🗓️ Em 9 dias |
-| **M4** Tabela de ablação | **19/11** | Números finais das quatro configurações | A partir daqui o trabalho é escrita. Nenhuma alteração de código é aceita | 🗓️ Em 37 dias |
-| **M5** Entrega | **10/12** | Artigo diagramado e submetido | — | 🗓️ Em 58 dias |
+| **M2** Metodologia congelada | **01/10** | Cenários, métricas, quatro configurações, atributos | Congela o que será medido antes de existir código a defender | ⚠️ Atrasado há 13 dias |
+| **M3** Modelo executável | **22/10** | C0 a C3 rodando sobre o mesmo gerador | Última data em que uma dimensão pode ser cortada sem comprometer a comparação | 🗓️ Em 8 dias |
+| **M4** Tabela de ablação | **19/11** | Números finais das quatro configurações | A partir daqui o trabalho é escrita. Nenhuma alteração de código é aceita | 🗓️ Em 36 dias |
+| **M5** Entrega | **10/12** | Artigo diagramado e submetido | — | 🗓️ Em 57 dias |
 <!-- QUADRO:fim marcos -->
 
 **Caminho crítico:** M2 → S6 (gerador com histórico de um ano) → S8 (D3) → S11 (execução) → S12 (tabela) → M4.
@@ -158,7 +162,7 @@ Dashboard, Isolation Forest e referencial teórico correm em paralelo e têm fol
 |---|---|---|
 | **M2 em 01/10** com **12 decisões abertas**, 9 delas vencendo nessa data | D-12 a D-19 vencem em 01/10, e os cenários também | Fechar as oito lacunas metodológicas antes de escrever a Metodologia |
 | **Gerador sem parâmetros** | 25 definições abertas na especificação do gerador — personas, matriz cargo × sistema, faixas de rede | As **25 perguntas abertas** da [especificação](banco-simulado.md), que entrou pelo PR #43, precisam de resposta antes da S6 |
-| **Nenhuma linha de código na `main`** | S6 a S8 são três semanas para banco, gerador e quatro motores | A S10 é o único corte disponível: o Isolation Forest é opcional por definição |
+| **O código não está na `main`** | Os quatro motores estão prontos na fila dos PRs #65 a #70, e o gerador da S6 não começou: sem ele o motor roda contra fixture | A S10 é o único corte disponível: o Isolation Forest é opcional por definição |
 | **Referencial fora do repositório** | ✅ **Resolvido em 28/09** — o texto entrou pelo insumo da Yasmin | Resta o levantamento v1, de 17 fontes, que continua fora |
 
 > **A S10 é a folga do cronograma.** Se a S6, a S7 ou a S8 estourarem, o
