@@ -1,0 +1,1294 @@
+{
+  "components": {
+    "schemas": {
+      "Alerta": {
+        "description": "Um alerta levantado, por evento ou por pessoa numa janela (D-12).",
+        "properties": {
+          "band": {
+            "title": "Band",
+            "type": "string"
+          },
+          "employee_id": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Employee Id"
+          },
+          "event_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Event Id"
+          },
+          "raised_at": {
+            "format": "date-time",
+            "title": "Raised At",
+            "type": "string"
+          },
+          "threshold": {
+            "description": "O corte que o levantou. Sem ele, 'quantos alertas' nao tem resposta",
+            "title": "Threshold",
+            "type": "number"
+          },
+          "window_end": {
+            "anyOf": [
+              {
+                "format": "date-time",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Window End"
+          },
+          "window_start": {
+            "anyOf": [
+              {
+                "format": "date-time",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Window Start"
+          }
+        },
+        "required": [
+          "band",
+          "threshold",
+          "raised_at"
+        ],
+        "title": "Alerta",
+        "type": "object"
+      },
+      "Configuracao": {
+        "description": "Um dos presets canonicos, para o painel saber o que cada execucao ligou.",
+        "properties": {
+          "config_hash": {
+            "title": "Config Hash",
+            "type": "string"
+          },
+          "dimensions": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Dimensions",
+            "type": "array"
+          },
+          "exploratory": {
+            "title": "Exploratory",
+            "type": "boolean"
+          },
+          "name": {
+            "title": "Name",
+            "type": "string"
+          }
+        },
+        "required": [
+          "name",
+          "dimensions",
+          "config_hash",
+          "exploratory"
+        ],
+        "title": "Configuracao",
+        "type": "object"
+      },
+      "Erro": {
+        "description": "O corpo de toda resposta que nao e 2xx.",
+        "properties": {
+          "code": {
+            "description": "Identificador estavel do erro, para o cliente tratar",
+            "title": "Code",
+            "type": "string"
+          },
+          "detail": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Contexto adicional, quando houver",
+            "title": "Detail"
+          },
+          "message": {
+            "description": "Uma frase em portugues, para quem le",
+            "title": "Message",
+            "type": "string"
+          }
+        },
+        "required": [
+          "code",
+          "message"
+        ],
+        "title": "Erro",
+        "type": "object"
+      },
+      "Execucao": {
+        "description": "Uma execucao de pontuacao, como ficou registrada.",
+        "properties": {
+          "code_sha": {
+            "title": "Code Sha",
+            "type": "string"
+          },
+          "config_hash": {
+            "title": "Config Hash",
+            "type": "string"
+          },
+          "config_name": {
+            "title": "Config Name",
+            "type": "string"
+          },
+          "exploratory": {
+            "description": "Verdadeiro quando a configuracao nao e um preset canonico. Resultado exploratorio nao vai ao artigo (D-33)",
+            "title": "Exploratory",
+            "type": "boolean"
+          },
+          "run_id": {
+            "description": "A semente do gerador que foi pontuada",
+            "title": "Run Id",
+            "type": "integer"
+          },
+          "scoring_run_id": {
+            "title": "Scoring Run Id",
+            "type": "integer"
+          },
+          "status": {
+            "title": "Status",
+            "type": "string"
+          },
+          "weights_version": {
+            "title": "Weights Version",
+            "type": "string"
+          }
+        },
+        "required": [
+          "scoring_run_id",
+          "run_id",
+          "config_name",
+          "config_hash",
+          "code_sha",
+          "weights_version",
+          "exploratory",
+          "status"
+        ],
+        "title": "Execucao",
+        "type": "object"
+      },
+      "HTTPValidationError": {
+        "properties": {
+          "detail": {
+            "items": {
+              "$ref": "#/components/schemas/ValidationError"
+            },
+            "title": "Detail",
+            "type": "array"
+          }
+        },
+        "title": "HTTPValidationError",
+        "type": "object"
+      },
+      "Metrica": {
+        "description": "O que o avaliador gravou. A API nao calcula metrica.",
+        "properties": {
+          "detection_delay_days": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Detection Delay Days"
+          },
+          "false_positive_rate": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "False Positive Rate"
+          },
+          "negatives": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Negatives"
+          },
+          "positives": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Positives"
+          },
+          "recall": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Recall"
+          },
+          "threshold": {
+            "title": "Threshold",
+            "type": "number"
+          },
+          "unit": {
+            "description": "event, episode ou user_day (D-12)",
+            "title": "Unit",
+            "type": "string"
+          }
+        },
+        "required": [
+          "unit",
+          "threshold"
+        ],
+        "title": "Metrica",
+        "type": "object"
+      },
+      "MotivoDoRisco": {
+        "description": "Uma regra que disparou, com o motivo em texto.\n\nNao e enfeite: a decomponibilidade que a secao 3.9 do artigo promete comeca\naqui. Score sem motivo obriga quem analisa a adivinhar o que o numero quis\ndizer.",
+        "properties": {
+          "points": {
+            "title": "Points",
+            "type": "integer"
+          },
+          "reason": {
+            "title": "Reason",
+            "type": "string"
+          },
+          "rule": {
+            "title": "Rule",
+            "type": "string"
+          }
+        },
+        "required": [
+          "rule",
+          "points",
+          "reason"
+        ],
+        "title": "MotivoDoRisco",
+        "type": "object"
+      },
+      "NotaDoEvento": {
+        "description": "A nota de um evento, decomposta.",
+        "properties": {
+          "band": {
+            "title": "Band",
+            "type": "string"
+          },
+          "config_hash": {
+            "description": "O hash da configuracao que produziu esta nota (D-34)",
+            "title": "Config Hash",
+            "type": "string"
+          },
+          "configuration": {
+            "title": "Configuration",
+            "type": "string"
+          },
+          "employee_id": {
+            "title": "Employee Id",
+            "type": "integer"
+          },
+          "event_id": {
+            "title": "Event Id",
+            "type": "string"
+          },
+          "event_type": {
+            "title": "Event Type",
+            "type": "string"
+          },
+          "final_raw": {
+            "description": "A nota bruta, sem teto. A faixa e para a tela; a avaliacao usa esta",
+            "title": "Final Raw",
+            "type": "number"
+          },
+          "hits": {
+            "items": {
+              "$ref": "#/components/schemas/MotivoDoRisco"
+            },
+            "title": "Hits",
+            "type": "array"
+          },
+          "occurred_at": {
+            "description": "Sempre em UTC, com fuso explicito",
+            "format": "date-time",
+            "title": "Occurred At",
+            "type": "string"
+          },
+          "parcels": {
+            "$ref": "#/components/schemas/ParcelasDoRisco"
+          }
+        },
+        "required": [
+          "event_id",
+          "employee_id",
+          "occurred_at",
+          "event_type",
+          "configuration",
+          "config_hash",
+          "parcels",
+          "final_raw",
+          "band",
+          "hits"
+        ],
+        "title": "NotaDoEvento",
+        "type": "object"
+      },
+      "NotaDoFuncionario": {
+        "description": "A nota mais recente de uma pessoa naquela execucao.",
+        "properties": {
+          "band": {
+            "title": "Band",
+            "type": "string"
+          },
+          "configuration": {
+            "title": "Configuration",
+            "type": "string"
+          },
+          "employee_id": {
+            "title": "Employee Id",
+            "type": "integer"
+          },
+          "event_id": {
+            "title": "Event Id",
+            "type": "string"
+          },
+          "final_raw": {
+            "title": "Final Raw",
+            "type": "number"
+          },
+          "occurred_at": {
+            "format": "date-time",
+            "title": "Occurred At",
+            "type": "string"
+          },
+          "parcels": {
+            "$ref": "#/components/schemas/ParcelasDoRisco"
+          }
+        },
+        "required": [
+          "employee_id",
+          "event_id",
+          "occurred_at",
+          "configuration",
+          "parcels",
+          "final_raw",
+          "band"
+        ],
+        "title": "NotaDoFuncionario",
+        "type": "object"
+      },
+      "Pagina_Alerta_": {
+        "properties": {
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/Alerta"
+            },
+            "title": "Items",
+            "type": "array"
+          },
+          "limit": {
+            "title": "Limit",
+            "type": "integer"
+          },
+          "offset": {
+            "title": "Offset",
+            "type": "integer"
+          },
+          "total": {
+            "description": "Quantos itens existem no total, nao nesta pagina",
+            "title": "Total",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "items",
+          "total",
+          "limit",
+          "offset"
+        ],
+        "title": "Pagina[Alerta]",
+        "type": "object"
+      },
+      "Pagina_Execucao_": {
+        "properties": {
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/Execucao"
+            },
+            "title": "Items",
+            "type": "array"
+          },
+          "limit": {
+            "title": "Limit",
+            "type": "integer"
+          },
+          "offset": {
+            "title": "Offset",
+            "type": "integer"
+          },
+          "total": {
+            "description": "Quantos itens existem no total, nao nesta pagina",
+            "title": "Total",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "items",
+          "total",
+          "limit",
+          "offset"
+        ],
+        "title": "Pagina[Execucao]",
+        "type": "object"
+      },
+      "Pagina_Metrica_": {
+        "properties": {
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/Metrica"
+            },
+            "title": "Items",
+            "type": "array"
+          },
+          "limit": {
+            "title": "Limit",
+            "type": "integer"
+          },
+          "offset": {
+            "title": "Offset",
+            "type": "integer"
+          },
+          "total": {
+            "description": "Quantos itens existem no total, nao nesta pagina",
+            "title": "Total",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "items",
+          "total",
+          "limit",
+          "offset"
+        ],
+        "title": "Pagina[Metrica]",
+        "type": "object"
+      },
+      "Pagina_NotaDoEvento_": {
+        "properties": {
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/NotaDoEvento"
+            },
+            "title": "Items",
+            "type": "array"
+          },
+          "limit": {
+            "title": "Limit",
+            "type": "integer"
+          },
+          "offset": {
+            "title": "Offset",
+            "type": "integer"
+          },
+          "total": {
+            "description": "Quantos itens existem no total, nao nesta pagina",
+            "title": "Total",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "items",
+          "total",
+          "limit",
+          "offset"
+        ],
+        "title": "Pagina[NotaDoEvento]",
+        "type": "object"
+      },
+      "Pagina_NotaDoFuncionario_": {
+        "properties": {
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/NotaDoFuncionario"
+            },
+            "title": "Items",
+            "type": "array"
+          },
+          "limit": {
+            "title": "Limit",
+            "type": "integer"
+          },
+          "offset": {
+            "title": "Offset",
+            "type": "integer"
+          },
+          "total": {
+            "description": "Quantos itens existem no total, nao nesta pagina",
+            "title": "Total",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "items",
+          "total",
+          "limit",
+          "offset"
+        ],
+        "title": "Pagina[NotaDoFuncionario]",
+        "type": "object"
+      },
+      "ParcelasDoRisco": {
+        "description": "As cinco parcelas, como o motor as produziu.\n\nEspelha as colunas de `sdcac.risk_scores`. Nulo e \"nao avaliada\".",
+        "properties": {
+          "c0": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Regras fixas. Nao-nulo so na C0",
+            "title": "C0"
+          },
+          "d1": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Risco do evento individual",
+            "title": "D1"
+          },
+          "d2": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Desvio do padrao da pessoa",
+            "title": "D2"
+          },
+          "d3_conduct": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Exposicao acumulada — o que a pessoa fez",
+            "title": "D3 Conduct"
+          },
+          "d3_posture": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Postura de seguranca — o estado da conta e do equipamento",
+            "title": "D3 Posture"
+          }
+        },
+        "title": "ParcelasDoRisco",
+        "type": "object"
+      },
+      "Saude": {
+        "description": "Resposta de `/health`, para o painel saber se vale tentar.",
+        "properties": {
+          "adapter": {
+            "description": "Qual adaptador esta servindo os dados",
+            "title": "Adapter",
+            "type": "string"
+          },
+          "runs": {
+            "description": "Quantas execucoes de pontuacao existem",
+            "title": "Runs",
+            "type": "integer"
+          },
+          "status": {
+            "title": "Status",
+            "type": "string"
+          }
+        },
+        "required": [
+          "status",
+          "adapter",
+          "runs"
+        ],
+        "title": "Saude",
+        "type": "object"
+      },
+      "ValidationError": {
+        "properties": {
+          "ctx": {
+            "title": "Context",
+            "type": "object"
+          },
+          "input": {
+            "title": "Input"
+          },
+          "loc": {
+            "items": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "integer"
+                }
+              ]
+            },
+            "title": "Location",
+            "type": "array"
+          },
+          "msg": {
+            "title": "Message",
+            "type": "string"
+          },
+          "type": {
+            "title": "Error Type",
+            "type": "string"
+          }
+        },
+        "required": [
+          "loc",
+          "msg",
+          "type"
+        ],
+        "title": "ValidationError",
+        "type": "object"
+      }
+    }
+  },
+  "info": {
+    "description": "Leitura dos resultados do **Sistema de Avaliação Multidimensional de Risco\nComportamental**.\n\nToda nota vem **decomposta nas cinco parcelas** — `c0`, `d1`, `d2`,\n`d3_conduct`, `d3_posture`. Parcela nula significa *dimensão não avaliada nesta\nconfiguração*, e é diferente de zero, que significa *avaliada e sem risco*.\n\nEsta API **não calcula**: faixa, parcela e motivo vêm do motor; métrica vem do\navaliador. Nenhuma rota escreve, e nenhuma lê o gabarito.",
+    "title": "SDCAC — API de leitura",
+    "version": "1.0.0"
+  },
+  "openapi": "3.1.0",
+  "paths": {
+    "/api/v1/configurations": {
+      "get": {
+        "description": "As configuracoes com parametro, com o hash de cada uma.\n\nSai dos presets versionados, e nao do banco: e o painel sabendo o que cada\nexecucao ligou sem precisar deduzir do nome.",
+        "operationId": "configuracoes_api_v1_configurations_get",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/Configuracao"
+                  },
+                  "title": "Response Configuracoes Api V1 Configurations Get",
+                  "type": "array"
+                }
+              }
+            },
+            "description": "Successful Response"
+          }
+        },
+        "summary": "Os presets canonicos da ablacao"
+      }
+    },
+    "/api/v1/health": {
+      "get": {
+        "description": "Diz se vale tentar, e quantas execucoes existem para consultar.",
+        "operationId": "saude_api_v1_health_get",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Saude"
+                }
+              }
+            },
+            "description": "Successful Response"
+          }
+        },
+        "summary": "A API esta de pe?"
+      }
+    },
+    "/api/v1/runs": {
+      "get": {
+        "description": "Da mais recente para a mais antiga, com semente, commit e hash.",
+        "operationId": "execucoes_api_v1_runs_get",
+        "parameters": [
+          {
+            "description": "Itens por pagina, no maximo 200",
+            "in": "query",
+            "name": "limit",
+            "required": false,
+            "schema": {
+              "default": 50,
+              "description": "Itens por pagina, no maximo 200",
+              "maximum": 200,
+              "minimum": 1,
+              "title": "Limit",
+              "type": "integer"
+            }
+          },
+          {
+            "description": "Quantos itens pular",
+            "in": "query",
+            "name": "offset",
+            "required": false,
+            "schema": {
+              "default": 0,
+              "description": "Quantos itens pular",
+              "minimum": 0,
+              "title": "Offset",
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Pagina_Execucao_"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Execucoes de pontuacao"
+      }
+    },
+    "/api/v1/runs/{scoring_run_id}": {
+      "get": {
+        "operationId": "execucao_api_v1_runs__scoring_run_id__get",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "scoring_run_id",
+            "required": true,
+            "schema": {
+              "title": "Scoring Run Id",
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Execucao"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Erro"
+                }
+              }
+            },
+            "description": "Not Found"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Uma execucao"
+      }
+    },
+    "/api/v1/runs/{scoring_run_id}/alerts": {
+      "get": {
+        "operationId": "alertas_api_v1_runs__scoring_run_id__alerts_get",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "scoring_run_id",
+            "required": true,
+            "schema": {
+              "title": "Scoring Run Id",
+              "type": "integer"
+            }
+          },
+          {
+            "description": "Faixa exata",
+            "in": "query",
+            "name": "band",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "pattern": "^(normal|low|medium|high)$",
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Faixa exata",
+              "title": "Band"
+            }
+          },
+          {
+            "description": "Inicio, em UTC",
+            "in": "query",
+            "name": "since",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "format": "date-time",
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Inicio, em UTC",
+              "title": "Since"
+            }
+          },
+          {
+            "description": "Fim, em UTC",
+            "in": "query",
+            "name": "until",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "format": "date-time",
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Fim, em UTC",
+              "title": "Until"
+            }
+          },
+          {
+            "description": "Itens por pagina, no maximo 200",
+            "in": "query",
+            "name": "limit",
+            "required": false,
+            "schema": {
+              "default": 50,
+              "description": "Itens por pagina, no maximo 200",
+              "maximum": 200,
+              "minimum": 1,
+              "title": "Limit",
+              "type": "integer"
+            }
+          },
+          {
+            "description": "Quantos itens pular",
+            "in": "query",
+            "name": "offset",
+            "required": false,
+            "schema": {
+              "default": 0,
+              "description": "Quantos itens pular",
+              "minimum": 0,
+              "title": "Offset",
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Pagina_Alerta_"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Erro"
+                }
+              }
+            },
+            "description": "Not Found"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Alertas, filtraveis por faixa e periodo"
+      }
+    },
+    "/api/v1/runs/{scoring_run_id}/employees": {
+      "get": {
+        "operationId": "funcionarios_api_v1_runs__scoring_run_id__employees_get",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "scoring_run_id",
+            "required": true,
+            "schema": {
+              "title": "Scoring Run Id",
+              "type": "integer"
+            }
+          },
+          {
+            "description": "Itens por pagina, no maximo 200",
+            "in": "query",
+            "name": "limit",
+            "required": false,
+            "schema": {
+              "default": 50,
+              "description": "Itens por pagina, no maximo 200",
+              "maximum": 200,
+              "minimum": 1,
+              "title": "Limit",
+              "type": "integer"
+            }
+          },
+          {
+            "description": "Quantos itens pular",
+            "in": "query",
+            "name": "offset",
+            "required": false,
+            "schema": {
+              "default": 0,
+              "description": "Quantos itens pular",
+              "minimum": 0,
+              "title": "Offset",
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Pagina_NotaDoFuncionario_"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Erro"
+                }
+              }
+            },
+            "description": "Not Found"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "A nota mais recente de cada pessoa"
+      }
+    },
+    "/api/v1/runs/{scoring_run_id}/employees/{employee_id}": {
+      "get": {
+        "operationId": "historico_api_v1_runs__scoring_run_id__employees__employee_id__get",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "scoring_run_id",
+            "required": true,
+            "schema": {
+              "title": "Scoring Run Id",
+              "type": "integer"
+            }
+          },
+          {
+            "in": "path",
+            "name": "employee_id",
+            "required": true,
+            "schema": {
+              "title": "Employee Id",
+              "type": "integer"
+            }
+          },
+          {
+            "description": "Itens por pagina, no maximo 200",
+            "in": "query",
+            "name": "limit",
+            "required": false,
+            "schema": {
+              "default": 50,
+              "description": "Itens por pagina, no maximo 200",
+              "maximum": 200,
+              "minimum": 1,
+              "title": "Limit",
+              "type": "integer"
+            }
+          },
+          {
+            "description": "Quantos itens pular",
+            "in": "query",
+            "name": "offset",
+            "required": false,
+            "schema": {
+              "default": 0,
+              "description": "Quantos itens pular",
+              "minimum": 0,
+              "title": "Offset",
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Pagina_NotaDoEvento_"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Erro"
+                }
+              }
+            },
+            "description": "Not Found"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "O historico de uma pessoa"
+      }
+    },
+    "/api/v1/runs/{scoring_run_id}/events/{event_id}": {
+      "get": {
+        "operationId": "evento_api_v1_runs__scoring_run_id__events__event_id__get",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "scoring_run_id",
+            "required": true,
+            "schema": {
+              "title": "Scoring Run Id",
+              "type": "integer"
+            }
+          },
+          {
+            "in": "path",
+            "name": "event_id",
+            "required": true,
+            "schema": {
+              "title": "Event Id",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NotaDoEvento"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Erro"
+                }
+              }
+            },
+            "description": "Not Found"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "A nota de um evento, decomposta"
+      }
+    },
+    "/api/v1/runs/{scoring_run_id}/metrics": {
+      "get": {
+        "description": "Pagina vazia enquanto o avaliador nao existir — e isso e resposta.\n\nA API **nao calcula** precisao nem revocacao: calcular exigiria o rotulo, e\no usuario da aplicacao nao tem permissao de conectar no `ground_truth`.",
+        "operationId": "metricas_api_v1_runs__scoring_run_id__metrics_get",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "scoring_run_id",
+            "required": true,
+            "schema": {
+              "title": "Scoring Run Id",
+              "type": "integer"
+            }
+          },
+          {
+            "description": "Itens por pagina, no maximo 200",
+            "in": "query",
+            "name": "limit",
+            "required": false,
+            "schema": {
+              "default": 50,
+              "description": "Itens por pagina, no maximo 200",
+              "maximum": 200,
+              "minimum": 1,
+              "title": "Limit",
+              "type": "integer"
+            }
+          },
+          {
+            "description": "Quantos itens pular",
+            "in": "query",
+            "name": "offset",
+            "required": false,
+            "schema": {
+              "default": 0,
+              "description": "Quantos itens pular",
+              "minimum": 0,
+              "title": "Offset",
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Pagina_Metrica_"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Erro"
+                }
+              }
+            },
+            "description": "Not Found"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "O que o avaliador gravou"
+      }
+    }
+  }
+}

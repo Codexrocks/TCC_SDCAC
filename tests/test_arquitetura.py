@@ -145,6 +145,7 @@ def test_as_duas_entradas_importam_o_nucleo():
     """
     entradas = {
         "runner": (RAIZ / "runner").rglob("*.py"),
+        "backend": (RAIZ / "backend").rglob("*.py"),
     }
     for nome, arquivos in entradas.items():
         textos = [a.read_text(encoding="utf-8") for a in arquivos]
@@ -152,6 +153,36 @@ def test_as_duas_entradas_importam_o_nucleo():
             f"{nome}/ nao importa detection/: ou esta duplicando regra, ou nao "
             "esta usando o motor"
         )
+
+
+def test_a_api_nao_importa_o_adaptador_nas_rotas():
+    """A rota depende da porta, nao do adaptador.
+
+    E o que faz a troca do arquivo por PostgreSQL nao tocar em rota nenhuma.
+    Quem escolhe o adaptador e `backend/dependencies.py`, e so ele.
+    """
+    rotas = RAIZ / "backend" / "api.py"
+
+    for no in ast.walk(arvore(rotas)):
+        if isinstance(no, ast.ImportFrom):
+            raiz = (no.module or "").split(".", 1)[0]
+            assert raiz != "storage", (
+                "backend/api.py importa storage/. O adaptador entra por "
+                "dependencia, e a rota nao pode saber qual e"
+            )
+
+
+def test_a_api_nao_tem_rota_de_escrita():
+    """Somente leitura na v1, pela D-35 e pela D-32.
+
+    O contrato publicado tambem e conferido em `tests/test_api.py`; este olha o
+    codigo, e vale mesmo quando o FastAPI nao esta instalado — que e o caso no
+    CI de hoje.
+    """
+    rotas = (RAIZ / "backend" / "api.py").read_text(encoding="utf-8")
+
+    for verbo in ("router.post", "router.put", "router.patch", "router.delete"):
+        assert verbo not in rotas, f"{verbo} em backend/api.py: a v1 nao escreve"
 
 
 def test_o_adaptador_de_arquivo_nao_importa_as_entradas():
