@@ -26,17 +26,11 @@ fechada fica enterrada.
 
 | ID | Decisão | Proposta | Dono | Prazo | Situação |
 |---|---|---|---|---|---|
-| D-02 | Dashboard: objetivo, instrumento ou fora do escopo | Instrumento de análise, descrito na Metodologia e na arquitetura | Davi, Filipe | 08/09/2026 | ⚠️ Atrasado há 36 dias |
 | D-06 | Cenários de contexto (B) e longitudinais (L) | Adotados; desenho detalhado na S5 | Yasmin | 01/10/2026 | ⚠️ Atrasado há 13 dias |
 | D-07 | Caneta rotativa por seção | Uma pessoa redige, duas revisam, a caneta gira. Registrada pelo Davi quando Yasmin e Filipe confirmarem | Davi, Yasmin, Filipe | — | 🗓️ Sem prazo |
 | D-09 | Pesos preliminares e análise de sensibilidade | Valores preliminares; sensibilidade na S12 | Yasmin | S8 | 🗓️ Em 8 dias |
-| D-12 | Unidade de análise das métricas | Duas unidades declaradas separadamente: evento para os cenários pontuais, episódio para os de contexto e longitudinais | Davi, Filipe | 01/10/2026 | ⚠️ Atrasado há 13 dias |
-| D-13 | Tratamento estatístico dos resultados | 10 a 20 sementes, as mesmas nas quatro configurações; Wilcoxon pareado. Regra de corte declarada em 28/09, respondendo à P31: ciclo completo de uma semente até 30 min → 20 sementes; acima disso → 10, com o motivo registrado | Davi | 01/10/2026 | ⚠️ Atrasado há 13 dias |
-| D-14 | O que fazer se a C0 não alcançar revocação 0,90 | Comparar curvas precisão-revocação, em vez de pontos únicos | Filipe | 01/10/2026 | ⚠️ Atrasado há 13 dias |
-| D-15 | Critério de relevância declarado a priori | Uma frase na Metodologia dizendo qual redução de FPR e qual revocação longitudinal contam como resposta afirmativa | Davi, Yasmin, Filipe | 01/10/2026 | ⚠️ Atrasado há 13 dias |
+| D-15 | Critério de relevância declarado a priori | Origem do número decidida em 14/10: argumento operacional — quantos alertas falsos um analista absorve por turno. Falta o valor, e ele perde o sentido no dia em que a primeira execução for registrada | Davi, Yasmin, Filipe | 01/10/2026 | ⚠️ Atrasado há 13 dias |
 | D-16 | Controle negativo longitudinal | Acrescentar cenário de escalada legítima aos cenários de teste | Yasmin | 01/10/2026 | ⚠️ Atrasado há 13 dias |
-| D-17 | Janela de constituição do baseline da D2 | Janela de treino anterior e disjunta da janela de avaliação | Davi | 01/10/2026 | ⚠️ Atrasado há 13 dias |
-| D-18 | Dupla contagem e escala na integração | Excluir o evento atual da janela de exposição | Davi | 01/10/2026 | ⚠️ Atrasado há 13 dias |
 | D-19 | Vertente LGPD e ISO/IEC 27001 | Entra como limitação e trabalho futuro na S13 | Yasmin | 01/10/2026 | ⚠️ Atrasado há 13 dias |
 <!-- QUADRO:fim decisoes-abertas -->
 
@@ -57,10 +51,16 @@ fechada fica enterrada.
 | ID | Decisão | O que ficou | Data |
 |---|---|---|---|
 | D-01 | Mudança de título | **Adotado "Sistema de Avaliação Multidimensional de Risco Comportamental"**, comunicado ao orientador. O título anterior fica na [Tarefa 01](entregas/tarefa-01.md) como registro do que foi entregue em 03/09 | 23/09/2026 |
+| D-02 | Dashboard: objetivo, instrumento ou fora do escopo | **Opção A — painel como instrumento de análise**, não objeto de um segundo experimento. É a proposta do [plano](plano.md), seção 1.5, e a que a Metodologia já pressupunha na § 3.9. Não há avaliação com participantes, o que mantém coerente a declaração de ausência de dado de pessoa real da § 3.2. Aberta desde 08/09, fechada a pedido do Davi | 14/10/2026 |
 | D-03 | Operacionalização de "resultados diferentes" | FPR a revocação fixa **e** revocação longitudinal, com a **direção declarada** na pergunta. Precisão@k é secundária. Ver [plano, seção 1.3](plano.md) | 07/09/2026 |
 | D-04 | Dono da Justificativa | Evidência de Yasmin e Filipe; tese e redação de Davi | 06/09/2026 |
 | D-08 | SLA de resposta a Pull Request | 24 horas. PR sem resposta em 24 h é item obrigatório de pauta | 06/09/2026 |
 | D-11 | Formato do artigo | **COBEM 2026 para tudo, ABNT só para a lista de referências.** Consta duas vezes nas orientações do professor, versionadas em [`templates/`](../templates/README.md). A volta anterior, que dizia CREEM 2026, foi engano de arquivo: o `.docx` tratado como sendo do professor era de evento irmão. ⚠️ **O template do COBEM 2026 ainda não está no repositório.** Quarta volta nesta decisão — o histórico das quatro está em [formato do artigo](formato-do-artigo.md) | 23/09/2026 |
+| D-12 | Unidade de análise das métricas | **Duas unidades, declaradas separadamente**: evento para os cenários pontuais, episódio para os de contexto e longitudinais. Implementado em `detection/integracao/composition.py`; `tests/test_schema.py` confere no schema que a D3 alarma sobre um período, e não sobre um evento | 14/10/2026 |
+| D-13 | Tratamento estatístico dos resultados | **Faixa e regra de fechamento, não número final** — como o alerta da própria decisão exigia. 10 a 20 sementes, as mesmas nas quatro configurações, Wilcoxon pareado. A regra de corte foi declarada em 28/09, respondendo à P31: ciclo completo de uma semente até 30 min → 20 sementes; acima disso → 10, com o motivo registrado. **O número final sai da S11**, e isso não impede o fechamento. `tests/test_portas.py` trata semente descartada como caso previsto, não como erro | 14/10/2026 |
+| D-14 | O que fazer se a C0 não alcançar revocação 0,90 | **Curvas precisão-revocação completas, não pontos únicos.** O teto de pontuação da C0 foi desenhado para não virar degrau na curva — `detection/c0/rules.py` e `detection/integracao/composition.py` —, e `tests/test_c0.py` cobre o empate no teto | 14/10/2026 |
+| D-17 | Janela de constituição do baseline da D2 | **Janela de treino anterior e disjunta da janela de avaliação.** `detection/d2/scoring.py` recusa evento posterior na fronteira e `runner/experiment.py` falha se as janelas se cruzarem; a trava está coberta em `tests/test_baseline.py` | 14/10/2026 |
+| D-18 | Dupla contagem e escala na integração | **O evento atual não entra na janela de exposição.** `detection/d3/posture.py` e `detection/d3/scoring.py` recusam o risco do próprio evento avaliado; `tests/test_d3.py` registra a D-18 como trava, e não como aviso na documentação | 14/10/2026 |
 | D-20 | Sexto capítulo do artigo (`04-desenvolvimento`), proposto pelo plano | **Não entra.** As orientações escritas do professor definem **cinco seções**, com a quinta juntando Conclusão e Referências. É a palavra de quem tem autoridade sobre a estrutura, e ela já estava no repositório — não precisava esperar reunião. O argumento de espaço, que já tinha caído quando a extensão virou 8 a 12 páginas, deixa de importar | 23/09/2026 |
 | D-21 | Idioma do artigo | Texto inteiro em **português**; só o *abstract* e as *keywords* em inglês. O template pede inglês, mas quem define para o TCC é a coordenação | 07/09/2026 |
 | D-22 | Onde ficam os insumos das encomendas | **`docs/insumos/`**, não `artigo/insumos/`. O GitBook **escreve** em `artigo/` e normaliza o Markdown ao salvar — foi assim que os comentários dos seis capítulos sumiram em 06/09. Em `docs/` ele só lê. As duas pastas publicam; o que muda é a escrita de volta. Cada insumo entregue entra no `docs/SUMMARY.md` | 07/09/2026 |
