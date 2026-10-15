@@ -75,4 +75,5 @@
 * [2026-10-13 — Sessão 27: o motor sai do papel, e a tabela ganha as quatro linhas](relatorios/2026-10-13-sessao-27.md)
 * [2026-10-14 — Sessão 28: as portas fecham, e o experimento roda de ponta a ponta](relatorios/2026-10-14-sessao-28.md)
 * [2026-10-14 — Sessão 29: a API de leitura entra, e o painel pode começar](relatorios/2026-10-14-sessao-29.md)
+* [2026-10-15 — Sessão 31: nenhuma semana pode ser dada por pronta](relatorios/2026-10-15-sessao-31.md)
 * [Modelo de relatório](relatorios/_modelo.md)
