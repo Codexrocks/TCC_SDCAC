@@ -47,3 +47,4 @@ Use o [modelo](_modelo.md) e adicione a página nova ao
 | 13/10/2026 | [Sessão 27](2026-10-13-sessao-27.md) | O motor de análise sai do papel: schema, as quatro dimensões e a composição em cinco PRs empilhados; treze erros da IA, um deles pego pela trava que ela mesma escreveu |
 | 14/10/2026 | [Sessão 28](2026-10-14-sessao-28.md) | As portas de entrada e saída fecham e o experimento roda pela linha de comando; a coluna `c0` era `NOT NULL` e tornava impossível gravar C1 a C3 |
 | 14/10/2026 | [Sessão 29](2026-10-14-sessao-29.md) | A API de leitura entra com nove rotas e o contrato versionado; o CI não roda os testes dela, e isso é pendência declarada |
+| 14/10/2026 | [Sessão 30](2026-10-14-sessao-30.md) | A M2 não estava travada por decisão não tomada, e sim por registro não atualizado: nove decisões abertas no papel já estavam implementadas e testadas no código |

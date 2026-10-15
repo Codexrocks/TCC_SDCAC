@@ -317,10 +317,8 @@ donos = ["Todos"]
 [[decisao]]
 id = "D-02"
 titulo = "Dashboard: objetivo, instrumento ou fora do escopo"
-proposta = "Instrumento de análise, descrito na Metodologia e na arquitetura"
-donos = ["Davi", "Filipe"]
-prazo = 2026-09-08
-estado = "aberta"
+estado = "fechada"
+fechada_em = 2026-10-14
 
 [[decisao]]
 id = "D-06"
@@ -366,7 +364,7 @@ fechada_em = 2026-10-14
 [[decisao]]
 id = "D-15"
 titulo = "Critério de relevância declarado a priori"
-proposta = "Uma frase na Metodologia dizendo qual redução de FPR e qual revocação longitudinal contam como resposta afirmativa"
+proposta = "Origem do número decidida em 14/10: argumento operacional — quantos alertas falsos um analista absorve por turno. Falta o valor, e ele perde o sentido no dia em que a primeira execução for registrada"
 donos = ["Davi", "Yasmin", "Filipe"]
 prazo = 2026-10-01
 estado = "aberta"

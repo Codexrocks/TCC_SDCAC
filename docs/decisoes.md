@@ -26,11 +26,10 @@ fechada fica enterrada.
 
 | ID | Decisão | Proposta | Dono | Prazo | Situação |
 |---|---|---|---|---|---|
-| D-02 | Dashboard: objetivo, instrumento ou fora do escopo | Instrumento de análise, descrito na Metodologia e na arquitetura | Davi, Filipe | 08/09/2026 | ⚠️ Atrasado há 36 dias |
 | D-06 | Cenários de contexto (B) e longitudinais (L) | Adotados; desenho detalhado na S5 | Yasmin | 01/10/2026 | ⚠️ Atrasado há 13 dias |
 | D-07 | Caneta rotativa por seção | Uma pessoa redige, duas revisam, a caneta gira. Registrada pelo Davi quando Yasmin e Filipe confirmarem | Davi, Yasmin, Filipe | — | 🗓️ Sem prazo |
 | D-09 | Pesos preliminares e análise de sensibilidade | Valores preliminares; sensibilidade na S12 | Yasmin | S8 | 🗓️ Em 8 dias |
-| D-15 | Critério de relevância declarado a priori | Uma frase na Metodologia dizendo qual redução de FPR e qual revocação longitudinal contam como resposta afirmativa | Davi, Yasmin, Filipe | 01/10/2026 | ⚠️ Atrasado há 13 dias |
+| D-15 | Critério de relevância declarado a priori | Origem do número decidida em 14/10: argumento operacional — quantos alertas falsos um analista absorve por turno. Falta o valor, e ele perde o sentido no dia em que a primeira execução for registrada | Davi, Yasmin, Filipe | 01/10/2026 | ⚠️ Atrasado há 13 dias |
 | D-16 | Controle negativo longitudinal | Acrescentar cenário de escalada legítima aos cenários de teste | Yasmin | 01/10/2026 | ⚠️ Atrasado há 13 dias |
 | D-19 | Vertente LGPD e ISO/IEC 27001 | Entra como limitação e trabalho futuro na S13 | Yasmin | 01/10/2026 | ⚠️ Atrasado há 13 dias |
 <!-- QUADRO:fim decisoes-abertas -->
@@ -52,6 +51,7 @@ fechada fica enterrada.
 | ID | Decisão | O que ficou | Data |
 |---|---|---|---|
 | D-01 | Mudança de título | **Adotado "Sistema de Avaliação Multidimensional de Risco Comportamental"**, comunicado ao orientador. O título anterior fica na [Tarefa 01](entregas/tarefa-01.md) como registro do que foi entregue em 03/09 | 23/09/2026 |
+| D-02 | Dashboard: objetivo, instrumento ou fora do escopo | **Opção A — painel como instrumento de análise**, não objeto de um segundo experimento. É a proposta do [plano](plano.md), seção 1.5, e a que a Metodologia já pressupunha na § 3.9. Não há avaliação com participantes, o que mantém coerente a declaração de ausência de dado de pessoa real da § 3.2. Aberta desde 08/09, fechada a pedido do Davi | 14/10/2026 |
 | D-03 | Operacionalização de "resultados diferentes" | FPR a revocação fixa **e** revocação longitudinal, com a **direção declarada** na pergunta. Precisão@k é secundária. Ver [plano, seção 1.3](plano.md) | 07/09/2026 |
 | D-04 | Dono da Justificativa | Evidência de Yasmin e Filipe; tese e redação de Davi | 06/09/2026 |
 | D-08 | SLA de resposta a Pull Request | 24 horas. PR sem resposta em 24 h é item obrigatório de pauta | 06/09/2026 |

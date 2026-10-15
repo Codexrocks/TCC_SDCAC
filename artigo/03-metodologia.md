@@ -158,11 +158,12 @@ não pode consultar.
 > mínimo, um cenário nomeado por família e ao menos um de escalada legítima.
 > **Não escrever antes de existir.**
 
-> **A escrever — lacuna 2 · Davi e Yasmin · 01/10.** Desenho cego. Se a
-> especificação dos cenários tiver de fato ocorrido sem acesso às fórmulas de
-> pontuação, acrescentar uma frase declarando isso — é a resposta mais forte à
-> objeção de circularidade tratada na Seção 3.8. **Se não tiver ocorrido, não
-> escrever.**
+A especificação dos cenários foi produzida **sem acesso às fórmulas de
+pontuação**: quem desenhou as famílias, os rótulos e os casos de escalada
+legítima não dispunha dos pesos, dos limiares nem da forma de composição das
+dimensões. A separação de papéis é registrada aqui porque é a resposta mais
+direta à objeção de circularidade tratada na Seção 3.8 — a de avaliar um detector
+com cenários moldados para que ele passe.
 
 ## 3.5 Unidade de análise
 
@@ -217,15 +218,23 @@ classe fortemente desbalanceada, como é o caso, a curva de precisão-revocaçã
 mais informativa que a curva ROC (Davis e Goadrich, 2006; Saito e Rehmsmeier,
 2015).
 
-> **A escrever — lacuna 3 · os três · 01/10.** O critério de sucesso declarado a
-> priori, da **D-15**. Falta a frase que fixa, **em números**, qual redução de
-> falsos positivos e qual revocação longitudinal contam como resposta afirmativa
-> à pergunta de pesquisa.
+> **A escrever — lacuna 3 · Davi · imediato.** O critério de sucesso declarado
+> a priori, da **D-15**.
 >
-> A frase está deliberadamente em branco: **seu valor metodológico está em ser
-> escolhida antes de existir resultado.** O número precisa ter origem
-> declarável — literatura, linha de base medida da C0, ou argumento operacional
-> de quantos falsos positivos um analista absorve por turno.
+> **A origem do número está decidida:** entre as três que a decisão admitia —
+> literatura, linha de base medida da C0, ou argumento operacional —, adotou-se o
+> **argumento operacional**, de quantos alertas falsos um analista absorve por
+> turno. É a origem defensável sem resultado na mão, e dialoga com a fadiga de
+> alerta tratada na [usabilidade](../docs/usabilidade.md).
+>
+> **Falta o número.** A frase a escrever fixa três valores: o teto de alertas
+> falsos por turno que se considera absorvível; a redução de falsos positivos
+> sobre a configuração C0 que daí decorre; e a revocação longitudinal mínima.
+>
+> **Ainda dá tempo de ser *a priori*:** em 14/10/2026 nenhum resultado havia sido
+> versionado. A partir da primeira execução registrada, esta frase deixa de ser
+> critério e passa a ser justificação de resultado — e a diferença entre as duas
+> é o que a Seção 3.8 chama de ameaça à validade.
 
 ## 3.7 Execução e reprodutibilidade
 
@@ -328,21 +337,23 @@ participantes, e nenhum dado de pessoa real é coletado, em coerência com a
 declaração da Seção 3.2. O critério de aceite do painel é funcional e está
 registrado na documentação do projeto.
 
-> **A escrever — lacuna 4 · Davi e Filipe · 01/10.** Esta subseção pressupõe a
-> **opção A da D-02** — painel como instrumento —, que é a proposta registrada
-> no [plano](../docs/plano.md), seção 1.5, mas a decisão está **aberta desde
-> 08/09**.
->
-> Se a escolha for a **opção B** — segundo experimento, com avaliação heurística
-> e SUS —, esta subseção é reescrita por inteiro **e passa a contradizer a
-> declaração de ausência de dado de pessoa real da Seção 3.2**. Se for a **C**, a
-> subseção é removida. **Decidir antes de congelar a M2.**
+A **D-02 fechou em 14/10/2026 pela opção A**: o painel é instrumento de
+análise, e não objeto de um segundo experimento. Não há avaliação com
+participantes, o que mantém coerente a declaração de ausência de dado de pessoa
+real da Seção 3.2.
 
 ***
 
 ## O que esta seção ainda precisa
 
-* [ ] **As quatro lacunas acima**, todas com prazo em **01/10** — são a M2
+* [x] ~~Lacuna 2~~ — desenho cego declarado em 14/10, confirmado pelo Davi
+* [x] ~~Lacuna 4~~ — **D-02 fechada pela opção A** em 14/10
+* [ ] **Lacuna 1** · **Yasmin** — a relação nominal dos cenários. Depende da
+      **D-06** e da **D-16**, e de o gerador de eventos existir: em 14/10 não há
+      gerador nem cenário nomeado no repositório
+* [ ] **Lacuna 3** · **Davi** · **imediato** — o número do critério a priori. A
+      origem já está escolhida; falta o valor, e ele perde o sentido no dia em
+      que a primeira execução for registrada
 * [ ] **As sete fontes conferidas na fonte** · **Davi** · antes de qualquer uma
       entrar em [`referencias.md`](referencias.md). As pendências estão em
       [citações pendentes](../docs/citacoes-pendentes.md), e o ano de

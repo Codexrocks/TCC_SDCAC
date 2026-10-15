@@ -19,15 +19,15 @@
 
 | Coluna | Itens |
 |---|---|
-| ⚠️ Atrasado | 12 |
+| ⚠️ Atrasado | 11 |
 | ▶️ Em curso | 1 |
 | ⏳ A vencer em 7 dias | 0 |
 | 🗓️ Depois | 21 |
-| ✅ Feito | 36 |
+| ✅ Feito | 37 |
 
 ## ⚠️ Atrasado
 
-12 itens.
+11 itens.
 
 | Tipo | Item | O que é | Quem | Prazo | Situação |
 |---|---|---|---|---|---|
@@ -37,7 +37,6 @@
 | Capítulo | **1. Introdução** | Entregue parcial em 24/09 — os seis blocos de complementação continuam vazios, e a parcialidade foi declarada no arquivo entregue | Yasmin, Filipe | S5 | ⚠️ Atrasado há 13 dias |
 | Capítulo | **2. Referencial teórico** | Escrito e versionado em 28/09 pela Yasmin — 4 subseções, ≈1.150 palavras, atrasado de S3 e S4. Faltam as 13 fontes confirmadas | Yasmin | S5 | ⚠️ Atrasado há 13 dias |
 | Capítulo | **3. Metodologia** | Escrita e versionada em 28/09 — 9 subseções. Faltam as 4 lacunas da M2 e as 7 fontes conferidas | Davi (caneta) | S5 | ⚠️ Atrasado há 13 dias |
-| Decisão | **D-02** | Dashboard: objetivo, instrumento ou fora do escopo | Davi, Filipe | 08/09/2026 | ⚠️ Atrasado há 36 dias |
 | Decisão | **D-06** | Cenários de contexto (B) e longitudinais (L) | Yasmin | 01/10/2026 | ⚠️ Atrasado há 13 dias |
 | Decisão | **D-15** | Critério de relevância declarado a priori | Davi, Yasmin, Filipe | 01/10/2026 | ⚠️ Atrasado há 13 dias |
 | Decisão | **D-16** | Controle negativo longitudinal | Yasmin | 01/10/2026 | ⚠️ Atrasado há 13 dias |
@@ -86,13 +85,14 @@ Nada nesta coluna.
 
 ## ✅ Feito
 
-36 itens.
+37 itens.
 
 | Tipo | Item | O que é | Quem | Prazo | Situação |
 |---|---|---|---|---|---|
 | Professor | **Tema do trabalho e composição do grupo — *Tarefa 01*** |  | Todos | 05/09/2026 | ✅ Entregue em 03/09/2026 |
 | Professor | **Introdução do artigo no template **COBEM 2026** — *Tarefa 02*** | Seis blocos de complementação vazios; a parcialidade foi declarada no arquivo entregue | Todos | 24/09/2026 | ✅ Entregue parcial em 24/09/2026 |
 | Marco | **M1 · Introdução** | Problema, pergunta, objetivos, delimitação | Todos | 24/09/2026 | ✅ Fechado em parte |
+| Decisão | **D-02** | Dashboard: objetivo, instrumento ou fora do escopo | — | 14/10/2026 | ✅ Fechada em 14/10/2026 |
 | Decisão | **D-12** | Unidade de análise das métricas | — | 14/10/2026 | ✅ Fechada em 14/10/2026 |
 | Decisão | **D-13** | Tratamento estatístico dos resultados | — | 14/10/2026 | ✅ Fechada em 14/10/2026 |
 | Decisão | **D-14** | O que fazer se a C0 não alcançar revocação 0,90 | — | 14/10/2026 | ✅ Fechada em 14/10/2026 |
