@@ -48,3 +48,4 @@ Use o [modelo](_modelo.md) e adicione a página nova ao
 | 14/10/2026 | [Sessão 26](2026-10-14-sessao-26.md) | O workflow do quadro falhava há oito dias em silêncio: branch fixa e squash merge não se reconciliam |
 | 14/10/2026 | [Sessão 28](2026-10-14-sessao-28.md) | As portas de entrada e saída fecham e o experimento roda pela linha de comando; a coluna `c0` era `NOT NULL` e tornava impossível gravar C1 a C3 |
 | 14/10/2026 | [Sessão 29](2026-10-14-sessao-29.md) | A API de leitura entra com nove rotas e o contrato versionado; o CI não roda os testes dela, e isso é pendência declarada |
+| 14/10/2026 | [Sessão 30](2026-10-14-sessao-30.md) | A M2 não estava travada por decisão não tomada, e sim por registro não atualizado: nove decisões abertas no papel já estavam implementadas e testadas no código |
