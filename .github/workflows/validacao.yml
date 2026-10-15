@@ -29,11 +29,23 @@ jobs:
         with:
           python-version: "3.12"
 
-      - name: Instalar pytest e PyYAML
+      - name: Instalar o que os testes precisam
         # O PyYAML e do validar.py: sem ele a sintaxe dos workflows so e
         # conferida pela margem, e a falta vira ERRO em CI de proposito.
         # Check que nao roda nao e trava.
-        run: pip install --quiet pytest pyyaml
+        #
+        # O FastAPI e o httpx sao dos testes da API. Sem eles, o
+        # `tests/test_api.py` inteiro e PULADO aqui — e teste pulado em
+        # silencio e pior que teste ausente, porque o verde do CI passa a
+        # afirmar o que ninguem conferiu. Este repositorio ja foi mordido por
+        # esse formato de defeito uma vez: o `tzdata` faltava, o CI (Linux)
+        # passava verde e a maquina da equipe (Windows) quebrava com
+        # ZoneInfoNotFoundError.
+        #
+        # A lista e explicita, e nao `pip install -e .`: as dependencias do
+        # projeto incluem pandas, matplotlib e streamlit, que nenhum teste usa
+        # e que levariam minutos a cada execucao.
+        run: pip install --quiet pytest pyyaml fastapi httpx
 
       # A ORDEM DOS DOIS PROXIMOS PASSOS IMPORTA.
       #

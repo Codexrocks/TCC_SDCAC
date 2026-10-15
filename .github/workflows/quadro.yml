@@ -27,6 +27,28 @@ name: Quadro
 # Ele também não faz merge. O merge na main é do Davi.
 #
 # Roda sob demanda pelo botão "Run workflow" na aba Actions.
+#
+# POR QUE A BRANCH É DO DIA, E NÃO UMA SÓ
+# ---------------------------------------
+# A primeira versão usava uma branch fixa, `claude/chore/quadro-diario`, e
+# trazia a `main` para dentro dela a cada execução. Isso funcionou uma vez e
+# depois falhou **oito dias seguidos, de 06/10 a 13/10**, sem ninguém perceber —
+# workflow agendado que falha não aparece em lugar nenhum.
+#
+# A causa é estrutural, não um descuido: o repositório usa **squash merge**. O
+# commit que a branch empurrou em 29/09 entrou na `main` como um commit
+# diferente, com outro SHA, e os PRs seguintes mexeram nas mesmas três páginas
+# geradas. A partir daí `git merge origin/main` conflita em `docs/quadro.md`
+# todas as vezes, e o passo para — corretamente, e para sempre.
+#
+# Branch longa e squash merge não se reconciliam. Como **tudo nesta branch é
+# gerado**, não há nada nela que valha preservar: a saída certa é nascer da
+# `main` a cada dia, em vez de tentar alcançá-la.
+#
+# Enquanto houver PR do quadro aberto, o workflow continua naquela branch e
+# acrescenta commit — assim não acumula um PR por dia. Só quando não há PR
+# aberto é que nasce a branch do dia. Nada disso usa `git push --force`, que a
+# seção 4 do AGENTS.md proíbe.
 
 on:
   schedule:
@@ -60,20 +82,32 @@ jobs:
 
       - name: Preparar a branch do quadro
         env:
-          BRANCH: claude/chore/quadro-diario
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PREFIXO: claude/chore/quadro-
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
-          # Se a branch já existe, continua nela e traz o que entrou na main.
-          # Nunca reescreve histórico: `git push --force` é proibido pelo
-          # AGENTS.md, seção 4. Conflito aqui falha alto, e uma pessoa olha.
-          if git ls-remote --exit-code --heads origin "$BRANCH" >/dev/null 2>&1; then
-            git fetch origin "$BRANCH"
-            git checkout -B "$BRANCH" "origin/$BRANCH"
+          # Já existe PR do quadro aberto? Continua na branch dele, para não
+          # abrir um PR por dia. Aí sim traz a main — e um conflito aqui é
+          # sinal de verdade, porque significa que alguém mexeu nas páginas
+          # geradas enquanto o PR estava aberto.
+          aberta="$(gh pr list --state open --json headRefName \
+                    -q "[.[] | select(.headRefName | startswith(\"$PREFIXO\"))][0].headRefName")"
+
+          if [ -n "$aberta" ]; then
+            echo "PR do quadro aberto em $aberta — continuando nela."
+            git fetch origin "$aberta"
+            git checkout -B "$aberta" "origin/$aberta"
             git merge --no-edit origin/main
+            echo "BRANCH=$aberta" >> "$GITHUB_ENV"
           else
-            git checkout -b "$BRANCH"
+            # Sem PR aberto, a branch antiga é entulho: tudo nela já entrou na
+            # main por squash. Nasce uma do dia, a partir da main.
+            nova="${PREFIXO}$(date -u +%Y-%m-%d)"
+            echo "Nenhum PR do quadro aberto — criando $nova a partir da main."
+            git checkout -B "$nova" origin/main
+            echo "BRANCH=$nova" >> "$GITHUB_ENV"
           fi
 
       - name: Recalcular o quadro
@@ -84,8 +118,6 @@ jobs:
 
       - name: Commitar, se mudou
         id: commit
-        env:
-          BRANCH: claude/chore/quadro-diario
         run: |
           if git diff --quiet; then
             echo "mudou=nao" >> "$GITHUB_OUTPUT"
@@ -110,7 +142,6 @@ jobs:
         if: steps.commit.outputs.mudou == 'sim'
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          BRANCH: claude/chore/quadro-diario
         run: |
           aberto="$(gh pr list --state open --head "$BRANCH" --json number -q '.[0].number')"
           if [ -n "$aberto" ]; then
@@ -118,56 +149,8 @@ jobs:
             exit 0
           fi
 
-          cat > corpo.md <<'CORPO'
-          ## O que muda
-
-          Recalcula o quadro contra a data de hoje. As três páginas geradas são
-          `docs/quadro.md` e os blocos marcados de `docs/cronograma.md` e
-          `docs/decisoes.md`.
-
-          Este PR foi aberto pelo workflow **Quadro**, sem nenhum assistente no meio: o
-          conteúdo sai de `scripts/quadro.py` lendo o `quadro.toml`. Para reproduzir:
-
-          ```
-          python3 scripts/quadro.py
-          ```
-
-          ## Por quê
-
-          Situação de prazo escrita à mão envelhece em silêncio. Em 26/09/2026 o
-          cronograma dizia que a Tarefa 02 vencia "amanhã" — o prazo tinha sido 24/09.
-
-          Nada de **fato** muda aqui. Data, dono, critério e estado moram no `quadro.toml`
-          e só mudam quando uma pessoa edita. O que muda neste PR é só o que se calcula:
-          que dia é hoje, o que venceu, o que entra na semana.
-
-          ## Uso de IA
-
-          - **IA usada:** nenhuma
-          - **No que ajudou:** nada. O conteúdo é aritmética de data feita por
-            `scripts/quadro.py`, determinística e reproduzível por qualquer pessoa que rode
-            o script
-          - **O que é meu:** os fatos do `quadro.toml`, que são editados à mão por pessoas
-            em Pull Request próprio. Este PR não inventa nem altera nenhum deles
-          - **Conferi tudo que a IA escreveu:** não se aplica — nenhuma IA escreveu.
-            Quem for mergear confere o diff, que é curto por construção
-
-          ## Checklist
-
-          - [x] Branch no padrão `<autor>/<tipo>/<assunto>`
-          - [x] Commits no padrão `tipo: descrição`, com a linha `Assistido-por:`
-          - [x] Não criei página nova em `docs/`
-          - [x] Não há `.env`, senha, token ou chave no diff
-          - [x] Nenhum arquivo protegido no diff — só as três páginas geradas
-          - [ ] Alguém leu o diff antes do merge
-
-          ## Responsável
-
-          Davi
-          CORPO
-
           gh pr create \
             --base main \
             --head "$BRANCH" \
             --title "chore: atualiza o quadro do cronograma" \
-            --body-file corpo.md
+            --body-file .github/quadro-corpo-de-pr.md
