@@ -74,17 +74,22 @@ COMMENT ON COLUMN scoring_runs.exploratory IS 'Verdadeiro quando a configuracao 
 CREATE TABLE risk_scores (
     scoring_run_id integer   NOT NULL REFERENCES scoring_runs,
     event_id       uuid      NOT NULL,
-    c0             numeric(6, 2) NOT NULL,
+    c0             numeric(6, 2),
     d1             numeric(6, 2),
     d2             numeric(6, 2),
     d3_conduct     numeric(6, 2),
     d3_posture     numeric(6, 2),
     final_raw      numeric(8, 2) NOT NULL,
     band           risk_band NOT NULL,
-    PRIMARY KEY (scoring_run_id, event_id)
+    PRIMARY KEY (scoring_run_id, event_id),
+    -- Nulo em TODAS as cinco parcelas seria nota que ninguem calculou. A C0
+    -- preenche uma; a C1, uma; a C2, duas; a C3, quatro. Nenhuma preenche zero.
+    CONSTRAINT risk_scores_alguma_parcela CHECK (
+        num_nonnulls(c0, d1, d2, d3_conduct, d3_posture) >= 1
+    )
 );
 
-COMMENT ON TABLE risk_scores IS 'As colunas de dimensao sao nulas quando a configuracao nao liga aquela dimensao: na C0 so c0 tem valor. Nulo aqui significa "nao avaliada", e e diferente de zero, que significa "avaliada e sem risco".';
+COMMENT ON TABLE risk_scores IS 'As colunas de dimensao sao nulas quando a configuracao nao liga aquela dimensao: na C0 so c0 tem valor, e nas C1 a C3 o c0 e nulo, porque a linha de base e uma configuracao e nao um componente das outras (D-26). Nulo aqui significa "nao avaliada", e e diferente de zero, que significa "avaliada e sem risco". A coluna c0 era NOT NULL ate 14/10/2026, o que tornava impossivel gravar qualquer execucao de C1 a C3 - defeito encontrado ao escrever a porta de escrita, nao em execucao.';
 
 -- ---------------------------------------------------------------------------
 -- Alertas

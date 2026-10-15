@@ -231,6 +231,35 @@ def test_nota_guarda_as_cinco_parcelas():
         )
 
 
+def test_a_parcela_c0_aceita_nulo():
+    """Na C1 a C3 a parcela c0 e nula, porque a linha de base e uma configuracao.
+
+    A coluna era NOT NULL ate 14/10/2026, o que tornava impossivel gravar
+    qualquer execucao de C1 a C3 — e contradizia o comentario da propria tabela.
+    O defeito apareceu ao escrever a porta de escrita, nao em execucao: nunca
+    houve banco para recusar o INSERT.
+    """
+    bloco = SDCAC.split("CREATE TABLE risk_scores (", 1)[1].split(");", 1)[0]
+    linha_do_c0 = next(
+        linha for linha in bloco.splitlines() if linha.strip().startswith("c0 ")
+    )
+
+    assert "NOT NULL" not in linha_do_c0
+
+
+def test_nota_sem_parcela_nenhuma_e_recusada():
+    """Nulo nas cinco seria nota que ninguem calculou.
+
+    Sem o CHECK, tornar o c0 anulavel abriria a porta para linha vazia com
+    `final_raw` preenchido — numero sem decomposicao, que e exatamente o que a
+    D-36 proibe.
+    """
+    assert "risk_scores_alguma_parcela" in SDCAC
+    assert "num_nonnulls(c0, d1, d2, d3_conduct, d3_posture) >= 1" in sem_comentarios(
+        SDCAC
+    )
+
+
 def test_alerta_e_por_evento_ou_por_janela():
     """A D-12 no schema: a D3 alarma sobre alguem num periodo, nao sobre um evento."""
     assert "alerts_alvo_definido" in SDCAC

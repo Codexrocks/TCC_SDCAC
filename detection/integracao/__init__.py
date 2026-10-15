@@ -6,10 +6,19 @@ duas parcelas da D3 separadas, como a D-30 exige e como o banco guarda.
 """
 
 from detection.integracao.composition import (
+    Alert,
     EvaluationContext,
     RiskScore,
+    alert_for,
     band_of,
     compose,
 )
 
-__all__ = ["EvaluationContext", "RiskScore", "band_of", "compose"]
+__all__ = [
+    "Alert",
+    "EvaluationContext",
+    "RiskScore",
+    "alert_for",
+    "band_of",
+    "compose",
+]
