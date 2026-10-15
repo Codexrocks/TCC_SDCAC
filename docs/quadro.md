@@ -19,15 +19,15 @@
 
 | Coluna | Itens |
 |---|---|
-| ⚠️ Atrasado | 17 |
+| ⚠️ Atrasado | 11 |
 | ▶️ Em curso | 1 |
 | ⏳ A vencer em 7 dias | 4 |
 | 🗓️ Depois | 17 |
-| ✅ Feito | 31 |
+| ✅ Feito | 37 |
 
 ## ⚠️ Atrasado
 
-17 itens.
+11 itens.
 
 | Tipo | Item | O que é | Quem | Prazo | Situação |
 |---|---|---|---|---|---|
@@ -37,15 +37,9 @@
 | Capítulo | **1. Introdução** | Entregue parcial em 24/09 — os seis blocos de complementação continuam vazios, e a parcialidade foi declarada no arquivo entregue | Yasmin, Filipe | S5 | ⚠️ Atrasado há 14 dias |
 | Capítulo | **2. Referencial teórico** | Escrito e versionado em 28/09 pela Yasmin — 4 subseções, ≈1.150 palavras, atrasado de S3 e S4. Faltam as 13 fontes confirmadas | Yasmin | S5 | ⚠️ Atrasado há 14 dias |
 | Capítulo | **3. Metodologia** | Escrita e versionada em 28/09 — 9 subseções. Faltam as 4 lacunas da M2 e as 7 fontes conferidas | Davi (caneta) | S5 | ⚠️ Atrasado há 14 dias |
-| Decisão | **D-02** | Dashboard: objetivo, instrumento ou fora do escopo | Davi, Filipe | 08/09/2026 | ⚠️ Atrasado há 37 dias |
 | Decisão | **D-06** | Cenários de contexto (B) e longitudinais (L) | Yasmin | 01/10/2026 | ⚠️ Atrasado há 14 dias |
-| Decisão | **D-12** | Unidade de análise das métricas | Davi, Filipe | 01/10/2026 | ⚠️ Atrasado há 14 dias |
-| Decisão | **D-13** | Tratamento estatístico dos resultados | Davi | 01/10/2026 | ⚠️ Atrasado há 14 dias |
-| Decisão | **D-14** | O que fazer se a C0 não alcançar revocação 0,90 | Filipe | 01/10/2026 | ⚠️ Atrasado há 14 dias |
 | Decisão | **D-15** | Critério de relevância declarado a priori | Davi, Yasmin, Filipe | 01/10/2026 | ⚠️ Atrasado há 14 dias |
 | Decisão | **D-16** | Controle negativo longitudinal | Yasmin | 01/10/2026 | ⚠️ Atrasado há 14 dias |
-| Decisão | **D-17** | Janela de constituição do baseline da D2 | Davi | 01/10/2026 | ⚠️ Atrasado há 14 dias |
-| Decisão | **D-18** | Dupla contagem e escala na integração | Davi | 01/10/2026 | ⚠️ Atrasado há 14 dias |
 | Decisão | **D-19** | Vertente LGPD e ISO/IEC 27001 | Yasmin | 01/10/2026 | ⚠️ Atrasado há 14 dias |
 | Decisão | **D-05** | Ablação em quatro configurações (C0 a C3) | Davi | 01/10/2026 | ⚠️ Atrasado há 14 dias · a confirmar |
 
@@ -94,13 +88,19 @@
 
 ## ✅ Feito
 
-31 itens.
+37 itens.
 
 | Tipo | Item | O que é | Quem | Prazo | Situação |
 |---|---|---|---|---|---|
 | Professor | **Tema do trabalho e composição do grupo — *Tarefa 01*** |  | Todos | 05/09/2026 | ✅ Entregue em 03/09/2026 |
 | Professor | **Introdução do artigo no template **COBEM 2026** — *Tarefa 02*** | Seis blocos de complementação vazios; a parcialidade foi declarada no arquivo entregue | Todos | 24/09/2026 | ✅ Entregue parcial em 24/09/2026 |
 | Marco | **M1 · Introdução** | Problema, pergunta, objetivos, delimitação | Todos | 24/09/2026 | ✅ Fechado em parte |
+| Decisão | **D-02** | Dashboard: objetivo, instrumento ou fora do escopo | — | 14/10/2026 | ✅ Fechada em 14/10/2026 |
+| Decisão | **D-12** | Unidade de análise das métricas | — | 14/10/2026 | ✅ Fechada em 14/10/2026 |
+| Decisão | **D-13** | Tratamento estatístico dos resultados | — | 14/10/2026 | ✅ Fechada em 14/10/2026 |
+| Decisão | **D-14** | O que fazer se a C0 não alcançar revocação 0,90 | — | 14/10/2026 | ✅ Fechada em 14/10/2026 |
+| Decisão | **D-17** | Janela de constituição do baseline da D2 | — | 14/10/2026 | ✅ Fechada em 14/10/2026 |
+| Decisão | **D-18** | Dupla contagem e escala na integração | — | 14/10/2026 | ✅ Fechada em 14/10/2026 |
 | Decisão | **D-01** | Mudança de título | — | 23/09/2026 | ✅ Fechada em 23/09/2026 |
 | Decisão | **D-03** | Operacionalização de "resultados diferentes" | — | 07/09/2026 | ✅ Fechada em 07/09/2026 |
 | Decisão | **D-04** | Dono da Justificativa | — | 06/09/2026 | ✅ Fechada em 06/09/2026 |
@@ -158,13 +158,6 @@ colunas acima.
 | Capítulo | **1. Introdução** | Yasmin, Filipe | Entregue parcial ao professor em 24/09. Os seis blocos de complementação de Yasmin e Filipe continuam vazios, e a seção da dimensão 3 ainda não foi ajustada à D-25. |
 | Capítulo | **2. Referencial teórico** | Yasmin | Escrito e versionado em 28/09 pela Yasmin — 4 subseções, cerca de 1.150 palavras. **As 13 chamadas bibliográficas não foram confirmadas na fonte**, e é isso que falta para a seção poder entrar. |
 | Capítulo | **3. Metodologia** | Davi (caneta) | Escrita e versionada em 28/09 — 9 subseções. As lacunas 2 e 4 fecharam em 14/10. Faltam a relação nominal dos cenários (lacuna 1) e o número do critério a priori (lacuna 3), além das 7 fontes por conferir. |
-
-## Alertas registrados nas decisões
-
-Ficam aqui porque são contradições conhecidas entre o que uma decisão
-promete e o prazo em que ela foi cobrada.
-
-- **D-13** — O número final sai da medição da primeira execução completa (P31), que é a S11. Em 01/10 esta decisão fecha como **faixa e regra de fechamento**, nunca como número final — o critério de aceite da S5 que exigir o número é impossível de cumprir
 
 ## Dívida bibliográfica
 

@@ -324,10 +324,8 @@ donos = ["Todos"]
 [[decisao]]
 id = "D-02"
 titulo = "Dashboard: objetivo, instrumento ou fora do escopo"
-proposta = "Instrumento de análise, descrito na Metodologia e na arquitetura"
-donos = ["Davi", "Filipe"]
-prazo = 2026-09-08
-estado = "aberta"
+estado = "fechada"
+fechada_em = 2026-10-14
 
 [[decisao]]
 id = "D-06"
@@ -355,32 +353,25 @@ estado = "aberta"
 [[decisao]]
 id = "D-12"
 titulo = "Unidade de análise das métricas"
-proposta = "Duas unidades declaradas separadamente: evento para os cenários pontuais, episódio para os de contexto e longitudinais"
-donos = ["Davi", "Filipe"]
-prazo = 2026-10-01
-estado = "aberta"
+estado = "fechada"
+fechada_em = 2026-10-14
 
 [[decisao]]
 id = "D-13"
 titulo = "Tratamento estatístico dos resultados"
-proposta = "10 a 20 sementes, as mesmas nas quatro configurações; Wilcoxon pareado. Regra de corte declarada em 28/09, respondendo à P31: ciclo completo de uma semente até 30 min → 20 sementes; acima disso → 10, com o motivo registrado"
-donos = ["Davi"]
-prazo = 2026-10-01
-estado = "aberta"
-alerta = "O número final sai da medição da primeira execução completa (P31), que é a S11. Em 01/10 esta decisão fecha como **faixa e regra de fechamento**, nunca como número final — o critério de aceite da S5 que exigir o número é impossível de cumprir"
+estado = "fechada"
+fechada_em = 2026-10-14
 
 [[decisao]]
 id = "D-14"
 titulo = "O que fazer se a C0 não alcançar revocação 0,90"
-proposta = "Comparar curvas precisão-revocação, em vez de pontos únicos"
-donos = ["Filipe"]
-prazo = 2026-10-01
-estado = "aberta"
+estado = "fechada"
+fechada_em = 2026-10-14
 
 [[decisao]]
 id = "D-15"
 titulo = "Critério de relevância declarado a priori"
-proposta = "Uma frase na Metodologia dizendo qual redução de FPR e qual revocação longitudinal contam como resposta afirmativa"
+proposta = "Origem do número decidida em 14/10: argumento operacional — quantos alertas falsos um analista absorve por turno. Falta o valor, e ele perde o sentido no dia em que a primeira execução for registrada"
 donos = ["Davi", "Yasmin", "Filipe"]
 prazo = 2026-10-01
 estado = "aberta"
@@ -396,18 +387,14 @@ estado = "aberta"
 [[decisao]]
 id = "D-17"
 titulo = "Janela de constituição do baseline da D2"
-proposta = "Janela de treino anterior e disjunta da janela de avaliação"
-donos = ["Davi"]
-prazo = 2026-10-01
-estado = "aberta"
+estado = "fechada"
+fechada_em = 2026-10-14
 
 [[decisao]]
 id = "D-18"
 titulo = "Dupla contagem e escala na integração"
-proposta = "Excluir o evento atual da janela de exposição"
-donos = ["Davi"]
-prazo = 2026-10-01
-estado = "aberta"
+estado = "fechada"
+fechada_em = 2026-10-14
 
 [[decisao]]
 id = "D-19"
