@@ -152,6 +152,21 @@ quando a interface passa a disparar execução.
 
 ## 6. O contrato de leitura (D-36)
 
+> **Existe desde 14/10/2026**, no Pull Request #72. O contrato publicado está
+> versionado em
+> [`backend/openapi.json`](https://github.com/Codexrocks/TCC_SDCAC/blob/main/backend/openapi.json)
+> — **nove rotas, todas `GET`** — e um teste reprova se ele ficar defasado do
+> código, do mesmo jeito que o `docs/quadro.md` é comparado com o `quadro.toml`.
+> O painel lê o arquivo sem precisar que a API esteja de pé.
+>
+> ```bash
+> SDCAC_DADOS=dados/semente-1 python -m uvicorn backend.main:app --host 127.0.0.1
+> ```
+>
+> As rotas: `/api/v1/health` · `/configurations` · `/runs` ·
+> `/runs/{id}` · `/runs/{id}/employees` · `/runs/{id}/employees/{employee_id}` ·
+> `/runs/{id}/alerts` · `/runs/{id}/events/{event_id}` · `/runs/{id}/metrics`.
+
 Quatro grupos, prefixo `/api/v1` desde o primeiro dia:
 
 | Grupo | O que entrega |
@@ -176,6 +191,25 @@ Duas proibições que vêm de decisões anteriores:
   conectar naquele banco
 - **A API não calcula métrica.** Precisão e revocação vêm da tabela
   `sdcac.metrics`, gravada pelo avaliador, que é o único que enxerga o gabarito
+
+### O que a API protege, e o que não protege
+
+Não há login na v1, pela **D-32**. Dizer que isso é seguro porque a API é só de
+leitura seria mentira confortável, então o desenho é explícito:
+
+| Medida | O que ela impede |
+|---|---|
+| **Escuta em `127.0.0.1`** | A trava é de rede, não de código. Expor na rede exige dizer isso em voz alta, com `--host` |
+| **O papel de banco** | É **isto** que protege o experimento, e não a aplicação: `sdcac_app` não conecta no `ground_truth`. O login protegeria a tela; o papel protege o resultado |
+| **CORS com lista explícita** | `*` deixaria qualquer página aberta no navegador de quem analisa consultar esta API. A lista vem do ambiente, e o padrão é só o desenvolvimento local do painel |
+| **Paginação com teto duro de 200** | Sem teto, uma requisição puxa dois milhões de eventos — a negação de serviço mais barata que existe |
+| **Envelope de erro único** | Nenhuma mensagem carrega SQL, caminho de arquivo ou rastreio de pilha. O repositório é público; isso não é motivo para a API narrar como é feita por dentro |
+| **Nenhuma rota de escrita** | Um teste varre o contrato e reprova qualquer verbo que não seja `GET` |
+
+O que **não** está lá, e nem finge estar: limitação de taxa, cabeçalho de
+segurança de navegador, auditoria de consulta. Nenhum deles faz sentido num
+instrumento que roda em `localhost` para uma pessoa — e a **D-19** registra a
+auditoria como o que a implantação real exigiria.
 
 ## 7. O que entra no `sdcac` na v2
 
@@ -211,14 +245,22 @@ ambiente simulado não tem por que tê-los.
 Além dos invariantes da especificação do banco — nada do futuro, exposição sem o
 evento atual, determinismo:
 
-- **A C0 não olha histórico:** apagar o passado do funcionário não muda a nota C0
-  nem a D1. É a **D-31** virando teste
-- **Preset canônico é imutável:** alterar C0 a C3 pela API falha
-- **Configuração presa ao resultado:** execução gravada sem hash de configuração
-  falha
-- **A aplicação não alcança o gabarito:** o teste tenta conectar com o usuário da
-  aplicação no `ground_truth` e **espera** erro de permissão
-- **Score decomposto:** toda resposta de leitura traz as cinco parcelas
+- ✅ **A C0 não olha histórico:** apagar o passado do funcionário não muda a nota
+  C0 nem a D1. É a **D-31** virando teste — hoje na forma precisada pela
+  **D-42**: só a janela de dois minutos muda a nota
+- ✅ **Preset canônico é imutável:** a API não tem rota de escrita, e um teste
+  varre o contrato e reprova qualquer verbo que não seja `GET`
+- ✅ **Configuração presa ao resultado:** `open_run` exige o hash. Quem grava sem
+  ele não consegue — não por disciplina, por falta do argumento
+- ⏳ **A aplicação não alcança o gabarito:** hoje verificado por leitura do SQL e
+  pela ausência de qualquer porta que leia rótulo. **Falta** a versão que tenta
+  conectar de verdade e espera erro de permissão — ela depende de haver servidor
+- ✅ **Score decomposto:** toda resposta de leitura traz as cinco parcelas, e
+  nulo é diferente de zero
+
+> **O que esses vistos não dizem.** Eles valem contra fixtures, não contra o
+> banco carregado: o gerador é a frente da S6 e não existe. Nenhum número do
+> artigo sai do que está verde aqui.
 
 ## 10. O que a v1 deliberadamente não tem
 
