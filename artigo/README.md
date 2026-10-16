@@ -124,13 +124,19 @@ Quatro coisas para saber antes de escrever:
 2. **As referências do contexto precisam ter até 5 anos de publicação.** Fonte
    mais antiga continua válida em outras partes, mas o contexto mostra o estado
    atual
-3. **A chamada no texto fica como está, na forma da NBR 10520** —
-   `(CHANDOLA; BANERJEE; KUMAR, 2009)`, caixa alta e ponto e vírgula. É a norma
-   ABNT da chamada, e "ABNT" é a única instrução escrita que existe sobre as
-   referências deste trabalho. Se o template do COBEM 2026 pedir outra forma, a
-   conversão é mecânica e vale para o artigo inteiro de uma vez — **não para
-   citações isoladas na véspera de uma entrega**. Ver
-   [formato do artigo](../docs/formato-do-artigo.md)
+3. **A chamada no texto está em autor-ano, caixa normal** —
+   `(Chandola et al., 2009)`. Esta é a forma do template, e a conversão **já
+   aconteceu**: o template chegou em 13/10/2026 e a troca valeu para o artigo
+   inteiro de uma vez, como registra a tabela *O que mudou em 13/10* da
+   [Introdução](01-introducao.md). Antes disso a instrução aqui era a caixa alta
+   da NBR 10520, `(CHANDOLA; BANERJEE; KUMAR, 2009)`, e **ficou desatualizada** —
+   quem a lesse hoje reverteria o artigo inteiro.
+
+   O que continua valendo é a regra de convivência: a **lista de referências**
+   segue a ABNT NBR 6023, que é a única instrução escrita que existe sobre as
+   referências deste trabalho, e mudança de forma de chamada vale para o artigo
+   inteiro de uma vez — **não para citações isoladas na véspera de uma
+   entrega**. Ver [formato do artigo](../docs/formato-do-artigo.md)
 4. ⚠️ **O template do COBEM 2026 ainda não está no repositório.** O que está
    versionado é o COBEM 2025 e o CREEM 2026, e nenhum dos dois é o que o
    professor pede
