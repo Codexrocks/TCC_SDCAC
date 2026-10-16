@@ -136,12 +136,12 @@ configurações analisadas.
 Diante das limitações associadas à análise isolada de eventos e à utilização
 exclusiva de regras fixas, formula-se a seguinte pergunta de pesquisa:
 
-> A avaliação combinada do risco do evento individual, do desvio comportamental
-> do usuário e da exposição acumulada ao risco reduz a taxa de falsos positivos,
-> a uma mesma revocação, e aumenta a revocação em cenários longitudinais na
-> identificação de comportamentos potencialmente anômalos, quando comparada à
-> análise baseada exclusivamente em regras fixas aplicadas a eventos individuais,
-> em ambiente corporativo simulado?
+*A avaliação combinada do risco do evento individual, do desvio comportamental do
+usuário e da exposição acumulada ao risco reduz a taxa de falsos positivos, a uma
+mesma revocação, e aumenta a revocação em cenários longitudinais na identificação
+de comportamentos potencialmente anômalos, quando comparada à análise baseada
+exclusivamente em regras fixas aplicadas a eventos individuais, em ambiente
+corporativo simulado?*
 
 A investigação será conduzida por meio da comparação entre diferentes
 configurações de avaliação, aplicadas aos mesmos conjuntos de eventos e cenários
