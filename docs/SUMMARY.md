@@ -77,6 +77,7 @@
 * [2026-10-14 — Sessão 28: as portas fecham, e o experimento roda de ponta a ponta](relatorios/2026-10-14-sessao-28.md)
 * [2026-10-14 — Sessão 29: a API de leitura entra, e o painel pode começar](relatorios/2026-10-14-sessao-29.md)
 * [2026-10-14 — Sessão 30: a M2 não estava travada por decisão](relatorios/2026-10-14-sessao-30.md)
+* [2026-10-15 — Sessão 31: nenhuma semana pode ser dada por pronta](relatorios/2026-10-15-sessao-31.md)
 * [2026-10-15 — Sessão 32: o contrato ganha exemplo real](relatorios/2026-10-15-sessao-32.md)
 * [2026-10-15 — Sessão 33: o artigo fica coerente consigo mesmo](relatorios/2026-10-15-sessao-33.md)
 * [Modelo de relatório](relatorios/_modelo.md)

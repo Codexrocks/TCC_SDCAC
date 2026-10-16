@@ -9,39 +9,40 @@
 > data do retrato. É o que impede esta página de dizer "amanhã" três dias
 > depois — que foi exatamente o que o cronograma fez em 26/09/2026.
 
-<!-- QUADRO:gerado-em 2026-10-14 -->
+<!-- QUADRO:gerado-em 2026-10-16 -->
 
 **TCC_SDCAC** · TCC 2026/2 · Prof. Euzébio D. de Souza
 
-**Retrato de 14/10/2026.** Entrega do TCC em **10/12/2026**, daqui a **57 dias**.
+**Retrato de 16/10/2026.** Entrega do TCC em **10/12/2026**, daqui a **55 dias**.
 
 ## Resumo
 
 | Coluna | Itens |
 |---|---|
-| ⚠️ Atrasado | 11 |
+| ⚠️ Atrasado | 12 |
 | ▶️ Em curso | 1 |
-| ⏳ A vencer em 7 dias | 0 |
-| 🗓️ Depois | 21 |
+| ⏳ A vencer em 7 dias | 3 |
+| 🗓️ Depois | 17 |
 | ✅ Feito | 37 |
 
 ## ⚠️ Atrasado
 
-11 itens.
+12 itens.
 
 | Tipo | Item | O que é | Quem | Prazo | Situação |
 |---|---|---|---|---|---|
-| Marco | **M2 · Metodologia congelada** | Cenários, métricas, quatro configurações, atributos | Todos | 01/10/2026 | ⚠️ Atrasado há 13 dias |
-| Semana | **S5** | artigo/03-metodologia.md + arquitetura v2 · o atrasado de S2 a S4 · ajustar a Introdução à D-25 | Davi (caneta), Yasmin (cenários), Filipe (métricas) | 25/09/2026 a 01/10/2026 | ⚠️ Atrasado há 13 dias |
-| Semana | **S6** | Schema, migrações, gerador de eventos e ingestão | Filipe (gerador), Davi (schema e ingestão) | 02/10/2026 a 08/10/2026 | ⚠️ Atrasado há 6 dias |
-| Capítulo | **1. Introdução** | Entregue parcial em 24/09 — os seis blocos de complementação continuam vazios, e a parcialidade foi declarada no arquivo entregue | Yasmin, Filipe | S5 | ⚠️ Atrasado há 13 dias |
-| Capítulo | **2. Referencial teórico** | Escrito e versionado em 28/09 pela Yasmin — 4 subseções, ≈1.150 palavras, atrasado de S3 e S4. Faltam as 13 fontes confirmadas | Yasmin | S5 | ⚠️ Atrasado há 13 dias |
-| Capítulo | **3. Metodologia** | Escrita e versionada em 28/09 — 9 subseções. Faltam as 4 lacunas da M2 e as 7 fontes conferidas | Davi (caneta) | S5 | ⚠️ Atrasado há 13 dias |
-| Decisão | **D-06** | Cenários de contexto (B) e longitudinais (L) | Yasmin | 01/10/2026 | ⚠️ Atrasado há 13 dias |
-| Decisão | **D-15** | Critério de relevância declarado a priori | Davi, Yasmin, Filipe | 01/10/2026 | ⚠️ Atrasado há 13 dias |
-| Decisão | **D-16** | Controle negativo longitudinal | Yasmin | 01/10/2026 | ⚠️ Atrasado há 13 dias |
-| Decisão | **D-19** | Vertente LGPD e ISO/IEC 27001 | Yasmin | 01/10/2026 | ⚠️ Atrasado há 13 dias |
-| Decisão | **D-05** | Ablação em quatro configurações (C0 a C3) | Davi | 01/10/2026 | ⚠️ Atrasado há 13 dias · a confirmar |
+| Marco | **M2 · Metodologia congelada** | Cenários, métricas, quatro configurações, atributos | Todos | 01/10/2026 | ⚠️ Atrasado há 15 dias |
+| Semana | **S5** | artigo/03-metodologia.md + arquitetura v2 · o atrasado de S2 a S4 · ajustar a Introdução à D-25 | Davi (caneta), Yasmin (cenários), Filipe (métricas) | 25/09/2026 a 01/10/2026 | ⚠️ Atrasado há 15 dias |
+| Semana | **S6** | Schema, migrações, gerador de eventos e ingestão | Filipe (gerador), Davi (schema e ingestão) | 02/10/2026 a 08/10/2026 | ⚠️ Atrasado há 8 dias |
+| Semana | **S7** | C0 (regras fixas) e motor D1 | Davi, Yasmin | 09/10/2026 a 15/10/2026 | ⚠️ Atrasado há 1 dia |
+| Capítulo | **1. Introdução** | Entregue parcial em 24/09 — os seis blocos de complementação continuam vazios, e a parcialidade foi declarada no arquivo entregue | Yasmin, Filipe | S5 | ⚠️ Atrasado há 15 dias |
+| Capítulo | **2. Referencial teórico** | Escrito e versionado em 28/09 pela Yasmin — 4 subseções, ≈1.150 palavras, atrasado de S3 e S4. Faltam as 13 fontes confirmadas | Yasmin | S5 | ⚠️ Atrasado há 15 dias |
+| Capítulo | **3. Metodologia** | Escrita e versionada em 28/09 — 9 subseções. Faltam as 4 lacunas da M2 e as 7 fontes conferidas | Davi (caneta) | S5 | ⚠️ Atrasado há 15 dias |
+| Decisão | **D-06** | Cenários de contexto (B) e longitudinais (L) | Yasmin | 01/10/2026 | ⚠️ Atrasado há 15 dias |
+| Decisão | **D-15** | Critério de relevância declarado a priori | Davi, Yasmin, Filipe | 01/10/2026 | ⚠️ Atrasado há 15 dias |
+| Decisão | **D-16** | Controle negativo longitudinal | Yasmin | 01/10/2026 | ⚠️ Atrasado há 15 dias |
+| Decisão | **D-19** | Vertente LGPD e ISO/IEC 27001 | Yasmin | 01/10/2026 | ⚠️ Atrasado há 15 dias |
+| Decisão | **D-05** | Ablação em quatro configurações (C0 a C3) | Davi | 01/10/2026 | ⚠️ Atrasado há 15 dias · a confirmar |
 
 ## ▶️ Em curso
 
@@ -49,39 +50,41 @@
 
 | Tipo | Item | O que é | Quem | Prazo | Situação |
 |---|---|---|---|---|---|
-| Semana | **S7** | C0 (regras fixas) e motor D1 | Davi, Yasmin | 09/10/2026 a 15/10/2026 | ▶️ Em curso · 1 dia até o fim |
+| Semana | **S8** | D2 (desvio do padrão) e D3 (exposição + higiene) | Davi, Yasmin | 16/10/2026 a 22/10/2026 | ▶️ Em curso · 6 dias até o fim |
 
 ## ⏳ A vencer em 7 dias
 
-Nada nesta coluna.
+3 itens.
+
+| Tipo | Item | O que é | Quem | Prazo | Situação |
+|---|---|---|---|---|---|
+| Marco | **M3 · Modelo executável** | C0 a C3 rodando sobre o mesmo gerador | Todos | 22/10/2026 | ⏳ Vence em 6 dias |
+| Decisão | **D-09** | Pesos preliminares e análise de sensibilidade | Yasmin | S8 | ⏳ Vence em 6 dias |
+| Decisão | **D-43** | Pesos de integração das dimensões na nota final | Davi, Yasmin | S8 | ⏳ Vence em 6 dias · a confirmar |
 
 ## 🗓️ Depois
 
-21 itens.
+17 itens.
 
 | Tipo | Item | O que é | Quem | Prazo | Situação |
 |---|---|---|---|---|---|
 | Professor | **Reunião de acompanhamento com o orientador** |  | Todos | Quinzenal | 🔁 Recorrente |
-| Professor | ****Entrega do TCC**** |  | Todos | 10/12/2026 | 🗓️ Em 57 dias |
+| Professor | ****Entrega do TCC**** |  | Todos | 10/12/2026 | 🗓️ Em 55 dias |
 | Professor | **Apresentação e defesa** |  | Todos | Dezembro | 🗓️ Sem prazo |
-| Marco | **M3 · Modelo executável** | C0 a C3 rodando sobre o mesmo gerador | Todos | 22/10/2026 | 🗓️ Em 8 dias |
-| Marco | **M4 · Tabela de ablação** | Números finais das quatro configurações | Todos | 19/11/2026 | 🗓️ Em 36 dias |
-| Marco | **M5 · Entrega** | Artigo diagramado e submetido | Todos | 10/12/2026 | 🗓️ Em 57 dias |
-| Semana | **S8** | D2 (desvio do padrão) e D3 (exposição + higiene) | Davi, Yasmin | 16/10/2026 a 22/10/2026 | 🗓️ Em 8 dias |
-| Semana | **S9** | Dashboard Streamlit | Filipe | 23/10/2026 a 29/10/2026 | 🗓️ Em 15 dias |
-| Semana | **S10 · opcional** | Isolation Forest — opcional | Filipe | 30/10/2026 a 05/11/2026 | 🗓️ Em 22 dias |
-| Semana | **S11** | Execução de todos os cenários nas quatro configurações | Todos (Yasmin) | 06/11/2026 a 12/11/2026 | 🗓️ Em 29 dias |
-| Semana | **S12** | Tabela de ablação, sensibilidade dos pesos, gráficos | Filipe, Davi | 13/11/2026 a 19/11/2026 | 🗓️ Em 36 dias |
-| Semana | **S13** | artigo/04-resultados.md | Filipe (caneta) | 20/11/2026 a 26/11/2026 | 🗓️ Em 43 dias |
-| Semana | **S14** | artigo/05-conclusao.md | Davi (caneta) | 27/11/2026 a 03/12/2026 | 🗓️ Em 50 dias |
-| Semana | **S15** | Versão final diagramada · ENTREGA 10/12 | Todos | 04/12/2026 a 10/12/2026 | 🗓️ Em 57 dias |
-| Semana | **S16** | Slides, ensaio cronometrado, defesa | Todos | a partir de 11/12/2026 | 🗓️ Em 58 dias |
-| Capítulo | **4. Resultados** | Esqueleto | Filipe (caneta) | S13 | 🗓️ Em 43 dias |
-| Capítulo | **5. Conclusão** | Esqueleto | Davi (caneta) | S14 | 🗓️ Em 50 dias |
+| Marco | **M4 · Tabela de ablação** | Números finais das quatro configurações | Todos | 19/11/2026 | 🗓️ Em 34 dias |
+| Marco | **M5 · Entrega** | Artigo diagramado e submetido | Todos | 10/12/2026 | 🗓️ Em 55 dias |
+| Semana | **S9** | Dashboard Streamlit | Filipe | 23/10/2026 a 29/10/2026 | 🗓️ Em 13 dias |
+| Semana | **S10 · opcional** | Isolation Forest — opcional | Filipe | 30/10/2026 a 05/11/2026 | 🗓️ Em 20 dias |
+| Semana | **S11** | Execução de todos os cenários nas quatro configurações | Todos (Yasmin) | 06/11/2026 a 12/11/2026 | 🗓️ Em 27 dias |
+| Semana | **S12** | Tabela de ablação, sensibilidade dos pesos, gráficos | Filipe, Davi | 13/11/2026 a 19/11/2026 | 🗓️ Em 34 dias |
+| Semana | **S13** | artigo/04-resultados.md | Filipe (caneta) | 20/11/2026 a 26/11/2026 | 🗓️ Em 41 dias |
+| Semana | **S14** | artigo/05-conclusao.md | Davi (caneta) | 27/11/2026 a 03/12/2026 | 🗓️ Em 48 dias |
+| Semana | **S15** | Versão final diagramada · ENTREGA 10/12 | Todos | 04/12/2026 a 10/12/2026 | 🗓️ Em 55 dias |
+| Semana | **S16** | Slides, ensaio cronometrado, defesa | Todos | a partir de 11/12/2026 | 🗓️ Em 56 dias |
+| Capítulo | **4. Resultados** | Esqueleto | Filipe (caneta) | S13 | 🗓️ Em 41 dias |
+| Capítulo | **5. Conclusão** | Esqueleto | Davi (caneta) | S14 | 🗓️ Em 48 dias |
 | Decisão | **D-07** | Caneta rotativa por seção | Davi, Yasmin, Filipe | — | 🗓️ Sem prazo |
-| Decisão | **D-09** | Pesos preliminares e análise de sensibilidade | Yasmin | S8 | 🗓️ Em 8 dias |
-| Decisão | **D-10** | Isolation Forest como benchmark opcional | Filipe | S10 | 🗓️ Em 22 dias · a confirmar |
-| Decisão | **D-43** | Pesos de integração das dimensões na nota final | Davi, Yasmin | S8 | 🗓️ Em 8 dias · a confirmar |
+| Decisão | **D-10** | Isolation Forest como benchmark opcional | Filipe | S10 | 🗓️ Em 20 dias · a confirmar |
 
 ## ✅ Feito
 
@@ -135,7 +138,25 @@ atrito.
 
 | Semana | Entregável | Critério de aceite | Quem |
 |---|---|---|---|
-| **S7** | C0 (regras fixas) e motor D1 | Cenários pontuais produzem o score esperado · C0 e C1 selecionáveis por flag · C0 sem parâmetro aprendido, pela D-42 | Davi, Yasmin |
+| **S8** | D2 (desvio do padrão) e D3 (exposição + higiene) | C2 e C3 executam ponta a ponta · cenário longitudinal gera exposição crescente sem alerta pontual · D3 reporta as duas parcelas separadas | Davi, Yasmin |
+
+## O que está em andamento
+
+Declaração de quem está com o item na mão: o que já foi produzido e o
+que falta para o critério de aceite fechar. Vem do campo `andamento` do
+`quadro.toml` — escrito ali direto, ou trazido do quadro compartilhado
+pela tarefa agendada. **Não é estado calculado**, ao contrário das
+colunas acima.
+
+| Tipo | Item | Quem | O que está fazendo |
+|---|---|---|---|
+| Semana | **S5** | Davi (caneta), Yasmin (cenários), Filipe (métricas) | Metodologia e referencial teórico escritos e versionados em 28/09. As lacunas 2 e 4 fecharam em 14/10. Faltam os cenários nomeados (lacuna 1, D-06 e D-16), o número do critério a priori (D-15) e o ajuste da Introdução à D-25. |
+| Semana | **S6** | Filipe (gerador), Davi (schema e ingestão) | Schema dos três bancos e as portas de ingestão versionados (#65, #71). **Falta o gerador de eventos** — sem ele não há semente completa, e o critério de aceite desta semana não tem como ser verificado. |
+| Semana | **S7** | Davi, Yasmin | C0 e motor D1 versionados e selecionáveis por configuração (#66), e a D-42 fixou a janela de falhas na C0 (#67). Falta conferir que os cenários pontuais produzem o score esperado, o que depende dos cenários. |
+| Semana | **S8** | Davi, Yasmin | **Entregue adiantada.** D2 (#68) e D3 (#70) versionadas, com as duas parcelas da D3 reportadas separadas, e o experimento rodando ponta a ponta (#71, #72). Falta o cenário longitudinal, que depende do gerador. |
+| Capítulo | **1. Introdução** | Yasmin, Filipe | Entregue parcial ao professor em 24/09. Os seis blocos de complementação de Yasmin e Filipe continuam vazios, e a seção da dimensão 3 ainda não foi ajustada à D-25. |
+| Capítulo | **2. Referencial teórico** | Yasmin | Escrito e versionado em 28/09 pela Yasmin — 4 subseções, cerca de 1.150 palavras. **As 13 chamadas bibliográficas não foram confirmadas na fonte**, e é isso que falta para a seção poder entrar. |
+| Capítulo | **3. Metodologia** | Davi (caneta) | Escrita e versionada em 28/09 — 9 subseções. As lacunas 2 e 4 fecharam em 14/10. Faltam a relação nominal dos cenários (lacuna 1) e o número do critério a priori (lacuna 3), além das 7 fontes por conferir. |
 
 ## Dívida bibliográfica
 
@@ -145,19 +166,19 @@ que some mais fácil de vista.
 
 | Onde | O que falta | Quem | Aberta desde | Idade |
 |---|---|---|---|---|
-| `docs/usabilidade.md § 6.2` | Formulação exata e porcentagem de Nielsen e Landauer | Filipe | 03/09/2026 | 41 dias |
-| `docs/usabilidade.md § 6.3` | Limites exatos de cada faixa adjetiva do SUS, em Bangor, Kortum e Miller (2009) | Filipe | 03/09/2026 | 41 dias |
-| `docs/usabilidade.md § 7` | Literatura de carga de trabalho e fadiga de alerta em analistas de SOC | Yasmin | 03/09/2026 | 41 dias |
-| `docs/usabilidade.md § 9` | Edição e ano da obra de Shneiderman efetivamente consultada | Filipe | 03/09/2026 | 41 dias |
-| `artigo/03-metodologia.md § 3.8` | Confirmar na fonte: (WOHLIN et al., 2012) — A taxonomia das quatro categorias de validade. **O ano está marcado como duvidoso pelo… | Davi | 28/09/2026 | 16 dias |
-| `artigo/03-metodologia.md § 3.7` | Confirmar na fonte: (DEMŠAR, 2006) — A escolha do Wilcoxon pareado para comparar configurações | Davi | 28/09/2026 | 16 dias |
-| `artigo/03-metodologia.md § 3.7` | Confirmar na fonte: (WILCOXON, 1945) — O teste em si | Davi | 28/09/2026 | 16 dias |
-| `artigo/03-metodologia.md § 3.6` | Confirmar na fonte: (DAVIS; GOADRICH, 2006) — Curva PR sobre ROC em classe desbalanceada | Davi | 28/09/2026 | 16 dias |
-| `artigo/03-metodologia.md § 3.6` | Confirmar na fonte: (SAITO; REHMSMEIER, 2015) — O mesmo ponto da linha acima | Davi | 28/09/2026 | 16 dias |
-| `artigo/03-metodologia.md § 3.8` | Confirmar na fonte: (KAUFMAN et al., 2012) — Vazamento na constituição do padrão individual | Davi | 28/09/2026 | 16 dias |
-| `artigo/03-metodologia.md § 3.8` | Confirmar na fonte: (SOMMER; PAXSON, 2010) — Limite das avaliações sobre dado sintético | Davi | 28/09/2026 | 16 dias |
-| `artigo/03-metodologia.md § 3.3 — a janela de falhas` | Afirmação sem chamada: "forma usual de regra de correlação em ferramentas de gestão de eventos de segurança". Entrou com a D-42 | Davi | 13/10/2026 | 1 dias |
-| `artigo/03-metodologia.md § 3.3 — "trivial para regras fixas"` | Afirmação sem fonte: detecção de tentativa sucessiva é "trivial para regras fixas". Pode ser reformulada sem fonte | Davi | 13/10/2026 | 1 dias |
+| `docs/usabilidade.md § 6.2` | Formulação exata e porcentagem de Nielsen e Landauer | Filipe | 03/09/2026 | 43 dias |
+| `docs/usabilidade.md § 6.3` | Limites exatos de cada faixa adjetiva do SUS, em Bangor, Kortum e Miller (2009) | Filipe | 03/09/2026 | 43 dias |
+| `docs/usabilidade.md § 7` | Literatura de carga de trabalho e fadiga de alerta em analistas de SOC | Yasmin | 03/09/2026 | 43 dias |
+| `docs/usabilidade.md § 9` | Edição e ano da obra de Shneiderman efetivamente consultada | Filipe | 03/09/2026 | 43 dias |
+| `artigo/03-metodologia.md § 3.8` | Confirmar na fonte: (WOHLIN et al., 2012) — A taxonomia das quatro categorias de validade. **O ano está marcado como duvidoso pelo… | Davi | 28/09/2026 | 18 dias |
+| `artigo/03-metodologia.md § 3.7` | Confirmar na fonte: (DEMŠAR, 2006) — A escolha do Wilcoxon pareado para comparar configurações | Davi | 28/09/2026 | 18 dias |
+| `artigo/03-metodologia.md § 3.7` | Confirmar na fonte: (WILCOXON, 1945) — O teste em si | Davi | 28/09/2026 | 18 dias |
+| `artigo/03-metodologia.md § 3.6` | Confirmar na fonte: (DAVIS; GOADRICH, 2006) — Curva PR sobre ROC em classe desbalanceada | Davi | 28/09/2026 | 18 dias |
+| `artigo/03-metodologia.md § 3.6` | Confirmar na fonte: (SAITO; REHMSMEIER, 2015) — O mesmo ponto da linha acima | Davi | 28/09/2026 | 18 dias |
+| `artigo/03-metodologia.md § 3.8` | Confirmar na fonte: (KAUFMAN et al., 2012) — Vazamento na constituição do padrão individual | Davi | 28/09/2026 | 18 dias |
+| `artigo/03-metodologia.md § 3.8` | Confirmar na fonte: (SOMMER; PAXSON, 2010) — Limite das avaliações sobre dado sintético | Davi | 28/09/2026 | 18 dias |
+| `artigo/03-metodologia.md § 3.3 — a janela de falhas` | Afirmação sem chamada: "forma usual de regra de correlação em ferramentas de gestão de eventos de segurança". Entrou com a D-42 | Davi | 13/10/2026 | 3 dias |
+| `artigo/03-metodologia.md § 3.3 — "trivial para regras fixas"` | Afirmação sem fonte: detecção de tentativa sucessiva é "trivial para regras fixas". Pode ser reformulada sem fonte | Davi | 13/10/2026 | 3 dias |
 
 ## O que ficou fora desta versão
 
