@@ -429,10 +429,18 @@ def render_quadro(dados: Dados, hoje: datetime.date) -> str:
         linhas.append("## O que está em andamento")
         linhas.append("")
         linhas.append(
-            "Escrito pelas próprias pessoas no quadro compartilhado e trazido para cá"
+            "Declaração de quem está com o item na mão: o que já foi produzido e o"
         )
-        linhas.append("pela tarefa agendada. Não é estado calculado: é declaração de quem")
-        linhas.append("está fazendo.")
+        linhas.append(
+            "que falta para o critério de aceite fechar. Vem do campo `andamento` do"
+        )
+        linhas.append(
+            "`quadro.toml` — escrito ali direto, ou trazido do quadro compartilhado"
+        )
+        linhas.append(
+            "pela tarefa agendada. **Não é estado calculado**, ao contrário das"
+        )
+        linhas.append("colunas acima.")
         linhas.append("")
         linhas.append(
             tabela(
