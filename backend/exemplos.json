@@ -1,0 +1,825 @@
+{
+  "_sobre": "Respostas reais da API, para o painel ser escrito sem precisar subir nada. Nenhum valor foi inventado: sao as respostas da execucao 4 (preset C3, semente 1), pontuada pelo runner sobre a semente dos fixtures e lida pela propria API. `tests/test_exemplos.py` valida cada corpo contra o modelo do contrato e reprova se divergirem.",
+  "_como_refazer": "python -m runner --dados <dir> --run-id 1 --treino 2026-01-01:2026-03-31 --avaliacao 2026-04-01:2026-04-03, com SDCAC_DADOS apontando para <dir>, e entao GET em cada rota.",
+  "_limites": "A semente tem 2 funcionarios e so eventos FILE_ACCESS: nao existe ninguem na faixa `high`, e /metrics vem vazio porque nenhum avaliador gravou metrica. Layout de triagem precisa do gerador de eventos.",
+  "respostas": [
+    {
+      "metodo": "GET",
+      "rota": "/api/v1/health",
+      "status": 200,
+      "corpo": {
+        "status": "ok",
+        "adapter": "ArquivoRepository",
+        "runs": 4
+      }
+    },
+    {
+      "metodo": "GET",
+      "rota": "/api/v1/configurations",
+      "status": 200,
+      "corpo": [
+        {
+          "name": "C0",
+          "dimensions": [
+            "c0"
+          ],
+          "config_hash": "c7e18b3d610967a053ee4d7b2e16759388b5c9bd88b15907a23ea8203d2e9da1",
+          "exploratory": false
+        },
+        {
+          "name": "C1",
+          "dimensions": [
+            "d1"
+          ],
+          "config_hash": "ace9929eeda08bf126ca0e9e66fecce96fc6025b3e4e2e0a3f34c14e6e568cf8",
+          "exploratory": false
+        },
+        {
+          "name": "C2",
+          "dimensions": [
+            "d1",
+            "d2"
+          ],
+          "config_hash": "448fb1ba8893c3cf6928cc15afb542be8fedfa90acf13336802ab0bbbdae1a09",
+          "exploratory": false
+        },
+        {
+          "name": "C3",
+          "dimensions": [
+            "d1",
+            "d2",
+            "d3"
+          ],
+          "config_hash": "7c224783ac832c1149b05f4a16a93194287e6c84b2a9b3ab9a926a6b93b9f855",
+          "exploratory": false
+        }
+      ]
+    },
+    {
+      "metodo": "GET",
+      "rota": "/api/v1/runs",
+      "status": 200,
+      "corpo": {
+        "items": [
+          {
+            "scoring_run_id": 4,
+            "run_id": 1,
+            "config_name": "C3",
+            "config_hash": "7c224783ac832c1149b05f4a16a93194287e6c84b2a9b3ab9a926a6b93b9f855",
+            "code_sha": "6e578b2ea182725e23f605c41efab217e9707427",
+            "weights_version": "presets-v1",
+            "exploratory": false,
+            "status": "done"
+          },
+          {
+            "scoring_run_id": 3,
+            "run_id": 1,
+            "config_name": "C2",
+            "config_hash": "448fb1ba8893c3cf6928cc15afb542be8fedfa90acf13336802ab0bbbdae1a09",
+            "code_sha": "6e578b2ea182725e23f605c41efab217e9707427",
+            "weights_version": "presets-v1",
+            "exploratory": false,
+            "status": "done"
+          },
+          {
+            "scoring_run_id": 2,
+            "run_id": 1,
+            "config_name": "C1",
+            "config_hash": "ace9929eeda08bf126ca0e9e66fecce96fc6025b3e4e2e0a3f34c14e6e568cf8",
+            "code_sha": "6e578b2ea182725e23f605c41efab217e9707427",
+            "weights_version": "presets-v1",
+            "exploratory": false,
+            "status": "done"
+          },
+          {
+            "scoring_run_id": 1,
+            "run_id": 1,
+            "config_name": "C0",
+            "config_hash": "c7e18b3d610967a053ee4d7b2e16759388b5c9bd88b15907a23ea8203d2e9da1",
+            "code_sha": "6e578b2ea182725e23f605c41efab217e9707427",
+            "weights_version": "presets-v1",
+            "exploratory": false,
+            "status": "done"
+          }
+        ],
+        "total": 4,
+        "limit": 50,
+        "offset": 0
+      }
+    },
+    {
+      "metodo": "GET",
+      "rota": "/api/v1/runs/4",
+      "status": 200,
+      "corpo": {
+        "scoring_run_id": 4,
+        "run_id": 1,
+        "config_name": "C3",
+        "config_hash": "7c224783ac832c1149b05f4a16a93194287e6c84b2a9b3ab9a926a6b93b9f855",
+        "code_sha": "6e578b2ea182725e23f605c41efab217e9707427",
+        "weights_version": "presets-v1",
+        "exploratory": false,
+        "status": "done"
+      }
+    },
+    {
+      "metodo": "GET",
+      "rota": "/api/v1/runs/4/metrics",
+      "status": 200,
+      "corpo": {
+        "items": [],
+        "total": 0,
+        "limit": 50,
+        "offset": 0
+      }
+    },
+    {
+      "metodo": "GET",
+      "rota": "/api/v1/runs/4/alerts",
+      "status": 200,
+      "corpo": {
+        "items": [
+          {
+            "band": "low",
+            "threshold": 20.0,
+            "raised_at": "2026-04-03T13:30:00Z",
+            "event_id": "ap-8-2-5",
+            "employee_id": null,
+            "window_start": null,
+            "window_end": null
+          },
+          {
+            "band": "low",
+            "threshold": 20.0,
+            "raised_at": "2026-04-03T12:00:00Z",
+            "event_id": "ap-8-2-4",
+            "employee_id": null,
+            "window_start": null,
+            "window_end": null
+          },
+          {
+            "band": "low",
+            "threshold": 20.0,
+            "raised_at": "2026-04-03T10:30:00Z",
+            "event_id": "ap-8-2-3",
+            "employee_id": null,
+            "window_start": null,
+            "window_end": null
+          },
+          {
+            "band": "low",
+            "threshold": 20.0,
+            "raised_at": "2026-04-03T09:00:00Z",
+            "event_id": "ap-8-2-2",
+            "employee_id": null,
+            "window_start": null,
+            "window_end": null
+          },
+          {
+            "band": "low",
+            "threshold": 20.0,
+            "raised_at": "2026-04-03T07:30:00Z",
+            "event_id": "ap-8-2-1",
+            "employee_id": null,
+            "window_start": null,
+            "window_end": null
+          },
+          {
+            "band": "low",
+            "threshold": 20.0,
+            "raised_at": "2026-04-03T06:00:00Z",
+            "event_id": "ap-8-2-0",
+            "employee_id": null,
+            "window_start": null,
+            "window_end": null
+          },
+          {
+            "band": "low",
+            "threshold": 20.0,
+            "raised_at": "2026-04-02T13:30:00Z",
+            "event_id": "ap-8-1-5",
+            "employee_id": null,
+            "window_start": null,
+            "window_end": null
+          },
+          {
+            "band": "low",
+            "threshold": 20.0,
+            "raised_at": "2026-04-02T12:00:00Z",
+            "event_id": "ap-8-1-4",
+            "employee_id": null,
+            "window_start": null,
+            "window_end": null
+          },
+          {
+            "band": "low",
+            "threshold": 20.0,
+            "raised_at": "2026-04-02T10:30:00Z",
+            "event_id": "ap-8-1-3",
+            "employee_id": null,
+            "window_start": null,
+            "window_end": null
+          },
+          {
+            "band": "low",
+            "threshold": 20.0,
+            "raised_at": "2026-04-02T09:00:00Z",
+            "event_id": "ap-8-1-2",
+            "employee_id": null,
+            "window_start": null,
+            "window_end": null
+          },
+          {
+            "band": "low",
+            "threshold": 20.0,
+            "raised_at": "2026-04-02T07:30:00Z",
+            "event_id": "ap-8-1-1",
+            "employee_id": null,
+            "window_start": null,
+            "window_end": null
+          },
+          {
+            "band": "low",
+            "threshold": 20.0,
+            "raised_at": "2026-04-02T06:00:00Z",
+            "event_id": "ap-8-1-0",
+            "employee_id": null,
+            "window_start": null,
+            "window_end": null
+          },
+          {
+            "band": "low",
+            "threshold": 20.0,
+            "raised_at": "2026-04-01T07:30:00Z",
+            "event_id": "ap-8-0-1",
+            "employee_id": null,
+            "window_start": null,
+            "window_end": null
+          },
+          {
+            "band": "normal",
+            "threshold": 20.0,
+            "raised_at": "2026-04-01T06:00:00Z",
+            "event_id": "ap-8-0-0",
+            "employee_id": null,
+            "window_start": null,
+            "window_end": null
+          }
+        ],
+        "total": 14,
+        "limit": 50,
+        "offset": 0
+      }
+    },
+    {
+      "metodo": "GET",
+      "rota": "/api/v1/runs/4/employees",
+      "status": 200,
+      "corpo": {
+        "items": [
+          {
+            "employee_id": 7,
+            "event_id": "a-7-2-4",
+            "occurred_at": "2026-04-03T23:00:00Z",
+            "configuration": "C3",
+            "parcels": {
+              "c0": null,
+              "d1": 0.0,
+              "d2": 0.0,
+              "d3_conduct": 0.0,
+              "d3_posture": 0.0
+            },
+            "final_raw": 0.0,
+            "band": "normal"
+          },
+          {
+            "employee_id": 8,
+            "event_id": "ap-8-2-5",
+            "occurred_at": "2026-04-03T13:30:00Z",
+            "configuration": "C3",
+            "parcels": {
+              "c0": null,
+              "d1": 0.0,
+              "d2": 0.0,
+              "d3_conduct": 34.0,
+              "d3_posture": 0.0
+            },
+            "final_raw": 34.0,
+            "band": "low"
+          }
+        ],
+        "total": 2,
+        "limit": 50,
+        "offset": 0
+      }
+    },
+    {
+      "metodo": "GET",
+      "rota": "/api/v1/runs/4/employees/8",
+      "status": 200,
+      "corpo": {
+        "items": [
+          {
+            "event_id": "ap-8-2-5",
+            "employee_id": 8,
+            "occurred_at": "2026-04-03T13:30:00Z",
+            "event_type": "FILE_ACCESS",
+            "configuration": "C3",
+            "config_hash": "7c224783ac832c1149b05f4a16a93194287e6c84b2a9b3ab9a926a6b93b9f855",
+            "parcels": {
+              "c0": null,
+              "d1": 0.0,
+              "d2": 0.0,
+              "d3_conduct": 34.0,
+              "d3_posture": 0.0
+            },
+            "final_raw": 34.0,
+            "band": "low",
+            "hits": [
+              {
+                "rule": "accumulated_exposure",
+                "points": 34,
+                "reason": "17 eventos nos ultimos 14 dias somam 103 pontos com decaimento, contra referencia de 300"
+              }
+            ]
+          },
+          {
+            "event_id": "ap-8-2-4",
+            "employee_id": 8,
+            "occurred_at": "2026-04-03T12:00:00Z",
+            "event_type": "FILE_ACCESS",
+            "configuration": "C3",
+            "config_hash": "7c224783ac832c1149b05f4a16a93194287e6c84b2a9b3ab9a926a6b93b9f855",
+            "parcels": {
+              "c0": null,
+              "d1": 0.0,
+              "d2": 0.0,
+              "d3_conduct": 34.0,
+              "d3_posture": 0.0
+            },
+            "final_raw": 34.0,
+            "band": "low",
+            "hits": [
+              {
+                "rule": "accumulated_exposure",
+                "points": 34,
+                "reason": "16 eventos nos ultimos 14 dias somam 103 pontos com decaimento, contra referencia de 300"
+              }
+            ]
+          },
+          {
+            "event_id": "ap-8-2-3",
+            "employee_id": 8,
+            "occurred_at": "2026-04-03T10:30:00Z",
+            "event_type": "FILE_ACCESS",
+            "configuration": "C3",
+            "config_hash": "7c224783ac832c1149b05f4a16a93194287e6c84b2a9b3ab9a926a6b93b9f855",
+            "parcels": {
+              "c0": null,
+              "d1": 0.0,
+              "d2": 0.0,
+              "d3_conduct": 34.0,
+              "d3_posture": 0.0
+            },
+            "final_raw": 34.0,
+            "band": "low",
+            "hits": [
+              {
+                "rule": "accumulated_exposure",
+                "points": 34,
+                "reason": "15 eventos nos ultimos 14 dias somam 103 pontos com decaimento, contra referencia de 300"
+              }
+            ]
+          },
+          {
+            "event_id": "ap-8-2-2",
+            "employee_id": 8,
+            "occurred_at": "2026-04-03T09:00:00Z",
+            "event_type": "FILE_ACCESS",
+            "configuration": "C3",
+            "config_hash": "7c224783ac832c1149b05f4a16a93194287e6c84b2a9b3ab9a926a6b93b9f855",
+            "parcels": {
+              "c0": null,
+              "d1": 0.0,
+              "d2": 0.0,
+              "d3_conduct": 34.0,
+              "d3_posture": 0.0
+            },
+            "final_raw": 34.0,
+            "band": "low",
+            "hits": [
+              {
+                "rule": "accumulated_exposure",
+                "points": 34,
+                "reason": "14 eventos nos ultimos 14 dias somam 103 pontos com decaimento, contra referencia de 300"
+              }
+            ]
+          },
+          {
+            "event_id": "ap-8-2-1",
+            "employee_id": 8,
+            "occurred_at": "2026-04-03T07:30:00Z",
+            "event_type": "FILE_ACCESS",
+            "configuration": "C3",
+            "config_hash": "7c224783ac832c1149b05f4a16a93194287e6c84b2a9b3ab9a926a6b93b9f855",
+            "parcels": {
+              "c0": null,
+              "d1": 20.0,
+              "d2": 0.0,
+              "d3_conduct": 28.0,
+              "d3_posture": 0.0
+            },
+            "final_raw": 48.0,
+            "band": "low",
+            "hits": [
+              {
+                "rule": "off_hours_employee",
+                "points": 20,
+                "reason": "evento as 04:30 no fuso de America/Sao_Paulo, fora da janela de 6h as 22h"
+              },
+              {
+                "rule": "accumulated_exposure",
+                "points": 28,
+                "reason": "13 eventos nos ultimos 14 dias somam 83 pontos com decaimento, contra referencia de 300"
+              }
+            ]
+          },
+          {
+            "event_id": "ap-8-2-0",
+            "employee_id": 8,
+            "occurred_at": "2026-04-03T06:00:00Z",
+            "event_type": "FILE_ACCESS",
+            "configuration": "C3",
+            "config_hash": "7c224783ac832c1149b05f4a16a93194287e6c84b2a9b3ab9a926a6b93b9f855",
+            "parcels": {
+              "c0": null,
+              "d1": 20.0,
+              "d2": 0.0,
+              "d3_conduct": 21.0,
+              "d3_posture": 0.0
+            },
+            "final_raw": 41.0,
+            "band": "low",
+            "hits": [
+              {
+                "rule": "off_hours_employee",
+                "points": 20,
+                "reason": "evento as 03:00 no fuso de America/Sao_Paulo, fora da janela de 6h as 22h"
+              },
+              {
+                "rule": "accumulated_exposure",
+                "points": 21,
+                "reason": "12 eventos nos ultimos 14 dias somam 63 pontos com decaimento, contra referencia de 300"
+              }
+            ]
+          },
+          {
+            "event_id": "ap-8-1-5",
+            "employee_id": 8,
+            "occurred_at": "2026-04-02T13:30:00Z",
+            "event_type": "FILE_ACCESS",
+            "configuration": "C3",
+            "config_hash": "7c224783ac832c1149b05f4a16a93194287e6c84b2a9b3ab9a926a6b93b9f855",
+            "parcels": {
+              "c0": null,
+              "d1": 0.0,
+              "d2": 0.0,
+              "d3_conduct": 25.0,
+              "d3_posture": 0.0
+            },
+            "final_raw": 25.0,
+            "band": "low",
+            "hits": [
+              {
+                "rule": "accumulated_exposure",
+                "points": 25,
+                "reason": "11 eventos nos ultimos 14 dias somam 74 pontos com decaimento, contra referencia de 300"
+              }
+            ]
+          },
+          {
+            "event_id": "ap-8-1-4",
+            "employee_id": 8,
+            "occurred_at": "2026-04-02T12:00:00Z",
+            "event_type": "FILE_ACCESS",
+            "configuration": "C3",
+            "config_hash": "7c224783ac832c1149b05f4a16a93194287e6c84b2a9b3ab9a926a6b93b9f855",
+            "parcels": {
+              "c0": null,
+              "d1": 0.0,
+              "d2": 0.0,
+              "d3_conduct": 25.0,
+              "d3_posture": 0.0
+            },
+            "final_raw": 25.0,
+            "band": "low",
+            "hits": [
+              {
+                "rule": "accumulated_exposure",
+                "points": 25,
+                "reason": "10 eventos nos ultimos 14 dias somam 74 pontos com decaimento, contra referencia de 300"
+              }
+            ]
+          },
+          {
+            "event_id": "ap-8-1-3",
+            "employee_id": 8,
+            "occurred_at": "2026-04-02T10:30:00Z",
+            "event_type": "FILE_ACCESS",
+            "configuration": "C3",
+            "config_hash": "7c224783ac832c1149b05f4a16a93194287e6c84b2a9b3ab9a926a6b93b9f855",
+            "parcels": {
+              "c0": null,
+              "d1": 0.0,
+              "d2": 0.0,
+              "d3_conduct": 25.0,
+              "d3_posture": 0.0
+            },
+            "final_raw": 25.0,
+            "band": "low",
+            "hits": [
+              {
+                "rule": "accumulated_exposure",
+                "points": 25,
+                "reason": "9 eventos nos ultimos 14 dias somam 74 pontos com decaimento, contra referencia de 300"
+              }
+            ]
+          },
+          {
+            "event_id": "ap-8-1-2",
+            "employee_id": 8,
+            "occurred_at": "2026-04-02T09:00:00Z",
+            "event_type": "FILE_ACCESS",
+            "configuration": "C3",
+            "config_hash": "7c224783ac832c1149b05f4a16a93194287e6c84b2a9b3ab9a926a6b93b9f855",
+            "parcels": {
+              "c0": null,
+              "d1": 0.0,
+              "d2": 0.0,
+              "d3_conduct": 25.0,
+              "d3_posture": 0.0
+            },
+            "final_raw": 25.0,
+            "band": "low",
+            "hits": [
+              {
+                "rule": "accumulated_exposure",
+                "points": 25,
+                "reason": "8 eventos nos ultimos 14 dias somam 74 pontos com decaimento, contra referencia de 300"
+              }
+            ]
+          },
+          {
+            "event_id": "ap-8-1-1",
+            "employee_id": 8,
+            "occurred_at": "2026-04-02T07:30:00Z",
+            "event_type": "FILE_ACCESS",
+            "configuration": "C3",
+            "config_hash": "7c224783ac832c1149b05f4a16a93194287e6c84b2a9b3ab9a926a6b93b9f855",
+            "parcels": {
+              "c0": null,
+              "d1": 20.0,
+              "d2": 0.0,
+              "d3_conduct": 18.0,
+              "d3_posture": 0.0
+            },
+            "final_raw": 38.0,
+            "band": "low",
+            "hits": [
+              {
+                "rule": "off_hours_employee",
+                "points": 20,
+                "reason": "evento as 04:30 no fuso de America/Sao_Paulo, fora da janela de 6h as 22h"
+              },
+              {
+                "rule": "accumulated_exposure",
+                "points": 18,
+                "reason": "7 eventos nos ultimos 14 dias somam 54 pontos com decaimento, contra referencia de 300"
+              }
+            ]
+          },
+          {
+            "event_id": "ap-8-1-0",
+            "employee_id": 8,
+            "occurred_at": "2026-04-02T06:00:00Z",
+            "event_type": "FILE_ACCESS",
+            "configuration": "C3",
+            "config_hash": "7c224783ac832c1149b05f4a16a93194287e6c84b2a9b3ab9a926a6b93b9f855",
+            "parcels": {
+              "c0": null,
+              "d1": 20.0,
+              "d2": 0.0,
+              "d3_conduct": 11.0,
+              "d3_posture": 0.0
+            },
+            "final_raw": 31.0,
+            "band": "low",
+            "hits": [
+              {
+                "rule": "off_hours_employee",
+                "points": 20,
+                "reason": "evento as 03:00 no fuso de America/Sao_Paulo, fora da janela de 6h as 22h"
+              },
+              {
+                "rule": "accumulated_exposure",
+                "points": 11,
+                "reason": "6 eventos nos ultimos 14 dias somam 34 pontos com decaimento, contra referencia de 300"
+              }
+            ]
+          },
+          {
+            "event_id": "ap-8-0-5",
+            "employee_id": 8,
+            "occurred_at": "2026-04-01T13:30:00Z",
+            "event_type": "FILE_ACCESS",
+            "configuration": "C3",
+            "config_hash": "7c224783ac832c1149b05f4a16a93194287e6c84b2a9b3ab9a926a6b93b9f855",
+            "parcels": {
+              "c0": null,
+              "d1": 0.0,
+              "d2": 0.0,
+              "d3_conduct": 13.0,
+              "d3_posture": 0.0
+            },
+            "final_raw": 13.0,
+            "band": "normal",
+            "hits": [
+              {
+                "rule": "accumulated_exposure",
+                "points": 13,
+                "reason": "5 eventos nos ultimos 14 dias somam 40 pontos com decaimento, contra referencia de 300"
+              }
+            ]
+          },
+          {
+            "event_id": "ap-8-0-4",
+            "employee_id": 8,
+            "occurred_at": "2026-04-01T12:00:00Z",
+            "event_type": "FILE_ACCESS",
+            "configuration": "C3",
+            "config_hash": "7c224783ac832c1149b05f4a16a93194287e6c84b2a9b3ab9a926a6b93b9f855",
+            "parcels": {
+              "c0": null,
+              "d1": 0.0,
+              "d2": 0.0,
+              "d3_conduct": 13.0,
+              "d3_posture": 0.0
+            },
+            "final_raw": 13.0,
+            "band": "normal",
+            "hits": [
+              {
+                "rule": "accumulated_exposure",
+                "points": 13,
+                "reason": "4 eventos nos ultimos 14 dias somam 40 pontos com decaimento, contra referencia de 300"
+              }
+            ]
+          },
+          {
+            "event_id": "ap-8-0-3",
+            "employee_id": 8,
+            "occurred_at": "2026-04-01T10:30:00Z",
+            "event_type": "FILE_ACCESS",
+            "configuration": "C3",
+            "config_hash": "7c224783ac832c1149b05f4a16a93194287e6c84b2a9b3ab9a926a6b93b9f855",
+            "parcels": {
+              "c0": null,
+              "d1": 0.0,
+              "d2": 0.0,
+              "d3_conduct": 13.0,
+              "d3_posture": 0.0
+            },
+            "final_raw": 13.0,
+            "band": "normal",
+            "hits": [
+              {
+                "rule": "accumulated_exposure",
+                "points": 13,
+                "reason": "3 eventos nos ultimos 14 dias somam 40 pontos com decaimento, contra referencia de 300"
+              }
+            ]
+          },
+          {
+            "event_id": "ap-8-0-2",
+            "employee_id": 8,
+            "occurred_at": "2026-04-01T09:00:00Z",
+            "event_type": "FILE_ACCESS",
+            "configuration": "C3",
+            "config_hash": "7c224783ac832c1149b05f4a16a93194287e6c84b2a9b3ab9a926a6b93b9f855",
+            "parcels": {
+              "c0": null,
+              "d1": 0.0,
+              "d2": 0.0,
+              "d3_conduct": 13.0,
+              "d3_posture": 0.0
+            },
+            "final_raw": 13.0,
+            "band": "normal",
+            "hits": [
+              {
+                "rule": "accumulated_exposure",
+                "points": 13,
+                "reason": "2 eventos nos ultimos 14 dias somam 40 pontos com decaimento, contra referencia de 300"
+              }
+            ]
+          },
+          {
+            "event_id": "ap-8-0-1",
+            "employee_id": 8,
+            "occurred_at": "2026-04-01T07:30:00Z",
+            "event_type": "FILE_ACCESS",
+            "configuration": "C3",
+            "config_hash": "7c224783ac832c1149b05f4a16a93194287e6c84b2a9b3ab9a926a6b93b9f855",
+            "parcels": {
+              "c0": null,
+              "d1": 20.0,
+              "d2": 0.0,
+              "d3_conduct": 7.0,
+              "d3_posture": 0.0
+            },
+            "final_raw": 27.0,
+            "band": "low",
+            "hits": [
+              {
+                "rule": "off_hours_employee",
+                "points": 20,
+                "reason": "evento as 04:30 no fuso de America/Sao_Paulo, fora da janela de 6h as 22h"
+              },
+              {
+                "rule": "accumulated_exposure",
+                "points": 7,
+                "reason": "1 eventos nos ultimos 14 dias somam 20 pontos com decaimento, contra referencia de 300"
+              }
+            ]
+          },
+          {
+            "event_id": "ap-8-0-0",
+            "employee_id": 8,
+            "occurred_at": "2026-04-01T06:00:00Z",
+            "event_type": "FILE_ACCESS",
+            "configuration": "C3",
+            "config_hash": "7c224783ac832c1149b05f4a16a93194287e6c84b2a9b3ab9a926a6b93b9f855",
+            "parcels": {
+              "c0": null,
+              "d1": 20.0,
+              "d2": 0.0,
+              "d3_conduct": 0.0,
+              "d3_posture": 0.0
+            },
+            "final_raw": 20.0,
+            "band": "normal",
+            "hits": [
+              {
+                "rule": "off_hours_employee",
+                "points": 20,
+                "reason": "evento as 03:00 no fuso de America/Sao_Paulo, fora da janela de 6h as 22h"
+              }
+            ]
+          }
+        ],
+        "total": 18,
+        "limit": 50,
+        "offset": 0
+      }
+    },
+    {
+      "metodo": "GET",
+      "rota": "/api/v1/runs/4/events/ap-8-2-5",
+      "status": 200,
+      "corpo": {
+        "event_id": "ap-8-2-5",
+        "employee_id": 8,
+        "occurred_at": "2026-04-03T13:30:00Z",
+        "event_type": "FILE_ACCESS",
+        "configuration": "C3",
+        "config_hash": "7c224783ac832c1149b05f4a16a93194287e6c84b2a9b3ab9a926a6b93b9f855",
+        "parcels": {
+          "c0": null,
+          "d1": 0.0,
+          "d2": 0.0,
+          "d3_conduct": 34.0,
+          "d3_posture": 0.0
+        },
+        "final_raw": 34.0,
+        "band": "low",
+        "hits": [
+          {
+            "rule": "accumulated_exposure",
+            "points": 34,
+            "reason": "17 eventos nos ultimos 14 dias somam 103 pontos com decaimento, contra referencia de 300"
+          }
+        ]
+      }
+    },
+    {
+      "metodo": "GET",
+      "rota": "/api/v1/runs/999",
+      "status": 404,
+      "corpo": {
+        "code": "nao_encontrado",
+        "message": "execucao 999 nao existe",
+        "detail": null
+      }
+    }
+  ]
+}
