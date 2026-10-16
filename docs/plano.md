@@ -127,12 +127,12 @@ objetivo → semana vive aqui.
 | OE5 | Desenvolver uma abordagem para avaliar a exposição acumulada ao risco a partir da recorrência, combinação e evolução temporal dos comportamentos. | D3 | S8, S11 | Davi + Yasmin |
 | OE6 | Integrar as três dimensões em uma avaliação final e comparar, por estudo de ablação, as configurações resultantes com a linha de base, usando cenários simulados e as métricas definidas. | Todas | S11, S12 | Todos — métricas: Filipe |
 
-> **Dashboard — decisão pendente (D-02).** A proposta registrada aqui é que o
-> dashboard seja *instrumento de análise*, descrito na Metodologia e na
-> [arquitetura](arquitetura.md), e não objetivo específico. Ele viabiliza o OE6
-> ao tornar o risco decomponível por dimensão. Alternativas: elevar a objetivo
-> específico (OE7), ou excluir e declarar na delimitação. Qualquer uma serve; a
-> omissão não.
+> **Dashboard — decidido em 14/10/2026 (D-02).** O dashboard é *instrumento de
+> análise*, e não objetivo específico: ele viabiliza o OE6 ao tornar o risco
+> decomponível por dimensão, e não é objeto de um segundo experimento. Não há
+> avaliação de usabilidade com participantes, o que mantém coerente a declaração
+> de que nenhum dado de pessoa real é coletado. Está na Metodologia, seção 3.9, e
+> na [arquitetura](arquitetura.md).
 
 ### 1.6 Delimitação
 
@@ -233,9 +233,10 @@ a resposta "não".
 | Repositório e artigo divergem — título, dimensões | Alta — já ocorreu | Médio | README e [arquitetura](arquitetura.md) atualizados em 26/09; este plano é a fonte de verdade, e divergência nova entra como achado de revisão | Davi |
 | Escopo cresce — bloqueio, resposta automática, dados reais | Baixa | Alto | Delimitação explícita (1.6); toda ampliação passa pelas [decisões](decisoes.md) | Davi |
 
-A Introdução saiu parcial em **24/09**, com os seis blocos de complementação
-vazios. Não há risco listado para "os seis blocos não são preenchidos na S5" —
-e a **M2, em 01/10**, passou a ser o marco mais próximo e o único sem plano B.
+A Introdução saiu parcial em **24/09** com os seis blocos de complementação
+vazios; eles foram preenchidos fora do repositório e sincronizados em **13/10**,
+e o risco não se materializou. A **M2** é que não fechou no prazo de 01/10 — e
+segue sendo o marco sem plano B.
 
 ---
 

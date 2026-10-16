@@ -94,9 +94,9 @@ estado = "pendente"
 numero = 1
 titulo = "Introdução"
 donos = ["Yasmin", "Filipe"]
-estado = "Entregue parcial em 24/09 — os seis blocos de complementação continuam vazios, e a parcialidade foi declarada no arquivo entregue"
+estado = "Entregue parcial em 24/09. Os seis blocos de complementação foram preenchidos fora do repositório e sincronizados em 13/10; falta conferir a extensão no template, cujo teto é de 2 páginas"
 pronto = false
-andamento = "Entregue parcial ao professor em 24/09. Os seis blocos de complementação de Yasmin e Filipe continuam vazios, e a seção da dimensão 3 ainda não foi ajustada à D-25."
+andamento = "Entregue parcial ao professor em 24/09. Os seis blocos de complementação foram preenchidos fora do repositório e sincronizados em 13/10, e a dimensão 3 já está ajustada à D-25 — as duas coisas foram declaradas como pendentes por engano até 15/10. Falta conferir a extensão no template, as fontes da contextualização com até 5 anos, e alinhar a granularidade dos objetivos ao plano."
 semana = "S5"
 registro = "entregas/tarefa-02.md"
 
@@ -147,7 +147,7 @@ titulo = "Introdução"
 data = 2026-09-24
 fecha = "Problema, pergunta, objetivos, delimitação"
 estado = "parcial"
-porque = "Era a Tarefa 02 do professor. Os seis blocos de complementação continuam vazios e vencem na S5"
+porque = "Era a Tarefa 02 do professor. Os seis blocos de complementação foram preenchidos fora do repositório e sincronizados em 13/10; falta conferir a extensão contra o teto de 2 páginas"
 
 [[marco]]
 id = "M2"
