@@ -50,3 +50,4 @@ Use o [modelo](_modelo.md) e adicione a página nova ao
 | 14/10/2026 | [Sessão 29](2026-10-14-sessao-29.md) | A API de leitura entra com nove rotas e o contrato versionado; o CI não roda os testes dela, e isso é pendência declarada |
 | 14/10/2026 | [Sessão 30](2026-10-14-sessao-30.md) | A M2 não estava travada por decisão não tomada, e sim por registro não atualizado: nove decisões abertas no papel já estavam implementadas e testadas no código |
 | 15/10/2026 | [Sessão 32](2026-10-15-sessao-32.md) | O contrato da API não tinha um único exemplo; passa a ter, todos de uma execução real — e a `Metrica` fica sem exemplo de propósito, porque nenhum avaliador gravou nenhuma |
+| 15/10/2026 | [Sessão 33](2026-10-15-sessao-33.md) | A D-02 fechou e quatro lugares do artigo continuavam pedindo escore SUS; a pergunta de pesquisa estava num bloco de citação, e era o que a conversão para `.docx` apagava |
