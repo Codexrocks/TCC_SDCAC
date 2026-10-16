@@ -251,21 +251,34 @@ e recomendado para a comparação de configurações sobre múltiplos conjuntos 
 dados (Demšar, 2006).
 
 O piso de dez sementes decorre da aritmética do próprio teste, e não de
-convenção. No teste de Wilcoxon pareado exato, o menor valor de *p* bilateral
-obtenível com *n* pares é $2/2^{n}$, correspondente ao caso em que todas as
-diferenças têm o mesmo sinal. Com *n* = 5 esse limite é 0,0625, de modo que
-nenhum resultado poderia ser declarado significativo ao nível de 0,05 ainda que
-uma configuração superasse a outra em todas as execuções; com *n* = 10 o limite é
-de aproximadamente 0,002.
+convenção: no Wilcoxon pareado exato, o menor valor de *p* bilateral obtenível
+com *n* pares é $2/2^{n}$, atingido quando todas as diferenças têm o mesmo sinal.
+Com *n* = 5 esse limite vale 0,0625 — acima de 0,05 ainda que uma configuração
+superasse a outra em todas as execuções — e com *n* = 10 cai a aproximadamente
+0,002.
 
-A reprodutibilidade é assegurada pelo registro de execução: cada execução grava
-identificador, semente, configuração e pesos utilizados, e cada avaliação
-produzida referencia a execução que a originou. Comparar duas configurações
-consiste, operacionalmente, em comparar dois identificadores de execução sobre o
-mesmo conjunto de eventos. O protótipo é implementado em Python 3.12 sobre
-PostgreSQL — banco relacional escolhido pela necessidade de janelas temporais por
-funcionário sobre volume da ordem de milhões de registros — e a interface de
-inspeção dos resultados é construída em Streamlit.
+A reprodutibilidade é assegurada pelo registro de execução. Cada execução grava
+identificador, semente, configuração e versão dos pesos, além de dois valores que
+permitem reconstituí-la: o resumo SHA-256 do conteúdo da configuração,
+serializada em ordem canônica — de modo que configurações equivalentes produzam o
+mesmo resumo, independentemente da ordem em que seus campos foram escritos —, e o
+identificador do *commit* do código em execução. Cada avaliação produzida
+referencia a execução que a originou, e comparar duas configurações consiste,
+operacionalmente, em comparar dois identificadores de execução sobre o mesmo
+conjunto de eventos.
+
+O protótipo é implementado em Python 3.12, e a camada de avaliação não conhece o
+meio de armazenamento: o acesso aos dados é declarado por interfaces, e duas
+implementações as cumprem. A primeira opera sobre PostgreSQL, banco relacional
+escolhido pela necessidade de janelas temporais por funcionário sobre volume da
+ordem de milhões de registros. A segunda opera sobre arquivos em disco e existe
+por razão metodológica: ela permite executar o experimento completo sem servidor
+de banco de dados, o que reduz o custo de reprodução por terceiros. As
+invariantes de desenho declaradas na Seção 3.8 — janelas de treino e de avaliação
+disjuntas, exclusão do evento corrente do termo de exposição acumulada e
+independência entre a camada de avaliação e o meio de armazenamento — são
+verificadas por testes automatizados executados a cada alteração do código. A
+interface de inspeção dos resultados é construída em Streamlit.
 
 ## 3.8 Ameaças à validade
 
@@ -286,14 +299,12 @@ janela de avaliação. Calculá-lo sobre os mesmos dias que contêm os cenários
 injetados faria o comportamento anômalo integrar a definição do que é normal para
 aquele funcionário, e o desempenho observado seria bom pelo motivo errado
 (Kaufman et al., 2012). Pela mesma razão, os atributos de estado são lidos na
-condição vigente na data do evento, e não em seu estado final. Ainda no mesmo
-eixo, o termo de exposição acumulada é calculado sobre a janela que **antecede** o
-evento avaliado, excluindo-o: incluí-lo faria o risco do evento corrente ser
-contado duas vezes — uma no termo do evento, outra no de exposição —, de modo que
-seu peso efetivo seria a soma dos dois coeficientes, e não o que lhe é atribuído;
-além disso, como a exposição soma o risco de vários dias, sua escala é uma ordem
-de magnitude superior à do evento isolado e o termo dominaria a nota final
-inclusive nos cenários pontuais. Por fim, a linha de base é mantida puramente
+condição vigente na data do evento, e não em seu estado final. O termo de exposição
+acumulada é calculado sobre a janela que **antecede** o evento avaliado,
+excluindo-o: incluí-lo contaria o risco do evento corrente duas vezes, elevando
+seu peso efetivo à soma dos dois coeficientes, e — como a exposição soma o risco
+de vários dias, em escala uma ordem de magnitude superior à do evento isolado —
+faria o termo dominar a nota final inclusive nos cenários pontuais. Por fim, a linha de base é mantida puramente
 estática, conforme a Seção 3.3, para que não incorpore a informação cuja
 contribuição se pretende medir.
 
