@@ -52,3 +52,4 @@ Use o [modelo](_modelo.md) e adicione a página nova ao
 | 15/10/2026 | [Sessão 31](2026-10-15-sessao-31.md) | Nenhuma semana pode ser dada por pronta: o critério de aceite de todas pede dado gerado, e o gerador de eventos não existe |
 | 15/10/2026 | [Sessão 32](2026-10-15-sessao-32.md) | O contrato da API não tinha um único exemplo; passa a ter, todos de uma execução real — e a `Metrica` fica sem exemplo de propósito, porque nenhum avaliador gravou nenhuma |
 | 15/10/2026 | [Sessão 33](2026-10-15-sessao-33.md) | A D-02 fechou e quatro lugares do artigo continuavam pedindo escore SUS; a pergunta de pesquisa estava num bloco de citação, e era o que a conversão para `.docx` apagava |
+| 16/10/2026 | [Sessão 34](2026-10-16-sessao-34.md) | A página inicial do GitBook anunciava como abertas três decisões já fechadas: ela copiava à mão o estado que o quadro calcula. Os 34 relatórios saem da raiz da navegação |
