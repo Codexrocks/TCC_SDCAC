@@ -31,7 +31,7 @@ não há data escrita à mão aqui, porque data escrita à mão envelhece:
 
 | Capítulo | Estado | Quem | Semana prevista | Situação |
 |---|---|---|---|---|
-| 1. Introdução | Entregue parcial em 24/09 — os seis blocos de complementação continuam vazios, e a parcialidade foi declarada no arquivo entregue | Yasmin, Filipe | S5 | ⚠️ Atrasado há 15 dias |
+| 1. Introdução | Entregue parcial em 24/09. Os seis blocos de complementação foram preenchidos fora do repositório e sincronizados em 13/10; falta conferir a extensão no template, cujo teto é de 2 páginas | Yasmin, Filipe | S5 | ⚠️ Atrasado há 15 dias |
 | 2. Referencial teórico | Escrito e versionado em 28/09 pela Yasmin — 4 subseções, ≈1.150 palavras, atrasado de S3 e S4. Faltam as 13 fontes confirmadas | Yasmin | S5 | ⚠️ Atrasado há 15 dias |
 | 3. Metodologia | Escrita e versionada em 28/09 — 9 subseções. Faltam as 4 lacunas da M2 e as 7 fontes conferidas | Davi (caneta) | S5 | ⚠️ Atrasado há 15 dias |
 | 4. Resultados | Esqueleto | Filipe (caneta) | S13 | 🗓️ Em 41 dias |
@@ -107,7 +107,7 @@ Três consequências que valem saber:
 
 | Semana | Entregável |
 |---|---|
-| S5 | Metodologia (caneta) — ✅ **escrita em 28/09**, com 4 lacunas abertas · arquitetura v2 ✅ · fechar D-12 a D-19 |
+| S5 | Metodologia (caneta) — ✅ **escrita em 28/09**; 2 das 4 lacunas fecharam em 14/10 · arquitetura v2 ✅ · D-12, D-13, D-14, D-17 e D-18 fechadas no #74; **D-15, D-16 e D-19 seguem abertas** |
 | S6 | Schema, migrações, carga e ingestão |
 | S7 | C0 (regras fixas, sem parâmetro aprendido) e motor D1 |
 | S8 | D2, D3 e a integração |
@@ -144,7 +144,7 @@ Três consequências que valem saber:
 
 | Marco | Data | O que fecha | Por que é marco | Situação |
 |---|---|---|---|---|
-| **M1** Introdução | **24/09** | Problema, pergunta, objetivos, delimitação | Era a Tarefa 02 do professor. Os seis blocos de complementação continuam vazios e vencem na S5 | ✅ Fechado em parte |
+| **M1** Introdução | **24/09** | Problema, pergunta, objetivos, delimitação | Era a Tarefa 02 do professor. Os seis blocos de complementação foram preenchidos fora do repositório e sincronizados em 13/10; falta conferir a extensão contra o teto de 2 páginas | ✅ Fechado em parte |
 | **M2** Metodologia congelada | **01/10** | Cenários, métricas, quatro configurações, atributos | Congela o que será medido antes de existir código a defender | ⚠️ Atrasado há 15 dias |
 | **M3** Modelo executável | **22/10** | C0 a C3 rodando sobre o mesmo gerador | Última data em que uma dimensão pode ser cortada sem comprometer a comparação | ⏳ Vence em 6 dias |
 | **M4** Tabela de ablação | **19/11** | Números finais das quatro configurações | A partir daqui o trabalho é escrita. Nenhuma alteração de código é aceita | 🗓️ Em 34 dias |
@@ -160,7 +160,7 @@ Dashboard, Isolation Forest e referencial teórico correm em paralelo e têm fol
 
 | Risco | Onde aperta | Mitigação |
 |---|---|---|
-| **M2 em 01/10** com **12 decisões abertas**, 9 delas vencendo nessa data | D-12 a D-19 vencem em 01/10, e os cenários também | Fechar as oito lacunas metodológicas antes de escrever a Metodologia |
+| **A M2 não fechou no prazo de 01/10**, e segue aberta | Das 12 decisões então abertas restam **6 abertas e 3 a confirmar**. As que travam são a D-15, a D-16 e a D-19 | Cinco fecharam no #74 contra o código que as impõe. O que falta não é decisão de código: é o número a priori da D-15 e os cenários nomeados |
 | **Gerador sem parâmetros** | 25 definições abertas na especificação do gerador — personas, matriz cargo × sistema, faixas de rede | As **25 perguntas abertas** da [especificação](banco-simulado.md), que entrou pelo PR #43, precisam de resposta antes da S6 |
 | **O código não está na `main`** | Os quatro motores estão prontos na fila dos PRs #65 a #70, e o gerador da S6 não começou: sem ele o motor roda contra fixture | A S10 é o único corte disponível: o Isolation Forest é opcional por definição |
 | **Referencial fora do repositório** | ✅ **Resolvido em 28/09** — o texto entrou pelo insumo da Yasmin | Resta o levantamento v1, de 17 fontes, que continua fora |

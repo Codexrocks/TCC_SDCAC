@@ -1,11 +1,30 @@
 # Configuração passo a passo
 
-Página de consulta para quando algo não estiver funcionando. Cada seção é
-independente — vá direto na que precisa.
+Página de consulta para quando algo não estiver funcionando. **A configuração
+inicial está concluída** desde 03/09/2026 — repositório público, branch padrão
+`main`, dois rulesets ativos, secret do assistente cadastrado. Nada aqui precisa
+ser feito de novo; tudo aqui serve para quando algo quebrar.
 
-Estado em 03/09/2026: repositório **público**, branch padrão **`main`**, dois
-rulesets ativos, secret do assistente cadastrado, equipe completa com acesso.
-A configuração inicial está **concluída** — esta página vira consulta.
+Por isso o detalhe fica: cada seção é um problema que já aconteceu, com a
+mensagem de erro exata e o que resolveu. Procure pelo sintoma.
+
+## Achar pelo sintoma
+
+| O que você está vendo | Onde está |
+|---|---|
+| `expected "site" to be defined` no GitBook | [1](#1-gitbook--git-sync) |
+| Um espaço chamado **"Untitled"** apareceu | [1](#1-gitbook--git-sync) |
+| O assistente não responde a `@claude` | [2](#2-secret-do-assistente) |
+| O merge está bloqueado, ou um check obrigatório não aparece | [3](#3-proteger-a-main-com-um-ruleset) |
+| Dúvida sobre **quem** pode executar o merge | [3](#3-proteger-a-main-com-um-ruleset) |
+| O nome da branch passou errado e ninguém barrou | [3](#3-proteger-a-main-com-um-ruleset) |
+| O relatório semanal não apareceu | [6](#6-relatório-semanal-automático) |
+| `cannot update this protected ref` | [7](#7-gitbook-e-a-main-protegida) |
+| **O texto que escrevi no GitBook não chegou ao repositório** | [7](#7-gitbook-e-a-main-protegida) |
+| O site publicou um **Artigo duplicado** | [7](#7-gitbook-e-a-main-protegida) |
+| O workflow avisou que descartou commits | [7](#7-gitbook-e-a-main-protegida) |
+| `python3` abre a Microsoft Store | [8](#8-windows--dois-comandos-que-não-funcionam-como-estão-escritos) |
+| `claude` não é reconhecido como comando | [8](#8-windows--dois-comandos-que-não-funcionam-como-estão-escritos) |
 
 ---
 
