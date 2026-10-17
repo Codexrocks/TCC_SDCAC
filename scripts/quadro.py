@@ -23,6 +23,7 @@ silencio. Contagem calculada nao envelhece.
 Regras do projeto em AGENTS.md. Rotulo textual junto do icone e exigencia de
 docs/usabilidade.md, e vale aqui como vale no dashboard.
 """
+
 import argparse
 import datetime
 import pathlib
@@ -57,9 +58,14 @@ COLUNAS = (
 # de quem escreveu; so a tabela de fato e gerada. Fora dos marcadores nada e
 # tocado.
 BLOCOS = {
+    "docs/README.md": ("pendencias-por-pessoa",),
     "docs/cronograma.md": ("prazos-do-professor", "capitulos", "marcos"),
     "docs/decisoes.md": ("decisoes-abertas", "decisoes-a-confirmar"),
 }
+
+# A ordem em que as pessoas aparecem na pagina inicial. Dono que nao estiver
+# aqui entra no fim, em ordem alfabetica -- nunca e descartado.
+EQUIPE = ("Davi", "Yasmin", "Filipe")
 
 MARCA_DATA = "<!-- QUADRO:gerado-em %s -->"
 RE_MARCA_DATA = re.compile(r"<!-- QUADRO:gerado-em (\d{4}-\d{2}-\d{2}) -->")
@@ -195,7 +201,9 @@ def cartoes(dados: Dados, hoje: datetime.date) -> list[Cartao]:
             coluna = "feito"
             quando = tarefa.get("entregue_em")
             parcial = " parcial" if estado == "entregue-parcial" else ""
-            situacao = f"✅ Entregue{parcial} em {br(quando)}" if quando else "✅ Entregue"
+            situacao = (
+                f"✅ Entregue{parcial} em {br(quando)}" if quando else "✅ Entregue"
+            )
         elif estado == "recorrente":
             coluna, situacao = "depois", "🔁 Recorrente"
         else:
@@ -338,7 +346,7 @@ def render_quadro(dados: Dados, hoje: datetime.date) -> str:
         "> execução seguinte.",
         ">",
         "> As colunas não estão escritas em lugar nenhum: são **calculadas** contra a",
-        "> data do retrato. É o que impede esta página de dizer \"amanhã\" três dias",
+        '> data do retrato. É o que impede esta página de dizer "amanhã" três dias',
         "> depois — que foi exatamente o que o cronograma fez em 26/09/2026.",
         "",
         MARCA_DATA % hoje.isoformat(),
@@ -395,7 +403,7 @@ def render_quadro(dados: Dados, hoje: datetime.date) -> str:
             "Só das semanas em curso ou vencendo. Critério é o que permite dizer"
         )
         linhas.append(
-            "\"pronto\" sem discussão — e sem ele escrito, recusar uma entrega vira"
+            '"pronto" sem discussão — e sem ele escrito, recusar uma entrega vira'
         )
         linhas.append("atrito.")
         linhas.append("")
@@ -417,14 +425,25 @@ def render_quadro(dados: Dados, hoje: datetime.date) -> str:
 
     andando = []
     for chave, rotulo in (
-        ("semana", "Semana"), ("capitulo", "Capítulo"),
-        ("decisao", "Decisão"), ("tarefa_professor", "Professor"),
+        ("semana", "Semana"),
+        ("capitulo", "Capítulo"),
+        ("decisao", "Decisão"),
+        ("tarefa_professor", "Professor"),
     ):
         for item in dados.get(chave, []):
             if item.get("andamento"):
-                nome = item.get("id") or f"{item.get('numero', '')}. {item.get('titulo', '')}"
-                andando.append((rotulo, nome, item["andamento"],
-                                ", ".join(item.get("donos", [])) or "—"))
+                nome = (
+                    item.get("id")
+                    or f"{item.get('numero', '')}. {item.get('titulo', '')}"
+                )
+                andando.append(
+                    (
+                        rotulo,
+                        nome,
+                        item["andamento"],
+                        ", ".join(item.get("donos", [])) or "—",
+                    )
+                )
     if andando:
         linhas.append("## O que está em andamento")
         linhas.append("")
@@ -511,7 +530,7 @@ def render_quadro(dados: Dados, hoje: datetime.date) -> str:
         "- **A tabela de decisões fechadas** em [`decisoes.md`](decisoes.md) também."
     )
     linhas.append(
-        "  Decisão fechada não tem prazo que envelheça, e a prosa do \"o que ficou\" é"
+        '  Decisão fechada não tem prazo que envelheça, e a prosa do "o que ficou" é'
     )
     linhas.append("  conteúdo, não estado.")
     linhas.append("")
@@ -552,8 +571,10 @@ def bloco_capitulos(dados: Dados, hoje: datetime.date) -> str:
         semana = semanas.get(capitulo.get("semana", ""))
         prazo = (semana.get("fim") or semana.get("inicio")) if semana else None
         prevista = capitulo.get("semana", "—")
-        if semana and semana["inicio"] <= hoje and (
-            semana.get("fim") is None or hoje <= semana["fim"]
+        if (
+            semana
+            and semana["inicio"] <= hoje
+            and (semana.get("fim") is None or hoje <= semana["fim"])
         ):
             prevista += " · ▶️ em curso"
         linhas.append(
@@ -565,9 +586,7 @@ def bloco_capitulos(dados: Dados, hoje: datetime.date) -> str:
                 "✅ Escrito" if capitulo.get("pronto") else frase_de_prazo(prazo, hoje),
             ]
         )
-    return tabela(
-        ["Capítulo", "Estado", "Quem", "Semana prevista", "Situação"], linhas
-    )
+    return tabela(["Capítulo", "Estado", "Quem", "Semana prevista", "Situação"], linhas)
 
 
 def bloco_marcos(dados: Dados, hoje: datetime.date) -> str:
@@ -610,9 +629,7 @@ def _tabela_de_decisoes(dados: Dados, hoje: datetime.date, estado: str) -> str:
                 frase_de_prazo(prazo, hoje),
             ]
         )
-    return tabela(
-        ["ID", "Decisão", "Proposta", "Dono", "Prazo", "Situação"], linhas
-    )
+    return tabela(["ID", "Decisão", "Proposta", "Dono", "Prazo", "Situação"], linhas)
 
 
 def bloco_decisoes_abertas(dados: Dados, hoje: datetime.date) -> str:
@@ -623,12 +640,66 @@ def bloco_decisoes_a_confirmar(dados: Dados, hoje: datetime.date) -> str:
     return _tabela_de_decisoes(dados, hoje, "a-confirmar")
 
 
+def bloco_pendencias_por_pessoa(dados: Dados, hoje: datetime.date) -> str:
+    """Quem deve o que, agrupado por pessoa, para a pagina inicial.
+
+    **Por que existe, e por que gerado.** A pagina inicial listava isto a mao, e
+    a lista apodreceu: em 15/10/2026 ela anunciava a D-02, a D-12 e a D-14 como
+    abertas, as tres ja fechadas, e falava em "D-01 a D-41" com 43 decisoes no
+    registro. Estado copiado a mao sempre acaba assim; foi o mesmo defeito que
+    fez o cronograma dizer "amanha" tres dias depois do prazo.
+
+    **E diferente do que o docs/quadro.md mostra.** Lá o agrupamento e por
+    urgencia -- atrasado, em curso, a vencer. Aqui e por pessoa, que e a pergunta
+    que a pagina inicial responde: "o que e meu?". A mesma decisao aparece sob
+    cada dono, de proposito: decisao de tres donos e pendencia dos tres.
+
+    Dono fora da `EQUIPE` entra no fim em vez de ser descartado em silencio --
+    pessoa nova no projeto nao pode desaparecer da pagina inicial por nao estar
+    numa constante.
+    """
+    semanas = semanas_por_id(dados)
+    abertas = [
+        d for d in dados.get("decisao", []) if d["estado"] in ("aberta", "a-confirmar")
+    ]
+    if not abertas:
+        return "Nenhuma decisao aberta. O quadro confirma: nada pendente aqui."
+
+    por_pessoa: dict[str, list[Registro]] = {}
+    for decisao in abertas:
+        for dono in decisao.get("donos", []) or ["sem dono"]:
+            por_pessoa.setdefault(dono, []).append(decisao)
+
+    ordem = [p for p in EQUIPE if p in por_pessoa]
+    ordem += sorted(p for p in por_pessoa if p not in EQUIPE)
+
+    partes = []
+    for pessoa in ordem:
+        linhas = []
+        for decisao in sorted(por_pessoa[pessoa], key=lambda d: d["id"]):
+            prazo = resolver_prazo(decisao, semanas)
+            linhas.append(
+                [
+                    decisao["id"],
+                    decisao["titulo"],
+                    "A confirmar" if decisao["estado"] == "a-confirmar" else "Aberta",
+                    frase_de_prazo(prazo, hoje),
+                ]
+            )
+        rotulo = plural(len(linhas), "pendência", "pendências")
+        cabeca = f"**{pessoa}** — {rotulo}"
+        corpo = tabela(["ID", "Decisão", "Estado", "Situação"], linhas)
+        partes.append(cabeca + "\n\n" + corpo.strip())
+    return "\n\n".join(partes) + "\n"
+
+
 DESENHISTAS = {
     "prazos-do-professor": bloco_prazos_do_professor,
     "capitulos": bloco_capitulos,
     "marcos": bloco_marcos,
     "decisoes-abertas": bloco_decisoes_abertas,
     "decisoes-a-confirmar": bloco_decisoes_a_confirmar,
+    "pendencias-por-pessoa": bloco_pendencias_por_pessoa,
 }
 
 
@@ -761,7 +832,9 @@ def checar_marcadores_no_indice(dados: Dados) -> list[str]:
         if arquivo.name == "citacoes-pendentes.md":
             continue
         rel = "docs/" + arquivo.name
-        marcadores = sem_codigo(arquivo.read_text(encoding="utf-8")).count("FALTA CITAÇÃO")
+        marcadores = sem_codigo(arquivo.read_text(encoding="utf-8")).count(
+            "FALTA CITAÇÃO"
+        )
         no_toml = sum(1 for c in dados.get("citacao", []) if c["onde"].startswith(rel))
         if marcadores != no_toml:
             problemas.append(
@@ -841,7 +914,9 @@ def main() -> None:
         # calendario andou, e check que falha sozinho todo dia e check ignorado.
         hoje = data_registrada()
         if hoje is None:
-            sys.exit("docs/quadro.md nao existe ou nao tem a marca de data. Rode sem --conferir.")
+            sys.exit(
+                "docs/quadro.md nao existe ou nao tem a marca de data. Rode sem --conferir."
+            )
     elif argumentos.hoje:
         hoje = datetime.date.fromisoformat(argumentos.hoje)
     else:
