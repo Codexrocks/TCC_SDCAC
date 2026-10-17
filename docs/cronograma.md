@@ -16,7 +16,7 @@ como recusar uma entrega, e a recusa vira atrito.
 | **05/09/26** | Tema do trabalho e composição do grupo — *Tarefa 01* | ✅ **Entregue em 03/09/2026** — [registro](entregas/tarefa-01.md) |
 | **24/09/26** | Introdução do artigo no template **COBEM 2026** — *Tarefa 02* | ✅ **Entregue parcial em 24/09/2026** — [registro](entregas/tarefa-02.md) |
 | Quinzenal | Reunião de acompanhamento com o orientador | 🔁 Recorrente |
-| **10/12/26** | **Entrega do TCC** | 🗓️ Em 55 dias |
+| **10/12/26** | **Entrega do TCC** | 🗓️ Em 54 dias |
 | Dezembro | Apresentação e defesa | 🗓️ Sem prazo |
 <!-- QUADRO:fim prazos-do-professor -->
 
@@ -31,11 +31,11 @@ não há data escrita à mão aqui, porque data escrita à mão envelhece:
 
 | Capítulo | Estado | Quem | Semana prevista | Situação |
 |---|---|---|---|---|
-| 1. Introdução | Entregue parcial em 24/09. Os seis blocos de complementação foram preenchidos fora do repositório e sincronizados em 13/10; falta conferir a extensão no template, cujo teto é de 2 páginas | Yasmin, Filipe | S5 | ⚠️ Atrasado há 15 dias |
-| 2. Referencial teórico | Escrito e versionado em 28/09 pela Yasmin — 4 subseções, ≈1.150 palavras, atrasado de S3 e S4. Faltam as 13 fontes confirmadas | Yasmin | S5 | ⚠️ Atrasado há 15 dias |
-| 3. Metodologia | Escrita e versionada em 28/09 — 9 subseções. Faltam as 4 lacunas da M2 e as 7 fontes conferidas | Davi (caneta) | S5 | ⚠️ Atrasado há 15 dias |
-| 4. Resultados | Esqueleto | Filipe (caneta) | S13 | 🗓️ Em 41 dias |
-| 5. Conclusão | Esqueleto | Davi (caneta) | S14 | 🗓️ Em 48 dias |
+| 1. Introdução | Entregue parcial em 24/09. Os seis blocos de complementação foram preenchidos fora do repositório e sincronizados em 13/10; falta conferir a extensão no template, cujo teto é de 2 páginas | Yasmin, Filipe | S5 | ⚠️ Atrasado há 16 dias |
+| 2. Referencial teórico | Escrito e versionado em 28/09 pela Yasmin — 4 subseções, ≈1.150 palavras, atrasado de S3 e S4. Faltam as 13 fontes confirmadas | Yasmin | S5 | ⚠️ Atrasado há 16 dias |
+| 3. Metodologia | Escrita e versionada em 28/09 — 9 subseções. Faltam as 4 lacunas da M2 e as 7 fontes conferidas | Davi (caneta) | S5 | ⚠️ Atrasado há 16 dias |
+| 4. Resultados | Esqueleto | Filipe (caneta) | S13 | 🗓️ Em 40 dias |
+| 5. Conclusão | Esqueleto | Davi (caneta) | S14 | 🗓️ Em 47 dias |
 <!-- QUADRO:fim capitulos -->
 
 **O código existe, e ainda não está na `main`.** O motor de análise — schema
@@ -145,10 +145,10 @@ Três consequências que valem saber:
 | Marco | Data | O que fecha | Por que é marco | Situação |
 |---|---|---|---|---|
 | **M1** Introdução | **24/09** | Problema, pergunta, objetivos, delimitação | Era a Tarefa 02 do professor. Os seis blocos de complementação foram preenchidos fora do repositório e sincronizados em 13/10; falta conferir a extensão contra o teto de 2 páginas | ✅ Fechado em parte |
-| **M2** Metodologia congelada | **01/10** | Cenários, métricas, quatro configurações, atributos | Congela o que será medido antes de existir código a defender | ⚠️ Atrasado há 15 dias |
-| **M3** Modelo executável | **22/10** | C0 a C3 rodando sobre o mesmo gerador | Última data em que uma dimensão pode ser cortada sem comprometer a comparação | ⏳ Vence em 6 dias |
-| **M4** Tabela de ablação | **19/11** | Números finais das quatro configurações | A partir daqui o trabalho é escrita. Nenhuma alteração de código é aceita | 🗓️ Em 34 dias |
-| **M5** Entrega | **10/12** | Artigo diagramado e submetido | — | 🗓️ Em 55 dias |
+| **M2** Metodologia congelada | **01/10** | Cenários, métricas, quatro configurações, atributos | Congela o que será medido antes de existir código a defender | ⚠️ Atrasado há 16 dias |
+| **M3** Modelo executável | **22/10** | C0 a C3 rodando sobre o mesmo gerador | Última data em que uma dimensão pode ser cortada sem comprometer a comparação | ⏳ Vence em 5 dias |
+| **M4** Tabela de ablação | **19/11** | Números finais das quatro configurações | A partir daqui o trabalho é escrita. Nenhuma alteração de código é aceita | 🗓️ Em 33 dias |
+| **M5** Entrega | **10/12** | Artigo diagramado e submetido | — | 🗓️ Em 54 dias |
 <!-- QUADRO:fim marcos -->
 
 **Caminho crítico:** M2 → S6 (gerador com histórico de um ano) → S8 (D3) → S11 (execução) → S12 (tabela) → M4.
