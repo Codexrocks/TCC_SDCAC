@@ -1,13 +1,11 @@
-"""O painel do SDCAC — esqueleto.
+"""O painel do SDCAC.
 
-**O que esta pronto:** a navegacao, a escolha da fonte, a selecao de execucao, o
-indicador de saude e a apresentacao das faixas de risco, que e a parte com
-exigencia escrita — rotulo junto da cor, forma propria e contraste conferido por
-`frontend/components/contraste.py`.
+Quatro telas: **Execucao**, que identifica a rodada e os presets; **Pessoas**,
+**Alertas** e **Decomposicao do risco**, em `telas.py`.
 
-**O que falta:** as tres telas analiticas. Cada uma esta marcada abaixo com a
-rota que a alimenta, o que o aceite da S9 cobra dela e o que ainda falta para
-ela ser demonstravel. **Dono: Filipe, S9 (23 a 29/10).**
+A apresentacao das faixas e a parte com exigencia escrita — rotulo junto da cor,
+forma propria e contraste conferido por `frontend/components/contraste.py`, com
+teste que reprova se qualquer uma das duas regredir.
 
 > **O aceite da S9 nao e demonstravel com a semente de hoje.** Ele diz: "leitor
 > externo identifica em menos de 1 min por que um usuario esta em risco alto".
@@ -26,12 +24,17 @@ A fonte padrao e o arquivo de exemplos, que roda sem servidor nem banco.
 
 import streamlit as st
 
-from frontend.components.faixas import FAIXAS, legenda_html, selo_html
+from frontend.components.faixas import legenda_html
 from frontend.dashboard.cliente import (
     FonteExemplos,
     FonteHTTP,
     Painel,
     SourceUnavailableError,
+)
+from frontend.dashboard.telas import (
+    tela_alertas,
+    tela_decomposicao,
+    tela_pessoas,
 )
 
 TELAS = ("Execucao", "Pessoas", "Alertas", "Decomposicao do risco")
@@ -157,36 +160,6 @@ def tela_execucao(painel: Painel, execucao: int) -> None:
     )
 
 
-def a_escrever(titulo: str, rota: str, aceite: str, falta: str) -> None:
-    """O lugar de uma tela que ainda nao existe, dizendo o que ela precisa.
-
-    Tela vazia sem explicacao vira duvida de quem abre o painel. Esta diz qual
-    rota a alimenta, o que o aceite cobra e o que falta — para o Filipe comecar
-    sem reler o cronograma, e para quem abrir entender que falta, nao quebrou.
-    """
-    st.header(titulo)
-    st.info(
-        f"**A escrever — S9, Filipe.**\n\n"
-        f"**Rota que alimenta:** `{rota}`\n\n"
-        f"**O que o aceite cobra:** {aceite}\n\n"
-        f"**O que falta:** {falta}",
-        icon=":material/construction:",
-    )
-    st.markdown("**Como a faixa aparece, quando a tela existir:**")
-    st.markdown(
-        " ".join(
-            selo_html(f.band, nota=nota)
-            for f, nota in zip(FAIXAS.values(), (8, 34, 61, 88), strict=True)
-        ),
-        unsafe_allow_html=True,
-    )
-    st.caption(
-        "Os selos acima usam `frontend/components/faixas.py`. Rotulo, forma e "
-        "contraste ja estao conferidos por teste — a tela nova nao precisa "
-        "escolher cor, so usar o selo."
-    )
-
-
 def principal() -> None:
     """Monta a pagina."""
     st.set_page_config(page_title="SDCAC — painel", layout="wide")
@@ -201,33 +174,11 @@ def principal() -> None:
     if tela == "Execucao":
         tela_execucao(painel, execucao)
     elif tela == "Pessoas":
-        a_escrever(
-            "Pessoas",
-            f"/api/v1/runs/{execucao}/employees",
-            "a lista ordenada por nota, com a faixa de cada pessoa legivel sem "
-            "depender da cor.",
-            "nada na API. A rota responde; a tela e que falta.",
-        )
+        tela_pessoas(painel, execucao)
     elif tela == "Alertas":
-        a_escrever(
-            "Alertas",
-            f"/api/v1/runs/{execucao}/alerts",
-            "a fila de triagem, filtravel por faixa e periodo.",
-            "o gerador de eventos da S6. A semente de hoje tem dois funcionarios "
-            "e **ninguem na faixa `high`**, entao a fila de triagem nao tem o que "
-            "triar — e nao se inventa alerta para a tela parecer cheia.",
-        )
+        tela_alertas(painel, execucao)
     else:
-        a_escrever(
-            "Decomposicao do risco",
-            f"/api/v1/runs/{execucao}/events/{{event_id}}",
-            "**o aceite da S9 em pessoa:** leitor externo identifica em menos de "
-            "1 min por que um usuario esta em risco alto. Exige as cinco parcelas "
-            "visiveis — `c0`, `d1`, `d2`, `d3_conduct` e `d3_posture`, as duas da "
-            "D3 **separadas**, pela D-25 — e o `hits`, que traz o motivo em texto.",
-            "a tela. A rota ja devolve tudo: parcelas, nota e motivo escrito. "
-            "O que falta demonstrar e o caminho do risco alto, que depende da S6.",
-        )
+        tela_decomposicao(painel, execucao)
 
 
 if __name__ == "__main__":

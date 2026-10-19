@@ -54,3 +54,4 @@ Use o [modelo](_modelo.md) e adicione a página nova ao
 | 15/10/2026 | [Sessão 33](2026-10-15-sessao-33.md) | A D-02 fechou e quatro lugares do artigo continuavam pedindo escore SUS; a pergunta de pesquisa estava num bloco de citação, e era o que a conversão para `.docx` apagava |
 | 16/10/2026 | [Sessão 34](2026-10-16-sessao-34.md) | A página inicial do GitBook anunciava como abertas três decisões já fechadas: ela copiava à mão o estado que o quadro calcula. Os 34 relatórios saem da raiz da navegação |
 | 19/10/2026 | [Sessão 35](2026-10-19-sessao-35.md) | O esqueleto do painel entra: a exigência de contraste e de rótulo vira teste, e a IA persegue por cinco servidores um defeito que nunca existiu |
+| 19/10/2026 | [Sessão 36](2026-10-19-sessao-36.md) | As três telas analíticas entram; a decomposição mostra as cinco parcelas com as duas da D3 separadas, e nulo deixa de parecer zero |

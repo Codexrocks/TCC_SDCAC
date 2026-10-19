@@ -237,8 +237,8 @@ TCC_SDCAC/
 ├── database/         corp/ · ground_truth/ · sdcac/ — schema e migrações
 ├── backend/          api/ · models/ · services/ · main.py  ← falta
 ├── generator/        personas/ · calendario/ · cenarios/   ← falta (S6, Filipe)
-├── frontend/         components/ — faixas, contraste        ← esqueleto, 19/10
-│                     dashboard/ — cliente e navegação       ← telas: falta (S9, Filipe)
+├── frontend/         components/ — faixas, contraste, parcelas
+│                     dashboard/ — cliente, navegação e 4 telas  ← 19/10; revisão na S9
 ├── data/             sementes geradas, por run_id          ← falta
 ├── results/          graphs/ · tables/ — de onde sai todo número do artigo  ← falta
 │
