@@ -11,7 +11,7 @@ está o que o software faz com aquilo.
 |---|---|
 | Versão | 28/09/2026 — incorpora as decisões D-32 a D-36 |
 | Entra em | **S6 a S8** a versão 1; **S9 em diante** a versão 2 |
-| Não trata de | Telas, layout e navegação. O painel é a frente do **Filipe**, na S9, sob a [usabilidade](usabilidade.md) |
+| Não trata de | Telas, layout e navegação. O painel tem página própria em [o painel](painel.md), e a S9 — revisão, avaliação heurística e o que falta — é do **Filipe**, sob a [usabilidade](usabilidade.md) |
 
 ## Quem faz
 
@@ -19,7 +19,7 @@ está o que o software faz com aquilo.
 |---|---|
 | Motor de avaliação, executor do experimento, schema e API | **Davi** |
 | Gerador de eventos | **Filipe** (S6) |
-| Painel de inspeção em Streamlit | **Filipe** (S9) |
+| Painel de inspeção em Streamlit | Base escrita pelo **Davi** em 19/10; a **S9 é do Filipe** — ver [o painel](painel.md) |
 | Cenários e rótulos | **Yasmin** (D-06 e D-16) |
 
 ***
@@ -67,7 +67,7 @@ runner/        executor do experimento                 entrada sem HTTP
 backend/       api/ · models/ · services/ · main.py    adaptador HTTP
 database/      corp/ · ground_truth/ · sdcac/          schema e migrações
 generator/     personas/ · calendario/ · cenarios/     a peça da S6
-frontend/      dashboard/                              a peça da S9
+frontend/      components/ · dashboard/                 base em 19/10; S9 revisa
 ```
 
 **A regra de dependência, conferida no CI:** `detection/` não importa
