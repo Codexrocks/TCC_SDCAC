@@ -236,6 +236,7 @@ inicio = 2026-10-23
 fim = 2026-10-29
 pronto = false
 entregavel = "Dashboard Streamlit"
+andamento = "Base escrita em 19/10 pelo Davi com IA (#81, #82): quatro telas, a decomposição por dimensão com as duas parcelas da D3 separadas, e as duas exigências de usabilidade viraram teste. **Falta a revisão do Filipe, a avaliação heurística e o caminho do risco alto**, que depende do gerador da S6. Ver [o painel](painel.md)."
 criterio = "Leitor externo identifica em menos de 1 min por que um usuário está em risco alto · risco decomponível por dimensão"
 donos = ["Filipe"]
 
