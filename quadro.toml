@@ -104,9 +104,9 @@ registro = "entregas/tarefa-02.md"
 numero = 2
 titulo = "Referencial teórico"
 donos = ["Yasmin"]
-estado = "Escrito e versionado em 28/09 pela Yasmin — 4 subseções, ≈1.150 palavras, atrasado de S3 e S4. Faltam as 13 fontes confirmadas"
+estado = "Escrito pela Yasmin em 28/09 e reorganizado em 13/10 para a estrutura da 3ª reunião — 3 seções, 8 elementos do problema. As 13 fontes foram conferidas e entraram na lista em ABNT (#64)"
 pronto = false
-andamento = "Escrito e versionado em 28/09 pela Yasmin — 4 subseções, cerca de 1.150 palavras. **As 13 chamadas bibliográficas não foram confirmadas na fonte**, e é isso que falta para a seção poder entrar."
+andamento = "Reorganizado em 13/10 para a estrutura da 3ª reunião — problema por elementos, como a literatura enfrentou, metodologia que se extrai — sem fonte nova. **As 13 fontes foram conferidas e entraram em `referencias.md` em ABNT NBR 6023** (#64). Falta a Yasmin reler a reorganização e concordar com o que ficou atribuído a cada obra."
 semana = "S5"
 
 [[capitulo]]
