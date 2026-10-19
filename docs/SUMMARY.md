@@ -82,4 +82,5 @@
   * [2026-10-15 — Sessão 33: o artigo fica coerente consigo mesmo](relatorios/2026-10-15-sessao-33.md)
   * [2026-10-16 — Sessão 34: o GitBook para de copiar estado à mão](relatorios/2026-10-16-sessao-34.md)
   * [2026-10-19 — Sessão 35: o esqueleto do painel, e a cor deixa de ser promessa](relatorios/2026-10-19-sessao-35.md)
+* [2026-10-19 — Sessão 36: as três telas, e a decomposição que o aceite pede](relatorios/2026-10-19-sessao-36.md)
 * [Modelo de relatório](relatorios/_modelo.md)
