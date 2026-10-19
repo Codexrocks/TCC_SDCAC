@@ -16,6 +16,7 @@
 * [Arquitetura](arquitetura.md)
 * [Banco da corporação simulada](banco-simulado.md)
 * [O software de análise](software.md)
+* [O painel](painel.md)
 * [Usabilidade](usabilidade.md)
 
 ## Como trabalhamos
@@ -83,4 +84,5 @@
   * [2026-10-16 — Sessão 34: o GitBook para de copiar estado à mão](relatorios/2026-10-16-sessao-34.md)
   * [2026-10-19 — Sessão 35: o esqueleto do painel, e a cor deixa de ser promessa](relatorios/2026-10-19-sessao-35.md)
 * [2026-10-19 — Sessão 36: as três telas, e a decomposição que o aceite pede](relatorios/2026-10-19-sessao-36.md)
+* [2026-10-19 — Sessão 37: o painel entra na main, e ganha página para quem pega](relatorios/2026-10-19-sessao-37.md)
 * [Modelo de relatório](relatorios/_modelo.md)
