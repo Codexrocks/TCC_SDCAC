@@ -1,6 +1,8 @@
 # Processo de trabalho
 
-Regra geral: **simples o suficiente para ninguém esquecer.**
+Como as peças se encaixam. **O detalhe de cada regra mora em outro lugar**, e
+esta página aponta para ele em vez de repetir: regra escrita em dois lugares
+começa igual e termina diferente.
 
 ---
 
@@ -19,17 +21,20 @@ Regra geral: **simples o suficiente para ninguém esquecer.**
     └──────────────────┘
 ```
 
-- **GitHub é a fonte da verdade.** Documentação e código no mesmo lugar.
+- **GitHub é a fonte da verdade.** Documentação e código no mesmo lugar
 - **GitBook só lê.** Ele espelha a pasta `docs/` e publica o site. O caminho de
-  volta foi desligado: o GitBook reformata todo o Markdown ao exportar, e isso
-  não é configurável. Editar pelo site não chega ao repositório — o texto se
-  perde. Detalhe em
-  [Configuração, seção 7](configuracao.md#7-gitbook-e-a-main-protegida).
+  volta foi desligado porque o GitBook reformata todo o Markdown ao exportar, e
+  isso não é configurável: **editar pelo site não chega ao repositório, e o
+  texto se perde.** Por quê, em
+  [Configuração, seção 7](configuracao.md#7-gitbook-e-a-main-protegida)
 - **Documentação se escreve pelo GitHub**, por Pull Request. O
-  [Guia do GitHub](guia-github.md) mostra como fazer isso sem instalar nada,
-  editando o arquivo no navegador.
+  [Guia do GitHub](guia-github.md) mostra como, sem instalar nada
 - **Nada de documentação solta** em Word, Drive ou WhatsApp. Se não está em
-  `docs/`, não existe.
+  `docs/`, não existe
+
+A exceção é a pasta `artigo/`, a única em que o GitBook **escreve** de volta —
+para o artigo ser redigido como num editor de texto. É por isso que nenhum
+marcador de bloco gerado mora lá.
 
 ---
 
@@ -42,140 +47,76 @@ Regra geral: **simples o suficiente para ninguém esquecer.**
 4. git add . && git commit            commits pequenos e frequentes
 5. git push -u origin davi/docs/tema  suba
 6. abra o Pull Request                confira o checklist do template
-7. espere os checks verdes            o merge é seu, depois deles
+7. espere os checks verdes
 8. apague a branch
 ```
 
-### Nomes de branch
+**Branch:** `<autor>/<tipo>/<assunto>` — começa por quem trabalha, para dar para
+ver quem está com o quê sem abrir o log. Os autores aceitos são `davi`,
+`yasmin`, `filipe`, `claude` e `gitbook`, e a lista é a mesma de `AUTORES` em
+[`scripts/validar.py`](../scripts/validar.py) — um teste compara as duas, para
+que acrescentar autor no script e esquecer a página não passe despercebido.
 
-`<autor>/<tipo>/<assunto>` — o nome começa por quem está trabalhando, para dar
-para ver quem está com o quê sem abrir o log.
+**Commit:** `tipo: descrição no imperativo`, mais a declaração de IA.
 
-| Tipo | Para quê | Exemplo |
-|---|---|---|
-| `docs` | documentação e artigo | `yasmin/docs/referencial-teorico` |
-| `feat` | código novo | `davi/feat/motor-deteccao` |
-| `fix` | correção | `filipe/fix/faixa-risco-medio` |
-| `chore` | configuração, manutenção | `davi/chore/atualiza-dependencias` |
+Os tipos, os limites de tamanho e o que vale num PR empilhado estão em
+**[Padrões](padroes.md)**, que é onde essas regras moram. O `validar.py` confere
+todas elas.
 
-Autores: `davi` · `yasmin` · `filipe` · `claude` · `gitbook`. A lista é a mesma
-de `AUTORES`, em [`scripts/validar.py`](../scripts/validar.py), e um teste
-compara as duas. Detalhe em [Padrões](padroes.md#branch).
+O que vale no merge, em uma linha cada:
 
-### Mensagens de commit
-
-`tipo: descrição curta em português, no imperativo`
-
-```
-docs: adiciona seção sobre SIEM e SOC
-feat: cria endpoint de ingestão de eventos
-fix: ajusta peso da regra de força bruta
-chore: adiciona dependência do Pandas
-```
-
-### Regras de merge
-
-- PR sempre para `main`
-- **Sem aprovação de outra pessoa** — só o Davi opera o repositório, e o
-  GitHub não deixa ninguém aprovar o próprio PR. O **trabalho** continua sendo
-  de três: ver [cronograma](cronograma.md#como-o-trabalho-chega-ao-repositório)
-- Checks **Validação** e **Governança** verdes
-- Arquivo de regra ou de checagem: **24 h de PR aberto** e a seção
-  `Arquivo protegido` preenchida (ver [Padrões](padroes.md))
-- **Só o Davi executa o merge** — trava do GitHub, não combinado
-- Sempre **Squash and merge**, e é a única opção que o GitHub oferece
-- Branch apagada depois do merge
+- PR sempre para `main`, com **Validação** e **Governança** verdes
+- **Sem aprovação de outra pessoa** — não há outra pessoa, e o GitHub não deixa
+  ninguém aprovar o próprio PR. O **trabalho** continua sendo de três: ver
+  [cronograma](cronograma.md#como-o-trabalho-chega-ao-repositório)
+- **Só o Davi executa o merge**, e **sempre Squash and merge** — as duas são
+  travas do GitHub, não combinados
+- Arquivo de regra ou de checagem espera **24 h** e preenche a seção
+  `Arquivo protegido`
 
 ---
 
 ## 3. Configuração do repositório
 
-Configuração única, feita pelo Davi.
+Feita uma vez, pelo Davi, e **concluída** desde 03/09/2026:
 
-**a) Tornar o repositório público** — `Settings → General → Danger Zone → Change visibility`
+- [x] Repositório **público** — no plano gratuito, regra de branch em
+      repositório privado de organização é recurso pago; em público é gratuita.
+      Sem isso a proteção da `main` dependeria de disciplina, e disciplina não
+      aparece no log da banca
+- [x] Dois rulesets ativos — `Proteção da main` e `Merge restrito ao líder`
+- [x] Secret `CLAUDE_CODE_OAUTH_TOKEN` cadastrado
+- [x] Acesso: **só o Davi tem escrita.** Yasmin e Filipe tiveram papel *Write*
+      entre 03/09 e 23/09/2026; hoje produzem fora e ele versiona
 
-Não é só preferência: no plano gratuito, **regra de branch em repositório
-privado de organização é recurso pago**. Em repositório público é gratuita. Sem
-isso, não há como impedir de fato um push direto na `main`.
+O passo a passo de cada item, com os campos exatos, para conferir ou refazer,
+está em **[Configuração passo a passo](configuracao.md)** — inclusive a
+distinção entre o `gitbook-docs.yaml` da raiz e o `docs/.gitbook.yaml`, que é o
+que gera o erro `expected "site" to be defined`.
 
-O plano do TCC já prevê o repositório como ativo de portfólio profissional, e o
-site do GitBook já é público — então abrir o código não muda a exposição.
-
-**b) Proteger a `main`** — dois rulesets, ambos `Active`:
-
-- [x] `Proteção da main` — PR obrigatório, checks **Validação** e
-      **Governança**, sem force push, sem deleção, só *Squash and merge*. Sem
-      bypass para ninguém. A exigência de aprovação saiu em 23/09/2026, quando
-      a operação do repositório passou a ser de uma pessoa
-- [x] `Merge restrito ao líder` — só o dono da organização atualiza a `main`
-
-**c) Adicionar o secret do assistente** — `Settings → Secrets and variables → Actions`
-
-- [x] `CLAUDE_CODE_OAUTH_TOKEN` — cadastrado em 03/09/2026
-
-**d) Dar acesso à equipe** — `Settings → Collaborators and teams`
-
-- [x] Yasmin (`@Yas2046`) e Filipe (`@FilipeF4guiar`) tiveram papel **Write**
-      entre 03/09 e 23/09/2026. Hoje **só o Davi tem acesso de escrita** — os
-      dois produzem fora e ele versiona. Conferido contra o repositório, não
-      contra a memória: `gh api repos/Codexrocks/TCC_SDCAC/collaborators`
-      devolve só `DaviSoaresDilly`
-
-Tudo isso está feito. O passo a passo de cada item, para conferir ou refazer,
-está em [Configuração passo a passo](configuracao.md).
-
-### Por que o repositório precisou ser público
-
-No plano gratuito, regra de branch em repositório **privado** de organização é
-recurso pago. Em repositório público é gratuita. Sem isso, não haveria como
-impedir de fato um push direto na `main` — a regra dependeria de disciplina, e
-disciplina não aparece no log da banca.
+> **Toda página nova precisa entrar no `docs/SUMMARY.md`.** Fora dele, ela não
+> existe para o GitBook — e o `validar.py` reprova.
 
 ---
 
-## 4. GitBook — configuração inicial
+## 4. Uso de IA
 
-O passo a passo com os campos exatos está em
-[Configuração passo a passo](configuracao.md#1-gitbook-git-sync).
+O assistente é usado o tempo todo, e isso é declarado em cada commit e em cada
+Pull Request — conferido por máquina, não por disciplina. As regras que os
+assistentes leem estão em [`AGENTS.md`](../AGENTS.md); a política escrita para
+gente, em **[Uso de IA](uso-de-ia.md)**.
 
-Dois arquivos, com papéis diferentes — confundir os dois é o que gera o erro
-`expected "site" to be defined`:
-
-| Arquivo | Onde | Configura |
-|---|---|---|
-| [`gitbook-docs.yaml`](../gitbook-docs.yaml) | raiz | o **site** e qual pasta alimenta cada espaço |
-| `docs/.gitbook.yaml` | dentro de `docs/` | **o espaço**: página inicial e índice |
-
-No Git Sync, deixe **Project directory vazio** — o `gitbook-docs.yaml` está na
-raiz do repositório. A **branch é `gitbook/docs/documentacao`**, não a `main`:
-ela é um espelho descartável, forçado a cada merge, e nada volta dela.
-
-> O plano Pro está em **trial até 17/09/2026**. Confira o que muda no plano
-> gratuito antes dessa data.
-
-> **Toda página nova precisa entrar no `docs/SUMMARY.md`.**
-> Se não estiver lá, não aparece no GitBook.
+Mudança nas regras ou nas checagens espera **24 h** de PR aberto e se explica na
+seção `Arquivo protegido` — para que nem a IA nem a pressa afrouxem a coleira na
+mesma sentada em que a mudança foi escrita.
 
 ---
-
-## 4.1 Uso de IA
-
-O assistente de IA é usado o tempo todo, e isso é declarado em cada commit e
-em cada Pull Request — conferido por máquina, não por disciplina. As regras que
-os assistentes leem estão em [`AGENTS.md`](../AGENTS.md); a política escrita
-para gente está em [Uso de IA](uso-de-ia.md).
-
-Mudança nas regras ou nas checagens automáticas espera **24 h** de Pull Request
-aberto e se explica na seção `Arquivo protegido`, para que nem a IA nem a pressa
-afrouxem a coleira na mesma sentada em que a mudança foi escrita.
 
 ## 5. O Claude no projeto
 
-O assistente atua em dois lugares:
-
 **No GitHub** — marque `@claude` em qualquer issue ou Pull Request e descreva o
 que precisa. Ele lê o repositório, responde no thread e, quando fizer sentido,
-abre um PR com a alteração.
+abre um PR.
 
 ```
 @claude revise o referencial teórico e aponte o que falta de citação ABNT
@@ -184,21 +125,21 @@ abre um PR com a alteração.
 
 > **Escrever `@claude` aciona o assistente — sempre.** Inclusive quando você só
 > está explicando a alguém que ele existe: o workflow dispara em qualquer
-> comentário que contenha essa palavra, e cada disparo consome a assinatura.
-> Para citar sem chamar, escreva "o assistente" ou quebre a menção
-> (`@ claude`).
+> comentário que contenha a palavra, e cada disparo consome a assinatura. Para
+> citar sem chamar, escreva "o assistente" ou quebre a menção (`@ claude`).
 
-**No GitBook** — como o GitBook espelha o `docs/`, tudo que o Claude escreve na
-documentação aparece lá automaticamente. Ele não precisa de acesso separado.
+**No GitBook** — como o GitBook espelha o `docs/`, o que o Claude escreve na
+documentação aparece lá sozinho. Ele não precisa de acesso separado.
 
 ### Relatórios
 
-A cada sessão de trabalho com o Claude, é gerado um relatório em
-[`docs/relatorios/`](relatorios/README.md) com: o que foi pedido, o que foi
-respondido, o que mudou no repositório e o que ficou pendente.
+A cada sessão de trabalho é gravado um relatório em
+[`docs/relatorios/`](relatorios/README.md): o que foi pedido, o que foi feito,
+as decisões com o motivo de cada uma, **os erros da própria IA** e as pendências
+com responsável e prazo.
 
-**Toda segunda de manhã**, além disso, um workflow abre sozinho um PR com o
-relatório da semana. Ele funciona em duas etapas, e a separação é proposital:
+**Toda segunda de manhã** um workflow abre sozinho um PR com o relatório da
+semana, em duas etapas, e a separação é proposital:
 
 1. [`scripts/atividade.py`](../scripts/atividade.py) **conta** — PRs abertos e
    mergeados, revisões e commits por pessoa, PRs parados. Sem IA no meio, então
@@ -206,7 +147,7 @@ relatório da semana. Ele funciona em duas etapas, e a separação é proposital
 2. o assistente **lê esses números** e escreve a leitura da semana, cruzando com
    o [cronograma](cronograma.md)
 
-Quem quiser conferir um número roda:
+Para conferir um número:
 
 ```bash
 python3 scripts/atividade.py --dias 7
@@ -215,5 +156,5 @@ python3 scripts/atividade.py --dias 7
 Precisa de um token do GitHub em `GITHUB_TOKEN`. O relatório também roda sob
 demanda pelo botão *Run workflow*, na aba **Actions**.
 
-Serve para dois propósitos: ninguém perde o fio da meada, e a banca tem prova
-documentada do processo de desenvolvimento.
+Serve a dois propósitos: ninguém perde o fio da meada, e a banca tem prova
+documentada do processo.
