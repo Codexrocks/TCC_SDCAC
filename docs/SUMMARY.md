@@ -81,4 +81,5 @@
   * [2026-10-15 — Sessão 32: o contrato ganha exemplo real](relatorios/2026-10-15-sessao-32.md)
   * [2026-10-15 — Sessão 33: o artigo fica coerente consigo mesmo](relatorios/2026-10-15-sessao-33.md)
   * [2026-10-16 — Sessão 34: o GitBook para de copiar estado à mão](relatorios/2026-10-16-sessao-34.md)
-  * [Modelo de relatório](relatorios/_modelo.md)
+  * [2026-10-19 — Sessão 35: o esqueleto do painel, e a cor deixa de ser promessa](relatorios/2026-10-19-sessao-35.md)
+* [Modelo de relatório](relatorios/_modelo.md)

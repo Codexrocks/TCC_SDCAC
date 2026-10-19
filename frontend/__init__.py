@@ -1,0 +1,1 @@
+"""O painel do SDCAC."""
