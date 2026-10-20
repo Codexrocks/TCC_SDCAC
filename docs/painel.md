@@ -99,12 +99,17 @@ API**: a execução 4, preset C3, semente 1, validadas contra o contrato por
 - [ ] **O critério de aceite não é demonstrável** no caminho do risco alto: não
       há ninguém em `high`. Depende do **gerador de eventos da S6** ·
       **Filipe**
-- [ ] **Avaliação heurística**, que a [usabilidade](usabilidade.md) seção 6.2
-      marca para a S9 · **Filipe**
-- [ ] **Teste com usuários na S11**, onde o "menos de 1 min" deixa de ser
-      estimativa e vira medida · **Filipe**
+- [ ] **Avaliação heurística**, que a [usabilidade](usabilidade.md) seção 6.1
+      marca para a S9. É feita por quem constrói, **sem participantes** ·
+      **Filipe**
 - [ ] **A tela de Métricas não existe** — `/metrics` responde vazio porque
       nenhum avaliador gravou métrica ainda · **Davi**
+
+> **Não há teste com usuários, e não é esquecimento.** A **D-02** fechou em
+> 14/10/2026 pela opção A: o painel é instrumento de análise, não objeto de um
+> segundo experimento. Sem participantes, o "menos de 1 min" do critério de
+> aceite continua sendo julgado por quem constrói — e é por isso que a
+> decomposição visível importa tanto.
 
 ## O que o CI não cobre
 

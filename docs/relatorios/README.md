@@ -56,3 +56,4 @@ Use o [modelo](_modelo.md) e adicione a página nova ao
 | 19/10/2026 | [Sessão 35](2026-10-19-sessao-35.md) | O esqueleto do painel entra: a exigência de contraste e de rótulo vira teste, e a IA persegue por cinco servidores um defeito que nunca existiu |
 | 19/10/2026 | [Sessão 36](2026-10-19-sessao-36.md) | As três telas analíticas entram; a decomposição mostra as cinco parcelas com as duas da D3 separadas, e nulo deixa de parecer zero |
 | 19/10/2026 | [Sessão 37](2026-10-19-sessao-37.md) | O conflito do empilhamento é simulado antes de existir; e a passagem para o Filipe não estava pronta — quatro buracos, três fechados |
+| 19/10/2026 | [Sessão 38](2026-10-19-sessao-38.md) | O PR #79 havia sido mergeado na branch do #78 e nada dele chegou à `main`; recuperado do commit órfão. O que falta passa a estar dividido por frente |

@@ -5,6 +5,7 @@ equipe o que esta atrasado. Se o calculo de prazo quebrar, a pagina continua
 bonita, continua sendo gerada, e passa a mentir em silencio — que e exatamente o
 defeito que ela nasceu para corrigir.
 """
+
 import datetime
 
 import pytest
@@ -27,11 +28,11 @@ def dados():
 @pytest.mark.parametrize(
     "prazo, esperada",
     [
-        (datetime.date(2026, 9, 25), "atrasado"),   # ontem
-        (datetime.date(2026, 9, 26), "a-vencer"),   # hoje ainda da
-        (datetime.date(2026, 10, 3), "a-vencer"),   # exatamente 7 dias
-        (datetime.date(2026, 10, 4), "depois"),     # 8 dias ja e depois
-        (None, "depois"),                           # sem prazo nao desaparece
+        (datetime.date(2026, 9, 25), "atrasado"),  # ontem
+        (datetime.date(2026, 9, 26), "a-vencer"),  # hoje ainda da
+        (datetime.date(2026, 10, 3), "a-vencer"),  # exatamente 7 dias
+        (datetime.date(2026, 10, 4), "depois"),  # 8 dias ja e depois
+        (None, "depois"),  # sem prazo nao desaparece
     ],
 )
 def test_coluna_de_prazo(prazo, esperada):
@@ -103,7 +104,9 @@ def test_resolver_prazo_por_data(dados):
 def test_resolver_prazo_por_semana(dados):
     """Prazo "fecha na S8" vira o ultimo dia da S8, nao o primeiro."""
     semanas = quadro.semanas_por_id(dados)
-    assert quadro.resolver_prazo({"prazo_semana": "S8"}, semanas) == semanas["S8"]["fim"]
+    assert (
+        quadro.resolver_prazo({"prazo_semana": "S8"}, semanas) == semanas["S8"]["fim"]
+    )
 
 
 def test_resolver_prazo_inexistente(dados):
@@ -151,7 +154,9 @@ def test_injetar_sem_marcador_falha():
 def test_todo_bloco_declarado_tem_desenhista():
     for nomes in quadro.BLOCOS.values():
         for nome in nomes:
-            assert nome in quadro.DESENHISTAS, f"bloco {nome!r} sem funcao que o desenhe"
+            assert nome in quadro.DESENHISTAS, (
+                f"bloco {nome!r} sem funcao que o desenhe"
+            )
 
 
 # ---------------------------------------------------------------------------
@@ -256,8 +261,9 @@ def test_marcadores_batem_com_o_indice(dados):
 def test_marcador_sem_linha_e_apontado(dados):
     """Foi o caso de 26/09: marcador indexado na secao errada, contagem cega."""
     magro = dict(dados)
-    magro["citacao"] = [c for c in dados["citacao"]
-                        if not c["onde"].startswith("docs/usabilidade.md")]
+    magro["citacao"] = [
+        c for c in dados["citacao"] if not c["onde"].startswith("docs/usabilidade.md")
+    ]
     assert quadro.checar_marcadores_no_indice(magro), "marcador orfao tem de acusar"
 
 
@@ -305,3 +311,133 @@ def test_sem_codigo_ignora_mencao_ao_marcador():
     """Explicar o marcador nao e usa-lo — a pagina de regra nao vira pendencia."""
     assert "FALTA" not in quadro.sem_codigo("use `FALTA CITAÇÃO` na linha")
     assert "FALTA" in quadro.sem_codigo("<!-- FALTA CITAÇÃO --> conferir")
+
+
+# ---------------------------------------------------------------------------
+# O bloco de pendencias por pessoa, na pagina inicial
+# ---------------------------------------------------------------------------
+
+# Data propria destes casos: nao reutiliza o HOJE do topo, que é de 26/09 e
+# sustenta os testes de fronteira de prazo.
+HOJE_PENDENCIAS = datetime.date(2026, 10, 16)
+
+
+def _dados_falsos(decisoes):
+    """O minimo que o desenhista le, para o caso nao depender do quadro.toml real."""
+    return {"decisao": decisoes, "semana": []}
+
+
+def test_a_pendencia_aparece_sob_cada_dono():
+    """Decisao de tres donos e pendencia dos tres, e nao de um escolhido.
+
+    Era o comportamento da lista escrita a mao, e quem a lia procurava o proprio
+    nome. Agrupar por dono unico esconderia a D-15 de duas das tres pessoas.
+    """
+    bloco = quadro.bloco_pendencias_por_pessoa(
+        _dados_falsos(
+            [
+                {
+                    "id": "D-15",
+                    "titulo": "Critério a priori",
+                    "estado": "aberta",
+                    "donos": ["Davi", "Yasmin", "Filipe"],
+                }
+            ]
+        ),
+        HOJE_PENDENCIAS,
+    )
+    for pessoa in ("Davi", "Yasmin", "Filipe"):
+        assert f"**{pessoa}**" in bloco
+    assert bloco.count("D-15") == 3
+
+
+def test_decisao_fechada_nao_entra():
+    """O par do teste acima: o bloco precisa de fato filtrar.
+
+    Foi o defeito que motivou gerar esta secao — a pagina anunciava a D-02, a
+    D-12 e a D-14 como abertas depois de as tres fecharem.
+    """
+    bloco = quadro.bloco_pendencias_por_pessoa(
+        _dados_falsos(
+            [
+                {
+                    "id": "D-02",
+                    "titulo": "Painel",
+                    "estado": "fechada",
+                    "donos": ["Filipe"],
+                }
+            ]
+        ),
+        HOJE_PENDENCIAS,
+    )
+    assert "D-02" not in bloco
+    assert "Nenhuma decisao aberta" in bloco
+
+
+def test_dono_fora_da_equipe_nao_desaparece():
+    """Pessoa nova no projeto nao pode sumir da pagina inicial.
+
+    A ordem de exibicao vem de uma constante. Se a constante fosse tambem o
+    filtro, alguem que entrasse na equipe ficaria invisivel ate alguem lembrar
+    de editar o script — defeito silencioso, que e o pior tipo.
+    """
+    bloco = quadro.bloco_pendencias_por_pessoa(
+        _dados_falsos(
+            [
+                {
+                    "id": "D-99",
+                    "titulo": "Alguma coisa",
+                    "estado": "aberta",
+                    "donos": ["Convidado"],
+                }
+            ]
+        ),
+        HOJE_PENDENCIAS,
+    )
+    assert "**Convidado**" in bloco
+    assert "D-99" in bloco
+
+
+def test_cada_nome_tem_linha_em_branco_antes_da_tabela():
+    """Sem a linha em branco, o Markdown engole o nome dentro da tabela anterior.
+
+    Foi exatamente o que a primeira versao deste bloco fez, e nenhum check
+    pegaria: o arquivo continuaria valido, so renderizaria errado no GitBook.
+    """
+    bloco = quadro.bloco_pendencias_por_pessoa(
+        _dados_falsos(
+            [
+                {"id": "D-1", "titulo": "Um", "estado": "aberta", "donos": ["Davi"]},
+                {
+                    "id": "D-2",
+                    "titulo": "Dois",
+                    "estado": "aberta",
+                    "donos": ["Yasmin"],
+                },
+            ]
+        ),
+        HOJE_PENDENCIAS,
+    )
+    linhas = bloco.splitlines()
+    for i, linha in enumerate(linhas):
+        if linha.startswith("**") and i > 0:
+            assert linhas[i - 1].strip() == "", (
+                f"falta linha em branco antes de {linha}"
+            )
+        if linha.startswith("**"):
+            assert linhas[i + 1].strip() == "", (
+                f"falta linha em branco depois de {linha}"
+            )
+
+
+def test_a_pagina_inicial_tem_os_marcadores(dados):
+    """O bloco so chega ao GitBook se os marcadores existirem na pagina.
+
+    Marcador apagado por engano — numa resolucao de conflito, por exemplo, que
+    foi o que aconteceu com o `capitulos` em 28/09 — faria o bloco deixar de ser
+    escrito sem erro nenhum.
+    """
+    texto = (quadro.RAIZ / "docs" / "README.md").read_text(encoding="utf-8")
+    assert "<!-- QUADRO:inicio pendencias-por-pessoa -->" in texto
+    assert "<!-- QUADRO:fim pendencias-por-pessoa -->" in texto
+    assert "docs/README.md" in quadro.BLOCOS

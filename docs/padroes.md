@@ -122,18 +122,32 @@ de disciplina: o GitHub recusa.
 ### PR empilhado
 
 Às vezes um PR precisa sair de outro que ainda não entrou — porque os dois mexem
-no mesmo arquivo. Nesse caso a base do segundo é a branch do primeiro, e o
-GitHub reaponta para a `main` sozinho quando o primeiro é mergeado.
+no mesmo arquivo. Nesse caso a base do segundo é a branch do primeiro.
 
-Duas coisas para saber:
+> ⚠️ **Neste repositório o GitHub não reaponta o segundo para a `main`, e isso
+> já custou um PR inteiro.** Em 17/10/2026 o **#79** foi mergeado na branch do
+> **#78** em vez da `main`: o #78 entrou por *Squash and merge*, que **não
+> atualiza a branch de origem** — ela é apagada. O #79 ficou com a base num ramo
+> morto, o GitHub o marcou como *merged*, e **nada do conteúdo dele chegou à
+> `main`**. A perda só apareceu três dias depois, por acaso.
+>
+> O conteúdo foi recuperado do commit órfão, que ainda estava no repositório
+> local. Se a coleta de lixo do git tivesse passado antes, teria sido reescrito
+> do zero.
 
+Três coisas para saber:
+
+- **Depois de mergear o de baixo, confira a base do de cima** antes de mergeá-lo,
+  e reaponte para `main` à mão se for preciso. É o passo que faltou em 17/10
 - **Merge o de baixo primeiro.** Fora de ordem, o segundo leva junto commits que
-  ninguém revisou naquele contexto.
+  ninguém revisou naquele contexto
 - Os rulesets protegem **só a `main`**. O check **Validação** roda em todo PR,
   mas as travas de merge só existem na `main` — então PR empilhado depende de
-  disciplina.
+  disciplina, e foi a disciplina que falhou
 
-Não é para virar hábito. Dois PRs empilhados já são o limite.
+**Não é para virar hábito, e a recomendação mudou:** prefira esperar o primeiro
+entrar na `main` e sair dela. Empilhar só quando a espera custar mais que o
+risco — e, se empilhar, dois já são o limite.
 
 ### Quando é preciso esperar e se explicar
 

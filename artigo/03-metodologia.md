@@ -19,7 +19,7 @@
 > entraram em [`referencias.md`](referencias.md), que só aceita entrada depois
 > de alguém abrir a obra.
 >
-> Os quatro blocos **A escrever** abaixo são lacunas conhecidas, com dono e
+> Os três blocos **A escrever** abaixo são lacunas conhecidas, com dono e
 > prazo. Estão visíveis de propósito: comentário HTML desaparece quando o
 > GitBook salva.
 
