@@ -51,20 +51,54 @@ operacionalização das duas métricas estão no [plano](plano.md).
 
 ## O que está esperando decisão
 
-O trabalho do Davi está travado por pendência de escopo, e não o contrário.
-Duas páginas dizem o que falta, e elas não se sobrepõem:
+O trabalho do Davi está travado por pendência de escopo, e não o contrário. A
+lista abaixo **é gerada** a partir do [`quadro.toml`](../quadro.toml) — ela não é
+escrita à mão, e por isso não envelhece. Até 15/10/2026 era escrita à mão, e
+anunciava como abertas três decisões já fechadas.
 
-| O que | Onde |
-|---|---|
-| Decisões abertas, de quem é cada uma e quanto falta para o prazo | **[Quadro](quadro.md)** — recalculado contra a data de hoje |
-| Parâmetros do gerador ainda sem valor, de **P15** a **P23** | [Banco da corporação simulada](banco-simulado.md), seção 10 |
+<!-- QUADRO:inicio pendencias-por-pessoa -->
+<!-- Bloco gerado por scripts/quadro.py a partir de quadro.toml. Editar aqui nao adianta: a proxima execucao reescreve. -->
 
-Esta página não repete essa lista de propósito. Até 15/10/2026 ela repetia, e
-anunciava como abertas três decisões já fechadas: cópia manual de estado
-apodrece, e foi o mesmo defeito que fez o cronograma dizer "amanhã" três dias
-depois do prazo.
+**Davi** — 4 pendências
 
-O histórico de tudo que já foi decidido está no
+| ID | Decisão | Estado | Situação |
+|---|---|---|---|
+| D-05 | Ablação em quatro configurações (C0 a C3) | A confirmar | ⚠️ Atrasado há 18 dias |
+| D-07 | Caneta rotativa por seção | Aberta | 🗓️ Sem prazo |
+| D-15 | Critério de relevância declarado a priori | Aberta | ⚠️ Atrasado há 18 dias |
+| D-43 | Pesos de integração das dimensões na nota final | A confirmar | ⏳ Vence em 3 dias |
+
+**Yasmin** — 7 pendências
+
+| ID | Decisão | Estado | Situação |
+|---|---|---|---|
+| D-06 | Cenários de contexto (B) e longitudinais (L) | Aberta | ⚠️ Atrasado há 18 dias |
+| D-07 | Caneta rotativa por seção | Aberta | 🗓️ Sem prazo |
+| D-09 | Pesos preliminares e análise de sensibilidade | Aberta | ⏳ Vence em 3 dias |
+| D-15 | Critério de relevância declarado a priori | Aberta | ⚠️ Atrasado há 18 dias |
+| D-16 | Controle negativo longitudinal | Aberta | ⚠️ Atrasado há 18 dias |
+| D-19 | Vertente LGPD e ISO/IEC 27001 | Aberta | ⚠️ Atrasado há 18 dias |
+| D-43 | Pesos de integração das dimensões na nota final | A confirmar | ⏳ Vence em 3 dias |
+
+**Filipe** — 3 pendências
+
+| ID | Decisão | Estado | Situação |
+|---|---|---|---|
+| D-07 | Caneta rotativa por seção | Aberta | 🗓️ Sem prazo |
+| D-10 | Isolation Forest como benchmark opcional | A confirmar | 🗓️ Em 17 dias |
+| D-15 | Critério de relevância declarado a priori | Aberta | ⚠️ Atrasado há 18 dias |
+
+<!-- QUADRO:fim pendencias-por-pessoa -->
+
+Os parâmetros do gerador ainda sem valor — de **P15** a **P23** — não entram
+aqui: eles vivem no [banco da corporação simulada](banco-simulado.md), seção 10.
+
+A tabela acima são as **decisões**. O que falta de trabalho — o gerador, os
+cenários, a avaliação heurística, as seções do artigo — está dividido em
+**[o que falta](o-que-falta.md)**, com o critério de aceite de cada frente.
+
+O mesmo estado agrupado por **urgência**, e não por pessoa, está no
+[quadro](quadro.md). O histórico do que já foi decidido está no
 [registro de decisões](decisoes.md).
 
 ## Onde fica cada coisa
@@ -80,6 +114,7 @@ O histórico de tudo que já foi decidido está no
 | Ver o que o gerador precisa produzir | [Banco da corporação simulada](banco-simulado.md) |
 | Ver o que o software faz com os dados | [O software de análise](software.md) |
 | Ver o estado de tudo, contra a data de hoje | [Quadro](quadro.md) |
+| Saber o que falta e de quem é | [O que falta](o-que-falta.md) |
 | Saber como o artigo é formatado | [Formato do artigo](formato-do-artigo.md) |
 | Ler o que já está escrito do artigo | [`artigo/`](../artigo/README.md) — Introdução, Referencial teórico e Metodologia |
 | Ver o material que a equipe entregou | [Insumos das encomendas](insumos/README.md) |
