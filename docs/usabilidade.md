@@ -159,6 +159,17 @@ dentro dos gráficos. Amarelo sobre branco é a armadilha clássica, e reprova.
 Princípio sem medição é alegação. Três instrumentos, em momentos diferentes do
 [cronograma](cronograma.md).
 
+> ⚠️ **Dos três, só a avaliação heurística da § 6.1 é aplicada neste trabalho.**
+> A **D-02** fechou em 14/10/2026 pela opção A: o painel é **instrumento de
+> análise**, e não objeto de um segundo experimento. Sem participantes, o teste
+> com usuários da § 6.2 e o SUS da § 6.3 **não acontecem** — e a § 3.9 da
+> [Metodologia](../artigo/03-metodologia.md) declara isso ao leitor, junto da
+> declaração de que nenhum dado de pessoa real é coletado.
+>
+> As duas seções ficam escritas de propósito: elas descrevem método com fonte
+> conferida, alimentam o Referencial Teórico e dizem o que seria feito se o
+> escopo mudasse. **Não são tarefa de ninguém.**
+
 ### 6.1 Avaliação heurística — durante a construção (S9)
 
 **Método:** Nielsen e Molich (1990). Cada avaliador percorre a interface sozinho
@@ -182,7 +193,7 @@ com um só, a maior parte dos problemas passa batido.
 **Saída:** tabela `heurística violada | onde | severidade | correção` em
 `docs/relatorios/`.
 
-### 6.2 Teste com usuários — S11, junto dos cenários
+### 6.2 Teste com usuários — não aplicado (D-02)
 
 Aproveitamos os seis cenários de teste que já existem em
 [`arquitetura.md`](arquitetura.md). O participante recebe a tarefa
@@ -203,7 +214,7 @@ disparou") e trabalha sem ajuda.
 > <!-- FALTA CITAÇÃO --> conferir a formulação exata e a porcentagem na fonte
 > antes de citar o número no artigo.
 
-### 6.3 SUS — satisfação, ao fim de cada rodada
+### 6.3 SUS — não aplicado (D-02)
 
 **Instrumento:** System Usability Scale, de **John Brooke (1996)**, publicado em
 *Usability Evaluation in Industry*.
@@ -268,8 +279,8 @@ referencial cobrir SIEM e SOC.
 |---|---|---|
 | Referencial teórico | Seções 1 a 5 e 7 desta página — princípios, norma e usabilidade em segurança | Yasmin + Filipe |
 | Metodologia | Seção 6 — os três instrumentos e como foram aplicados | Filipe |
-| Resultados | Escores SUS, tabela de violações heurísticas, métricas de tarefa | Filipe |
-| Discussão | Fadiga de alerta cruzando taxa de falsos positivos com satisfação | Todos |
+| Resultados | Tabela de violações heurísticas da § 6.1. **Sem escore SUS e sem métrica de tarefa**, pela D-02 | Filipe |
+| Discussão | Fadiga de alerta cruzando taxa de falsos positivos com a operabilidade do volume de alertas | Todos |
 
 ---
 
