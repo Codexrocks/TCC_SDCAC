@@ -26,12 +26,12 @@ fechada fica enterrada.
 
 | ID | Decisão | Proposta | Dono | Prazo | Situação |
 |---|---|---|---|---|---|
-| D-06 | Cenários de contexto (B) e longitudinais (L) | Adotados; desenho detalhado na S5 | Yasmin | 01/10/2026 | ⚠️ Atrasado há 21 dias |
+| D-06 | Cenários de contexto (B) e longitudinais (L) | Adotados; desenho detalhado na S5 | Yasmin | 01/10/2026 | ⚠️ Atrasado há 22 dias |
 | D-07 | Caneta rotativa por seção | Uma pessoa redige, duas revisam, a caneta gira. Registrada pelo Davi quando Yasmin e Filipe confirmarem | Davi, Yasmin, Filipe | — | 🗓️ Sem prazo |
-| D-09 | Pesos preliminares e análise de sensibilidade | Valores preliminares; sensibilidade na S12 | Yasmin | S8 | ⏳ Vence hoje |
-| D-15 | Critério de relevância declarado a priori | Origem do número decidida em 14/10: argumento operacional — quantos alertas falsos um analista absorve por turno. Falta o valor, e ele perde o sentido no dia em que a primeira execução for registrada | Davi, Yasmin, Filipe | 01/10/2026 | ⚠️ Atrasado há 21 dias |
-| D-16 | Controle negativo longitudinal | Acrescentar cenário de escalada legítima aos cenários de teste | Yasmin | 01/10/2026 | ⚠️ Atrasado há 21 dias |
-| D-19 | Vertente LGPD e ISO/IEC 27001 | Entra como limitação e trabalho futuro na S13 | Yasmin | 01/10/2026 | ⚠️ Atrasado há 21 dias |
+| D-09 | Pesos preliminares e análise de sensibilidade | Valores preliminares; sensibilidade na S12 | Yasmin | S8 | ⚠️ Atrasado há 1 dia |
+| D-15 | Critério de relevância declarado a priori | Origem do número decidida em 14/10: argumento operacional — quantos alertas falsos um analista absorve por turno. Falta o valor, e ele perde o sentido no dia em que a primeira execução for registrada | Davi, Yasmin, Filipe | 01/10/2026 | ⚠️ Atrasado há 22 dias |
+| D-16 | Controle negativo longitudinal | Acrescentar cenário de escalada legítima aos cenários de teste | Yasmin | 01/10/2026 | ⚠️ Atrasado há 22 dias |
+| D-19 | Vertente LGPD e ISO/IEC 27001 | Entra como limitação e trabalho futuro na S13 | Yasmin | 01/10/2026 | ⚠️ Atrasado há 22 dias |
 <!-- QUADRO:fim decisoes-abertas -->
 
 ## Adotadas, a confirmar
@@ -41,9 +41,9 @@ fechada fica enterrada.
 
 | ID | Decisão | Proposta | Dono | Prazo | Situação |
 |---|---|---|---|---|---|
-| D-05 | Ablação em quatro configurações (C0 a C3) | Confirmar no M2 | Davi | 01/10/2026 | ⚠️ Atrasado há 21 dias |
-| D-10 | Isolation Forest como benchmark opcional | Cortável na S10, se as métricas estiverem em risco | Filipe | S10 | 🗓️ Em 14 dias |
-| D-43 | Pesos de integração das dimensões na nota final | Um conjunto só de pesos para C1, C2 e C3 — D1 1,0; D2 1,0; conduta 1,0; postura 0,5 — e a C0 sem ponderação nenhuma. Peso próprio por configuração faria a tabela de ablação medir duas coisas ao mesmo tempo: a dimensão acrescentada e o peso trocado. A postura entra com metade porque é estado, e não ação. Valores preliminares, sujeitos à análise de sensibilidade da D-09 | Davi, Yasmin | S8 | ⏳ Vence hoje |
+| D-05 | Ablação em quatro configurações (C0 a C3) | Confirmar no M2 | Davi | 01/10/2026 | ⚠️ Atrasado há 22 dias |
+| D-10 | Isolation Forest como benchmark opcional | Cortável na S10, se as métricas estiverem em risco | Filipe | S10 | 🗓️ Em 13 dias |
+| D-43 | Pesos de integração das dimensões na nota final | Um conjunto só de pesos para C1, C2 e C3 — D1 1,0; D2 1,0; conduta 1,0; postura 0,5 — e a C0 sem ponderação nenhuma. Peso próprio por configuração faria a tabela de ablação medir duas coisas ao mesmo tempo: a dimensão acrescentada e o peso trocado. A postura entra com metade porque é estado, e não ação. Valores preliminares, sujeitos à análise de sensibilidade da D-09 | Davi, Yasmin | S8 | ⚠️ Atrasado há 1 dia |
 <!-- QUADRO:fim decisoes-a-confirmar -->
 
 ## Fechadas
