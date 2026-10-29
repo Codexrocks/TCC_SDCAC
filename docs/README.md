@@ -63,30 +63,30 @@ anunciava como abertas três decisões já fechadas.
 
 | ID | Decisão | Estado | Situação |
 |---|---|---|---|
-| D-05 | Ablação em quatro configurações (C0 a C3) | A confirmar | ⚠️ Atrasado há 27 dias |
+| D-05 | Ablação em quatro configurações (C0 a C3) | A confirmar | ⚠️ Atrasado há 28 dias |
 | D-07 | Caneta rotativa por seção | Aberta | 🗓️ Sem prazo |
-| D-15 | Critério de relevância declarado a priori | Aberta | ⚠️ Atrasado há 27 dias |
-| D-43 | Pesos de integração das dimensões na nota final | A confirmar | ⚠️ Atrasado há 6 dias |
+| D-15 | Critério de relevância declarado a priori | Aberta | ⚠️ Atrasado há 28 dias |
+| D-43 | Pesos de integração das dimensões na nota final | A confirmar | ⚠️ Atrasado há 7 dias |
 
 **Yasmin** — 7 pendências
 
 | ID | Decisão | Estado | Situação |
 |---|---|---|---|
-| D-06 | Cenários de contexto (B) e longitudinais (L) | Aberta | ⚠️ Atrasado há 27 dias |
+| D-06 | Cenários de contexto (B) e longitudinais (L) | Aberta | ⚠️ Atrasado há 28 dias |
 | D-07 | Caneta rotativa por seção | Aberta | 🗓️ Sem prazo |
-| D-09 | Pesos preliminares e análise de sensibilidade | Aberta | ⚠️ Atrasado há 6 dias |
-| D-15 | Critério de relevância declarado a priori | Aberta | ⚠️ Atrasado há 27 dias |
-| D-16 | Controle negativo longitudinal | Aberta | ⚠️ Atrasado há 27 dias |
-| D-19 | Vertente LGPD e ISO/IEC 27001 | Aberta | ⚠️ Atrasado há 27 dias |
-| D-43 | Pesos de integração das dimensões na nota final | A confirmar | ⚠️ Atrasado há 6 dias |
+| D-09 | Pesos preliminares e análise de sensibilidade | Aberta | ⚠️ Atrasado há 7 dias |
+| D-15 | Critério de relevância declarado a priori | Aberta | ⚠️ Atrasado há 28 dias |
+| D-16 | Controle negativo longitudinal | Aberta | ⚠️ Atrasado há 28 dias |
+| D-19 | Vertente LGPD e ISO/IEC 27001 | Aberta | ⚠️ Atrasado há 28 dias |
+| D-43 | Pesos de integração das dimensões na nota final | A confirmar | ⚠️ Atrasado há 7 dias |
 
 **Filipe** — 3 pendências
 
 | ID | Decisão | Estado | Situação |
 |---|---|---|---|
 | D-07 | Caneta rotativa por seção | Aberta | 🗓️ Sem prazo |
-| D-10 | Isolation Forest como benchmark opcional | A confirmar | 🗓️ Em 8 dias |
-| D-15 | Critério de relevância declarado a priori | Aberta | ⚠️ Atrasado há 27 dias |
+| D-10 | Isolation Forest como benchmark opcional | A confirmar | ⏳ Vence em 7 dias |
+| D-15 | Critério de relevância declarado a priori | Aberta | ⚠️ Atrasado há 28 dias |
 
 <!-- QUADRO:fim pendencias-por-pessoa -->
 
