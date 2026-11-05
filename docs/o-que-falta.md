@@ -59,6 +59,13 @@ motores.
    (`E701`/`E702`) e 42 de nomenclatura (`N803`/`N806`/`N812`). O Ruff não roda
    no CI, então não reprova — mas a seção 3 de padrões de código põe a
    formatação como não negociável
+3. **Três grupos de parâmetros sem procedência** — `_CAT_W`, `MFA0_*` e
+   `PATCH_MEDIAN` não citam decisão nem se declaram assunção, contra a regra que
+   o próprio `config.py` enuncia no cabeçalho. Detalhe em
+   [banco simulado](banco-simulado.md), seção 10 · ratificação do **Davi**
+4. **O baseline é de 100 dias e a D-24 diz "3 primeiros meses"** (≈91), sem
+   explicação. E a checagem que anuncia a D-24 **mede o parâmetro**, não os 91
+   dias: passa por construção. Alinhar o número ou registrar por que são 100
 
 **Na ordem do cronograma:**
 
