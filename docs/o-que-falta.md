@@ -13,38 +13,54 @@ Divisão do trabalho que resta, de 19/10/2026 até a entrega em 10/12.
 
 ## A peça que trava quatro semanas
 
-O código das semanas 6 a 9 **está escrito e testado**: schema, ingestão, as
-quatro configurações, o experimento ponta a ponta, a API de leitura e o painel.
-Nenhuma das quatro pode ser dada por aceita, e é pelo mesmo motivo.
+O código das semanas 6 a 9 **está escrito e testado**: schema, as quatro
+configurações, o experimento ponta a ponta, a API de leitura, o painel e — desde
+**04/11/2026, pelo #89** — o gerador de eventos. Nenhuma das quatro fecha ainda,
+e **o motivo mudou**.
 
 | Semana | O que existe | Por que o aceite não fecha |
 |---|---|---|
-| **S6** | Schema, migrações e ingestão | **Falta o gerador de eventos.** O aceite pede "uma semente completa gerada" |
-| **S7** | C0 e motor D1, selecionáveis por configuração | O aceite pede que "cenários pontuais produzam o score esperado" — e os cenários dependem da **D-06** |
-| **S8** | D2 e D3, com as duas parcelas separadas | O aceite pede "cenário longitudinal com exposição crescente sem alerta pontual" |
-| **S9** | As três telas do painel, com decomposição por dimensão | O aceite pede que o leitor entenda "por que um usuário está em **risco alto**" — e **não existe ninguém em `high`** em nenhum dado obtenível |
+| **S6** | Schema, migrações e **o gerador**, com as checagens passando | **Falta a ingestão.** O gerador escreve CSV e nada no repositório lê CSV: o adaptador de arquivo espera `catalogo.json` e `eventos.jsonl`, e não existe carga por `COPY`. O aceite pede "carga por COPY" |
+| **S7** | C0 e motor D1, selecionáveis por configuração | O aceite pede que "cenários pontuais produzam o score esperado" — e os cenários nomeados dependem da **D-06** |
+| **S8** | D2 e D3, com as duas parcelas separadas | O aceite pede "cenário longitudinal com exposição crescente sem alerta pontual", que depende da **D-16** |
+| **S9** | As três telas do painel, com decomposição por dimensão | O aceite pede "por que um usuário está em **risco alto**", e continua sem ninguém em `high` — agora porque o dado gerado **não chega aos motores**, não porque não exista |
 
-O experimento hoje roda sobre os *fixtures* de teste: **2 funcionários e um só
-tipo de evento**. Isso prova que a tubulação funciona e não povoa painel nenhum.
+**O que o gerador já produz**, em escala cheia e 79 segundos: 1.905.130 eventos,
+73.619 sessões, 124 episódios, e as 16 checagens da seção 9 passando — volume
+anual na faixa da **D-23**, média por dia útil na faixa de cada persona pela
+**D-38**, cenários depois do baseline de três meses pela **D-24**, e `corp` sem
+rótulo nenhum pela **D-17**, com o gabarito separado em `ground_truth/`.
 
-> **A M3 vence em 22/10**, e o critério dela é "C0 a C3 rodando sobre **o mesmo
-> gerador**". As quatro rodam — sobre *fixture*. O gerador está escrito dentro
-> do critério que ele mesmo trava.
+O experimento, porém, **continua rodando sobre os *fixtures* de teste** — 2
+funcionários e um só tipo de evento —, porque falta o elo entre o CSV e os
+motores.
+
+> **A M3 venceu em 22/10** e o critério dela é "C0 a C3 rodando sobre **o mesmo
+> gerador**". O gerador existe; as quatro configurações ainda rodam sobre
+> *fixture*. **O que falta agora é a ingestão, e ela é do Davi** — ver a seção
+> "O que não dá para dividir".
 
 ---
 
 ## Filipe — dados, gerador e painel
 
-**Primeiro, e antes de tudo:**
+> ✅ **O gerador entrou em 04/11/2026**, pelo [#89](https://github.com/Codexrocks/TCC_SDCAC/pull/89)
+> — 9 arquivos, 1.170 linhas, as checagens da seção 9 passando. Era o item que
+> travava quatro semanas, e saiu do caminho crítico. Os parâmetros **P15** e
+> **P17** ficaram embutidos no gerador e seguem valendo como registro em
+> [banco simulado](banco-simulado.md), seção 10.
 
-1. **O gerador de eventos** — personas, calendário, rotina e ruído legítimo,
-   especificado em [banco simulado](banco-simulado.md). É o item acima: destrava
-   S6, S7, S8, S9 e a M3 de uma vez
-2. **As sete checagens do catálogo**, que o aceite da S6 exige
-3. **Os parâmetros P15 e P17** — proporção de cada tipo por persona e a taxa
-   normal de senha errada — em [banco simulado](banco-simulado.md), seção 10
+**O que ficou dele, e é dívida de qualidade do próprio gerador:**
 
-**Depois, na ordem do cronograma:**
+1. **Nenhum teste.** São 1.170 linhas em 9 arquivos, sem um `test_` — o único
+   módulo do repositório nessa situação, contra a seção 8 de
+   [padrões de código](padroes-codigo.md)
+2. **226 apontamentos do Ruff**, sendo 141 de vários comandos na mesma linha
+   (`E701`/`E702`) e 42 de nomenclatura (`N803`/`N806`/`N812`). O Ruff não roda
+   no CI, então não reprova — mas a seção 3 de padrões de código põe a
+   formatação como não negociável
+
+**Na ordem do cronograma:**
 
 4. **Revisar o painel** da S9. Ele foi escrito por outra pessoa com IA, e o que
    a banca vê precisa bater com quem assina — ver [o painel](painel.md)
@@ -88,7 +104,15 @@ contra o que ser medido.
 
 ## O que não dá para dividir
 
-Três coisas continuam no Davi por construção, não por combinação:
+Quatro coisas continuam no Davi por construção, não por combinação:
+
+**A ingestão — e desde 04/11 ela é o elo que falta.** O gerador escreve CSV em
+`corp/` e `ground_truth/`; o adaptador de arquivo espera `catalogo.json` e
+`eventos.jsonl`, e a carga por `COPY` para o PostgreSQL não existe — `database/`
+tem só o schema. Enquanto esse elo não existir, o experimento continua rodando
+sobre *fixture* de 2 funcionários, e **nem a S6 nem a M3 fecham**. O
+[quadro](quadro.md) registra a S6 como "Filipe (gerador), Davi (schema e
+ingestão)": a metade do Filipe entrou.
 
 **A D-15 — o critério de relevância declarado a priori.** A origem do número já
 foi decidida em 14/10: argumento operacional, de quantos alertas falsos um
@@ -115,9 +139,13 @@ avaliador que grave métrica — e a caneta da **S14**.
 
 ## O caminho crítico, em uma frase
 
-**Gerador → semente completa → cenários nomeados → execução das quatro
-configurações → tabela de ablação → Resultados → Conclusão.**
+~~Gerador~~ → **ingestão** → **cenários nomeados** → execução das quatro
+configurações → tabela de ablação → Resultados → Conclusão.
 
-Cada elo depende do anterior, e o primeiro está atrasado desde 08/10. A
-**S10 é o único corte disponível** no cronograma: o Isolation Forest é opcional
+O primeiro elo caiu em 04/11. Os dois seguintes são independentes entre si e
+podem andar em paralelo — a **ingestão** é do Davi, os **cenários nomeados** são
+da Yasmin pelas **D-06** e **D-16**, atrasadas desde 01/10. Depois deles, o resto
+é sequência.
+
+A **S10 é o único corte disponível** no cronograma: o Isolation Forest é opcional
 por definição.
