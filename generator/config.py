@@ -87,5 +87,10 @@ MFA0_BASE, MFA0_PRIV = .85, 1.0
 PATCH_MEDIAN = {'it_infra': 3, 'sales': 25, 'default': 12}
 CORP_PHONE_FRAC, PERSONAL_PHONE_N = .60, 25
 
-# D-24: primeiros 3 meses = baseline; cenários só depois (janela de avaliação)
-EVAL_START_DAY = 100
+# D-24: primeiros 3 meses = baseline; cenários só depois (janela de avaliação).
+# 90 e o numero de dias dos tres primeiros meses a partir de 2026-01-01
+# (31+28+31), entao o indice 90 e 1 de abril. O valor anterior era 100, que
+# punha o inicio da avaliacao em 11 de abril -- dez dias dentro da janela que a
+# D-24 reserva ao baseline. A checagem `baseline cobre exatamente 3 meses`
+# confere isto contra a data de inicio, e nao contra esta constante.
+EVAL_START_DAY = 90

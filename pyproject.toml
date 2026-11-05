@@ -11,7 +11,7 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "tcc-sdcac"
 version = "0.1.0"
-description = "Sistema de Detecção de Comportamentos Anômalos em Cybersecurity"
+description = "Sistema de Avaliação Multidimensional de Risco Comportamental"
 readme = "README.md"
 requires-python = ">=3.12"
 
@@ -19,6 +19,11 @@ dependencies = [
     "fastapi>=0.115",
     "uvicorn[standard]>=0.30",
     "psycopg[binary]>=3.2",
+    # O gerador importa numpy direto (generator/world.py, normal.py,
+    # scenarios.py, checks.py). Vinha de carona pelo pandas, que o traz como
+    # dependencia transitiva — e dependencia direta nao declarada quebra no dia
+    # em que a de cima muda. Mesmo raciocinio do tzdata, logo abaixo.
+    "numpy>=1.26",
     "pandas>=2.2",
     "matplotlib>=3.9",
     "streamlit>=1.38",
