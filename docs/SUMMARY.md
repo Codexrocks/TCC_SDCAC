@@ -87,4 +87,5 @@
   * [2026-10-19 — Sessão 36: as três telas, e a decomposição que o aceite pede](relatorios/2026-10-19-sessao-36.md)
   * [2026-10-19 — Sessão 37: o painel entra na main, e ganha página para quem pega](relatorios/2026-10-19-sessao-37.md)
   * [2026-10-19 — Sessão 38: um PR inteiro tinha sido perdido](relatorios/2026-10-19-sessao-38.md)
+  * [2026-11-04 — Sessão 39: o gerador entra, e os bloqueios se invertem](relatorios/2026-11-04-sessao-39.md)
   * [Modelo de relatório](relatorios/_modelo.md)

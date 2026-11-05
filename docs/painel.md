@@ -96,9 +96,10 @@ API**: a execução 4, preset C3, semente 1, validadas contra o contrato por
 
 - [ ] **Revisão do Filipe.** O painel foi escrito por outra pessoa com IA; o que
       a banca vê precisa bater com quem fez · **Filipe**
-- [ ] **O critério de aceite não é demonstrável** no caminho do risco alto: não
-      há ninguém em `high`. Depende do **gerador de eventos da S6** ·
-      **Filipe**
+- [ ] **O critério de aceite não é demonstrável** no caminho do risco alto:
+      continua sem ninguém em `high`. O **gerador entrou em 04/11** e produz
+      1,9 M de eventos por semente — o que falta agora é a **ingestão**, que
+      ligue esse CSV aos motores · **Davi**
 - [ ] **Avaliação heurística**, que a [usabilidade](usabilidade.md) seção 6.1
       marca para a S9. É feita por quem constrói, **sem participantes** ·
       **Filipe**
