@@ -457,6 +457,57 @@ estão completos.
 | Os eventos | P15, P17 | Proporção de cada tipo por persona e a **taxa normal de senha errada** — sem ela a força bruta só enxerga ataque, nunca erro de digitação | Sem dono registrado. **Proposta: Filipe**, que faz o gerador, com ratificação do Davi |
 | Os cenários | P18 a P23 | Catálogo, prevalência, modo de injeção, rótulos e desenho cego. Vencem em **01/10** pelas decisões [D-06](decisoes.md) e [D-16](decisoes.md) | **Yasmin** |
 
+### O que o gerador do #89 trouxe, e o que ficou sem procedência
+
+O `generator/` entrou em **04/11/2026** e implementa esta especificação. O
+cabeçalho do `generator/config.py` promete a regra certa:
+
+> *"Nenhum número aqui é estatística do mundo real. Tudo que a spec fecha vem
+> com o número da decisão; o que a spec deixa aberto está marcado ASSUNÇÃO."*
+
+Conferida contra o arquivo, a promessa vale para quase tudo — o `MIX` está
+marcado `ASSUNÇÃO (P15)` e o `RESIDUAL_P` cita a **D-27**. **Três grupos não
+estão marcados de nenhuma das duas formas:**
+
+| Parâmetro | Onde | O que é |
+|---|---|---|
+| `_CAT_W` | `config.py:32` | Pesos das categorias de navegação — 70% corporativo, 17% não categorizado, 7% rede social, 3% webmail, 3% nuvem |
+| `MFA0_BASE`, `MFA0_PRIV` | `config.py:86` | Fração que começa com segundo fator ativo — 0,85 e 1,0 |
+| `PATCH_MEDIAN` | `config.py:87` | Mediana de dias desde a última atualização, por departamento |
+
+Não é dívida bibliográfica — a procedência aqui é **ratificação**, não fonte. Mas
+número que não cita decisão nem se declara assunção é o pior dos dois casos:
+quem lê não sabe se foi decidido ou arbitrado.
+
+**E a P15 virou código antes da ratificação.** A tabela acima registra "Sem dono
+registrado. **Proposta:** Filipe, com ratificação do Davi" — o gerador já a
+implementa, marcada como assunção. A proposta precisa ser fechada.
+
+### O baseline de 100 dias e a D-24
+
+O `EVAL_START_DAY = 100` do `config.py:91` fixa o baseline em **100 dias**. A
+[**D-24**](decisoes.md) fixou o padrão individual nos **"3 primeiros meses"**, que
+são cerca de 91. A diferença é de nove dias e **não está explicada em lugar
+nenhum** — pode ser margem deliberada, e nada diz que é.
+
+O detalhe que importa: a checagem da seção 9 anuncia a decisão e **mede o
+parâmetro**.
+
+```python
+chk('cenários começam após o baseline de 3 meses (D-24)', ... >= W.eval_start - 1)
+```
+
+Ela compara com `eval_start`, que é o próprio `EVAL_START_DAY`. **Passa por
+construção, qualquer que seja o valor** — verifica coerência interna, não
+aderência à D-24.
+
+> **Em correção pelo [#92](https://github.com/Codexrocks/TCC_SDCAC/pull/92).** O
+> parâmetro passa a **90** — que é o número exato, e não os "cerca de 91" que o
+> levantamento inicial estimou: 31+28+31 a partir de 01/01/2026, com o índice 90
+> caindo em 1º de abril. Entra também uma checagem que **deriva os três meses da
+> data de início** em vez de ler a constante, e `tests/test_gerador.py`, que impõe
+> o alinhamento sem depender de numpy — para não ser pulado em silêncio no CI.
+
 ## 11. O que pode esperar
 
 | Assunto | Por quê |
