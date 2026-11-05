@@ -1,6 +1,23 @@
 """Checagens da seção 9 da banco-simulado.md + invariantes D-17/D-23/D-27 (falha = exceção)."""
+import calendar
+from datetime import date
+
 import numpy as np
+
 from . import config as C
+
+
+def _dias_de_tres_meses(inicio):
+    """Quantos dias tem os tres primeiros meses a partir de `inicio`.
+
+    Derivado do calendario, nao de constante: com inicio em 2026-01-01 sao 90
+    (31+28+31). O dia e preservado, e cai para o ultimo do mes quando o mes de
+    destino e mais curto -- 31/01 mais tres meses e 30/04.
+    """
+    mes = inicio.month + 3
+    ano, mes = inicio.year + (mes - 1) // 12, (mes - 1) % 12 + 1
+    dia = min(inicio.day, calendar.monthrange(ano, mes)[1])
+    return (date(ano, mes, dia) - inicio).days
 
 
 def run(R, full_scale):
@@ -65,6 +82,15 @@ def run(R, full_scale):
     # 8. cenários só após o baseline (D-24)
     inj = s['ep'] >= 0
     chk('cenários começam após o baseline de 3 meses (D-24)', (day_of_s[inj & (np.array([R.eps.family.values[e] if e >= 0 else 'N' for e in s['ep']]) != 'N')] >= W.eval_start - 1).all())
+    # 9. o baseline tem de ser os 3 meses da D-24, e nao o que a constante disser.
+    # A checagem acima compara os cenarios com `W.eval_start`: ela passa por
+    # construcao, qualquer que seja o valor. Esta aqui mede a decisao, derivando
+    # os 3 meses da data de inicio.
+    chk(
+        'baseline cobre exatamente 3 meses a partir do inicio (D-24)',
+        W.eval_start == _dias_de_tres_meses(W.start),
+        f'eval_start={W.eval_start} · 3 meses={_dias_de_tres_meses(W.start)}',
+    )
     chk('ingested_at >= occurred_at', (R.lat > 0).all())
     return res
 
