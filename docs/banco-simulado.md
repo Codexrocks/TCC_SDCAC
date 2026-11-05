@@ -499,8 +499,14 @@ chk('cenários começam após o baseline de 3 meses (D-24)', ... >= W.eval_start
 
 Ela compara com `eval_start`, que é o próprio `EVAL_START_DAY`. **Passa por
 construção, qualquer que seja o valor** — verifica coerência interna, não
-aderência à D-24. Fechar isto é escolher uma das duas: alinhar o parâmetro aos 91
-dias, ou registrar aqui por que são 100.
+aderência à D-24.
+
+> **Em correção pelo [#92](https://github.com/Codexrocks/TCC_SDCAC/pull/92).** O
+> parâmetro passa a **90** — que é o número exato, e não os "cerca de 91" que o
+> levantamento inicial estimou: 31+28+31 a partir de 01/01/2026, com o índice 90
+> caindo em 1º de abril. Entra também uma checagem que **deriva os três meses da
+> data de início** em vez de ler a constante, e `tests/test_gerador.py`, que impõe
+> o alinhamento sem depender de numpy — para não ser pulado em silêncio no CI.
 
 ## 11. O que pode esperar
 
