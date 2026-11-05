@@ -497,16 +497,29 @@ parâmetro**.
 chk('cenários começam após o baseline de 3 meses (D-24)', ... >= W.eval_start - 1)
 ```
 
-Ela compara com `eval_start`, que é o próprio `EVAL_START_DAY`. **Passa por
-construção, qualquer que seja o valor** — verifica coerência interna, não
-aderência à D-24.
+Ela comparava com `eval_start`, que é o próprio `EVAL_START_DAY`: **passava por
+construção, qualquer que fosse o valor.** Verificava coerência interna, não
+aderência à D-24 — e foi por isso que dez dias de desvio ficaram invisíveis num
+módulo com 16 checagens verdes.
 
-> **Em correção pelo [#92](https://github.com/Codexrocks/TCC_SDCAC/pull/92).** O
-> parâmetro passa a **90** — que é o número exato, e não os "cerca de 91" que o
-> levantamento inicial estimou: 31+28+31 a partir de 01/01/2026, com o índice 90
-> caindo em 1º de abril. Entra também uma checagem que **deriva os três meses da
-> data de início** em vez de ler a constante, e `tests/test_gerador.py`, que impõe
-> o alinhamento sem depender de numpy — para não ser pulado em silêncio no CI.
+**Fechado em 04/11/2026, pelo [#92](https://github.com/Codexrocks/TCC_SDCAC/pull/92):**
+
+- O parâmetro passou a **90** — o número exato, e não os "cerca de 91" que o
+  levantamento inicial estimou: 31+28+31 a partir de 01/01/2026, com o índice 90
+  caindo em 1º de abril
+- Entrou uma segunda checagem, que **deriva os três meses da data de início** em
+  vez de ler a constante. São 17 agora, e a nova reporta `eval_start=90 · 3
+  meses=90`
+- Entrou `tests/test_gerador.py`, com 7 casos, que impõe o alinhamento **sem
+  depender de numpy** — o `config.py` não importa nada, e o CI instala só
+  `pytest pyyaml fastapi httpx`, então um teste que dependesse de numpy seria
+  pulado em silêncio
+- O `- 1` da checagem antiga **não foi tocado**: é tolerância de fuso, e aparece
+  igual na checagem de admissão
+
+A lição fica registrada porque vale além deste caso: **checagem que cita uma
+decisão e mede um parâmetro não verifica a decisão.** Ela passa sempre, e dá a
+impressão oposta.
 
 ## 11. O que pode esperar
 
