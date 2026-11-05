@@ -63,9 +63,11 @@ motores.
    `PATCH_MEDIAN` não citam decisão nem se declaram assunção, contra a regra que
    o próprio `config.py` enuncia no cabeçalho. Detalhe em
    [banco simulado](banco-simulado.md), seção 10 · ratificação do **Davi**
-4. **O baseline é de 100 dias e a D-24 diz "3 primeiros meses"** (≈91), sem
-   explicação. E a checagem que anuncia a D-24 **mede o parâmetro**, não os 91
-   dias: passa por construção. Alinhar o número ou registrar por que são 100
+> ✅ **O baseline foi alinhado em 04/11, pelo #92:** o `EVAL_START_DAY` passou de
+> 100 para **90** — os três meses exatos da **D-24** —, entrou a checagem que
+> mede a decisão em vez do parâmetro, e `tests/test_gerador.py` tornou-se o
+> primeiro teste do módulo. Detalhe em
+> [banco simulado](banco-simulado.md), seção 10.
 
 **Na ordem do cronograma:**
 
