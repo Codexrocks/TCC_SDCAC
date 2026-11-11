@@ -1,0 +1,2753 @@
+diff -ru -x tests -x __pycache__ /home/claude/generator_orig/__init__.py generator/__init__.py
+--- /home/claude/generator_orig/__init__.py	2026-11-11 12:40:17.304317917 +0000
++++ generator/__init__.py	2026-11-11 12:40:17.327126242 +0000
+@@ -1,2 +1,3 @@
+ """Gerador de eventos do TCC_SDCAC — contrato: docs/banco-simulado.md (D-23 a D-41)."""
++
+ __version__ = "2.0.0"
+diff -ru -x tests -x __pycache__ /home/claude/generator_orig/__main__.py generator/__main__.py
+--- /home/claude/generator_orig/__main__.py	2026-11-11 12:40:17.304333005 +0000
++++ generator/__main__.py	2026-11-11 12:41:06.923129190 +0000
+@@ -1,7 +1,11 @@
+ """python -m generator --seeds 10 --out out [--scale 1.0] [--days 365] [--start 2026-01-01]"""
+-import argparse, time
++
++import argparse
++import time
+ from datetime import date
++
+ import numpy as np
++
+ from . import checks, output
+ from .core import Sink
+ from .normal import simulate_normal
+@@ -9,24 +13,39 @@
+ from .world import build_world
+ 
+ p = argparse.ArgumentParser()
+-p.add_argument('--seeds', type=int, default=1, help='número de execuções (run_id 1..N, semente base + i)')
+-p.add_argument('--seed0', type=int, default=42)
+-p.add_argument('--out', default='out')
+-p.add_argument('--scale', type=float, default=1.0, help='fração do efetivo (250 funcionários = 1.0)')
+-p.add_argument('--days', type=int, default=365)
+-p.add_argument('--start', default='2026-01-01')
+-p.add_argument('--scenario-scale', type=float, default=1.0)
++p.add_argument(
++    "--seeds",
++    type=int,
++    default=1,
++    help="número de execuções (run_id 1..N, semente base + i)",
++)
++p.add_argument("--seed0", type=int, default=42)
++p.add_argument("--out", default="out")
++p.add_argument(
++    "--scale",
++    type=float,
++    default=1.0,
++    help="fração do efetivo (250 funcionários = 1.0)",
++)
++p.add_argument("--days", type=int, default=365)
++p.add_argument("--start", default="2026-01-01")
++p.add_argument("--scenario-scale", type=float, default=1.0)
+ a = p.parse_args()
+ start = date.fromisoformat(a.start)
+ for run_id in range(1, a.seeds + 1):
+-    seed = a.seed0 + run_id - 1; t0 = time.time()
+-    W = build_world(seed, start, a.days, a.scale)
+-    S = Sink(W, np.random.default_rng([seed, 21]))
+-    inject(W, S, np.random.default_rng([seed, 31]), a.scenario_scale)     # cenários primeiro: registram overrides
+-    simulate_normal(W, S, np.random.default_rng([seed, 41]))
+-    R = output.assemble(W, S, run_id, seed)
+-    res = checks.run(R, full_scale=(a.scale == 1.0 and a.days >= 365))
++    seed = a.seed0 + run_id - 1
++    t0 = time.time()
++    world = build_world(seed, start, a.days, a.scale)
++    sink = Sink(world, np.random.default_rng([seed, 21]))
++    inject(
++        world, sink, np.random.default_rng([seed, 31]), a.scenario_scale
++    )  # cenários primeiro: registram overrides
++    simulate_normal(world, sink, np.random.default_rng([seed, 41]))
++    data = output.assemble(world, sink, run_id, seed)
++    res = checks.run(data, full_scale=(a.scale == 1.0 and a.days >= 365))
+     checks.report(res)
+-    base = output.write(R, a.out)
+-    print(f'run {run_id} (seed {seed}): {R.N:,} eventos, {R.nS:,} sessões, {len(R.eps)} episódios -> {base}  [{time.time() - t0:.0f}s]')
+-    print(R.eps.groupby('family').size().to_dict())
++    base = output.write(data, a.out)
++    print(
++        f"run {run_id} (seed {seed}): {data.N:,} eventos, {data.nS:,} sessões, {len(data.eps)} episódios -> {base}  [{time.time() - t0:.0f}s]"
++    )
++    print(data.eps.groupby("family").size().to_dict())
+diff -ru -x tests -x __pycache__ /home/claude/generator_orig/checks.py generator/checks.py
+--- /home/claude/generator_orig/checks.py	2026-11-11 12:40:17.304340464 +0000
++++ generator/checks.py	2026-11-11 12:41:06.923129190 +0000
+@@ -1,78 +1,156 @@
+ """Checagens da seção 9 da banco-simulado.md + invariantes D-17/D-23/D-27 (falha = exceção)."""
++
+ import numpy as np
+-from . import config as C
++
++from . import config as cfg
+ 
+ 
+-def run(R, full_scale):
+-    W, s = R.W, R.s
++def run(data, full_scale):
++    world, s = data.W, data.s
+     res = []
+ 
+-    def chk(name, ok, detail=''):
++    def chk(name, ok, detail=""):
+         res.append((name, bool(ok), detail))
+ 
+-    et, sid, t, N = R.et, R.sid, R.t, R.N
++    et, sid, t, n_ev = data.et, data.sid, data.t, data.N
+     # 1. toda sessão: 1 LOGOUT, ≥1 LOGIN com sucesso; funcionário existe
+-    n_out = np.bincount(sid[et == 1], minlength=R.nS)
+-    n_ok = np.bincount(sid[(et == 0) & (R.rs == 0)], minlength=R.nS)
+-    chk('cada sessão tem exatamente 1 LOGOUT e 1 LOGIN com sucesso', (n_out == 1).all() and (n_ok == 1).all(), f'{R.nS} sessões')
+-    chk('sessões referenciam funcionários existentes', np.isin(s['emp'], W.all_ids).all())
++    n_out = np.bincount(sid[et == 1], minlength=data.nS)
++    n_ok = np.bincount(sid[(et == 0) & (data.rs == 0)], minlength=data.nS)
++    chk(
++        "cada sessão tem exatamente 1 LOGOUT e 1 LOGIN com sucesso",
++        (n_out == 1).all() and (n_ok == 1).all(),
++        f"{data.nS} sessões",
++    )
++    chk(
++        "sessões referenciam funcionários existentes",
++        np.isin(s["emp"], world.all_ids).all(),
++    )
+     # 2. nenhuma ação depois do LOGOUT da própria sessão
+-    last = np.zeros(R.nS, np.int64); np.maximum.at(last, sid, np.arange(N))
+-    chk('nenhuma ação depois do LOGOUT da própria sessão', (et[last] == 1).all() and (t <= s['t1'][sid]).all() and (t >= s['t0'][sid]).all())
++    last = np.zeros(data.nS, np.int64)
++    np.maximum.at(last, sid, np.arange(n_ev))
++    chk(
++        "nenhuma ação depois do LOGOUT da própria sessão",
++        (et[last] == 1).all()
++        and (t <= s["t1"][sid]).all()
++        and (t >= s["t0"][sid]).all(),
++    )
+     # 3. listas fechadas
+-    chk('códigos dentro das listas fechadas',
+-        (R.rs <= 2).all() and (R.a1[et == 3] > 0).all() and (R.a2[et == 3] < 3).all() and (R.a1[et == 5] < len(C.DOMAINS)).all()
+-        and (R.a2[et == 0] < 5).all() and (R.a1[et == 6] < 5).all() and (R.a2[et == 7] < 4).all())
+-    chk('size_bytes > 0 em todo FILE_DOWNLOAD', (R.a1[et == 3] > 0).all())
+-    chk('domínios sempre .example', all(d.endswith('.example') for d, _ in C.DOMAINS))
++    chk(
++        "códigos dentro das listas fechadas",
++        (data.rs <= 2).all()
++        and (data.a1[et == 3] > 0).all()
++        and (data.a2[et == 3] < 3).all()
++        and (data.a1[et == 5] < len(cfg.DOMAINS)).all()
++        and (data.a2[et == 0] < 5).all()
++        and (data.a1[et == 6] < 5).all()
++        and (data.a2[et == 7] < 4).all(),
++    )
++    chk("size_bytes > 0 em todo FILE_DOWNLOAD", (data.a1[et == 3] > 0).all())
++    chk("domínios sempre .example", all(d.endswith(".example") for d, _ in cfg.DOMAINS))
+     # 4. IP dentro de faixa cadastrada; is_vpn <=> faixa vpn
+-    base = np.array([r['base'] for r in W.ranges]); end = base + np.array([r['size'] for r in W.ranges]) - 1
+-    ip = s['ip']; ix = np.searchsorted(base, ip, 'right') - 1
++    base = np.array([r["base"] for r in world.ranges])
++    end = base + np.array([r["size"] for r in world.ranges]) - 1
++    ip = s["ip"]
++    ix = np.searchsorted(base, ip, "right") - 1
+     inr = (ix >= 0) & (ip <= end[np.maximum(ix, 0)])
+-    chk('todo IP está dentro de uma faixa cadastrada', inr.all(), f'{(~inr).sum()} fora')
+-    typ = np.array([r['type'] for r in W.ranges])[np.maximum(ix, 0)]
+-    chk('is_vpn <=> IP na faixa vpn', ((typ == 'vpn') == s['vpn']).all())
++    chk(
++        "todo IP está dentro de uma faixa cadastrada", inr.all(), f"{(~inr).sum()} fora"
++    )
++    typ = np.array([r["type"] for r in world.ranges])[np.maximum(ix, 0)]
++    chk("is_vpn <=> IP na faixa vpn", ((typ == "vpn") == s["vpn"]).all())
+     # 5. sem rótulo em corp (D-17): o gabarito só existe em ground_truth
+-    chk('eventos/sessões de corp não carregam rótulo (D-17)', True, 'colunas fixas em output.write')
++    chk(
++        "eventos/sessões de corp não carregam rótulo (D-17)",
++        True,
++        "colunas fixas em output.write",
++    )
+     # 6. calendário (D-27)
+-    day_of_s = ((s['t0'] + np.array([W.emp_by_id[i].tz for i in s['emp']]) * 3600) // 86400 - W.day_epoch[0] // 86400).astype(int)
+-    hire = np.array([W.emp_by_id[i].hire_idx for i in s['emp']])
+-    chk('nenhum evento antes da admissão', (day_of_s >= hire - 1).all())
+-    ncnt = np.bincount(sid, minlength=R.nS)
+-    normal = s['ep'] < 0
+-    vac = np.array([W.emp_by_id[i].vac[min(max(d, 0), W.ndays - 1)] for i, d in zip(s['emp'], day_of_s)])
+-    wk = (W.wd[np.clip(day_of_s, 0, W.ndays - 1)] >= 5)
+-    chk('atividade residual em férias existe e é < 3% do volume', 0 < ncnt[normal & vac].sum() < .03 * ncnt[normal].sum(),
+-        f'{ncnt[normal & vac].sum()} eventos em férias')
++    day_of_s = (
++        (s["t0"] + np.array([world.emp_by_id[i].tz for i in s["emp"]]) * 3600) // 86400
++        - world.day_epoch[0] // 86400
++    ).astype(int)
++    hire = np.array([world.emp_by_id[i].hire_idx for i in s["emp"]])
++    chk("nenhum evento antes da admissão", (day_of_s >= hire - 1).all())
++    ncnt = np.bincount(sid, minlength=data.nS)
++    normal = s["ep"] < 0
++    vac = np.array(
++        [
++            world.emp_by_id[i].vac[min(max(d, 0), world.ndays - 1)]
++            for i, d in zip(s["emp"], day_of_s)
++        ]
++    )
++    wk = world.wd[np.clip(day_of_s, 0, world.ndays - 1)] >= 5
++    chk(
++        "atividade residual em férias existe e é < 3% do volume",
++        0 < ncnt[normal & vac].sum() < 0.03 * ncnt[normal].sum(),
++        f"{ncnt[normal & vac].sum()} eventos em férias",
++    )
+     # 7. volume por dia útil (D-23)
+-    key = np.array([W.emp_by_id[i].id for i in s['emp']]) * 10000 + np.clip(day_of_s, 0, 9999)
++    key = np.array([world.emp_by_id[i].id for i in s["emp"]]) * 10000 + np.clip(
++        day_of_s, 0, 9999
++    )
+     u, inv = np.unique(key[normal], return_inverse=True)
+-    tot = np.bincount(inv, weights=ncnt[normal]); emp_of = (u // 10000).astype(int)
++    tot = np.bincount(inv, weights=ncnt[normal])
++    emp_of = (u // 10000).astype(int)
+     big = tot >= 10
+     per = {}
+-    for e in W.emps:
++    for e in world.emps:
+         m = big & (emp_of == e.id)
+-        if m.any(): per.setdefault(e.persona, []).append(tot[m].mean())
+-    ok = True; det = []
++        if m.any():
++            per.setdefault(e.persona, []).append(tot[m].mean())
++    ok = True
++    det = []
+     for p, v in per.items():
+-        mu = float(np.mean(v)); lo, hi = C.PERSONAS[p]['lo'], C.PERSONAS[p]['hi']
+-        ok &= (.9 * lo <= mu <= 1.1 * hi); det.append(f'{p}={mu:.1f}[{lo}-{hi}]')
+-    chk('média de eventos/dia útil dentro da faixa de cada persona (D-38)', ok, ' '.join(det))
+-    wmean = float(np.average([np.mean(v) for v in per.values()], weights=[len(v) for v in per.values()]))
+-    chk('média ponderada 20-50 eventos/dia útil (D-23)', 20 <= wmean <= 50, f'{wmean:.1f}')
++        mu = float(np.mean(v))
++        lo, hi = cfg.PERSONAS[p]["lo"], cfg.PERSONAS[p]["hi"]
++        ok &= 0.9 * lo <= mu <= 1.1 * hi
++        det.append(f"{p}={mu:.1f}[{lo}-{hi}]")
++    chk(
++        "média de eventos/dia útil dentro da faixa de cada persona (D-38)",
++        ok,
++        " ".join(det),
++    )
++    wmean = float(
++        np.average(
++            [np.mean(v) for v in per.values()], weights=[len(v) for v in per.values()]
++        )
++    )
++    chk(
++        "média ponderada 20-50 eventos/dia útil (D-23)",
++        20 <= wmean <= 50,
++        f"{wmean:.1f}",
++    )
+     if full_scale:
+-        chk('volume anual por semente em 1,15-2,9 M (D-23)', 1.15e6 <= N <= 2.9e6, f'{N:,}')
++        chk(
++            "volume anual por semente em 1,15-2,9 M (D-23)",
++            1.15e6 <= n_ev <= 2.9e6,
++            f"{n_ev:,}",
++        )
+     # 8. cenários só após o baseline (D-24)
+-    inj = s['ep'] >= 0
+-    chk('cenários começam após o baseline de 3 meses (D-24)', (day_of_s[inj & (np.array([R.eps.family.values[e] if e >= 0 else 'N' for e in s['ep']]) != 'N')] >= W.eval_start - 1).all())
+-    chk('ingested_at >= occurred_at', (R.lat > 0).all())
++    inj = s["ep"] >= 0
++    chk(
++        "cenários começam após o baseline de 3 meses (D-24)",
++        (
++            day_of_s[
++                inj
++                & (
++                    np.array(
++                        [data.eps.family.values[e] if e >= 0 else "N" for e in s["ep"]]
++                    )
++                    != "N"
++                )
++            ]
++            >= world.eval_start - 1
++        ).all(),
++    )
++    chk("ingested_at >= occurred_at", (data.lat > 0).all())
+     return res
+ 
+ 
+ def report(res):
+     bad = [r for r in res if not r[1]]
+-    print('\n=== CHECAGENS (seção 9) ===')
++    print("\n=== CHECAGENS (seção 9) ===")
+     for n, ok, d in res:
+-        print(('  OK   ' if ok else '  FALHA'), n, f'— {d}' if d else '')
++        print(("  OK   " if ok else "  FALHA"), n, f"— {d}" if d else "")
+     if bad:
+-        raise SystemExit(f'{len(bad)} checagem(ns) falharam')
++        raise SystemExit(f"{len(bad)} checagem(ns) falharam")
+diff -ru -x tests -x __pycache__ /home/claude/generator_orig/config.py generator/config.py
+--- /home/claude/generator_orig/config.py	2026-11-11 12:40:17.304295659 +0000
++++ generator/config.py	2026-11-11 12:41:18.444913460 +0000
+@@ -4,88 +4,148 @@
+ Tudo que a spec fecha vem com o número da decisão; o que a spec deixa aberto está
+ marcado ASSUNÇÃO e deve ser ratificado (P12/P13: Davi · P15/P17: Filipe+Davi · P18-P23: Yasmin).
+ """
+-ETYPES = ['LOGIN', 'LOGOUT', 'FILE_ACCESS', 'FILE_DOWNLOAD', 'EXTERNAL_DEVICE',
+-          'WEB_BROWSING', 'SYSTEM_CONFIG', 'PHISHING_SIM']
++
++ETYPES = [
++    "LOGIN",
++    "LOGOUT",
++    "FILE_ACCESS",
++    "FILE_DOWNLOAD",
++    "EXTERNAL_DEVICE",
++    "WEB_BROWSING",
++    "SYSTEM_CONFIG",
++    "PHISHING_SIM",
++]
+ E = {n: i for i, n in enumerate(ETYPES)}
+-RESULTS = ['success', 'failure', 'blocked']
+-FAIL_REASONS = ['', 'wrong_password', 'user_locked', 'mfa_failed', 'unknown_user']
+-LOGOUT_REASONS = ['user', 'timeout', 'forced']
+-ACTIONS = ['view', 'edit']
+-DESTS = ['local_disk', 'external_storage', 'removable']
+-DEVTYPES = ['usb_pendrive', 'external_hd', 'phone']
+-SUBTYPES = ['password_change', 'privilege_escalation', 'mfa_disabled', 'mfa_enabled', 'permission_grant']
++RESULTS = ["success", "failure", "blocked"]
++FAIL_REASONS = ["", "wrong_password", "user_locked", "mfa_failed", "unknown_user"]
++LOGOUT_REASONS = ["user", "timeout", "forced"]
++ACTIONS = ["view", "edit"]
++DESTS = ["local_disk", "external_storage", "removable"]
++DEVTYPES = ["usb_pendrive", "external_hd", "phone"]
++SUBTYPES = [
++    "password_change",
++    "privilege_escalation",
++    "mfa_disabled",
++    "mfa_enabled",
++    "permission_grant",
++]
+ SUB = {n: i for i, n in enumerate(SUBTYPES)}
+-INITIATORS = ['self', 'admin']
+-OUTCOMES = ['reported', 'ignored', 'clicked', 'submitted_credentials']   # do melhor ao pior (D-25)
+-SENS = ['public', 'internal', 'confidential', 'restricted']
+-RANGE_TYPES = ['office', 'vpn', 'home', 'external']
+-DEVICE_TYPES = ['notebook', 'corporate_phone', 'personal_phone', 'unknown_external']
++INITIATORS = ["self", "admin"]
++OUTCOMES = [
++    "reported",
++    "ignored",
++    "clicked",
++    "submitted_credentials",
++]  # do melhor ao pior (D-25)
++SENS = ["public", "internal", "confidential", "restricted"]
++RANGE_TYPES = ["office", "vpn", "home", "external"]
++DEVICE_TYPES = ["notebook", "corporate_phone", "personal_phone", "unknown_external"]
+ 
+ # domínios: sempre .example (seção 9)
+ DOMAINS = (
+-    [(f'{n}.corp.example', 'corporate') for n in ('intranet', 'docs', 'suporte', 'rh', 'wiki', 'agenda')] +
+-    [(f'{n}.example', 'cloud_storage') for n in ('nuvem-arquivos', 'compartilha-ai')] +
+-    [(f'{n}.example', 'social_media') for n in ('rede-social', 'video-curto')] +
+-    [(f'{n}.example', 'webmail') for n in ('correio-web', 'caixa-postal')] +
+-    [(f'{n}.example', 'uncategorized') for n in ('blog-noticias', 'forum-tech', 'loja-online',
+-                                                  'portal-esportes', 'receitas', 'tutoriais')])
+-_CAT_W = {'corporate': .70, 'uncategorized': .17, 'social_media': .07, 'webmail': .03, 'cloud_storage': .03}
++    [
++        (f"{n}.corp.example", "corporate")
++        for n in ("intranet", "docs", "suporte", "rh", "wiki", "agenda")
++    ]
++    + [(f"{n}.example", "cloud_storage") for n in ("nuvem-arquivos", "compartilha-ai")]
++    + [(f"{n}.example", "social_media") for n in ("rede-social", "video-curto")]
++    + [(f"{n}.example", "webmail") for n in ("correio-web", "caixa-postal")]
++    + [
++        (f"{n}.example", "uncategorized")
++        for n in (
++            "blog-noticias",
++            "forum-tech",
++            "loja-online",
++            "portal-esportes",
++            "receitas",
++            "tutoriais",
++        )
++    ]
++)
++# ASSUNÇÃO (a ratificar: Davi): peso por categoria de domínio no WEB_BROWSING; a spec não fixa essa distribuição.
++_CAT_W = {
++    "corporate": 0.70,
++    "uncategorized": 0.17,
++    "social_media": 0.07,
++    "webmail": 0.03,
++    "cloud_storage": 0.03,
++}
+ _cnt = {c: sum(1 for _, k in DOMAINS if k == c) for c in _CAT_W}
+ DOMAIN_P = [(_CAT_W[k] / _cnt[k]) for _, k in DOMAINS]
+-CLOUD_IDX = [i for i, (_, k) in enumerate(DOMAINS) if k == 'cloud_storage']
++CLOUD_IDX = [i for i, (_, k) in enumerate(DOMAINS) if k == "cloud_storage"]
+ 
+ # D-37 / D-38 / D-40: (departamento, persona, sede, n)
+ COHORTS = [
+-    ('operations_support', 'shift_ops', 'SP', 30), ('operations_support', 'shift_ops', 'MAO', 15),
+-    ('operations_support', 'day_admin', 'MAO', 25),
+-    ('sales', 'sales_traveler', 'SP', 45),
+-    ('engineering_product', 'hybrid_eng', 'SP', 30), ('engineering_product', 'day_admin', 'SP', 10),
+-    ('admin_finance', 'day_admin', 'SP', 35),
+-    ('it_infra', 'it_privileged', 'SP', 25),
+-    ('hr', 'day_admin', 'SP', 15), ('legal', 'day_admin', 'SP', 10), ('board', 'management', 'SP', 10),
++    ("operations_support", "shift_ops", "SP", 30),
++    ("operations_support", "shift_ops", "MAO", 15),
++    ("operations_support", "day_admin", "MAO", 25),
++    ("sales", "sales_traveler", "SP", 45),
++    ("engineering_product", "hybrid_eng", "SP", 30),
++    ("engineering_product", "day_admin", "SP", 10),
++    ("admin_finance", "day_admin", "SP", 35),
++    ("it_infra", "it_privileged", "SP", 25),
++    ("hr", "day_admin", "SP", 15),
++    ("legal", "day_admin", "SP", 10),
++    ("board", "management", "SP", 10),
+ ]
+-TZ = {'SP': -3, 'MAO': -4}
++TZ = {"SP": -3, "MAO": -4}
+ # faixa de eventos por dia útil (D-38) e horário de referência
+ PERSONAS = {
+-    'day_admin':      dict(lo=20, hi=35, start=8.5, span=9.0),
+-    'shift_ops':      dict(lo=25, hi=40, start=6.0, span=8.0),
+-    'it_privileged':  dict(lo=45, hi=70, start=9.0, span=9.0),
+-    'sales_traveler': dict(lo=20, hi=35, start=8.5, span=9.0),
+-    'hybrid_eng':     dict(lo=30, hi=50, start=9.5, span=8.5),
+-    'management':     dict(lo=15, hi=30, start=8.5, span=9.5),
++    "day_admin": dict(lo=20, hi=35, start=8.5, span=9.0),
++    "shift_ops": dict(lo=25, hi=40, start=6.0, span=8.0),
++    "it_privileged": dict(lo=45, hi=70, start=9.0, span=9.0),
++    "sales_traveler": dict(lo=20, hi=35, start=8.5, span=9.0),
++    "hybrid_eng": dict(lo=30, hi=50, start=9.5, span=8.5),
++    "management": dict(lo=15, hi=30, start=8.5, span=9.5),
+ }
+ # ASSUNÇÃO (P15): mistura FILE_ACCESS, FILE_DOWNLOAD, WEB_BROWSING, EXTERNAL_DEVICE, SYSTEM_CONFIG
+ MIX = {
+-    'day_admin':      [.64, .09, .255, .005, .010],
+-    'shift_ops':      [.66, .06, .265, .003, .012],
+-    'it_privileged':  [.60, .05, .22, .015, .115],
+-    'sales_traveler': [.58, .10, .30, .006, .014],
+-    'hybrid_eng':     [.62, .12, .21, .015, .035],
+-    'management':     [.55, .08, .34, .005, .020],
++    "day_admin": [0.64, 0.09, 0.255, 0.005, 0.010],
++    "shift_ops": [0.66, 0.06, 0.265, 0.003, 0.012],
++    "it_privileged": [0.60, 0.05, 0.22, 0.015, 0.115],
++    "sales_traveler": [0.58, 0.10, 0.30, 0.006, 0.014],
++    "hybrid_eng": [0.62, 0.12, 0.21, 0.015, 0.035],
++    "management": [0.55, 0.08, 0.34, 0.005, 0.020],
+ }
+-RESIDUAL_P = {'weekend': .03, 'holiday': .03, 'vacation': .02}     # D-27: nunca zero absoluto
+-RESIDUAL_P_MGMT = .12
++RESIDUAL_P = {
++    "weekend": 0.03,
++    "holiday": 0.03,
++    "vacation": 0.02,
++}  # D-27: nunca zero absoluto
++RESIDUAL_P_MGMT = 0.12
+ 
+ # D-39: sistemas -> (nome, sigilo, n_recursos, departamentos | None = todos)
+ SYSTEMS = {
+-    'portal':      ('portal_interno', 'public', 3, None),
+-    'mail':        ('email_agenda', 'internal', 1, None),
+-    'crm':         ('crm_atendimento', 'internal', 20, {'operations_support', 'sales'}),
+-    'repo':        ('repositorio_codigo', 'internal', 40, {'engineering_product', 'it_infra'}),
+-    'fs_conf_fin': ('arquivos_financeiro', 'confidential', 80, {'admin_finance', 'legal', 'board'}),
+-    'fs_conf_leg': ('arquivos_juridico', 'confidential', 60, {'admin_finance', 'legal', 'board'}),
+-    'erp':         ('erp_financeiro', 'confidential', 15, {'admin_finance', 'board'}),
+-    'contracts':   ('contratos_juridicos', 'confidential', 40, {'legal', 'board'}),
+-    'payroll':     ('folha_pagamento', 'restricted', 6, 'hr5+board'),
+-    'dossier':     ('dossie_pessoal', 'restricted', 30, {'hr'}),
+-    'console':     ('console_infra', 'restricted', 12, {'it_infra'}),
++    "portal": ("portal_interno", "public", 3, None),
++    "mail": ("email_agenda", "internal", 1, None),
++    "crm": ("crm_atendimento", "internal", 20, {"operations_support", "sales"}),
++    "repo": ("repositorio_codigo", "internal", 40, {"engineering_product", "it_infra"}),
++    "fs_conf_fin": (
++        "arquivos_financeiro",
++        "confidential",
++        80,
++        {"admin_finance", "legal", "board"},
++    ),
++    "fs_conf_leg": (
++        "arquivos_juridico",
++        "confidential",
++        60,
++        {"admin_finance", "legal", "board"},
++    ),
++    "erp": ("erp_financeiro", "confidential", 15, {"admin_finance", "board"}),
++    "contracts": ("contratos_juridicos", "confidential", 40, {"legal", "board"}),
++    "payroll": ("folha_pagamento", "restricted", 6, "hr5+board"),
++    "dossier": ("dossie_pessoal", "restricted", 30, {"hr"}),
++    "console": ("console_infra", "restricted", 12, {"it_infra"}),
+ }
+-FS_OWN_N = 60          # arquivos por pasta de departamento (internal)
++FS_OWN_N = 60  # arquivos por pasta de departamento (internal)
+ 
+ # D-41
+-MFA0_BASE, MFA0_PRIV = .85, 1.0
+-PATCH_MEDIAN = {'it_infra': 3, 'sales': 25, 'default': 12}
+-CORP_PHONE_FRAC, PERSONAL_PHONE_N = .60, 25
++# ASSUNÇÃO (a ratificar: Davi): frações iniciais com MFA (base / privilegiados) — valores sem decisão que os fixe.
++MFA0_BASE, MFA0_PRIV = 0.85, 1.0
++# ASSUNÇÃO (a ratificar: Davi): mediana de dias para aplicar patch, por departamento — valores sem decisão que os fixe.
++PATCH_MEDIAN = {"it_infra": 3, "sales": 25, "default": 12}
++CORP_PHONE_FRAC, PERSONAL_PHONE_N = 0.60, 25
+ 
+ # D-24: primeiros 3 meses = baseline; cenários só depois (janela de avaliação)
+ EVAL_START_DAY = 100
+diff -ru -x tests -x __pycache__ /home/claude/generator_orig/core.py generator/core.py
+--- /home/claude/generator_orig/core.py	2026-11-11 12:40:17.304325509 +0000
++++ generator/core.py	2026-11-11 12:41:06.927129191 +0000
+@@ -1,12 +1,13 @@
+ """Sink: acumula sessões e eventos. Toda ação pertence a uma sessão (seção 9)."""
++
+ import numpy as np
+-from . import config as C
+ 
+ _Z = np.zeros(0, np.int64)
+ 
+ 
+ class Body:
+     """Eventos do corpo de uma sessão: (dt desde o login, tipo, recurso, a1, a2, a3, resultado)."""
++
+     def __init__(self):
+         self.r = []
+ 
+@@ -18,13 +19,13 @@
+         if not self.r:
+             return [_Z] * 7
+         a = np.array(self.r, dtype=np.int64)
+-        a = a[np.argsort(a[:, 0], kind='stable')]
++        a = a[np.argsort(a[:, 0], kind="stable")]
+         return [a[:, i] for i in range(7)]
+ 
+ 
+ class Sink:
+-    def __init__(self, W, rng):
+-        self.W, self.rng = W, rng
++    def __init__(self, world, rng):
++        self.W, self.rng = world, rng
+         self.ch = []
+         self.s = dict(emp=[], dev=[], vpn=[], ip=[], t0=[], t1=[], ep=[])
+         self.eps = []
+@@ -35,42 +36,89 @@
+ 
+     def vpn_ip(self):
+         r = self.W.ranges[self.W.r_vpn]
+-        return int(r['base'] + self.rng.integers(1, r['size'] - 1))
++        return int(r["base"] + self.rng.integers(1, r["size"] - 1))
+ 
+-    def session(self, emp_id, t_first, D, body, ip, vpn, dev, mfa, ep=-1, n_wrong=0,
+-                gap=(4, 40), wait=(600, 2700), lo=None):
++    def session(
++        self,
++        emp_id,
++        t_first,
++        duration,
++        body,
++        ip,
++        vpn,
++        dev,
++        mfa,
++        ep=-1,
++        n_wrong=0,
++        gap=(4, 40),
++        wait=(600, 2700),
++        lo=None,
++    ):
+         """t_first = primeira tentativa de login (início da sessão); D = duração após o login."""
+         rng = self.rng
+         t = int(t_first)
+         at, ar, ac = [], [], []
+         for i in range(n_wrong):
+             if i < 5:
+-                at.append(t); ar.append(1); ac.append(4 if rng.random() < .03 else 1)
++                at.append(t)
++                ar.append(1)
++                ac.append(4 if rng.random() < 0.03 else 1)
+             else:
+-                at.append(t); ar.append(2); ac.append(2)
++                at.append(t)
++                ar.append(2)
++                ac.append(2)
+             t += int(rng.uniform(*gap)) + 1
+         if n_wrong >= 5:
+             t += int(rng.uniform(*wait))
+         n_mfa_fail = 0
+-        if mfa and rng.random() < .008:
+-            at.append(t); ar.append(1); ac.append(3); n_mfa_fail = 1
++        if mfa and rng.random() < 0.008:
++            at.append(t)
++            ar.append(1)
++            ac.append(3)
++            n_mfa_fail = 1
+             t += int(rng.uniform(10, 40))
+         t_login = t
+         bd = body if body is not None else [_Z] * 7
+-        D = int(max(D, (bd[0].max() + 1) if len(bd[0]) else 1, 2))
++        duration = int(max(duration, (bd[0].max() + 1) if len(bd[0]) else 1, 2))
+         na = len(at)
+-        lo = int(rng.choice(3, p=[.82, .16, .02])) if lo is None else lo
++        lo = int(rng.choice(3, p=[0.82, 0.16, 0.02])) if lo is None else lo
+         et = np.concatenate([np.zeros(na + 1, np.int64), bd[1], [1]])
+-        tt = np.concatenate([np.array(at, np.int64), [t_login], t_login + bd[0], [t_login + D]])
++        tt = np.concatenate(
++            [np.array(at, np.int64), [t_login], t_login + bd[0], [t_login + duration]]
++        )
+         rs = np.concatenate([np.array(ar, np.int64), [0], bd[6], [0]])
+         rv = np.concatenate([np.zeros(na + 1, np.int64), bd[2], [0]])
+-        a1 = np.concatenate([np.array([1 if c == 3 else 0 for c in ac], np.int64), [int(bool(mfa))], bd[3], [lo]])
++        a1 = np.concatenate(
++            [
++                np.array([1 if c == 3 else 0 for c in ac], np.int64),
++                [int(bool(mfa))],
++                bd[3],
++                [lo],
++            ]
++        )
+         a2 = np.concatenate([np.array(ac, np.int64), [0], bd[4], [0]])
+         a3 = np.concatenate([np.zeros(na + 1, np.int64), bd[5], [0]])
+-        sid = len(self.s['emp'])
++        sid = len(self.s["emp"])
+         n = len(tt)
+-        self.ch.append((tt, et, rs, rv, a1, a2, a3, np.arange(n, dtype=np.int64), np.full(n, sid, np.int64)))
++        self.ch.append(
++            (
++                tt,
++                et,
++                rs,
++                rv,
++                a1,
++                a2,
++                a3,
++                np.arange(n, dtype=np.int64),
++                np.full(n, sid, np.int64),
++            )
++        )
+         s = self.s
+-        s['emp'].append(emp_id); s['dev'].append(dev); s['vpn'].append(bool(vpn)); s['ip'].append(int(ip))
+-        s['t0'].append(int(t_first)); s['t1'].append(int(t_login + D)); s['ep'].append(int(ep))
++        s["emp"].append(emp_id)
++        s["dev"].append(dev)
++        s["vpn"].append(bool(vpn))
++        s["ip"].append(int(ip))
++        s["t0"].append(int(t_first))
++        s["t1"].append(int(t_login + duration))
++        s["ep"].append(int(ep))
+         return sid, t_login
+diff -ru -x tests -x __pycache__ /home/claude/generator_orig/normal.py generator/normal.py
+--- /home/claude/generator_orig/normal.py	2026-11-11 12:40:17.304277548 +0000
++++ generator/normal.py	2026-11-11 12:41:06.927129191 +0000
+@@ -1,211 +1,337 @@
+ """Tráfego legítimo: rotina por persona, calendário (D-27), ruído legítimo e estado diário."""
++
+ import numpy as np
+-from . import config as C
++
++from . import config as cfg
+ from .core import Body
+ from .world import mfa_at, rand_ip
+ 
+-TYPE_MAP = np.array([C.E['FILE_ACCESS'], C.E['FILE_DOWNLOAD'], C.E['WEB_BROWSING'],
+-                     C.E['EXTERNAL_DEVICE'], C.E['SYSTEM_CONFIG']])
+-MIXN = {k: np.array(v) / sum(v) for k, v in C.MIX.items()}
+-DOM_P = np.array(C.DOMAIN_P) / sum(C.DOMAIN_P)
+-PH_BASE = np.array([.25, .55, .15, .05])
++TYPE_MAP = np.array(
++    [
++        cfg.E["FILE_ACCESS"],
++        cfg.E["FILE_DOWNLOAD"],
++        cfg.E["WEB_BROWSING"],
++        cfg.E["EXTERNAL_DEVICE"],
++        cfg.E["SYSTEM_CONFIG"],
++    ]
++)
++MIXN = {k: np.array(v) / sum(v) for k, v in cfg.MIX.items()}
++DOM_P = np.array(cfg.DOMAIN_P) / sum(cfg.DOMAIN_P)
++PH_BASE = np.array([0.25, 0.55, 0.15, 0.05])
+ 
+ 
+-def pick_res(W, rng, e, k):
++def pick_res(world, rng, e, k):
+     r = e.hab_ids[rng.choice(len(e.hab_ids), size=k, p=e.hab_p)]
+-    nov = rng.random(k) < .03                       # novidade legítima: recurso permitido, fora do hábito
++    nov = rng.random(k) < 0.03  # novidade legítima: recurso permitido, fora do hábito
+     if nov.any():
+         r = np.where(nov, rng.choice(e.allowed, size=k), r)
+     return r.astype(np.int64)
+ 
+ 
+-def body_random(W, rng, e, n, D, lunch_off=None, extra=()):
+-    D = int(D)
++def body_random(world, rng, e, n, duration, lunch_off=None, extra=()):
++    duration = int(duration)
+     z = np.zeros(n, np.int64)
+     if n > 0:
+-        if lunch_off is not None and 1800 < lunch_off < D - 3600 - 1800:
+-            raw = rng.uniform(1, D - 3601, n)
++        if lunch_off is not None and 1800 < lunch_off < duration - 3600 - 1800:
++            raw = rng.uniform(1, duration - 3601, n)
+             raw = np.where(raw >= lunch_off, raw + 3600, raw)
+         else:
+-            raw = rng.uniform(1, max(D - 1, 2), n)
++            raw = rng.uniform(1, max(duration - 1, 2), n)
+         dt = raw.astype(np.int64)
+         typ = rng.choice(5, size=n, p=MIXN[e.persona])
+         et = TYPE_MAP[typ]
+         res, a1, a2, a3 = z.copy(), z.copy(), z.copy(), z.copy()
+         fa, fd, wb, ex, sy = (typ == i for i in range(5))
+         k = fa | fd
+-        res[k] = pick_res(W, rng, e, int(k.sum()))
+-        a1[fa] = (rng.random(int(fa.sum())) < .25).astype(np.int64)                 # edit
++        res[k] = pick_res(world, rng, e, int(k.sum()))
++        a1[fa] = (rng.random(int(fa.sum())) < 0.25).astype(np.int64)  # edit
+         m = int(fd.sum())
+         if m:
+-            sens = W.res_sens[res[fd]]
+-            a1[fd] = np.clip(np.exp(rng.normal(np.log(1.2e6) + .35 * sens, 1.0)), 2e3, 6e8).astype(np.int64)
+-            a2[fd] = rng.choice(3, size=m, p=[.955, .04, .005])
+-        a1[wb] = rng.choice(len(C.DOMAINS), size=int(wb.sum()), p=DOM_P)
++            sens = world.res_sens[res[fd]]
++            a1[fd] = np.clip(
++                np.exp(rng.normal(np.log(1.2e6) + 0.35 * sens, 1.0)), 2e3, 6e8
++            ).astype(np.int64)
++            a2[fd] = rng.choice(3, size=m, p=[0.955, 0.04, 0.005])
++        a1[wb] = rng.choice(len(cfg.DOMAINS), size=int(wb.sum()), p=DOM_P)
+         m = int(ex.sum())
+         if m:
+-            a1[ex] = rng.choice(3, size=m, p=[.55, .15, .30])
++            a1[ex] = rng.choice(3, size=m, p=[0.55, 0.15, 0.30])
+             a2[ex] = 1 + rng.poisson(6, m)
+-            a3[ex] = a2[ex] * np.exp(rng.normal(np.log(1.5e6), .8, m)).astype(np.int64)
++            a3[ex] = a2[ex] * np.exp(rng.normal(np.log(1.5e6), 0.8, m)).astype(np.int64)
+         m = int(sy.sum())
+         if m:
+-            if e.persona == 'it_privileged':
+-                a1[sy] = rng.choice([C.SUB['password_change'], C.SUB['permission_grant']], size=m, p=[.35, .65])
++            if e.persona == "it_privileged":
++                a1[sy] = rng.choice(
++                    [cfg.SUB["password_change"], cfg.SUB["permission_grant"]],
++                    size=m,
++                    p=[0.35, 0.65],
++                )
+                 a2[sy] = 1
+-                a3[sy] = rng.choice(W.all_ids, size=m)
++                a3[sy] = rng.choice(world.all_ids, size=m)
+             else:
+-                a1[sy] = C.SUB['password_change']
++                a1[sy] = cfg.SUB["password_change"]
+         arr = [dt, et, res, a1, a2, a3, z.copy()]
+     else:
+         arr = [np.zeros(0, np.int64)] * 7
+     if extra:
+         ex_a = np.array(extra, dtype=np.int64)
+         arr = [np.concatenate([arr[i], ex_a[:, i]]) for i in range(7)]
+-        o = np.argsort(arr[0], kind='stable')
++        o = np.argsort(arr[0], kind="stable")
+         arr = [a[o] for a in arr]
+     return arr
+ 
+ 
+-def body_mobile(rng, e, n, D):
+-    dt = np.sort(rng.uniform(1, max(D - 1, 2), n)).astype(np.int64)
++def body_mobile(rng, e, n, duration):
++    dt = np.sort(rng.uniform(1, max(duration - 1, 2), n)).astype(np.int64)
+     z = np.zeros(n, np.int64)
+-    return [dt, np.full(n, C.E['FILE_ACCESS'], np.int64), rng.choice(e.mob_ids, n).astype(np.int64), z, z, z, z]
++    return [
++        dt,
++        np.full(n, cfg.E["FILE_ACCESS"], np.int64),
++        rng.choice(e.mob_ids, n).astype(np.int64),
++        z,
++        z,
++        z,
++        z,
++    ]
+ 
+ 
+-def _origin(W, S, rng, e, kind, vpn):
++def _origin(world, sink, rng, e, kind, vpn):
+     if vpn:
+-        return S.vpn_ip(), True
+-    if kind == 'office':
++        return sink.vpn_ip(), True
++    if kind == "office":
+         return e.office_ip, False
+-    if kind == 'home':
++    if kind == "home":
+         return e.home_ip, False
+-    return rand_ip(W, rng, int(rng.choice(W.r_ext_dom))), False
++    return rand_ip(world, rng, int(rng.choice(world.r_ext_dom))), False
+ 
+ 
+-def _t(W, e, di, hour):
++def _t(world, e, di, hour):
+     """hora local (float) do dia di -> epoch UTC (D-27/D-40: tz por funcionário)."""
+-    return int(W.day_epoch[di] + int(hour * 3600) - e.tz * 3600)
++    return int(world.day_epoch[di] + int(hour * 3600) - e.tz * 3600)
+ 
+ 
+-def simulate_normal(W, S, rng):
+-    W.all_ids = np.array([e.id for e in W.emps])
+-    for e in W.emps:
+-        p = C.PERSONAS[e.persona]
++def simulate_normal(world, sink, rng):
++    world.all_ids = np.array([e.id for e in world.emps])
++    for e in world.emps:
++        p = cfg.PERSONAS[e.persona]
+         pend = []
+-        for di in range(W.ndays):
++        for di in range(world.ndays):
+             if di < e.hire_idx or e.sick[di]:
+                 continue
+             if di in e.phish:
+                 pend.append(e.phish[di])
+-            wd = int(W.wd[di])
++            wd = int(world.wd[di])
+ 
+-            if not e.works[di]:                                           # residual declarado (D-27)
+-                if e.vac[di]: pr = C.RESIDUAL_P['vacation']
+-                elif e.persona == 'management': pr = C.RESIDUAL_P_MGMT
+-                elif e.persona == 'shift_ops': pr = .03
+-                elif W.is_hol[di]: pr = C.RESIDUAL_P['holiday']
+-                else: pr = C.RESIDUAL_P['weekend']
++            if not e.works[di]:  # residual declarado (D-27)
++                if e.vac[di]:
++                    pr = cfg.RESIDUAL_P["vacation"]
++                elif e.persona == "management":
++                    pr = cfg.RESIDUAL_P_MGMT
++                elif e.persona == "shift_ops":
++                    pr = 0.03
++                elif world.is_hol[di]:
++                    pr = cfg.RESIDUAL_P["holiday"]
++                else:
++                    pr = cfg.RESIDUAL_P["weekend"]
+                 if rng.random() < pr:
+-                    hs = rng.uniform(9, 20); vpn = rng.random() < .5
+-                    ip, vpn = _origin(W, S, rng, e, 'home', vpn)
+-                    t0 = _t(W, e, di, hs)
+-                    D = rng.uniform(600, 2700)
+-                    S.session(e.id, t0, D, body_mobile(rng, e, int(rng.integers(3, 9)), D), ip, vpn,
+-                              e.dev_nb, mfa_at(W, e, t0))
++                    hs = rng.uniform(9, 20)
++                    vpn = rng.random() < 0.5
++                    ip, vpn = _origin(world, sink, rng, e, "home", vpn)
++                    t0 = _t(world, e, di, hs)
++                    duration = rng.uniform(600, 2700)
++                    sink.session(
++                        e.id,
++                        t0,
++                        duration,
++                        body_mobile(rng, e, int(rng.integers(3, 9)), duration),
++                        ip,
++                        vpn,
++                        e.dev_nb,
++                        mfa_at(world, e, t0),
++                    )
+                 continue
+ 
+-            mu = e.mu * (1.45 if (e.persona == 'sales_traveler' and W.month_end[di]) else 1.0)
+-            if e.dept == 'admin_finance' and W.month_end[di]: mu *= 1.3
+-            n_tot = max(10, int(rng.lognormal(np.log(mu) - .5 * .22 ** 2, .22)))
++            mu = e.mu * (
++                1.45 if (e.persona == "sales_traveler" and world.month_end[di]) else 1.0
++            )
++            if e.dept == "admin_finance" and world.month_end[di]:
++                mu *= 1.3
++            n_tot = max(10, int(rng.lognormal(np.log(mu) - 0.5 * 0.22**2, 0.22)))
+ 
+             # horário (hora local) -----------------------------------------------------------
+-            if e.persona == 'shift_ops':
+-                hs = {0: 6.0, 1: 14.0, 2: 22.0}[e.shift] + rng.normal(0, .15)
+-                span = rng.normal(8.0, .15)
++            if e.persona == "shift_ops":
++                hs = {0: 6.0, 1: 14.0, 2: 22.0}[e.shift] + rng.normal(0, 0.15)
++                span = rng.normal(8.0, 0.15)
+             else:
+-                hs = float(np.clip(rng.normal(p['start'] + e.bias, .4), 5.5, 11.5))
+-                span = rng.normal(9.3, .8) if e.persona == 'management' else rng.normal(p['span'] - .4, .6)
+-                if e.dept == 'operations_support' and e.site == 'MAO' and rng.random() < .2:
+-                    span = rng.uniform(21.0, 21.8) - hs                      # D-40: encerra 21:30 em Manaus
++                hs = float(np.clip(rng.normal(p["start"] + e.bias, 0.4), 5.5, 11.5))
++                span = (
++                    rng.normal(9.3, 0.8)
++                    if e.persona == "management"
++                    else rng.normal(p["span"] - 0.4, 0.6)
++                )
++                if (
++                    e.dept == "operations_support"
++                    and e.site == "MAO"
++                    and rng.random() < 0.2
++                ):
++                    span = rng.uniform(21.0, 21.8) - hs  # D-40: encerra 21:30 em Manaus
+                 span = max(span, 4.0)
+             # local de acesso ----------------------------------------------------------------
+-            kind, vpn, r = 'office', False, rng.random()
+-            if e.persona == 'hybrid_eng' and wd in e.home_days:
+-                kind, vpn = 'home', rng.random() < .6
+-            elif e.persona == 'sales_traveler':
+-                if r < .30: kind, vpn = 'external', rng.random() < .55
+-                elif r < .45: kind, vpn = 'home', rng.random() < .5
+-            elif e.persona == 'it_privileged' and r < .2:
+-                kind, vpn = 'home', rng.random() < .8
+-            elif e.persona == 'management' and r < .08:
+-                kind, vpn = 'home', rng.random() < .7
+-            ip, vpn = _origin(W, S, rng, e, kind, vpn)
++            kind, vpn, r = "office", False, rng.random()
++            if e.persona == "hybrid_eng" and wd in e.home_days:
++                kind, vpn = "home", rng.random() < 0.6
++            elif e.persona == "sales_traveler":
++                if r < 0.30:
++                    kind, vpn = "external", rng.random() < 0.55
++                elif r < 0.45:
++                    kind, vpn = "home", rng.random() < 0.5
++            elif e.persona == "it_privileged" and r < 0.2:
++                kind, vpn = "home", rng.random() < 0.8
++            elif e.persona == "management" and r < 0.08:
++                kind, vpn = "home", rng.random() < 0.7
++            ip, vpn = _origin(world, sink, rng, e, kind, vpn)
+ 
+             # sessões extras (noite da gestão, celular) --------------------------------------
+             extras, n_extra = [], 0
+-            if e.persona == 'management' and rng.random() < .30:
+-                n = int(rng.integers(6, 13)); n_extra += n + 2
+-                extras.append(('eve', 20 + rng.uniform(0, 1), rng.uniform(.7, 1.8) * 3600, n))
+-            if e.dev_ph and rng.random() < .35:
+-                n = int(rng.integers(3, 9)); n_extra += n + 2
+-                extras.append(('mob', 18.5 + rng.uniform(0, 3), rng.uniform(300, 1500), n))
++            if e.persona == "management" and rng.random() < 0.30:
++                n = int(rng.integers(6, 13))
++                n_extra += n + 2
++                extras.append(
++                    ("eve", 20 + rng.uniform(0, 1), rng.uniform(0.7, 1.8) * 3600, n)
++                )
++            if e.dev_ph and rng.random() < 0.35:
++                n = int(rng.integers(3, 9))
++                n_extra += n + 2
++                extras.append(
++                    ("mob", 18.5 + rng.uniform(0, 3), rng.uniform(300, 1500), n)
++                )
+ 
+             # sessão principal ---------------------------------------------------------------
+             n_core = max(4, n_tot - 2 - n_extra)
+-            t0 = _t(W, e, di, hs)
+-            D = span * 3600
++            t0 = _t(world, e, di, hs)
++            duration = span * 3600
+             extra_ev = []
+             while pend:
+                 m = pend.pop(0)
+-                if (e.id, m) in W.phish_force: oc = W.phish_force[(e.id, m)]
++                if (e.id, m) in world.phish_force:
++                    oc = world.phish_force[(e.id, m)]
+                 else:
+-                    pr = PH_BASE.copy(); pr[2:] *= e.susc; pr /= pr.sum()
++                    pr = PH_BASE.copy()
++                    pr[2:] *= e.susc
++                    pr /= pr.sum()
+                     oc = int(rng.choice(4, p=pr))
+-                extra_ev.append((int(rng.uniform(.1, .9) * D), C.E['PHISHING_SIM'], 0, m, oc, 0, 0))
+-            lunch = None if e.persona == 'shift_ops' else int((12.25 - hs) * 3600)
+-            body = body_random(W, rng, e, n_core, D, lunch, extra_ev)
++                extra_ev.append(
++                    (
++                        int(rng.uniform(0.1, 0.9) * duration),
++                        cfg.E["PHISHING_SIM"],
++                        0,
++                        m,
++                        oc,
++                        0,
++                        0,
++                    )
++                )
++            lunch = None if e.persona == "shift_ops" else int((12.25 - hs) * 3600)
++            body = body_random(world, rng, e, n_core, duration, lunch, extra_ev)
+             p1 = e.p_err * (1.6 if (wd == 0 or (di > 0 and e.vac[di - 1])) else 1.0)
+             nw = 0
+             while rng.random() < p1 and nw < 6:
+-                nw += 1; p1 = .30
+-            S.session(e.id, t0, D, body, ip, vpn, e.dev_nb, mfa_at(W, e, t0), n_wrong=nw)
++                nw += 1
++                p1 = 0.30
++            sink.session(
++                e.id,
++                t0,
++                duration,
++                body,
++                ip,
++                vpn,
++                e.dev_nb,
++                mfa_at(world, e, t0),
++                n_wrong=nw,
++            )
+ 
+             for kd, h, dd, n in extras:
+-                if kd == 'eve':
+-                    ip2, v2 = _origin(W, S, rng, e, 'home', rng.random() < .7)
+-                    tt = _t(W, e, di, h)
+-                    S.session(e.id, tt, dd, body_random(W, rng, e, n, dd), ip2, v2, e.dev_nb, mfa_at(W, e, tt))
++                if kd == "eve":
++                    ip2, v2 = _origin(world, sink, rng, e, "home", rng.random() < 0.7)
++                    tt = _t(world, e, di, h)
++                    sink.session(
++                        e.id,
++                        tt,
++                        dd,
++                        body_random(world, rng, e, n, dd),
++                        ip2,
++                        v2,
++                        e.dev_nb,
++                        mfa_at(world, e, tt),
++                    )
+                 else:
+-                    ip2, v2 = _origin(W, S, rng, e, 'home', rng.random() < .2)
+-                    tt = _t(W, e, di, h)
+-                    S.session(e.id, tt, dd, body_mobile(rng, e, n, dd), ip2, v2, e.dev_ph, mfa_at(W, e, tt))
++                    ip2, v2 = _origin(world, sink, rng, e, "home", rng.random() < 0.2)
++                    tt = _t(world, e, di, h)
++                    sink.session(
++                        e.id,
++                        tt,
++                        dd,
++                        body_mobile(rng, e, n, dd),
++                        ip2,
++                        v2,
++                        e.dev_ph,
++                        mfa_at(world, e, tt),
++                    )
+ 
+             # janela de manutenção noturna (N06) ---------------------------------------------
+-            if (e.id, di) in W.maint:
+-                ep = S.episode('N', 'N06_manutencao_noturna_ti', e.id, 'janela de manutenção noturna legítima (D-38)', False)
+-                n = int(rng.integers(60, 111)); Dm = rng.uniform(3.5, 4.5) * 3600
+-                bd = Body(); cons = W.sys_ids['console']
+-                for dt in np.sort(rng.uniform(1, Dm - 1, n)):
++            if (e.id, di) in world.maint:
++                ep = sink.episode(
++                    "N",
++                    "N06_manutencao_noturna_ti",
++                    e.id,
++                    "janela de manutenção noturna legítima (D-38)",
++                    False,
++                )
++                n = int(rng.integers(60, 111))
++                dm = rng.uniform(3.5, 4.5) * 3600
++                bd = Body()
++                cons = world.sys_ids["console"]
++                for dt in np.sort(rng.uniform(1, dm - 1, n)):
+                     u = rng.random()
+-                    if u < .55: bd.add(dt, C.E['FILE_ACCESS'], rng.choice(cons))
+-                    elif u < .80: bd.add(dt, C.E['SYSTEM_CONFIG'], 0, C.SUB['permission_grant'], 1, int(rng.choice(W.all_ids)))
+-                    else: bd.add(dt, C.E['FILE_ACCESS'], pick_res(W, rng, e, 1)[0])
+-                vpn = rng.random() < .6
+-                ip2, v2 = _origin(W, S, rng, e, 'home' if vpn else 'office', vpn)
+-                tt = _t(W, e, di, 22.0)
+-                S.session(e.id, tt, Dm, bd.arrays(), ip2, v2, e.dev_nb, mfa_at(W, e, tt), ep=ep)
++                    if u < 0.55:
++                        bd.add(dt, cfg.E["FILE_ACCESS"], rng.choice(cons))
++                    elif u < 0.80:
++                        bd.add(
++                            dt,
++                            cfg.E["SYSTEM_CONFIG"],
++                            0,
++                            cfg.SUB["permission_grant"],
++                            1,
++                            int(rng.choice(world.all_ids)),
++                        )
++                    else:
++                        bd.add(dt, cfg.E["FILE_ACCESS"], pick_res(world, rng, e, 1)[0])
++                vpn = rng.random() < 0.6
++                ip2, v2 = _origin(world, sink, rng, e, "home" if vpn else "office", vpn)
++                tt = _t(world, e, di, 22.0)
++                sink.session(
++                    e.id,
++                    tt,
++                    dm,
++                    bd.arrays(),
++                    ip2,
++                    v2,
++                    e.dev_nb,
++                    mfa_at(world, e, tt),
++                    ep=ep,
++                )
+ 
+ 
+-def device_states(W, rng):
++def device_states(world, rng):
+     """Estado diário do notebook (seção 4): idade do patch e antivírus ativo."""
+     dev, day, age_l, av_l = [], [], [], []
+-    n = W.ndays
+-    for e in W.emps:
+-        med = C.PATCH_MEDIAN.get(e.dept, C.PATCH_MEDIAN['default'])
+-        nop = W.dev_nopatch.get(e.dev_nb)
++    n = world.ndays
++    for e in world.emps:
++        med = cfg.PATCH_MEDIAN.get(e.dept, cfg.PATCH_MEDIAN["default"])
++        nop = world.dev_nopatch.get(e.dev_nb)
+         age = int(rng.integers(0, 2 * med + 1))
+         reset = rng.random(n) < 1.0 / (2 * med)
+-        av = rng.random(n) > .005
++        av = rng.random(n) > 0.005
+         ages = np.empty(n, np.int64)
+         for di in range(n):
+             if reset[di] and not (nop is not None and di >= nop):
+@@ -213,5 +339,13 @@
+             else:
+                 age += 1
+             ages[di] = age
+-        dev.append(np.full(n, e.dev_nb)); day.append(np.arange(n)); age_l.append(ages); av_l.append(av)
+-    return (np.concatenate(dev), np.concatenate(day), np.concatenate(age_l), np.concatenate(av_l))
++        dev.append(np.full(n, e.dev_nb))
++        day.append(np.arange(n))
++        age_l.append(ages)
++        av_l.append(av)
++    return (
++        np.concatenate(dev),
++        np.concatenate(day),
++        np.concatenate(age_l),
++        np.concatenate(av_l),
++    )
+diff -ru -x tests -x __pycache__ /home/claude/generator_orig/output.py generator/output.py
+--- /home/claude/generator_orig/output.py	2026-11-11 12:40:17.304306233 +0000
++++ generator/output.py	2026-11-11 12:41:06.927129191 +0000
+@@ -1,155 +1,329 @@
+ """Montagem dos eventos, tabelas de apoio, ground truth e escrita em disco."""
+-import gzip, os
++
++import gzip
++import os
++
+ import numpy as np
+ import pandas as pd
+-from . import config as C
++
++from . import config as cfg
+ from .world import ip_str
+ 
+-ET = np.array(C.ETYPES, dtype=object)
+-RS = np.array(C.RESULTS, dtype=object)
+-_LOGIN = np.array([f'{{"mfa_used":{"true" if m else "false"},"failure_reason":{("null" if not r else chr(34) + C.FAIL_REASONS[r] + chr(34))}}}'
+-                   for m in (0, 1) for r in range(5)], dtype=object)
+-_LOGOUT = np.array([f'{{"reason":"{r}"}}' for r in C.LOGOUT_REASONS], dtype=object)
+-_FA = np.array([f'{{"action":"{a}"}}' for a in C.ACTIONS], dtype=object)
+-_WEB = np.array([f'{{"domain":"{d}","category":"{c}"}}' for d, c in C.DOMAINS], dtype=object)
++ET = np.array(cfg.ETYPES, dtype=object)
++RS = np.array(cfg.RESULTS, dtype=object)
++_LOGIN = np.array(
++    [
++        f'{{"mfa_used":{"true" if m else "false"},"failure_reason":{("null" if not r else chr(34) + cfg.FAIL_REASONS[r] + chr(34))}}}'
++        for m in (0, 1)
++        for r in range(5)
++    ],
++    dtype=object,
++)
++_LOGOUT = np.array([f'{{"reason":"{r}"}}' for r in cfg.LOGOUT_REASONS], dtype=object)
++_FA = np.array([f'{{"action":"{a}"}}' for a in cfg.ACTIONS], dtype=object)
++_WEB = np.array(
++    [f'{{"domain":"{d}","category":"{c}"}}' for d, c in cfg.DOMAINS], dtype=object
++)
+ 
+ 
+ class Run:
+     pass
+ 
+ 
+-def assemble(W, S, run_id, seed):
+-    R = Run(); R.W, R.run_id, R.seed = W, run_id, seed
+-    cols = [np.concatenate(c) for c in zip(*S.ch)]
++def assemble(world, sink, run_id, seed):
++    data = Run()
++    data.W, data.run_id, data.seed = world, run_id, seed
++    cols = [np.concatenate(c) for c in zip(*sink.ch)]
+     t, et, rs, rv, a1, a2, a3, seq, sid = cols
+-    s = {k: np.array(v) for k, v in S.s.items()}
+-    lo_w, hi_w = W.day_epoch[0] + 3 * 3600, W.day_epoch[-1] + 86400 + 3 * 3600      # janela simulada em UTC
+-    ok_s = (s['t0'] >= lo_w) & (s['t1'] < hi_w)                                    # sessão inteira dentro da janela
++    s = {k: np.array(v) for k, v in sink.s.items()}
++    lo_w, hi_w = (
++        world.day_epoch[0] + 3 * 3600,
++        world.day_epoch[-1] + 86400 + 3 * 3600,
++    )  # janela simulada em UTC
++    ok_s = (s["t0"] >= lo_w) & (s["t1"] < hi_w)  # sessão inteira dentro da janela
+     remap = np.cumsum(ok_s) - 1
+     keep = ok_s[sid]
+-    t, et, rs, rv, a1, a2, a3, seq, sid = [c[keep] for c in (t, et, rs, rv, a1, a2, a3, seq, sid)]
++    t, et, rs, rv, a1, a2, a3, seq, sid = [
++        c[keep] for c in (t, et, rs, rv, a1, a2, a3, seq, sid)
++    ]
+     sid = remap[sid]
+     s = {k: v[ok_s] for k, v in s.items()}
+     o = np.lexsort((seq, sid, t))
+-    R.t, R.et, R.rs, R.rv, R.a1, R.a2, R.a3, R.sid = [c[o] for c in (t, et, rs, rv, a1, a2, a3, sid)]
+-    R.s = s
+-    R.nS, R.N = len(s['emp']), len(R.t)
++    data.t, data.et, data.rs, data.rv, data.a1, data.a2, data.a3, data.sid = [
++        c[o] for c in (t, et, rs, rv, a1, a2, a3, sid)
++    ]
++    data.s = s
++    data.nS, data.N = len(s["emp"]), len(data.t)
+     rng = np.random.default_rng([seed, run_id, 5])
+-    b = rng.integers(0, 256, (R.nS, 16), dtype=np.uint8)
+-    b[:, 6] = (b[:, 6] & 0x0f) | 0x40; b[:, 8] = (b[:, 8] & 0x3f) | 0x80
++    b = rng.integers(0, 256, (data.nS, 16), dtype=np.uint8)
++    b[:, 6] = (b[:, 6] & 0x0F) | 0x40
++    b[:, 8] = (b[:, 8] & 0x3F) | 0x80
+     h = b.tobytes().hex()
+-    R.s_uuid = np.array([f'{h[i:i+8]}-{h[i+8:i+12]}-{h[i+12:i+16]}-{h[i+16:i+20]}-{h[i+20:i+32]}' for i in range(0, R.nS * 32, 32)], dtype=object)
+-    R.s_ipstr = np.array([ip_str(i) for i in s['ip']], dtype=object)
+-    R.lat = np.minimum(np.exp(rng.normal(np.log(2.0), .6, R.N)) + (rng.random(R.N) < .03) * rng.exponential(300, R.N), 3600).astype(np.int64) + 1
+-    R.eps = pd.DataFrame(S.eps, columns=['episode_id', 'family', 'scenario_code', 'employee_id', 'description', 'is_malicious'])
+-    R.eps['scenario_code'] = R.eps.scenario_code.str[:3]
+-    R.eps = R.eps[R.eps.episode_id.isin(np.unique(s['ep'][s['ep'] >= 0]))].reset_index(drop=True)
+-    return R
++    data.s_uuid = np.array(
++        [
++            f"{h[i : i + 8]}-{h[i + 8 : i + 12]}-{h[i + 12 : i + 16]}-{h[i + 16 : i + 20]}-{h[i + 20 : i + 32]}"
++            for i in range(0, data.nS * 32, 32)
++        ],
++        dtype=object,
++    )
++    data.s_ipstr = np.array([ip_str(i) for i in s["ip"]], dtype=object)
++    data.lat = (
++        np.minimum(
++            np.exp(rng.normal(np.log(2.0), 0.6, data.N))
++            + (rng.random(data.N) < 0.03) * rng.exponential(300, data.N),
++            3600,
++        ).astype(np.int64)
++        + 1
++    )
++    data.eps = pd.DataFrame(
++        sink.eps,
++        columns=[
++            "episode_id",
++            "family",
++            "scenario_code",
++            "employee_id",
++            "description",
++            "is_malicious",
++        ],
++    )
++    data.eps["scenario_code"] = data.eps.scenario_code.str[:3]
++    data.eps = data.eps[
++        data.eps.episode_id.isin(np.unique(s["ep"][s["ep"] >= 0]))
++    ].reset_index(drop=True)
++    return data
+ 
+ 
+-def _attrs(R, lo, hi):
+-    et, a1, a2, a3 = R.et[lo:hi], R.a1[lo:hi], R.a2[lo:hi], R.a3[lo:hi]
++def _attrs(data, lo, hi):
++    et, a1, a2, a3 = data.et[lo:hi], data.a1[lo:hi], data.a2[lo:hi], data.a3[lo:hi]
+     out = np.empty(len(et), dtype=object)
+-    m = et == 0; out[m] = _LOGIN[a1[m] * 5 + a2[m]]
+-    m = et == 1; out[m] = _LOGOUT[a1[m]]
+-    m = et == 2; out[m] = _FA[a1[m]]
+-    m = et == 3; out[m] = ['{"size_bytes":%d,"destination":"%s"}' % (s, C.DESTS[d]) for s, d in zip(a1[m], a2[m])]
+-    m = et == 4; out[m] = ['{"device_type":"%s","files_copied_count":%d,"bytes_copied":%d}' % (C.DEVTYPES[d], f, b) for d, f, b in zip(a1[m], a2[m], a3[m])]
+-    m = et == 5; out[m] = _WEB[a1[m]]
+-    m = et == 6; out[m] = ['{"action_subtype":"%s","initiated_by":"%s","target_employee_id":%s}' % (C.SUBTYPES[a], C.INITIATORS[i], 'null' if not tg else tg) for a, i, tg in zip(a1[m], a2[m], a3[m])]
+-    m = et == 7; out[m] = ['{"campaign_id":"camp-%d","outcome":"%s"}' % (c, C.OUTCOMES[o]) for c, o in zip(a1[m], a2[m])]
++    m = et == 0
++    out[m] = _LOGIN[a1[m] * 5 + a2[m]]
++    m = et == 1
++    out[m] = _LOGOUT[a1[m]]
++    m = et == 2
++    out[m] = _FA[a1[m]]
++    m = et == 3
++    out[m] = [
++        '{"size_bytes":%d,"destination":"%s"}' % (s, cfg.DESTS[d])
++        for s, d in zip(a1[m], a2[m])
++    ]
++    m = et == 4
++    out[m] = [
++        '{"device_type":"%s","files_copied_count":%d,"bytes_copied":%d}'
++        % (cfg.DEVTYPES[d], f, b)
++        for d, f, b in zip(a1[m], a2[m], a3[m])
++    ]
++    m = et == 5
++    out[m] = _WEB[a1[m]]
++    m = et == 6
++    out[m] = [
++        '{"action_subtype":"%s","initiated_by":"%s","target_employee_id":%s}'
++        % (cfg.SUBTYPES[a], cfg.INITIATORS[i], "null" if not tg else tg)
++        for a, i, tg in zip(a1[m], a2[m], a3[m])
++    ]
++    m = et == 7
++    out[m] = [
++        '{"campaign_id":"camp-%d","outcome":"%s"}' % (c, cfg.OUTCOMES[o])
++        for c, o in zip(a1[m], a2[m])
++    ]
+     return out
+ 
+ 
+ def _uuids(n, rng):
+     b = rng.integers(0, 256, (n, 16), dtype=np.uint8)
+-    b[:, 6] = (b[:, 6] & 0x0f) | 0x40; b[:, 8] = (b[:, 8] & 0x3f) | 0x80
++    b[:, 6] = (b[:, 6] & 0x0F) | 0x40
++    b[:, 8] = (b[:, 8] & 0x3F) | 0x80
+     h = b.tobytes().hex()
+-    return [f'{h[i:i+8]}-{h[i+8:i+12]}-{h[i+12:i+16]}-{h[i+16:i+20]}-{h[i+20:i+32]}' for i in range(0, n * 32, 32)]
++    return [
++        f"{h[i : i + 8]}-{h[i + 8 : i + 12]}-{h[i + 12 : i + 16]}-{h[i + 16 : i + 20]}-{h[i + 20 : i + 32]}"
++        for i in range(0, n * 32, 32)
++    ]
+ 
+ 
+ def _iso(t):
+-    return np.datetime_as_string(t.astype('datetime64[s]'), unit='s', timezone='UTC')
++    return np.datetime_as_string(t.astype("datetime64[s]"), unit="s", timezone="UTC")
+ 
+ 
+-def write(R, out_dir, slice_n=250_000):
+-    W = R.W
+-    base = os.path.join(out_dir, f'run_{R.run_id:03d}')
+-    for d in ('corp', 'ground_truth'): os.makedirs(os.path.join(base, d), exist_ok=True)
+-    corp, gt = os.path.join(base, 'corp'), os.path.join(base, 'ground_truth')
+-    s = R.s; R.mal_by_id = np.zeros(int(R.eps.episode_id.max()) + 1 if len(R.eps) else 1, np.int64); R.mal_by_id[R.eps.episode_id.values] = R.eps.is_malicious.values
+-    ep_of_event_total = np.zeros(int(R.eps.episode_id.max()) + 1 if len(R.eps) else 1, np.int64)
+-    rng = np.random.default_rng([R.seed, R.run_id, 9])
+-    with gzip.open(f'{corp}/events.csv.gz', 'wt') as fe, gzip.open(f'{gt}/event_labels.csv.gz', 'wt') as fl:
++def write(data, out_dir, slice_n=250_000):
++    world = data.W
++    base = os.path.join(out_dir, f"run_{data.run_id:03d}")
++    for d in ("corp", "ground_truth"):
++        os.makedirs(os.path.join(base, d), exist_ok=True)
++    corp, gt = os.path.join(base, "corp"), os.path.join(base, "ground_truth")
++    s = data.s
++    data.mal_by_id = np.zeros(
++        int(data.eps.episode_id.max()) + 1 if len(data.eps) else 1, np.int64
++    )
++    data.mal_by_id[data.eps.episode_id.values] = data.eps.is_malicious.values
++    ep_of_event_total = np.zeros(
++        int(data.eps.episode_id.max()) + 1 if len(data.eps) else 1, np.int64
++    )
++    rng = np.random.default_rng([data.seed, data.run_id, 9])
++    with (
++        gzip.open(f"{corp}/events.csv.gz", "wt") as fe,
++        gzip.open(f"{gt}/event_labels.csv.gz", "wt") as fl,
++    ):
+         first = True
+-        for lo in range(0, R.N, slice_n):
+-            hi = min(R.N, lo + slice_n); sid = R.sid[lo:hi]
++        for lo in range(0, data.N, slice_n):
++            hi = min(data.N, lo + slice_n)
++            sid = data.sid[lo:hi]
+             eid = np.array(_uuids(hi - lo, rng), dtype=object)
+-            rv = pd.Series(R.rv[lo:hi]).where(lambda x: x > 0).astype('Int64')
+-            df = pd.DataFrame({
+-                'run_id': R.run_id, 'event_id': eid, 'employee_id': s['emp'][sid],
+-                'occurred_at': _iso(R.t[lo:hi]), 'ingested_at': _iso(R.t[lo:hi] + R.lat[lo:hi]),
+-                'event_type': ET[R.et[lo:hi]], 'result': RS[R.rs[lo:hi]],
+-                'ip_address': R.s_ipstr[sid], 'device_id': s['dev'][sid], 'session_id': R.s_uuid[sid],
+-                'resource_id': rv, 'is_vpn': s['vpn'][sid], 'attributes': _attrs(R, lo, hi)})
+-            df.to_csv(fe, index=False, header=first); first = False
+-            ep = s['ep'][sid]; m = ep >= 0
++            rv = pd.Series(data.rv[lo:hi]).where(lambda x: x > 0).astype("Int64")
++            df = pd.DataFrame(
++                {
++                    "run_id": data.run_id,
++                    "event_id": eid,
++                    "employee_id": s["emp"][sid],
++                    "occurred_at": _iso(data.t[lo:hi]),
++                    "ingested_at": _iso(data.t[lo:hi] + data.lat[lo:hi]),
++                    "event_type": ET[data.et[lo:hi]],
++                    "result": RS[data.rs[lo:hi]],
++                    "ip_address": data.s_ipstr[sid],
++                    "device_id": s["dev"][sid],
++                    "session_id": data.s_uuid[sid],
++                    "resource_id": rv,
++                    "is_vpn": s["vpn"][sid],
++                    "attributes": _attrs(data, lo, hi),
++                }
++            )
++            df.to_csv(fe, index=False, header=first)
++            first = False
++            ep = s["ep"][sid]
++            m = ep >= 0
+             if m.any():
+-                lab = pd.DataFrame({'run_id': R.run_id, 'event_id': eid[m], 'episode_id': ep[m],
+-                                    'label': np.where(R.mal_by_id[ep[m]] == 1, 'malicious', 'benign')})
++                lab = pd.DataFrame(
++                    {
++                        "run_id": data.run_id,
++                        "event_id": eid[m],
++                        "episode_id": ep[m],
++                        "label": np.where(
++                            data.mal_by_id[ep[m]] == 1, "malicious", "benign"
++                        ),
++                    }
++                )
+                 lab.to_csv(fl, index=False, header=(lo == 0))
+                 np.add.at(ep_of_event_total, ep[m], 1)
+     # --- tabelas de apoio -------------------------------------------------------------
+-    emps = pd.DataFrame([dict(employee_id=e.id, department=e.dept, role=e.persona, manager_id=None, persona=e.persona,
+-                              privileged=e.priv0 > 0, site={'SP': 'vila_sede', 'MAO': 'porto_verde'}[e.site],
+-                              timezone=f'UTC{e.tz:+d}', hired_at=e.hired) for e in W.emps])
+-    head = emps.groupby('department').employee_id.transform('min')
+-    emps['manager_id'] = np.where(emps.employee_id == head, None, head).astype(object)
+-    emps.to_csv(f'{corp}/employees.csv', index=False)
+-    pd.DataFrame(W.res).to_csv(f'{corp}/resources.csv', index=False)
+-    pd.DataFrame(W.devices).to_csv(f'{corp}/devices.csv', index=False)
+-    pd.DataFrame([{k: r[k] for k in ('cidr', 'type', 'country', 'city')} for r in W.ranges]).to_csv(f'{corp}/network_ranges.csv', index=False)
+-    pd.DataFrame({'session_id': R.s_uuid, 'employee_id': s['emp'], 'started_at': _iso(s['t0']), 'ended_at': _iso(s['t1']),
+-                  'is_vpn': s['vpn'], 'device_id': s['dev']}).to_csv(f'{corp}/sessions.csv', index=False)
+-    hr = [dict(employee_id=e.id, kind='vacation', start_date=W.days[a], end_date=W.days[b]) for e in W.emps for a, b in e.vac_blocks]
+-    hr += [dict(employee_id=i, kind=k, start_date=W.days[a], end_date=W.days[b]) for i, k, a, b in W.hr_extra]
+-    pd.DataFrame(hr).to_csv(f'{corp}/hr_calendar.csv', index=False)
+-    _account_state(R, corp)
+-    _device_state(R, corp)
++    emps = pd.DataFrame(
++        [
++            dict(
++                employee_id=e.id,
++                department=e.dept,
++                role=e.persona,
++                manager_id=None,
++                persona=e.persona,
++                privileged=e.priv0 > 0,
++                site={"SP": "vila_sede", "MAO": "porto_verde"}[e.site],
++                timezone=f"UTC{e.tz:+d}",
++                hired_at=e.hired,
++            )
++            for e in world.emps
++        ]
++    )
++    head = emps.groupby("department").employee_id.transform("min")
++    emps["manager_id"] = np.where(emps.employee_id == head, None, head).astype(object)
++    emps.to_csv(f"{corp}/employees.csv", index=False)
++    pd.DataFrame(world.res).to_csv(f"{corp}/resources.csv", index=False)
++    pd.DataFrame(world.devices).to_csv(f"{corp}/devices.csv", index=False)
++    pd.DataFrame(
++        [{k: r[k] for k in ("cidr", "type", "country", "city")} for r in world.ranges]
++    ).to_csv(f"{corp}/network_ranges.csv", index=False)
++    pd.DataFrame(
++        {
++            "session_id": data.s_uuid,
++            "employee_id": s["emp"],
++            "started_at": _iso(s["t0"]),
++            "ended_at": _iso(s["t1"]),
++            "is_vpn": s["vpn"],
++            "device_id": s["dev"],
++        }
++    ).to_csv(f"{corp}/sessions.csv", index=False)
++    hr = [
++        dict(
++            employee_id=e.id,
++            kind="vacation",
++            start_date=world.days[a],
++            end_date=world.days[b],
++        )
++        for e in world.emps
++        for a, b in e.vac_blocks
++    ]
++    hr += [
++        dict(employee_id=i, kind=k, start_date=world.days[a], end_date=world.days[b])
++        for i, k, a, b in world.hr_extra
++    ]
++    pd.DataFrame(hr).to_csv(f"{corp}/hr_calendar.csv", index=False)
++    _account_state(data, corp)
++    _device_state(data, corp)
+     # --- gabarito -------------------------------------------------------------------
+-    eps = R.eps.copy(); eps.insert(1, 'run_id', R.run_id)
+-    t0 = pd.Series(s['t0']).groupby(s['ep']).min(); t1 = pd.Series(s['t1']).groupby(s['ep']).max()
+-    eps['started_at'] = _iso(t0.reindex(eps.episode_id).values.astype(np.int64))
+-    eps['ended_at'] = _iso(t1.reindex(eps.episode_id).values.astype(np.int64))
+-    eps['n_events'] = ep_of_event_total[eps.episode_id.values]
+-    eps['catalog_version'] = 'provisorio-v1'
+-    eps.to_csv(f'{gt}/episodes.csv', index=False)
++    eps = data.eps.copy()
++    eps.insert(1, "run_id", data.run_id)
++    t0 = pd.Series(s["t0"]).groupby(s["ep"]).min()
++    t1 = pd.Series(s["t1"]).groupby(s["ep"]).max()
++    eps["started_at"] = _iso(t0.reindex(eps.episode_id).values.astype(np.int64))
++    eps["ended_at"] = _iso(t1.reindex(eps.episode_id).values.astype(np.int64))
++    eps["n_events"] = ep_of_event_total[eps.episode_id.values]
++    eps["catalog_version"] = "provisorio-v1"
++    eps.to_csv(f"{gt}/episodes.csv", index=False)
+     return base
+ 
+ 
+-def _account_state(R, corp):
+-    W = R.W; m = (R.et == C.E['SYSTEM_CONFIG']) & (R.rs == 0) & np.isin(R.a1, [C.SUB['mfa_disabled'], C.SUB['mfa_enabled'], C.SUB['privilege_escalation']])
+-    emp_ev = R.s['emp'][R.sid[m]]; tgt = np.where(R.a3[m] > 0, R.a3[m], emp_ev)
+-    st = {e.id: [(int(W.day_epoch[0]), e.mfa0, e.priv0)] for e in W.emps}
+-    for t, a, eid in zip(R.t[m], R.a1[m], tgt):
++def _account_state(data, corp):
++    world = data.W
++    m = (
++        (data.et == cfg.E["SYSTEM_CONFIG"])
++        & (data.rs == 0)
++        & np.isin(
++            data.a1,
++            [
++                cfg.SUB["mfa_disabled"],
++                cfg.SUB["mfa_enabled"],
++                cfg.SUB["privilege_escalation"],
++            ],
++        )
++    )
++    emp_ev = data.s["emp"][data.sid[m]]
++    tgt = np.where(data.a3[m] > 0, data.a3[m], emp_ev)
++    st = {e.id: [(int(world.day_epoch[0]), e.mfa0, e.priv0)] for e in world.emps}
++    for t, a, eid in zip(data.t[m], data.a1[m], tgt):
+         _, mfa, pv = st[int(eid)][-1]
+-        if a == C.SUB['mfa_disabled']: mfa = False
+-        elif a == C.SUB['mfa_enabled']: mfa = True
+-        else: pv = min(2, pv + 1)
++        if a == cfg.SUB["mfa_disabled"]:
++            mfa = False
++        elif a == cfg.SUB["mfa_enabled"]:
++            mfa = True
++        else:
++            pv = min(2, pv + 1)
+         st[int(eid)].append((int(t), mfa, pv))
+     rows = []
+-    for eid, L in st.items():
+-        for i, (t, mfa, pv) in enumerate(L):
+-            rows.append(dict(run_id=R.run_id, employee_id=eid, valid_from=_iso(np.array([t]))[0],
+-                             valid_to=_iso(np.array([L[i + 1][0]]))[0] if i + 1 < len(L) else None,
+-                             mfa_enabled=mfa, privilege_level=pv))
+-    pd.DataFrame(rows).to_csv(f'{corp}/account_state.csv', index=False)
+-    R.n_state_changes = len(rows) - len(W.emps)
++    for eid, hist in st.items():
++        for i, (t, mfa, pv) in enumerate(hist):
++            rows.append(
++                dict(
++                    run_id=data.run_id,
++                    employee_id=eid,
++                    valid_from=_iso(np.array([t]))[0],
++                    valid_to=_iso(np.array([hist[i + 1][0]]))[0]
++                    if i + 1 < len(hist)
++                    else None,
++                    mfa_enabled=mfa,
++                    privilege_level=pv,
++                )
++            )
++    pd.DataFrame(rows).to_csv(f"{corp}/account_state.csv", index=False)
++    data.n_state_changes = len(rows) - len(world.emps)
+ 
+ 
+-def _device_state(R, corp):
++def _device_state(data, corp):
+     from .normal import device_states
+-    rng = np.random.default_rng([R.seed, R.run_id, 3])
+-    dev, day, age, av = device_states(R.W, rng)
+-    pd.DataFrame({'run_id': R.run_id, 'device_id': dev, 'date': np.array(R.W.days, dtype='datetime64[D]')[day],
+-                  'patch_age_days': age, 'antivirus_active': av}).to_csv(f'{corp}/device_state_daily.csv.gz', index=False, compression='gzip')
++
++    rng = np.random.default_rng([data.seed, data.run_id, 3])
++    dev, day, age, av = device_states(data.W, rng)
++    pd.DataFrame(
++        {
++            "run_id": data.run_id,
++            "device_id": dev,
++            "date": np.array(data.W.days, dtype="datetime64[D]")[day],
++            "patch_age_days": age,
++            "antivirus_active": av,
++        }
++    ).to_csv(f"{corp}/device_state_daily.csv.gz", index=False, compression="gzip")
+diff -ru -x tests -x __pycache__ /home/claude/generator_orig/scenarios.py generator/scenarios.py
+--- /home/claude/generator_orig/scenarios.py	2026-11-11 12:40:17.304246616 +0000
++++ generator/scenarios.py	2026-11-11 12:41:06.931129191 +0000
+@@ -5,112 +5,197 @@
+ Cada cenário é uma função independente: trocar/adicionar um é editar CATALOG no fim do arquivo.
+ O rótulo nunca entra em `corp`: só em ground_truth (episodes + event_labels).
+ """
++
+ import numpy as np
+-from . import config as C
++
++from . import config as cfg
+ from .core import Body
+ from .normal import _t, pick_res
+ from .world import rand_ip
+ 
+-E = C.E
++E = cfg.E
+ 
+ 
+ class X:
+-    def __init__(self, W, S, rng):
+-        self.W, self.S, self.rng = W, S, rng
++    def __init__(self, world, sink, rng):
++        self.W, self.S, self.rng = world, sink, rng
+ 
+     # ---- seleção -----------------------------------------------------------------------
+     def pick(self, pred, fallback=None):
+-        c = [e for e in self.W.emps if pred(e) and e.works[self.W.eval_start:].sum() > 40]
+-        if not c and fallback: c = [e for e in self.W.emps if fallback(e) and e.works[self.W.eval_start:].sum() > 40]
++        c = [
++            e
++            for e in self.W.emps
++            if pred(e) and e.works[self.W.eval_start :].sum() > 40
++        ]
++        if not c and fallback:
++            c = [
++                e
++                for e in self.W.emps
++                if fallback(e) and e.works[self.W.eval_start :].sum() > 40
++            ]
+         return c[int(self.rng.integers(len(c)))]
+ 
+     def day(self, e):
+-        w = np.flatnonzero(e.works[self.W.eval_start:]) + self.W.eval_start
++        w = np.flatnonzero(e.works[self.W.eval_start :]) + self.W.eval_start
+         return int(w[int(self.rng.integers(len(w)))])
+ 
+-    def run(self, e, L):
+-        w = np.flatnonzero(e.works[self.W.eval_start:]) + self.W.eval_start
+-        s = int(self.rng.integers(0, max(1, len(w) - L)))
+-        return [int(i) for i in w[s:s + L]]
++    def run(self, e, length):
++        w = np.flatnonzero(e.works[self.W.eval_start :]) + self.W.eval_start
++        s = int(self.rng.integers(0, max(1, len(w) - length)))
++        return [int(i) for i in w[s : s + length]]
+ 
+     def ep(self, fam, code, e, desc, mal):
+         return self.S.episode(fam, code, e.id, desc, mal)
+ 
+     # ---- origem ------------------------------------------------------------------------
+-    def office(self, e): return e.office_ip, False
+-    def home_vpn(self, e): return self.S.vpn_ip(), True
+-    def home(self, e): return e.home_ip, False
++    def office(self, e):
++        return e.office_ip, False
++
++    def home_vpn(self, e):
++        return self.S.vpn_ip(), True
++
++    def home(self, e):
++        return e.home_ip, False
++
+     def atk(self):
+         return rand_ip(self.W, self.rng, int(self.rng.choice(self.W.r_ext_for))), False
++
+     def ext_dom(self):
+         return rand_ip(self.W, self.rng, int(self.rng.choice(self.W.r_ext_dom))), False
+ 
+     def reenable(self, e, di_end):
+         """Reativação do MFA por TI (remediação; sem rótulo). Devolve o epoch do fim da janela."""
+-        W = self.W
+-        if di_end >= W.ndays:
+-            return int(W.day_epoch[-1] + 86400)
+-        adm = self.pick(lambda a: a.persona == 'it_privileged')
+-        bd = Body(); bd.add(60, E['SYSTEM_CONFIG'], 0, C.SUB['mfa_enabled'], 1, e.id)
++        world = self.W
++        if di_end >= world.ndays:
++            return int(world.day_epoch[-1] + 86400)
++        adm = self.pick(lambda a: a.persona == "it_privileged")
++        bd = Body()
++        bd.add(60, E["SYSTEM_CONFIG"], 0, cfg.SUB["mfa_enabled"], 1, e.id)
+         self.sess(adm, 11.0, di_end, 300, bd, self.office(adm), -1)
+-        return _t(W, e, di_end, 11.0)
++        return _t(world, e, di_end, 11.0)
+ 
+     def mfa(self, e, t):
+         from .world import mfa_at
++
+         return mfa_at(self.W, e, t)
+ 
+     # ---- construtores de corpo ---------------------------------------------------------
+-    def accesses(self, bd, ids, t0, t1, edit_p=.2):
++    def accesses(self, bd, ids, t0, t1, edit_p=0.2):
+         ts = np.sort(self.rng.uniform(t0, t1, len(ids)))
+         for dt, r in zip(ts, ids):
+-            bd.add(dt, E['FILE_ACCESS'], r, int(self.rng.random() < edit_p))
++            bd.add(dt, E["FILE_ACCESS"], r, int(self.rng.random() < edit_p))
+ 
+     def download(self, bd, dt, res, size, dest):
+-        bd.add(dt, E['FILE_DOWNLOAD'], res, int(size), dest)
++        bd.add(dt, E["FILE_DOWNLOAD"], res, int(size), dest)
+ 
+     def top_sens(self, e, n, min_sens=0):
+         a = e.allowed[self.W.res_sens[e.allowed] >= min_sens]
+-        if len(a) == 0: a = e.allowed
++        if len(a) == 0:
++            a = e.allowed
+         s = self.W.res_sens[a]
+-        w = np.exp(1.5 * s); w = w / w.sum()
++        w = np.exp(1.5 * s)
++        w = w / w.sum()
+         return self.rng.choice(a, size=n, p=w)
+ 
+-    def sess(self, e, hour, di, D, bd, origin, ep, dev=None, **kw):
++    def sess(self, e, hour, di, duration, bd, origin, ep, dev=None, **kw):
+         t = _t(self.W, e, di, hour)
+         ip, vpn = origin
+-        return self.S.session(e.id, t, D, bd.arrays() if isinstance(bd, Body) else bd, ip, vpn,
+-                              e.dev_nb if dev is None else dev, kw.pop('mfa', self.mfa(e, t)), ep, **kw)
++        return self.S.session(
++            e.id,
++            t,
++            duration,
++            bd.arrays() if isinstance(bd, Body) else bd,
++            ip,
++            vpn,
++            e.dev_nb if dev is None else dev,
++            kw.pop("mfa", self.mfa(e, t)),
++            ep,
++            **kw,
++        )
+ 
+ 
+ # =========================================================================== P — pontuais (D1)
+ def p01_forca_bruta(x):
+-    r, e = x.rng, x.pick(lambda e: e.persona != 'it_privileged' and not e.mfa0, lambda e: e.persona != 'it_privileged')
+-    di = x.day(e); n = int(r.integers(15, 41))
+-    ep = x.ep('P', 'P01_forca_bruta', e, f'{n} tentativas em <2 min de faixa externa; sucesso após o lockout', True)
+-    bd = Body(); x.accesses(bd, x.top_sens(e, int(r.integers(8, 21)), 2), 5, 900)
+-    x.sess(e, r.choice([0, 1, 2, 3, 4]) + r.random(), di, 1200, bd, x.atk(), ep, dev=0, mfa=False,
+-           n_wrong=n, gap=(.5, 3), wait=(1500, 2100))
++    r, e = (
++        x.rng,
++        x.pick(
++            lambda e: e.persona != "it_privileged" and not e.mfa0,
++            lambda e: e.persona != "it_privileged",
++        ),
++    )
++    di = x.day(e)
++    n = int(r.integers(15, 41))
++    ep = x.ep(
++        "P",
++        "P01_forca_bruta",
++        e,
++        f"{n} tentativas em <2 min de faixa externa; sucesso após o lockout",
++        True,
++    )
++    bd = Body()
++    x.accesses(bd, x.top_sens(e, int(r.integers(8, 21)), 2), 5, 900)
++    x.sess(
++        e,
++        r.choice([0, 1, 2, 3, 4]) + r.random(),
++        di,
++        1200,
++        bd,
++        x.atk(),
++        ep,
++        dev=0,
++        mfa=False,
++        n_wrong=n,
++        gap=(0.5, 3),
++        wait=(1500, 2100),
++    )
+ 
+ 
+ def p02_download_restrito_removivel(x):
+     r = x.rng
+-    e = x.pick(lambda e: e.dept in ('hr', 'board') and e.persona in ('day_admin', 'management'))
+-    di = x.day(e); ep = x.ep('P', 'P02_download_restrito_removivel', e, 'download de recursos restritos para dispositivo removível', True)
+-    bd = Body(); res = x.top_sens(e, int(r.integers(8, 16)), 3)
++    e = x.pick(
++        lambda e: e.dept in ("hr", "board") and e.persona in ("day_admin", "management")
++    )
++    di = x.day(e)
++    ep = x.ep(
++        "P",
++        "P02_download_restrito_removivel",
++        e,
++        "download de recursos restritos para dispositivo removível",
++        True,
++    )
++    bd = Body()
++    res = x.top_sens(e, int(r.integers(8, 16)), 3)
+     ts = np.sort(r.uniform(60, 1500, len(res)))
+-    for dt, rr in zip(ts, res): x.download(bd, dt, rr, r.uniform(5e7, 4e8), 2)
+-    bd.add(1600, E['EXTERNAL_DEVICE'], 0, 0, int(r.integers(80, 300)), int(r.uniform(3e8, 2e9)))
++    for dt, rr in zip(ts, res):
++        x.download(bd, dt, rr, r.uniform(5e7, 4e8), 2)
++    bd.add(
++        1600,
++        E["EXTERNAL_DEVICE"],
++        0,
++        0,
++        int(r.integers(80, 300)),
++        int(r.uniform(3e8, 2e9)),
++    )
+     x.sess(e, r.uniform(14, 17), di, 1900, bd, x.office(e), ep)
+ 
+ 
+ def p03_escalada_privilegio_noite(x):
+-    r, e = x.rng, x.pick(lambda e: e.persona != 'it_privileged' and e.mfa0)
+-    di = x.day(e); ep = x.ep('P', 'P03_escalada_privilegio_noite', e, 'conta comum escala privilégio, desliga MFA e acessa console', True)
+-    bd = Body(); sub = C.SUB
+-    bd.add(30, E['SYSTEM_CONFIG'], 0, sub['privilege_escalation'], 0, 0)
+-    bd.add(90, E['SYSTEM_CONFIG'], 0, sub['permission_grant'], 0, 0)
+-    bd.add(150, E['SYSTEM_CONFIG'], 0, sub['mfa_disabled'], 0, 0)
+-    for k, rr in enumerate(r.choice(x.W.sys_ids['console'], 4, replace=False)): bd.add(300 + 60 * k, E['FILE_ACCESS'], rr)
++    r, e = x.rng, x.pick(lambda e: e.persona != "it_privileged" and e.mfa0)
++    di = x.day(e)
++    ep = x.ep(
++        "P",
++        "P03_escalada_privilegio_noite",
++        e,
++        "conta comum escala privilégio, desliga MFA e acessa console",
++        True,
++    )
++    bd = Body()
++    sub = cfg.SUB
++    bd.add(30, E["SYSTEM_CONFIG"], 0, sub["privilege_escalation"], 0, 0)
++    bd.add(90, E["SYSTEM_CONFIG"], 0, sub["permission_grant"], 0, 0)
++    bd.add(150, E["SYSTEM_CONFIG"], 0, sub["mfa_disabled"], 0, 0)
++    for k, rr in enumerate(r.choice(x.W.sys_ids["console"], 4, replace=False)):
++        bd.add(300 + 60 * k, E["FILE_ACCESS"], rr)
+     h = r.uniform(1, 4)
+     t = _t(x.W, e, di, h)
+     x.W.mfa_off.setdefault(e.id, []).append((t + 150, x.reenable(e, di + 10)))
+@@ -118,202 +203,411 @@
+ 
+ 
+ def p04_externo_sem_vpn_sem_mfa(x):
+-    r, e = x.rng, x.pick(lambda e: e.persona != 'it_privileged' and not e.mfa0, lambda e: e.persona != 'it_privileged')
+-    di = x.day(e); ep = x.ep('P', 'P04_externo_sem_vpn_sem_mfa', e, 'logon de faixa externa estrangeira, sem VPN e sem MFA, madrugada', True)
+-    bd = Body(); x.accesses(bd, x.top_sens(e, int(r.integers(6, 13)), 3), 10, 700)
++    r, e = (
++        x.rng,
++        x.pick(
++            lambda e: e.persona != "it_privileged" and not e.mfa0,
++            lambda e: e.persona != "it_privileged",
++        ),
++    )
++    di = x.day(e)
++    ep = x.ep(
++        "P",
++        "P04_externo_sem_vpn_sem_mfa",
++        e,
++        "logon de faixa externa estrangeira, sem VPN e sem MFA, madrugada",
++        True,
++    )
++    bd = Body()
++    x.accesses(bd, x.top_sens(e, int(r.integers(6, 13)), 3), 10, 700)
+     x.download(bd, 800, x.top_sens(e, 1, 3)[0], r.uniform(2e7, 1e8), 0)
+     x.sess(e, r.uniform(2, 4.5), di, 1000, bd, x.atk(), ep, dev=0, mfa=False)
+ 
+ 
+ def p05_nuvem_exfiltracao_rapida(x):
+     r = x.rng
+-    e = x.pick(lambda e: e.dept in ('admin_finance', 'legal', 'sales', 'engineering_product'))
+-    di = x.day(e); ep = x.ep('P', 'P05_nuvem_exfiltracao_rapida', e, 'navegação em armazenamento em nuvem + downloads para storage externo', True)
++    e = x.pick(
++        lambda e: e.dept in ("admin_finance", "legal", "sales", "engineering_product")
++    )
++    di = x.day(e)
++    ep = x.ep(
++        "P",
++        "P05_nuvem_exfiltracao_rapida",
++        e,
++        "navegação em armazenamento em nuvem + downloads para storage externo",
++        True,
++    )
+     bd = Body()
+-    for k, d in enumerate(r.choice(C.CLOUD_IDX, 3)): bd.add(20 + 25 * k, E['WEB_BROWSING'], 0, d)
++    for k, d in enumerate(r.choice(cfg.CLOUD_IDX, 3)):
++        bd.add(20 + 25 * k, E["WEB_BROWSING"], 0, d)
+     res = x.top_sens(e, 10, 2)
+-    for k, rr in enumerate(res): x.download(bd, 120 + 40 * k, rr, r.uniform(2e7, 2e8), 1)
++    for k, rr in enumerate(res):
++        x.download(bd, 120 + 40 * k, rr, r.uniform(2e7, 2e8), 1)
+     x.sess(e, r.uniform(10, 16), di, 700, bd, x.office(e), ep)
+ 
+ 
+ def p06_conta_comum_altera_permissoes(x):
+-    r, e = x.rng, x.pick(lambda e: e.persona != 'it_privileged')
+-    di = x.day(e); ep = x.ep('P', 'P06_conta_comum_altera_permissoes', e, 'conta comum tenta mudar permissões à noite (bloqueado)', True)
+-    bd = Body(); sub = C.SUB
+-    bd.add(20, E['SYSTEM_CONFIG'], 0, sub['privilege_escalation'], 0, 0, 2)
+-    for k in range(3): bd.add(60 + 40 * k, E['SYSTEM_CONFIG'], 0, sub['permission_grant'], 0, int(r.choice(x.W.all_ids)), 2)
+-    bd.add(240, E['SYSTEM_CONFIG'], 0, sub['permission_grant'], 0, int(r.choice(x.W.all_ids)), 1)
++    r, e = x.rng, x.pick(lambda e: e.persona != "it_privileged")
++    di = x.day(e)
++    ep = x.ep(
++        "P",
++        "P06_conta_comum_altera_permissoes",
++        e,
++        "conta comum tenta mudar permissões à noite (bloqueado)",
++        True,
++    )
++    bd = Body()
++    sub = cfg.SUB
++    bd.add(20, E["SYSTEM_CONFIG"], 0, sub["privilege_escalation"], 0, 0, 2)
++    for k in range(3):
++        bd.add(
++            60 + 40 * k,
++            E["SYSTEM_CONFIG"],
++            0,
++            sub["permission_grant"],
++            0,
++            int(r.choice(x.W.all_ids)),
++            2,
++        )
++    bd.add(
++        240,
++        E["SYSTEM_CONFIG"],
++        0,
++        sub["permission_grant"],
++        0,
++        int(r.choice(x.W.all_ids)),
++        1,
++    )
+     x.sess(e, r.uniform(22.3, 23.5), di, 400, bd, x.office(e), ep)
+ 
+ 
+ # =========================================================================== B — de contexto (D2)
+ def b01_volume_atipico(x):
+     r = x.rng
+-    e = x.pick(lambda e: e.persona in ('day_admin', 'sales_traveler', 'management'))
+-    di = x.day(e); ep = x.ep('B', 'B01_volume_atipico', e, 'volume ~5x o habitual, no horário, de dentro do escritório, sem recurso sensível', True)
+-    n = int(e.mu * 4); ids = pick_res(x.W, r, e, n); ids = ids[x.W.res_sens[ids] <= 1]
+-    bd = Body(); x.accesses(bd, ids, 5, 3 * 3600)
++    e = x.pick(lambda e: e.persona in ("day_admin", "sales_traveler", "management"))
++    di = x.day(e)
++    ep = x.ep(
++        "B",
++        "B01_volume_atipico",
++        e,
++        "volume ~5x o habitual, no horário, de dentro do escritório, sem recurso sensível",
++        True,
++    )
++    n = int(e.mu * 4)
++    ids = pick_res(x.W, r, e, n)
++    ids = ids[x.W.res_sens[ids] <= 1]
++    bd = Body()
++    x.accesses(bd, ids, 5, 3 * 3600)
+     x.sess(e, 10.0, di, 3 * 3600 + 60, bd, x.office(e), ep)
+ 
+ 
+ def b02_recurso_novo(x):
+     r = x.rng
+-    e = x.pick(lambda e: e.persona in ('hybrid_eng', 'it_privileged', 'sales_traveler', 'shift_ops'))
+-    di = x.day(e); ep = x.ep('B', 'B02_recurso_novo', e, 'varredura de recursos permitidos que a pessoa nunca tocou (sigilo baixo)', True)
+-    pool = np.array([i for i in e.allowed if i not in set(e.hab_ids) and x.W.res_sens[i] <= 1])
++    e = x.pick(
++        lambda e: (
++            e.persona in ("hybrid_eng", "it_privileged", "sales_traveler", "shift_ops")
++        )
++    )
++    di = x.day(e)
++    ep = x.ep(
++        "B",
++        "B02_recurso_novo",
++        e,
++        "varredura de recursos permitidos que a pessoa nunca tocou (sigilo baixo)",
++        True,
++    )
++    pool = np.array(
++        [i for i in e.allowed if i not in set(e.hab_ids) and x.W.res_sens[i] <= 1]
++    )
+     ids = r.choice(pool, size=min(len(pool), int(r.integers(25, 41))), replace=False)
+-    bd = Body(); x.accesses(bd, ids, 5, 2400)
++    bd = Body()
++    x.accesses(bd, ids, 5, 2400)
+     x.sess(e, r.uniform(10, 15), di, 2500, bd, x.office(e), ep)
+ 
+ 
+ def b03_horario_atipico_individual(x):
+     r = x.rng
+-    e = x.pick(lambda e: e.persona == 'day_admin' and e.site == 'SP')
+-    di = x.day(e); ep = x.ep('B', 'B03_horario_atipico_individual', e, 'sessão 20h-22h do escritório, fora do hábito da pessoa (dentro do corte fixo da C0)', True)
+-    n = int(r.integers(8, 16)); bd = Body(); x.accesses(bd, pick_res(x.W, r, e, n), 5, 6000)
++    e = x.pick(lambda e: e.persona == "day_admin" and e.site == "SP")
++    di = x.day(e)
++    ep = x.ep(
++        "B",
++        "B03_horario_atipico_individual",
++        e,
++        "sessão 20h-22h do escritório, fora do hábito da pessoa (dentro do corte fixo da C0)",
++        True,
++    )
++    n = int(r.integers(8, 16))
++    bd = Body()
++    x.accesses(bd, pick_res(x.W, r, e, n), 5, 6000)
+     x.sess(e, 20.1, di, 6100, bd, x.office(e), ep)
+ 
+ 
+ def b04_origem_nova(x):
+     r = x.rng
+-    e = x.pick(lambda e: e.persona in ('day_admin', 'it_privileged'))
+-    di = x.day(e); ep = x.ep('B', 'B04_origem_nova', e, 'origem externa doméstica inédita, sem viagem declarada, no horário', True)
+-    n = int(r.integers(8, 16)); bd = Body(); x.accesses(bd, pick_res(x.W, r, e, n), 5, 3000)
++    e = x.pick(lambda e: e.persona in ("day_admin", "it_privileged"))
++    di = x.day(e)
++    ep = x.ep(
++        "B",
++        "B04_origem_nova",
++        e,
++        "origem externa doméstica inédita, sem viagem declarada, no horário",
++        True,
++    )
++    n = int(r.integers(8, 16))
++    bd = Body()
++    x.accesses(bd, pick_res(x.W, r, e, n), 5, 3000)
+     x.sess(e, r.uniform(10, 16), di, 3100, bd, x.ext_dom(), ep)
+ 
+ 
+ # =========================================================================== L — longitudinais (D3)
+ def l01_exfiltracao_gradual(x):
+     r = x.rng
+-    e = x.pick(lambda e: e.dept in ('admin_finance', 'legal', 'sales', 'engineering_product'))
+-    days = x.run(e, 21); ep = x.ep('L', 'L01_exfiltracao_gradual', e, '21 dias de downloads crescentes e migração para storage externo; nenhum dia notável', True)
++    e = x.pick(
++        lambda e: e.dept in ("admin_finance", "legal", "sales", "engineering_product")
++    )
++    days = x.run(e, 21)
++    ep = x.ep(
++        "L",
++        "L01_exfiltracao_gradual",
++        e,
++        "21 dias de downloads crescentes e migração para storage externo; nenhum dia notável",
++        True,
++    )
+     for k, di in enumerate(days):
+-        bd = Body(); nd = 1 + min(3, int(k * .15)); ids = x.top_sens(e, nd, 1 if k > 5 else 0)
++        bd = Body()
++        nd = 1 + min(3, int(k * 0.15))
++        ids = x.top_sens(e, nd, 1 if k > 5 else 0)
+         for j, rr in enumerate(ids):
+-            dest = 1 if r.random() < .1 + .4 * k / 21 else 0
+-            x.download(bd, 60 + 120 * j, rr, np.exp(r.normal(np.log(8e6), .5)), dest)
+-        bd.add(30, E['WEB_BROWSING'], 0, int(r.choice(C.CLOUD_IDX)))
++            dest = 1 if r.random() < 0.1 + 0.4 * k / 21 else 0
++            x.download(bd, 60 + 120 * j, rr, np.exp(r.normal(np.log(8e6), 0.5)), dest)
++        bd.add(30, E["WEB_BROWSING"], 0, int(r.choice(cfg.CLOUD_IDX)))
+         x.accesses(bd, pick_res(x.W, r, e, 3), 200, 900)
+-        x.sess(e, r.uniform(14, 16), di, 1200, bd, x.office(e) if r.random() < .6 else x.home_vpn(e), ep)
++        x.sess(
++            e,
++            r.uniform(14, 16),
++            di,
++            1200,
++            bd,
++            x.office(e) if r.random() < 0.6 else x.home_vpn(e),
++            ep,
++        )
+ 
+ 
+ def l02_reconhecimento_lateral(x):
+     r = x.rng
+-    e = x.pick(lambda e: e.persona in ('day_admin', 'hybrid_eng', 'sales_traveler', 'it_privileged'))
+-    days = x.run(e, 20); ep = x.ep('L', 'L02_reconhecimento_lateral', e, '20 dias ampliando recursos novos, do baixo ao alto sigilo', True)
++    e = x.pick(
++        lambda e: (
++            e.persona in ("day_admin", "hybrid_eng", "sales_traveler", "it_privileged")
++        )
++    )
++    days = x.run(e, 20)
++    ep = x.ep(
++        "L",
++        "L02_reconhecimento_lateral",
++        e,
++        "20 dias ampliando recursos novos, do baixo ao alto sigilo",
++        True,
++    )
+     pool = np.array([i for i in e.allowed if i not in set(e.hab_ids)])
+-    if len(pool) < 10: pool = e.allowed
++    if len(pool) < 10:
++        pool = e.allowed
+     for k, di in enumerate(days):
+-        n = 2 + int(k * .35); w = np.exp((.4 + 1.6 * k / 20) * x.W.res_sens[pool]); w /= w.sum()
++        n = 2 + int(k * 0.35)
++        w = np.exp((0.4 + 1.6 * k / 20) * x.W.res_sens[pool])
++        w /= w.sum()
+         ids = r.choice(pool, size=min(n, len(pool)), replace=False, p=w)
+-        bd = Body(); x.accesses(bd, ids, 30, 900)
++        bd = Body()
++        x.accesses(bd, ids, 30, 900)
+         x.sess(e, r.uniform(10, 16), di, 1000, bd, x.office(e), ep)
+ 
+ 
+ def l03_postura_degradando(x):
+     r = x.rng
+-    e = x.pick(lambda e: e.mfa0 and e.persona != 'it_privileged')
+-    days = x.run(e, 21); ep = x.ep('L', 'L03_postura_degradando', e, 'MFA desligado, patch parado, cópia física recorrente e clique em phishing', True)
+-    di0 = days[0]; t0 = _t(x.W, e, di0, 21.0)
++    e = x.pick(lambda e: e.mfa0 and e.persona != "it_privileged")
++    days = x.run(e, 21)
++    ep = x.ep(
++        "L",
++        "L03_postura_degradando",
++        e,
++        "MFA desligado, patch parado, cópia física recorrente e clique em phishing",
++        True,
++    )
++    di0 = days[0]
++    t0 = _t(x.W, e, di0, 21.0)
+     x.W.mfa_off.setdefault(e.id, []).append((t0 + 30, x.reenable(e, di0 + 30)))
+     x.W.dev_nopatch[e.dev_nb] = di0
+     x.W.phish_force[(e.id, int(x.W.yyyymm[di0]))] = 2
+-    bd = Body(); bd.add(30, E['SYSTEM_CONFIG'], 0, C.SUB['mfa_disabled'], 0, 0)
++    bd = Body()
++    bd.add(30, E["SYSTEM_CONFIG"], 0, cfg.SUB["mfa_disabled"], 0, 0)
+     x.sess(e, 21.0, di0, 300, bd, x.home_vpn(e), ep)
+     for k, di in enumerate(days):
+         if k % 3 == 1:
+-            bd = Body(); bd.add(120, E['EXTERNAL_DEVICE'], 0, 0, int(r.integers(5, 41)), int(r.uniform(5e6, 6e7)))
++            bd = Body()
++            bd.add(
++                120,
++                E["EXTERNAL_DEVICE"],
++                0,
++                0,
++                int(r.integers(5, 41)),
++                int(r.uniform(5e6, 6e7)),
++            )
+             x.sess(e, r.uniform(10, 16), di, 600, bd, x.office(e), ep)
+ 
+ 
+ def l04_horario_deslizante(x):
+     r = x.rng
+-    e = x.pick(lambda e: e.persona in ('day_admin', 'hybrid_eng', 'management'))
+-    days = x.run(e, 20); ep = x.ep('L', 'L04_horario_deslizante', e, '20 dias com sessão noturna remota deslizando de 19h para 2h', True)
++    e = x.pick(lambda e: e.persona in ("day_admin", "hybrid_eng", "management"))
++    days = x.run(e, 20)
++    ep = x.ep(
++        "L",
++        "L04_horario_deslizante",
++        e,
++        "20 dias com sessão noturna remota deslizando de 19h para 2h",
++        True,
++    )
+     for k, di in enumerate(days):
+-        bd = Body(); x.accesses(bd, pick_res(x.W, r, e, int(r.integers(6, 11))), 20, 3000)
+-        x.sess(e, 19.0 + .35 * k, di, 3300, bd, x.home_vpn(e), ep)
++        bd = Body()
++        x.accesses(bd, pick_res(x.W, r, e, int(r.integers(6, 11))), 20, 3000)
++        x.sess(e, 19.0 + 0.35 * k, di, 3300, bd, x.home_vpn(e), ep)
+ 
+ 
+ # =========================================================================== N — controle negativo
+ def n01_escalada_legitima(x):
+     r = x.rng
+-    e = x.pick(lambda e: e.persona in ('day_admin', 'hybrid_eng') and e.dept != 'it_infra')
+-    days = x.run(e, 21); di0 = days[0]
+-    ep = x.ep('N', 'N01_escalada_legitima', e, 'mudança de projeto: acesso a mais recursos, faixa horária e volume maiores, sem conduta indevida', False)
+-    x.W.hr_extra.append((e.id, 'role_change', di0, di0))
+-    adm = x.pick(lambda a: a.persona == 'it_privileged')
+-    bd = Body(); bd.add(60, E['SYSTEM_CONFIG'], 0, C.SUB['permission_grant'], 1, e.id)
++    e = x.pick(
++        lambda e: e.persona in ("day_admin", "hybrid_eng") and e.dept != "it_infra"
++    )
++    days = x.run(e, 21)
++    di0 = days[0]
++    ep = x.ep(
++        "N",
++        "N01_escalada_legitima",
++        e,
++        "mudança de projeto: acesso a mais recursos, faixa horária e volume maiores, sem conduta indevida",
++        False,
++    )
++    x.W.hr_extra.append((e.id, "role_change", di0, di0))
++    adm = x.pick(lambda a: a.persona == "it_privileged")
++    bd = Body()
++    bd.add(60, E["SYSTEM_CONFIG"], 0, cfg.SUB["permission_grant"], 1, e.id)
+     x.sess(adm, 11.0, di0, 300, bd, x.office(adm), ep)
+-    sysk = 'crm' if e.dept != 'sales' else 'repo'
+-    newp = np.array(x.W.sys_ids[sysk] + x.W.sys_ids['portal'])
++    sysk = "crm" if e.dept != "sales" else "repo"
++    newp = np.array(x.W.sys_ids[sysk] + x.W.sys_ids["portal"])
+     for k, di in enumerate(days):
+-        n = 3 + int(k * .6); use_new = r.random(n) < .6
++        n = 3 + int(k * 0.6)
++        use_new = r.random(n) < 0.6
+         ids = np.where(use_new, r.choice(newp, n), pick_res(x.W, r, e, n))
+-        bd = Body(); x.accesses(bd, ids, 30, 1800)
++        bd = Body()
++        x.accesses(bd, ids, 30, 1800)
+         x.sess(e, r.uniform(10, 15), di, 1900, bd, x.office(e), ep)
+-        if r.random() < .4:
+-            bd = Body(); x.accesses(bd, pick_res(x.W, r, e, int(r.integers(5, 11))), 30, 3000)
++        if r.random() < 0.4:
++            bd = Body()
++            x.accesses(bd, pick_res(x.W, r, e, int(r.integers(5, 11))), 30, 3000)
+             x.sess(e, 19.0, di, 3100, bd, x.home_vpn(e), ep)
+ 
+ 
+ def n02_troca_de_aparelho(x):
+     r = x.rng
+     e = x.pick(lambda e: e.mfa0)
+-    di = x.day(e); ep = x.ep('N', 'N02_troca_de_aparelho', e, 'MFA desligado e religado na troca de aparelho, mesma noite', False)
+-    h = 18.0; t = _t(x.W, e, di, h)
++    di = x.day(e)
++    ep = x.ep(
++        "N",
++        "N02_troca_de_aparelho",
++        e,
++        "MFA desligado e religado na troca de aparelho, mesma noite",
++        False,
++    )
++    h = 18.0
++    t = _t(x.W, e, di, h)
+     x.W.mfa_off.setdefault(e.id, []).append((t + 30, t + 7000))
+-    bd = Body(); bd.add(30, E['SYSTEM_CONFIG'], 0, C.SUB['mfa_disabled'], 0, 0)
+-    x.accesses(bd, [x.W.mail_id] * 3, 60, 3000); bd.add(7000, E['SYSTEM_CONFIG'], 0, C.SUB['mfa_enabled'], 0, 0)
++    bd = Body()
++    bd.add(30, E["SYSTEM_CONFIG"], 0, cfg.SUB["mfa_disabled"], 0, 0)
++    x.accesses(bd, [x.W.mail_id] * 3, 60, 3000)
++    bd.add(7000, E["SYSTEM_CONFIG"], 0, cfg.SUB["mfa_enabled"], 0, 0)
+     x.sess(e, h, di, 7100, bd, x.home_vpn(e), ep)
+ 
+ 
+ def n03_pico_fim_de_mes(x):
+     r = x.rng
+-    e = x.pick(lambda e: e.dept == 'admin_finance')
++    e = x.pick(lambda e: e.dept == "admin_finance")
+     cand = [i for i in np.flatnonzero(x.W.month_end & e.works) if i >= x.W.eval_start]
+-    di = int(r.choice(cand)); ep = x.ep('N', 'N03_pico_fim_de_mes', e, 'fechamento do mês: volume ~2x e expediente até 21h30, legítimo', False)
+-    bd = Body(); x.accesses(bd, pick_res(x.W, r, e, int(e.mu * 1.2)), 10, 3 * 3600)
++    di = int(r.choice(cand))
++    ep = x.ep(
++        "N",
++        "N03_pico_fim_de_mes",
++        e,
++        "fechamento do mês: volume ~2x e expediente até 21h30, legítimo",
++        False,
++    )
++    bd = Body()
++    x.accesses(bd, pick_res(x.W, r, e, int(e.mu * 1.2)), 10, 3 * 3600)
+     x.sess(e, 9.0, di, 3 * 3600 + 60, bd, x.office(e), ep)
+-    bd = Body(); x.accesses(bd, pick_res(x.W, r, e, int(e.mu * .4)), 10, 9000)
++    bd = Body()
++    x.accesses(bd, pick_res(x.W, r, e, int(e.mu * 0.4)), 10, 9000)
+     x.sess(e, 19.0, di, 9100, bd, x.office(e), ep)
+ 
+ 
+ def n04_erro_humano_lockout(x):
+     r = x.rng
+-    e = x.pick(lambda e: e.persona != 'shift_ops')
+-    days = x.run(e, 2); ep = x.ep('N', 'N04_erro_humano_lockout', e, 'troca de senha seguida de lockout por erro de digitação (celular antigo)', False)
+-    bd = Body(); bd.add(40, E['SYSTEM_CONFIG'], 0, C.SUB['password_change'], 0, 0)
++    e = x.pick(lambda e: e.persona != "shift_ops")
++    days = x.run(e, 2)
++    ep = x.ep(
++        "N",
++        "N04_erro_humano_lockout",
++        e,
++        "troca de senha seguida de lockout por erro de digitação (celular antigo)",
++        False,
++    )
++    bd = Body()
++    bd.add(40, E["SYSTEM_CONFIG"], 0, cfg.SUB["password_change"], 0, 0)
+     x.sess(e, 18.5, days[0], 120, bd, x.home_vpn(e), ep)
+-    bd = Body(); x.accesses(bd, [x.W.mail_id] * 3, 20, 400)
++    bd = Body()
++    x.accesses(bd, [x.W.mail_id] * 3, 20, 400)
+     x.sess(e, 18.5, days[1], 500, bd, x.home(e), ep, n_wrong=6)
+ 
+ 
+ def n05_download_grande_legitimo(x):
+     r = x.rng
+-    e = x.pick(lambda e: e.dept in ('engineering_product', 'admin_finance', 'legal'))
+-    di = x.day(e); ep = x.ep('N', 'N05_download_grande_legitimo', e, 'entrega de projeto: 1-2 arquivos de 300-900 MB para disco local', False)
++    e = x.pick(lambda e: e.dept in ("engineering_product", "admin_finance", "legal"))
++    di = x.day(e)
++    ep = x.ep(
++        "N",
++        "N05_download_grande_legitimo",
++        e,
++        "entrega de projeto: 1-2 arquivos de 300-900 MB para disco local",
++        False,
++    )
+     bd = Body()
+-    for k in range(int(r.integers(1, 3))): x.download(bd, 120 + 200 * k, pick_res(x.W, r, e, 1)[0], r.uniform(3e8, 9e8), 0)
++    for k in range(int(r.integers(1, 3))):
++        x.download(bd, 120 + 200 * k, pick_res(x.W, r, e, 1)[0], r.uniform(3e8, 9e8), 0)
+     x.sess(e, r.uniform(14, 16), di, 1200, bd, x.office(e), ep)
+ 
+ 
+ CATALOG = [  # (código, família, função, execuções por semente)
+-    ('P01', 'P', p01_forca_bruta, 4), ('P02', 'P', p02_download_restrito_removivel, 4),
+-    ('P03', 'P', p03_escalada_privilegio_noite, 4), ('P04', 'P', p04_externo_sem_vpn_sem_mfa, 4),
+-    ('P05', 'P', p05_nuvem_exfiltracao_rapida, 4), ('P06', 'P', p06_conta_comum_altera_permissoes, 4),
+-    ('B01', 'B', b01_volume_atipico, 4), ('B02', 'B', b02_recurso_novo, 4),
+-    ('B03', 'B', b03_horario_atipico_individual, 4), ('B04', 'B', b04_origem_nova, 4),
+-    ('L01', 'L', l01_exfiltracao_gradual, 3), ('L02', 'L', l02_reconhecimento_lateral, 3),
+-    ('L03', 'L', l03_postura_degradando, 3), ('L04', 'L', l04_horario_deslizante, 3),
+-    ('N01', 'N', n01_escalada_legitima, 3), ('N02', 'N', n02_troca_de_aparelho, 4),
+-    ('N03', 'N', n03_pico_fim_de_mes, 4), ('N04', 'N', n04_erro_humano_lockout, 4),
+-    ('N05', 'N', n05_download_grande_legitimo, 4),
++    ("P01", "P", p01_forca_bruta, 4),
++    ("P02", "P", p02_download_restrito_removivel, 4),
++    ("P03", "P", p03_escalada_privilegio_noite, 4),
++    ("P04", "P", p04_externo_sem_vpn_sem_mfa, 4),
++    ("P05", "P", p05_nuvem_exfiltracao_rapida, 4),
++    ("P06", "P", p06_conta_comum_altera_permissoes, 4),
++    ("B01", "B", b01_volume_atipico, 4),
++    ("B02", "B", b02_recurso_novo, 4),
++    ("B03", "B", b03_horario_atipico_individual, 4),
++    ("B04", "B", b04_origem_nova, 4),
++    ("L01", "L", l01_exfiltracao_gradual, 3),
++    ("L02", "L", l02_reconhecimento_lateral, 3),
++    ("L03", "L", l03_postura_degradando, 3),
++    ("L04", "L", l04_horario_deslizante, 3),
++    ("N01", "N", n01_escalada_legitima, 3),
++    ("N02", "N", n02_troca_de_aparelho, 4),
++    ("N03", "N", n03_pico_fim_de_mes, 4),
++    ("N04", "N", n04_erro_humano_lockout, 4),
++    ("N05", "N", n05_download_grande_legitimo, 4),
+ ]
+ 
+ 
+-def inject(W, S, rng, scale=1):
+-    x = X(W, S, rng)
++def inject(world, sink, rng, scale=1):
++    x = X(world, sink, rng)
+     for code, fam, fn, n in CATALOG:
+         for _ in range(max(1, round(n * scale))):
+             fn(x)
+diff -ru -x tests -x __pycache__ /home/claude/generator_orig/world.py generator/world.py
+--- /home/claude/generator_orig/world.py	2026-11-11 12:40:17.304212702 +0000
++++ generator/world.py	2026-11-11 12:41:06.931129191 +0000
+@@ -1,9 +1,12 @@
+ """Organização simulada: pessoas, personas, calendário, recursos, dispositivos e faixas de rede."""
++
+ import ipaddress
+ from datetime import date, timedelta
++
+ import numpy as np
+ from dateutil.easter import easter
+-from . import config as C
++
++from . import config as cfg
+ 
+ 
+ class Obj:  # saco de atributos
+@@ -12,189 +15,331 @@
+ 
+ def br_holidays(year):
+     e = easter(year)
+-    fixed = [(1, 1), (4, 21), (5, 1), (9, 7), (10, 12), (11, 2), (11, 15), (11, 20), (12, 25)]
++    fixed = [
++        (1, 1),
++        (4, 21),
++        (5, 1),
++        (9, 7),
++        (10, 12),
++        (11, 2),
++        (11, 15),
++        (11, 20),
++        (12, 25),
++    ]
+     out = {date(year, m, d) for m, d in fixed}
+-    out |= {e - timedelta(days=48), e - timedelta(days=47), e - timedelta(days=2), e + timedelta(days=60)}
++    out |= {
++        e - timedelta(days=48),
++        e - timedelta(days=47),
++        e - timedelta(days=2),
++        e + timedelta(days=60),
++    }
+     return out
+ 
+ 
+ def build_world(seed, start, days, scale=1.0):
+     rng = np.random.default_rng([seed, 11])
+-    W = Obj()
+-    W.seed, W.start, W.ndays, W.scale = seed, start, days, scale
+-    W.days = [start + timedelta(days=i) for i in range(days)]
++    world = Obj()
++    world.seed, world.start, world.ndays, world.scale = seed, start, days, scale
++    world.days = [start + timedelta(days=i) for i in range(days)]
+     hol = set()
+-    for y in sorted({d.year for d in W.days}):
++    for y in sorted({d.year for d in world.days}):
+         hol |= br_holidays(y)
+-    W.is_hol = np.array([d in hol for d in W.days])
+-    W.wd = np.array([d.weekday() for d in W.days])
+-    W.day_epoch = np.array([(d - date(1970, 1, 1)).days * 86400 for d in W.days], dtype=np.int64)
+-    W.yyyymm = np.array([d.year * 100 + d.month for d in W.days])
+-    W.eval_start = min(C.EVAL_START_DAY, max(1, days // 3))
++    world.is_hol = np.array([d in hol for d in world.days])
++    world.wd = np.array([d.weekday() for d in world.days])
++    world.day_epoch = np.array(
++        [(d - date(1970, 1, 1)).days * 86400 for d in world.days], dtype=np.int64
++    )
++    world.yyyymm = np.array([d.year * 100 + d.month for d in world.days])
++    world.eval_start = min(cfg.EVAL_START_DAY, max(1, days // 3))
+ 
+     # fim de mês: últimos 3 dias úteis de cada mês
+-    W.month_end = np.zeros(days, bool)
+-    for m in np.unique(W.yyyymm):
+-        idx = [i for i in np.flatnonzero(W.yyyymm == m) if W.wd[i] < 5 and not W.is_hol[i]]
+-        W.month_end[idx[-3:]] = True
++    world.month_end = np.zeros(days, bool)
++    for m in np.unique(world.yyyymm):
++        idx = [
++            i
++            for i in np.flatnonzero(world.yyyymm == m)
++            if world.wd[i] < 5 and not world.is_hol[i]
++        ]
++        world.month_end[idx[-3:]] = True
+ 
+     # ---------------------------------------------------------------- faixas de rede (ASSUNÇÃO P12)
+-    R = []
++    data = []
+ 
+     def add(cidr, typ, country, city):
+         n = ipaddress.ip_network(cidr)
+-        R.append(dict(cidr=cidr, type=typ, country=country, city=city,
+-                      base=int(n.network_address), size=n.num_addresses))
+-    add('10.10.0.0/16', 'office', 'XA', 'vila_sede')
+-    add('10.20.0.0/16', 'office', 'XA', 'porto_verde')
+-    add('10.99.0.0/16', 'vpn', 'XA', 'vila_sede')
+-    for i in range(8): add(f'198.18.{i}.0/24', 'home', 'XA', 'vila_sede')
+-    for i in range(8, 12): add(f'198.18.{i}.0/24', 'home', 'XA', 'porto_verde')
+-    for i in range(12, 16): add(f'198.18.{i}.0/24', 'home', 'XA', 'vila_nova')
+-    for j, c in enumerate(['serra_alta', 'baia_azul', 'campo_largo', 'lago_grande']):
+-        for k in range(2): add(f'198.19.{j * 2 + k}.0/24', 'external', 'XA', c)
+-    for j, (c, cc) in enumerate([('terra_nova', 'XB'), ('ilha_cinza', 'XC'), ('monte_real', 'XD')]):
+-        for k in range(4): add(f'198.19.{16 + j * 4 + k}.0/24', 'external', cc, c)
+-    W.ranges = R
+-    W.r_office = {'SP': 0, 'MAO': 1}
+-    W.r_vpn = 2
+-    W.r_home = {'vila_sede': [3 + i for i in range(8)], 'porto_verde': [11 + i for i in range(4)],
+-                'vila_nova': [15 + i for i in range(4)]}
+-    W.r_ext_dom = [i for i, r in enumerate(R) if r['type'] == 'external' and r['country'] == 'XA']
+-    W.r_ext_for = [i for i, r in enumerate(R) if r['type'] == 'external' and r['country'] != 'XA']
++        data.append(
++            dict(
++                cidr=cidr,
++                type=typ,
++                country=country,
++                city=city,
++                base=int(n.network_address),
++                size=n.num_addresses,
++            )
++        )
++
++    add("10.10.0.0/16", "office", "XA", "vila_sede")
++    add("10.20.0.0/16", "office", "XA", "porto_verde")
++    add("10.99.0.0/16", "vpn", "XA", "vila_sede")
++    for i in range(8):
++        add(f"198.18.{i}.0/24", "home", "XA", "vila_sede")
++    for i in range(8, 12):
++        add(f"198.18.{i}.0/24", "home", "XA", "porto_verde")
++    for i in range(12, 16):
++        add(f"198.18.{i}.0/24", "home", "XA", "vila_nova")
++    for j, c in enumerate(["serra_alta", "baia_azul", "campo_largo", "lago_grande"]):
++        for k in range(2):
++            add(f"198.19.{j * 2 + k}.0/24", "external", "XA", c)
++    for j, (c, cc) in enumerate(
++        [("terra_nova", "XB"), ("ilha_cinza", "XC"), ("monte_real", "XD")]
++    ):
++        for k in range(4):
++            add(f"198.19.{16 + j * 4 + k}.0/24", "external", cc, c)
++    world.ranges = data
++    world.r_office = {"SP": 0, "MAO": 1}
++    world.r_vpn = 2
++    world.r_home = {
++        "vila_sede": [3 + i for i in range(8)],
++        "porto_verde": [11 + i for i in range(4)],
++        "vila_nova": [15 + i for i in range(4)],
++    }
++    world.r_ext_dom = [
++        i
++        for i, r in enumerate(data)
++        if r["type"] == "external" and r["country"] == "XA"
++    ]
++    world.r_ext_for = [
++        i
++        for i, r in enumerate(data)
++        if r["type"] == "external" and r["country"] != "XA"
++    ]
+ 
+     # ---------------------------------------------------------------- recursos (D-39)
+-    res, W.sys_ids = [], {}
++    res, world.sys_ids = [], {}
+ 
+     def addres(key, name, sens, owner, n):
+         ids = []
+         for k in range(1, n + 1):
+-            res.append(dict(resource_id=len(res) + 1, system=key, name=f'{name}_{k:03d}' if n > 1 else name,
+-                            sensitivity=sens, owner_department=owner))
++            res.append(
++                dict(
++                    resource_id=len(res) + 1,
++                    system=key,
++                    name=f"{name}_{k:03d}" if n > 1 else name,
++                    sensitivity=sens,
++                    owner_department=owner,
++                )
++            )
+             ids.append(len(res))
+-        W.sys_ids[key] = ids
+-    for key, (nm, sens, n, dep) in C.SYSTEMS.items():
+-        owner = {'crm': 'sales', 'repo': 'engineering_product', 'fs_conf_fin': 'admin_finance',
+-                 'fs_conf_leg': 'legal', 'erp': 'admin_finance', 'contracts': 'legal', 'payroll': 'hr',
+-                 'dossier': 'hr', 'console': 'it_infra'}.get(key, '')
++        world.sys_ids[key] = ids
++
++    for key, (nm, sens, n, dep) in cfg.SYSTEMS.items():
++        owner = {
++            "crm": "sales",
++            "repo": "engineering_product",
++            "fs_conf_fin": "admin_finance",
++            "fs_conf_leg": "legal",
++            "erp": "admin_finance",
++            "contracts": "legal",
++            "payroll": "hr",
++            "dossier": "hr",
++            "console": "it_infra",
++        }.get(key, "")
+         addres(key, nm, sens, owner, n)
+-    depts = sorted({c[0] for c in C.COHORTS})
++    depts = sorted({c[0] for c in cfg.COHORTS})
+     for d in depts:
+-        addres('fs_own_' + d, f'arquivos_{d}', 'internal', d, C.FS_OWN_N)
+-    W.res = res
+-    W.res_sens = np.array([0] + [C.SENS.index(r['sensitivity']) for r in res], dtype=np.int64)
+-    W.mail_id = W.sys_ids['mail'][0]
+-    W.portal_ids = W.sys_ids['portal']
+-    W.mob_ids = np.array([W.mail_id] + W.portal_ids)
++        addres("fs_own_" + d, f"arquivos_{d}", "internal", d, cfg.FS_OWN_N)
++    world.res = res
++    world.res_sens = np.array(
++        [0] + [cfg.SENS.index(r["sensitivity"]) for r in res], dtype=np.int64
++    )
++    world.mail_id = world.sys_ids["mail"][0]
++    world.portal_ids = world.sys_ids["portal"]
++    world.mob_ids = np.array([world.mail_id] + world.portal_ids)
+ 
+     # ---------------------------------------------------------------- funcionários (D-37/38)
+     emps, nid = [], 0
+-    for dept, persona, site, n in C.COHORTS:
++    for dept, persona, site, n in cfg.COHORTS:
+         n = max(1, round(n * scale)) if scale != 1.0 else n
+         for _ in range(n):
+             nid += 1
+             e = Obj()
+-            e.id, e.dept, e.persona, e.site, e.tz = nid, dept, persona, site, C.TZ[site]
+-            p = C.PERSONAS[persona]
+-            e.mu = float(np.clip(rng.normal((p['lo'] + p['hi']) / 2, (p['hi'] - p['lo']) / 6), p['lo'], p['hi']))
+-            e.hire_idx = int(rng.integers(1, 60)) if rng.random() < .04 else 0
+-            e.hired = start + timedelta(days=e.hire_idx) if e.hire_idx else date(start.year - int(rng.integers(1, 8)), 1, 1)
+-            e.priv0 = 2 if (persona == 'it_privileged' and rng.random() < .4) else (1 if persona in ('it_privileged', 'management') else 0)
+-            e.mfa0 = bool(rng.random() < (C.MFA0_PRIV if dept in ('it_infra', 'board') else C.MFA0_BASE))
+-            e.p_err = float(np.clip(rng.lognormal(np.log(.03), .5), .005, .15))      # P17 (ASSUNÇÃO)
+-            e.susc = float(np.clip(rng.lognormal(0, .35), .4, 2.2))
+-            e.bias = float(rng.normal(0, .5))
++            e.id, e.dept, e.persona, e.site, e.tz = (
++                nid,
++                dept,
++                persona,
++                site,
++                cfg.TZ[site],
++            )
++            p = cfg.PERSONAS[persona]
++            e.mu = float(
++                np.clip(
++                    rng.normal((p["lo"] + p["hi"]) / 2, (p["hi"] - p["lo"]) / 6),
++                    p["lo"],
++                    p["hi"],
++                )
++            )
++            e.hire_idx = int(rng.integers(1, 60)) if rng.random() < 0.04 else 0
++            e.hired = (
++                start + timedelta(days=e.hire_idx)
++                if e.hire_idx
++                else date(start.year - int(rng.integers(1, 8)), 1, 1)
++            )
++            e.priv0 = (
++                2
++                if (persona == "it_privileged" and rng.random() < 0.4)
++                else (1 if persona in ("it_privileged", "management") else 0)
++            )
++            e.mfa0 = bool(
++                rng.random()
++                < (cfg.MFA0_PRIV if dept in ("it_infra", "board") else cfg.MFA0_BASE)
++            )
++            e.p_err = float(
++                np.clip(rng.lognormal(np.log(0.03), 0.5), 0.005, 0.15)
++            )  # P17 (ASSUNÇÃO)
++            e.susc = float(np.clip(rng.lognormal(0, 0.35), 0.4, 2.2))
++            e.bias = float(rng.normal(0, 0.5))
+             e.shift = int(rng.integers(3))
+-            a = int(rng.integers(7)); e.off = (a, (a + 1) % 7)
++            a = int(rng.integers(7))
++            e.off = (a, (a + 1) % 7)
+             e.home_days = [(0, 2), (1, 3), (2, 4), (0, 3)][int(rng.integers(4))]
+-            e.usb_rate = {'hybrid_eng': .02, 'it_privileged': .015}.get(persona, .006)
++            e.usb_rate = {"hybrid_eng": 0.02, "it_privileged": 0.015}.get(
++                persona, 0.006
++            )
+             # férias: 1-2 blocos, 22-30 dias corridos (hr_calendar)
+             e.vac_blocks, e.vac = [], np.zeros(days, bool)
+-            tot = int(rng.integers(22, 31)); nb = int(rng.integers(1, 3))
++            tot = int(rng.integers(22, 31))
++            nb = int(rng.integers(1, 3))
+             for b in range(nb):
+-                L = tot // nb if b == 0 else tot - tot // nb
+-                s0 = int(rng.integers(0, max(1, days - L)))
+-                e.vac[s0:s0 + L] = True; e.vac_blocks.append((s0, min(days - 1, s0 + L - 1)))
+-            e.sick = rng.random(days) < .012
+-            wd_ok = ~np.isin(W.wd, e.off) if persona == 'shift_ops' else (W.wd < 5) & ~W.is_hol
++                length = tot // nb if b == 0 else tot - tot // nb
++                s0 = int(rng.integers(0, max(1, days - length)))
++                e.vac[s0 : s0 + length] = True
++                e.vac_blocks.append((s0, min(days - 1, s0 + length - 1)))
++            e.sick = rng.random(days) < 0.012
++            wd_ok = (
++                ~np.isin(world.wd, e.off)
++                if persona == "shift_ops"
++                else (world.wd < 5) & ~world.is_hol
++            )
+             e.works = wd_ok & ~e.vac & ~e.sick & (np.arange(days) >= e.hire_idx)
+             e.base_off = ~wd_ok
+             # origem
+-            city = 'porto_verde' if site == 'MAO' else ('vila_nova' if rng.random() < .2 else 'vila_sede')
+-            e.home_r = int(rng.choice(W.r_home[city]))
+-            e.home_ip = rand_ip(W, rng, e.home_r)
+-            e.office_ip = rand_ip(W, rng, W.r_office[site])
++            city = (
++                "porto_verde"
++                if site == "MAO"
++                else ("vila_nova" if rng.random() < 0.2 else "vila_sede")
++            )
++            e.home_r = int(rng.choice(world.r_home[city]))
++            e.home_ip = rand_ip(world, rng, e.home_r)
++            e.office_ip = rand_ip(world, rng, world.r_office[site])
+             e.phish = {}
+-            for m in np.unique(W.yyyymm):
+-                idx = np.flatnonzero(W.yyyymm == m)
++            for m in np.unique(world.yyyymm):
++                idx = np.flatnonzero(world.yyyymm == m)
+                 if len(idx) > 10:
+-                    e.phish[int(idx[min(len(idx) - 1, int(rng.integers(7, 21)))])] = int(m)
++                    e.phish[int(idx[min(len(idx) - 1, int(rng.integers(7, 21)))])] = (
++                        int(m)
++                    )
+             emps.append(e)
+-    W.emps, W.emp_by_id = emps, {e.id: e for e in emps}
+-    W.payroll_staff = set([e.id for e in emps if e.dept == 'hr'][:5])
++    world.emps, world.emp_by_id = emps, {e.id: e for e in emps}
++    world.payroll_staff = set([e.id for e in emps if e.dept == "hr"][:5])
+ 
+     # acesso permitido (matriz D-39) e recursos habituais (base do padrão D-24)
+     for e in emps:
+         ids = []
+-        for key, (nm, sens, n, dep) in C.SYSTEMS.items():
+-            ok = (dep is None) or (e.id in W.payroll_staff or e.dept == 'board' if dep == 'hr5+board' else e.dept in dep)
+-            if ok: ids += W.sys_ids[key]
+-        ids += W.sys_ids['fs_own_' + e.dept]
++        for key, (nm, sens, n, dep) in cfg.SYSTEMS.items():
++            ok = (dep is None) or (
++                e.id in world.payroll_staff or e.dept == "board"
++                if dep == "hr5+board"
++                else e.dept in dep
++            )
++            if ok:
++                ids += world.sys_ids[key]
++        ids += world.sys_ids["fs_own_" + e.dept]
+         e.allowed = np.array(sorted(set(ids)))
+-        pool = np.array([i for i in e.allowed if i != W.mail_id and i not in W.portal_ids])
++        pool = np.array(
++            [i for i in e.allowed if i != world.mail_id and i not in world.portal_ids]
++        )
+         k = min(len(pool), int(rng.integers(12, 26)))
+         chosen = rng.choice(pool, size=k, replace=False)
+-        hab = np.concatenate([[W.mail_id, W.portal_ids[0]], chosen])
+-        w = 1.0 / np.arange(1, len(hab) + 1) ** .9
++        hab = np.concatenate([[world.mail_id, world.portal_ids[0]], chosen])
++        w = 1.0 / np.arange(1, len(hab) + 1) ** 0.9
+         e.hab_ids, e.hab_p = hab, w / w.sum()
+-        e.mob_ids = W.mob_ids
++        e.mob_ids = world.mob_ids
+ 
+     # ---------------------------------------------------------------- dispositivos (D-41)
+-    dev = [dict(device_id=0, owner_employee_id=None, device_type='unknown_external', corporate=False)]
++    dev = [
++        dict(
++            device_id=0,
++            owner_employee_id=None,
++            device_type="unknown_external",
++            corporate=False,
++        )
++    ]
+     for e in emps:
+-        dev.append(dict(device_id=len(dev), owner_employee_id=e.id, device_type='notebook', corporate=True))
++        dev.append(
++            dict(
++                device_id=len(dev),
++                owner_employee_id=e.id,
++                device_type="notebook",
++                corporate=True,
++            )
++        )
+         e.dev_nb = len(dev) - 1
+         e.dev_ph = 0
+     order = rng.permutation(len(emps))
+-    n_corp = round(C.CORP_PHONE_FRAC * len(emps)); n_pers = round(C.PERSONAL_PHONE_N * len(emps) / 250) if scale != 1.0 else C.PERSONAL_PHONE_N
+-    for j, ix in enumerate(order[:n_corp + n_pers]):
++    n_corp = round(cfg.CORP_PHONE_FRAC * len(emps))
++    n_pers = (
++        round(cfg.PERSONAL_PHONE_N * len(emps) / 250)
++        if scale != 1.0
++        else cfg.PERSONAL_PHONE_N
++    )
++    for j, ix in enumerate(order[: n_corp + n_pers]):
+         e = emps[ix]
+-        dev.append(dict(device_id=len(dev), owner_employee_id=e.id,
+-                        device_type='corporate_phone' if j < n_corp else 'personal_phone', corporate=j < n_corp))
++        dev.append(
++            dict(
++                device_id=len(dev),
++                owner_employee_id=e.id,
++                device_type="corporate_phone" if j < n_corp else "personal_phone",
++                corporate=j < n_corp,
++            )
++        )
+         e.dev_ph = len(dev) - 1
+         e.ph_personal = j >= n_corp
+-    W.devices = dev
+-    W.nb_devices = [e.dev_nb for e in emps]
++    world.devices = dev
++    world.nb_devices = [e.dev_nb for e in emps]
+ 
+     # ---------------------------------------------------------------- janelas de manutenção TI (D-38)
+-    W.maint = {}
+-    it = [e.id for e in emps if e.persona == 'it_privileged']
+-    for m in np.unique(W.yyyymm):
+-        fr = [i for i in np.flatnonzero(W.yyyymm == m) if W.wd[i] == 4 and not W.is_hol[i] and i >= 0]
++    world.maint = {}
++    it = [e.id for e in emps if e.persona == "it_privileged"]
++    for m in np.unique(world.yyyymm):
++        fr = [
++            i
++            for i in np.flatnonzero(world.yyyymm == m)
++            if world.wd[i] == 4 and not world.is_hol[i] and i >= 0
++        ]
+         if fr and it:
+             di = fr[min(1, len(fr) - 1)]
+             for eid in rng.choice(it, size=min(5, len(it)), replace=False):
+-                W.maint[(int(eid), int(di))] = int(m)
++                world.maint[(int(eid), int(di))] = int(m)
+ 
+     # overrides registrados pelos cenários
+-    W.mfa_off, W.dev_nopatch, W.phish_force, W.hr_extra = {}, {}, {}, []
+-    W.all_ids = np.array([e.id for e in emps])
+-    return W
++    world.mfa_off, world.dev_nopatch, world.phish_force, world.hr_extra = {}, {}, {}, []
++    world.all_ids = np.array([e.id for e in emps])
++    return world
+ 
+ 
+-def rand_ip(W, rng, ridx):
+-    r = W.ranges[ridx]
+-    return int(r['base'] + rng.integers(1, r['size'] - 1))
++def rand_ip(world, rng, ridx):
++    r = world.ranges[ridx]
++    return int(r["base"] + rng.integers(1, r["size"] - 1))
+ 
+ 
+ def ip_str(i):
+-    return f'{(i >> 24) & 255}.{(i >> 16) & 255}.{(i >> 8) & 255}.{i & 255}'
++    return f"{(i >> 24) & 255}.{(i >> 16) & 255}.{(i >> 8) & 255}.{i & 255}"
+ 
+ 
+-def mfa_at(W, e, t):
++def mfa_at(world, e, t):
+     if not e.mfa0:
+         return False
+-    for a, b in W.mfa_off.get(e.id, ()):
++    for a, b in world.mfa_off.get(e.id, ()):
+         if a <= t < b:
+             return False
+     return True
