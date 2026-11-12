@@ -38,25 +38,29 @@ rótulo nenhum pela **D-17**, com o gabarito separado em `ground_truth/`.
 > elas. Procedimento em
 > [execução do experimento](execucao-do-experimento.md).
 
-> ⚠️ **A C3 não executa, e é decisão — não defeito.** O gerador escreve estado
-> diário **só do notebook** (`generator/normal.py`, `device_states`), e a D3
-> exige o estado do equipamento **do evento**, recusando-se a pontuar sem ele:
-> *"sem ele, atualização e antivírus sairiam como se estivessem em ordem"*.
-> Eventos de celular e de origem externa não têm esse estado. Três caminhos, e
-> o terceiro campo é o que a escolha custa:
+> ✅ **A C3 passou a executar em 11/11/2026.** Pela decisão de que a D3 pontua a
+> conduta e deixa a parcela de postura como **não avaliada** quando o
+> equipamento do evento não tem estado no dia — o gerador escreve estado diário
+> só do notebook. **As quatro configurações rodaram**, e a §4 do artigo tem a
+> tabela de ablação completa.
 >
-> | Caminho | O que muda | O que custa |
-> |---|---|---|
-> | Gerador escreve estado de celular | trabalho do **Filipe** | o que é "idade de patch" de um celular precisa de decisão própria |
-> | D3 pontua sem a parcela de postura quando falta estado | muda a **semântica da D-30** | abre a porta para a parcela sumir em silêncio, que é o que a recusa atual impede |
-> | Experimento restringe-se a eventos de notebook | nada no código | tira do experimento os eventos de origem externa, que são onde estão vários cenários |
+> Três números que a execução da C3 trouxe, e que estão na §4.6:
 >
-> **Sem a C3 a tabela de ablação tem três colunas, e falta a parcela de
-> exposição acumulada — metade do que a pergunta de pesquisa propõe avaliar.**
+> | | |
+> |---|---|
+> | Eventos sem a parcela de postura | **79.456**, 5,5% da janela |
+> | Riscos anteriores fora da janela por empate de instante | **962** |
+> | Fração do registro que a C3 alerta no limiar 20 | **99,8%** — ela não é operável nesse corte |
+>
+> Os dois primeiros subestimam parcelas da C3, e portanto são **conservadores**.
+> O terceiro é o limiar, não o modelo: a revocação fixa mostra a C3 como a
+> melhor configuração a partir de 0,40.
 
 > **A M3 venceu em 22/10** e o critério dela é "C0 a C3 rodando sobre **o mesmo
-> gerador**". Três das quatro rodam. **O que falta é a C3**, e ela depende da
-> decisão acima.
+> gerador**". **As quatro rodam desde 11/11/2026**, sobre a mesma semente e a
+> mesma janela. O que resta para o critério ser cumprido com rigor são as
+> **múltiplas sementes** da D-13 — uma execução por configuração não distingue
+> ganho sistemático de variação de amostragem.
 
 ---
 
@@ -180,14 +184,15 @@ avaliador que grave métrica — e a caneta da **S14**.
 
 ## O caminho crítico, em uma frase
 
-~~Gerador~~ → ~~ingestão~~ → **a C3** · **cenários nomeados** → execução das
-quatro configurações → tabela de ablação → ~~Resultados~~ → Conclusão.
+~~Gerador~~ → ~~ingestão~~ → ~~a C3~~ → **múltiplas sementes** · **cenários
+nomeados** → tabela de ablação → ~~Resultados~~ → ~~Conclusão~~.
 
-O gerador caiu em 04/11, a ingestão em 11/11 — e a **Seção 4 do artigo já está
-escrita sobre números de execução registrada**, com três das quatro
-configurações. Os dois elos restantes são independentes entre si: a **C3** é
-decisão do Davi, os **cenários nomeados** são da Yasmin pelas **D-06** e
-**D-16**, atrasadas desde 01/10.
+O gerador caiu em 04/11; a ingestão e a C3, em 11/11. A **Seção 4 do artigo
+está escrita sobre números de execução registrada, com as quatro
+configurações**, e a Conclusão responde à pergunta de pesquisa. Os dois elos
+restantes são independentes entre si: as **múltiplas sementes** da **D-13**, que
+é o que converte a análise descritiva em inferencial, e os **cenários nomeados**
+da Yasmin pelas **D-06** e **D-16**, atrasadas desde 01/10.
 
 Duas decisões passaram a vencer antes da banca, e não depois:
 

@@ -27,7 +27,7 @@ Como reproduzir: [execução do experimento](../docs/execucao-do-experimento.md)
 | Eventos gerados | 1.905.111, em 124 episódios |
 | Janela de treino | 01/01 a 31/03/2026 — os três meses da **D-24** |
 | Janela de avaliação | 01/04 a 31/12/2026 — 1.435.546 eventos, 2.638 maliciosos |
-| Configurações | **C0, C1 e C2**. A C3 não roda ainda — ver abaixo |
+| Configurações | **as quatro** |
 | Limiar de operação | 20, o teto da faixa normal do preset. **Não calibrado** |
 | `code_sha` | `5729695`, registrado em cada execução pelo próprio executor |
 
@@ -39,6 +39,16 @@ Como reproduzir: [execução do experimento](../docs/execucao-do-experimento.md)
 2. **O limiar não foi calibrado.** No corte 20 as três configurações alarmam em
    um quinto do log, com precisão abaixo de 1%. A comparação que tem sentido
    hoje é a de **FPR a revocação fixa**, não a do limiar de operação
-3. **Sem a C3.** O gerador escreve estado diário só do notebook, e a D3 se
-   recusa a pontuar evento cujo equipamento não tenha estado no dia. É decisão
-   pendente do Davi, registrada em [o que falta](../docs/o-que-falta.md)
+3. **A C3 rodou sem a parcela de postura em 5,5% dos eventos.** O gerador
+   escreve estado diário de equipamento só para notebooks, e **79.456 eventos**
+   de celular e de origem externa foram pontuados sem ela, com a ausência
+   registrada em cada nota. Pela decisão de 11/11/2026 a D3 pontua a conduta e
+   deixa a postura como não avaliada, em vez de interromper — o efeito é
+   subestimar essa parcela nos eventos afetados, e portanto **conservador**
+4. **A C3 não é operável no limiar 20.** Ela alerta sobre 99,8% do registro: a
+   exposição acumulada cresce ao longo da janela e empurra quase toda nota acima
+   do corte. A comparação que vale para ela é a de revocação fixa
+5. **962 riscos anteriores ficaram fora da janela de exposição** por terem o
+   mesmo instante do evento avaliado. O desenho exclui o evento corrente, e na
+   resolução de segundo o irmão de mesmo instante não se distingue dele. Mesmo
+   sentido conservador

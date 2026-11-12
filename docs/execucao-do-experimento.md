@@ -71,12 +71,18 @@ Um laço por configuração, cada uma com o próprio hash e o próprio conjunto 
 notas. Em escala cheia, as quatro configurações passeiam por 1,45 milhão de
 eventos da janela de avaliação.
 
-> ⚠️ **A C3 ainda não roda sobre dado gerado.** O gerador escreve estado diário
-> **só do notebook** — `generator/normal.py`, `device_states` —, e a D3 exige
-> estado do equipamento **do evento**, recusando-se a pontuar sem ele: *"sem
-> ele, atualização e antivírus sairiam como se estivessem em ordem"*. Eventos de
-> celular e de origem externa não têm esse estado. É decisão pendente, não
-> defeito de código — ver [o que falta](o-que-falta.md).
+> ✅ **A C3 passou a rodar em 11/11/2026**, pela decisão de que a D3 pontua a
+> conduta e deixa a parcela de postura como **não avaliada** quando o
+> equipamento do evento não tem estado no dia. O gerador escreve estado diário
+> **só do notebook**, e por isso 79.456 eventos — 5,5% da janela — foram
+> pontuados sem essa parcela, com a ausência registrada em cada nota e contada
+> na saída do executor. O efeito é **conservador**: subestima a postura nos
+> eventos afetados.
+>
+> **A C3 não é operável no limiar padrão.** Ela alerta sobre 99,8% do registro,
+> porque a exposição acumulada cresce ao longo da janela. A comparação que vale
+> para ela é a de revocação fixa — e nela a C3 passa a ser a melhor
+> configuração a partir de 0,40 de revocação.
 
 ## 4. O avaliador — as métricas
 
@@ -121,4 +127,4 @@ preset, e ele **não foi calibrado**: no limiar 20 as três configurações alar
 em um quarto do log. A comparação que tem sentido hoje é a de **FPR a revocação
 fixa**, não a do limiar de operação.
 
-**Sem a C3.** Ver o passo 3.
+**Com a C3 sem a parcela de postura em 5,5% dos eventos.** Ver o passo 3.
