@@ -374,7 +374,7 @@ fechada_em = 2026-10-14
 [[decisao]]
 id = "D-15"
 titulo = "Critério de relevância declarado a priori"
-proposta = "CritERIO pelo argumento operacional: teto de 45 alertas falsos por turno, declarado pelo Davi em 12/11/2026 -- depois da primeira execucao, e a secao 3.6 registra isso em texto corrido. A C2 o cumpre a 0,20 de revocacao em 7 das 10 sementes; a linha de base, em nenhuma. A revocacao longitudinal minima continua nao declarada"
+proposta = "CritERIO pelo argumento operacional: teto de 45 alertas falsos por turno, declarado pelo Davi em 12/11/2026 -- depois da primeira execucao, e a secao 3.6 registra isso em texto corrido. A C2 o cumpre a 0,20 de revocacao em 7 das 10 sementes; a linha de base, em nenhuma. Revocacao longitudinal minima de 0,80, declarada no mesmo dia: cumprida pela C2 e pela C3 em 10 das 10 sementes, pela C1 em 9 e pela C0 em nenhuma"
 donos = ["Davi", "Yasmin", "Filipe"]
 prazo = 2026-10-01
 estado = "fechada"
