@@ -50,19 +50,32 @@ motores.
 > **P17** ficaram embutidos no gerador e seguem valendo como registro em
 > [banco simulado](banco-simulado.md), seção 10.
 
+> ✅ **A dívida de qualidade do gerador foi paga em 11/11/2026.** O Filipe
+> formatou os 9 arquivos, renomeou os identificadores de uma letra e marcou os
+> três grupos de parâmetros como **ASSUNÇÃO (a ratificar: Davi)**. O Ruff caiu de
+> **226 para 23 apontamentos**, e a formatação passa.
+>
+> **A refatoração foi verificada por saída, não por leitura:** gerando com a
+> versão anterior e com a nova, na mesma semente, os **11 arquivos saem byte a
+> byte idênticos**. É o que prova que renomear `W` para `world` em 751 linhas
+> não mudou um número — e é por isso que resultado já medido sobre a versão
+> anterior continua valendo.
+
 **O que ficou dele, e é dívida de qualidade do próprio gerador:**
 
-1. **Nenhum teste.** São 1.170 linhas em 9 arquivos, sem um `test_` — o único
-   módulo do repositório nessa situação, contra a seção 8 de
-   [padrões de código](padroes-codigo.md)
-2. **226 apontamentos do Ruff**, sendo 141 de vários comandos na mesma linha
-   (`E701`/`E702`) e 42 de nomenclatura (`N803`/`N806`/`N812`). O Ruff não roda
-   no CI, então não reprova — mas a seção 3 de padrões de código põe a
-   formatação como não negociável
-3. **Três grupos de parâmetros sem procedência** — `_CAT_W`, `MFA0_*` e
-   `PATCH_MEDIAN` não citam decisão nem se declaram assunção, contra a regra que
-   o próprio `config.py` enuncia no cabeçalho. Detalhe em
-   [banco simulado](banco-simulado.md), seção 10 · ratificação do **Davi**
+1. ~~**Nenhum teste.**~~ `tests/test_gerador.py` entrou pelo #92, com 7 casos.
+   **Continua sendo o único módulo sem teste do próprio comportamento**: os 7
+   medem a aderência do baseline à D-24, não o gerador
+2. ~~**226 apontamentos do Ruff.**~~ **23 restam**, e são de três tipos: 9
+   `B905` (`zip()` sem `strict=`), 6 `B007` e 4 `F841` (variável atribuída e não
+   usada), 4 `UP031`. Os `B905` são os que importam — `zip()` sem `strict`
+   esconde lista de tamanho diferente em silêncio, e corrigi-los exige saber a
+   intenção de cada um
+3. ~~**Três grupos de parâmetros sem procedência.**~~ `_CAT_W`, `MFA0_*` e
+   `PATCH_MEDIAN` agora se declaram **ASSUNÇÃO** no `config.py`. A declaração
+   fecha a regra do cabeçalho; **a ratificação continua sendo do Davi** — e
+   agora ela é a pendência, não a omissão. Detalhe em
+   [banco simulado](banco-simulado.md), seção 10
 > ✅ **O baseline foi alinhado em 04/11, pelo #92:** o `EVAL_START_DAY` passou de
 > 100 para **90** — os três meses exatos da **D-24** —, entrou a checagem que
 > mede a decisão em vez do parâmetro, e `tests/test_gerador.py` tornou-se o
