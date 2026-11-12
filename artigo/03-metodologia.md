@@ -67,9 +67,11 @@ depende de sua correspondência com o mundo real.
 
 A comparação central é organizada como **estudo de ablação** — procedimento em
 que as componentes de um modelo são ativadas progressivamente, uma por vez, de
-modo que o ganho atribuível a cada uma possa ser isolado. São definidas quatro
-configurações, executadas sobre os mesmos eventos, os mesmos cenários e as mesmas
-métricas.
+modo que o ganho atribuível a cada uma possa ser isolado. São definidas as quatro
+configurações da Tab. 1, executadas sobre os mesmos eventos, os mesmos cenários
+e as mesmas métricas.
+
+**Tabela 1.** As quatro configurações do estudo de ablação.
 
 | Configuração | Composição | Papel no experimento |
 |---|---|---|
@@ -77,6 +79,8 @@ métricas.
 | **C1** | D1 — risco do evento individual | Ganho de atributos mais ricos sobre a mesma lógica pontual |
 | **C2** | D1 + D2 — desvio em relação ao padrão do próprio funcionário | Ganho de contexto individual |
 | **C3** | D1 + D2 + D3 — exposição acumulada e higiene de segurança | Contribuição original do trabalho |
+
+Fonte: elaborada pelos autores (2026).
 
 A C0 cumpre a função de grupo de controle e **não possui parâmetro aprendido**:
 seus limiares são fixos, idênticos para todos, e nenhuma regra consulta o padrão
