@@ -226,11 +226,10 @@ isso que ela entra antes da conclusão e não depois.
 
 ## 4.5 Discussão
 
-> **Rascunho de IA, redigido em 12/11/2026 a partir dos números já registrados.**
-> A caneta desta subseção é do **Filipe**, pela S13, e **ele ainda não a leu**.
-> Nenhuma chamada bibliográfica aqui é nova: todas as sete são da lista já
-> conferida na fonte, e nenhuma afirmação quantitativa vem de fora de
-> `results/agregado.json`.
+> **Rascunho de IA redigido em 12/11/2026, e lido pelo Filipe no mesmo dia** —
+> a caneta desta subseção é dele, pela S13. Nenhuma chamada bibliográfica aqui é
+> nova: todas as sete são da lista já conferida na fonte, e nenhuma afirmação
+> quantitativa vem de fora de `results/agregado.json`.
 
 A comparação respondeu às duas grandezas da pergunta de pesquisa, e produziu
 três resultados que a pergunta não previa. Esta subseção trata deles, porque são

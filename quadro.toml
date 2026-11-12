@@ -334,7 +334,8 @@ titulo = "Cenários de contexto (B) e longitudinais (L)"
 proposta = "Adotados; desenho detalhado na S5"
 donos = ["Yasmin"]
 prazo = 2026-10-01
-estado = "aberta"
+estado = "fechada"
+fechada_em = 2026-11-12
 
 [[decisao]]
 id = "D-07"
@@ -383,7 +384,8 @@ titulo = "Controle negativo longitudinal"
 proposta = "Acrescentar cenário de escalada legítima aos cenários de teste"
 donos = ["Yasmin"]
 prazo = 2026-10-01
-estado = "aberta"
+estado = "fechada"
+fechada_em = 2026-11-12
 
 [[decisao]]
 id = "D-17"
@@ -403,7 +405,8 @@ titulo = "Vertente LGPD e ISO/IEC 27001"
 proposta = "Entra como limitação e trabalho futuro na S13"
 donos = ["Yasmin"]
 prazo = 2026-10-01
-estado = "aberta"
+estado = "fechada"
+fechada_em = 2026-11-12
 
 [[decisao]]
 id = "D-05"
