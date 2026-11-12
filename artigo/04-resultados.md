@@ -110,21 +110,14 @@ invalida comparar as quatro *neste ponto*, e é por isso que a grandeza da
 
 ### 4.3.1 Ruído: FPR com a revocação fixada
 
-A primeira grandeza da pergunta de pesquisa está na Tab. 5.
+A primeira grandeza da pergunta de pesquisa está na Fig. 1. Cada ponto é a média
+das dez sementes e a barra vertical é o desvio-padrão amostral; a escala vertical
+é logarítmica porque os valores cobrem quatro ordens de grandeza, e numa escala
+linear as três configurações abaixo de 1% virariam uma linha colada no eixo.
 
-**Tabela 5.** Falsos positivos, em porcentagem, no limiar mais alto que ainda alcança cada revocação.
+![Falsos positivos por nível de revocação fixada](../results/figuras/fpr-por-revocacao.png)
 
-| Revocação | C0 | C1 | C2 | C3 |
-|---|---|---|---|---|
-| **0,10** | 1,15 ± 0,71 | **0,01 ± 0,02** | 0,04 ± 0,02 | 0,05 ± 0,03 |
-| **0,20** | 18,44 ± 1,49 | 6,03 ± 2,75 | **0,40 ± 0,19** | 0,54 ± 0,29 |
-| **0,30** | 34,55 ± 34,52 | 14,05 ± 4,21 | **1,33 ± 0,55** | 1,70 ± 0,94 |
-| **0,40** | 100,00 ± 0,00 | 23,27 ± 17,36 | **3,18 ± 1,60** | 3,47 ± 1,36 |
-| **0,50** | 100,00 ± 0,00 | 58,75 ± 21,51 | **6,85 ± 1,01** | 7,18 ± 2,12 |
-| **0,60** | 100,00 ± 0,00 | 72,09 ± 0,47 | **11,93 ± 4,13** | 14,04 ± 4,48 |
-| **0,70** | 100,00 ± 0,00 | 72,09 ± 0,47 | **26,75 ± 4,24** | 28,33 ± 8,84 |
-| **0,80** | 100,00 ± 0,00 | 72,09 ± 0,47 | **47,42 ± 14,82** | 52,87 ± 11,11 |
-| **0,90** | 100,00 ± 0,00 | 100,00 ± 0,00 | 76,00 ± 1,41 | **73,69 ± 6,75** |
+**Figura 1.** Falsos positivos, em porcentagem, no limiar mais alto que ainda alcança cada revocação.
 
 Fonte: dados da pesquisa (2026).
 
@@ -171,10 +164,10 @@ segundo, na FPR — e que a troca, no desenho atual, não compensa.
 
 ### 4.3.2 Cobertura: revocação nos cenários longitudinais
 
-A segunda grandeza está na Tab. 6, medida na família **L** — aqueles em que o risco cresce ao
+A segunda grandeza está na Tab. 5, medida na família **L** — aqueles em que o risco cresce ao
 longo de dias sem que um evento isolado dispare alerta:
 
-**Tabela 6.** Revocação nos cenários longitudinais, em porcentagem, por episódio e por evento.
+**Tabela 5.** Revocação nos cenários longitudinais, em porcentagem, por episódio e por evento.
 
 | Unidade de análise | C0 | C1 | C2 | C3 |
 |---|---|---|---|---|
@@ -216,26 +209,33 @@ sustenta**.
 
 ## 4.4 Verificação do painel de análise
 
-> **A escrever.** A **D-02 fechou em 14/10/2026 pela opção A**: o painel é
-> instrumento de análise, e não objeto de avaliação — como declara a Seção 3.9.
-> **Não há escore SUS, métricas de tarefa nem participantes**, e esta subseção
-> não reporta satisfação de usuário.
->
-> O que entra aqui é a verificação do critério funcional declarado em
-> [usabilidade](../docs/usabilidade.md): decomposição do risco visível por
-> dimensão, rótulo textual acompanhando cada uso de cor e contraste mínimo de
-> 4,5:1 — a seção 5 daquele documento —, somada à avaliação heurística da seção
-> 6.1, que é feita por quem constrói e **não** requer participantes. As seções
-> 6.2 e 6.3 de lá, teste com usuários e SUS, ficam fora pela **D-02**.
->
-> A verificação é feita pelos autores sobre o painel construído, e o que se
-> reporta é se o critério foi cumprido.
->
-> As cinco parcelas que o painel precisa exibir separadas são as da Seção 3.3:
-> regras fixas, risco do evento individual, desvio do padrão do próprio
-> funcionário e as duas parcelas da terceira dimensão — exposição acumulada e
-> postura de segurança —, que pelas decisões **D-25** e **D-30** não se agregam
-> em um valor único.
+Pela decisão registrada na Seção 3.9, o painel é instrumento de análise e não
+objeto de avaliação: **não há escore de satisfação, métrica de tarefa nem
+participante**, e nada se afirma aqui sobre a qualidade da interface. O que se
+verifica é o critério funcional — a nota decomponível por dimensão, o rótulo
+textual acompanhando cada uso de cor e o contraste mínimo de 4,5:1 entre texto e
+fundo, exigências dos critérios 1.4.1 e 1.4.3 da WCAG 2.2.
+
+![A decomposição da nota de um evento, no painel](../results/figuras/painel-decomposicao.png)
+
+**Figura 2.** A decomposição da nota de um evento da configuração C3, no painel.
+
+Fonte: captura do painel sobre os exemplos gravados do projeto (2026).
+
+**A verificação é automática, e roda a cada alteração do código:** quarenta casos
+de teste conferem os três requisitos. O contraste é calculado par a par entre
+texto e fundo de cada faixa; os rótulos e os intervalos de cada faixa são
+confrontados com a documentação **e** com a classificação do próprio motor, de
+modo que uma legenda divergente do que o sistema faz reprova; e as cinco parcelas
+da Seção 3.3 são conferidas uma a uma, inclusive a exigência de que a parcela que
+a configuração não liga apareça **ausente, e não zero** — a distinção que a
+Figura 2 mostra no traço da linha das regras fixas, que a C3 não ativa.
+
+**O que não foi feito, e fica declarado:** a avaliação heurística prevista na
+Seção 3.9, em que cada integrante percorre a interface isoladamente confrontando
+a tela com um conjunto de heurísticas, **não foi realizada**. O que se pode
+afirmar, portanto, é que o critério funcional é cumprido — **não** que a
+interface seja adequada ao uso.
 
 ## 4.5 Discussão
 

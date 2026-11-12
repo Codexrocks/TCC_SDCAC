@@ -98,6 +98,7 @@ ignore = [
 "ingest/cli.py" = ["T201"]
 "evaluator/cli.py" = ["T201"]
 "evaluator/agregado_cli.py" = ["T201"]
+"evaluator/figuras_cli.py" = ["T201"]
 
 [tool.ruff.lint.pydocstyle]
 convention = "google"
