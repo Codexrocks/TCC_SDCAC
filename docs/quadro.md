@@ -23,7 +23,7 @@
 | ▶️ Em curso | 1 |
 | ⏳ A vencer em 7 dias | 0 |
 | 🗓️ Depois | 13 |
-| ✅ Feito | 37 |
+| ✅ Feito | 38 |
 
 ## ⚠️ Atrasado
 
@@ -85,7 +85,7 @@ Nada nesta coluna.
 
 ## ✅ Feito
 
-37 itens.
+38 itens.
 
 | Tipo | Item | O que é | Quem | Prazo | Situação |
 |---|---|---|---|---|---|
@@ -126,6 +126,7 @@ Nada nesta coluna.
 | Decisão | **D-40** | Sede, filial e fusos horários | — | 28/09/2026 | ✅ Fechada em 28/09/2026 |
 | Decisão | **D-41** | Dispositivos e estado inicial de higiene | — | 28/09/2026 | ✅ Fechada em 28/09/2026 |
 | Decisão | **D-42** | A quarta regra da C0: janela de falhas ou evento isolado | — | 13/10/2026 | ✅ Fechada em 13/10/2026 |
+| Decisão | **D-44** | Evento cujo equipamento nao tem estado no dia | — | 11/11/2026 | ✅ Fechada em 11/11/2026 |
 
 ## Critério de aceite do que está aberto
 

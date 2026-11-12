@@ -223,6 +223,22 @@ class ArquivoStorage:
 
     def __init__(self, raiz: Path | str) -> None:
         self.raiz = Path(raiz)
+        # Indice do estado diario de equipamento, montado na primeira consulta.
+        #
+        # **Por que indexar, e nao so cachear o arquivo.** `device_states` e
+        # chamado uma vez por (equipamento, dia) de cada evento pontuado: em
+        # escala cheia sao ~69 mil consultas sobre um arquivo de ~91 mil linhas.
+        # Reler e reparsear o JSON a cada consulta sao bilhoes de conversoes de
+        # data, e a execucao da C3 simplesmente nao termina — foi assim que o
+        # custo apareceu, rodando a C3 sobre dado gerado pela primeira vez.
+        #
+        # Cachear aqui e seguro porque **nenhuma funcao deste arquivo escreve em
+        # `corp/`**: o estado de equipamento e entrada imutavel durante a
+        # execucao. O indice vale por instancia, e nao por processo, para que
+        # dois experimentos sobre diretorios diferentes nao se contaminem.
+        self._indice_de_equipamento: (
+            dict[tuple[int, int, date], tuple[DeviceState, ...]] | None
+        ) = None
 
     # ------------------------------------------------------------ entradas
 
@@ -345,19 +361,22 @@ class ArquivoStorage:
     def device_states(
         self, run_id: int, *, device_id: int, day: date
     ) -> tuple[DeviceState, ...]:
-        dados = _le_json(self.raiz / "corp" / "estado-de-equipamento.json")
-        return tuple(
-            DeviceState(
-                device_id=int(linha["device_id"]),
-                state_date=date.fromisoformat(str(linha["state_date"])),
-                patch_age_days=int(linha["patch_age_days"]),
-                antivirus_on=bool(linha["antivirus_on"]),
-            )
-            for linha in dados  # type: ignore[union-attr]
-            if int(linha["run_id"]) == run_id
-            and int(linha["device_id"]) == device_id
-            and date.fromisoformat(str(linha["state_date"])) == day
-        )
+        if self._indice_de_equipamento is None:
+            indice: dict[tuple[int, int, date], list[DeviceState]] = {}
+            dados = _le_json(self.raiz / "corp" / "estado-de-equipamento.json")
+            for linha in dados:  # type: ignore[union-attr]
+                estado = DeviceState(
+                    device_id=int(linha["device_id"]),
+                    state_date=date.fromisoformat(str(linha["state_date"])),
+                    patch_age_days=int(linha["patch_age_days"]),
+                    antivirus_on=bool(linha["antivirus_on"]),
+                )
+                chave = (int(linha["run_id"]), estado.device_id, estado.state_date)
+                indice.setdefault(chave, []).append(estado)
+            self._indice_de_equipamento = {
+                chave: tuple(estados) for chave, estados in indice.items()
+            }
+        return self._indice_de_equipamento.get((run_id, device_id, day), ())
 
     # -------------------------------------------------------------- saidas
 

@@ -415,3 +415,54 @@ def test_eventos_com_margem_de_tempo_cobrem_a_janela_de_treino(storage):
     ultimo = list(storage.events(1))[-1]
 
     assert (ultimo.occurred_at - primeiro.occurred_at) > timedelta(days=60)
+
+
+def test_o_estado_de_equipamento_le_o_arquivo_uma_vez_so(tmp_path, monkeypatch):
+    """O indice, e nao o arquivo relido a cada consulta.
+
+    **Por que este teste existe.** `device_states` e consultado uma vez por
+    (equipamento, dia) de cada evento pontuado: em escala cheia sao ~69 mil
+    consultas sobre um arquivo de ~91 mil linhas. Reler e reparsear o JSON a
+    cada uma sao bilhoes de conversoes de data, e a execucao da C3 **nao
+    termina** — foi assim que o custo apareceu, rodando a C3 sobre dado gerado
+    pela primeira vez.
+
+    O teste conta leituras em vez de medir tempo: medicao de tempo reprova em
+    maquina lenta e passa em maquina rapida, e o que precisa ficar fixo e o
+    numero de leituras.
+    """
+    import storage.arquivos as modulo
+
+    adaptador = ArquivoStorage(escreve_corp(tmp_path))
+
+    original = modulo._le_json
+    leituras = []
+
+    def contando(caminho):
+        leituras.append(caminho.name)
+        return original(caminho)
+
+    monkeypatch.setattr(modulo, "_le_json", contando)
+
+    dias = [AVALIACAO_INICIO, AVALIACAO_INICIO + timedelta(days=1)]
+    for _ in range(3):
+        for dia in dias:
+            adaptador.device_states(1, device_id=70, day=dia)
+
+    do_equipamento = [n for n in leituras if n == "estado-de-equipamento.json"]
+    assert len(do_equipamento) == 1
+
+
+def test_o_indice_de_equipamento_nao_vaza_entre_instancias(tmp_path):
+    """O indice vale por instancia, e nao por processo.
+
+    Dois experimentos sobre diretorios diferentes rodam no mesmo processo. Cache
+    de modulo faria o segundo ler o estado do primeiro, e a nota sairia errada
+    sem nada acusar — defeito que nenhum teste de um diretorio so pegaria.
+    """
+    primeira = ArquivoStorage(escreve_corp(tmp_path / "a"))
+    segunda = ArquivoStorage(escreve_corp(tmp_path / "b"))
+
+    assert primeira.device_states(1, device_id=70, day=AVALIACAO_INICIO)
+    assert primeira._indice_de_equipamento is not None
+    assert segunda._indice_de_equipamento is None
