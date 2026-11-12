@@ -60,6 +60,9 @@ class ExperimentResult:
     # Sai no resumo de proposito: parcela que desaparece sem contagem e a forma
     # silenciosa do defeito que a D-44 aceitou correr.
     without_posture: int = 0
+    # Quantas vezes um risco anterior ficou fora da janela de exposicao por ter
+    # o **mesmo instante** do evento avaliado. Ver o comentario em `_pontua`.
+    tied_priors: int = 0
 
 
 def code_sha() -> str:
@@ -171,7 +174,7 @@ def run_experiment(
         if config.enables("d2"):
             storage.save_baselines(scoring_run_id, padroes or {})
 
-        pontuadas, alertas, sem_postura = _pontua(
+        pontuadas, alertas, sem_postura, empates = _pontua(
             storage,
             run_id=run_id,
             scoring_run_id=scoring_run_id,
@@ -190,6 +193,7 @@ def run_experiment(
                 config_hash=config.config_hash,
                 scored=pontuadas,
                 without_posture=sem_postura,
+                tied_priors=empates,
                 alerts=alertas,
             )
         )
@@ -236,6 +240,7 @@ def _pontua(
     alertas = []
     pontuadas = 0
     sem_postura_total = 0
+    empates_total = 0
 
     for evento in storage.events(run_id, start=inicio, end=fim):
         pessoa = evento.employee_id
@@ -272,13 +277,31 @@ def _pontua(
                 sem_postura = True
                 sem_postura_total += 1
 
+        # A D-18 recusa risco anterior de instante **maior ou igual** ao do
+        # evento, e o gerador produz varios eventos da mesma pessoa no mesmo
+        # segundo: um `FILE_ACCESS` e o `FILE_DOWNLOAD` seguinte cabem no mesmo
+        # instante. O empate nao e o evento atual — e outro evento, anterior na
+        # ordem —, mas com resolucao de segundo os dois sao indistinguiveis para
+        # a invariante.
+        #
+        # Quem cede aqui e o executor, nao a invariante: a D-18 e decisao, e
+        # afrouxar `>=` para `>` seria mexer nela. O custo e que a exposicao do
+        # irmao de mesmo segundo nao entra, o que **subestima** a parcela de
+        # conduta — vies contra a propria hipotese, que e a direcao aceitavel.
+        # E conta-se, pelo mesmo motivo da D-44: parcela que diminui sem
+        # contagem e a forma silenciosa do defeito.
+        anteriores_de = tuple(
+            p for p in anteriores[pessoa] if p.occurred_at < evento.occurred_at
+        )
+        empates_total += len(anteriores[pessoa]) - len(anteriores_de)
+
         nota = compose(
             evento,
             EvaluationContext(
                 catalog=catalogo,
                 recent=recentes,
                 baseline=padroes.get(pessoa),
-                priors=tuple(anteriores[pessoa]),
+                priors=anteriores_de,
                 posture=postura,
                 posture_unavailable=sem_postura,
             ),
@@ -309,4 +332,4 @@ def _pontua(
     if alertas:
         storage.save_alerts(scoring_run_id, alertas)
 
-    return pontuadas, len(alertas), sem_postura_total
+    return pontuadas, len(alertas), sem_postura_total, empates_total

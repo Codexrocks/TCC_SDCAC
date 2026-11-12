@@ -126,10 +126,15 @@ def main(argv: list[str] | None = None) -> int:
             if resumo.without_posture
             else ""
         )
+        empates = (
+            f"  {resumo.tied_priors} riscos anteriores fora da janela por empate de instante"
+            if resumo.tied_priors
+            else ""
+        )
         print(
             f"  {resumo.configuration:<{largura}}  execucao {resumo.scoring_run_id}"
             f"  {resumo.scored} eventos  {resumo.alerts} alertas"
-            f"  hash {resumo.config_hash[:12]}{sem_postura}"
+            f"  hash {resumo.config_hash[:12]}{sem_postura}{empates}"
         )
     return 0
 
