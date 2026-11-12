@@ -27,6 +27,7 @@ from montar_artigo import (  # noqa: E402
     SECOES_DE_CONTROLE,
     blocos,
     confere_legendas,
+    emails,
     trechos,
 )
 
@@ -241,3 +242,50 @@ def test_o_erro_diz_qual_tabela_e(tmp_path):
     caminho = escreve(tmp_path, f"{TABELA}\n")
     ((erro,)) = confere_legendas([caminho])
     assert "1a tabela (| a | b |)" in erro
+
+
+# ------------------------------------------------------- e-mails dos autores
+# O template pede o e-mail de cada autor abaixo do nome, e o repositorio e
+# publico. O arquivo com os enderecos fica fora do versionamento, e o montador
+# tem de aceitar a ausencia dele sem quebrar -- e o caso de quem clonou o
+# repositorio.
+
+
+def test_sem_arquivo_o_documento_monta_sem_a_linha(tmp_path):
+    """Ausencia nao e erro: e quem clonou e nao tem os enderecos."""
+    assert emails(tmp_path) is None
+
+
+def test_lista_de_enderecos_vira_uma_linha(tmp_path):
+    caminho = tmp_path / "emails.json"
+    caminho.write_text('["um@x.br", "dois@x.br"]', encoding="utf-8")
+    assert emails(tmp_path, caminho) == "um@x.br, dois@x.br"
+
+
+def test_dicionario_de_nome_para_endereco_tambem_serve(tmp_path):
+    """O formato com nome e mais legivel para quem mantem o arquivo."""
+    caminho = tmp_path / "emails.json"
+    caminho.write_text(
+        '{"Fulano": "um@x.br", "Beltrano": "dois@x.br"}', encoding="utf-8"
+    )
+    assert emails(tmp_path, caminho) == "um@x.br, dois@x.br"
+
+
+def test_endereco_em_branco_nao_vira_virgula_solta(tmp_path):
+    caminho = tmp_path / "emails.json"
+    caminho.write_text('["um@x.br", "", "  "]', encoding="utf-8")
+    assert emails(tmp_path, caminho) == "um@x.br"
+
+
+def test_arquivo_vazio_conta_como_ausente(tmp_path):
+    caminho = tmp_path / "emails.json"
+    caminho.write_text("[]", encoding="utf-8")
+    assert emails(tmp_path, caminho) is None
+
+
+def test_o_lugar_padrao_e_dentro_de_artigo(tmp_path):
+    (tmp_path / "artigo").mkdir()
+    (tmp_path / "artigo" / "emails.local.json").write_text(
+        '["so@x.br"]', encoding="utf-8"
+    )
+    assert emails(tmp_path) == "so@x.br"

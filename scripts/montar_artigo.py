@@ -37,6 +37,7 @@ silencio.
 """
 
 import argparse
+import json
 import re
 import sys
 from pathlib import Path
@@ -322,7 +323,26 @@ def tabela(doc, linhas):
 
 
 # ---------------------------------------------------------------- montagem
-def abertura(doc, raiz):
+def emails(raiz: Path, caminho: Path | None = None) -> str | None:
+    """Os e-mails dos autores, de um arquivo **fora do versionamento**.
+
+    O template pede o e-mail de cada autor logo abaixo do nome. O repositorio e
+    publico, e endereco de pessoa nao vai para repositorio publico so porque o
+    documento de entrega precisa dele: o arquivo fica na maquina de quem monta,
+    o `.gitignore` o ignora, e `artigo/emails.exemplo.json` mostra o formato.
+
+    Sem o arquivo, o documento monta **sem** a linha -- nao e erro, e o caso de
+    quem clonou o repositorio e nao tem os enderecos.
+    """
+    caminho = caminho or raiz / "artigo" / "emails.local.json"
+    if not caminho.exists():
+        return None
+    dados = json.loads(caminho.read_text(encoding="utf-8"))
+    enderecos = dados if isinstance(dados, list) else list(dados.values())
+    return ", ".join(str(e).strip() for e in enderecos if str(e).strip()) or None
+
+
+def abertura(doc, raiz, caminho_emails=None):
     texto = (raiz / "artigo" / "00-resumo.md").read_text(encoding="utf-8")
 
     titulo = re.search(r"## Título\n+\*\*(.+?)\*\*", texto, re.S).group(1)
@@ -353,7 +373,11 @@ def abertura(doc, raiz):
         recuo_esq=Cm(0.1),
     )
     barra_lateral(p)
-    for linha, tam in ((autores.replace(" · ", "\n"), Pt(10)), (instituicao, Pt(9))):
+    linhas = [(autores.replace(" · ", "\n"), Pt(10)), (instituicao, Pt(9))]
+    enderecos = emails(raiz, caminho_emails)
+    if enderecos:
+        linhas.append((enderecos, Pt(9)))
+    for linha, tam in linhas:
         for parte in linha.split("\n"):
             p = escreve(
                 doc,
@@ -402,9 +426,13 @@ def secao(doc, caminho, *, titulo_de_nivel1=True):
                 return
             if nivel == 1 and not titulo_de_nivel1:
                 continue
+            # Sem caixa alta: o template pede titulo "left-aligned and
+            # bolded in Times New Roman, size 10", numerado em arabicos, e nao
+            # diz nada sobre caixa. A caixa era escolha nossa, e saiu em
+            # 12/11/2026 a pedido do Davi.
             escreve(
                 doc,
-                conteudo.upper() if nivel == 1 else conteudo,
+                conteudo,
                 negrito=True,
                 recuo=False,
                 antes=5.75,
@@ -476,6 +504,14 @@ def monta_parser() -> argparse.ArgumentParser:
         "--saida", type=Path, help="onde gravar; por omissao, artigo/artigo-cobem.docx"
     )
     parser.add_argument(
+        "--emails",
+        type=Path,
+        help=(
+            "arquivo com os e-mails dos autores; por omissao, "
+            "artigo/emails.local.json, que o .gitignore ignora"
+        ),
+    )
+    parser.add_argument(
         "--resultados",
         type=Path,
         help=(
@@ -521,7 +557,7 @@ def main(argv: list[str] | None = None) -> int:
 
     doc = Document()
     estilo(doc)
-    abertura(doc, raiz)
+    abertura(doc, raiz, args.emails)
     for caminho in paginas:
         secao(doc, caminho)
     referencias(doc, raiz)
