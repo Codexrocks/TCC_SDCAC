@@ -636,17 +636,7 @@ o_que = "Confirmar na fonte: (WILCOXON, 1945) — O teste em si"
 dono = "Davi"
 desde = 2026-09-28
 
-[[citacao]]
-onde = "artigo/03-metodologia.md § 3.6"
-o_que = "Confirmar na fonte: (DAVIS; GOADRICH, 2006) — Curva PR sobre ROC em classe desbalanceada"
-dono = "Davi"
-desde = 2026-09-28
 
-[[citacao]]
-onde = "artigo/03-metodologia.md § 3.6"
-o_que = "Confirmar na fonte: (SAITO; REHMSMEIER, 2015) — O mesmo ponto da linha acima"
-dono = "Davi"
-desde = 2026-09-28
 
 [[citacao]]
 onde = "artigo/03-metodologia.md § 3.8"
