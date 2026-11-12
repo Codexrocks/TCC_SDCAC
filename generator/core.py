@@ -70,12 +70,10 @@ class Sink:
             t += int(rng.uniform(*gap)) + 1
         if n_wrong >= 5:
             t += int(rng.uniform(*wait))
-        n_mfa_fail = 0
         if mfa and rng.random() < 0.008:
             at.append(t)
             ar.append(1)
             ac.append(3)
-            n_mfa_fail = 1
             t += int(rng.uniform(10, 40))
         t_login = t
         bd = body if body is not None else [_Z] * 7

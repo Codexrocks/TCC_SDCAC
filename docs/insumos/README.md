@@ -59,10 +59,16 @@ O `cenarios-yasmin-v2.md` corrige a v1 com base nesta afirmação:
 > **nunca** teve um `N06`."*
 
 **Isso não se sustenta.** O `N06_manutencao_noturna_ti` está implementado em
-[`generator/normal.py`](../../generator/normal.py), linha 185, desde o #89 — não
-em `generator/scenarios.py`, que foi o único arquivo consultado. Ele está lá
+[`generator/normal.py`](../../generator/normal.py), **linha 281**, desde o #89 —
+não em `generator/scenarios.py`, que foi o único arquivo consultado. Ele está lá
 porque é atividade **legítima**, e pertence à rotina normal em vez da injeção de
 cenários.
+
+> **Correção de 12/11/2026:** esta página dizia linha **185**, e estava errada.
+> A 185 é um ramo de persona da atividade normal; o `sink.episode("N",
+> "N06_manutencao_noturna_ti", …)` está na 283, sob o comentário da 281. Quem
+> fosse conferir a correção cairia no lugar errado — e a credibilidade dela
+> depende de a pessoa achar o código.
 
 Medido no gabarito que o gerador produz:
 
@@ -79,6 +85,73 @@ Medido no gabarito que o gerador produz:
 São exatamente os números que o insumo atribui ao artigo do Drive e nega ao
 código. **O código e o artigo já concordam**, e a pendência que o insumo abre
 para o Filipe — implementar o N06 — **não existe**.
+
+**Medido de novo em 12/11, em outra escala, para mostrar de onde vem a
+prevalência.** Com 15 funcionários em vez de 250, o gabarito traz 88 episódios:
+P 24, B 16, L 12 e N 36 — sendo **N06 = 17**. Os três primeiros não mudam porque
+o CATALOG injeta um número fixo por semente; o N06 **escala com a população**,
+porque nasce das janelas de manutenção que o mundo sorteia. É isso que explica
+por que ele é 53 na escala cheia e por que não aparece no `CATALOG`.
+
+### O insumo dos pesos: a D-43 confere, a ordenação da D1 não
+
+O [`pesos-yasmin-v1.md`](pesos-yasmin-v1.md) faz duas coisas, e elas tiveram
+sortes diferentes na conferência.
+
+**A ratificação da D-43 confere com o código, item por item.** O insumo ratifica
+D1 = 1,0, D2 = 1,0, conduta = 1,0, postura = 0,5 e a C0 sem ponderação. O
+`detection/presets.toml` traz exatamente isso, num bloco `[integration]` único
+compartilhado por C1, C2 e C3, e a C0 fora dele. Confirmar a D-43 **não muda uma
+linha de código** — a leitura dela é um sim.
+
+**A ordenação de severidade proposta para a D1 divergência em três atributos.** O
+insumo organiza os sinais da D1 em Alto, Médio e Baixo; o `presets.toml` atribui
+pontos. Confrontados:
+
+| Atributo | O insumo propõe | O código atribui | Bate? |
+|---|---|---|---|
+| Escalada de privilégio | **Alto** | `privilege_change` = **40**, o maior | ✅ |
+| Recurso `restricted` | **Alto** | `sensitivity.restricted` = **35** | ✅ |
+| Download para externo | **Alto** | `download_to_external` = **25** | ✅ |
+| **`mfa_used = false` em login** | **Alto** | `login_without_mfa` = **15**, o segundo **menor** | ❌ |
+| **Dispositivo pessoal** | **Baixo** | `personal_device` = **25**, acima de MFA, horário e removível | ❌ |
+| **Faixa `external` sem VPN** | **Médio** | `network_kind.external` = **30**, o terceiro maior | ❌ |
+| Horário fora do padrão | Médio | `off_hours_employee` = 20 | ✅ |
+| Navegação de risco | Médio | `risky_browsing` = 10, o menor | ✅ |
+| Faixa `home` | Baixo | `network_kind.home` = 10 | ✅ |
+
+**As três divergências não são de calibragem fina: duas são quase inversões.** O
+MFA ausente num login, que o insumo põe no topo, vale menos que dispositivo
+pessoal, que o insumo põe na base. E a faixa `external`, descrita no insumo como
+"plausível e ambígua por natureza", é o terceiro sinal mais pesado do sistema.
+
+⚠️ **Nada foi mudado.** `network_kind` e `sensitivity` são as parcelas que mais
+disparam nas notas medidas, e mexer em qualquer um desses pontos **invalida as
+dez sementes da § 4** — todo número do artigo teria de ser reexecutado. A
+pergunta é da Yasmin e do Davi juntos, e tem três saídas possíveis:
+
+1. **A ordenação do insumo está certa** e os pontos se ajustam — e então as dez
+   sementes rodam de novo, antes da banca
+2. **Os pontos estão certos** e a ordenação do insumo se corrige — e aí ela não
+   pode ir para o artigo como está
+3. **As duas descrevem coisas diferentes** — o insumo fala de gravidade
+   conceitual e os pontos, de poder discriminativo observado — e o artigo diz
+   isso explicitamente, em vez de deixar a contradição implícita
+
+A terceira é a mais provável e a mais honesta, mas é **decisão**, não conferência.
+
+### O que a conferência **não** alcança
+
+Duas coisas ficaram fora, e por limite de método, não de tempo:
+
+| O quê | Por quê |
+|---|---|
+| O [insumo de LGPD e ISO](lgpd-iso-yasmin-v1.md) — a **D-19** | Afirmação sobre texto legal e sobre controles da ISO/IEC 27001:2022 só se confere **na fonte**. Nada nele é checável contra o código |
+| Os **quatro casos reais** do [insumo de exemplos](exemplos-reais-yasmin-v1.md) | Mesmo motivo. Estão em [citações pendentes](../citacoes-pendentes.md), e um deles — Capital One — **declara-se incompleto no próprio insumo** |
+
+Conferir afirmação contra código é o que uma IA pode fazer. Conferir afirmação
+contra fonte é o que o [`AGENTS.md`](../../AGENTS.md) seção 3 reserva a uma
+pessoa, por nome.
 
 ### Duas outras afirmações do `.zip` que não se confirmam
 

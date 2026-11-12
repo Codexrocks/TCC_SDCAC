@@ -82,7 +82,7 @@ class X:
     # ---- construtores de corpo ---------------------------------------------------------
     def accesses(self, bd, ids, t0, t1, edit_p=0.2):
         ts = np.sort(self.rng.uniform(t0, t1, len(ids)))
-        for dt, r in zip(ts, ids):
+        for dt, r in zip(ts, ids, strict=True):
             bd.add(dt, E["FILE_ACCESS"], r, int(self.rng.random() < edit_p))
 
     def download(self, bd, dt, res, size, dest):
@@ -166,7 +166,7 @@ def p02_download_restrito_removivel(x):
     bd = Body()
     res = x.top_sens(e, int(r.integers(8, 16)), 3)
     ts = np.sort(r.uniform(60, 1500, len(res)))
-    for dt, rr in zip(ts, res):
+    for dt, rr in zip(ts, res, strict=True):
         x.download(bd, dt, rr, r.uniform(5e7, 4e8), 2)
     bd.add(
         1600,
@@ -507,7 +507,6 @@ def n01_escalada_legitima(x):
 
 
 def n02_troca_de_aparelho(x):
-    r = x.rng
     e = x.pick(lambda e: e.mfa0)
     di = x.day(e)
     ep = x.ep(
@@ -548,7 +547,6 @@ def n03_pico_fim_de_mes(x):
 
 
 def n04_erro_humano_lockout(x):
-    r = x.rng
     e = x.pick(lambda e: e.persona != "shift_ops")
     days = x.run(e, 2)
     ep = x.ep(
@@ -608,6 +606,6 @@ CATALOG = [  # (código, família, função, execuções por semente)
 
 def inject(world, sink, rng, scale=1):
     x = X(world, sink, rng)
-    for code, fam, fn, n in CATALOG:
+    for _code, _fam, fn, n in CATALOG:
         for _ in range(max(1, round(n * scale))):
             fn(x)
