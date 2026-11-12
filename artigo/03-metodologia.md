@@ -31,10 +31,9 @@ Este trabalho caracteriza-se como pesquisa **aplicada**, de abordagem
 **quantitativa** e procedimento **experimental**, na modalidade de
 desenvolvimento de protótipo: há manipulação controlada de uma variável
 independente — a configuração de avaliação empregada —, medição de seu efeito
-sobre grandezas definidas previamente à execução, e comparação apoiada
-exclusivamente em métricas numéricas e teste de hipótese. Não é exploratória: há
-hipótese direcional declarada na pergunta de pesquisa e grupo de controle
-explícito, descrito na Seção 3.3.
+sobre grandezas definidas previamente à execução, e comparação apoiada em
+métricas numéricas e teste de hipótese. Não é exploratória: há hipótese
+direcional declarada na pergunta de pesquisa e grupo de controle explícito.
 
 ## 3.2 Ambiente experimental simulado
 
@@ -105,20 +104,18 @@ tal.
 
 ## 3.4 Cenários e gabarito
 
-Sobre o tráfego normal são injetados cenários de teste em quatro famílias, cada
-uma destinada a exercitar um aspecto distinto do modelo: **P**, cenários pontuais,
-exercita a D1 e mede verdadeiro positivo de evento isolado; **B**, de contexto,
-exercita a D2 e mede redução de falso positivo por contexto individual; **L**,
-longitudinais, exercita a D3 com escalada gradual sem evento individualmente
-notável; e **N**, controle negativo, submete todas as dimensões a comportamento
-legítimo.
+Sobre o tráfego normal são injetados cenários de teste em quatro famílias: **P**,
+pontuais, exercita a D1 sobre evento isolado; **B**, de contexto, exercita a D2;
+**L**, longitudinais, exercita a D3 com escalada gradual sem evento
+individualmente notável; e **N**, controle negativo, submete todas as dimensões a
+comportamento legítimo.
 
 A família N dá medida ao falso positivo. Além do ruído legítimo do tráfego de
 fundo — férias, afastamento, mudança de cargo e trabalho remoto —, ela inclui um
 cenário de **escalada legítima**: um funcionário que, por mudança de projeto,
-passa a acessar mais recursos, em faixa horária mais ampla e com maior volume,
-sem conduta indevida. Sem ele a terceira dimensão não tem como ter seu falso
-positivo medido, e é ela a contribuição original do trabalho.
+passa a acessar mais recursos, em horário mais amplo e com maior volume, sem
+conduta indevida. Sem ele a terceira dimensão não tem como ter seu falso positivo
+medido.
 
 O gabarito é produzido pelo próprio gerador: cada cenário grava seu identificador
 e seu rótulo na base `ground_truth`, à qual a aplicação não tem acesso. A
@@ -168,14 +165,15 @@ sobre a família L, em unidade de episódio.
 
 $$\mathrm{Revocação}_{L} = \frac{VP_{L}}{VP_{L} + FN_{L}}$$
 
-**O critério de sucesso é declarado em termos operacionais:** considera-se
-absorvível por um analista o teto de **45 alertas falsos por turno**, do que
-decorre a exigência de alcançar a revocação de referência de 0,20 sem ultrapassar
-esse volume. O número foi fixado **em 12/11/2026, posteriormente à primeira
-execução registrada**, e por isso se registra sua procedência: ele vem do
-argumento operacional sobre a capacidade de triagem de um analista, e não da
+**O critério de sucesso é declarado em termos operacionais**, em dois valores:
+considera-se absorvível por um analista o teto de **45 alertas falsos por turno**,
+do que decorre a exigência de alcançar a revocação de referência de 0,20 sem
+ultrapassar esse volume; e exige-se **revocação longitudinal mínima de 0,80**,
+medida por episódio sobre a família L. Ambos foram fixados **em 12/11/2026,
+posteriormente à primeira execução registrada**, e por isso se registra sua
+procedência: vêm do argumento operacional sobre a capacidade de triagem, e não da
 tabela de resultados — critério derivado do resultado não é critério, é
-justificação. A revocação longitudinal mínima não foi declarada.
+justificação.
 
 A comparação a revocação fixa pressupõe que a linha de base alcance a revocação
 de referência em algum limiar. Como a C0 reúne poucas regras discretas e não
@@ -230,12 +228,11 @@ configurações consiste, operacionalmente, em comparar dois identificadores de
 execução sobre o mesmo conjunto de eventos.
 
 O protótipo é implementado em Python 3.12, e a camada de avaliação não conhece o
-meio de armazenamento: o acesso é declarado por interfaces, cumpridas por duas
-implementações — uma sobre PostgreSQL e outra sobre arquivos em disco, esta por
-razão metodológica, pois permite reproduzir o experimento sem servidor de banco
-de dados. As invariantes de desenho da Seção 3.8 são verificadas por testes
-automatizados a cada alteração do código, e a interface de inspeção é construída
-em Streamlit.
+meio de armazenamento: o acesso é declarado por interfaces, cumpridas por uma
+implementação sobre PostgreSQL e outra sobre arquivos em disco — esta por razão
+metodológica, pois permite reproduzir o experimento sem servidor de banco. As
+invariantes da Seção 3.8 são verificadas por testes automatizados a cada
+alteração do código.
 
 A execução se dá em cinco etapas encadeadas, cada uma um programa independente:
 geração, tradução, pontuação, avaliação e agregação. A avaliação é a única que
