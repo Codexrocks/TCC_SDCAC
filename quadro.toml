@@ -689,3 +689,27 @@ onde = "artigo/03-metodologia.md § 3.3 — \"trivial para regras fixas\""
 o_que = "Afirmação sem fonte: detecção de tentativa sucessiva é \"trivial para regras fixas\". Pode ser reformulada sem fonte"
 dono = "Davi"
 desde = 2026-10-13
+
+[[citacao]]
+onde = "artigo/01-introducao.md — caso Target, 2013"
+o_que = "Confirmar na fonte: RILEY; ELGIN; LAWRENCE; MATLACK, Bloomberg Businessweek, 13 mar. 2014"
+dono = "Yasmin"
+desde = 2026-11-10
+
+[[citacao]]
+onde = "artigo/01-introducao.md — caso GE / Zheng, 2018"
+o_que = "Confirmar na fonte: U.S. DOJ, Niskayuna man charged theft trade secrets, 2018"
+dono = "Yasmin"
+desde = 2026-11-10
+
+[[citacao]]
+onde = "artigo/01-introducao.md — caso Capital One, 2019"
+o_que = "Confirmar na fonte: U.S. DOJ, usao-wdwa. **O próprio insumo admite estar incompleto**, com URL genérica"
+dono = "Yasmin"
+desde = 2026-11-10
+
+[[citacao]]
+onde = "artigo/01-introducao.md — caso Tesla / Tripp, 2018"
+o_que = "Confirmar na fonte: petição inicial Tesla, Inc. v. Martin Tripp (Nevada) ou GovInfoSecurity, 2018"
+dono = "Yasmin"
+desde = 2026-11-10

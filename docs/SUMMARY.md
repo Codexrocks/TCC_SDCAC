@@ -35,6 +35,10 @@
 * [Insumos das encomendas](insumos/README.md)
   * [Referencial teórico — Yasmin, 28/09](insumos/referencial-teorico-yasmin-v2.md)
   * [Metodologia — Davi, 28/09](insumos/metodologia-davi-v1.md)
+  * [Cenários e desenho cego — Yasmin, 10/11](insumos/cenarios-yasmin-v2.md)
+  * [Pesos e sensibilidade — Yasmin, 10/11](insumos/pesos-yasmin-v1.md)
+  * [LGPD e ISO/IEC 27001 — Yasmin, 10/11](insumos/lgpd-iso-yasmin-v1.md)
+  * [Exemplos reais — Yasmin, 10/11](insumos/exemplos-reais-yasmin-v1.md)
 
 ## Uso de IA
 
@@ -89,4 +93,5 @@
   * [2026-10-19 — Sessão 38: um PR inteiro tinha sido perdido](relatorios/2026-10-19-sessao-38.md)
   * [2026-11-04 — Sessão 39: o gerador entra, e os bloqueios se invertem](relatorios/2026-11-04-sessao-39.md)
   * [2026-11-11 — Sessão 42: a parte do Filipe conserta, e a D3 aceita rodar sem postura](relatorios/2026-11-11-sessao-42.md)
+  * [2026-11-11 — Sessão 40: a entrega da Yasmin entra como insumo](relatorios/2026-11-11-sessao-40.md)
   * [Modelo de relatório](relatorios/_modelo.md)
