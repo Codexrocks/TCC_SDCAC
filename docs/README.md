@@ -59,31 +59,27 @@ anunciava como abertas três decisões já fechadas.
 <!-- QUADRO:inicio pendencias-por-pessoa -->
 <!-- Bloco gerado por scripts/quadro.py a partir de quadro.toml. Editar aqui nao adianta: a proxima execucao reescreve. -->
 
-**Davi** — 4 pendências
+**Davi** — 3 pendências
 
 | ID | Decisão | Estado | Situação |
 |---|---|---|---|
 | D-05 | Ablação em quatro configurações (C0 a C3) | A confirmar | ⚠️ Atrasado há 42 dias |
 | D-07 | Caneta rotativa por seção | Aberta | 🗓️ Sem prazo |
-| D-15 | Critério de relevância declarado a priori | Aberta | ⚠️ Atrasado há 42 dias |
 | D-43 | Pesos de integração das dimensões na nota final | A confirmar | ⚠️ Atrasado há 21 dias |
 
-**Yasmin** — 4 pendências
+**Yasmin** — 2 pendências
 
 | ID | Decisão | Estado | Situação |
 |---|---|---|---|
 | D-07 | Caneta rotativa por seção | Aberta | 🗓️ Sem prazo |
-| D-09 | Pesos preliminares e análise de sensibilidade | Aberta | ⚠️ Atrasado há 21 dias |
-| D-15 | Critério de relevância declarado a priori | Aberta | ⚠️ Atrasado há 42 dias |
 | D-43 | Pesos de integração das dimensões na nota final | A confirmar | ⚠️ Atrasado há 21 dias |
 
-**Filipe** — 3 pendências
+**Filipe** — 2 pendências
 
 | ID | Decisão | Estado | Situação |
 |---|---|---|---|
 | D-07 | Caneta rotativa por seção | Aberta | 🗓️ Sem prazo |
 | D-10 | Isolation Forest como benchmark opcional | A confirmar | ⚠️ Atrasado há 7 dias |
-| D-15 | Critério de relevância declarado a priori | Aberta | ⚠️ Atrasado há 42 dias |
 
 <!-- QUADRO:fim pendencias-por-pessoa -->
 

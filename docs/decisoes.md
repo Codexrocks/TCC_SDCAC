@@ -27,8 +27,6 @@ fechada fica enterrada.
 | ID | Decisão | Proposta | Dono | Prazo | Situação |
 |---|---|---|---|---|---|
 | D-07 | Caneta rotativa por seção | Uma pessoa redige, duas revisam, a caneta gira. Registrada pelo Davi quando Yasmin e Filipe confirmarem | Davi, Yasmin, Filipe | — | 🗓️ Sem prazo |
-| D-09 | Pesos preliminares e análise de sensibilidade | Valores preliminares; sensibilidade na S12 | Yasmin | S8 | ⚠️ Atrasado há 21 dias |
-| D-15 | Critério de relevância declarado a priori | Origem do número decidida em 14/10: argumento operacional — quantos alertas falsos um analista absorve por turno. Falta o valor, e ele perde o sentido no dia em que a primeira execução for registrada | Davi, Yasmin, Filipe | 01/10/2026 | ⚠️ Atrasado há 42 dias |
 <!-- QUADRO:fim decisoes-abertas -->
 
 ## Adotadas, a confirmar
