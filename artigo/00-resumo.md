@@ -41,11 +41,14 @@ comparação com regras fixas em ambiente corporativo simulado**
 
 ## Resumo
 
-> **Completo desde 11/11/2026.** As três primeiras partes — contexto, objetivo e
-> método — estavam escritas desde setembro. As **duas frases finais**, com o
-> resultado principal e a conclusão, foram escritas quando a primeira execução
-> registrada passou a existir: resumo redigido antes é resumo do que se
-> pretendia fazer.
+> **Completo desde 11/11/2026, e reescrito em 12/11/2026.** As três primeiras
+> partes — contexto, objetivo e método — estavam escritas desde setembro. As
+> **duas frases finais**, com o resultado principal e a conclusão, só foram
+> escritas quando a execução registrada passou a existir: resumo redigido antes
+> é resumo do que se pretendia fazer. Em 12/11 elas foram **reescritas sobre as
+> dez sementes**, pela **D-13** — e a reescrita não foi cosmética: o teste
+> pareado derrubou a afirmação de que a terceira dimensão superava as demais em
+> revocação alta.
 >
 > Um parágrafo só, sem fórmula e sem chamada bibliográfica, em cerca de 300
 > palavras — a instrução do template.
@@ -62,21 +65,21 @@ risco, esta última reportada em duas parcelas distintas — conduta e postura d
 segurança. O método consiste em um experimento comparativo conduzido em ambiente
 corporativo simulado, no qual quatro configurações de avaliação — uma linha de
 base de regras fixas e três configurações com acréscimo progressivo de dimensões
-— são aplicadas aos mesmos conjuntos de eventos e cenários, sobre múltiplas
-sementes de geração independentes, permitindo medir isoladamente a contribuição
-de cada dimensão. As grandezas de comparação são a taxa de falsos positivos a uma
-mesma revocação e a revocação em cenários longitudinais. Na primeira execução
-registrada, sobre 1.435.546 eventos e 109 episódios, a configuração que soma o
-risco do evento ao desvio em relação ao padrão individual reduziu a taxa de
-falsos positivos de 20,05% para 0,68% à revocação de 0,20 e elevou a revocação
-em cenários longitudinais de 25,0% para 100%, medida por episódio, enquanto a
-linha de base de regras fixas só alcançou revocação de 0,30 emitindo alerta
-sobre todos os eventos do registro. O ganho não se mostrou gratuito: a mesma
-configuração elevou de 73,7% para 93,0% a proporção de episódios legítimos que
-produziram alerta, e a configuração que acrescenta a exposição acumulada só
-supera as demais a partir de 0,40 de revocação, de modo que o resultado desta
-etapa autoriza afirmar redução de ruído e aumento de cobertura nos cenários
-medidos, em regime de revocação declarado, e não ausência de custo.
+— são aplicadas aos mesmos conjuntos de eventos e cenários, permitindo medir
+isoladamente a contribuição de cada dimensão. As grandezas de comparação são a taxa de falsos positivos a uma
+mesma revocação e a revocação em cenários longitudinais. Em dez execuções
+independentes, com 1.436.275 ± 9.681 eventos avaliados em cada uma, a
+configuração que soma o risco do evento ao desvio em relação ao padrão
+individual reduziu a taxa de falsos positivos de 18,44% para 0,40% à revocação
+de 0,20 e elevou a revocação em cenários longitudinais de 35,0% para 100,0%,
+medida por episódio, com significância em teste pareado em todos os níveis
+examinados, enquanto a linha de base de regras fixas não alcançou revocação de
+0,40 sem emitir alerta sobre todo o registro. O ganho não se mostrou gratuito: a mesma
+configuração elevou de 75,8% para 96,0% a proporção de episódios legítimos que
+produziram alerta, e o acréscimo da exposição acumulada não reduziu
+significativamente a taxa de falsos positivos em nenhum regime, de modo que os
+resultados autorizam afirmar redução de ruído e aumento de cobertura nos
+cenários medidos, em regime de revocação declarado, e não ausência de custo.
 
 **Palavras-chave:** risco comportamental, análise de logs, detecção de anomalias,
 regras fixas, ambiente corporativo simulado
@@ -121,21 +124,22 @@ reported as two separate components — conduct and security posture. The method
 is a comparative experiment conducted in a simulated corporate environment, in
 which four assessment configurations — a fixed-rule baseline and three
 configurations adding dimensions progressively — are applied to the same sets of
-events and scenarios, over multiple independent generation seeds, so that the
-contribution of each dimension can be measured in isolation. The comparison
+events and scenarios, so that the contribution of each dimension can be
+measured in isolation. The comparison
 quantities are the false positive rate at a fixed recall and the recall on
-longitudinal scenarios. In the first registered execution, over 1,435,546 events
-and 109 episodes, the configuration that adds the deviation from the individual
-baseline to the event risk reduced the false positive rate from 20.05% to 0.68%
-at a recall of 0.20 and raised the recall on longitudinal scenarios from 25.0%
-to 100%, measured per episode, whereas the fixed-rule baseline only reached a
-recall of 0.30 by raising an alert on every event in the log. The gain was not
-free: the same configuration raised from 73.7% to 93.0% the share of legitimate
-episodes that produced an alert, and the configuration adding accumulated
-exposure only outperforms the others from a recall of 0.40 upwards, so that the
-results of this stage support a claim of reduced noise and increased coverage on
-the measured scenarios, at a declared recall regime, and not one of absent
-cost.
+longitudinal scenarios. Across ten independent executions, with 1,436,275 ±
+9,681 events assessed in each, the configuration that adds the deviation from
+the individual baseline to the event risk reduced the false positive rate from
+18.44% to 0.40% at a recall of 0.20 and raised the recall on longitudinal
+scenarios from 35.0% to 100.0%, measured per episode, significantly so under a
+paired Wilcoxon test at every recall level examined, whereas the fixed-rule
+baseline did not reach a recall of 0.40 without raising an alert on every event
+in the log. The gain was not free: the same
+configuration raised from 75.8% to 96.0% the share of legitimate episodes that
+produced an alert, and adding accumulated exposure did not significantly reduce
+the false positive rate under any recall regime, so that the results support a
+claim of reduced noise and increased coverage on the measured scenarios, at a
+declared recall regime, and not one of absent cost.
 
 **Keywords:** behavioural risk, log analysis, anomaly detection, fixed rules,
 simulated corporate environment
@@ -146,9 +150,8 @@ simulated corporate environment
 
 * [x] As duas frases finais do Resumo, com o resultado principal e a conclusão
 * [x] As duas frases finais do Abstract, espelhando as do Resumo
-* [ ] **Reescrever as duas últimas frases quando houver múltiplas sementes**,
-  pela **D-13**. Hoje elas descrevem **uma** execução, e o Resumo diz isso com
-  as palavras "na primeira execução registrada" — o que é honesto e provisório
+* [x] **Reescritas sobre múltiplas sementes** em 12/11/2026, pela **D-13** — dez
+  execuções independentes, com média, desvio-padrão e teste pareado
 * [x] **A quarta configuração**, executada em 11/11/2026 pela **D-44**
 * [ ] **A decisão sobre os e-mails** no bloco de autores, por ser repositório
   público

@@ -15,42 +15,54 @@ revocação em cenários longitudinais, quando comparada à análise baseada
 exclusivamente em regras fixas aplicadas a eventos individuais. São duas
 grandezas, e cada uma recebe resposta própria.
 
-**Quanto ao ruído, a resposta é afirmativa com margem ampla.** À revocação de
-0,20 a taxa de falsos positivos caiu de 20,05% na linha de base para 0,68% na
-configuração que acrescenta o desvio em relação ao padrão individual. À
-revocação de 0,30 a linha de base só alcança o ponto emitindo alerta sobre a
-totalidade do registro, enquanto a configuração com duas dimensões o alcança com
-1,83%. **Quanto à cobertura longitudinal, também é afirmativa:** medida por
-episódio, a revocação passou de 25,0% para 100%, o que é coerente com o desenho
-— aqueles cenários foram construídos para que nenhum evento isolado fosse
-notável, e é essa a situação que as regras fixas não alcançam.
+**Quanto ao ruído, a resposta é afirmativa com margem ampla e com
+significância estatística.** À revocação de 0,20 a taxa de falsos positivos caiu
+de 18,44% na linha de base para 0,40% na configuração que acrescenta o desvio em
+relação ao padrão individual, e a diferença se repete em **todos os nove níveis
+de revocação examinados**, com p = 0,0020 em cada um — o menor valor que dez
+pares produzem num teste de Wilcoxon pareado bilateral exato. À revocação de
+0,40 a linha de base **não alcança o ponto em nenhuma das dez execuções** sem
+emitir alerta sobre a totalidade do registro, enquanto a configuração com duas
+dimensões o alcança com 3,18%. **Quanto à cobertura longitudinal, também é
+afirmativa:** medida por episódio, a revocação passou de 35,0% para 100,0% —
+todos os doze cenários longitudinais, em todas as dez execuções —, o que é
+coerente com o desenho: aqueles cenários foram construídos para que nenhum
+evento isolado fosse notável, e é essa a situação que as regras fixas não
+alcançam.
 
-**A contrapartida não estava na pergunta.** A mesma configuração elevou de 73,7%
-para 93,0% a proporção de episódios de controle negativo que produziram alerta,
+**A contrapartida não estava na pergunta.** A mesma configuração elevou de 75,8%
+para 96,0% a proporção de episódios de controle negativo que produziram alerta,
 isto é, de atividade legítima sinalizada. A pergunta mede ruído sobre o conjunto
 de eventos e cobertura sobre os cenários longitudinais, e não o alarme sobre
 comportamento legítimo incomum; é nesse terceiro eixo, não interrogado, que o
 ganho encontra seu custo. O que os dados autorizam afirmar é redução de ruído e
 aumento de cobertura nos cenários medidos — não superioridade sem custo.
 
-**Quanto à terceira dimensão, a resposta é condicional ao regime de operação.**
-A configuração completa não é a melhor em toda a faixa: a 0,20 de revocação ela
-produz 0,83% de falsos positivos contra 0,68% da configuração com duas
-dimensões, e **passa a ser a melhor a partir de 0,40**, com vantagem crescente —
-4,58% contra 6,54% em 0,40, e 14,70% contra 21,99% em 0,60. A leitura é coerente
-com o que a exposição acumulada mede: um termo que cresce devagar e atinge muita
-gente é ruim para separar os poucos eventos de maior risco e bom para alcançar
-os casos que nenhum evento isolado denuncia. **A contribuição original do
-trabalho se verifica, portanto, no regime de revocação alta** — e no limiar
-herdado, não calibrado, ela alerta sobre 99,8% do registro e não é operável.
+**Quanto à terceira dimensão, a resposta é negativa no eixo do ruído.** O
+acréscimo da exposição acumulada **não reduz a taxa de falsos positivos em
+nenhum regime de revocação**: o teste pareado não rejeita a hipótese nula em
+seis dos nove níveis, e nos três em que a rejeita é a configuração completa que
+apresenta taxa **maior**. A vantagem que a execução de semente única sugeria
+acima de 0,40 de revocação não sobreviveu às dez. O ganho dessa dimensão aparece
+em outro lugar: ela leva a detecção por episódio a 100% nas três famílias
+maliciosas — e alarma em 100,0% da família de controle negativo, o que torna o
+ganho inseparável do custo.
 
-Duas restrições delimitam o alcance da resposta, ambas declaradas na Seção 4.6:
-**uma única semente** de geração, de modo que nenhuma diferença está distinguida
-de variação de amostragem; e o **limiar de operação não calibrado**, razão pela
-qual a comparação válida é a de falsos positivos a revocação fixa. Duas parcelas
-da configuração completa foram, além disso, **subestimadas** — a postura, em
-5,5% dos eventos sem estado de equipamento, e a exposição, nos empates de
-instante —, o que torna o resultado dela conservador nesse recorte.
+A leitura é coerente com o que a exposição acumulada mede: um termo que cresce
+devagar e atinge muita gente alcança os casos que nenhum evento isolado denuncia
+e **não** separa os poucos eventos de maior risco. No limiar herdado, não
+calibrado, ela alerta sobre 99,84% do registro e não é operável. **A contribuição
+original do trabalho se verifica, portanto, na segunda dimensão — o desvio em
+relação ao padrão do próprio usuário —, e não na terceira.**
+
+Uma restrição delimita o alcance da resposta, declarada na Seção 4.6: o
+**limiar de operação não calibrado**, razão pela qual a comparação válida é a de
+falsos positivos a revocação fixa. Duas parcelas da configuração completa foram,
+além disso, **subestimadas** — a postura, nos eventos sem estado de equipamento,
+e a exposição, nos empates de instante —, o que torna o resultado dela
+conservador nesse recorte. E as dez sementes medem variação de amostragem, não
+validade externa: todas saem do mesmo gerador, e essa ameaça não se resolve com
+mais sementes.
 
 ## 5.2 Objetivos alcançados
 
@@ -62,10 +74,13 @@ sem parâmetro estimado de comportamento (b); a avaliação do evento individual
 janela de treino disjunta (d); a avaliação da exposição acumulada em duas
 parcelas separadas (e); e a integração numa classificação decomponível (f).
 
-O objetivo (g) está cumprido para as quatro configurações, e o (h)
-**parcialmente**: as duas grandezas primárias foram apuradas, mas o tratamento
-estatístico da Seção 3.7 pressupõe de dez a vinte sementes e a execução
-reportada usa uma. A análise é, nesse sentido, descritiva e não inferencial.
+Os objetivos (g) e (h) estão **cumpridos**: a comparação cobre as quatro
+configurações, as duas grandezas primárias foram apuradas e o tratamento
+estatístico da Seção 3.7 foi aplicado sobre **dez sementes de geração
+independentes**, com teste de Wilcoxon pareado de p-valor exato. A análise é,
+nesse sentido, inferencial e não apenas descritiva — e foi a inferência que
+derrubou uma das conclusões que a execução de semente única autorizava, o que é
+precisamente a razão de ela vir antes da conclusão e não depois.
 
 ## 5.3 Contribuições
 
@@ -84,10 +99,13 @@ trabalho, como declara a Seção 3.9.
 ## 5.4 Trabalhos futuros
 
 Três desdobramentos decorrem das limitações da Seção 4.6. O primeiro, e mais
-imediato, é **completar o desenho estatístico previsto** — executar o
-experimento sobre as dez a vinte sementes da Seção 3.7, com o teste pareado, e
-calibrar o limiar de operação —, que é o que converte a análise descritiva em
-inferencial. O segundo é a **implantação sobre dado real à luz da Lei nº
+imediato, é **calibrar o limiar de operação** sobre dado em escala: sem isso,
+nenhuma das quatro configurações é operável no corte herdado, e a única
+comparação que o trabalho pode fazer é a de falsos positivos a revocação fixa.
+A ele se soma o **reexame da terceira dimensão**, que no desenho atual não
+contribui para a separação e talvez pertença a um segundo estágio de triagem, e
+não ao mesmo corte das demais. O segundo é a **implantação sobre dado real à luz
+da Lei nº
 13.709/2018 e dos controles aplicáveis da ISO/IEC 27001:2022**: base legal,
 transparência ao titular, minimização e retenção. O terceiro é a **validação
 contra tráfego de produção**, que o ambiente simulado não substitui — acurácia

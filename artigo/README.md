@@ -40,49 +40,67 @@ limite do [template](../docs/formato-do-artigo.md), e ele é rígido: trabalho f
 é desclassificado antes da revisão.
 
 > **Este orçamento precisa ser recombinado**, e desde 11/11/2026 existe a
-> medição que faltava para fazê-lo. Ele foi fechado quando se supunha um teto de
+> medição que faltava para fazê-lo — refeita em 12/11 com o § 4 das dez
+> sementes. Ele foi fechado quando se supunha um teto de
 > 10 páginas e um piso inexistente. O professor pede **no mínimo 8** — a soma
 > abaixo dá exatamente o piso, sem folga. Com 12 de teto, há espaço para
 > distribuir; quem decide como é a equipe.
 
-### O que o documento montado mede hoje — 11/11/2026
+### O que o documento montado mede hoje — 12/11/2026
 
-Montado a partir deste Markdown no formato COBEM, o artigo tem **13 páginas**:
-**uma acima do teto de 12**, e fora do padrão é desclassificação antes da
+Montado a partir deste Markdown no formato COBEM, o artigo tem **14 páginas**:
+**duas acima do teto de 12**, e fora do padrão é desclassificação antes da
 revisão.
 
 | Seção | Orçamento | Medido | Diferença |
 |---|---|---|---|
-| Cabeçalho, resumo, palavras-chave, abstract, keywords | 0,5 | **0,9** | +0,4 |
-| **1. Introdução** | 1 a 1,5 · **teto 2** | **2,0** | no limite |
-| **2. Referencial teórico** | 1,5 a 2 | **2,5** | +0,5 |
-| **3. Metodologia** | 2 | **4,3** | **+2,3** |
-| **4. Resultados e discussão** | 2 a 2,5 | **2,0** | no orçamento |
-| **5. Conclusões**, com as referências | 1,0 | **1,7** | +0,7 |
-| **Total** | 8 a 12 | **13,0** | **+1,0** |
+| Cabeçalho, resumo, palavras-chave, abstract, keywords | 0,5 | **0,89** | +0,39 |
+| **1. Introdução** | 1 a 1,5 · **teto 2** | **1,98** | no limite |
+| **2. Referencial teórico** | 1,5 a 2 | **2,07** | +0,07 |
+| **3. Metodologia** | 2 | **4,27** | **+2,27** |
+| **4. Resultados e discussão** | 2 a 2,5 | **3,06** | **+0,56** |
+| **5. Conclusões** | 0,5 | **1,13** | +0,63 |
+| Referências | 0,5 | **0,60** | +0,10 |
+| **Total** | 8 a 12 | **14,00** | **+2,00** |
 
-> Medido em 11/11/2026 com as **quatro** configurações na § 4 — a C3 entrou
-> depois da primeira medição, e o total não mudou porque a § 3 e a § 5 cederam o
-> espaço que a § 4 ocupou.
+> **Como se mede.** A posição fracionária de cada título dentro da própria
+> página, e não a contagem de páginas inteiras: por isso as sete linhas somam
+> exatamente o total. A medição de 11/11 dava 2,5 para o Referencial e 1,7 para
+> a Conclusão com as referências; o texto dessas seções não mudou o suficiente
+> para explicar a diferença, então **uma das duas medições está errada** e a
+> desta data é a que fecha com o total. Vale remedir antes de cortar.
 
-Três leituras:
+> **A § 4 cresceu uma página inteira em 12/11**, de 2,0 para 3,06, e o motivo é
+> o que o trabalho ganhou: as dez sementes da **D-13** trouxeram média,
+> desvio-padrão e teste pareado, e a tabela de FPR a revocação fixa passou a ter
+> nove linhas de `média ± desvio` mais uma tabela de significância. Fechar a
+> D-13 custou uma página — e é a página mais bem gasta do artigo, porque é a que
+> converte "a C2 foi melhor" em "a C2 é melhor, com p = 0,0020".
+
+Quatro leituras:
 
 **O excesso está concentrado na Metodologia**, que ocupa mais do dobro do
-orçamento dela. É também a seção que mais cresceu, e a página que falta cortar
-sai dali com menos dano do que de qualquer outra.
+orçamento dela. É de longe o maior desvio, e as duas páginas que faltam cortar
+saem dali com menos dano do que de qualquer outra seção.
 
 **O orçamento do cabeçalho era irrealista.** O template pede resumo de cerca de
 300 palavras em um parágrafo, e um artigo bilíngue precisa de dois — o piso real
-é 0,9 página, não 0,5. Essa linha do orçamento precisa subir, não o texto
+é 0,89 página, não 0,5. Essa linha do orçamento precisa subir, não o texto
 encurtar.
 
 **A Introdução está no limite rígido de 2 páginas**, que é do professor e não
 deste orçamento. Qualquer acréscimo nela passa a exigir um corte na mesma seção.
 
+**A § 4 não deve ser a primeira a encurtar.** Ela está 0,56 acima do orçamento,
+e o que ocupa esse espaço é resultado de execução registrada — a parte do artigo
+que a banca mais vai cobrar. Cortar tabela de resultado para caber é o corte que
+custa mais caro.
+
 > **Já foram cortados**, em 11/11: a Tabela 1 da § 3.4 passou de 22 linhas para
 > 4, agrupada por família; a aritmética do piso de sementes da § 3.7 foi
-> condensada; e a § 5 foi reescrita mais curta. De 14 páginas para 13. O resto
-> depende de decisão editorial de quem tem a caneta de cada seção.
+> condensada; e a § 5 foi reescrita mais curta. De 14 páginas para 13 — e as dez
+> sementes trouxeram a 14ª de volta. O resto depende de decisão editorial de
+> quem tem a caneta de cada seção.
 
 Orçamento combinado para um artigo de **8 páginas** — o piso:
 

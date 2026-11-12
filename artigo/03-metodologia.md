@@ -307,15 +307,23 @@ independência entre a camada de avaliação e o meio de armazenamento — são
 verificadas por testes automatizados executados a cada alteração do código. A
 interface de inspeção dos resultados é construída em Streamlit.
 
-A execução se dá em quatro etapas encadeadas, cada uma um programa de linha de
+A execução se dá em cinco etapas encadeadas, cada uma um programa de linha de
 comando independente: a **geração** da massa de eventos e do gabarito; a
 **tradução** dos arquivos gerados para o formato que a camada de avaliação lê; a
 **pontuação**, que percorre os eventos uma vez por configuração e grava as notas
-com o identificador da execução; e a **avaliação**, que compara as notas ao
-gabarito e grava as métricas. A quarta etapa é a única que acessa o gabarito, em
-coerência com a separação de permissões descrita na Seção 3.2. As métricas
-reportadas na Seção 4 são lidas do arquivo que essa última etapa grava, e não
-transcritas à mão.
+com o identificador da execução; a **avaliação**, que compara as notas ao
+gabarito e grava as métricas de uma semente; e a **agregação**, que reúne as
+sementes, calcula média e desvio-padrão e aplica o teste pareado. A quarta etapa
+é a única que acessa o gabarito, em coerência com a separação de permissões
+descrita na Seção 3.2, e a quinta já não o acessa: ela opera sobre as métricas
+que a quarta gravou. As métricas reportadas na Seção 4 são lidas do arquivo que a
+quinta etapa grava, e não transcritas à mão.
+
+A agregação recusa reunir execuções que não sejam comparáveis entre si — limiar
+de operação distinto, níveis de revocação distintos, conjunto de configurações
+distinto, ou a mesma execução contada duas vezes. A recusa é deliberada: a média
+de execuções incomparáveis é um número plausível, e nada no resultado final
+denunciaria a mistura.
 
 ## 3.8 Ameaças à validade
 
