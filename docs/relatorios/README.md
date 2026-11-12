@@ -64,3 +64,4 @@ Use o [modelo](_modelo.md) e adicione a página nova ao
 | 12/11/2026 | [Sessão 43](2026-11-12-sessao-43.md) | Dez sementes com Wilcoxon pareado exato: a D-13 fecha, a vantagem da C3 não sobrevive ao teste, e o painel deixa de levar 140 s para abrir uma tela |
 | 12/11/2026 | [Sessão 44](2026-11-12-sessao-44.md) | O montador do artigo entra no repositório, e uma auditoria bibliográfica de IA é registrada como insumo sem fechar pendência: as duas baixas da § 3.3 caem porque a frase saiu do texto |
 | 12/11/2026 | [Sessão 45](2026-11-12-sessao-45.md) | O orientador pede legenda com fonte em toda tabela: as seis ganham legenda, fonte e chamada pelo número, e as doze linhas novas são pagas com comentário, não com resultado |
+| 12/11/2026 | [Sessão 46](2026-11-12-sessao-46.md) | As duas figuras da Seção 4 entram e a 4.4 deixa de ser um título vazio; as 44 linhas novas são pagas com repetição entre seções e com a Estrutura do trabalho, que sai |

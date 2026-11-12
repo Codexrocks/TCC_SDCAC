@@ -22,12 +22,17 @@ import math
 # A area de desenho, no sistema de coordenadas do proprio SVG. A conversao para
 # o documento reduz tudo na mesma proporcao, de modo que o que importa aqui e a
 # razao entre as medidas, e nao o valor absoluto.
+#
+# A figura e **larga e baixa** de proposito. Ela entra num documento com teto
+# de 12 paginas, e altura ali se paga em paragrafo cortado: achatar o desenho
+# custa menos do que reduzir a largura, porque e a largura que decide se o
+# texto dos eixos ainda se le no papel.
 LARGURA = 720
-ALTURA = 400
+ALTURA = 310
 ESQUERDA = 74
 DIREITA = 636  # sobra a direita para o rotulo de cada serie
 TOPO = 16
-BASE = 344
+BASE = 256
 
 # O eixo vertical e logaritmico, em quatro decadas: 0,01% a 100%. Abaixo de
 # 0,01% nao ha o que mostrar -- com 1,43 milhao de eventos pontuados, 0,01%
@@ -215,6 +220,6 @@ def figura_fpr(agregado: dict) -> str:
             )
         partes += _serie(nome, pontos)
     # abaixo de 1% e a partir de 0,50 de revocacao nao passa nenhuma curva
-    partes += _legenda(list(agregado["configuracoes"]), 408, 250)
+    partes += _legenda(list(agregado["configuracoes"]), 408, BASE - 106)
     partes.append("</svg>")
     return "\n".join(partes) + "\n"
