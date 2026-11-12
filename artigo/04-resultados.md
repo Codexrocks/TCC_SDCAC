@@ -226,33 +226,73 @@ isso que ela entra antes da conclusão e não depois.
 
 ## 4.5 Discussão
 
-> **A escrever** — a caneta é do Filipe, pela S13. Os números já estão nas
-> seções acima, e o que falta é o argumento. Quatro perguntas que a banca vai
-> fazer, e que estas dez execuções já permitem atacar:
+> **Rascunho de IA, redigido em 12/11/2026 a partir dos números já registrados.**
+> A caneta desta subseção é do **Filipe**, pela S13, e **ele ainda não a leu**.
+> Nenhuma chamada bibliográfica aqui é nova: todas as sete são da lista já
+> conferida na fonte, e nenhuma afirmação quantitativa vem de fora de
+> `results/agregado.json`.
 
-**A taxa de falsos positivos é operável?** No limiar herdado, não: mais de mil e
-trezentos alertas por dia útil nas três primeiras configurações, e mais de sete
-mil na quarta. A pergunta útil é outra — **a que revocação o sistema cabe num
-turno?** A 0,20 de revocação a C2 produz **33 ± 14 alertas por dia útil**; a C0,
-**1.403 ± 114**. É aqui que a **D-15** entra, e é por isso que ela tinha de ser
-declarada **antes** de se olhar esta tabela.
+A comparação respondeu às duas grandezas da pergunta de pesquisa, e produziu
+três resultados que a pergunta não previa. Esta subseção trata deles, porque são
+eles que decidem se o modelo serve.
 
-**Onde o sistema errou.** A C2 perde **0,2 ± 0,4 episódio** da família B — em
-oito das dez sementes ela acerta os dezesseis; a C0 perde 11,4 ± 0,5. E as
-quatro configurações alarmam em mais de 75% dos episódios legítimos da família
-N: o erro dominante não é deixar ataque passar, é **chamar de anômalo o que é só
-incomum**.
+**A taxa de falsos positivos não é operável, e o motivo é aritmético antes de
+ser técnico.** No limiar herdado, as três primeiras configurações produzem mais
+de mil e trezentos alertas por dia útil e precisão abaixo de 1%. A tentação é ler
+isso como defeito de calibração, mas o número não melhora muito com calibração:
+há 2.583 ± 54 eventos maliciosos em 1.436.275 ± 9.681, isto é, **menos de dois em
+cada mil**. Com uma base-taxa dessa ordem, mesmo a FPR de 0,40% que a C2 alcança
+a 0,20 de revocação deixa a precisão na casa de poucas unidades percentuais. É
+exatamente o argumento de Axelsson (2000): em detecção de intrusão o fator
+limitante é a taxa de falsos positivos, e não a de detecção, porque a raridade do
+evento de interesse amplifica o erro. **O desenho de revocação fixa da Seção
+4.3.1 existe por causa disso** — ele compara configurações no único eixo em que a
+base-taxa não contamina a comparação.
 
-**O que os pesos das regras não capturam.** A D1 sozinha ganha pouco sobre a C0
-na família B — 45,6% contra 28,7% — e muito na L — 89,2% contra 35,0%. O salto
-na B só vem com a D2, que é a dimensão do desvio em relação ao próprio histórico
-da pessoa: 98,8%, com p = 0,0020. É o argumento central a favor da linha de base
-por funcionário. A terceira dimensão, por sua vez, **não melhora a separação em
-nenhum ponto da curva** — o que sugere que ela pertence a um segundo estágio de
-triagem, e não ao mesmo corte das demais.
+O custo recai sobre o analista, e a fadiga de alerta é causa documentada de
+abandono do posto (Sundaramurthy et al., 2015; Vielberth et al., 2020). Daí a
+pergunta útil não ser "a FPR é baixa?", mas **a que revocação o sistema cabe num
+turno**: a 0,20 a C2 produz **33 ± 14 alertas por dia útil** contra **1.403 ±
+114** da linha de base — a diferença entre uma fila que se lê e uma que se
+ignora.
 
-**Comparação com o Isolation Forest**, se a S10 acontecer — opcional pela
-**D-10**.
+**O erro dominante não é deixar ataque passar: é chamar de anômalo o que é só
+incomum.** A C2 perde 0,2 ± 0,4 episódio da família comportamental e a C0 perde
+11,4 ± 0,5; mas as quatro configurações alarmam em mais de 75% dos episódios da
+família N, e a C3 em 100%. A família N não é ruído do experimento — é a
+operacionalização da distinção que Chandola, Banerjee e Kumar (2009) põem no
+centro do problema: **anômalo não é sinônimo de malicioso**, e um modelo que mede
+desvio mede desvio, não intenção. Plantão noturno, viagem e janela de manutenção
+são desvio legítimo, e separá-los exige informação que o registro de eventos não
+carrega. Que o alarme sobre eles **cresça** junto com a cobertura é o achado mais
+incômodo desta seção, e o primeiro que uma implantação real enfrentaria.
+
+**O ganho vem da segunda dimensão, não da terceira.** A D1 sozinha acrescenta
+pouco sobre a linha de base na família comportamental — 45,6% contra 28,7% — e
+muito na longitudinal — 89,2% contra 35,0%. O salto na família comportamental só
+aparece com a D2, que é o desvio em relação ao histórico da própria pessoa:
+98,8%, com p = 0,0020. É a validação empírica da ideia original de Denning
+(1987), de que o perfil de referência é por sujeito e não por população, e é o
+que a literatura de análise de comportamento de usuário e entidade retomou
+(Shashanka, Shen e Wan, 2016). Cenários desenhados para que nenhum evento
+isolado seja notável — a forma pela qual a ameaça interna costuma se desenvolver
+(Cappelli, Moore e Trzeciak, 2012; Homoliak et al., 2019) — são precisamente os
+que a linha de base não alcança.
+
+A terceira dimensão, por sua vez, **não reduz o ruído em nenhum regime**, e a
+Seção 4.3.1 mostra por quê: a exposição acumulada é um termo que cresce devagar e
+atinge muita gente. Ela é boa para alcançar o caso que nenhum evento denuncia e
+ruim para ordenar a fila. A leitura que os dados sustentam é que ela **pertence a
+um segundo estágio de triagem** — uma lista de pessoas a examinar, com periodicidade
+própria — e não ao mesmo corte que decide se um evento gera alerta agora.
+
+**O que esta comparação não resolve.** Os números saem de registro sintético e
+por isso **não se comparam a FPR publicada sobre registro real**: base-taxa,
+diversidade de normalidade e sofisticação do atacante são todas escolhas nossas.
+O que a comparação sustenta é interna — qual configuração é melhor sobre o mesmo
+dado —, e é só isso que a pergunta afirma. O detector não supervisionado previsto
+como opcional pela **D-10** responderia a uma pergunta diferente e igualmente
+limitada, e não substituiria a validação contra tráfego de produção.
 
 ## 4.6 Limitações
 
