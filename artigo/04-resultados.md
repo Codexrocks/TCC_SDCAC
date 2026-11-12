@@ -248,12 +248,11 @@ abandono do posto (Sundaramurthy et al., 2015; Vielberth et al., 2020). Daí a
 pergunta útil não ser "a FPR é baixa?", mas **a que revocação o sistema cabe num
 turno** — e é o que o critério da Seção 3.6 fixa, em 45 alertas falsos por turno.
 
-**O critério é cumprido, e não em toda população.** À revocação de 0,20 a C2
-produz **33 ± 14 alertas por dia útil** e o cumpre em **sete das dez sementes**,
-com mínimo de 20 e máximo de 55; a linha de base, com 1.403 ± 114, não o cumpre
-em nenhuma. À revocação de 0,10 a C2 o cumpre em dez de dez, com 4 ± 1 alertas; a
-0,30, em uma de dez. **O critério discrimina**, portanto, e é entre 0,10 e 0,20 de
-revocação que o sistema cabe num turno.
+**O critério é cumprido, e não em toda população.** A 0,20 de revocação a C2
+produz **33 ± 14 alertas por dia útil** e o cumpre em **sete das dez sementes**
+(mínimo 20, máximo 55); a linha de base, com 1.403 ± 114, não o cumpre em
+nenhuma. A 0,10 a C2 o cumpre em dez de dez, e a 0,30 em uma. **O critério
+discrimina**, e é entre 0,10 e 0,20 que o sistema cabe num turno.
 
 **O erro dominante não é deixar ataque passar: é chamar de anômalo o que é só
 incomum.** A C2 perde 0,2 ± 0,4 episódio da família comportamental e a C0 perde
@@ -309,11 +308,9 @@ para mostrar o problema, não para comparar configurações.
 **A parcela de postura não foi avaliada em parte dos eventos.** O gerador
 escreve estado diário de equipamento apenas para notebooks, e os eventos de
 celular e de origem externa — **79.456, ou 5,5% da janela, na semente 42** —
-foram pontuados pela C3 sem ela, com a ausência registrada em cada nota. A
-decisão de pontuar sem a parcela, em vez de interromper a execução, está
-registrada no projeto; o efeito é subestimá-la nos eventos afetados, e como eles
-concentram parte dos cenários de origem externa, o resultado da C3 é
-**conservador** nesse recorte.
+foram pontuados pela C3 sem ela, com a ausência registrada em cada nota. O efeito
+é subestimá-la nos eventos afetados, e como eles concentram parte dos cenários de
+origem externa, o resultado da C3 é **conservador** nesse recorte.
 
 **A exposição acumulada é subestimada nos empates de instante.** O desenho
 exclui o evento corrente do termo de exposição, e a implementação exclui também
@@ -325,19 +322,17 @@ do registro. A única comparação que vale para ela é a de revocação fixa �
 nela, como a Seção 4.3.1 mostra, a quarta dimensão não traz vantagem
 significativa.
 
-**Ambiente simulado não é produção.** A massa de dados foi gerada por nós, e
-acurácia alta sobre dado sintético pode indicar gerador previsível em vez de
-modelo bom. O conjunto de regras é pequeno, e o painel não foi avaliado com
-usuários, por decisão da **D-02**, de modo que nada se afirma sobre sua
-usabilidade.
+**Ambiente simulado não é produção.** Acurácia alta sobre dado sintético pode
+indicar gerador previsível em vez de modelo bom. O conjunto de regras é pequeno,
+e o painel não foi avaliado com usuários, pela **D-02**, de modo que nada se
+afirma sobre sua usabilidade.
 
 **O tratamento de dados pessoais.** Monitorar comportamento de colaborador é
-tratamento de dado pessoal quando aplicado a organização real; este trabalho
-opera só sobre dado sintético, e por isso a legislação não o vincula
-operacionalmente. O que cabe dizer é o que uma implantação real exigiria à luz
-da Lei nº 13.709/2018 e dos controles aplicáveis da ISO/IEC 27001:2022 — base
-legal, transparência ao titular, minimização e retenção. É a **D-19**, e o par
-dela em trabalhos futuros está na Seção 5.4.
+tratamento de dado pessoal quando aplicado a organização real; este trabalho opera
+só sobre dado sintético, e a legislação não o vincula operacionalmente. O que cabe
+dizer é o que uma implantação real exigiria à luz da Lei nº 13.709/2018 e dos
+controles da ISO/IEC 27001:2022 — base legal, transparência, minimização e
+retenção. O par em trabalhos futuros está na Seção 5.4.
 
 Limitação declarada é honestidade científica. Limitação escondida que a banca
 descobre é outra coisa.
