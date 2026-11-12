@@ -188,7 +188,14 @@ def _nota_para_dicionario(nota: RiskScore) -> dict[str, object]:
     }
 
 
-def _nota_de_dicionario(dados: Mapping[str, object]) -> RiskScore:
+def nota_de_dicionario(dados: Mapping[str, object]) -> RiskScore:
+    """Reconstroi uma `RiskScore` a partir do dicionario gravado em disco.
+
+    E publica porque dois modulos de `storage/` leem o mesmo registro: este
+    adaptador, ao percorrer as notas, e `storage/leitura.py`, ao servir o
+    resumo por pessoa. O padrao do projeto reserva o prefixo `_` para o que e
+    privado ao modulo, e isto deixou de ser.
+    """
     return RiskScore(
         event_id=str(dados["event_id"]),
         configuration=str(dados["configuration"]),
@@ -469,12 +476,60 @@ class ArquivoStorage:
                     json.dumps(_nota_para_dicionario(nota), ensure_ascii=False) + "\n"
                 )
 
+    def save_employee_summary(
+        self,
+        scoring_run_id: int,
+        resumos: Iterable[tuple[int, str, datetime, RiskScore]],
+    ) -> None:
+        """Grava a nota mais recente de cada pessoa, pela D-36.
+
+        **Por que existe um arquivo so para isto.** A tela de Pessoas precisa de
+        uma linha por funcionario, e o caminho generico para produzi-la e juntar
+        1,9 milhao de eventos com 1,4 milhao de notas **a cada requisicao**:
+        medido, sao 140 segundos para devolver 250 linhas, e o cliente do painel
+        desiste antes. O executor ja percorre os eventos em ordem, e sabe a
+        ultima nota de cada pessoa sem custo nenhum — entao quem escreve e ele.
+
+        O arquivo e derivado: apagar nao perde dado, so devolve a leitura ao
+        caminho lento.
+        """
+        caminho = self.raiz / "sdcac" / "resumos" / f"{scoring_run_id}.json"
+        _grava_json(
+            caminho,
+            [
+                {
+                    "employee_id": int(employee_id),
+                    "event_id": str(event_id),
+                    "occurred_at": occurred_at.isoformat(),
+                    "score": _nota_para_dicionario(nota),
+                }
+                for employee_id, event_id, occurred_at, nota in resumos
+            ],
+        )
+
+    def load_employee_summary(
+        self, scoring_run_id: int
+    ) -> tuple[Mapping[str, object], ...] | None:
+        """O resumo por pessoa, ou `None` quando a execucao nao o escreveu.
+
+        `None` e diferente de lista vazia: execucao antiga nao tem o arquivo e
+        precisa cair no caminho lento, enquanto execucao sem evento nenhum tem o
+        arquivo e devolve nada mesmo.
+        """
+        caminho = self.raiz / "sdcac" / "resumos" / f"{scoring_run_id}.json"
+        if not caminho.exists():
+            return None
+        dados = _le_json(caminho)
+        if not isinstance(dados, list):
+            raise StorageError(f"{caminho} nao e uma lista JSON")
+        return tuple(dados)
+
     def load_scores(self, scoring_run_id: int) -> tuple[RiskScore, ...]:
         caminho = self.raiz / "sdcac" / "notas" / f"{scoring_run_id}.jsonl"
         if not caminho.exists():
             return ()
         return tuple(
-            _nota_de_dicionario(json.loads(linha))
+            nota_de_dicionario(json.loads(linha))
             for linha in caminho.read_text(encoding="utf-8").splitlines()
             if linha.strip()
         )
