@@ -607,6 +607,12 @@ estado = "a-confirmar"
 # ---------------------------------------------------------------------------
 
 [[citacao]]
+onde = "artigo/03-metodologia.md § 3.8 · 04-resultados.md § 4.6 · 05-conclusao.md § 5.4"
+o_que = "A Lei nº 13.709/2018 é citada nos três lugares e não tem entrada em referencias.md. Fonte normativa: falta conferir os dados oficiais de publicação para a entrada em ABNT NBR 6023"
+dono = "Davi"
+desde = 2026-11-11
+
+[[citacao]]
 onde = "artigo/03-metodologia.md § 3.8"
 o_que = "Confirmar na fonte: (WOHLIN et al., 2012) — A taxonomia das quatro categorias de validade. **O ano está marcado como duvidoso pelo…"
 dono = "Davi"

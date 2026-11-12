@@ -39,10 +39,46 @@ O artigo inteiro tem **de 8 a 12 páginas**, tabelas e figuras incluídas. É o
 limite do [template](../docs/formato-do-artigo.md), e ele é rígido: trabalho fora do padrão
 é desclassificado antes da revisão.
 
-> **Este orçamento precisa ser recombinado.** Ele foi fechado quando se supunha
-> um teto de 10 páginas e um piso inexistente. O professor pede **no mínimo 8** — a
-> soma abaixo dá exatamente o piso, sem folga. Com 12 de teto, há espaço para
+> **Este orçamento precisa ser recombinado**, e desde 11/11/2026 existe a
+> medição que faltava para fazê-lo. Ele foi fechado quando se supunha um teto de
+> 10 páginas e um piso inexistente. O professor pede **no mínimo 8** — a soma
+> abaixo dá exatamente o piso, sem folga. Com 12 de teto, há espaço para
 > distribuir; quem decide como é a equipe.
+
+### O que o documento montado mede hoje — 11/11/2026
+
+Montado a partir deste Markdown no formato COBEM, o artigo tem **13 páginas**:
+**uma acima do teto de 12**, e fora do padrão é desclassificação antes da
+revisão.
+
+| Seção | Orçamento | Medido | Diferença |
+|---|---|---|---|
+| Cabeçalho, resumo, palavras-chave, abstract, keywords | 0,5 | **0,9** | +0,4 |
+| **1. Introdução** | 1 a 1,5 · **teto 2** | **2,0** | no limite |
+| **2. Referencial teórico** | 1,5 a 2 | **2,5** | +0,5 |
+| **3. Metodologia** | 2 | **4,3** | **+2,3** |
+| **4. Resultados e discussão** | 2 a 2,5 | **1,7** | −0,3 |
+| **5. Conclusões**, com as referências | 1,0 | **1,5** | +0,5 |
+| **Total** | 8 a 12 | **13,0** | **+1,0** |
+
+Três leituras:
+
+**O excesso está concentrado na Metodologia**, que ocupa mais do dobro do
+orçamento dela. É também a seção que mais cresceu, e a página que falta cortar
+sai dali com menos dano do que de qualquer outra.
+
+**O orçamento do cabeçalho era irrealista.** O template pede resumo de cerca de
+300 palavras em um parágrafo, e um artigo bilíngue precisa de dois — o piso real
+é 0,9 página, não 0,5. Essa linha do orçamento precisa subir, não o texto
+encurtar.
+
+**A Introdução está no limite rígido de 2 páginas**, que é do professor e não
+deste orçamento. Qualquer acréscimo nela passa a exigir um corte na mesma seção.
+
+> **Já foram cortados**, em 11/11: a Tabela 1 da § 3.4 passou de 22 linhas para
+> 4, agrupada por família; a aritmética do piso de sementes da § 3.7 foi
+> condensada; e a § 5 foi reescrita mais curta. De 14 páginas para 13. O resto
+> depende de decisão editorial de quem tem a caneta de cada seção.
 
 Orçamento combinado para um artigo de **8 páginas** — o piso:
 
@@ -146,7 +182,23 @@ Referências** — aqui elas ficam em arquivos separados só por organização d
 escrita.
 
 O Markdown daqui é a **fonte da verdade do texto**; o template é aplicado na
-hora de montar o documento de entrega. O que existe hoje em
+hora de montar o documento de entrega.
+
+**Como o documento é montado.** Um programa lê os arquivos desta pasta, descarta
+todo bloco de citação (`>`) e as seções de controle — que são andaime do
+repositório e não texto do artigo —, e aplica as regras lidas do próprio
+`COBEM-2025-template.docx`: A4, margem superior de 3 cm e as outras de 2 cm,
+Times New Roman 10, entrelinha simples, texto justificado, primeira linha
+recuada 0,5 cm, título centralizado em negrito corpo 14, autores em 10,
+instituição e e-mails em 9, resumo e palavras-chave em itálico 10 com a barra
+vertical à esquerda do bloco, títulos de seção à esquerda em negrito 10
+numerados com algarismos arábicos separados por ponto, tabelas centralizadas com
+legenda acima, e **páginas sem numeração**.
+
+O `.docx` e o `.pdf` gerados **não são versionados** — são saída de montagem, e
+estão no `.gitignore`. O programa que os monta ainda não está no repositório: o
+lugar dele é `scripts/`, que é **arquivo protegido** e exige 24 h de Pull
+Request aberto com a seção `Arquivo protegido` preenchida. O que existe hoje em
 [`templates/`](../templates/README.md) é aproximação; o arquivo do COBEM 2026
 precisa ser obtido com o professor.
 

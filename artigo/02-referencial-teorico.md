@@ -27,7 +27,7 @@ material, o processo que este trabalho adota para implementar a solução.
 
 ## 2.1 Os elementos que caracterizam o problema
 
-### O registro é a evidência, e ele é volumoso e heterogêneo
+### 2.1.1 O registro é a evidência, e ele é volumoso e heterogêneo
 
 A segurança da informação organiza-se, normativamente, em torno da preservação da
 confidencialidade, integridade e disponibilidade da informação (International
@@ -46,7 +46,7 @@ quantidade e em diversidade desses registros amplia a complexidade de
 interpretá-los — o volume que torna a evidência rica é o que torna a leitura
 difícil.
 
-### O evento isolado não distingue falha de autenticação de abuso de autorização
+### 2.1.2 O evento isolado não distingue falha de autenticação de abuso de autorização
 
 Autenticação e autorização descrevem processos distintos e sequenciais. A
 primeira verifica a identidade de um sujeito a partir de evidências vinculadas a
@@ -62,7 +62,7 @@ combinação que destoam do que lhe é habitual. Reconhecê-las exige conhecer o
 padrão esperado daquele sujeito, informação que o evento isolado, por definição,
 não carrega.
 
-### A correlação por regras escritas à mão não acompanha o ambiente
+### 2.1.3 A correlação por regras escritas à mão não acompanha o ambiente
 
 Sistemas de gerenciamento de informações e eventos de segurança (SIEM) combinam
 coleta multifonte, normalização e correlação de eventos para gerar alertas
@@ -78,7 +78,7 @@ forma genérica dispara sobre o legítimo. Em ambientes com rotinas heterogênea
 turnos, plantões, trabalho remoto, viagens —, o mesmo limiar aplicado a toda a
 organização produz os dois efeitos ao mesmo tempo.
 
-### O volume de alertas excede a capacidade humana de triagem
+### 2.1.4 O volume de alertas excede a capacidade humana de triagem
 
 Um Centro de Operações de Segurança (SOC) é a função organizacional responsável
 por monitorar essa correlação e conduzir a triagem dos alertas resultantes. A
@@ -92,7 +92,7 @@ sinaliza que um evento ocorreu e que ele cruzou um limiar, mas não informa se
 aquele evento é habitual para aquele usuário específico — que é precisamente a
 informação de que o analista precisa para decidir se vale investigar.
 
-### A raridade do evento malicioso faz o falso positivo dominar a fila
+### 2.1.5 A raridade do evento malicioso faz o falso positivo dominar a fila
 
 A rigidez do limiar fixo tem um efeito quantificável quando eventos maliciosos
 são raros em relação ao volume total de eventos legítimos. Mesmo um detector com
@@ -106,7 +106,7 @@ detectores com a mesma taxa de erro produzem experiências operacionais muito
 diferentes conforme a raridade do que procuram, e essa diferença não aparece em
 métricas que ignoram o desbalanceamento.
 
-### O ruído se converte em exaustão, e a exaustão degrada a triagem
+### 2.1.6 O ruído se converte em exaustão, e a exaustão degrada a triagem
 
 Em operação contínua, esse volume de ruído é uma das causas documentadas de
 exaustão do analista de segurança, com impacto direto na qualidade da triagem
@@ -120,7 +120,7 @@ ninguém consegue percorrer, não resolve o problema de quem o opera — e é po
 que a redução do falso positivo, e não apenas o ganho de cobertura, precisa
 figurar entre as grandezas medidas.
 
-### O agente interno tem credencial válida e não dispara o perímetro
+### 2.1.7 O agente interno tem credencial válida e não dispara o perímetro
 
 A ameaça interna é um caso estruturalmente difícil para abordagens baseadas
 apenas em autenticação e perímetro: o agente possui credencial válida e não
@@ -135,7 +135,7 @@ interessa, para o problema aqui delimitado, o que se desenvolve ao longo do
 tempo: a conduta que se instala gradualmente, sem que nenhum episódio isolado
 reúna, sozinho, elementos suficientes para caracterizá-la.
 
-### O limiar fixo não representa nem a diferença entre usuários nem a evolução temporal
+### 2.1.8 O limiar fixo não representa nem a diferença entre usuários nem a evolução temporal
 
 A ideia de inferir atividade maliciosa a partir do desvio em relação a um perfil
 de uso normal remonta a Denning (1987). Chandola et al. (2009) formalizam essa

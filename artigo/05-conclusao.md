@@ -8,153 +8,101 @@
 
 ## 5.1 Retomada da pergunta de pesquisa
 
-> **A escrever.** Responda **exatamente** esta pergunta, transcrita da
-> [Introdução](01-introducao.md) para que a resposta não derive para uma
-> parecida e mais fácil:
->
-> *A avaliação combinada do risco do evento individual, do desvio comportamental
-> do usuário e da exposição acumulada ao risco reduz a taxa de falsos positivos,
-> a uma mesma revocação, e aumenta a revocação em cenários longitudinais na
-> identificação de comportamentos potencialmente anômalos, quando comparada à
-> análise baseada exclusivamente em regras fixas aplicadas a eventos individuais,
-> em ambiente corporativo simulado?*
->
-> São **duas** grandezas, e as duas precisam de resposta: falso positivo a
-> revocação fixa, e revocação longitudinal. Responder só a uma é responder
-> metade. Se a resposta for "parcialmente", diga parcialmente e explique o que
-> faltou.
+A pergunta da Seção 1.4 indaga se a avaliação combinada do risco do evento
+individual, do desvio comportamental do usuário e da exposição acumulada ao
+risco reduz a taxa de falsos positivos, a uma mesma revocação, e aumenta a
+revocação em cenários longitudinais, quando comparada à análise baseada
+exclusivamente em regras fixas aplicadas a eventos individuais. São duas
+grandezas, e cada uma recebe resposta própria.
+
+**Quanto ao ruído, a resposta é afirmativa com margem ampla.** À revocação de
+0,20 a taxa de falsos positivos caiu de 20,05% na linha de base para 0,68% na
+configuração que acrescenta o desvio em relação ao padrão individual. À
+revocação de 0,30 a linha de base só alcança o ponto emitindo alerta sobre a
+totalidade do registro, enquanto a configuração com duas dimensões o alcança com
+1,83%. **Quanto à cobertura longitudinal, também é afirmativa:** medida por
+episódio, a revocação passou de 25,0% para 100%, o que é coerente com o desenho
+— aqueles cenários foram construídos para que nenhum evento isolado fosse
+notável, e é essa a situação que as regras fixas não alcançam.
+
+**A contrapartida não estava na pergunta.** A mesma configuração elevou de 73,7%
+para 93,0% a proporção de episódios de controle negativo que produziram alerta,
+isto é, de atividade legítima sinalizada. A pergunta mede ruído sobre o conjunto
+de eventos e cobertura sobre os cenários longitudinais, e não o alarme sobre
+comportamento legítimo incomum; é nesse terceiro eixo, não interrogado, que o
+ganho encontra seu custo. O que os dados autorizam afirmar é redução de ruído e
+aumento de cobertura nos cenários medidos — não superioridade sem custo.
+
+Três restrições delimitam o alcance da resposta, todas declaradas na Seção 4.6:
+**uma única semente** de geração, de modo que nenhuma diferença está distinguida
+de variação de amostragem; limiar de operação não calibrado, razão pela qual a
+comparação válida é a de falsos positivos a revocação fixa; e a quarta
+configuração não executada. Como é a exposição acumulada a contribuição original
+do trabalho, **a pergunta está respondida para a composição de duas dimensões e
+permanece aberta para a de três**.
 
 ## 5.2 Objetivos alcançados
 
-> **A escrever.** Percorra os objetivos específicos da Introdução, um a um,
-> dizendo se foram cumpridos e com que evidência.
->
-> Objetivo não cumprido se declara — a banca compara esta seção com a
-> Introdução.
+Dos oito objetivos específicos da Seção 1.5.2, os seis primeiros estão cumpridos
+e verificáveis no repositório: o modelo de eventos e o gerador de logs
+sintéticos com gabarito em base separada (a); a linha de base de regras fixas,
+sem parâmetro estimado de comportamento (b); a avaliação do evento individual
+(c); a identificação de divergência em relação ao padrão de cada usuário, em
+janela de treino disjunta (d); a avaliação da exposição acumulada em duas
+parcelas separadas (e); e a integração numa classificação decomponível (f).
+
+O objetivo (g) está cumprido para três das quatro configurações, e o (h)
+**parcialmente**: as duas grandezas primárias foram apuradas, mas o tratamento
+estatístico da Seção 3.7 pressupõe de dez a vinte sementes e a execução
+reportada usa uma. A análise é, nesse sentido, descritiva e não inferencial.
 
 ## 5.3 Contribuições
 
-> **A escrever.** O que o trabalho deixa. Cinco itens existem e são
-> verificáveis — não prometa nada além do que estiver no repositório:
->
-> * o **protótipo**, com a camada de avaliação independente do meio de
->   armazenamento, o que permite reproduzir o experimento sem servidor de banco
-> * as **quatro configurações canônicas** semeadas e somente-leitura, que tornam
->   a ablação repetível
-> * o **conjunto de regras e pesos** versionado, com resumo criptográfico preso
->   a cada execução
-> * os **cenários de teste automatizados**, e as invariantes de desenho da Seção
->   3.8 impostas por teste
-> * o **contrato de leitura versionado**, que torna a nota decomponível
->   inspecionável por fora do painel
->
-> Note que **a avaliação de usabilidade não é contribuição deste trabalho**: a
-> **D-02** fechou pela opção A, e a Seção 3.9 declara o painel como instrumento.
+O trabalho deixa cinco artefatos versionados: o **protótipo**, cuja camada de
+avaliação é independente do meio de armazenamento, o que permite reproduzir o
+experimento sem servidor de banco de dados; as **quatro configurações
+canônicas**, semeadas e somente-leitura, que tornam a ablação repetível; o
+**conjunto de regras e pesos** versionado, com resumo criptográfico preso a cada
+execução, de modo que duas execuções só são comparáveis se os resumos
+coincidirem; os **cenários de teste automatizados**, com as invariantes de
+desenho da Seção 3.8 impostas por teste a cada alteração do código; e o
+**contrato de leitura versionado**, que torna a nota decomponível inspecionável
+fora da interface. A avaliação de usabilidade **não** é contribuição deste
+trabalho, como declara a Seção 3.9.
 
 ## 5.4 Trabalhos futuros
 
-> **A escrever.** O que ficou de fora e por quê. Amarrado às limitações da
-> seção 4.6, item a item.
->
-> Três já estão identificados, e os três têm origem registrada:
->
-> * **Implantação sobre dado real, à luz da Lei nº 13.709/2018 e da ISO/IEC
->   27001:2022** — base legal, transparência ao titular, minimização e retenção.
->   É o par da limitação da Seção 4.6, e é a **D-19**
-> * **Validação contra tráfego de produção**, que o ambiente simulado não
->   substitui — a Seção 3.8 declara a ameaça de validade externa
-> * **Comparação com detector não supervisionado**, se a S10 não acontecer
->   dentro do prazo
+Três desdobramentos decorrem das limitações da Seção 4.6. O primeiro, e mais
+imediato, é **completar o desenho estatístico previsto** — executar o
+experimento sobre as dez a vinte sementes da Seção 3.7, com o teste pareado, e
+calibrar o limiar de operação —, que é o que converte a análise descritiva em
+inferencial. O segundo é a **implantação sobre dado real à luz da Lei nº
+13.709/2018 e dos controles aplicáveis da ISO/IEC 27001:2022**: base legal,
+transparência ao titular, minimização e retenção. O terceiro é a **validação
+contra tráfego de produção**, que o ambiente simulado não substitui — acurácia
+elevada sobre dado sintético pode indicar gerador previsível em vez de modelo
+adequado, e só o registro real distingue as duas hipóteses.
+
+> **A caneta desta seção é do Davi**, pela S14. O texto acima foi redigido a
+> partir dos resultados registrados e dos itens que as instruções anteriores
+> desta página enumeravam — **nada foi acrescentado além do que está no
+> repositório** —, e precisa da leitura de quem assina.
 
 ***
 
-## Resumo
+## Resumo e Abstract
 
-> **Este é o item mais fácil de esquecer do TCC inteiro.** As diretrizes
-> institucionais pedem o Resumo nesta mesma etapa, mas ele **não tem semana
-> própria** no nosso cronograma. Ver [diretrizes](../docs/diretrizes.md).
+> **Mudaram para [o bloco de abertura](00-resumo.md) em 11/11/2026.**
 >
-> **Parcialmente escrito.** O parágrafo abaixo cobre **contexto, objetivo e
-> método** — as três partes que não dependem de resultado. **Falta o resultado
-> principal e a conclusão**, e eles não podem ser escritos antes de existirem:
-> resumo redigido antes é resumo do que se pretendia fazer, não do que foi feito.
-> Quem fechar a Seção 4 acrescenta as duas últimas frases aqui.
-
-A crescente digitalização das organizações amplia o volume e a diversidade dos
-registros de eventos produzidos por sistemas corporativos, e a análise desses
-registros apoiada exclusivamente em regras fixas aplicadas a eventos isolados
-não distingue atividade legítima incomum de comportamento efetivamente
-indevido, nem identifica situações que se desenvolvem gradualmente. Este
-trabalho desenvolve e avalia um modelo experimental de avaliação multidimensional
-de risco comportamental, que combina o risco do evento individual, o desvio em
-relação ao padrão de comportamento do próprio usuário e a exposição acumulada ao
-risco, esta última reportada em duas parcelas distintas — conduta e postura de
-segurança. O método consiste em um experimento comparativo conduzido em ambiente
-corporativo simulado, no qual quatro configurações de avaliação — uma linha de
-base de regras fixas e três configurações com acréscimo progressivo de dimensões
-— são aplicadas aos mesmos conjuntos de eventos e cenários, sobre múltiplas
-sementes de geração independentes, permitindo medir isoladamente a contribuição
-de cada dimensão. As grandezas de comparação são a taxa de falsos positivos a uma
-mesma revocação e a revocação em cenários longitudinais.
-
-> **A escrever.** Duas frases finais: o resultado principal, com os números da
-> Seção 4, e a conclusão que responde à pergunta de pesquisa.
-
-**Palavras-chave:** risco comportamental. Análise de logs. Detecção de anomalias.
-Regras fixas. Ambiente corporativo simulado.
-
-> **Recuperadas do `.docx` entregue**, onde já estavam escritas e separadas por
-> vírgula. Aqui ficam separadas por ponto, como a NBR 6028 pede e como o
-> [README](README.md) desta pasta instrui.
-
-***
-
-## Abstract
-
-> **O abstract em inglês é obrigatório**, além do Resumo em português —
-> confirmado com o orientador em 04/09/2026, e exigido também pela estrutura do
-> [formato do artigo](../docs/formato-do-artigo.md).
+> Eles moravam aqui porque é nesta etapa — a **5ª Versão** — que as diretrizes
+> institucionais os cobram, e porque era aqui que seriam escritos. Em 11/11 as
+> duas frases que faltavam em cada um — o resultado principal e a conclusão —
+> puderam ser escritas, e no documento montado o bloco vai para o alto, logo
+> depois dos autores.
 >
-> ⚠️ **Onde o bloco em inglês fica no documento depende do template COBEM 2026**,
-> que ainda não está no repositório. Na família ABCM ele costuma ir depois da
-> lista de referências; confirmar quando o arquivo chegar.
->
-> **É a única parte do artigo em inglês.** O resto é todo em português, decidido
-> em 07/09/2026.
->
-> No documento final este bloco vai para **o alto**, logo depois dos autores —
-> antes da Introdução. Ele mora aqui porque é a 5ª Versão que a instituição
-> cobra, e porque é quando ele é escrito.
->
-> **Parcialmente escrito**, nas mesmas três partes do Resumo: contexto,
-> objetivo e método. **Falta o resultado e a conclusão**, pelo mesmo motivo.
->
-> ⚠️ **Este texto foi redigido com auxílio de IA e precisa ser lido por uma
-> pessoa antes de ser assinado** — está declarado no Pull Request que o
-> introduziu. Abstract gerado por máquina que ninguém conferiu é o mesmo
-> problema da referência inventada.
-
-The growing digitalization of organizations increases both the volume and the
-diversity of event records produced by corporate systems. Analysing such records
-solely through fixed rules applied to isolated events fails to distinguish
-unusual but legitimate activity from genuinely improper behaviour, and does not
-identify situations that develop gradually over time. This work develops and
-evaluates an experimental model for multidimensional assessment of behavioural
-risk, combining the risk of the individual event, the deviation from each user's
-own behavioural baseline, and the accumulated exposure to risk, the latter
-reported as two separate components — conduct and security posture. The method
-is a comparative experiment conducted in a simulated corporate environment, in
-which four assessment configurations — a fixed-rule baseline and three
-configurations adding dimensions progressively — are applied to the same sets of
-events and scenarios, over multiple independent generation seeds, so that the
-contribution of each dimension can be measured in isolation. The comparison
-quantities are the false positive rate at a fixed recall and the recall on
-longitudinal scenarios.
-
-> **A escrever.** As duas frases finais, espelhando as do Resumo.
-
-**Keywords:** behavioural risk. Log analysis. Anomaly detection. Fixed rules.
-Simulated corporate environment.
+> Manter o texto nos dois lugares é como a documentação deste projeto já
+> apodreceu duas vezes. A entrega da 5ª Versão continua sendo esta seção; o
+> texto do resumo mora em um arquivo só.
 
 ***
 
