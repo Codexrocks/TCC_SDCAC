@@ -18,7 +18,7 @@
 
 ***
 
-## Contextualização
+## 1.1 Contextualização
 
 A crescente digitalização das organizações tem ampliado significativamente a
 quantidade de informações geradas pelos sistemas computacionais. Atividades como
@@ -60,7 +60,7 @@ integrar diferentes níveis de informação, considerando simultaneamente as
 características do evento individual, o comportamento histórico do usuário e a
 evolução temporal das atividades registradas.
 
-## Problema
+## 1.2 Problema
 
 A análise de segurança baseada exclusivamente em eventos individuais e regras
 fixas apresenta limitações relacionadas à interpretação do contexto em que as
@@ -89,7 +89,7 @@ individual dos usuários e à evolução temporal dos eventos pode contribuir pa
 avaliação de comportamentos potencialmente anômalos, em comparação com uma
 abordagem baseada exclusivamente em regras fixas aplicadas a eventos isolados.
 
-## Justificativa
+## 1.3 Justificativa
 
 A necessidade de aprimorar os mecanismos de interpretação de eventos
 computacionais torna relevante a investigação de abordagens capazes de considerar
@@ -131,7 +131,7 @@ avaliar eventos de forma estruturada permite a realização de experimentos
 controlados e reprodutíveis, mantendo condições equivalentes entre as diferentes
 configurações analisadas.
 
-## Pergunta de pesquisa
+## 1.4 Pergunta de pesquisa
 
 Diante das limitações associadas à análise isolada de eventos e à utilização
 exclusiva de regras fixas, formula-se a seguinte pergunta de pesquisa:
@@ -148,16 +148,16 @@ configurações de avaliação, aplicadas aos mesmos conjuntos de eventos e cen�
 experimentais, de modo que a contribuição de cada dimensão possa ser medida
 isoladamente.
 
-## Objetivos
+## 1.5 Objetivos
 
-### Objetivo geral
+### 1.5.1 Objetivo geral
 
 Desenvolver um modelo de avaliação de risco baseado na análise integrada de
 eventos individuais, padrões comportamentais e exposição acumulada ao risco,
 avaliando sua contribuição em comparação com uma linha de base baseada em regras
 fixas aplicadas a eventos individuais, em um ambiente corporativo simulado.
 
-### Objetivos específicos
+### 1.5.2 Objetivos específicos
 
 Para alcançar o objetivo geral, foram definidos os seguintes objetivos
 específicos:
@@ -188,7 +188,7 @@ conjuntos de eventos e cenários experimentais; e
 h) analisar os resultados obtidos por meio das métricas e critérios definidos
 para o experimento.
 
-## Estrutura do trabalho
+## 1.6 Estrutura do trabalho
 
 Esta introdução apresenta a contextualização do tema, o problema de pesquisa, a
 justificativa, a pergunta de pesquisa e os objetivos estabelecidos. Em seguida, o

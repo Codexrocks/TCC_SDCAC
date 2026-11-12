@@ -34,3 +34,7 @@ Thumbs.db
 
 # Logs
 *.log
+
+# Montagem do artigo (saida de build, nao versionada)
+artigo/*.docx
+artigo/*.pdf

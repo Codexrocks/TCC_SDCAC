@@ -153,10 +153,34 @@ identificador e seu rótulo na base `ground_truth`, à qual a aplicação não t
 acesso. A avaliação compara, portanto, a saída do sistema a um gabarito que ele
 não pode consultar.
 
-> **A escrever — lacuna 1 · Yasmin · 01/10.** A relação nominal dos cenários de
-> cada família depende da **D-06** e da **D-16**. Entra aqui uma tabela com, no
-> mínimo, um cenário nomeado por família e ao menos um de escalada legítima.
-> **Não escrever antes de existir.**
+A Tabela 1 relaciona os cenários nomeados de cada família, com o número de
+episódios produzidos na execução de referência descrita na Seção 3.7.
+
+**Tabela 1. Catálogo de cenários, por família, e episódios produzidos na
+execução de referência.** A versão do catálogo é registrada em cada episódio do
+gabarito como `provisorio-v1`.
+
+| Família | Cenários nomeados | Episódios |
+|---|---|---|
+| **P** — pontuais | P01 força bruta com sucesso após o bloqueio · P02 download de recurso restrito para removível · P03 escalada de privilégio com desligamento do segundo fator · P04 autenticação externa sem túnel e sem segundo fator · P05 nuvem seguida de download externo · P06 tentativa de alterar permissões à noite | 24 |
+| **B** — de contexto | B01 volume cinco vezes o habitual · B02 varredura de recursos nunca acessados · B03 sessão noturna fora do hábito da pessoa e dentro do corte fixo · B04 origem doméstica inédita | 16 |
+| **L** — longitudinais | L01 exfiltração gradual em 21 dias · L02 reconhecimento lateral em 20 dias · L03 postura em degradação · L04 horário deslizante de 19h para 2h | 12 |
+| **N** — controle negativo | N01 **escalada legítima** por mudança de projeto · N02 segundo fator desligado e religado na troca de aparelho · N03 fechamento de mês · N04 bloqueio por erro de digitação · N05 entrega de projeto com arquivos grandes · N06 janela de manutenção noturna | 72 |
+| | **Total** | **124** |
+
+As quatro famílias somam 20 cenários nomeados. A família N responde por 72 dos
+124 episódios, e o desequilíbrio é deliberado: o controle negativo precisa ser
+frequente para que o falso positivo tenha massa onde ser medido. O N06 não é
+injetado como cenário — ele pertence à rotina normal do gerador, porque é
+atividade legítima e recorrente, e é por isso que produz 53 episódios contra os
+3 ou 4 dos demais.
+
+O catálogo é tratado como provisório, e o próprio gabarito o declara: cada
+episódio registra a versão do catálogo que o produziu. A Tabela 1 descreve,
+portanto, o conjunto de cenários efetivamente implementado e executado — o
+mesmo que produziu os resultados da Seção 4 —, e não um catálogo cuja
+especificação tenha sido encerrada. A distinção é relevante para a objeção de
+desenho não cego tratada na Seção 3.8.
 
 A especificação dos cenários foi produzida **sem acesso às fórmulas de
 pontuação**: quem desenhou as famílias, os rótulos e os casos de escalada
@@ -231,10 +255,14 @@ mais informativa que a curva ROC (Davis e Goadrich, 2006; Saito e Rehmsmeier,
 > falsos por turno que se considera absorvível; a redução de falsos positivos
 > sobre a configuração C0 que daí decorre; e a revocação longitudinal mínima.
 >
-> **Ainda dá tempo de ser *a priori*:** em 14/10/2026 nenhum resultado havia sido
-> versionado. A partir da primeira execução registrada, esta frase deixa de ser
-> critério e passa a ser justificação de resultado — e a diferença entre as duas
-> é o que a Seção 3.8 chama de ameaça à validade.
+> ⚠️ **O prazo venceu em 11/11/2026**, com a primeira execução registrada. O
+> texto anterior desta nota dizia que "ainda dá tempo de ser *a priori*", e a
+> condição que ele descrevia deixou de valer: existe resultado versionado. O que
+> resta é declarar o número **pelo argumento operacional, sem olhar a tabela da
+> Seção 4.3**, e registrar que foi declarado depois — porque critério escrito
+> depois do resultado não é critério, é justificação, e a diferença entre as duas
+> é exatamente o que a Seção 3.8 chama de ameaça à validade. Declarar e admitir a
+> data é defensável; declarar e omitir, não.
 
 ## 3.7 Execução e reprodutibilidade
 
@@ -250,12 +278,11 @@ pareadas (Wilcoxon, 1945), adequado por não pressupor normalidade das diferenç
 e recomendado para a comparação de configurações sobre múltiplos conjuntos de
 dados (Demšar, 2006).
 
-O piso de dez sementes decorre da aritmética do próprio teste, e não de
-convenção: no Wilcoxon pareado exato, o menor valor de *p* bilateral obtenível
-com *n* pares é $2/2^{n}$, atingido quando todas as diferenças têm o mesmo sinal.
-Com *n* = 5 esse limite vale 0,0625 — acima de 0,05 ainda que uma configuração
-superasse a outra em todas as execuções — e com *n* = 10 cai a aproximadamente
-0,002.
+O piso de dez sementes decorre da aritmética do teste, e não de convenção: no
+Wilcoxon pareado exato o menor valor de *p* bilateral obtenível com *n* pares é
+$2/2^{n}$, de modo que com *n* = 5 o limite é 0,0625 — acima de 0,05 ainda que
+uma configuração superasse a outra em todas as execuções — e com *n* = 10 cai a
+cerca de 0,002.
 
 A reprodutibilidade é assegurada pelo registro de execução. Cada execução grava
 identificador, semente, configuração e versão dos pesos, além de dois valores que
@@ -279,6 +306,24 @@ disjuntas, exclusão do evento corrente do termo de exposição acumulada e
 independência entre a camada de avaliação e o meio de armazenamento — são
 verificadas por testes automatizados executados a cada alteração do código. A
 interface de inspeção dos resultados é construída em Streamlit.
+
+A execução se dá em cinco etapas encadeadas, cada uma um programa de linha de
+comando independente: a **geração** da massa de eventos e do gabarito; a
+**tradução** dos arquivos gerados para o formato que a camada de avaliação lê; a
+**pontuação**, que percorre os eventos uma vez por configuração e grava as notas
+com o identificador da execução; a **avaliação**, que compara as notas ao
+gabarito e grava as métricas de uma semente; e a **agregação**, que reúne as
+sementes, calcula média e desvio-padrão e aplica o teste pareado. A quarta etapa
+é a única que acessa o gabarito, em coerência com a separação de permissões
+descrita na Seção 3.2, e a quinta já não o acessa: ela opera sobre as métricas
+que a quarta gravou. As métricas reportadas na Seção 4 são lidas do arquivo que a
+quinta etapa grava, e não transcritas à mão.
+
+A agregação recusa reunir execuções que não sejam comparáveis entre si — limiar
+de operação distinto, níveis de revocação distintos, conjunto de configurações
+distinto, ou a mesma execução contada duas vezes. A recusa é deliberada: a média
+de execuções incomparáveis é um número plausível, e nada no resultado final
+denunciaria a mistura.
 
 ## 3.8 Ameaças à validade
 

@@ -163,7 +163,7 @@ colunas acima.
 
 ## Dívida bibliográfica
 
-17 pendências. Referência não conferida na fonte é o único
+18 pendências. Referência não conferida na fonte é o único
 item deste quadro que pode reprovar o trabalho por fraude acadêmica, e é o
 que some mais fácil de vista.
 
@@ -186,6 +186,7 @@ que some mais fácil de vista.
 | `artigo/01-introducao.md — caso GE / Zheng, 2018` | Confirmar na fonte: U.S. DOJ, Niskayuna man charged theft trade secrets, 2018 | Yasmin | 10/11/2026 | 2 dias |
 | `artigo/01-introducao.md — caso Capital One, 2019` | Confirmar na fonte: U.S. DOJ, usao-wdwa. **O próprio insumo admite estar incompleto**, com URL genérica | Yasmin | 10/11/2026 | 2 dias |
 | `artigo/01-introducao.md — caso Tesla / Tripp, 2018` | Confirmar na fonte: petição inicial Tesla, Inc. v. Martin Tripp (Nevada) ou GovInfoSecurity, 2018 | Yasmin | 10/11/2026 | 2 dias |
+| `artigo/03-metodologia.md § 3.8 · 04-resultados.md § 4.6 · 05-conclusao.md § 5.4` | A Lei nº 13.709/2018 é citada nos três lugares e não tem entrada em referencias.md. Fonte normativa: falta conferir os dados oficiais de publicação para a entrada em ABNT NBR 6023 | Davi | 11/11/2026 | 1 dias |
 
 ## O que ficou fora desta versão
 
