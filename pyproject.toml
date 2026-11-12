@@ -98,6 +98,8 @@ ignore = [
 "ingest/cli.py" = ["T201"]
 "evaluator/cli.py" = ["T201"]
 "evaluator/agregado_cli.py" = ["T201"]
+# O montador do artigo tambem e interface: o `print` diz onde gravou.
+"scripts/montar_artigo.py" = ["T201"]
 
 [tool.ruff.lint.pydocstyle]
 convention = "google"

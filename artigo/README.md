@@ -190,9 +190,15 @@ escrita.
 O Markdown daqui é a **fonte da verdade do texto**; o template é aplicado na
 hora de montar o documento de entrega.
 
-**Como o documento é montado.** Um programa lê os arquivos desta pasta, descarta
-todo bloco de citação (`>`) e as seções de controle — que são andaime do
-repositório e não texto do artigo —, e aplica as regras lidas do próprio
+**Como o documento é montado.**
+
+```bash
+python scripts/montar_artigo.py
+```
+
+O programa lê os arquivos desta pasta, descarta todo bloco de citação (`>`) e as
+seções de controle — que são andaime do repositório e não texto do artigo —, e
+aplica as regras lidas do próprio
 `COBEM-2025-template.docx`: A4, margem superior de 3 cm e as outras de 2 cm,
 Times New Roman 10, entrelinha simples, texto justificado, primeira linha
 recuada 0,5 cm, título centralizado em negrito corpo 14, autores em 10,
@@ -202,11 +208,24 @@ numerados com algarismos arábicos separados por ponto, tabelas centralizadas co
 legenda acima, e **páginas sem numeração**.
 
 O `.docx` e o `.pdf` gerados **não são versionados** — são saída de montagem, e
-estão no `.gitignore`. O programa que os monta ainda não está no repositório: o
-lugar dele é `scripts/`, que é **arquivo protegido** e exige 24 h de Pull
-Request aberto com a seção `Arquivo protegido` preenchida. O que existe hoje em
-[`templates/`](../templates/README.md) é aproximação; o arquivo do COBEM 2026
-precisa ser obtido com o professor.
+estão no `.gitignore`. **O programa que os monta entrou no repositório em
+12/11/2026**, em [`scripts/montar_artigo.py`](../scripts/montar_artigo.py), e é o
+que torna a entrega reproduzível por qualquer um da equipe em vez de depender da
+máquina de quem montou.
+
+Duas coisas que vale saber antes de mexer nele:
+
+- **A lista de referências não tem espaçamento entre entradas.** Foi o que fechou
+  o artigo em 12 páginas: as doze linhas de 6 pt somavam 72 pt de branco puro, e
+  empurravam a última referência para a 13ª página. **Não é exigência do
+  template** — era escolha do programa, e está comentada no código
+- **O bloco em inglês é opcional.** O Abstract saiu em 12/11/2026 por autorização
+  do orientador, e o montador aceita os dois formatos: se a página voltar a
+  tê-lo, ele entra de novo sem alteração nenhuma
+
+O que existe hoje em [`templates/`](../templates/README.md) é aproximação; o
+arquivo do COBEM 2026 precisa ser obtido com o professor, e qualquer divergência
+de 2025 para 2026 muda **o programa**, não o texto.
 
 Escreva o conteúdo aqui primeiro. Formatar é o último passo, não o primeiro —
 texto preso dentro de um `.docx` não é revisável por ninguém e não aparece no
