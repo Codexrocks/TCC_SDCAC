@@ -53,14 +53,12 @@ primeira verifica a identidade de um sujeito a partir de evidências vinculadas 
 essa identidade (Grassi et al., 2017); a segunda decide quais ações um sujeito já
 autenticado pode executar, tipicamente mediada por papéis (Sandhu et al., 1996).
 
-A distinção importa porque as duas deixam rastros de naturezas diferentes. Falhas
-de autenticação — horário atípico, repetição de tentativas, origem não habitual —
-produzem eventos discretos, delimitados e fáceis de registrar. Violações de
-autorização, ao contrário, costumam consistir em ações individualmente
-permitidas: o sujeito acessa o que lhe é facultado, na ordem, no volume ou na
-combinação que destoam do que lhe é habitual. Reconhecê-las exige conhecer o
-padrão esperado daquele sujeito, informação que o evento isolado, por definição,
-não carrega.
+A distinção importa porque as duas deixam rastros de naturezas diferentes.
+Falhas de autenticação produzem eventos discretos e delimitados. Violações de
+autorização costumam consistir em ações individualmente **permitidas**: o sujeito
+acessa o que lhe é facultado, na ordem, no volume ou na combinação que destoam do
+que lhe é habitual. Reconhecê-las exige conhecer o padrão esperado daquele
+sujeito, informação que o evento isolado, por definição, não carrega.
 
 ### 2.1.3 A correlação por regras escritas à mão não acompanha o ambiente
 
@@ -71,12 +69,11 @@ autores documentam uma limitação estrutural amplamente relatada: a correlaçã
 depende de regras escritas manualmente, e o volume de alertas gerado tende a
 exceder a capacidade de análise disponível.
 
-A consequência prática é que a qualidade da detecção fica limitada pela
-capacidade de alguém antecipar, por escrito, as condições que caracterizam um
-comportamento indevido. Regra que não foi escrita não dispara; regra escrita de
-forma genérica dispara sobre o legítimo. Em ambientes com rotinas heterogêneas —
-turnos, plantões, trabalho remoto, viagens —, o mesmo limiar aplicado a toda a
-organização produz os dois efeitos ao mesmo tempo.
+A qualidade da detecção fica, portanto, limitada pela capacidade de alguém
+antecipar por escrito o que caracteriza um comportamento indevido: regra que não
+foi escrita não dispara, e regra genérica dispara sobre o legítimo. Em ambientes
+com rotinas heterogêneas — turnos, plantões, trabalho remoto, viagens — o mesmo
+limiar produz os dois efeitos ao mesmo tempo.
 
 ### 2.1.4 O volume de alertas excede a capacidade humana de triagem
 
@@ -88,9 +85,9 @@ volume de alertas e a capacidade humana de análise.
 
 Os mesmos autores apontam um agravante que interessa diretamente a este trabalho:
 a ausência de contexto comportamental na maior parte das ferramentas. O alerta
-sinaliza que um evento ocorreu e que ele cruzou um limiar, mas não informa se
-aquele evento é habitual para aquele usuário específico — que é precisamente a
-informação de que o analista precisa para decidir se vale investigar.
+diz que um evento cruzou um limiar, mas não se ele é habitual **para aquele
+usuário** — que é a informação de que o analista precisa para decidir se vale
+investigar.
 
 ### 2.1.5 A raridade do evento malicioso faz o falso positivo dominar a fila
 
@@ -100,11 +97,9 @@ taxa de falso positivo percentualmente pequena produz, em termos absolutos, uma
 fila de alertas dominada por falsos positivos — a *base-rate fallacy*,
 demonstrada formalmente por Axelsson (2000) no contexto da detecção de intrusão.
 
-O resultado é que a precisão percebida de um detector não decorre apenas da sua
-acurácia, mas da proporção entre as classes no ambiente em que ele opera. Dois
-detectores com a mesma taxa de erro produzem experiências operacionais muito
-diferentes conforme a raridade do que procuram, e essa diferença não aparece em
-métricas que ignoram o desbalanceamento.
+A precisão percebida de um detector não decorre, portanto, apenas da sua
+acurácia, mas da proporção entre as classes no ambiente em que ele opera — e essa
+diferença não aparece em métricas que ignoram o desbalanceamento.
 
 ### 2.1.6 O ruído se converte em exaustão, e a exaustão degrada a triagem
 
@@ -114,11 +109,10 @@ exaustão do analista de segurança, com impacto direto na qualidade da triagem
 a ser organizacional: a fila que não se consegue examinar é, na prática, uma fila
 não examinada.
 
-Isso estabelece um critério de avaliação que a mera contagem de acertos não
-captura. Um detector que encontra o que procura, mas ao custo de uma fila que
-ninguém consegue percorrer, não resolve o problema de quem o opera — e é por isso
-que a redução do falso positivo, e não apenas o ganho de cobertura, precisa
-figurar entre as grandezas medidas.
+Um detector que encontra o que procura ao custo de uma fila que ninguém percorre
+não resolve o problema de quem o opera — e é por isso que a redução do falso
+positivo, e não apenas o ganho de cobertura, precisa figurar entre as grandezas
+medidas.
 
 ### 2.1.7 O agente interno tem credencial válida e não dispara o perímetro
 
