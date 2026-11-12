@@ -22,7 +22,7 @@ from dataclasses import dataclass
 from datetime import datetime
 
 from detection.integracao import RiskScore
-from storage.arquivos import ArquivoStorage
+from storage.arquivos import ArquivoStorage, nota_de_dicionario
 
 # Teto duro de pagina. Nem o painel nem ninguem pede mais que isto de uma vez, e
 # o parametro vindo do cliente nao pode ser quem decide.
@@ -93,6 +93,23 @@ class ArquivoRepository(ArquivoStorage):
         "Mais recente" e selecao, nao calculo: e o maior `occurred_at` daquela
         pessoa naquela execucao.
         """
+        resumo = self.load_employee_summary(scoring_run_id)
+        if resumo is not None:
+            # O caminho rapido, e o unico que serve em escala: o executor ja
+            # gravou uma linha por pessoa. O caminho abaixo fica para execucao
+            # antiga, gravada antes de o resumo existir.
+            prontos = [
+                EmployeeScore(
+                    employee_id=int(linha["employee_id"]),
+                    event_id=str(linha["event_id"]),
+                    occurred_at=datetime.fromisoformat(str(linha["occurred_at"])),
+                    score=nota_de_dicionario(linha["score"]),
+                )
+                for linha in resumo
+            ]
+            prontos.sort(key=lambda e: e.employee_id)
+            return _pagina(prontos, limit, offset)
+
         eventos = self._eventos_por_id(scoring_run_id)
         por_pessoa: dict[int, EmployeeScore] = {}
 

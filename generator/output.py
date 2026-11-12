@@ -33,7 +33,7 @@ class Run:
 def assemble(world, sink, run_id, seed):
     data = Run()
     data.W, data.run_id, data.seed = world, run_id, seed
-    cols = [np.concatenate(c) for c in zip(*sink.ch)]
+    cols = [np.concatenate(c) for c in zip(*sink.ch, strict=True)]
     t, et, rs, rv, a1, a2, a3, seq, sid = cols
     s = {k: np.array(v) for k, v in sink.s.items()}
     lo_w, hi_w = (
@@ -104,27 +104,28 @@ def _attrs(data, lo, hi):
     out[m] = _FA[a1[m]]
     m = et == 3
     out[m] = [
-        '{"size_bytes":%d,"destination":"%s"}' % (s, cfg.DESTS[d])
-        for s, d in zip(a1[m], a2[m])
+        f'{{"size_bytes":{s},"destination":"{cfg.DESTS[d]}"}}'
+        for s, d in zip(a1[m], a2[m], strict=True)
     ]
     m = et == 4
     out[m] = [
-        '{"device_type":"%s","files_copied_count":%d,"bytes_copied":%d}'
-        % (cfg.DEVTYPES[d], f, b)
-        for d, f, b in zip(a1[m], a2[m], a3[m])
+        f'{{"device_type":"{cfg.DEVTYPES[d]}","files_copied_count":{f},'
+        f'"bytes_copied":{b}}}'
+        for d, f, b in zip(a1[m], a2[m], a3[m], strict=True)
     ]
     m = et == 5
     out[m] = _WEB[a1[m]]
     m = et == 6
     out[m] = [
-        '{"action_subtype":"%s","initiated_by":"%s","target_employee_id":%s}'
-        % (cfg.SUBTYPES[a], cfg.INITIATORS[i], "null" if not tg else tg)
-        for a, i, tg in zip(a1[m], a2[m], a3[m])
+        f'{{"action_subtype":"{cfg.SUBTYPES[a]}",'
+        f'"initiated_by":"{cfg.INITIATORS[i]}",'
+        f'"target_employee_id":{"null" if not tg else tg}}}'
+        for a, i, tg in zip(a1[m], a2[m], a3[m], strict=True)
     ]
     m = et == 7
     out[m] = [
-        '{"campaign_id":"camp-%d","outcome":"%s"}' % (c, cfg.OUTCOMES[o])
-        for c, o in zip(a1[m], a2[m])
+        f'{{"campaign_id":"camp-{c}","outcome":"{cfg.OUTCOMES[o]}"}}'
+        for c, o in zip(a1[m], a2[m], strict=True)
     ]
     return out
 
@@ -285,7 +286,7 @@ def _account_state(data, corp):
     emp_ev = data.s["emp"][data.sid[m]]
     tgt = np.where(data.a3[m] > 0, data.a3[m], emp_ev)
     st = {e.id: [(int(world.day_epoch[0]), e.mfa0, e.priv0)] for e in world.emps}
-    for t, a, eid in zip(data.t[m], data.a1[m], tgt):
+    for t, a, eid in zip(data.t[m], data.a1[m], tgt, strict=True):
         _, mfa, pv = st[int(eid)][-1]
         if a == cfg.SUB["mfa_disabled"]:
             mfa = False

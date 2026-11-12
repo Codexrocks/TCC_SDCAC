@@ -78,6 +78,65 @@ nula em seis dos nove níveis, e nos três em que rejeita é a **C3 que tem FPR
 maior**. O ganho dela aparece na cobertura por episódio, e com o custo de
 alarmar em **100%** da família de controle negativo.
 
+## A calibração do limiar, sem reexecutar nada
+
+**O limiar de operação não precisa de nova execução para ser calibrado.** O
+avaliador já grava, para cada nível de revocação, o **limiar mais alto que o**
+**alcança** e quantos alertas isso produz. Calibrar é **escolher uma linha**
+desta tabela — e é isso que a **D-15** tem de fixar.
+
+Média ± desvio-padrão sobre as dez sementes. Alertas por dia útil supõem os
+**189 dias úteis** da janela de avaliação de nove meses.
+
+| Revocação | Config | Limiar | FPR % | Alertas por dia útil |
+|---|---|---|---|---|
+| **0,10** | C0 | 45,0 ± 12,9 | 1,15 ± 0,71 | 89 ± 54 |
+| **0,10** | C1 | 76,5 ± 7,5 | 0,01 ± 0,02 | 2 ± 2 |
+| **0,10** | C2 | 137,4 ± 14,3 | 0,04 ± 0,02 | 4 ± 1 |
+| **0,10** | C3 | 251,3 ± 11,9 | 0,05 ± 0,03 | 5 ± 2 |
+| **0,20** | C0 | 30,0 ± 0,0 | 18,44 ± 1,49 | 1.403 ± 114 |
+| **0,20** | C1 | 32,5 ± 4,9 | 6,03 ± 2,75 | 460 ± 208 |
+| **0,20** | C2 | 68,6 ± 7,7 | 0,40 ± 0,19 | 33 ± 14 |
+| **0,20** | C3 | 194,2 ± 8,4 | 0,54 ± 0,29 | 44 ± 22 |
+| **0,30** | C0 | 24,0 ± 12,6 | 34,55 ± 34,52 | 2.622 ± 2.608 |
+| **0,30** | C1 | 22,5 ± 2,6 | 14,05 ± 4,21 | 1.070 ± 315 |
+| **0,30** | C2 | 51,8 ± 7,0 | 1,33 ± 0,55 | 105 ± 42 |
+| **0,30** | C3 | 178,2 ± 8,1 | 1,70 ± 0,94 | 133 ± 71 |
+| **0,40** | C0 | 0,0 ± 0,0 | 100,00 ± 0,00 | 7.599 ± 51 |
+| **0,40** | C1 | 18,5 ± 4,7 | 23,27 ± 17,36 | 1.772 ± 1.318 |
+| **0,40** | C2 | 41,6 ± 4,7 | 3,18 ± 1,60 | 247 ± 121 |
+| **0,40** | C3 | 168,4 ± 4,7 | 3,47 ± 1,36 | 269 ± 103 |
+| **0,50** | C0 | 0,0 ± 0,0 | 100,00 ± 0,00 | 7.599 ± 51 |
+| **0,50** | C1 | 7,5 ± 4,9 | 58,75 ± 21,51 | 4.465 ± 1.631 |
+| **0,50** | C2 | 33,7 ± 2,1 | 6,85 ± 1,01 | 527 ± 75 |
+| **0,50** | C3 | 159,3 ± 3,8 | 7,18 ± 2,12 | 552 ± 162 |
+| **0,60** | C0 | 0,0 ± 0,0 | 100,00 ± 0,00 | 7.599 ± 51 |
+| **0,60** | C1 | 5,0 ± 0,0 | 72,09 ± 0,47 | 5.480 ± 54 |
+| **0,60** | C2 | 25,9 ± 3,1 | 11,93 ± 4,13 | 913 ± 312 |
+| **0,60** | C3 | 149,8 ± 3,5 | 14,04 ± 4,48 | 1.073 ± 339 |
+
+### Como se lê, e por que isto fecha a D-15
+
+A pergunta da **D-15** é operacional: **quantos alertas falsos um analista**
+**absorve por turno?** Escolhido o número, a tabela devolve o resto — o nível
+de revocação que cabe nele, o limiar que o produz e a FPR que se obtém.
+
+**O ponto operável que os dados mostram** é a C2 a 0,20 de revocação: limiar
+**68,6 ± 7,7**, FPR de **0,40 ± 0,19%** e **33 ± 14 alertas por dia útil**.
+No mesmo ponto a linha de base precisa de **1.403 ± 114** — a diferença entre
+uma fila que se lê e uma que se ignora.
+
+> ⚠️ **O limiar não é o mesmo nas dez sementes.** O desvio de ± 7,7 na C2 a
+> 0,20 significa que o corte que entrega aquela revocação **depende da**
+> **população**. Fixar um limiar único e usá-lo numa organização nova não
+> entrega a revocação prometida — o que a D-15 pode fixar é o **critério**, e a
+> calibração tem de ser refeita por ambiente. Isso é resultado, não lacuna.
+
+> **A C0 a 0,30 tem desvio maior que a média** — 34,55 ± 34,52. Não é erro de
+> medida: em oito das dez sementes ela alcança 0,30 com FPR em torno de 18%, e
+> em duas só alcança alertando o registro inteiro. O limiar de ± 12,6 conta a
+> mesma história.
+
 ## Ressalvas que o artigo precisa repetir, e não esconder
 
 1. **O limiar não foi calibrado.** No corte 20 as três primeiras configurações

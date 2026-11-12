@@ -237,6 +237,10 @@ def _pontua(
     cache_de_conta: dict[int, tuple] = {}
     cache_de_equipamento: dict[tuple[int, date], tuple] = {}
     lote: list[RiskScore] = []
+    # A ultima nota de cada pessoa, montada na passada que ja existe. A tela de
+    # Pessoas precisa disto, e reconstrui-la na leitura custa 140 segundos por
+    # requisicao em escala cheia — o executor sabe de graca.
+    ultima_de: dict[int, tuple[int, str, datetime, RiskScore]] = {}
     alertas = []
     pontuadas = 0
     sem_postura_total = 0
@@ -314,6 +318,11 @@ def _pontua(
         if alerta is not None:
             alertas.append(alerta)
 
+        # Valores de dominio: quem serializa e o adaptador. O executor nao
+        # sabe de arquivo nem de banco, e e isso que faz a mesma funcao valer
+        # para os dois.
+        ultima_de[pessoa] = (pessoa, evento.event_id, evento.occurred_at, nota)
+
         historico[pessoa].append(evento)
         if config.enables("d3"):
             anteriores[pessoa].append(
@@ -329,6 +338,11 @@ def _pontua(
 
     if lote:
         storage.save_scores(scoring_run_id, lote)
+
+    # Ordenado por matricula, que e a ordem em que a tela de Pessoas pagina.
+    storage.save_employee_summary(
+        scoring_run_id, [ultima_de[k] for k in sorted(ultima_de)]
+    )
     if alertas:
         storage.save_alerts(scoring_run_id, alertas)
 

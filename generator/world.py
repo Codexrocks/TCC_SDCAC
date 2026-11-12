@@ -132,7 +132,7 @@ def build_world(seed, start, days, scale=1.0):
             ids.append(len(res))
         world.sys_ids[key] = ids
 
-    for key, (nm, sens, n, dep) in cfg.SYSTEMS.items():
+    for key, (nm, sens, n, _dep) in cfg.SYSTEMS.items():
         owner = {
             "crm": "sales",
             "repo": "engineering_product",
@@ -245,7 +245,7 @@ def build_world(seed, start, days, scale=1.0):
     # acesso permitido (matriz D-39) e recursos habituais (base do padrão D-24)
     for e in emps:
         ids = []
-        for key, (nm, sens, n, dep) in cfg.SYSTEMS.items():
+        for key, (_nm, _sens, _n, dep) in cfg.SYSTEMS.items():
             ok = (dep is None) or (
                 e.id in world.payroll_staff or e.dept == "board"
                 if dep == "hr5+board"

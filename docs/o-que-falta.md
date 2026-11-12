@@ -105,12 +105,38 @@ rótulo nenhum pela **D-17**, com o gabarito separado em `ground_truth/`.
 
 1. ~~**Nenhum teste.**~~ `tests/test_gerador.py` entrou pelo #92, com 7 casos.
    **Continua sendo o único módulo sem teste do próprio comportamento**: os 7
-   medem a aderência do baseline à D-24, não o gerador
-2. ~~**226 apontamentos do Ruff.**~~ **23 restam**, e são de três tipos: 9
-   `B905` (`zip()` sem `strict=`), 6 `B007` e 4 `F841` (variável atribuída e não
-   usada), 4 `UP031`. Os `B905` são os que importam — `zip()` sem `strict`
-   esconde lista de tamanho diferente em silêncio, e corrigi-los exige saber a
-   intenção de cada um
+   medem a aderência do baseline à D-24, não o gerador.
+   ⚠️ **E não é falta de trabalho: é o CI.** Ele instala só
+   `pytest pyyaml fastapi httpx`, e o gerador precisa de `numpy` e `pandas` —
+   teste de comportamento dele seria **pulado em silêncio** na nuvem, que é
+   exatamente o modo de falhar que o cabeçalho do `test_gerador.py` existe para
+   impedir. Corrigir exige mexer em `.github/`, que é **arquivo protegido** e
+   espera 24 h
+
+> ⚠️ **Uma pergunta aberta que a limpeza do Ruff revelou, e que é de desenho, não
+> de estilo.** O `checks.py` calculava `wk` — se a sessão caiu em fim de semana —
+> e **nunca usava**. Logo abaixo estão as duas checagens que anunciam
+> "eventos/**dia útil**", da **D-23** e da **D-38**, e o filtro delas é
+> `tot >= 10` eventos no dia, **não o dia da semana**.
+>
+> Ou seja: a checagem passa, mas mede *dias com atividade*, não *dias úteis*. O
+> limiar de 10 exclui a maior parte do fim de semana na prática, o que faz dela um
+> bom aproximado — e aproximado não é o que o nome diz. O `wk` parece ter sido
+> escrito para esse filtro e ficado no caminho.
+>
+> **Não troquei o filtro**, porque trocar muda o que a checagem mede, e as faixas
+> da D-23 e da D-38 são o que o artigo cita como invariante do gerador. A linha
+> morta saiu e a pergunta ficou em comentário no próprio arquivo: **as faixas
+> valem por dia de semana ou por dia com atividade?** É do Davi, e é de uma linha
+> de resposta.
+2. ~~**226 apontamentos do Ruff.**~~ ~~**23 restam.**~~ **Zerados em
+   12/11/2026.** Os 9 `B905` viraram `strict=True`, porque em todos os nove as
+   sequências têm o mesmo tamanho por construção — a palavra afirma a invariante
+   em vez de supô-la. Os 6 `B007` ganharam `_` nos nomes não usados, os 4 `UP031`
+   viraram f-string e os 4 `F841` saíram. **Verificado por saída:** gerando com a
+   versão anterior e com a nova, na mesma semente, os **11 arquivos têm conteúdo
+   byte a byte idêntico** — o `.csv.gz` difere só no instante que o gzip grava no
+   cabeçalho
 3. ~~**Três grupos de parâmetros sem procedência.**~~ `_CAT_W`, `MFA0_*` e
    `PATCH_MEDIAN` agora se declaram **ASSUNÇÃO** no `config.py`. A declaração
    fecha a regra do cabeçalho; **a ratificação continua sendo do Davi** — e
