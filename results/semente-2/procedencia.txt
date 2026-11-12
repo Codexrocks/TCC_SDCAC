@@ -1,0 +1,21 @@
+
+=== CHECAGENS (seção 9) ===
+  OK    cada sessão tem exatamente 1 LOGOUT e 1 LOGIN com sucesso — 73357 sessões
+  OK    sessões referenciam funcionários existentes 
+  OK    nenhuma ação depois do LOGOUT da própria sessão 
+  OK    códigos dentro das listas fechadas 
+  OK    size_bytes > 0 em todo FILE_DOWNLOAD 
+  OK    domínios sempre .example 
+  OK    todo IP está dentro de uma faixa cadastrada — 0 fora
+  OK    is_vpn <=> IP na faixa vpn 
+  OK    eventos/sessões de corp não carregam rótulo (D-17) — colunas fixas em output.write
+  OK    nenhum evento antes da admissão 
+  OK    atividade residual em férias existe e é < 3% do volume — 825 eventos em férias
+  OK    média de eventos/dia útil dentro da faixa de cada persona (D-38) — shift_ops=32.1[25-40] day_admin=27.5[20-35] sales_traveler=28.9[20-35] hybrid_eng=40.4[30-50] it_privileged=56.7[45-70] management=23.5[15-30]
+  OK    média ponderada 20-50 eventos/dia útil (D-23) — 32.9
+  OK    volume anual por semente em 1,15-2,9 M (D-23) — 1,906,519
+  OK    cenários começam após o baseline de 3 meses (D-24) 
+  OK    baseline cobre exatamente 3 meses a partir do inicio (D-24) — eval_start=90 · 3 meses=90
+  OK    ingested_at >= occurred_at 
+run 1 (seed 43): 1,906,519 eventos, 73,357 sessões, 127 episódios -> C:/Users/DaviS/AppData/Local/Temp/claude/17f1651925baac9e/33dc641d-ca24-437d-a8f2-dda2fc561c4b/scratchpad/seeds/tmp-2/gerado\run_001  [105s]
+{'B': 16, 'L': 12, 'N': 75, 'P': 24}

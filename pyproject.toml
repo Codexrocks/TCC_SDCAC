@@ -95,6 +95,9 @@ ignore = [
 # das checagens da secao 9, que e o que se le ao rodar.
 "generator/__main__.py" = ["T201"]
 "generator/checks.py" = ["T201"]
+"ingest/cli.py" = ["T201"]
+"evaluator/cli.py" = ["T201"]
+"evaluator/agregado_cli.py" = ["T201"]
 
 [tool.ruff.lint.pydocstyle]
 convention = "google"
