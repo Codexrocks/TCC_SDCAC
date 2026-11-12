@@ -17,6 +17,7 @@
 * [Arquitetura](arquitetura.md)
 * [Banco da corporação simulada](banco-simulado.md)
 * [O software de análise](software.md)
+* [Execução do experimento](execucao-do-experimento.md)
 * [O painel](painel.md)
 * [Usabilidade](usabilidade.md)
 
@@ -92,6 +93,8 @@
   * [2026-10-19 — Sessão 37: o painel entra na main, e ganha página para quem pega](relatorios/2026-10-19-sessao-37.md)
   * [2026-10-19 — Sessão 38: um PR inteiro tinha sido perdido](relatorios/2026-10-19-sessao-38.md)
   * [2026-11-04 — Sessão 39: o gerador entra, e os bloqueios se invertem](relatorios/2026-11-04-sessao-39.md)
-  * [2026-11-11 — Sessão 42: a parte do Filipe conserta, e a D3 aceita rodar sem postura](relatorios/2026-11-11-sessao-42.md)
   * [2026-11-11 — Sessão 40: a entrega da Yasmin entra como insumo](relatorios/2026-11-11-sessao-40.md)
+  * [2026-11-11 — Sessão 41: a ingestão nasce, e o experimento roda sobre dado gerado](relatorios/2026-11-11-sessao-41.md)
+  * [2026-11-11 — Sessão 42: a parte do Filipe conserta, e a D3 aceita rodar sem postura](relatorios/2026-11-11-sessao-42.md)
+  * [2026-11-12 — Sessão 43: dez sementes, estatística e a vantagem da C3 que caiu](relatorios/2026-11-12-sessao-43.md)
   * [Modelo de relatório](relatorios/_modelo.md)
