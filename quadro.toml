@@ -590,6 +590,12 @@ estado = "fechada"
 fechada_em = 2026-10-13
 
 [[decisao]]
+id = "D-44"
+titulo = "Evento cujo equipamento nao tem estado no dia"
+estado = "fechada"
+fechada_em = 2026-11-11
+
+[[decisao]]
 id = "D-43"
 titulo = "Pesos de integração das dimensões na nota final"
 proposta = "Um conjunto só de pesos para C1, C2 e C3 — D1 1,0; D2 1,0; conduta 1,0; postura 0,5 — e a C0 sem ponderação nenhuma. Peso próprio por configuração faria a tabela de ablação medir duas coisas ao mesmo tempo: a dimensão acrescentada e o peso trocado. A postura entra com metade porque é estado, e não ação. Valores preliminares, sujeitos à análise de sensibilidade da D-09"
