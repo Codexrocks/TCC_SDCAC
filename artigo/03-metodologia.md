@@ -27,66 +27,51 @@
 
 ## 3.1 Natureza e tipo de pesquisa
 
-Este trabalho caracteriza-se como pesquisa de natureza **aplicada**, de abordagem
-**quantitativa** e procedimento **experimental**, conduzida na modalidade de
-**desenvolvimento de produto ou protótipo**. A classificação como experimental
-decorre da existência de manipulação controlada de uma variável independente — a
-configuração de avaliação empregada — e da medição de seu efeito sobre grandezas
-definidas previamente à execução. O caráter quantitativo decorre de a comparação
-entre configurações apoiar-se exclusivamente em métricas numéricas e em teste de
-hipótese. Não se trata de pesquisa exploratória: há hipótese direcional declarada
-na pergunta de pesquisa e grupo de controle explícito, descrito na Seção 3.3.
+Este trabalho caracteriza-se como pesquisa **aplicada**, de abordagem
+**quantitativa** e procedimento **experimental**, na modalidade de
+desenvolvimento de protótipo: há manipulação controlada de uma variável
+independente — a configuração de avaliação empregada —, medição de seu efeito
+sobre grandezas definidas previamente à execução, e comparação apoiada
+exclusivamente em métricas numéricas e teste de hipótese. Não é exploratória: há
+hipótese direcional declarada na pergunta de pesquisa e grupo de controle
+explícito, descrito na Seção 3.3.
 
 ## 3.2 Ambiente experimental simulado
 
 A avaliação é conduzida sobre um ambiente corporativo simulado, gerado
-integralmente por software. O ambiente representa uma organização de 250
-funcionários ao longo de um ano de operação, com volume médio de 20 a 50 eventos
-por dia útil por funcionário, o que totaliza de 1,15 a 2,9 milhões de eventos por
-semente de geração.
+integralmente por software, que representa uma organização de 250 funcionários ao
+longo de um ano de operação, com volume médio de 20 a 50 eventos por dia útil por
+funcionário — de 1,15 a 2,9 milhões de eventos por semente de geração.
 
-Os registros cobrem oito tipos de evento, abrangendo autenticação, acesso e
-transferência de arquivos, conexão de dispositivos removíveis, navegação,
-campanhas simuladas de *phishing* e alterações de configuração de conta. Cada
-tipo carrega atributos próprios, especificados no catálogo de eventos que
-acompanha o trabalho; a especificação completa, incluindo as listas fechadas de
-valores e a estrutura das tabelas de apoio, não é reproduzida aqui.
+Os registros cobrem oito tipos de evento — autenticação, acesso e transferência
+de arquivos, dispositivos removíveis, navegação, *phishing* simulado e alteração
+de configuração de conta —, cada um com atributos próprios e listas fechadas de
+valores. Parte da postura de segurança não é evento, mas condição que dura:
+atualização do dispositivo, antivírus, segundo fator e privilégio da conta são
+registrados como **estado diário**, lidos na condição vigente na data do evento
+avaliado.
 
-Parte da postura de segurança não se expressa como evento, mas como condição que
-dura: idade da última atualização do dispositivo, atividade do antivírus,
-habilitação do segundo fator de autenticação e nível de privilégio da conta.
-Esses atributos são registrados como estado diário e lidos sempre na condição
-vigente na data do evento avaliado, nunca em seu estado final, de modo que
-informação posterior não influencie a avaliação de um evento anterior.
+A separação entre dados e gabarito é estrutural, e não procedimental: o ambiente
+é distribuído em três bases — `corp`, com os eventos **sem rótulo**, a única
+visível à aplicação; `ground_truth`, com os episódios e seus rótulos, lida
+exclusivamente pela rotina de métricas; e `sdcac`, com padrões, notas e alertas.
+O usuário de banco da aplicação **não recebe permissão de conexão** à
+`ground_truth`, o que impede por construção o vazamento de rótulo.
 
-A separação entre dados e gabarito é estrutural, e não apenas procedimental: o
-ambiente é distribuído em três bases distintas. A base `corp` contém os eventos
-sem qualquer rótulo e é a única visível à aplicação; a base `ground_truth` contém
-os episódios e seus rótulos e é lida exclusivamente pela rotina de cálculo de
-métricas; a base `sdcac` armazena os padrões, as notas e os alertas produzidos
-pelo sistema. O usuário de banco utilizado pela aplicação não recebe permissão de
-conexão à base `ground_truth`, o que impede por construção o vazamento de rótulo.
-A integridade do conjunto gerado é verificada por testes automáticos executados
-antes da carga, que rejeitam o lote em caso de violação de integridade
-referencial ou de valor fora das listas fechadas.
-
-Duas declarações se fazem necessárias. A primeira é que **não há dado de pessoa
-real** em nenhuma etapa do trabalho: funcionários, recursos, dispositivos,
-domínios e faixas de endereçamento são fictícios, e os domínios empregados
-pertencem ao espaço reservado `.example`. A segunda é que os valores que
-descrevem a simulação — número de funcionários, volume diário de eventos e
-distribuição de perfis de uso — são **parâmetros declarados do gerador**,
-escolhidos para produzir um ambiente plausível, e não estimativas empíricas
-extraídas de organizações reais. Nenhuma conclusão deste trabalho depende de sua
-correspondência com o mundo real.
+Duas declarações se fazem necessárias. **Não há dado de pessoa real** em nenhuma
+etapa: funcionários, recursos, dispositivos e domínios são fictícios, estes no
+espaço reservado `.example`. E os valores que descrevem a simulação são
+**parâmetros declarados do gerador**, escolhidos para produzir um ambiente
+plausível, e não estimativas extraídas de organizações reais — nenhuma conclusão
+deste trabalho depende de sua correspondência com o mundo real.
 
 ## 3.3 Desenho experimental
 
-A comparação central do trabalho é organizada como um **estudo de ablação** —
-procedimento em que as componentes de um modelo são ativadas progressivamente,
-uma por vez, de modo que o ganho atribuível a cada uma possa ser isolado. São
-definidas quatro configurações de avaliação, executadas sobre os mesmos eventos,
-os mesmos cenários e as mesmas métricas.
+A comparação central é organizada como **estudo de ablação** — procedimento em
+que as componentes de um modelo são ativadas progressivamente, uma por vez, de
+modo que o ganho atribuível a cada uma possa ser isolado. São definidas quatro
+configurações, executadas sobre os mesmos eventos, os mesmos cenários e as mesmas
+métricas.
 
 | Configuração | Composição | Papel no experimento |
 |---|---|---|
@@ -95,152 +80,100 @@ os mesmos cenários e as mesmas métricas.
 | **C2** | D1 + D2 — desvio em relação ao padrão do próprio funcionário | Ganho de contexto individual |
 | **C3** | D1 + D2 + D3 — exposição acumulada e higiene de segurança | Contribuição original do trabalho |
 
-A configuração C0 cumpre a função de grupo de controle e **não possui
-parâmetro aprendido**: seus limiares são fixos, idênticos para todos os
-usuários, e nenhuma de suas regras consulta o padrão comportamental individual.
-A formulação anterior da linha de base incluía a noção de endereço de origem
-habitual, obtida do histórico de cada usuário; essa regra foi substituída pela
-verificação de pertencimento a faixas de rede corporativas previamente
-cadastradas, de modo que a informação cuja contribuição o experimento pretende
-medir não esteja presente no grupo de controle.
+A C0 cumpre a função de grupo de controle e **não possui parâmetro aprendido**:
+seus limiares são fixos, idênticos para todos, e nenhuma regra consulta o padrão
+individual — a noção de origem habitual vem de faixas de rede previamente
+cadastradas, e não do histórico de cada usuário, para que a informação cuja
+contribuição se pretende medir não esteja presente no controle. Mantém-se, por
+outro lado, a contagem de falhas de autenticação em janela fixa de dois minutos,
+que é correlação de curto prazo e não perfil individual; como a C0 dispõe dessa
+regra, o reconhecimento de tentativas sucessivas **não pode ser atribuído como
+ganho** às dimensões avaliadas.
 
-Mantém-se, por outro lado, a regra de contagem de falhas de autenticação em
-janela fixa de dois minutos. A distinção relevante é entre correlação de curto
-prazo e perfil individual: a janela não possui parâmetro estimado a partir do
-comportamento do usuário, aplica o mesmo limiar a todos os usuários e não retém
-informação além de seu próprio intervalo. Trata-se da forma usual de regra de
-correlação em ferramentas de gestão de eventos de segurança, e sua remoção
-produziria um grupo de controle incapaz de identificar tentativas sucessivas de
-autenticação — cenário cuja detecção é trivial para regras fixas e cujo
-reconhecimento, portanto, não poderia ser atribuído como ganho às dimensões
-avaliadas.
+As quatro configurações não são quatro sistemas, mas um único código sob quatro
+parâmetros, de modo que a única variável entre as linhas da tabela de resultados
+seja a dimensão acrescentada. A terceira dimensão reporta **duas parcelas
+separadas** — exposição acumulada e higiene de segurança —, que não são somadas:
+a agregação exigiria um peso relativo entre conduta e postura sem justificativa
+defensável, e a separação preserva a decomponibilidade do risco por dimensão.
 
-As quatro configurações não correspondem a quatro sistemas distintos, mas a um
-único código executado sob quatro parâmetros. Essa decisão garante que a única
-variável entre as linhas da tabela de resultados seja a dimensão acrescentada.
-
-A terceira dimensão reporta **duas parcelas separadas** — exposição acumulada e
-higiene de segurança —, que não são somadas em um valor único. A agregação
-exigiria um peso relativo entre conduta e postura sem justificativa defensável, e
-a separação preserva a decomponibilidade do risco por dimensão.
-
-Registre-se, por fim, que a hipótese admite refutação: caso a configuração C3 não
-apresente ganho mensurável sobre a C2, esse resultado responde negativamente à
-pergunta de pesquisa e é reportado como tal.
+A hipótese admite refutação: caso a C3 não apresente ganho mensurável sobre a C2,
+esse resultado responde negativamente à pergunta de pesquisa e é reportado como
+tal.
 
 ## 3.4 Cenários e gabarito
 
-Sobre o tráfego considerado normal são injetados cenários de teste, organizados em
-quatro famílias, cada uma destinada a exercitar um aspecto distinto do modelo.
+Sobre o tráfego normal são injetados cenários de teste em quatro famílias, cada
+uma destinada a exercitar um aspecto distinto do modelo: **P**, cenários pontuais,
+exercita a D1 e mede verdadeiro positivo de evento isolado; **B**, de contexto,
+exercita a D2 e mede redução de falso positivo por contexto individual; **L**,
+longitudinais, exercita a D3 com escalada gradual sem evento individualmente
+notável; e **N**, controle negativo, submete todas as dimensões a comportamento
+legítimo.
 
-| Família | Exercita | Papel |
-|---|---|---|
-| **P** — pontuais | D1 | Verdadeiros positivos de evento isolado |
-| **B** — de contexto | D2 | Redução de falso positivo por contexto individual |
-| **L** — longitudinais | D3 | Escalada gradual sem evento individualmente notável |
-| **N** — controle negativo | Todas | Falsos positivos sobre comportamento legítimo |
+A família N dá medida ao falso positivo. Além do ruído legítimo do tráfego de
+fundo — férias, afastamento, mudança de cargo e trabalho remoto —, ela inclui um
+cenário de **escalada legítima**: um funcionário que, por mudança de projeto,
+passa a acessar mais recursos, em faixa horária mais ampla e com maior volume,
+sem conduta indevida. Sem ele a terceira dimensão não tem como ter seu falso
+positivo medido, e é ela a contribuição original do trabalho.
 
-A família N dá medida ao falso positivo. Além do ruído legítimo já presente no
-tráfego de fundo — férias, afastamento, mudança de cargo e trabalho remoto —, ela
-inclui ao menos um cenário de **escalada legítima**: um funcionário que, por
-mudança de projeto, passa a acessar mais recursos, em faixa horária mais ampla e
-com maior volume, sem que haja conduta indevida. Sem esse cenário a terceira
-dimensão não tem como ter seu falso positivo medido, e é ela a contribuição
-original do trabalho.
+O gabarito é produzido pelo próprio gerador: cada cenário grava seu identificador
+e seu rótulo na base `ground_truth`, à qual a aplicação não tem acesso. A
+avaliação compara, portanto, a saída do sistema a um gabarito que ele não pode
+consultar.
 
-O gabarito é produzido pelo próprio gerador: cada cenário injetado grava seu
-identificador e seu rótulo na base `ground_truth`, à qual a aplicação não tem
-acesso. A avaliação compara, portanto, a saída do sistema a um gabarito que ele
-não pode consultar.
+O catálogo implementado reúne **20 cenários nomeados** — 6 em P, 4 em B, 4 em L
+e 6 em N — e produz **124 episódios por semente**: 24, 16, 12 e 72,
+respectivamente. O desequilíbrio da família N é deliberado, porque o controle
+negativo precisa ser frequente para que o falso positivo tenha massa onde ser
+medido; um de seus cenários, a janela de manutenção noturna, não é injetado e
+pertence à rotina normal do gerador, respondendo por 53 dos 72 episódios da
+família.
 
-A Tabela 1 relaciona os cenários nomeados de cada família, com o número de
-episódios produzidos na execução de referência descrita na Seção 3.7.
-
-**Tabela 1. Catálogo de cenários, por família, e episódios produzidos na
-execução de referência.** A versão do catálogo é registrada em cada episódio do
-gabarito como `provisorio-v1`.
-
-| Família | Cenários nomeados | Episódios |
-|---|---|---|
-| **P** — pontuais | P01 força bruta com sucesso após o bloqueio · P02 download de recurso restrito para removível · P03 escalada de privilégio com desligamento do segundo fator · P04 autenticação externa sem túnel e sem segundo fator · P05 nuvem seguida de download externo · P06 tentativa de alterar permissões à noite | 24 |
-| **B** — de contexto | B01 volume cinco vezes o habitual · B02 varredura de recursos nunca acessados · B03 sessão noturna fora do hábito da pessoa e dentro do corte fixo · B04 origem doméstica inédita | 16 |
-| **L** — longitudinais | L01 exfiltração gradual em 21 dias · L02 reconhecimento lateral em 20 dias · L03 postura em degradação · L04 horário deslizante de 19h para 2h | 12 |
-| **N** — controle negativo | N01 **escalada legítima** por mudança de projeto · N02 segundo fator desligado e religado na troca de aparelho · N03 fechamento de mês · N04 bloqueio por erro de digitação · N05 entrega de projeto com arquivos grandes · N06 janela de manutenção noturna | 72 |
-| | **Total** | **124** |
-
-As quatro famílias somam 20 cenários nomeados. A família N responde por 72 dos
-124 episódios, e o desequilíbrio é deliberado: o controle negativo precisa ser
-frequente para que o falso positivo tenha massa onde ser medido. O N06 não é
-injetado como cenário — ele pertence à rotina normal do gerador, porque é
-atividade legítima e recorrente, e é por isso que produz 53 episódios contra os
-3 ou 4 dos demais.
-
-O catálogo é tratado como provisório, e o próprio gabarito o declara: cada
-episódio registra a versão do catálogo que o produziu. A Tabela 1 descreve,
-portanto, o conjunto de cenários efetivamente implementado e executado — o
-mesmo que produziu os resultados da Seção 4 —, e não um catálogo cuja
-especificação tenha sido encerrada. A distinção é relevante para a objeção de
-desenho não cego tratada na Seção 3.8.
-
-A especificação dos cenários foi produzida **sem acesso às fórmulas de
-pontuação**: quem desenhou as famílias, os rótulos e os casos de escalada
-legítima não dispunha dos pesos, dos limiares nem da forma de composição das
-dimensões. A separação de papéis é registrada aqui porque é a resposta mais
-direta à objeção de circularidade tratada na Seção 3.8 — a de avaliar um detector
-com cenários moldados para que ele passe.
+O catálogo é **provisório**, e cada episódio do gabarito registra a versão que o
+produziu: descreve o conjunto efetivamente executado, o mesmo que produziu os
+resultados da Seção 4, e não uma especificação encerrada. A distinção importa
+para a objeção de desenho não cego da Seção 3.8, à qual se soma o fato de a
+especificação dos cenários ter sido produzida **sem acesso às fórmulas de
+pontuação**.
 
 ## 3.5 Unidade de análise
 
 A escolha da unidade de análise altera substantivamente o valor das métricas, e
 por isso é declarada de forma explícita. São adotadas duas unidades, aplicadas a
-conjuntos distintos de cenários e reportadas separadamente. Para os cenários
-pontuais a unidade é o **evento**: cada registro é classificado individualmente.
-Para os cenários de contexto e longitudinais a unidade é o **episódio**, definido
-como o par funcionário × cenário; um cenário longitudinal que se desenvolve ao
-longo de dez dias constitui um único episódio, detectado ou não.
+conjuntos distintos de cenários e reportadas separadamente: para os cenários
+pontuais a unidade é o **evento**, classificado individualmente; para os de
+contexto e longitudinais é o **episódio**, definido como o par funcionário ×
+cenário — um cenário que se desenvolve ao longo de dez dias constitui um único
+episódio, detectado ou não.
 
-A distinção não é de forma. Considere-se um cenário longitudinal de dez dias, com
-cerca de quarenta eventos, nenhum deles individualmente notável, em que a
-terceira dimensão ultrapassa o limiar no oitavo dia. Medida por evento, a
-detecção rende revocação próxima de 0,15, ainda que o sistema tenha identificado
-o episódio exatamente como se pretendia. Medida por episódio, o mesmo caso rende
-0,00 para a linha de base contra 1,00 para a configuração completa — valores que
-descrevem o que efetivamente ocorreu.
-
-A taxa de falsos positivos utiliza denominador único em todas as configurações:
-falsos positivos por **funcionário-dia**. Apurá-la por evento compararia uma taxa
-medida em eventos a detecções que só existem em janelas temporais. Toda tabela de
-resultados identifica a unidade em que cada valor foi apurado, e nenhuma linha
-combina as duas.
+A distinção não é de forma: num cenário longitudinal cujo risco só cruza o limiar
+no oitavo dia, a medição por evento rende revocação próxima de 0,15 ainda que o
+episódio tenha sido identificado como se pretendia, enquanto a medição por
+episódio rende 1,00. Toda tabela de resultados identifica a unidade em que cada
+valor foi apurado, e nenhuma linha combina as duas.
 
 ## 3.6 Métricas e critério de sucesso
 
-São definidas duas métricas primárias, ambas derivadas diretamente da pergunta de
-pesquisa. A primeira é a **taxa de falsos positivos a revocação fixa**: para cada
+São definidas duas métricas primárias, ambas derivadas da pergunta de pesquisa. A
+primeira é a **taxa de falsos positivos a revocação fixa**: para cada
 configuração determina-se o limiar em que todas atingem uma mesma revocação de
-referência, e comparam-se as taxas de falsos positivos nesse ponto, apuradas em
-funcionário-dia:
+referência, e comparam-se as taxas nesse ponto.
 
 $$\mathrm{FPR} = \frac{FP}{FP + VN}$$
 
 A segunda é a **revocação em cenários longitudinais**, calculada exclusivamente
-sobre a família L, em unidade de episódio:
+sobre a família L, em unidade de episódio.
 
 $$\mathrm{Revocação}_{L} = \frac{VP_{L}}{VP_{L} + FN_{L}}$$
 
-Como métrica secundária reporta-se a **precisão@k**, isto é, a precisão restrita
-aos *k* alertas de maior risco. A justificativa é operacional: o analista consome
-o início de uma fila ordenada por risco, não a fila inteira, e a precisão no topo
-descreve melhor a utilidade prática do detector do que a precisão global.
-
 A comparação a revocação fixa pressupõe que a linha de base alcance a revocação
-de referência em algum limiar. Como a configuração C0 combina um número reduzido
-de regras discretas e não dispara em cenários longitudinais, essa condição pode
-não se verificar. Nesse caso a comparação passa a ser feita entre **curvas de
-precisão e revocação** completas, e não entre pontos isolados; em problemas de
-classe fortemente desbalanceada, como é o caso, a curva de precisão-revocação é
-mais informativa que a curva ROC (Davis e Goadrich, 2006; Saito e Rehmsmeier,
-2015).
+de referência em algum limiar. Como a C0 combina um número reduzido de regras
+discretas e não dispara em cenários longitudinais, essa condição pode
+verificar-se apenas no limiar mínimo — caso em que a taxa de falsos positivos
+resultante é o próprio resultado, e se lê como alcançar a revocação alertando o
+registro inteiro.
 
 > **A escrever — lacuna 3 · Davi · imediato.** O critério de sucesso declarado
 > a priori, da **D-15**.
@@ -267,136 +200,103 @@ mais informativa que a curva ROC (Davis e Goadrich, 2006; Saito e Rehmsmeier,
 ## 3.7 Execução e reprodutibilidade
 
 Cada configuração é executada sobre *N* sementes de geração independentes, com
-*N* entre 10 e 20, e as mesmas sementes são utilizadas nas quatro configurações.
-Cada valor da tabela de resultados é reportado como média e desvio-padrão sobre
-as *N* execuções, e não como valor único.
+*N* entre 10 e 20, e as mesmas sementes são utilizadas nas quatro. Cada valor da
+tabela de resultados é reportado como média e desvio-padrão sobre as *N*
+execuções, e não como valor único.
 
-O uso das mesmas sementes nas quatro configurações torna a comparação **pareada**:
-para cada semente existe uma diferença observada entre configurações, e o
-conjunto dessas *N* diferenças é submetido ao teste de Wilcoxon para amostras
-pareadas (Wilcoxon, 1945), adequado por não pressupor normalidade das diferenças
-e recomendado para a comparação de configurações sobre múltiplos conjuntos de
-dados (Demšar, 2006).
-
-O piso de dez sementes decorre da aritmética do teste, e não de convenção: no
-Wilcoxon pareado exato o menor valor de *p* bilateral obtenível com *n* pares é
+O uso das mesmas sementes nas quatro configurações torna a comparação
+**pareada**: para cada semente existe uma diferença observada entre
+configurações, e o conjunto dessas *N* diferenças é submetido ao teste de
+Wilcoxon para amostras pareadas (Wilcoxon, 1945), adequado por não pressupor
+normalidade e recomendado para comparar configurações sobre múltiplos conjuntos
+de dados (Demšar, 2006). O piso de dez sementes decorre da aritmética do teste, e
+não de convenção: o menor valor de *p* bilateral obtenível com *n* pares é
 $2/2^{n}$, de modo que com *n* = 5 o limite é 0,0625 — acima de 0,05 ainda que
 uma configuração superasse a outra em todas as execuções — e com *n* = 10 cai a
 cerca de 0,002.
 
-A reprodutibilidade é assegurada pelo registro de execução. Cada execução grava
-identificador, semente, configuração e versão dos pesos, além de dois valores que
-permitem reconstituí-la: o resumo SHA-256 do conteúdo da configuração,
-serializada em ordem canônica — de modo que configurações equivalentes produzam o
-mesmo resumo, independentemente da ordem em que seus campos foram escritos —, e o
-identificador do *commit* do código em execução. Cada avaliação produzida
-referencia a execução que a originou, e comparar duas configurações consiste,
-operacionalmente, em comparar dois identificadores de execução sobre o mesmo
-conjunto de eventos.
+A reprodutibilidade é assegurada pelo registro de execução: cada execução grava
+identificador, semente, configuração, versão dos pesos, o resumo SHA-256 da
+configuração serializada em ordem canônica e o *commit* do código. Comparar duas
+configurações consiste, operacionalmente, em comparar dois identificadores de
+execução sobre o mesmo conjunto de eventos.
 
 O protótipo é implementado em Python 3.12, e a camada de avaliação não conhece o
-meio de armazenamento: o acesso aos dados é declarado por interfaces, e duas
-implementações as cumprem. A primeira opera sobre PostgreSQL, banco relacional
-escolhido pela necessidade de janelas temporais por funcionário sobre volume da
-ordem de milhões de registros. A segunda opera sobre arquivos em disco e existe
-por razão metodológica: ela permite executar o experimento completo sem servidor
-de banco de dados, o que reduz o custo de reprodução por terceiros. As
-invariantes de desenho declaradas na Seção 3.8 — janelas de treino e de avaliação
-disjuntas, exclusão do evento corrente do termo de exposição acumulada e
-independência entre a camada de avaliação e o meio de armazenamento — são
-verificadas por testes automatizados executados a cada alteração do código. A
-interface de inspeção dos resultados é construída em Streamlit.
+meio de armazenamento: o acesso é declarado por interfaces, cumpridas por duas
+implementações — uma sobre PostgreSQL e outra sobre arquivos em disco, esta por
+razão metodológica, pois permite reproduzir o experimento sem servidor de banco
+de dados. As invariantes de desenho da Seção 3.8 são verificadas por testes
+automatizados a cada alteração do código, e a interface de inspeção é construída
+em Streamlit.
 
-A execução se dá em cinco etapas encadeadas, cada uma um programa de linha de
-comando independente: a **geração** da massa de eventos e do gabarito; a
-**tradução** dos arquivos gerados para o formato que a camada de avaliação lê; a
-**pontuação**, que percorre os eventos uma vez por configuração e grava as notas
-com o identificador da execução; a **avaliação**, que compara as notas ao
-gabarito e grava as métricas de uma semente; e a **agregação**, que reúne as
-sementes, calcula média e desvio-padrão e aplica o teste pareado. A quarta etapa
-é a única que acessa o gabarito, em coerência com a separação de permissões
-descrita na Seção 3.2, e a quinta já não o acessa: ela opera sobre as métricas
-que a quarta gravou. As métricas reportadas na Seção 4 são lidas do arquivo que a
-quinta etapa grava, e não transcritas à mão.
-
-A agregação recusa reunir execuções que não sejam comparáveis entre si — limiar
-de operação distinto, níveis de revocação distintos, conjunto de configurações
-distinto, ou a mesma execução contada duas vezes. A recusa é deliberada: a média
-de execuções incomparáveis é um número plausível, e nada no resultado final
-denunciaria a mistura.
+A execução se dá em cinco etapas encadeadas, cada uma um programa independente:
+geração, tradução, pontuação, avaliação e agregação. A avaliação é a única que
+acessa o gabarito, em coerência com a separação de permissões da Seção 3.2, e as
+métricas da Seção 4 são lidas do arquivo que a agregação grava, não transcritas à
+mão. A agregação **recusa** reunir execuções não comparáveis — limiar distinto,
+níveis de revocação distintos, conjunto de configurações distinto, ou a mesma
+execução contada duas vezes —, porque a média de execuções incomparáveis é um
+número plausível que nada no resultado final denunciaria.
 
 ## 3.8 Ameaças à validade
 
 Esta seção declara as ameaças à validade identificadas e as medidas adotadas,
-organizadas segundo as quatro categorias usuais em experimentação em engenharia
-de software (Wohlin et al., 2012).
+segundo as quatro categorias usuais em experimentação em engenharia de software
+(Wohlin et al., 2012).
 
-**Validade de construto.** O risco comportamental é um construto, e não uma
-grandeza diretamente observável; o que se mede é a concordância entre a saída do
-sistema e um gabarito construído pelos próprios autores. A ameaça é mitigada pela
-declaração explícita da unidade de análise (Seção 3.5) e pelo reporte separado
-das parcelas da terceira dimensão, que evita agregar em um número único grandezas
-de naturezas distintas.
+**Validade de construto.** O risco comportamental é um construto, e não grandeza
+diretamente observável: o que se mede é a concordância entre a saída do sistema e
+um gabarito construído pelos próprios autores. Mitigam a ameaça a declaração
+explícita da unidade de análise (Seção 3.5) e o reporte separado das parcelas da
+terceira dimensão.
 
-**Validade interna.** O padrão individual de cada funcionário é constituído sobre
-os três primeiros meses do período simulado, janela **anterior e disjunta** da
-janela de avaliação. Calculá-lo sobre os mesmos dias que contêm os cenários
-injetados faria o comportamento anômalo integrar a definição do que é normal para
-aquele funcionário, e o desempenho observado seria bom pelo motivo errado
-(Kaufman et al., 2012). Pela mesma razão, os atributos de estado são lidos na
-condição vigente na data do evento, e não em seu estado final. O termo de exposição
-acumulada é calculado sobre a janela que **antecede** o evento avaliado,
-excluindo-o: incluí-lo contaria o risco do evento corrente duas vezes, elevando
-seu peso efetivo à soma dos dois coeficientes, e — como a exposição soma o risco
-de vários dias, em escala uma ordem de magnitude superior à do evento isolado —
-faria o termo dominar a nota final inclusive nos cenários pontuais. Por fim, a linha de base é mantida puramente
-estática, conforme a Seção 3.3, para que não incorpore a informação cuja
-contribuição se pretende medir.
+**Validade interna.** O padrão individual é constituído sobre os três primeiros
+meses do período simulado, janela **anterior e disjunta** da de avaliação:
+calculá-lo sobre os dias que contêm os cenários injetados faria o comportamento
+anômalo integrar a definição de normal, e o desempenho seria bom pelo motivo
+errado (Kaufman et al., 2012). Pela mesma razão os atributos de estado são lidos
+na condição vigente na data do evento, e o termo de exposição acumulada é
+calculado sobre a janela que **antecede** o evento avaliado, excluindo-o —
+incluí-lo contaria o risco do evento corrente duas vezes e, como a exposição soma
+vários dias, faria o termo dominar a nota inclusive nos cenários pontuais. A
+linha de base é mantida puramente estática, conforme a Seção 3.3.
 
 **Circularidade do desenho.** A terceira dimensão é projetada para capturar
 escalada gradual, os cenários longitudinais são projetados como escalada gradual,
-e o experimento mede se a primeira detecta os segundos. Isoladamente, esse
-arranjo demonstra que a implementação funciona, não que a abordagem seja
-adequada. Duas medidas reduzem a objeção: a inclusão do controle negativo
-longitudinal descrito na Seção 3.4, que penaliza um detector excessivamente
-sensível, e a separação entre quem especifica os cenários e quem implementa as
-fórmulas de pontuação.
+e o experimento mede se a primeira detecta os segundos — arranjo que,
+isoladamente, demonstra que a implementação funciona, não que a abordagem seja
+adequada. Reduzem a objeção o controle negativo longitudinal da Seção 3.4, que
+penaliza um detector excessivamente sensível, e a separação entre quem especifica
+os cenários e quem implementa as fórmulas.
 
-**Validade externa.** Os resultados valem para o ambiente simulado descrito e não
-são extrapoláveis a dados de produção. Acurácia elevada sobre dados sintéticos
-deve ser lida como indício de que o gerador pode ser demasiadamente previsível,
-e não como evidência de qualidade do modelo (Sommer e Paxson, 2010). A mitigação
-adotada é a presença de ruído legítimo no tráfego de fundo — viagens, trabalho
-remoto, afastamentos e mudanças de cargo —, de modo que o comportamento normal
-não seja artificialmente homogêneo.
+**Validade externa.** Os resultados valem para o ambiente simulado e não são
+extrapoláveis a dados de produção: acurácia elevada sobre dados sintéticos deve
+ser lida como indício de gerador demasiadamente previsível, e não como evidência
+de qualidade do modelo (Sommer e Paxson, 2010). A mitigação é a presença de ruído
+legítimo no tráfego de fundo — viagens, trabalho remoto, afastamentos e mudanças
+de cargo —, de modo que o comportamento normal não seja artificialmente
+homogêneo.
 
 **Validade de conclusão estatística.** Uma única execução por configuração não
-permitiria distinguir ganho sistemático de variação de amostragem. A mitigação é
-o desenho descrito na Seção 3.7: múltiplas sementes, comparação pareada e teste
-de hipótese sobre as diferenças.
+distinguiria ganho sistemático de variação de amostragem; a mitigação é o desenho
+da Seção 3.7.
 
 **Tratamento de dados pessoais.** O monitoramento de comportamento de
-colaboradores constitui tratamento de dado pessoal quando aplicado a uma
-organização real. Como este trabalho opera exclusivamente sobre dados sintéticos,
-a legislação não o vincula do ponto de vista operacional; a discussão das
-implicações de uma implantação real, à luz da Lei nº 13.709/2018 e dos controles
-aplicáveis da norma ISO/IEC 27001:2022, é tratada entre as limitações e os
-trabalhos futuros.
+colaboradores constitui tratamento de dado pessoal quando aplicado a organização
+real; como este trabalho opera exclusivamente sobre dados sintéticos, a
+legislação não o vincula operacionalmente. As implicações de uma implantação
+real, à luz da Lei nº 13.709/2018 e dos controles aplicáveis da ISO/IEC
+27001:2022, são tratadas entre as limitações e os trabalhos futuros.
 
 ## 3.9 O painel de análise
 
-O painel construído no trabalho é tratado como **instrumento de análise**, e não
-como objeto de avaliação. Sua função é tornar a nota de risco decomponível por
-dimensão, de modo que a contribuição de cada componente seja inspecionável
-durante a análise dos resultados. Não se realiza avaliação de usabilidade com
-participantes, e nenhum dado de pessoa real é coletado, em coerência com a
-declaração da Seção 3.2. O critério de aceite do painel é funcional e está
-registrado na documentação do projeto.
-
-A **D-02 fechou em 14/10/2026 pela opção A**: o painel é instrumento de
-análise, e não objeto de um segundo experimento. Não há avaliação com
-participantes, o que mantém coerente a declaração de ausência de dado de pessoa
-real da Seção 3.2.
+O painel é tratado como **instrumento de análise**, e não como objeto de
+avaliação — decisão tomada em 14/10/2026. Sua função é tornar a nota decomponível
+por dimensão, de modo que a contribuição de cada componente seja inspecionável
+durante a análise dos resultados. **Não se realiza avaliação de usabilidade com
+participantes**, o que mantém coerente a declaração de ausência de dado de pessoa
+real da Seção 3.2, e o critério de aceite é funcional, registrado na documentação
+do projeto.
 
 ***
 
