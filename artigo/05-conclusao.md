@@ -33,13 +33,24 @@ comportamento legítimo incomum; é nesse terceiro eixo, não interrogado, que o
 ganho encontra seu custo. O que os dados autorizam afirmar é redução de ruído e
 aumento de cobertura nos cenários medidos — não superioridade sem custo.
 
-Três restrições delimitam o alcance da resposta, todas declaradas na Seção 4.6:
+**Quanto à terceira dimensão, a resposta é condicional ao regime de operação.**
+A configuração completa não é a melhor em toda a faixa: a 0,20 de revocação ela
+produz 0,83% de falsos positivos contra 0,68% da configuração com duas
+dimensões, e **passa a ser a melhor a partir de 0,40**, com vantagem crescente —
+4,58% contra 6,54% em 0,40, e 14,70% contra 21,99% em 0,60. A leitura é coerente
+com o que a exposição acumulada mede: um termo que cresce devagar e atinge muita
+gente é ruim para separar os poucos eventos de maior risco e bom para alcançar
+os casos que nenhum evento isolado denuncia. **A contribuição original do
+trabalho se verifica, portanto, no regime de revocação alta** — e no limiar
+herdado, não calibrado, ela alerta sobre 99,8% do registro e não é operável.
+
+Duas restrições delimitam o alcance da resposta, ambas declaradas na Seção 4.6:
 **uma única semente** de geração, de modo que nenhuma diferença está distinguida
-de variação de amostragem; limiar de operação não calibrado, razão pela qual a
-comparação válida é a de falsos positivos a revocação fixa; e a quarta
-configuração não executada. Como é a exposição acumulada a contribuição original
-do trabalho, **a pergunta está respondida para a composição de duas dimensões e
-permanece aberta para a de três**.
+de variação de amostragem; e o **limiar de operação não calibrado**, razão pela
+qual a comparação válida é a de falsos positivos a revocação fixa. Duas parcelas
+da configuração completa foram, além disso, **subestimadas** — a postura, em
+5,5% dos eventos sem estado de equipamento, e a exposição, nos empates de
+instante —, o que torna o resultado dela conservador nesse recorte.
 
 ## 5.2 Objetivos alcançados
 
@@ -51,7 +62,7 @@ sem parâmetro estimado de comportamento (b); a avaliação do evento individual
 janela de treino disjunta (d); a avaliação da exposição acumulada em duas
 parcelas separadas (e); e a integração numa classificação decomponível (f).
 
-O objetivo (g) está cumprido para três das quatro configurações, e o (h)
+O objetivo (g) está cumprido para as quatro configurações, e o (h)
 **parcialmente**: as duas grandezas primárias foram apuradas, mas o tratamento
 estatístico da Seção 3.7 pressupõe de dez a vinte sementes e a execução
 reportada usa uma. A análise é, nesse sentido, descritiva e não inferencial.

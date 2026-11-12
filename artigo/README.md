@@ -57,9 +57,13 @@ revisão.
 | **1. Introdução** | 1 a 1,5 · **teto 2** | **2,0** | no limite |
 | **2. Referencial teórico** | 1,5 a 2 | **2,5** | +0,5 |
 | **3. Metodologia** | 2 | **4,3** | **+2,3** |
-| **4. Resultados e discussão** | 2 a 2,5 | **1,7** | −0,3 |
-| **5. Conclusões**, com as referências | 1,0 | **1,5** | +0,5 |
+| **4. Resultados e discussão** | 2 a 2,5 | **2,0** | no orçamento |
+| **5. Conclusões**, com as referências | 1,0 | **1,7** | +0,7 |
 | **Total** | 8 a 12 | **13,0** | **+1,0** |
+
+> Medido em 11/11/2026 com as **quatro** configurações na § 4 — a C3 entrou
+> depois da primeira medição, e o total não mudou porque a § 3 e a § 5 cederam o
+> espaço que a § 4 ocupou.
 
 Três leituras:
 

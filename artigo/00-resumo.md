@@ -73,8 +73,10 @@ em cenários longitudinais de 25,0% para 100%, medida por episódio, enquanto a
 linha de base de regras fixas só alcançou revocação de 0,30 emitindo alerta
 sobre todos os eventos do registro. O ganho não se mostrou gratuito: a mesma
 configuração elevou de 73,7% para 93,0% a proporção de episódios legítimos que
-produziram alerta, de modo que o resultado desta etapa autoriza afirmar redução
-de ruído e aumento de cobertura nos cenários medidos, e não ausência de custo.
+produziram alerta, e a configuração que acrescenta a exposição acumulada só
+supera as demais a partir de 0,40 de revocação, de modo que o resultado desta
+etapa autoriza afirmar redução de ruído e aumento de cobertura nos cenários
+medidos, em regime de revocação declarado, e não ausência de custo.
 
 **Palavras-chave:** risco comportamental, análise de logs, detecção de anomalias,
 regras fixas, ambiente corporativo simulado
@@ -129,9 +131,11 @@ at a recall of 0.20 and raised the recall on longitudinal scenarios from 25.0%
 to 100%, measured per episode, whereas the fixed-rule baseline only reached a
 recall of 0.30 by raising an alert on every event in the log. The gain was not
 free: the same configuration raised from 73.7% to 93.0% the share of legitimate
-episodes that produced an alert, so that the results of this stage support a
-claim of reduced noise and increased coverage on the measured scenarios, not one
-of absent cost.
+episodes that produced an alert, and the configuration adding accumulated
+exposure only outperforms the others from a recall of 0.40 upwards, so that the
+results of this stage support a claim of reduced noise and increased coverage on
+the measured scenarios, at a declared recall regime, and not one of absent
+cost.
 
 **Keywords:** behavioural risk, log analysis, anomaly detection, fixed rules,
 simulated corporate environment
@@ -145,8 +149,7 @@ simulated corporate environment
 * [ ] **Reescrever as duas últimas frases quando houver múltiplas sementes**,
   pela **D-13**. Hoje elas descrevem **uma** execução, e o Resumo diz isso com
   as palavras "na primeira execução registrada" — o que é honesto e provisório
-* [ ] **A quarta configuração.** O Resumo anuncia quatro e o resultado reporta
-  três: a C3 depende do estado de equipamento, pela **D-44**
+* [x] **A quarta configuração**, executada em 11/11/2026 pela **D-44**
 * [ ] **A decisão sobre os e-mails** no bloco de autores, por ser repositório
   público
 * [ ] **Uma pessoa ler o Abstract inteiro** antes de assinar
