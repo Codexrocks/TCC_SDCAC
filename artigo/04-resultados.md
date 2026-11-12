@@ -8,11 +8,13 @@
 > execução registrada em `results/`, nunca de estimativa — de ninguém, e muito
 > menos de uma IA.
 
-**Dez execuções independentes, em 12/11/2026.** Todos os números desta seção
-saem de `results/agregado.json`, gravado pelo avaliador a partir das dez pastas
+**Dez execuções independentes, em 12/11/2026**, nos parâmetros da Tab. 2. Todos
+os números desta seção saem de `results/agregado.json`, gravado pelo avaliador a partir das dez pastas
 `results/semente-1` a `semente-10`. A procedência completa está em
 [`results/README.md`](../results/README.md) e o procedimento em
 [execução do experimento](../docs/execucao-do-experimento.md).
+
+**Tabela 2.** Parâmetros da execução registrada.
 
 | | |
 |---|---|
@@ -23,6 +25,8 @@ saem de `results/agregado.json`, gravado pelo avaliador a partir das dez pastas
 | Janela de avaliação | 01/04 a 31/12/2026 |
 | Configurações executadas | **as quatro**, em todas as dez |
 | Limiar de alerta | 20, o teto da faixa normal do preset |
+
+Fonte: dados da pesquisa (2026).
 
 **Toda célula de toda tabela desta seção é média ± desvio-padrão amostral sobre
 as dez sementes**, em pontos percentuais. O teste de hipótese é o de **Wilcoxon
@@ -47,6 +51,8 @@ ficam no baseline de três meses, onde o gerador não injeta cenário de ataque.
 episódio conta como detectado quando **pelo menos um** de seus eventos
 ultrapassa o limiar.
 
+**Tabela 3.** Episódios detectados, por família de cenário, em porcentagem.
+
 | Família | Episódios | C0 | C1 | C2 | C3 |
 |---|---|---|---|---|---|
 | **P** — pontual | 24,0 | 83,3 ± 0,0 | 100,0 ± 0,0 | 100,0 ± 0,0 | 100,0 ± 0,0 |
@@ -54,9 +60,9 @@ ultrapassa o limiar.
 | **L** — longitudinal | 12,0 | 35,0 ± 10,2 | 89,2 ± 7,9 | 100,0 ± 0,0 | 100,0 ± 0,0 |
 | **N** — normal, benigno por construção | 59,9 | 75,8 ± 1,1 | 93,3 ± 0,2 | 96,0 ± 2,6 | **100,0 ± 0,0** |
 
-Três leituras que a tabela impõe:
+Fonte: dados da pesquisa (2026).
 
-**A família N não é acerto.** Ela reúne atividade legítima que *parece*
+**A família N não é acerto.** Ela reúne, na Tab. 3, atividade legítima que *parece*
 estranha — plantão noturno, viagem, janela de manutenção de infraestrutura —, e
 alertar sobre ela é falso positivo. A linha subiu junto com a cobertura, e o
 aumento é significativo: **p = 0,0020** entre C2 e C0 e **p = 0,0039** entre C3
@@ -76,7 +82,7 @@ no ponto de revocação fixa da Seção 4.3.
 
 ## 4.2 Matriz de confusão
 
-Por evento, no limiar de operação 20:
+**Tabela 4.** Desempenho por evento no limiar de operação 20, em porcentagem, exceto os alertas.
 
 | Config | Revocação | FPR | Precisão | Alertas por dia útil |
 |---|---|---|---|---|
@@ -85,7 +91,10 @@ Por evento, no limiar de operação 20:
 | **C2** | 65,40 ± 2,47 | 20,75 ± 1,36 | 0,57 ± 0,04 | 1.583 ± 104 |
 | **C3** | 99,99 ± 0,03 | 99,84 ± 0,01 | 0,18 ± 0,00 | 7.587 ± 51 |
 
-**Nenhuma das quatro configurações é operável neste limiar**: mais de mil e
+Fonte: dados da pesquisa (2026).
+
+**Nenhuma das quatro configurações é operável neste limiar**, como a Tab. 4
+mostra: mais de mil e
 trezentos alertas por dia útil nas três primeiras, com precisão abaixo de 1%, é
 um analista descartando alerta em tempo integral. A **C3 é o caso extremo** —
 deixa escapar menos de um evento malicioso por semente e, para isso, alerta
@@ -101,8 +110,9 @@ invalida comparar as quatro *neste ponto*, e é por isso que a grandeza da
 
 ### 4.3.1 Ruído: FPR com a revocação fixada
 
-A primeira grandeza da pergunta de pesquisa. Cada célula é a taxa de falsos
-positivos no limiar mais alto que ainda alcança aquela revocação:
+A primeira grandeza da pergunta de pesquisa está na Tab. 5.
+
+**Tabela 5.** Falsos positivos, em porcentagem, no limiar mais alto que ainda alcança cada revocação.
 
 | Revocação | C0 | C1 | C2 | C3 |
 |---|---|---|---|---|
@@ -115,6 +125,8 @@ positivos no limiar mais alto que ainda alcança aquela revocação:
 | **0,70** | 100,00 ± 0,00 | 72,09 ± 0,47 | **26,75 ± 4,24** | 28,33 ± 8,84 |
 | **0,80** | 100,00 ± 0,00 | 72,09 ± 0,47 | **47,42 ± 14,82** | 52,87 ± 11,11 |
 | **0,90** | 100,00 ± 0,00 | 100,00 ± 0,00 | 76,00 ± 1,41 | **73,69 ± 6,75** |
+
+Fonte: dados da pesquisa (2026).
 
 **FPR de 100% não é lacuna: é resultado.** Toda revocação é alcançável baixando
 o limiar até alertar o registro inteiro, e é o que as linhas da C0 dizem a
@@ -159,12 +171,16 @@ segundo, na FPR — e que a troca, no desenho atual, não compensa.
 
 ### 4.3.2 Cobertura: revocação nos cenários longitudinais
 
-A segunda grandeza. Medida na família **L** — aqueles em que o risco cresce ao
+A segunda grandeza está na Tab. 6, medida na família **L** — aqueles em que o risco cresce ao
 longo de dias sem que um evento isolado dispare alerta:
+
+**Tabela 6.** Revocação nos cenários longitudinais, em porcentagem, por episódio e por evento.
 
 | Unidade de análise | C0 | C1 | C2 | C3 |
 |---|---|---|---|---|
 | **Por episódio**, no limiar de operação | 35,0 ± 10,2 | 89,2 ± 7,9 | **100,0 ± 0,0** | 100,0 ± 0,0 |
+
+Fonte: dados da pesquisa (2026).
 
 A C2 detecta **os doze episódios longitudinais em todas as dez sementes** —
 desvio-padrão zero. Contra a C0 o ganho é significativo (p = 0,0020) e contra a
@@ -196,8 +212,7 @@ mede.**
 
 **O que as dez sementes acrescentam:** a diferença entre C2 e C0 não é variação
 de amostragem, e a diferença entre C3 e C2, que a semente única sugeria, **não se
-sustenta**. A estatística serviu nas duas direções, e é por isso que ela entra
-antes da conclusão e não depois.
+sustenta**.
 
 ## 4.4 Verificação do painel de análise
 
@@ -229,9 +244,6 @@ antes da conclusão e não depois.
 > nova: todas as sete são da lista já conferida na fonte, e nenhuma afirmação
 > quantitativa vem de fora de `results/agregado.json`.
 
-A comparação respondeu às duas grandezas da pergunta de pesquisa e produziu três
-resultados que ela não previa — e são eles que decidem se o modelo serve.
-
 **A taxa de falsos positivos não é operável, e o motivo é aritmético antes de
 ser técnico.** No limiar herdado, as três primeiras configurações produzem mais
 de mil e trezentos alertas por dia útil e precisão abaixo de 1% — e o número não
@@ -262,8 +274,8 @@ operacionalização da distinção que Chandola, Banerjee e Kumar (2009) põem n
 centro do problema: **anômalo não é sinônimo de malicioso**, e um modelo que mede
 desvio mede desvio, não intenção. Plantão noturno, viagem e janela de manutenção
 são desvio legítimo, e separá-los exige informação que o registro de eventos não
-carrega. Que o alarme sobre eles **cresça** junto com a cobertura é o achado mais
-incômodo desta seção, e o primeiro que uma implantação real enfrentaria.
+carrega. Que o alarme sobre eles **cresça** junto com a cobertura é o primeiro problema que uma
+implantação real enfrentaria.
 
 **O ganho vem da segunda dimensão, não da terceira.** A D1 sozinha acrescenta
 pouco sobre a linha de base na família comportamental — 45,6% contra 28,7% — e
@@ -285,10 +297,8 @@ um segundo estágio de triagem** — uma lista de pessoas a examinar, com period
 própria — e não ao mesmo corte que decide se um evento gera alerta agora.
 
 **O que esta comparação não resolve.** Os números saem de registro sintético e
-**não se comparam a FPR publicada sobre registro real**: base-taxa, diversidade
-de normalidade e sofisticação do atacante são escolhas nossas. O que a comparação
-sustenta é interna — qual configuração é melhor sobre o mesmo dado —, e é só isso
-que a pergunta afirma.
+**não se comparam a FPR publicada sobre registro real**: a comparação é interna,
+sobre o mesmo dado, e é só isso que a pergunta afirma.
 
 ## 4.6 Limitações
 
@@ -301,7 +311,7 @@ gerador ser previsível — todas as dez saem do mesmo gerador. Essa ameaça est
 Seção 3.8 e **não se resolve com mais sementes**.
 
 **O limiar não foi calibrado.** Os números da Seção 4.2 vêm de um corte herdado
-dos testes de unidade, não escolhido sobre dado em escala: aquela tabela serve
+dos testes de unidade, não escolhido sobre dado em escala: a Tab. 4 serve
 para mostrar o problema, não para comparar configurações.
 
 **A parcela de postura não foi avaliada em parte dos eventos.** O gerador
@@ -330,9 +340,6 @@ só sobre dado sintético, e a legislação não o vincula operacionalmente. O q
 dizer é o que uma implantação real exigiria à luz da Lei nº 13.709/2018 e dos
 controles da ISO/IEC 27001:2022 — base legal, transparência, minimização e
 retenção. O par em trabalhos futuros está na Seção 5.4.
-
-Limitação declarada é honestidade científica. Limitação escondida que a banca
-descobre é outra coisa.
 
 ***
 
