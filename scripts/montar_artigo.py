@@ -73,6 +73,44 @@ SECOES_DE_CONTROLE = (
 )
 
 
+# ------------------------------------------------------------- verificacao
+def confere_legendas(caminhos: list[Path]) -> list[str]:
+    """Cada tabela precisa de legenda numerada em sequencia e de fonte.
+
+    E a exigencia que o orientador apontou na entrega de 12/11/2026. Fica como
+    verificacao, e nao como lembrete, porque lembrete nao reprova nada.
+    """
+    erros: list[str] = []
+    esperado = 0
+    for caminho in caminhos:
+        lidos = blocos(caminho.read_text(encoding="utf-8"))
+        nesta_pagina = 0
+        for k, (tipo, _nivel, conteudo) in enumerate(lidos):
+            if tipo == "titulo" and conteudo in SECOES_DE_CONTROLE:
+                break
+            if tipo != "tabela":
+                continue
+            # a posicao no arquivo, e a primeira linha, para o erro dizer qual
+            # tabela e sem obrigar a contar blocos de Markdown a mao
+            nesta_pagina += 1
+            primeira = str(conteudo[0])[:48] if conteudo else ""
+            onde = f"{caminho.name}, {nesta_pagina}a tabela ({primeira})"
+            antes = lidos[k - 1] if k else ("", 0, "")
+            depois = lidos[k + 1] if k + 1 < len(lidos) else ("", 0, "")
+            if antes[0] != "legenda":
+                erros.append(f"{onde}: sem legenda acima")
+                continue
+            esperado += 1
+            m = re.match(r"^\*\*(?:Tabela|Figura) (\d+)\.", str(antes[2]))
+            if m and int(m.group(1)) != esperado:
+                erros.append(
+                    f"{onde}: legenda numerada {m.group(1)}, esperada {esperado}"
+                )
+            if depois[0] != "fonte":
+                erros.append(f"{onde}: sem fonte abaixo")
+    return erros
+
+
 # ---------------------------------------------------------------- leitura
 def blocos(texto: str) -> list[tuple[str, int, object]]:
     """Quebra o Markdown em blocos, descartando o que e andaime do repositorio."""
@@ -93,6 +131,14 @@ def blocos(texto: str) -> list[tuple[str, int, object]]:
         m = re.match(r"^(#{1,3}) (.+)$", linha)
         if m:
             saida.append(("titulo", len(m.group(1)), m.group(2).strip()))
+            i += 1
+            continue
+        if re.match(r"^\*\*(Tabela|Figura) \d+\.\*\*", linha.strip()):
+            saida.append(("legenda", 0, linha.strip()))
+            i += 1
+            continue
+        if linha.strip().startswith("Fonte:"):
+            saida.append(("fonte", 0, linha.strip()))
             i += 1
             continue
         if linha.lstrip().startswith("|"):
@@ -232,7 +278,6 @@ def tabela(doc, linhas):
                 r.italic = it
                 r.font.size = Pt(9)
                 r.font.name = "Consolas" if mono else FONTE
-    doc.add_paragraph().paragraph_format.space_after = Pt(0)
 
 
 # ---------------------------------------------------------------- montagem
@@ -324,6 +369,22 @@ def secao(doc, caminho, *, titulo_de_nivel1=True):
                 antes=5.75,
                 depois=5.75,
             )
+        elif tipo == "legenda":
+            # titulo acima da tabela, centralizado, colado nela: e a forma do
+            # template da familia ABCM ("Tabela 1. Exemplo de tabela.")
+            escreve(doc, conteudo, centro=True, recuo=False, antes=5.75, depois=2)
+        elif tipo == "fonte":
+            # a fonte vai abaixo, menor, pela NBR 6023 -- exigencia do
+            # orientador na entrega de 12/11/2026
+            escreve(
+                doc,
+                conteudo,
+                tamanho=Pt(9),
+                centro=True,
+                recuo=False,
+                antes=2,
+                depois=5.75,
+            )
         elif tipo == "tabela":
             tabela(doc, conteudo)
         elif tipo == "formula":
@@ -396,13 +457,29 @@ def main(argv: list[str] | None = None) -> int:
     quatro = args.resultados or raiz / "artigo" / "04-resultados.md"
     destino = args.saida or raiz / "artigo" / "artigo-cobem.docx"
 
+    paginas = [
+        raiz / "artigo" / "01-introducao.md",
+        raiz / "artigo" / "02-referencial-teorico.md",
+        raiz / "artigo" / "03-metodologia.md",
+        quatro,
+        raiz / "artigo" / "05-conclusao.md",
+    ]
+    erros = confere_legendas(paginas)
+    if erros:
+        print(
+            "Tabela sem legenda numerada ou sem fonte. O orientador apontou isso "
+            "na entrega de 12/11/2026, e o documento nao e montado assim:",
+            file=sys.stderr,
+        )
+        for erro in erros:
+            print(f"  {erro}", file=sys.stderr)
+        return 1
+
     doc = Document()
     estilo(doc)
     abertura(doc, raiz)
-    for nome in ("01-introducao.md", "02-referencial-teorico.md", "03-metodologia.md"):
-        secao(doc, raiz / "artigo" / nome)
-    secao(doc, quatro)
-    secao(doc, raiz / "artigo" / "05-conclusao.md")
+    for caminho in paginas:
+        secao(doc, caminho)
     referencias(doc, raiz)
     destino.parent.mkdir(parents=True, exist_ok=True)
     doc.save(destino)
