@@ -103,10 +103,19 @@ Ao conferir, apague a linha e acrescente a referência em ABNT NBR 6023 na
 | `(WOHLIN et al., 2012)` ⚠️ | § 3.8 | A taxonomia das quatro categorias de validade. **O ano está marcado como duvidoso pelo próprio insumo** — pode ser outra edição | Davi | 28/09/2026 |
 | `(DEMŠAR, 2006)` | § 3.7 | A escolha do Wilcoxon pareado para comparar configurações | Davi | 28/09/2026 |
 | `(WILCOXON, 1945)` | § 3.7 | O teste em si | Davi | 28/09/2026 |
-| `(DAVIS; GOADRICH, 2006)` | § 3.6 | Curva PR sobre ROC em classe desbalanceada | Davi | 28/09/2026 |
-| `(SAITO; REHMSMEIER, 2015)` | § 3.6 | O mesmo ponto da linha acima | Davi | 28/09/2026 |
 | `(KAUFMAN et al., 2012)` | § 3.8 | Vazamento na constituição do padrão individual | Davi | 28/09/2026 |
 | `(SOMMER; PAXSON, 2010)` | § 3.8 | Limite das avaliações sobre dado sintético | Davi | 28/09/2026 |
+
+> **Duas baixas em 12/11/2026, e não por conferência.** As chamadas
+> `(DAVIS; GOADRICH, 2006)` e `(SAITO; REHMSMEIER, 2015)` sustentavam uma
+> contingência da § 3.6 — comparar curvas de precisão-revocação completas caso a
+> linha de base não alcançasse a revocação de referência. **A contingência não se
+> materializou:** a C0 alcança todos os níveis, e a FPR de 100% com que o faz é o
+> próprio resultado, como a § 4.3.1 reporta. Ao resumir a Metodologia para caber
+> no teto de 12 páginas, a contingência saiu e as duas chamadas com ela.
+>
+> **Isto não as declara conferidas.** Se a comparação por curva voltar ao texto,
+> as duas voltam para esta fila como estavam.
 
 > **A `SOMMER; PAXSON, 2010` já era conhecida do repositório:** ela aparece no
 > [plano](plano.md), seção 4, como apoio ao risco de dados sintéticos fáceis
