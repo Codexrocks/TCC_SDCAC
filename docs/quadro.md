@@ -19,15 +19,15 @@
 
 | Coluna | Itens |
 |---|---|
-| ⚠️ Atrasado | 19 |
+| ⚠️ Atrasado | 14 |
 | ▶️ Em curso | 1 |
 | ⏳ A vencer em 7 dias | 2 |
 | 🗓️ Depois | 11 |
-| ✅ Feito | 38 |
+| ✅ Feito | 43 |
 
 ## ⚠️ Atrasado
 
-19 itens.
+14 itens.
 
 | Tipo | Item | O que é | Quem | Prazo | Situação |
 |---|---|---|---|---|---|
@@ -42,11 +42,6 @@
 | Capítulo | **1. Introdução** | Entregue parcial em 24/09. Os seis blocos de complementação foram preenchidos fora do repositório e sincronizados em 13/10; falta conferir a extensão no template, cujo teto é de 2 páginas | Yasmin, Filipe | S5 | ⚠️ Atrasado há 42 dias |
 | Capítulo | **2. Referencial teórico** | Escrito pela Yasmin em 28/09 e reorganizado em 13/10 para a estrutura da 3ª reunião — 3 seções, 8 elementos do problema. As 13 fontes foram conferidas e entraram na lista em ABNT (#64) | Yasmin | S5 | ⚠️ Atrasado há 42 dias |
 | Capítulo | **3. Metodologia** | Escrita e versionada em 28/09 — 9 subseções. Faltam as 4 lacunas da M2 e as 7 fontes conferidas | Davi (caneta) | S5 | ⚠️ Atrasado há 42 dias |
-| Decisão | **D-06** | Cenários de contexto (B) e longitudinais (L) | Yasmin | 01/10/2026 | ⚠️ Atrasado há 42 dias |
-| Decisão | **D-09** | Pesos preliminares e análise de sensibilidade | Yasmin | S8 | ⚠️ Atrasado há 21 dias |
-| Decisão | **D-15** | Critério de relevância declarado a priori | Davi, Yasmin, Filipe | 01/10/2026 | ⚠️ Atrasado há 42 dias |
-| Decisão | **D-16** | Controle negativo longitudinal | Yasmin | 01/10/2026 | ⚠️ Atrasado há 42 dias |
-| Decisão | **D-19** | Vertente LGPD e ISO/IEC 27001 | Yasmin | 01/10/2026 | ⚠️ Atrasado há 42 dias |
 | Decisão | **D-05** | Ablação em quatro configurações (C0 a C3) | Davi | 01/10/2026 | ⚠️ Atrasado há 42 dias · a confirmar |
 | Decisão | **D-10** | Isolation Forest como benchmark opcional | Filipe | S10 | ⚠️ Atrasado há 7 dias · a confirmar |
 | Decisão | **D-43** | Pesos de integração das dimensões na nota final | Davi, Yasmin | S8 | ⚠️ Atrasado há 21 dias · a confirmar |
@@ -88,7 +83,7 @@
 
 ## ✅ Feito
 
-38 itens.
+43 itens.
 
 | Tipo | Item | O que é | Quem | Prazo | Situação |
 |---|---|---|---|---|---|
@@ -96,11 +91,16 @@
 | Professor | **Introdução do artigo no template **COBEM 2026** — *Tarefa 02*** | Seis blocos de complementação vazios; a parcialidade foi declarada no arquivo entregue | Todos | 24/09/2026 | ✅ Entregue parcial em 24/09/2026 |
 | Marco | **M1 · Introdução** | Problema, pergunta, objetivos, delimitação | Todos | 24/09/2026 | ✅ Fechado em parte |
 | Decisão | **D-02** | Dashboard: objetivo, instrumento ou fora do escopo | — | 14/10/2026 | ✅ Fechada em 14/10/2026 |
+| Decisão | **D-06** | Cenários de contexto (B) e longitudinais (L) | Yasmin | 12/11/2026 | ✅ Fechada em 12/11/2026 |
+| Decisão | **D-09** | Pesos preliminares e análise de sensibilidade | Yasmin | 12/11/2026 | ✅ Fechada em 12/11/2026 |
 | Decisão | **D-12** | Unidade de análise das métricas | — | 14/10/2026 | ✅ Fechada em 14/10/2026 |
 | Decisão | **D-13** | Tratamento estatístico dos resultados | — | 14/10/2026 | ✅ Fechada em 14/10/2026 |
 | Decisão | **D-14** | O que fazer se a C0 não alcançar revocação 0,90 | — | 14/10/2026 | ✅ Fechada em 14/10/2026 |
+| Decisão | **D-15** | Critério de relevância declarado a priori | Davi, Yasmin, Filipe | 12/11/2026 | ✅ Fechada em 12/11/2026 |
+| Decisão | **D-16** | Controle negativo longitudinal | Yasmin | 12/11/2026 | ✅ Fechada em 12/11/2026 |
 | Decisão | **D-17** | Janela de constituição do baseline da D2 | — | 14/10/2026 | ✅ Fechada em 14/10/2026 |
 | Decisão | **D-18** | Dupla contagem e escala na integração | — | 14/10/2026 | ✅ Fechada em 14/10/2026 |
+| Decisão | **D-19** | Vertente LGPD e ISO/IEC 27001 | Yasmin | 12/11/2026 | ✅ Fechada em 12/11/2026 |
 | Decisão | **D-01** | Mudança de título | — | 23/09/2026 | ✅ Fechada em 23/09/2026 |
 | Decisão | **D-03** | Operacionalização de "resultados diferentes" | — | 07/09/2026 | ✅ Fechada em 07/09/2026 |
 | Decisão | **D-04** | Dono da Justificativa | — | 06/09/2026 | ✅ Fechada em 06/09/2026 |
