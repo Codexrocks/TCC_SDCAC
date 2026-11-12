@@ -41,10 +41,37 @@ Os quatro insumos acima chegaram num `.zip` em 11/11. **Entraram como recebidos 
 não foram editados**, conforme a regra desta pasta — inclusive onde a conferência
 discorda deles. A correção mora aqui; o insumo fica como prova do que chegou.
 
-**Três deles declaram, no próprio cabeçalho, "Conferi tudo que a IA escreveu?
-**Ainda não**".** Pelo [`AGENTS.md`](../../AGENTS.md) seção 3, isso os torna
-**proposta**, não entrega: nenhum fecha a decisão que diz fechar — D-06, D-09,
-D-16, D-19 e P18 a P23 continuam abertas até a Yasmin ler e confirmar.
+**Três deles declaravam, no próprio cabeçalho, "Conferi tudo que a IA escreveu?
+**Ainda não**".** Pelo [`AGENTS.md`](../../AGENTS.md) seção 3, isso os tornava
+**proposta**, não entrega.
+
+> ✅ **A Yasmin leu e confirmou os quatro, em 12/11/2026** — relatado pelo Davi.
+> Os arquivos **não foram editados**, porque a regra desta pasta é que insumo não
+> se altera depois de entregue; a confirmação mora aqui, com data e com quem a
+> trouxe.
+>
+> **O que isso fecha:** a **D-06** e a **D-16**, que são o desenho dos cenários, e
+> a **D-19**, que é o recorte de LGPD e ISO. A metade dela da **D-43** também está
+> ratificada; falta a do Davi.
+>
+> **O que isso não fecha, e por dois motivos diferentes:**
+>
+> 1. **A D-09 continua aberta**, e não por falta de leitura: o que ela confirmou
+>    **contradiz o código** em dois atributos da D1, como a seção abaixo mostra.
+>    Fechar a decisão agora registraria no quadro uma escolha que o sistema não
+>    implementa. Ela fecha quando a contradição for resolvida — por qualquer um
+>    dos dois lados
+> 2. **As quatro fontes dos exemplos reais continuam em
+>    [citações pendentes](../citacoes-pendentes.md).** Confirmar um insumo e
+>    conferir uma fonte são atos diferentes: o primeiro diz "este texto é meu", o
+>    segundo diz "abri a obra e ela sustenta o que o texto afirma". O
+>    `AGENTS.md` seção 3 cobra o segundo por nome
+>
+> **E uma afirmação do insumo dos cenários continua errada depois de confirmada:**
+> a de que o código "nunca teve um N06". A confirmação a torna *dela*, não a torna
+> *verdadeira* — o N06 está medido, em duas escalas, na seção abaixo. O que a
+> confirmação fecha é o desenho dos cenários; o que ela não pode fechar é um fato
+> sobre o código.
 
 O `exemplos-reais-yasmin-v1.md` declara **"Sim"**. O `README.md` que vinha no
 `.zip` dizia o contrário — *"nenhum destes arquivos foi lido e confirmado pela
@@ -104,31 +131,37 @@ D1 = 1,0, D2 = 1,0, conduta = 1,0, postura = 0,5 e a C0 sem ponderação. O
 compartilhado por C1, C2 e C3, e a C0 fora dele. Confirmar a D-43 **não muda uma
 linha de código** — a leitura dela é um sim.
 
-**A ordenação de severidade proposta para a D1 divergência em três atributos.** O
+**A ordenação de severidade proposta para a D1 diverge em dois atributos.** O
 insumo organiza os sinais da D1 em Alto, Médio e Baixo; o `presets.toml` atribui
-pontos. Confrontados:
+pontos, e a nota da D1 é a **soma** de todas as regras que disparam
+(`detection/d1/scoring.py`). A comparação correta é entre o nível do insumo e a
+pontuação da situação que ele descreve:
 
-| Atributo | O insumo propõe | O código atribui | Bate? |
+| A situação que o insumo descreve | Nível | Pontos no código | Bate? |
 |---|---|---|---|
-| Escalada de privilégio | **Alto** | `privilege_change` = **40**, o maior | ✅ |
-| Recurso `restricted` | **Alto** | `sensitivity.restricted` = **35** | ✅ |
-| Download para externo | **Alto** | `download_to_external` = **25** | ✅ |
-| **`mfa_used = false` em login** | **Alto** | `login_without_mfa` = **15**, o segundo **menor** | ❌ |
-| **Dispositivo pessoal** | **Baixo** | `personal_device` = **25**, acima de MFA, horário e removível | ❌ |
-| **Faixa `external` sem VPN** | **Médio** | `network_kind.external` = **30**, o terceiro maior | ❌ |
-| Horário fora do padrão | Médio | `off_hours_employee` = 20 | ✅ |
-| Navegação de risco | Médio | `risky_browsing` = 10, o menor | ✅ |
-| Faixa `home` | Baixo | `network_kind.home` = 10 | ✅ |
+| Download grande para externo | **Alto** | 45 — `large_download` 20 + `download_to_external` 25 | ✅ o maior |
+| Escalada de privilégio | **Alto** | 40 — `privilege_change` | ✅ |
+| Acesso a recurso `restricted` | **Alto** | 35 — `sensitivity.restricted` | ✅ |
+| Faixa `external` sem VPN | **Médio** | 30 — `network_kind.external` | ✅ topo do Médio |
+| **Dispositivo pessoal** | **Baixo** | **25** — `personal_device` | ❌ acima de tudo que é Médio |
+| Horário fora do padrão | **Médio** | 20 — `off_hours_employee` | ✅ |
+| **`mfa_used = false` em login** | **Alto** | **15** — `login_without_mfa` | ❌ 8º de 10 |
+| Navegação de risco | **Médio** | 10 — `risky_browsing` | ✅ |
+| Faixa `home` | **Baixo** | 10 — `network_kind.home` | ✅ |
 
-**As três divergências não são de calibragem fina: duas são quase inversões.** O
-MFA ausente num login, que o insumo põe no topo, vale menos que dispositivo
-pessoal, que o insumo põe na base. E a faixa `external`, descrita no insumo como
-"plausível e ambígua por natureza", é o terceiro sinal mais pesado do sistema.
+**Sete de nove batem. As duas que não batem estão quase invertidas entre si:** o
+MFA ausente num login, que o insumo põe no **topo**, vale 15; o dispositivo
+pessoal, que o insumo põe na **base**, vale 25.
 
-⚠️ **Nada foi mudado.** `network_kind` e `sensitivity` são as parcelas que mais
-disparam nas notas medidas, e mexer em qualquer um desses pontos **invalida as
-dez sementes da § 4** — todo número do artigo teria de ser reexecutado. A
-pergunta é da Yasmin e do Davi juntos, e tem três saídas possíveis:
+> **Correção de 12/11/2026.** Esta página dizia **três** divergências, incluindo
+> a faixa `external`. Eram **duas**: eu comparei pesos de regra isolados, quando o
+> D1 soma os pontos de todas as regras que disparam. Com a soma, a `external`
+> fica em 30 — abaixo dos três Altos e acima de todos os Médios, que é exatamente
+> onde "topo do Médio" deve ficar.
+
+⚠️ **Nada foi mudado.** Mexer nesses pontos **invalida as dez sementes da § 4** —
+todo número do artigo teria de ser reexecutado, cerca de duas horas. A pergunta é
+da Yasmin e do Davi juntos, e tem três saídas possíveis:
 
 1. **A ordenação do insumo está certa** e os pontos se ajustam — e então as dez
    sementes rodam de novo, antes da banca

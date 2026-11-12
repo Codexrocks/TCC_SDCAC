@@ -176,16 +176,30 @@ rótulo nenhum pela **D-17**, com o gabarito separado em `ground_truth/`.
 > fechou**, e o que falta mudou de natureza: era produzir, agora é **ler e
 > confirmar**.
 
-**O que trava a Metodologia e a S7 — agora à espera de leitura, não de trabalho:**
+> ✅ **Lidos e confirmados em 12/11/2026**, relatado pelo Davi. Fecharam a
+> **D-06**, a **D-16** e a **D-19**, e ratificaram a metade dela da **D-43**.
+>
+> ⚠️ **A D-09 continua aberta, e não por falta de leitura.** O que ela confirmou
+> — a ordenação de severidade dos sinais da D1 em Alto, Médio e Baixo — **diverge
+> do `presets.toml` em dois atributos**, e eles estão quase invertidos entre si:
+>
+> | A situação | O insumo diz | O código dá |
+> |---|---|---|
+> | `mfa_used = false` em login | **Alto** | **15** — 8º de 10 |
+> | Dispositivo pessoal | **Baixo** | **25** — acima de todo o Médio |
+>
+> Os outros sete atributos batem. Fechar a D-09 agora registraria no quadro uma
+> escolha que o sistema não implementa; mexer nos pontos **invalida as dez
+> sementes** e exige reexecutar tudo. É decisão do Davi com a Yasmin, e está
+> detalhada em [insumos](insumos/README.md).
 
-1. **Ler o [insumo dos cenários](insumos/cenarios-yasmin-v2.md) inteiro** e
-   marcar o campo de conferência. Dele saem a **D-06**, a **D-16** e as **P18 a
-   P23**, e a **lacuna 1** da § 3.4 do artigo
-2. **Ler o [insumo dos pesos](insumos/pesos-yasmin-v1.md)** — a **D-09**, e a
-   ratificação da **D-43**
-3. **Ler o [insumo de LGPD e ISO](insumos/lgpd-iso-yasmin-v1.md)** — a **D-19**,
-   que a § 3.8 do artigo já declara como ameaça à validade e que a S13 cobra nas
-   limitações da § 4.6 e nos trabalhos futuros da § 5.4
+**O que resta, e é de outra natureza:**
+
+1. **As quatro fontes dos exemplos reais**, em
+   [citações pendentes](citacoes-pendentes.md). Confirmar um insumo e conferir uma
+   fonte são atos diferentes — o primeiro diz "este texto é meu", o segundo diz
+   "abri a obra e ela sustenta o que o texto afirma"
+2. **Uma chamada bibliográfica do referencial**, por conferir na fonte
 
 > ⚠️ **Uma correção que a conferência achou, e que precisa ser lida junto.** O
 > insumo dos cenários afirma que o código "não tem" o cenário **N06** e abre

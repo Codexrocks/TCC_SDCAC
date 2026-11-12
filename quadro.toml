@@ -334,7 +334,8 @@ titulo = "Cenários de contexto (B) e longitudinais (L)"
 proposta = "Adotados; desenho detalhado na S5"
 donos = ["Yasmin"]
 prazo = 2026-10-01
-estado = "aberta"
+estado = "fechada"
+fechada_em = 2026-11-12
 
 [[decisao]]
 id = "D-07"
@@ -346,10 +347,11 @@ estado = "aberta"
 [[decisao]]
 id = "D-09"
 titulo = "Pesos preliminares e análise de sensibilidade"
-proposta = "Valores preliminares; sensibilidade na S12"
+proposta = "Pesos preliminares, com a analise de sensibilidade na S12. Fechada pela saida C em 12/11/2026: a ordenacao de gravidade conceitual do insumo da Yasmin e os pontos do presets.toml descrevem coisas diferentes, e a secao 3.3 do artigo diz isso -- os pontos ordenam o que o detector prioriza, nao a gravidade do sinal. Os pontos nao foram alterados: alterar invalidaria as dez sementes"
 donos = ["Yasmin"]
 prazo_semana = "S8"
-estado = "aberta"
+estado = "fechada"
+fechada_em = 2026-11-12
 
 [[decisao]]
 id = "D-12"
@@ -372,10 +374,11 @@ fechada_em = 2026-10-14
 [[decisao]]
 id = "D-15"
 titulo = "Critério de relevância declarado a priori"
-proposta = "Origem do número decidida em 14/10: argumento operacional — quantos alertas falsos um analista absorve por turno. Falta o valor, e ele perde o sentido no dia em que a primeira execução for registrada"
+proposta = "CritERIO pelo argumento operacional: teto de 45 alertas falsos por turno, declarado pelo Davi em 12/11/2026 -- depois da primeira execucao, e a secao 3.6 registra isso em texto corrido. A C2 o cumpre a 0,20 de revocacao em 7 das 10 sementes; a linha de base, em nenhuma. Revocacao longitudinal minima de 0,80, declarada no mesmo dia: cumprida pela C2 e pela C3 em 10 das 10 sementes, pela C1 em 9 e pela C0 em nenhuma"
 donos = ["Davi", "Yasmin", "Filipe"]
 prazo = 2026-10-01
-estado = "aberta"
+estado = "fechada"
+fechada_em = 2026-11-12
 
 [[decisao]]
 id = "D-16"
@@ -383,7 +386,8 @@ titulo = "Controle negativo longitudinal"
 proposta = "Acrescentar cenário de escalada legítima aos cenários de teste"
 donos = ["Yasmin"]
 prazo = 2026-10-01
-estado = "aberta"
+estado = "fechada"
+fechada_em = 2026-11-12
 
 [[decisao]]
 id = "D-17"
@@ -403,7 +407,8 @@ titulo = "Vertente LGPD e ISO/IEC 27001"
 proposta = "Entra como limitação e trabalho futuro na S13"
 donos = ["Yasmin"]
 prazo = 2026-10-01
-estado = "aberta"
+estado = "fechada"
+fechada_em = 2026-11-12
 
 [[decisao]]
 id = "D-05"
