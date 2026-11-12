@@ -17,26 +17,23 @@ grandezas, e cada uma recebe resposta própria.
 
 **Quanto ao ruído, a resposta é afirmativa com margem ampla e com
 significância estatística.** À revocação de 0,20 a taxa de falsos positivos caiu
-de 18,44% na linha de base para 0,40% na configuração que acrescenta o desvio em
-relação ao padrão individual, e a diferença se repete em **todos os nove níveis
-de revocação examinados**, com p = 0,0020 em cada um — o menor valor que dez
-pares produzem num teste de Wilcoxon pareado bilateral exato. À revocação de
-0,40 a linha de base **não alcança o ponto em nenhuma das dez execuções** sem
-emitir alerta sobre a totalidade do registro, enquanto a configuração com duas
-dimensões o alcança com 3,18%. **Quanto à cobertura longitudinal, também é
-afirmativa:** medida por episódio, a revocação passou de 35,0% para 100,0% —
-todos os doze cenários longitudinais, em todas as dez execuções —, o que é
-coerente com o desenho: aqueles cenários foram construídos para que nenhum
-evento isolado fosse notável, e é essa a situação que as regras fixas não
-alcançam.
+de 18,44% para 0,40% na configuração que acrescenta o desvio em relação ao padrão
+individual, e a diferença se repete nos **nove níveis examinados**, com
+p = 0,0020 em cada um — o menor valor que dez pares produzem num teste de
+Wilcoxon pareado bilateral exato. À revocação de 0,40 a linha de base **não
+alcança o ponto em nenhuma das dez execuções** sem alertar sobre a totalidade do
+registro. **Quanto à cobertura longitudinal, também é afirmativa:** medida por
+episódio, passou de 35,0% para 100,0% — os doze cenários, nas dez execuções —, o
+que é coerente com o desenho: eles foram construídos para que nenhum evento
+isolado fosse notável, e é essa a situação que as regras fixas não alcançam.
 
 **A contrapartida não estava na pergunta.** A mesma configuração elevou de 75,8%
-para 96,0% a proporção de episódios de controle negativo que produziram alerta,
-isto é, de atividade legítima sinalizada. A pergunta mede ruído sobre o conjunto
-de eventos e cobertura sobre os cenários longitudinais, e não o alarme sobre
-comportamento legítimo incomum; é nesse terceiro eixo, não interrogado, que o
-ganho encontra seu custo. O que os dados autorizam afirmar é redução de ruído e
-aumento de cobertura nos cenários medidos — não superioridade sem custo.
+para 96,0% a proporção de episódios de controle negativo que produziram alerta —
+atividade legítima sinalizada. A pergunta mede ruído sobre o conjunto de eventos
+e cobertura nos cenários longitudinais, não o alarme sobre comportamento legítimo
+incomum: é nesse terceiro eixo, não interrogado, que o ganho encontra seu custo.
+O que os dados autorizam afirmar é redução de ruído e aumento de cobertura nos
+cenários medidos — não superioridade sem custo.
 
 **Quanto à terceira dimensão, a resposta é negativa no eixo do ruído.** O
 acréscimo da exposição acumulada **não reduz a taxa de falsos positivos em
@@ -50,19 +47,17 @@ ganho inseparável do custo.
 
 A leitura é coerente com o que a exposição acumulada mede: um termo que cresce
 devagar e atinge muita gente alcança os casos que nenhum evento isolado denuncia
-e **não** separa os poucos eventos de maior risco. No limiar herdado, não
-calibrado, ela alerta sobre 99,84% do registro e não é operável. **A contribuição
-original do trabalho se verifica, portanto, na segunda dimensão — o desvio em
-relação ao padrão do próprio usuário —, e não na terceira.**
+e **não** separa os de maior risco. **A contribuição original do trabalho se
+verifica, portanto, na segunda dimensão — o desvio em relação ao padrão do
+próprio usuário —, e não na terceira.**
 
-Uma restrição delimita o alcance da resposta, declarada na Seção 4.6: o
+Três restrições delimitam o alcance da resposta, declaradas na Seção 4.6: o
 **limiar de operação não calibrado**, razão pela qual a comparação válida é a de
-falsos positivos a revocação fixa. Duas parcelas da configuração completa foram,
-além disso, **subestimadas** — a postura, nos eventos sem estado de equipamento,
-e a exposição, nos empates de instante —, o que torna o resultado dela
-conservador nesse recorte. E as dez sementes medem variação de amostragem, não
-validade externa: todas saem do mesmo gerador, e essa ameaça não se resolve com
-mais sementes.
+falsos positivos a revocação fixa; a **subestimação** de duas parcelas da
+configuração completa — a postura, nos eventos sem estado de equipamento, e a
+exposição, nos empates de instante —, que torna o resultado dela conservador
+nesse recorte; e o fato de dez sementes medirem variação de amostragem, não
+validade externa, já que todas saem do mesmo gerador.
 
 ## 5.2 Objetivos alcançados
 
