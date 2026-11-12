@@ -418,3 +418,66 @@ def test_a_margem_de_historico_cobre_a_janela_da_d3(dados):
     janela = _janela_de_historico(load_canonical("C3"))
 
     assert janela >= timedelta(days=load_canonical("C3").dimension("d3")["window_days"])
+
+
+def test_o_executor_grava_o_resumo_por_pessoa(dados):
+    """A tela de Pessoas precisa de uma linha por pessoa, e quem a tem e o executor.
+
+    **Por que este teste existe.** Reconstruir essa linha na leitura custa juntar
+    todos os eventos com todas as notas: medido em escala cheia, **140 segundos**
+    para devolver 250 linhas, e o cliente do painel desiste em muito menos. O
+    executor ja percorre os eventos em ordem e sabe a ultima nota de cada pessoa
+    sem custo nenhum.
+
+    O resumo e **derivado**: apaga-lo nao perde dado, so devolve a leitura ao
+    caminho lento — e e isso que o teste seguinte fixa.
+    """
+    (resumo,) = roda(dados, configs=[load_canonical("C0")])
+
+    linhas = dados.load_employee_summary(resumo.scoring_run_id)
+    assert linhas is not None
+    assert [linha["employee_id"] for linha in linhas] == sorted(
+        {linha["employee_id"] for linha in linhas}
+    )
+
+    notas = {n.event_id: n for n in dados.load_scores(resumo.scoring_run_id)}
+    eventos = {e.event_id: e for e in dados.events(1)}
+    for linha in linhas:
+        evento = eventos[linha["event_id"]]
+        assert evento.employee_id == linha["employee_id"]
+        # E a **mais recente** daquela pessoa, pela D-36 — nao uma qualquer.
+        da_pessoa = [
+            e
+            for e in eventos.values()
+            if e.employee_id == evento.employee_id and e.event_id in notas
+        ]
+        assert evento.occurred_at == max(e.occurred_at for e in da_pessoa)
+
+
+def test_sem_o_resumo_a_leitura_cai_no_caminho_lento(dados, tmp_path):
+    """`None` significa execucao antiga, e nao execucao sem pessoa nenhuma.
+
+    A distincao importa: lista vazia faria a tela de Pessoas dizer que nao ha
+    ninguem, quando o que ha e um arquivo que aquela execucao nunca escreveu.
+    """
+    from storage.leitura import ArquivoRepository
+
+    (resumo,) = roda(dados, configs=[load_canonical("C0")])
+    caminho = tmp_path / "sdcac" / "resumos" / f"{resumo.scoring_run_id}.json"
+    assert caminho.exists()
+
+    leitura = ArquivoRepository(tmp_path)
+    com_resumo, total = leitura.list_employee_scores(resumo.scoring_run_id)
+
+    caminho.unlink()
+    assert leitura.load_employee_summary(resumo.scoring_run_id) is None
+    sem_resumo, total_lento = leitura.list_employee_scores(resumo.scoring_run_id)
+
+    # Os dois caminhos tem de dar o mesmo resultado. Se divergirem, o rapido
+    # esta mentindo — e ninguem olharia o lento para descobrir.
+    assert total == total_lento
+    assert [e.employee_id for e in com_resumo] == [e.employee_id for e in sem_resumo]
+    assert [e.event_id for e in com_resumo] == [e.event_id for e in sem_resumo]
+    assert [e.score.final_raw for e in com_resumo] == [
+        e.score.final_raw for e in sem_resumo
+    ]
