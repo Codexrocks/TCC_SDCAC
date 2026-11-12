@@ -114,7 +114,7 @@ class FonteHTTP:
     """A API de leitura, por HTTP."""
 
     def __init__(
-        self, base: str = "http://127.0.0.1:8000", *, espera: float = 5.0
+        self, base: str = "http://127.0.0.1:8000", *, espera: float = 60.0
     ) -> None:
         self.base = base.rstrip("/")
         self.espera = espera
