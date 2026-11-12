@@ -227,7 +227,8 @@ cerca de 0,002.
 
 A reprodutibilidade é assegurada pelo registro de execução: cada execução grava
 identificador, semente, configuração, versão dos pesos, o resumo SHA-256 da
-configuração serializada em ordem canônica e o *commit* do código. Comparar duas
+configuração serializada em ordem canônica e o identificador da versão do
+código. Comparar duas
 configurações consiste, operacionalmente, em comparar dois identificadores de
 execução sobre o mesmo conjunto de eventos.
 
@@ -241,8 +242,8 @@ alteração do código.
 A execução se dá em cinco etapas encadeadas, cada uma um programa independente:
 geração, tradução, pontuação, avaliação e agregação. A avaliação é a única que
 acessa o gabarito, em coerência com a separação de permissões da Seção 3.2, e as
-métricas da Seção 4 são lidas do arquivo que a agregação grava, não transcritas à
-mão. A agregação **recusa** reunir execuções não comparáveis — limiar distinto,
+métricas da Seção 4 são lidas do arquivo que a agregação grava, e não transcritas
+manualmente. A agregação **recusa** reunir execuções não comparáveis — limiar distinto,
 níveis de revocação distintos, conjunto de configurações distinto, ou a mesma
 execução contada duas vezes —, porque a média de execuções incomparáveis é um
 número plausível que nada no resultado final denunciaria.

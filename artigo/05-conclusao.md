@@ -59,7 +59,7 @@ amostragem, não validade externa.
 ## 5.2 Objetivos alcançados
 
 Dos oito objetivos específicos da Seção 1.5.2, os seis primeiros estão cumpridos
-e verificáveis no repositório: o modelo de eventos e o gerador de logs
+e verificáveis no protótipo: o modelo de eventos e o gerador de logs
 sintéticos com gabarito em base separada (a); a linha de base de regras fixas,
 sem parâmetro estimado de comportamento (b); a avaliação do evento individual
 (c); a identificação de divergência em relação ao padrão de cada usuário, em
@@ -75,16 +75,16 @@ derrubou uma das conclusões que a execução de semente única autorizava.
 
 ## 5.3 Contribuições
 
-O trabalho deixa cinco artefatos versionados: o **protótipo**, cuja camada de
+O trabalho deixa cinco artefatos: o **protótipo**, cuja camada de
 avaliação é independente do meio de armazenamento, o que permite reproduzir o
 experimento sem servidor de banco de dados; as **quatro configurações
 canônicas**, semeadas e somente-leitura, que tornam a ablação repetível; o
-**conjunto de regras e pesos** versionado, com resumo criptográfico preso a cada
+**conjunto de regras e pesos**, com resumo criptográfico preso a cada
 execução, de modo que duas execuções só são comparáveis se os resumos
 coincidirem; os **cenários de teste automatizados**, com as invariantes de
-desenho da Seção 3.8 impostas por teste a cada alteração do código; e o
-**contrato de leitura versionado**, que torna a nota decomponível inspecionável
-fora da interface. A avaliação de usabilidade **não** é contribuição deste
+desenho da Seção 3.8 verificadas a cada alteração do código; e o
+**contrato de leitura**, que torna a nota decomponível inspecionável fora da
+interface. A avaliação de usabilidade **não** é contribuição deste
 trabalho, como declara a Seção 3.9.
 
 ## 5.4 Trabalhos futuros

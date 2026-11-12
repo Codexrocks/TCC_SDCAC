@@ -8,16 +8,14 @@
 > execução registrada em `results/`, nunca de estimativa — de ninguém, e muito
 > menos de uma IA.
 
-**Dez execuções independentes, em 12/11/2026.** Todos os números desta seção saem de `results/agregado.json`, gravado pelo avaliador a partir das dez pastas
-`results/semente-1` a `semente-10`. A procedência completa está em
-[`results/README.md`](../results/README.md) e o procedimento em
-[execução do experimento](../docs/execucao-do-experimento.md).
+**Dez execuções independentes.** Todos os números desta seção são lidos do
+arquivo de agregação descrito na Seção 3.7, e não transcritos manualmente.
 
 São **dez sementes**, as do gerador 42 a 51, com **1.436.275 ± 9.681** eventos
 pontuados em cada uma, dos quais **2.583 ± 54** maliciosos. O treino usa 01/01 a
-31/03/2026 — os três meses da **D-24** — e a avaliação, 01/04 a 31/12/2026. As
+31/03/2026 e a avaliação, 01/04 a 31/12/2026. As
 quatro configurações rodaram em todas as dez sementes, no limiar de alerta 20,
-que é o teto da faixa normal do preset.
+que é o teto da faixa normal de risco.
 
 **Toda célula de toda tabela desta seção é média ± desvio-padrão amostral sobre
 as dez sementes**, em pontos percentuais. O teste de hipótese é o de **Wilcoxon
@@ -91,10 +89,11 @@ deixa escapar menos de um evento malicioso por semente e, para isso, alerta
 sobre 99,84% do registro, porque a exposição acumulada cresce ao longo da janela
 e empurra quase toda nota acima do corte.
 
-O limiar 20 é o teto da faixa normal do preset, herdado dos testes de unidade, e
+O limiar 20 é o teto da faixa normal de risco, herdado da configuração inicial
+do protótipo, e
 **não foi calibrado sobre dado em escala**. Isso não invalida a comparação —
-invalida comparar as quatro *neste ponto*, e é por isso que a grandeza da
-**D-03** é a da seção seguinte.
+invalida comparar as quatro *neste ponto*, e é por isso que a comparação se faz
+a revocação fixa, na seção seguinte.
 
 ## 4.3 Métricas de desempenho
 
@@ -315,8 +314,8 @@ quarta dimensão não traz vantagem significativa.
 
 **Ambiente simulado não é produção.** Acurácia alta sobre dado sintético pode
 indicar gerador previsível em vez de modelo bom. O conjunto de regras é pequeno,
-e o painel não foi avaliado com usuários, pela **D-02**, de modo que nada se
-afirma sobre sua usabilidade.
+e o painel não foi avaliado com usuários, conforme a Seção 3.9, de modo que nada
+se afirma sobre sua usabilidade.
 
 **O tratamento de dados pessoais.** Monitorar comportamento de colaborador é
 tratamento de dado pessoal quando aplicado a organização real; este trabalho opera
