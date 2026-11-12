@@ -57,6 +57,11 @@ RAIZ = Path(__file__).resolve().parent.parent
 FONTE = "Times New Roman"
 CORPO_PT = 10.0
 
+# A coluna de texto tem 17 cm. A figura entra menor de proposito: a 17 cm
+# as duas do artigo passariam de 9 cm de altura cada uma, e o documento tem
+# teto de 12 paginas.
+LARGURA_FIGURA_CM = 12.0
+
 SECOES_DE_CONTROLE = (
     "O que esta seção ainda precisa",
     "O que esta página ainda precisa",
@@ -82,12 +87,32 @@ def confere_legendas(caminhos: list[Path]) -> list[str]:
     """
     erros: list[str] = []
     esperado = 0
+    esperado_fig = 0
     for caminho in caminhos:
         lidos = blocos(caminho.read_text(encoding="utf-8"))
         nesta_pagina = 0
         for k, (tipo, _nivel, conteudo) in enumerate(lidos):
             if tipo == "titulo" and conteudo in SECOES_DE_CONTROLE:
                 break
+            if tipo == "imagem":
+                # na figura a ordem se inverte: imagem, legenda, fonte. E a
+                # forma do template, e e a convencao de todo lugar.
+                esperado_fig += 1
+                onde = f"{caminho.name}, figura {esperado_fig} ({conteudo})"
+                legenda = lidos[k + 1] if k + 1 < len(lidos) else ("", 0, "")
+                fonte = lidos[k + 2] if k + 2 < len(lidos) else ("", 0, "")
+                if legenda[0] != "legenda":
+                    erros.append(f"{onde}: sem legenda abaixo")
+                    continue
+                m = re.match(r"^\*\*Figura (\d+)\.", str(legenda[2]))
+                if m and int(m.group(1)) != esperado_fig:
+                    erros.append(
+                        f"{onde}: legenda numerada {m.group(1)}, "
+                        f"esperada {esperado_fig}"
+                    )
+                if fonte[0] != "fonte":
+                    erros.append(f"{onde}: sem fonte abaixo da legenda")
+                continue
             if tipo != "tabela":
                 continue
             # a posicao no arquivo, e a primeira linha, para o erro dizer qual
@@ -131,6 +156,11 @@ def blocos(texto: str) -> list[tuple[str, int, object]]:
         m = re.match(r"^(#{1,3}) (.+)$", linha)
         if m:
             saida.append(("titulo", len(m.group(1)), m.group(2).strip()))
+            i += 1
+            continue
+        m = re.match(r"^!\[[^\]]*\]\(([^)]+)\)$", linha.strip())
+        if m:
+            saida.append(("imagem", 0, m.group(1)))
             i += 1
             continue
         if re.match(r"^\*\*(Tabela|Figura) \d+\.\*\*", linha.strip()):
@@ -240,6 +270,17 @@ def escreve(
         r.italic = it or italico
         r.font.size = tamanho or Pt(CORPO_PT)
         r.font.name = "Consolas" if mono else FONTE
+    return p
+
+
+def imagem(doc, caminho: Path):
+    """A figura, centralizada, na largura fixa -- a altura sai da proporcao."""
+    p = doc.add_paragraph()
+    pf = p.paragraph_format
+    pf.alignment = WD_ALIGN_PARAGRAPH.CENTER
+    pf.first_line_indent = Cm(0)
+    pf.space_before, pf.space_after = Pt(5.75), Pt(2)
+    p.add_run().add_picture(str(caminho), width=Cm(LARGURA_FIGURA_CM))
     return p
 
 
@@ -385,6 +426,9 @@ def secao(doc, caminho, *, titulo_de_nivel1=True):
                 antes=2,
                 depois=5.75,
             )
+        elif tipo == "imagem":
+            # o caminho do Markdown e relativo ao arquivo que o escreveu
+            imagem(doc, (caminho.parent / str(conteudo)).resolve())
         elif tipo == "tabela":
             tabela(doc, conteudo)
         elif tipo == "formula":
