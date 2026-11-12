@@ -46,10 +46,10 @@ limite do [template](../docs/formato-do-artigo.md), e ele é rígido: trabalho f
 > abaixo dá exatamente o piso, sem folga. Com 12 de teto, há espaço para
 > distribuir; quem decide como é a equipe.
 
-### O que o documento montado mede hoje — 12/11/2026
+### O que o documento montado mede hoje — 12/11/2026, com a § 4.5 escrita
 
-Montado a partir deste Markdown no formato COBEM, o artigo tem **14 páginas**:
-**duas acima do teto de 12**, e fora do padrão é desclassificação antes da
+Montado a partir deste Markdown no formato COBEM, o artigo tem **15 páginas**:
+**três acima do teto de 12**, e fora do padrão é desclassificação antes da
 revisão.
 
 | Seção | Orçamento | Medido | Diferença |
@@ -58,10 +58,57 @@ revisão.
 | **1. Introdução** | 1 a 1,5 · **teto 2** | **1,98** | no limite |
 | **2. Referencial teórico** | 1,5 a 2 | **2,07** | +0,07 |
 | **3. Metodologia** | 2 | **4,27** | **+2,27** |
-| **4. Resultados e discussão** | 2 a 2,5 | **3,06** | **+0,56** |
-| **5. Conclusões** | 0,5 | **1,13** | +0,63 |
-| Referências | 0,5 | **0,60** | +0,10 |
-| **Total** | 8 a 12 | **14,00** | **+2,00** |
+| **4. Resultados e discussão** | 2 a 2,5 | **3,47** | **+0,97** |
+| **5. Conclusões**, com as referências | 1,0 | **2,32** | +1,32 |
+| **Total** | 8 a 12 | **15,00** | **+3,00** |
+
+> A linha da § 5 agrega Conclusão e Referências porque a medição do último bloco
+> é feita contra a contagem inteira de páginas, e por isso absorve o espaço vago
+> do fim da última folha. Separadas, mediam 1,13 e 0,60 na montagem de ontem.
+
+### A § 3 por subseção, para o corte não ser às cegas
+
+Medido no mesmo documento. É a seção com o maior desvio, e esta tabela existe
+para que se decida **de onde** cortar, e não só **quanto**:
+
+| Subseção | Medido |
+|---|---|
+| 3.1 Natureza e tipo de pesquisa | 0,15 |
+| 3.2 Ambiente experimental simulado | 0,43 |
+| 3.3 Desenho experimental | 0,62 |
+| **3.4 Cenários e gabarito** | **1,04** |
+| 3.5 Unidade de análise | 0,24 |
+| **3.6 Métricas e critério de sucesso** | 0,31 |
+| **3.7 Execução e reprodutibilidade** | 0,66 |
+| **3.8 Ameaças à validade** | 0,62 |
+| 3.9 O painel de análise | 0,17 |
+| **Total** | **4,27** |
+
+### A aritmética do corte, que é decisão da equipe
+
+**Três páginas não saem de uma seção só.** A § 3 teria de perder 70% de si para
+cobrir sozinha o excesso, e não é o que se quer de uma Metodologia avaliada por
+banca. A conta que fecha em 12 distribui:
+
+| Seção | Hoje | Cabe em | Corte |
+|---|---|---|---|
+| 3. Metodologia | 4,27 | ~2,5 | **−1,75** |
+| 1. Introdução | 1,98 | ~1,5 | **−0,5** |
+| 5. Conclusão, com referências | 2,32 | ~1,95 | **−0,35** |
+| 4. Resultados | 3,47 | ~3,1 | **−0,4** |
+| | | | **−3,00** |
+
+⚠️ **Nenhum desses cortes foi feito.** Cada um é a caneta de uma pessoa, e cortar
+texto de quatro autores por iniciativa de quem mede não é decisão de quem mede —
+é o que este README já dizia quando escreveu que "quem decide como é a equipe".
+O que faltava era o número por subseção, e agora ele existe.
+
+Dois avisos para quem for cortar:
+
+- **A § 3.4 é a que mais ocupa e a que menos se deve mexer agora.** Ela depende
+  da **D-06** e da **D-16**, que não fecharam — cortar texto que vai mudar é
+  trabalho duas vezes
+- **A § 4 não deve ser a primeira**, e o motivo está mais abaixo
 
 > **Como se mede.** A posição fracionária de cada título dentro da própria
 > página, e não a contagem de páginas inteiras: por isso as sete linhas somam
@@ -70,12 +117,15 @@ revisão.
 > para explicar a diferença, então **uma das duas medições está errada** e a
 > desta data é a que fecha com o total. Vale remedir antes de cortar.
 
-> **A § 4 cresceu uma página inteira em 12/11**, de 2,0 para 3,06, e o motivo é
-> o que o trabalho ganhou: as dez sementes da **D-13** trouxeram média,
-> desvio-padrão e teste pareado, e a tabela de FPR a revocação fixa passou a ter
-> nove linhas de `média ± desvio` mais uma tabela de significância. Fechar a
-> D-13 custou uma página — e é a página mais bem gasta do artigo, porque é a que
-> converte "a C2 foi melhor" em "a C2 é melhor, com p = 0,0020".
+> **A § 4 cresceu uma página e meia em 12/11**, de 2,0 para 3,47, em duas
+> etapas. As dez sementes da **D-13** trouxeram média, desvio-padrão e teste
+> pareado, e a tabela de FPR a revocação fixa passou a ter nove linhas de
+> `média ± desvio` mais uma de significância: **+1,06**. Depois a § 4.5, a
+> Discussão, passou de instrução a texto escrito: **+0,41**.
+>
+> As duas são conteúdo que a banca cobra. A primeira é a que converte "a C2 foi
+> melhor" em "a C2 é melhor, com p = 0,0020"; a segunda é a seção que o professor
+> pede por nome. **Nenhuma das duas é a gordura do artigo.**
 
 Quatro leituras:
 
