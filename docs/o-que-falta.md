@@ -20,25 +20,43 @@ e **o motivo mudou**.
 
 | Semana | O que existe | Por que o aceite não fecha |
 |---|---|---|
-| **S6** | Schema, migrações e **o gerador**, com as checagens passando | **Falta a ingestão.** O gerador escreve CSV e nada no repositório lê CSV: o adaptador de arquivo espera `catalogo.json` e `eventos.jsonl`, e não existe carga por `COPY`. O aceite pede "carga por COPY" |
-| **S7** | C0 e motor D1, selecionáveis por configuração | O aceite pede que "cenários pontuais produzam o score esperado" — e os cenários nomeados dependem da **D-06** |
-| **S8** | D2 e D3, com as duas parcelas separadas | O aceite pede "cenário longitudinal com exposição crescente sem alerta pontual", que depende da **D-16** |
-| **S9** | As três telas do painel, com decomposição por dimensão | O aceite pede "por que um usuário está em **risco alto**", e continua sem ninguém em `high` — agora porque o dado gerado **não chega aos motores**, não porque não exista |
+| **S6** | Schema, migrações, **o gerador** e **a ingestão** — o experimento roda sobre dado gerado desde 11/11/2026 | O aceite pede **"carga por `COPY`"**, e o caminho que existe é outro: a ingestão traduz o CSV para o formato do adaptador de arquivo. O dado chega aos motores; a carga para o PostgreSQL não existe. **O Davi decide se o critério se cumpre por este caminho** ou se o `COPY` continua exigido |
+| **S7** | C0 e motor D1, selecionáveis por configuração | O aceite pede que "cenários pontuais produzam o score esperado" — e os cenários nomeados dependem da **D-06**. A família P já é detectada em 100% dos episódios pela C1, mas "o escore esperado" só existe depois do catálogo |
+| **S8** | D2 e D3, com as duas parcelas separadas | O aceite pede "cenário longitudinal com exposição crescente sem alerta pontual", que depende da **D-16** — e a **C3 ainda não executa** (ver abaixo) |
+| **S9** | As três telas do painel, com decomposição por dimensão | O aceite pede "por que um usuário está em **risco alto**", e agora **há dado para isso**: a execução de 11/11 produziu 280 a 315 mil alertas. Falta apontar o painel para uma execução registrada |
 
-**O que o gerador já produz**, em escala cheia e 79 segundos: 1.905.130 eventos,
-73.619 sessões, 124 episódios, e as 16 checagens da seção 9 passando — volume
+**O que o gerador produz**, em escala cheia e 67 segundos: 1.905.111 eventos,
+73.604 sessões, 124 episódios, e as 17 checagens da seção 9 passando — volume
 anual na faixa da **D-23**, média por dia útil na faixa de cada persona pela
 **D-38**, cenários depois do baseline de três meses pela **D-24**, e `corp` sem
 rótulo nenhum pela **D-17**, com o gabarito separado em `ground_truth/`.
 
-O experimento, porém, **continua rodando sobre os *fixtures* de teste** — 2
-funcionários e um só tipo de evento —, porque falta o elo entre o CSV e os
-motores.
+> ✅ **A ingestão entrou em 11/11/2026, e com ela o avaliador.** O experimento
+> deixou de rodar sobre *fixture* de 2 funcionários: **1.435.546 eventos
+> pontuados** pelas configurações C0, C1 e C2, com as métricas da **D-03** em
+> [`results/semente-1`](../results/README.md) e a §4 do artigo escrita sobre
+> elas. Procedimento em
+> [execução do experimento](execucao-do-experimento.md).
+
+> ⚠️ **A C3 não executa, e é decisão — não defeito.** O gerador escreve estado
+> diário **só do notebook** (`generator/normal.py`, `device_states`), e a D3
+> exige o estado do equipamento **do evento**, recusando-se a pontuar sem ele:
+> *"sem ele, atualização e antivírus sairiam como se estivessem em ordem"*.
+> Eventos de celular e de origem externa não têm esse estado. Três caminhos, e
+> o terceiro campo é o que a escolha custa:
+>
+> | Caminho | O que muda | O que custa |
+> |---|---|---|
+> | Gerador escreve estado de celular | trabalho do **Filipe** | o que é "idade de patch" de um celular precisa de decisão própria |
+> | D3 pontua sem a parcela de postura quando falta estado | muda a **semântica da D-30** | abre a porta para a parcela sumir em silêncio, que é o que a recusa atual impede |
+> | Experimento restringe-se a eventos de notebook | nada no código | tira do experimento os eventos de origem externa, que são onde estão vários cenários |
+>
+> **Sem a C3 a tabela de ablação tem três colunas, e falta a parcela de
+> exposição acumulada — metade do que a pergunta de pesquisa propõe avaliar.**
 
 > **A M3 venceu em 22/10** e o critério dela é "C0 a C3 rodando sobre **o mesmo
-> gerador**". O gerador existe; as quatro configurações ainda rodam sobre
-> *fixture*. **O que falta agora é a ingestão, e ela é do Davi** — ver a seção
-> "O que não dá para dividir".
+> gerador**". Três das quatro rodam. **O que falta é a C3**, e ela depende da
+> decisão acima.
 
 ---
 
@@ -115,20 +133,34 @@ contra o que ser medido.
 
 Quatro coisas continuam no Davi por construção, não por combinação:
 
-**A ingestão — e desde 04/11 ela é o elo que falta.** O gerador escreve CSV em
-`corp/` e `ground_truth/`; o adaptador de arquivo espera `catalogo.json` e
-`eventos.jsonl`, e a carga por `COPY` para o PostgreSQL não existe — `database/`
-tem só o schema. Enquanto esse elo não existir, o experimento continua rodando
-sobre *fixture* de 2 funcionários, e **nem a S6 nem a M3 fecham**. O
-[quadro](quadro.md) registra a S6 como "Filipe (gerador), Davi (schema e
-ingestão)": a metade do Filipe entrou.
+> ✅ **A ingestão entrou em 11/11/2026** — `ingest/` e `evaluator/`, com 21
+> testes. O elo que faltava desde 04/11 saiu do caminho crítico, e o
+> experimento passou a rodar sobre dado gerado.
+
+**O que ficou dela, e é do Davi:** ratificar as **três correspondências** que a
+tradução precisou declarar, e que estão nomeadas em constantes no topo de
+`ingest/corp.py` justamente para serem ratificáveis:
+
+| O quê | O gerador escreve | Os motores esperam |
+|---|---|---|
+| **Persona** | `day_admin`, `shift_ops`, `sales_traveler`, `hybrid_eng` | `office_daytime`, `shift`, `sales_travel`, `hybrid` |
+| **Fuso** (D-31, D-40) | deslocamento fixo, `UTC-3` | chave IANA, `America/Sao_Paulo` |
+| **Privilégio** | `privileged`, booleano | `standard`, `elevated`, `admin` |
+
+O do fuso **derrubou a pontuação no primeiro evento**; os outros dois não
+quebravam nada — produziriam nota errada em silêncio. Persona ou fuso novo no
+gerador faz a ingestão **recusar**, em vez de adivinhar.
+
+**A carga por `COPY` continua não existindo** — `database/` tem só o schema, e é
+dela que o critério de aceite da S6 fala. Ver a tabela acima.
 
 **A D-15 — o critério de relevância declarado a priori.** A origem do número já
 foi decidida em 14/10: argumento operacional, de quantos alertas falsos um
-analista absorve por turno. **Falta o valor.** Ele perde o sentido no dia em que
-a primeira execução for registrada: declarar o critério depois de existir
-resultado não é rigor, é justificativa. É a **lacuna 3** da Metodologia, e vence
-antes da S11.
+analista absorve por turno. **Falta o valor, e o prazo já passou.** O texto
+desta seção dizia que o número "perde o sentido no dia em que a primeira
+execução for registrada" — **esse dia foi 11/11/2026**. O que resta é declarar o
+valor pelo argumento operacional, sem olhar a tabela da §4.3, e registrar que
+foi declarado depois. É a **lacuna 3** da Metodologia.
 
 **O merge.** O ruleset `Merge restrito ao líder` recusa qualquer outra origem, e
 o GitHub não deixa ninguém aprovar o próprio Pull Request. Todo trabalho da
@@ -148,13 +180,22 @@ avaliador que grave métrica — e a caneta da **S14**.
 
 ## O caminho crítico, em uma frase
 
-~~Gerador~~ → **ingestão** → **cenários nomeados** → execução das quatro
-configurações → tabela de ablação → Resultados → Conclusão.
+~~Gerador~~ → ~~ingestão~~ → **a C3** · **cenários nomeados** → execução das
+quatro configurações → tabela de ablação → ~~Resultados~~ → Conclusão.
 
-O primeiro elo caiu em 04/11. Os dois seguintes são independentes entre si e
-podem andar em paralelo — a **ingestão** é do Davi, os **cenários nomeados** são
-da Yasmin pelas **D-06** e **D-16**, atrasadas desde 01/10. Depois deles, o resto
-é sequência.
+O gerador caiu em 04/11, a ingestão em 11/11 — e a **Seção 4 do artigo já está
+escrita sobre números de execução registrada**, com três das quatro
+configurações. Os dois elos restantes são independentes entre si: a **C3** é
+decisão do Davi, os **cenários nomeados** são da Yasmin pelas **D-06** e
+**D-16**, atrasadas desde 01/10.
+
+Duas decisões passaram a vencer antes da banca, e não depois:
+
+- **A D-12** — evento, usuário-dia ou episódio. Os resultados de hoje reportam
+  as duas unidades porque ela está aberta, e escolher depois de ver qual
+  favorece a conclusão não é rigor
+- **A D-15** — o critério de relevância. A execução de 11/11 **já existe**, e
+  cada dia que passa torna a declaração a priori menos a priori
 
 A **S10 é o único corte disponível** no cronograma: o Isolation Forest é opcional
 por definição.
