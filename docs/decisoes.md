@@ -26,12 +26,12 @@ fechada fica enterrada.
 
 | ID | Decisão | Proposta | Dono | Prazo | Situação |
 |---|---|---|---|---|---|
-| D-06 | Cenários de contexto (B) e longitudinais (L) | Adotados; desenho detalhado na S5 | Yasmin | 01/10/2026 | ⚠️ Atrasado há 41 dias |
+| D-06 | Cenários de contexto (B) e longitudinais (L) | Adotados; desenho detalhado na S5 | Yasmin | 01/10/2026 | ⚠️ Atrasado há 42 dias |
 | D-07 | Caneta rotativa por seção | Uma pessoa redige, duas revisam, a caneta gira. Registrada pelo Davi quando Yasmin e Filipe confirmarem | Davi, Yasmin, Filipe | — | 🗓️ Sem prazo |
-| D-09 | Pesos preliminares e análise de sensibilidade | Valores preliminares; sensibilidade na S12 | Yasmin | S8 | ⚠️ Atrasado há 20 dias |
-| D-15 | Critério de relevância declarado a priori | Origem do número decidida em 14/10: argumento operacional — quantos alertas falsos um analista absorve por turno. Falta o valor, e ele perde o sentido no dia em que a primeira execução for registrada | Davi, Yasmin, Filipe | 01/10/2026 | ⚠️ Atrasado há 41 dias |
-| D-16 | Controle negativo longitudinal | Acrescentar cenário de escalada legítima aos cenários de teste | Yasmin | 01/10/2026 | ⚠️ Atrasado há 41 dias |
-| D-19 | Vertente LGPD e ISO/IEC 27001 | Entra como limitação e trabalho futuro na S13 | Yasmin | 01/10/2026 | ⚠️ Atrasado há 41 dias |
+| D-09 | Pesos preliminares e análise de sensibilidade | Valores preliminares; sensibilidade na S12 | Yasmin | S8 | ⚠️ Atrasado há 21 dias |
+| D-15 | Critério de relevância declarado a priori | Origem do número decidida em 14/10: argumento operacional — quantos alertas falsos um analista absorve por turno. Falta o valor, e ele perde o sentido no dia em que a primeira execução for registrada | Davi, Yasmin, Filipe | 01/10/2026 | ⚠️ Atrasado há 42 dias |
+| D-16 | Controle negativo longitudinal | Acrescentar cenário de escalada legítima aos cenários de teste | Yasmin | 01/10/2026 | ⚠️ Atrasado há 42 dias |
+| D-19 | Vertente LGPD e ISO/IEC 27001 | Entra como limitação e trabalho futuro na S13 | Yasmin | 01/10/2026 | ⚠️ Atrasado há 42 dias |
 <!-- QUADRO:fim decisoes-abertas -->
 
 ## Adotadas, a confirmar
@@ -41,9 +41,9 @@ fechada fica enterrada.
 
 | ID | Decisão | Proposta | Dono | Prazo | Situação |
 |---|---|---|---|---|---|
-| D-05 | Ablação em quatro configurações (C0 a C3) | Confirmar no M2 | Davi | 01/10/2026 | ⚠️ Atrasado há 41 dias |
-| D-10 | Isolation Forest como benchmark opcional | Cortável na S10, se as métricas estiverem em risco | Filipe | S10 | ⚠️ Atrasado há 6 dias |
-| D-43 | Pesos de integração das dimensões na nota final | Um conjunto só de pesos para C1, C2 e C3 — D1 1,0; D2 1,0; conduta 1,0; postura 0,5 — e a C0 sem ponderação nenhuma. Peso próprio por configuração faria a tabela de ablação medir duas coisas ao mesmo tempo: a dimensão acrescentada e o peso trocado. A postura entra com metade porque é estado, e não ação. Valores preliminares, sujeitos à análise de sensibilidade da D-09 | Davi, Yasmin | S8 | ⚠️ Atrasado há 20 dias |
+| D-05 | Ablação em quatro configurações (C0 a C3) | Confirmar no M2 | Davi | 01/10/2026 | ⚠️ Atrasado há 42 dias |
+| D-10 | Isolation Forest como benchmark opcional | Cortável na S10, se as métricas estiverem em risco | Filipe | S10 | ⚠️ Atrasado há 7 dias |
+| D-43 | Pesos de integração das dimensões na nota final | Um conjunto só de pesos para C1, C2 e C3 — D1 1,0; D2 1,0; conduta 1,0; postura 0,5 — e a C0 sem ponderação nenhuma. Peso próprio por configuração faria a tabela de ablação medir duas coisas ao mesmo tempo: a dimensão acrescentada e o peso trocado. A postura entra com metade porque é estado, e não ação. Valores preliminares, sujeitos à análise de sensibilidade da D-09 | Davi, Yasmin | S8 | ⚠️ Atrasado há 21 dias |
 <!-- QUADRO:fim decisoes-a-confirmar -->
 
 ## Fechadas
@@ -84,6 +84,7 @@ fechada fica enterrada.
 | D-40 | Sede, filial e fusos horários | **São Paulo (UTC−3) com 210 pessoas e Manaus (UTC−4) com 40.** Corrige a recomendação anterior, de um fuso só: a **D-31** faz a C0 usar o fuso da sede e a D1 o fuso do funcionário, e com um fuso único essa diferença é decorativa. Com dois, quem encerra às 21:30 em Manaus são 22:30 em São Paulo — a C0 dispara e a D1 não. É falso positivo legítimo, fabricado por desenho, que é o mecanismo que a pergunta de pesquisa alega resolver | 28/09/2026 |
 | D-41 | Dispositivos e estado inicial de higiene | **425 dispositivos**: 250 notebooks corporativos, 150 celulares corporativos e **25 celulares pessoais autorizados**. MFA ligado em ~87% no início. O dispositivo pessoal precisa existir no tráfego legítimo: se aparecesse só em cenário, viraria detector perfeito e a C0 acertaria sem olhar mais nada — a mesma armadilha que a D-27 evitou em férias e feriado | 28/09/2026 |
 | D-42 | A quarta regra da C0: janela de falhas ou evento isolado | Decidida pelo Davi em 13/10, no pedido *"mantenha a janela e corrija a Metodologia, registra a D-42"*. **A janela fica**, com limiar fixo igual para todos e memória de dois minutos. E "puramente estática" passa a ser dito com precisão: a C0 não tem **parâmetro aprendido** — nada estimado do comportamento de ninguém. A distinção é entre correlação de curto prazo e perfil individual: a primeira é regra de SIEM, a segunda é a D2. Tirar a janela produziria um grupo de controle incapaz de pegar tentativa sucessiva de autenticação, e o ganho apareceria nas dimensões por falta de adversário — a banca chamaria isso de comparação com adversário de palha. O custo foi reescrever a seção 3.3 da [Metodologia](../artigo/03-metodologia.md) e reformular a invariante da **D-31**: a nota da C0 depende do evento, do cadastro e dos dois minutos anteriores da mesma conta — nada mais antigo, nada de outra pessoa. Verificado em teste. As duas afirmações sem fonte que a reescrita trouxe estão em [citações pendentes](citacoes-pendentes.md) | 13/10/2026 |
+| D-44 | Evento cujo equipamento não tem estado no dia | Decidida pelo Davi em 11/11, no pedido *"a D3 pontua sem a parcela de postura"*. **A D3 pontua a conduta e deixa a parcela de postura como não avaliada** — `d3_posture` nulo, e não zero. Antes disso o `build_posture` **se recusava** a montar o retrato sem o estado do equipamento do dia, e a execução parava; a recusa era a trava contra postura limpa fabricada por carga incompleta. O motivo de tirá-la é concreto: o gerador escreve estado diário **só do notebook**, e por isso a **C3 não executava** — sem ela a tabela de ablação tem três colunas e falta a parcela de exposição acumulada, que é metade do que a pergunta de pesquisa propõe avaliar. **O que ficou no lugar da trava**, porque a decisão aceitou correr o risco de a parcela sumir em silêncio: a exceção é própria, e qualquer outro erro de montagem do retrato continua derrubando a execução; a nota afetada carrega o achado `posture_unavailable`, visível na decomposição do painel; e o executor **conta** quantos eventos perderam a parcela, e diz na saída. Verificado em 11 testes. A alternativa mais fina — pontuar os sinais de postura que **não** vêm do equipamento, que são MFA, privilégio, phishing, removível e navegação, e descartar só atualização e antivírus — não foi adotada e fica registrada aqui: ela preserva sinal nos eventos de origem externa, que são onde estão vários cenários | 11/11/2026 |
 
 ---
 

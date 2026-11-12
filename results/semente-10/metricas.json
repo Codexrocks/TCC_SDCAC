@@ -1,0 +1,457 @@
+{
+ "run_id": 1,
+ "limiar_de_operacao": 20.0,
+ "niveis_de_revocacao": [
+  0.1,
+  0.2,
+  0.3,
+  0.4,
+  0.5,
+  0.6,
+  0.7,
+  0.8,
+  0.9
+ ],
+ "configuracoes": {
+  "C0": {
+   "scoring_run_id": 1,
+   "eventos_pontuados": 1427301,
+   "eventos_maliciosos": 2648,
+   "por_evento": {
+    "limiar": 20.0,
+    "tp": 797,
+    "fp": 268153,
+    "tn": 1156500,
+    "fn": 1851,
+    "revocacao": 0.3009818731117825,
+    "precisao": 0.0029633760922104482,
+    "fpr": 0.18822337790325083
+   },
+   "fpr_a_revocacao_fixa": {
+    "0.10": {
+     "limiar": 60.0,
+     "fpr": 0.003201481343176198,
+     "revocacao_obtida": 0.10876132930513595,
+     "alertados": 4849,
+     "fracao_do_log": 0.003397321237776755
+    },
+    "0.20": {
+     "limiar": 30.0,
+     "fpr": 0.18822337790325083,
+     "revocacao_obtida": 0.3009818731117825,
+     "alertados": 268950,
+     "fracao_do_log": 0.18843257308724648
+    },
+    "0.30": {
+     "limiar": 30.0,
+     "fpr": 0.18822337790325083,
+     "revocacao_obtida": 0.3009818731117825,
+     "alertados": 268950,
+     "fracao_do_log": 0.18843257308724648
+    },
+    "0.40": {
+     "limiar": 0.0,
+     "fpr": 1.0,
+     "revocacao_obtida": 1.0,
+     "alertados": 1427301,
+     "fracao_do_log": 1.0
+    },
+    "0.50": {
+     "limiar": 0.0,
+     "fpr": 1.0,
+     "revocacao_obtida": 1.0,
+     "alertados": 1427301,
+     "fracao_do_log": 1.0
+    },
+    "0.60": {
+     "limiar": 0.0,
+     "fpr": 1.0,
+     "revocacao_obtida": 1.0,
+     "alertados": 1427301,
+     "fracao_do_log": 1.0
+    },
+    "0.70": {
+     "limiar": 0.0,
+     "fpr": 1.0,
+     "revocacao_obtida": 1.0,
+     "alertados": 1427301,
+     "fracao_do_log": 1.0
+    },
+    "0.80": {
+     "limiar": 0.0,
+     "fpr": 1.0,
+     "revocacao_obtida": 1.0,
+     "alertados": 1427301,
+     "fracao_do_log": 1.0
+    },
+    "0.90": {
+     "limiar": 0.0,
+     "fpr": 1.0,
+     "revocacao_obtida": 1.0,
+     "alertados": 1427301,
+     "fracao_do_log": 1.0
+    }
+   },
+   "por_episodio": {
+    "P": {
+     "descricao": "pontual",
+     "episodios_na_janela": 24,
+     "detectados": 20,
+     "taxa": 0.8333333333333334,
+     "eventos": 460
+    },
+    "B": {
+     "descricao": "comportamental",
+     "episodios_na_janela": 16,
+     "detectados": 5,
+     "taxa": 0.3125,
+     "eventos": 603
+    },
+    "L": {
+     "descricao": "longitudinal",
+     "episodios_na_janela": 12,
+     "detectados": 3,
+     "taxa": 0.25,
+     "eventos": 1585
+    },
+    "N": {
+     "descricao": "normal (benigno por construcao)",
+     "episodios_na_janela": 61,
+     "detectados": 46,
+     "taxa": 0.7540983606557377,
+     "eventos": 4807
+    }
+   }
+  },
+  "C1": {
+   "scoring_run_id": 2,
+   "eventos_pontuados": 1427301,
+   "eventos_maliciosos": 2648,
+   "por_evento": {
+    "limiar": 20.0,
+    "tp": 1190,
+    "fp": 263923,
+    "tn": 1160730,
+    "fn": 1458,
+    "revocacao": 0.44939577039274925,
+    "precisao": 0.004488652008766073,
+    "fpr": 0.18525423383799425
+   },
+   "fpr_a_revocacao_fixa": {
+    "0.10": {
+     "limiar": 80.0,
+     "fpr": 0.0,
+     "revocacao_obtida": 0.11895770392749244,
+     "alertados": 315,
+     "fracao_do_log": 0.00022069626518863225
+    },
+    "0.20": {
+     "limiar": 30.0,
+     "fpr": 0.06510006296270039,
+     "revocacao_obtida": 0.21790030211480363,
+     "alertados": 93322,
+     "fracao_do_log": 0.0653835455870906
+    },
+    "0.30": {
+     "limiar": 20.0,
+     "fpr": 0.18525423383799425,
+     "revocacao_obtida": 0.44939577039274925,
+     "alertados": 265113,
+     "fracao_do_log": 0.18574428239032972
+    },
+    "0.40": {
+     "limiar": 20.0,
+     "fpr": 0.18525423383799425,
+     "revocacao_obtida": 0.44939577039274925,
+     "alertados": 265113,
+     "fracao_do_log": 0.18574428239032972
+    },
+    "0.50": {
+     "limiar": 5.0,
+     "fpr": 0.7220045863799817,
+     "revocacao_obtida": 0.8270392749244713,
+     "alertados": 1030796,
+     "fracao_do_log": 0.7221994519726392
+    },
+    "0.60": {
+     "limiar": 5.0,
+     "fpr": 0.7220045863799817,
+     "revocacao_obtida": 0.8270392749244713,
+     "alertados": 1030796,
+     "fracao_do_log": 0.7221994519726392
+    },
+    "0.70": {
+     "limiar": 5.0,
+     "fpr": 0.7220045863799817,
+     "revocacao_obtida": 0.8270392749244713,
+     "alertados": 1030796,
+     "fracao_do_log": 0.7221994519726392
+    },
+    "0.80": {
+     "limiar": 5.0,
+     "fpr": 0.7220045863799817,
+     "revocacao_obtida": 0.8270392749244713,
+     "alertados": 1030796,
+     "fracao_do_log": 0.7221994519726392
+    },
+    "0.90": {
+     "limiar": 0.0,
+     "fpr": 1.0,
+     "revocacao_obtida": 1.0,
+     "alertados": 1427301,
+     "fracao_do_log": 1.0
+    }
+   },
+   "por_episodio": {
+    "P": {
+     "descricao": "pontual",
+     "episodios_na_janela": 24,
+     "detectados": 24,
+     "taxa": 1.0,
+     "eventos": 460
+    },
+    "B": {
+     "descricao": "comportamental",
+     "episodios_na_janela": 16,
+     "detectados": 8,
+     "taxa": 0.5,
+     "eventos": 603
+    },
+    "L": {
+     "descricao": "longitudinal",
+     "episodios_na_janela": 12,
+     "detectados": 11,
+     "taxa": 0.9166666666666666,
+     "eventos": 1585
+    },
+    "N": {
+     "descricao": "normal (benigno por construcao)",
+     "episodios_na_janela": 61,
+     "detectados": 57,
+     "taxa": 0.9344262295081968,
+     "eventos": 4807
+    }
+   }
+  },
+  "C2": {
+   "scoring_run_id": 3,
+   "eventos_pontuados": 1427301,
+   "eventos_maliciosos": 2648,
+   "por_evento": {
+    "limiar": 20.0,
+    "tp": 1730,
+    "fp": 299125,
+    "tn": 1125528,
+    "fn": 918,
+    "revocacao": 0.6533232628398792,
+    "precisao": 0.0057502783733027535,
+    "fpr": 0.20996340863354093
+   },
+   "fpr_a_revocacao_fixa": {
+    "0.10": {
+     "limiar": 157.0,
+     "fpr": 0.00011230804974965834,
+     "revocacao_obtida": 0.10120845921450151,
+     "alertados": 428,
+     "fracao_do_log": 0.0002998666714309035
+    },
+    "0.20": {
+     "limiar": 68.0,
+     "fpr": 0.0034969918990799863,
+     "revocacao_obtida": 0.20241691842900303,
+     "alertados": 5518,
+     "fracao_do_log": 0.003866038067653564
+    },
+    "0.30": {
+     "limiar": 50.0,
+     "fpr": 0.01546692422646076,
+     "revocacao_obtida": 0.30891238670694865,
+     "alertados": 22853,
+     "fracao_do_log": 0.016011338883669245
+    },
+    "0.40": {
+     "limiar": 40.0,
+     "fpr": 0.03522963135584595,
+     "revocacao_obtida": 0.4229607250755287,
+     "alertados": 51310,
+     "fracao_do_log": 0.035948969418503875
+    },
+    "0.50": {
+     "limiar": 33.0,
+     "fpr": 0.06925124925157214,
+     "revocacao_obtida": 0.5007552870090635,
+     "alertados": 99985,
+     "fracao_do_log": 0.07005179706312824
+    },
+    "0.60": {
+     "limiar": 27.0,
+     "fpr": 0.0963869798470224,
+     "revocacao_obtida": 0.600453172205438,
+     "alertados": 138908,
+     "fracao_do_log": 0.09732214858673818
+    },
+    "0.70": {
+     "limiar": 12.0,
+     "fpr": 0.2715419123112786,
+     "revocacao_obtida": 0.706570996978852,
+     "alertados": 388724,
+     "fracao_do_log": 0.27234899996566947
+    },
+    "0.80": {
+     "limiar": 6.0,
+     "fpr": 0.430937217694414,
+     "revocacao_obtida": 0.8032477341389728,
+     "alertados": 616063,
+     "fracao_do_log": 0.4316279467330297
+    },
+    "0.90": {
+     "limiar": 4.0,
+     "fpr": 0.7591876758761608,
+     "revocacao_obtida": 0.9018126888217523,
+     "alertados": 1083967,
+     "fracao_do_log": 0.7594522809134163
+    }
+   },
+   "por_episodio": {
+    "P": {
+     "descricao": "pontual",
+     "episodios_na_janela": 24,
+     "detectados": 24,
+     "taxa": 1.0,
+     "eventos": 460
+    },
+    "B": {
+     "descricao": "comportamental",
+     "episodios_na_janela": 16,
+     "detectados": 16,
+     "taxa": 1.0,
+     "eventos": 603
+    },
+    "L": {
+     "descricao": "longitudinal",
+     "episodios_na_janela": 12,
+     "detectados": 12,
+     "taxa": 1.0,
+     "eventos": 1585
+    },
+    "N": {
+     "descricao": "normal (benigno por construcao)",
+     "episodios_na_janela": 61,
+     "detectados": 61,
+     "taxa": 1.0,
+     "eventos": 4807
+    }
+   }
+  },
+  "C3": {
+   "scoring_run_id": 4,
+   "eventos_pontuados": 1427301,
+   "eventos_maliciosos": 2648,
+   "por_evento": {
+    "limiar": 20.0,
+    "tp": 2648,
+    "fp": 1422273,
+    "tn": 2380,
+    "fn": 0,
+    "revocacao": 1.0,
+    "precisao": 0.0018583486382753851,
+    "fpr": 0.9983294177599739
+   },
+   "fpr_a_revocacao_fixa": {
+    "0.10": {
+     "limiar": 269.0,
+     "fpr": 0.0003053375102568836,
+     "revocacao_obtida": 0.10045317220543806,
+     "alertados": 701,
+     "fracao_do_log": 0.0004911367679277181
+    },
+    "0.20": {
+     "limiar": 195.0,
+     "fpr": 0.0042978886788572375,
+     "revocacao_obtida": 0.21790030211480363,
+     "alertados": 6700,
+     "fracao_do_log": 0.004694174529409003
+    },
+    "0.30": {
+     "limiar": 180.0,
+     "fpr": 0.013211638202425434,
+     "revocacao_obtida": 0.3164652567975831,
+     "alertados": 19660,
+     "fracao_do_log": 0.013774249440027015
+    },
+    "0.40": {
+     "limiar": 174.0,
+     "fpr": 0.019642677901215242,
+     "revocacao_obtida": 0.40558912386706947,
+     "alertados": 29058,
+     "fracao_do_log": 0.02035870499635326
+    },
+    "0.50": {
+     "limiar": 165.0,
+     "fpr": 0.04848549085286031,
+     "revocacao_obtida": 0.5117069486404834,
+     "alertados": 70430,
+     "fracao_do_log": 0.049344882403921805
+    },
+    "0.60": {
+     "limiar": 153.0,
+     "fpr": 0.0999836451402552,
+     "revocacao_obtida": 0.6008308157099698,
+     "alertados": 144033,
+     "fracao_do_log": 0.10091284179020403
+    },
+    "0.70": {
+     "limiar": 140.0,
+     "fpr": 0.30421302590876514,
+     "revocacao_obtida": 0.7190332326283988,
+     "alertados": 435302,
+     "fracao_do_log": 0.3049826210448952
+    },
+    "0.80": {
+     "limiar": 130.0,
+     "fpr": 0.6230815503845498,
+     "revocacao_obtida": 0.8361027190332326,
+     "alertados": 889889,
+     "fracao_do_log": 0.6234767578807834
+    },
+    "0.90": {
+     "limiar": 124.0,
+     "fpr": 0.7537667066998069,
+     "revocacao_obtida": 0.904833836858006,
+     "alertados": 1076252,
+     "fracao_do_log": 0.754046973973955
+    }
+   },
+   "por_episodio": {
+    "P": {
+     "descricao": "pontual",
+     "episodios_na_janela": 24,
+     "detectados": 24,
+     "taxa": 1.0,
+     "eventos": 460
+    },
+    "B": {
+     "descricao": "comportamental",
+     "episodios_na_janela": 16,
+     "detectados": 16,
+     "taxa": 1.0,
+     "eventos": 603
+    },
+    "L": {
+     "descricao": "longitudinal",
+     "episodios_na_janela": 12,
+     "detectados": 12,
+     "taxa": 1.0,
+     "eventos": 1585
+    },
+    "N": {
+     "descricao": "normal (benigno por construcao)",
+     "episodios_na_janela": 61,
+     "detectados": 61,
+     "taxa": 1.0,
+     "eventos": 4807
+    }
+   }
+  }
+ }
+}
