@@ -22,7 +22,7 @@ from dataclasses import dataclass
 from datetime import datetime
 
 from detection.integracao import RiskScore
-from storage.arquivos import ArquivoStorage, _nota_de_dicionario
+from storage.arquivos import ArquivoStorage, nota_de_dicionario
 
 # Teto duro de pagina. Nem o painel nem ninguem pede mais que isto de uma vez, e
 # o parametro vindo do cliente nao pode ser quem decide.
@@ -103,7 +103,7 @@ class ArquivoRepository(ArquivoStorage):
                     employee_id=int(linha["employee_id"]),
                     event_id=str(linha["event_id"]),
                     occurred_at=datetime.fromisoformat(str(linha["occurred_at"])),
-                    score=_nota_de_dicionario(linha["score"]),
+                    score=nota_de_dicionario(linha["score"]),
                 )
                 for linha in resumo
             ]

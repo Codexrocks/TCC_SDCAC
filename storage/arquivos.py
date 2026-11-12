@@ -188,7 +188,14 @@ def _nota_para_dicionario(nota: RiskScore) -> dict[str, object]:
     }
 
 
-def _nota_de_dicionario(dados: Mapping[str, object]) -> RiskScore:
+def nota_de_dicionario(dados: Mapping[str, object]) -> RiskScore:
+    """Reconstroi uma `RiskScore` a partir do dicionario gravado em disco.
+
+    E publica porque dois modulos de `storage/` leem o mesmo registro: este
+    adaptador, ao percorrer as notas, e `storage/leitura.py`, ao servir o
+    resumo por pessoa. O padrao do projeto reserva o prefixo `_` para o que e
+    privado ao modulo, e isto deixou de ser.
+    """
     return RiskScore(
         event_id=str(dados["event_id"]),
         configuration=str(dados["configuration"]),
@@ -522,7 +529,7 @@ class ArquivoStorage:
         if not caminho.exists():
             return ()
         return tuple(
-            _nota_de_dicionario(json.loads(linha))
+            nota_de_dicionario(json.loads(linha))
             for linha in caminho.read_text(encoding="utf-8").splitlines()
             if linha.strip()
         )
