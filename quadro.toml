@@ -71,6 +71,13 @@ quando = "Quinzenal"
 estado = "recorrente"
 
 [[tarefa_professor]]
+id = "resultados-reenvio"
+titulo = "**Seção de Resultados reenviada**, com legenda e fonte em toda tabela"
+prazo = 2026-11-19
+estado = "pendente"
+ressalva = "Entregue em 12/11 e devolvida pelo orientador com correções: tabela e figura precisam de legenda com a respectiva fonte indicada"
+
+[[tarefa_professor]]
 id = "entrega-final"
 titulo = "**Entrega do TCC**"
 prazo = 2026-12-10

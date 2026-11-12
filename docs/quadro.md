@@ -21,7 +21,7 @@
 |---|---|
 | ⚠️ Atrasado | 14 |
 | ▶️ Em curso | 1 |
-| ⏳ A vencer em 7 dias | 2 |
+| ⏳ A vencer em 7 dias | 3 |
 | 🗓️ Depois | 11 |
 | ✅ Feito | 43 |
 
@@ -56,10 +56,11 @@
 
 ## ⏳ A vencer em 7 dias
 
-2 itens.
+3 itens.
 
 | Tipo | Item | O que é | Quem | Prazo | Situação |
 |---|---|---|---|---|---|
+| Professor | ****Seção de Resultados reenviada**, com legenda e fonte em toda tabela** | Entregue em 12/11 e devolvida pelo orientador com correções: tabela e figura precisam de legenda com a respectiva fonte indicada | Todos | 19/11/2026 | ⏳ Vence em 7 dias |
 | Marco | **M4 · Tabela de ablação** | Números finais das quatro configurações | Todos | 19/11/2026 | ⏳ Vence em 7 dias |
 | Semana | **S12** | Tabela de ablação, sensibilidade dos pesos, gráficos | Filipe, Davi | 13/11/2026 a 19/11/2026 | ⏳ Vence em 7 dias |
 
