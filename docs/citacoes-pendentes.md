@@ -39,8 +39,6 @@ que estão aqui e não na lista de referências.
 
 | Onde | O que falta | Quem | Desde |
 |---|---|---|---|
-| `03-metodologia.md` § 3.3 | Afirmação **sem chamada nenhuma**: "forma usual de regra de correlação em ferramentas de gestão de eventos de segurança". Entrou com a **D-42**, em 13/10, para justificar a janela de falhas na C0. Candidata: `KENT; SOUPPAYA, 2006` (NIST SP 800-92), que já está na fila do referencial — **conferir se ela sustenta a afirmação**, e não só o tema. Se não sustentar, a frase sai: a decisão não depende dela | Davi | 13/10/2026 |
-| `03-metodologia.md` § 3.3 | Afirmação sem fonte: a detecção de tentativa sucessiva de autenticação é "trivial para regras fixas". **Alternativa sem fonte:** reformular como consequência do próprio desenho — a C0 tem a regra, logo o reconhecimento não pode ser atribuído às dimensões. O argumento se sustenta sem a afirmação de dificuldade | Davi | 13/10/2026 |
 | `03-metodologia.md` § 3.8 · `04-resultados.md` § 4.6 · `05-conclusao.md` § 5.4 | A **Lei nº 13.709/2018** é citada nos três lugares e **não tem entrada em [`referencias.md`](../artigo/referencias.md)**, nem estava registrada aqui. Achado em 11/11/2026, ao montar o documento. É fonte normativa e primária, não bibliografia que uma IA possa ter inventado — mas a **entrada em ABNT NBR 6023 precisa dos dados oficiais de publicação** (veículo, data, seção), e é isso que falta conferir. Proposta a conferir: `BRASIL. Lei nº 13.709, de 14 de agosto de 2018. Lei Geral de Proteção de Dados Pessoais (LGPD). Brasília, DF: Presidência da República, 2018.` | Davi | 11/11/2026 |
 
 ### As 4 dos exemplos reais — **entregues em 10/11/2026, por conferir**
@@ -84,6 +82,28 @@ explícito: referência que a IA produziu e ninguém conferiu na fonte **não en
 
 ### As 7 da metodologia
 
+> 📦 **Uma auditoria de IA identificou as obras em 12/11/2026**, e está em
+> [insumos](insumos/auditoria-citacoes-ia-v1.md). **Ela não fecha nenhuma destas
+> linhas** — o `AGENTS.md` seção 3 veda referência que a IA produziu e ninguém
+> conferiu na fonte, e a própria auditoria recusou assinar pela equipe.
+>
+> **O que ela faz é encurtar a conferência:** cada obra está nomeada com veículo,
+> volume, páginas e DOI, e em vários casos com o trecho que sustenta a afirmação.
+> Conferir passou de "procurar a obra" para "abrir este documento e checar o
+> trecho".
+>
+> ⚠️ **Três apontamentos dela mudam o que o artigo afirma**, e nenhum foi
+> aplicado:
+>
+> | Chamada | O que a auditoria aponta |
+> |---|---|
+> | `(KAUFMAN et al., 2012)` | O ano seria **2011** — a publicação é do KDD '11, com DOI 10.1145/2020408.2020496 |
+> | `(SOMMER; PAXSON, 2010)` | O artigo trata de **generalização** e da distância entre ambiente experimental e operacional — **não** especificamente de dado sintético, que é o que a § 3.8 lhe atribui |
+> | `(WOHLIN et al., 2012)` | O ano confere, mas a **edição é divergente** entre registros: não inserir o número sem conferir a folha de rosto do exemplar usado |
+>
+> O segundo é o mais sério, e é do tipo que a validação automática não pega: a
+> obra existe, está citada, e **o que o texto afirma não é o que ela diz**.
+
 Situação diferente, e mais exigente. O
 [insumo entregue pelo Davi](insumos/metodologia-davi-v1.md) em 28/09 declara, no
 próprio cabeçalho, que a redação foi **rascunhada por IA** e que **nenhuma das
@@ -116,6 +136,25 @@ Ao conferir, apague a linha e acrescente a referência em ABNT NBR 6023 na
 >
 > **Isto não as declara conferidas.** Se a comparação por curva voltar ao texto,
 > as duas voltam para esta fila como estavam.
+
+> ✅ **Mais duas baixas no mesmo dia, e estas porque a frase saiu do artigo.**
+> As afirmações
+> *"forma usual de regra de correlação em ferramentas de gestão de eventos de
+> segurança"* e *"trivial para regras fixas"* **não estão mais na § 3.3** — elas
+> saíram no resumo da Metodologia, junto com o parágrafo que as continha. O que a
+> seção diz hoje é só a consequência do desenho: como a C0 tem a regra da janela
+> de dois minutos, o reconhecimento de tentativas sucessivas não pode ser
+> atribuído como ganho às dimensões.
+>
+> **Não é baixa por conferência.** Se qualquer uma das duas frases voltar ao
+> texto, as duas pendências voltam a esta fila como estavam. A primeira tinha a
+> `KENT; SOUPPAYA, 2006` como candidata, e aquela obra **continua na fila do
+> referencial** por outro motivo.
+>
+> A [auditoria de 12/11](insumos/auditoria-citacoes-ia-v1.md) chegou à mesma
+> conclusão sobre a segunda, por outro caminho — *"é consequência lógica do
+> desenho experimental, não uma afirmação que exige fundamentação externa"*. É
+> corroboração, e não o motivo: o motivo é o texto não estar mais lá.
 
 > **A `SOMMER; PAXSON, 2010` já era conhecida do repositório:** ela aparece no
 > [plano](plano.md), seção 4, como apoio ao risco de dados sintéticos fáceis

@@ -34,6 +34,7 @@ de afirmado.
 | [Pesos preliminares e sensibilidade](pesos-yasmin-v1.md) | **Yasmin**, rascunho integral por Claude Sonnet 5 | 10/11/2026 | **Nada ainda** — proposta até ela confirmar |
 | [LGPD e ISO/IEC 27001](lgpd-iso-yasmin-v1.md) | **Yasmin**, rascunho integral por Claude Sonnet 5 | 10/11/2026 | **Nada ainda** — proposta até ela confirmar |
 | [Exemplos reais do problema](exemplos-reais-yasmin-v1.md) | **Yasmin**, rascunho integral por Claude Sonnet 5 | 10/11/2026 | **Nada ainda** — as 4 fontes vão para [citações pendentes](../citacoes-pendentes.md) |
+| [Auditoria das citações pendentes](auditoria-citacoes-ia-v1.md) | **Uma IA**, integralmente | 12/11/2026 | **Material de conferência** — não fecha pendência nenhuma |
 
 ## A entrega de 10/11/2026, e o que a conferência achou
 
@@ -193,6 +194,40 @@ O `README.md` do pacote dizia que os arquivos *"também ficam versionados em
 `docs/relatorios/2026-11-10-sessao-40.md` estava *"já feito"*. Nenhuma das duas
 era verdade em 11/11: os insumos entraram **neste** Pull Request, e aquele
 relatório não existe em nenhuma branch do repositório.
+
+### A auditoria de citações de 12/11, e o que ela pode fazer
+
+Uma IA auditou as onze citações pendentes e identificou as obras, os dados
+bibliográficos e, em vários casos, o trecho que sustenta cada afirmação. O
+documento está em
+[auditoria das citações](auditoria-citacoes-ia-v1.md), versionado como recebido.
+
+**Ela não fecha pendência nenhuma**, e o `AGENTS.md` seção 3 diz por quê:
+*"referência bibliográfica que a IA produziu e ninguém conferiu na fonte"* está
+entre o que nunca é aceitável. **A própria auditoria recusou assinar por vocês** —
+é a parte mais importante dela, e está citada no cabeçalho do insumo.
+
+**O que ela muda é o custo.** Antes, conferir era procurar a obra, decidir se era
+a certa e ler o trecho. Agora é abrir um documento nomeado e checar se o trecho
+sustenta a afirmação.
+
+**E traz cinco correções que mudam o artigo**, nenhuma aplicada:
+
+| | |
+|---|---|
+| `KAUFMAN et al., 2012` | O ano seria **2011** — KDD '11 |
+| Target | O evento é de 2013, a publicação de **2014** |
+| Bangor et al. | A média da amostra deles é **69,5**, não 68, e eles dão médias e desvios — **não limites de faixa** |
+| Nielsen e Landauer | **Não** estabeleceram cinco participantes como regra; o estudo é um modelo |
+| Sommer e Paxson | Tratam de generalização, **não** especificamente de dado sintético |
+
+As três últimas são do tipo mais perigoso: a obra existe, está citada, e o que o
+texto afirma **não é o que ela diz**. É exatamente o que a validação automática
+não pega e a banca pega.
+
+**E uma referência nova que ela propõe — Tariq et al. (2025), sobre fadiga de
+alertas — não entra.** Citação nova sugerida por IA é o caso que a regra nomeia
+primeiro.
 
 ## Ao acrescentar um insumo
 
