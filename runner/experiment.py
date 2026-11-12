@@ -38,7 +38,7 @@ from zoneinfo import ZoneInfo
 
 from detection.configuration import Configuration
 from detection.d2 import Baseline, build_baselines
-from detection.d3 import PriorScore, build_posture
+from detection.d3 import MissingEquipmentStateError, PriorScore, build_posture
 from detection.integracao import EvaluationContext, RiskScore, alert_for, compose
 
 # Quantos dias de historico por pessoa o laco mantem em memoria. Precisa cobrir
@@ -56,6 +56,13 @@ class ExperimentResult:
     config_hash: str
     scored: int
     alerts: int
+    # Quantos eventos foram pontuados **sem a parcela de postura**, pela D-44.
+    # Sai no resumo de proposito: parcela que desaparece sem contagem e a forma
+    # silenciosa do defeito que a D-44 aceitou correr.
+    without_posture: int = 0
+    # Quantas vezes um risco anterior ficou fora da janela de exposicao por ter
+    # o **mesmo instante** do evento avaliado. Ver o comentario em `_pontua`.
+    tied_priors: int = 0
 
 
 def code_sha() -> str:
@@ -167,7 +174,7 @@ def run_experiment(
         if config.enables("d2"):
             storage.save_baselines(scoring_run_id, padroes or {})
 
-        pontuadas, alertas = _pontua(
+        pontuadas, alertas, sem_postura, empates = _pontua(
             storage,
             run_id=run_id,
             scoring_run_id=scoring_run_id,
@@ -185,6 +192,8 @@ def run_experiment(
                 scoring_run_id=scoring_run_id,
                 config_hash=config.config_hash,
                 scored=pontuadas,
+                without_posture=sem_postura,
+                tied_priors=empates,
                 alerts=alertas,
             )
         )
@@ -230,6 +239,8 @@ def _pontua(
     lote: list[RiskScore] = []
     alertas = []
     pontuadas = 0
+    sem_postura_total = 0
+    empates_total = 0
 
     for evento in storage.events(run_id, start=inicio, end=fim):
         pessoa = evento.employee_id
@@ -239,22 +250,50 @@ def _pontua(
         recentes = tuple(historico[pessoa])
 
         postura = None
+        sem_postura = False
         if config.enables("d3"):
             # O dia e o LOCAL da pessoa, o mesmo que o `build_posture` vai
             # calcular. Buscar pelo dia em UTC traria o estado errado para todo
             # evento perto da meia-noite — e sempre para o mesmo lado.
             fuso = ZoneInfo(catalogo.employee(pessoa).timezone)
             dia = evento.occurred_at.astimezone(fuso).date()
-            postura = build_posture(
-                evento,
-                account_states=_conta(storage, run_id, pessoa, cache_de_conta),
-                device_states=_equipamento(
-                    storage, run_id, evento.device_id, dia, cache_de_equipamento
-                ),
-                recent=recentes,
-                catalog=catalogo,
-                config=config,
-            )
+            try:
+                postura = build_posture(
+                    evento,
+                    account_states=_conta(storage, run_id, pessoa, cache_de_conta),
+                    device_states=_equipamento(
+                        storage, run_id, evento.device_id, dia, cache_de_equipamento
+                    ),
+                    recent=recentes,
+                    catalog=catalogo,
+                    config=config,
+                )
+            except MissingEquipmentStateError:
+                # D-44: o equipamento do evento nao tem estado no dia, e a
+                # parcela de postura nao e pontuada. A excecao e **especifica**:
+                # qualquer outro erro de montagem do retrato continua
+                # derrubando a execucao, porque e defeito e nao dado faltando.
+                postura = None
+                sem_postura = True
+                sem_postura_total += 1
+
+        # A D-18 recusa risco anterior de instante **maior ou igual** ao do
+        # evento, e o gerador produz varios eventos da mesma pessoa no mesmo
+        # segundo: um `FILE_ACCESS` e o `FILE_DOWNLOAD` seguinte cabem no mesmo
+        # instante. O empate nao e o evento atual — e outro evento, anterior na
+        # ordem —, mas com resolucao de segundo os dois sao indistinguiveis para
+        # a invariante.
+        #
+        # Quem cede aqui e o executor, nao a invariante: a D-18 e decisao, e
+        # afrouxar `>=` para `>` seria mexer nela. O custo e que a exposicao do
+        # irmao de mesmo segundo nao entra, o que **subestima** a parcela de
+        # conduta — vies contra a propria hipotese, que e a direcao aceitavel.
+        # E conta-se, pelo mesmo motivo da D-44: parcela que diminui sem
+        # contagem e a forma silenciosa do defeito.
+        anteriores_de = tuple(
+            p for p in anteriores[pessoa] if p.occurred_at < evento.occurred_at
+        )
+        empates_total += len(anteriores[pessoa]) - len(anteriores_de)
 
         nota = compose(
             evento,
@@ -262,8 +301,9 @@ def _pontua(
                 catalog=catalogo,
                 recent=recentes,
                 baseline=padroes.get(pessoa),
-                priors=tuple(anteriores[pessoa]),
+                priors=anteriores_de,
                 posture=postura,
+                posture_unavailable=sem_postura,
             ),
             config,
         )
@@ -292,4 +332,4 @@ def _pontua(
     if alertas:
         storage.save_alerts(scoring_run_id, alertas)
 
-    return pontuadas, len(alertas)
+    return pontuadas, len(alertas), sem_postura_total, empates_total

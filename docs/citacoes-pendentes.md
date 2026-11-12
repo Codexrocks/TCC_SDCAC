@@ -42,6 +42,27 @@ que estão aqui e não na lista de referências.
 | `03-metodologia.md` § 3.3 | Afirmação **sem chamada nenhuma**: "forma usual de regra de correlação em ferramentas de gestão de eventos de segurança". Entrou com a **D-42**, em 13/10, para justificar a janela de falhas na C0. Candidata: `KENT; SOUPPAYA, 2006` (NIST SP 800-92), que já está na fila do referencial — **conferir se ela sustenta a afirmação**, e não só o tema. Se não sustentar, a frase sai: a decisão não depende dela | Davi | 13/10/2026 |
 | `03-metodologia.md` § 3.3 | Afirmação sem fonte: a detecção de tentativa sucessiva de autenticação é "trivial para regras fixas". **Alternativa sem fonte:** reformular como consequência do próprio desenho — a C0 tem a regra, logo o reconhecimento não pode ser atribuído às dimensões. O argumento se sustenta sem a afirmação de dificuldade | Davi | 13/10/2026 |
 
+### As 4 dos exemplos reais — **entregues em 10/11/2026, por conferir**
+
+O insumo [exemplos reais](insumos/exemplos-reais-yasmin-v1.md) traz quatro casos
+para a Introdução, com fonte. **O rascunho foi produzido integralmente por IA**
+(Claude Sonnet 5), e o cabeçalho do arquivo declara "Conferi tudo que a IA
+escreveu? **Sim**" — enquanto o `README.md` do pacote entregue dizia que nenhum
+arquivo havia sido conferido. **As duas não podem valer juntas**, e é o campo que
+decide se as referências podem entrar.
+
+Até isso ficar resolvido, nenhuma delas vai ao artigo. O `AGENTS.md` seção 3 é
+explícito: referência que a IA produziu e ninguém conferiu na fonte **não entra**.
+
+| Onde | O que falta | Quem | Desde |
+|---|---|---|---|
+| `01-introducao.md` — caso **Target, 2013** | Confirmar na fonte: RILEY; ELGIN; LAWRENCE; MATLACK, *Bloomberg Businessweek*, 13 mar. 2014. Abrir o artigo e conferir que ele sustenta o que o texto afirma | Yasmin | 10/11/2026 |
+| `01-introducao.md` — caso **GE / Zheng, 2018** | Confirmar na fonte: U.S. DOJ, *Niskayuna man charged theft trade secrets*, 2018. Abrir o *press release* e conferir autor, data e conteúdo | Yasmin | 10/11/2026 |
+| `01-introducao.md` — caso **Capital One, 2019** | Confirmar na fonte: U.S. DOJ, `usao-wdwa`. **O próprio insumo admite estar incompleto** — *"conferir o número exato"* —, com URL genérica e sem o documento | Yasmin | 10/11/2026 |
+| `01-introducao.md` — caso **Tesla / Tripp, 2018** | Confirmar na fonte: petição inicial *Tesla, Inc. v. Martin Tripp* (Nevada) **ou** *GovInfoSecurity*, 2018. São duas fontes para o mesmo caso, e a petição não tem link: decidir qual sustenta a afirmação | Yasmin | 10/11/2026 |
+
+***
+
 ### As 13 do referencial teórico — **conferidas em 13/10/2026**
 
 > **A Yasmin declarou ter conferido cada uma na fonte**, e o **Davi confirmou a

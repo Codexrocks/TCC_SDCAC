@@ -44,6 +44,23 @@ from detection.model import (
 )
 
 
+class MissingEquipmentStateError(ValueError):
+    """Nao ha estado do equipamento do evento no dia local dele.
+
+    **Excecao propria, e nao `ValueError` solto, por uma razao de projeto.** Pela
+    decisao de 11/11/2026 a D3 pontua **sem a parcela de postura** quando isto
+    acontece, e quem decide isso e o executor — nao esta funcao. Para decidir, o
+    executor precisa distinguir *este* caso de qualquer outro erro de montagem
+    do retrato: insumo de outra pessoa, retrato de outro dia, desfecho de
+    phishing fora da lista. Todos esses continuam `ValueError` e continuam
+    derrubando a execucao, porque sao defeito.
+
+    Capturar `ValueError` generico aqui faria a parcela sumir tambem quando o
+    motivo fosse um bug — que e exatamente o risco que a recusa original
+    existia para impedir.
+    """
+
+
 def _conta_vigente(event: Event, estados: Iterable[AccountState]) -> AccountState:
     """O estado da conta no instante do evento, e nao o mais recente.
 
@@ -138,7 +155,7 @@ def build_posture(
     do_dia = [e for e in device_states if e.state_date == dia]
     equipamento = next((e for e in do_dia if e.device_id == event.device_id), None)
     if equipamento is None:
-        raise ValueError(
+        raise MissingEquipmentStateError(
             f"nenhum estado do equipamento {event.device_id} em {dia}: sem ele, "
             "atualizacao e antivirus sairiam como se estivessem em ordem"
         )

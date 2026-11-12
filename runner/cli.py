@@ -118,10 +118,23 @@ def main(argv: list[str] | None = None) -> int:
     largura = max(len(r.configuration) for r in resumos)
     print(f"semente {args.run_id} · limiar de alerta {limiar:g}")
     for resumo in resumos:
+        # A contagem da D-44 so aparece quando existe: linha com "0 sem
+        # postura" em toda execucao treina quem le a ignorar, e e justamente
+        # ela que nao pode passar batida.
+        sem_postura = (
+            f"  {resumo.without_posture} sem a parcela de postura (D-44)"
+            if resumo.without_posture
+            else ""
+        )
+        empates = (
+            f"  {resumo.tied_priors} riscos anteriores fora da janela por empate de instante"
+            if resumo.tied_priors
+            else ""
+        )
         print(
             f"  {resumo.configuration:<{largura}}  execucao {resumo.scoring_run_id}"
             f"  {resumo.scored} eventos  {resumo.alerts} alertas"
-            f"  hash {resumo.config_hash[:12]}"
+            f"  hash {resumo.config_hash[:12]}{sem_postura}{empates}"
         )
     return 0
 

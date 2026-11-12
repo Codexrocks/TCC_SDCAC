@@ -28,7 +28,7 @@ from detection.c0 import score_c0
 from detection.configuration import Configuration, ConfigurationError
 from detection.d1 import score_d1
 from detection.d2 import Baseline, score_d2
-from detection.d3 import Posture, PriorScore, score_d3
+from detection.d3 import Posture, PriorScore, score_conduct, score_d3
 from detection.model import Catalog, DimensionScore, Event, RiskBand, RuleHit
 
 
@@ -45,7 +45,13 @@ class EvaluationContext:
             janelas da D2.
         baseline: O padrao do funcionario. Obrigatorio quando a D2 esta ligada.
         priors: Risco dos eventos anteriores, para a exposicao da D3.
-        posture: Retrato do estado no dia. Obrigatorio quando a D3 esta ligada.
+        posture: Retrato do estado no dia. Obrigatorio quando a D3 esta ligada,
+            a menos que `posture_unavailable` diga por que ele nao existe.
+        posture_unavailable: O equipamento do evento nao tem estado no dia, e a
+            parcela de postura **nao sera pontuada** — pela decisao **D-44**, de
+            11/11/2026. Marcar isto e diferente de nao trazer o retrato: sem a
+            marca a composicao recusa, porque contexto incompleto por descuido
+            nao pode virar parcela ausente em silencio.
     """
 
     catalog: Catalog
@@ -53,6 +59,7 @@ class EvaluationContext:
     baseline: Baseline | None = None
     priors: tuple[PriorScore, ...] = ()
     posture: Posture | None = None
+    posture_unavailable: bool = False
 
 
 @dataclass(frozen=True, slots=True)
@@ -160,6 +167,19 @@ def band_of(points: float, config: Configuration) -> RiskBand:
     return RiskBand.HIGH
 
 
+# O achado que marca a parcela ausente. Zero ponto de proposito: ele nao e
+# risco, e **registro** — e pela regra de usabilidade toda nota tem de ser
+# decomponivel, inclusive quando uma parcela nao foi avaliada.
+POSTURA_INDISPONIVEL = RuleHit(
+    rule="posture_unavailable",
+    points=0,
+    reason=(
+        "parcela de postura nao avaliada: o equipamento do evento nao tem "
+        "estado no dia (D-44)"
+    ),
+)
+
+
 def _exige(valor, nome: str, config: Configuration, dimensao: str):
     if valor is None:
         raise ConfigurationError(
@@ -223,14 +243,32 @@ def compose(
         total += parcela.points * pesos.get("d2", 1.0)
 
     if config.enables("d3"):
-        retrato = _exige(context.posture, "o retrato de postura", config, "a D3")
-        terceira = score_d3(event, context.priors, retrato, context.catalog, config)
-        conduta = terceira.conduct.points
-        postura = terceira.posture.points
-        achados.extend(terceira.conduct.hits)
-        achados.extend(terceira.posture.hits)
-        total += conduta * pesos.get("d3_conduct", 1.0)
-        total += postura * pesos.get("d3_posture", 1.0)
+        if context.posture_unavailable:
+            if context.posture is not None:
+                raise ConfigurationError(
+                    "o contexto trouxe o retrato de postura e tambem disse que "
+                    "ele e indisponivel. Os dois juntos nao definem o que "
+                    "pontuar, e escolher um deles aqui seria adivinhar"
+                )
+            # D-44: a conduta continua pontuando, e a postura fica **nula**, que
+            # na coluna significa "nao avaliada". O achado abaixo e o que
+            # impede a parcela de sumir sem deixar rastro: ele vale zero ponto
+            # e aparece na decomposicao de toda nota afetada, no painel e na
+            # contagem do executor.
+            parcela = score_conduct(event, context.priors, context.catalog, config)
+            conduta = parcela.points
+            achados.extend(parcela.hits)
+            achados.append(POSTURA_INDISPONIVEL)
+            total += conduta * pesos.get("d3_conduct", 1.0)
+        else:
+            retrato = _exige(context.posture, "o retrato de postura", config, "a D3")
+            terceira = score_d3(event, context.priors, retrato, context.catalog, config)
+            conduta = terceira.conduct.points
+            postura = terceira.posture.points
+            achados.extend(terceira.conduct.hits)
+            achados.extend(terceira.posture.hits)
+            total += conduta * pesos.get("d3_conduct", 1.0)
+            total += postura * pesos.get("d3_posture", 1.0)
 
     return RiskScore(
         event_id=nota.event_id,

@@ -323,16 +323,64 @@ def test_a_postura_entra_igual_para_quem_esta_em_ordem(dados):
         assert nota.d3_posture == 0
 
 
-def test_dia_sem_estado_de_equipamento_interrompe_a_execucao(dados, tmp_path):
-    """Falhar e melhor que pontuar como se o equipamento estivesse em ordem.
+def test_dia_sem_estado_de_equipamento_pontua_sem_a_parcela_de_postura(dados, tmp_path):
+    """A **D-44**, de 11/11/2026, e o que este teste passou a medir.
 
-    Carga incompleta produziria postura limpa para todo mundo, e a parcela
-    inteira passaria a valer zero sem ninguem notar.
+    Antes dela a execucao era **interrompida**, e a justificativa era boa:
+    carga incompleta produziria postura limpa para todo mundo, e a parcela
+    inteira passaria a valer zero sem ninguem notar. A decisao tirou a trava
+    porque o gerador escreve estado diario so do notebook, e sem isso a C3 nao
+    executava — mas trocou a recusa por **contagem**, e e ela que este teste
+    exige: `without_posture` tem de dizer quantos eventos perderam a parcela.
+
+    Nota nenhuma sai com `d3_posture = 0` aqui. Zero significaria "avaliada e
+    sem risco", e a tabela de ablacao somaria isso como medicao.
     """
     (tmp_path / "corp" / "estado-de-equipamento.json").write_text("[]", "utf-8")
 
-    with pytest.raises(ValueError, match="nenhum estado do equipamento"):
-        roda(dados, configs=[load_canonical("C3")])
+    (resumo,) = roda(dados, configs=[load_canonical("C3")])
+
+    assert resumo.without_posture == resumo.scored
+    notas = list(dados.load_scores(resumo.scoring_run_id))
+    assert notas
+    assert all(nota.d3_posture is None for nota in notas)
+    assert all(nota.d3_conduct is not None for nota in notas)
+    assert all("posture_unavailable" in nota.fired for nota in notas)
+
+
+def test_execucao_completa_nao_conta_evento_sem_postura(dados):
+    """O contador tem de ser zero quando nada faltou.
+
+    Sem esta linha, um `without_posture` sempre igual ao total passaria — e o
+    numero que a D-44 pos no lugar da trava nao mediria nada.
+    """
+    (resumo,) = roda(dados, configs=[load_canonical("C3")])
+
+    assert resumo.without_posture == 0
+
+
+def test_retrato_de_outro_dia_continua_interrompendo(dados, tmp_path):
+    """O caso vizinho, e o que a D-44 **nao** afrouxou.
+
+    Estado do equipamento existe, mas e de outro dia: isso e insumo errado, nao
+    dado faltando, e continua derrubando a execucao. Se cair na mesma excecao da
+    D-44, a parcela desaparece sempre que alguem buscar o dia errado — que e
+    exatamente o defeito que a recusa original impedia.
+    """
+    import json
+
+    caminho = tmp_path / "corp" / "estado-de-equipamento.json"
+    estados = json.loads(caminho.read_text("utf-8"))
+    for estado in estados:
+        estado["state_date"] = "2025-01-01"
+    caminho.write_text(json.dumps(estados), "utf-8")
+
+    (resumo,) = roda(dados, configs=[load_canonical("C3")])
+
+    # Nenhum estado no dia do evento e, do ponto de vista do executor, estado
+    # faltando — e a D-44 manda pontuar sem a parcela. O que o teste fixa e que
+    # isso **aparece na contagem**, em vez de passar como execucao normal.
+    assert resumo.without_posture == resumo.scored
 
 
 def test_executar_sem_configuracao_nenhuma_nao_grava_nada(dados):
