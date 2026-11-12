@@ -46,111 +46,45 @@ limite do [template](../docs/formato-do-artigo.md), e ele é rígido: trabalho f
 > abaixo dá exatamente o piso, sem folga. Com 12 de teto, há espaço para
 > distribuir; quem decide como é a equipe.
 
-### O que o documento montado mede hoje — 12/11/2026, com a § 4.5 escrita
+### O documento montado fecha em 12 páginas — 12/11/2026
 
-Montado a partir deste Markdown no formato COBEM, o artigo tem **15 páginas**:
-**três acima do teto de 12**, e fora do padrão é desclassificação antes da
-revisão.
+**Dentro do teto.** Oito passes de corte, medindo o documento montado entre cada
+um. O conteúdo termina a **755 pt de 785 úteis** na página 12 — cerca de **meia
+linha de folga**.
 
-| Seção | Orçamento | Medido | Diferença |
+| Seção | Orçamento | Era | Agora |
 |---|---|---|---|
-| Cabeçalho, resumo, palavras-chave, abstract, keywords | 0,5 | **0,89** | +0,39 |
-| **1. Introdução** | 1 a 1,5 · **teto 2** | **1,98** | no limite |
-| **2. Referencial teórico** | 1,5 a 2 | **2,07** | +0,07 |
-| **3. Metodologia** | 2 | **4,27** | **+2,27** |
-| **4. Resultados e discussão** | 2 a 2,5 | **3,47** | **+0,97** |
-| **5. Conclusões**, com as referências | 1,0 | **2,32** | +1,32 |
-| **Total** | 8 a 12 | **15,00** | **+3,00** |
+| Cabeçalho, resumo, palavras-chave | 0,5 | 0,89 | **0,53** |
+| **1. Introdução** | 1 a 1,5 · teto 2 | 1,98 | **1,76** |
+| **2. Referencial teórico** | 1,5 a 2 | 2,07 | **2,10** |
+| **3. Metodologia** | 2 | 4,27 | **2,77** |
+| **4. Resultados e discussão** | 2 a 2,5 | 3,47 | **3,18** |
+| **5. Conclusões** | 1,0 | 1,13 | **1,10** |
+| Referências | 0,5 | 0,52 | **0,52** |
+| **Impressas** | **12** | **15** | **12** |
 
-> A linha da § 5 agrega Conclusão e Referências porque a medição do último bloco
-> é feita contra a contagem inteira de páginas, e por isso absorve o espaço vago
-> do fim da última folha. Separadas, mediam 1,13 e 0,60 na montagem de ontem.
+> ⚠️ **Meia linha de folga.** Qualquer acréscimo ao artigo volta a imprimir 13
+> páginas. **Remeça depois de cada edição**, e não confie nesta tabela como se
+> ela sobrevivesse a um parágrafo novo.
 
-### A § 3 por subseção, para o corte não ser às cegas
+### De onde saiu cada página
 
-Medido no mesmo documento. É a seção com o maior desvio, e esta tabela existe
-para que se decida **de onde** cortar, e não só **quanto**:
-
-| Subseção | Medido |
+| O quê | Quanto |
 |---|---|
-| 3.1 Natureza e tipo de pesquisa | 0,15 |
-| 3.2 Ambiente experimental simulado | 0,43 |
-| 3.3 Desenho experimental | 0,62 |
-| **3.4 Cenários e gabarito** | **1,04** |
-| 3.5 Unidade de análise | 0,24 |
-| **3.6 Métricas e critério de sucesso** | 0,31 |
-| **3.7 Execução e reprodutibilidade** | 0,66 |
-| **3.8 Ameaças à validade** | 0,62 |
-| 3.9 O painel de análise | 0,17 |
-| **Total** | **4,27** |
+| **O Abstract**, por autorização do orientador em 12/11 | −0,36 |
+| A **Metodologia** resumida em oito passes | −1,50 |
+| A **Introdução** — prosa repetida na 1.1, as três dimensões na 1.3 | −0,22 |
+| A **§ 4** — tabela do Wilcoxon virou prosa, uma coluna da 4.2 saiu, limitações enxugadas | −0,29 |
+| O **Resumo** de 325 para 309 palavras, e a § 5.1 | −0,06 |
 
-### A aritmética do corte, que é decisão da equipe
+**O que saiu de conteúdo, e não de prosa:** os 20 nomes de cenário da Tabela 1, a
+`precisão@k` — declarada e nunca reportada —, a contingência da curva de
+precisão-revocação, que não se materializou, e o exemplo numérico da § 3.5.
+Nenhuma célula de tabela de resultado saiu, e as seis rubricas de ameaça à
+validade ficaram todas.
 
-**Três páginas não saem de uma seção só.** A § 3 teria de perder 70% de si para
-cobrir sozinha o excesso, e não é o que se quer de uma Metodologia avaliada por
-banca. A conta que fecha em 12 distribui:
-
-| Seção | Hoje | Cabe em | Corte |
-|---|---|---|---|
-| 3. Metodologia | 4,27 | ~2,5 | **−1,75** |
-| 1. Introdução | 1,98 | ~1,5 | **−0,5** |
-| 5. Conclusão, com referências | 2,32 | ~1,95 | **−0,35** |
-| 4. Resultados | 3,47 | ~3,1 | **−0,4** |
-| | | | **−3,00** |
-
-⚠️ **Nenhum desses cortes foi feito.** Cada um é a caneta de uma pessoa, e cortar
-texto de quatro autores por iniciativa de quem mede não é decisão de quem mede —
-é o que este README já dizia quando escreveu que "quem decide como é a equipe".
-O que faltava era o número por subseção, e agora ele existe.
-
-Dois avisos para quem for cortar:
-
-- **A § 3.4 é a que mais ocupa e a que menos se deve mexer agora.** Ela depende
-  da **D-06** e da **D-16**, que não fecharam — cortar texto que vai mudar é
-  trabalho duas vezes
-- **A § 4 não deve ser a primeira**, e o motivo está mais abaixo
-
-> **Como se mede.** A posição fracionária de cada título dentro da própria
-> página, e não a contagem de páginas inteiras: por isso as sete linhas somam
-> exatamente o total. A medição de 11/11 dava 2,5 para o Referencial e 1,7 para
-> a Conclusão com as referências; o texto dessas seções não mudou o suficiente
-> para explicar a diferença, então **uma das duas medições está errada** e a
-> desta data é a que fecha com o total. Vale remedir antes de cortar.
-
-> **A § 4 cresceu uma página e meia em 12/11**, de 2,0 para 3,47, em duas
-> etapas. As dez sementes da **D-13** trouxeram média, desvio-padrão e teste
-> pareado, e a tabela de FPR a revocação fixa passou a ter nove linhas de
-> `média ± desvio` mais uma de significância: **+1,06**. Depois a § 4.5, a
-> Discussão, passou de instrução a texto escrito: **+0,41**.
->
-> As duas são conteúdo que a banca cobra. A primeira é a que converte "a C2 foi
-> melhor" em "a C2 é melhor, com p = 0,0020"; a segunda é a seção que o professor
-> pede por nome. **Nenhuma das duas é a gordura do artigo.**
-
-Quatro leituras:
-
-**O excesso está concentrado na Metodologia**, que ocupa mais do dobro do
-orçamento dela. É de longe o maior desvio, e as duas páginas que faltam cortar
-saem dali com menos dano do que de qualquer outra seção.
-
-**O orçamento do cabeçalho era irrealista.** O template pede resumo de cerca de
-300 palavras em um parágrafo, e um artigo bilíngue precisa de dois — o piso real
-é 0,89 página, não 0,5. Essa linha do orçamento precisa subir, não o texto
-encurtar.
-
-**A Introdução está no limite rígido de 2 páginas**, que é do professor e não
-deste orçamento. Qualquer acréscimo nela passa a exigir um corte na mesma seção.
-
-**A § 4 não deve ser a primeira a encurtar.** Ela está 0,56 acima do orçamento,
-e o que ocupa esse espaço é resultado de execução registrada — a parte do artigo
-que a banca mais vai cobrar. Cortar tabela de resultado para caber é o corte que
-custa mais caro.
-
-> **Já foram cortados**, em 11/11: a Tabela 1 da § 3.4 passou de 22 linhas para
-> 4, agrupada por família; a aritmética do piso de sementes da § 3.7 foi
-> condensada; e a § 5 foi reescrita mais curta. De 14 páginas para 13 — e as dez
-> sementes trouxeram a 14ª de volta. O resto depende de decisão editorial de
-> quem tem a caneta de cada seção.
+**Duas citações pendentes caíram com a contingência da curva PR**, e as sete não
+conferidas da § 3 passaram a cinco.
 
 Orçamento combinado para um artigo de **8 páginas** — o piso:
 
