@@ -53,14 +53,32 @@ rótulo nenhum pela **D-17**, com o gabarito separado em `ground_truth/`.
 > | Fração do registro que a C3 alerta no limiar 20 | **99,8%** — ela não é operável nesse corte |
 >
 > Os dois primeiros subestimam parcelas da C3, e portanto são **conservadores**.
-> O terceiro é o limiar, não o modelo: a revocação fixa mostra a C3 como a
-> melhor configuração a partir de 0,40.
+> O terceiro é o limiar, não o modelo.
+>
+> ⚠️ **A leitura seguinte, de que a revocação fixa mostrava a C3 como a melhor
+> configuração a partir de 0,40, caiu em 12/11/2026**: ela vinha de uma semente,
+> e o Wilcoxon sobre dez não rejeita a nula naquele regime. Ver a §4.3.1.
 
+> ✅ **As dez sementes entraram em 12/11/2026, e com elas a D-13.** Dez
+> execuções independentes, as quatro configurações em cada uma, com média,
+> desvio-padrão e **Wilcoxon pareado de p-valor exato** em
+> [`results/agregado.md`](../results/README.md). A §4 do artigo deixou de ser
+> descritiva.
+>
+> Dois resultados que só dez sementes davam, e que mudaram o texto:
+>
+> | | |
+> |---|---|
+> | C2 contra C0, FPR a revocação fixa | menor nos **nove** níveis, **p = 0,0020** em cada um |
+> | C3 contra C2 | nula **não rejeitada** em seis dos nove; nos três restantes a C3 está **pior** |
+>
+> A vantagem que a semente única atribuía à C3 acima de 0,40 de revocação **não
+> sobreviveu ao teste pareado** — e a afirmação de que a C0 "só alcança 0,30
+> alertando tudo" valia para a semente 42, não em geral: nas dez, isso só
+> acontece em duas.
+>
 > **A M3 venceu em 22/10** e o critério dela é "C0 a C3 rodando sobre **o mesmo
-> gerador**". **As quatro rodam desde 11/11/2026**, sobre a mesma semente e a
-> mesma janela. O que resta para o critério ser cumprido com rigor são as
-> **múltiplas sementes** da D-13 — uma execução por configuração não distingue
-> ganho sistemático de variação de amostragem.
+> gerador**". Com as dez sementes, está cumprido.
 
 ---
 
@@ -184,15 +202,15 @@ avaliador que grave métrica — e a caneta da **S14**.
 
 ## O caminho crítico, em uma frase
 
-~~Gerador~~ → ~~ingestão~~ → ~~a C3~~ → **múltiplas sementes** · **cenários
+~~Gerador~~ → ~~ingestão~~ → ~~a C3~~ → ~~múltiplas sementes~~ → **cenários
 nomeados** → tabela de ablação → ~~Resultados~~ → ~~Conclusão~~.
 
-O gerador caiu em 04/11; a ingestão e a C3, em 11/11. A **Seção 4 do artigo
-está escrita sobre números de execução registrada, com as quatro
-configurações**, e a Conclusão responde à pergunta de pesquisa. Os dois elos
-restantes são independentes entre si: as **múltiplas sementes** da **D-13**, que
-é o que converte a análise descritiva em inferencial, e os **cenários nomeados**
-da Yasmin pelas **D-06** e **D-16**, atrasadas desde 01/10.
+O gerador caiu em 04/11; a ingestão e a C3, em 11/11; as **dez sementes da
+D-13**, em 12/11. A **Seção 4 do artigo está escrita sobre números de execução
+registrada, com as quatro configurações e tratamento estatístico**, e a
+Conclusão responde à pergunta de pesquisa. O elo que resta no caminho crítico
+são os **cenários nomeados** da Yasmin pelas **D-06** e **D-16**, atrasadas
+desde 01/10.
 
 Duas decisões passaram a vencer antes da banca, e não depois:
 

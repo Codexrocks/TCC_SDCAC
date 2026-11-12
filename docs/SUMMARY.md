@@ -90,4 +90,5 @@
   * [2026-10-19 — Sessão 38: um PR inteiro tinha sido perdido](relatorios/2026-10-19-sessao-38.md)
   * [2026-11-04 — Sessão 39: o gerador entra, e os bloqueios se invertem](relatorios/2026-11-04-sessao-39.md)
   * [2026-11-11 — Sessão 41: a ingestão nasce, e o experimento roda sobre dado gerado](relatorios/2026-11-11-sessao-41.md)
+  * [2026-11-12 — Sessão 43: dez sementes, estatística e a vantagem da C3 que caiu](relatorios/2026-11-12-sessao-43.md)
   * [Modelo de relatório](relatorios/_modelo.md)

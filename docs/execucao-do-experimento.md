@@ -1,8 +1,9 @@
 # Execução do experimento, ponta a ponta
 
-Quatro comandos, na ordem. Até 11/11/2026 os dois do meio não existiam, e era
+Cinco comandos, na ordem. Até 11/11/2026 os dois do meio não existiam, e era
 por isso que o experimento rodava sobre *fixture* de dois funcionários enquanto
-o gerador produzia 1,9 milhão de eventos que ninguém lia.
+o gerador produzia 1,9 milhão de eventos que ninguém lia. O quinto entrou em
+12/11/2026, quando passaram a existir dez sementes para agregar.
 
 ```bash
 python -m generator --out out                       # 1. gera
@@ -11,6 +12,7 @@ python -m runner --dados dados/semente-1 --run-id 1 \            # 3. pontua
     --treino 2026-01-01:2026-03-31 --avaliacao 2026-04-01:2026-12-31
 python -m evaluator --dados dados/semente-1 --gerado out/run_001 \ # 4. mede
     --run-id 1 --limiar 20 --saida results/semente-1
+python -m evaluator.agregado_cli results/semente-* --saida results/  # 5. agrega
 ```
 
 > **Nenhum número do artigo se digita à mão.** O passo 4 grava
@@ -113,18 +115,79 @@ Três leituras que o relatório força, e que valem anotar:
   baixando o limiar até alertar o log inteiro; a FPR e a fração do log alertada
   é que dizem se o ponto é operável
 
+## 5. O agregado — as dez sementes juntas
+
+Uma semente é uma amostra. O passo 5 lê as dez pastas de `results/` e grava
+`agregado.json` e `agregado.md` com **média, desvio-padrão amostral e teste de
+Wilcoxon pareado** de cada métrica.
+
+**Pareado, de postos, bilateral e exato** — e cada uma dessas quatro palavras é
+uma escolha:
+
+| Escolha | Por quê |
+|---|---|
+| **Pareado** | A mesma semente gera a mesma população para as quatro configurações. Comparar dentro da semente tira a variação do sorteio de dentro do erro |
+| **De postos** | A FPR não é normal: acumula perto de zero e tem teto em 1. Um teste *t* suporia o que o dado não tem |
+| **Bilateral** | A hipótese é de diferença, não de direção. Unilateral seria escolher o lado depois de ver o resultado |
+| **Exato** | Com dez pares a distribuição nula é contável, e a aproximação normal do Wilcoxon é justamente pior em amostra pequena. Sai por contagem de subconjuntos, sem biblioteca de fora |
+
+O menor p-valor que dez pares produzem num teste bilateral exato é **0,0020** —
+2 em 1024. Resultado reportado como `p = 0,0020` está no piso da escala, e não
+quer dizer "p menor que isso".
+
+**O agregado recusa o que não é comparável**, e é essa a parte que importa:
+limiares diferentes, níveis de revocação diferentes, conjuntos de configuração
+diferentes, ou a mesma pasta contada duas vezes. Média de coisas incomparáveis
+sai plausível, e nada no número final acusaria.
+
+> **O `run_id` não é a semente.** Cada semente tem o seu próprio conjunto
+> gerado, que começa em `run_001` — as dez trazem `run_id` igual a 1. A
+> identidade de uma execução é o **nome da pasta**, e a semente do gerador está
+> no `procedencia.txt` de cada uma, na linha `run 1 (seed M)`.
+
+### Rodar as dez
+
+O gerador aceita `--seeds N`, que produz N conjuntos numa só chamada. Em escala
+cheia, porém, **cada semente ocupa cerca de 3,7 GB** entre CSV e banco de
+arquivos, e dez de uma vez somariam 37 GB. O procedimento usado em 12/11/2026
+roda uma semente por vez, avalia, e **apaga os brutos** antes da seguinte,
+guardando só `results/semente-N/` — quatro semanas depois a execução se repete
+do zero, porque regerar é determinístico.
+
+```bash
+treino=2026-01-01:2026-03-31
+avaliacao=2026-04-01:2026-12-31
+
+for n in $(seq 1 10); do
+    python -m generator --seeds 1 --seed0 $((41 + n)) --out tmp/gerado > tmp/procedencia.txt
+    python -m ingest --origem tmp/gerado/run_001 --destino tmp/dados
+    python -m runner --dados tmp/dados --run-id 1 --treino $treino --avaliacao $avaliacao
+    python -m evaluator --dados tmp/dados --gerado tmp/gerado/run_001 --run-id 1 --limiar 20 --saida results/semente-$n
+    cp tmp/procedencia.txt results/semente-$n/procedencia.txt
+    rm -rf tmp/gerado tmp/dados
+done
+
+python -m evaluator.agregado_cli results/semente-* --saida results/
+```
+
+Quatro em paralelo, as dez levaram **cerca de duas horas** numa máquina comum —
+o gasto está no executor, que passeia por 1,45 milhão de eventos quatro vezes
+por semente.
+
 ---
 
 ## O que os números de hoje ainda não são
 
-**Uma semente só.** A **D-13** pede tratamento estatístico sobre múltiplas
-sementes, e a Seção 3.7 do artigo descreve o desenho. Uma execução por
-configuração não distingue ganho sistemático de variação de amostragem —
-`--seeds N` no gerador é o que falta rodar.
+**Dez sementes medem variação de amostragem, não validade externa.** A **D-13**
+está atendida desde 12/11/2026: o que o Wilcoxon afasta é a hipótese de a
+diferença ter vindo do sorteio. O que ele **não** afasta é a de o gerador ser
+previsível — todas as dez saem do mesmo gerador, com o mesmo catálogo de
+cenários. Essa ameaça está declarada na Seção 3.8 do artigo e não se resolve com
+mais sementes.
 
 **Com o limiar padrão.** O corte de alerta usado é o teto da faixa normal do
-preset, e ele **não foi calibrado**: no limiar 20 as três configurações alarmam
-em um quarto do log. A comparação que tem sentido hoje é a de **FPR a revocação
+preset, e ele **não foi calibrado**: no limiar 20 as três primeiras
+configurações alarmam em cerca de um quinto do registro, e a quarta em 99,8%. A comparação que tem sentido hoje é a de **FPR a revocação
 fixa**, não a do limiar de operação.
 
 **Com a C3 sem a parcela de postura em 5,5% dos eventos.** Ver o passo 3.

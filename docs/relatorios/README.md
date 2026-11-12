@@ -59,3 +59,4 @@ Use o [modelo](_modelo.md) e adicione a página nova ao
 | 19/10/2026 | [Sessão 38](2026-10-19-sessao-38.md) | O PR #79 havia sido mergeado na branch do #78 e nada dele chegou à `main`; recuperado do commit órfão. O que falta passa a estar dividido por frente |
 | 04/11/2026 | [Sessão 39](2026-11-04-sessao-39.md) | O gerador de eventos entra pelo #89, reaberto do #88 que reprovava na forma; os bloqueios se invertem — agora travam a ingestão e os cenários, não o gerador |
 | 11/11/2026 | [Sessão 41](2026-11-11-sessao-41.md) | A ingestão e o avaliador nascem, e o experimento roda sobre dado gerado pela primeira vez: 1,43 milhão de eventos pontuados, e a §4 do artigo escrita sobre número de execução registrada |
+| 12/11/2026 | [Sessão 43](2026-11-12-sessao-43.md) | Dez sementes com Wilcoxon pareado exato: a D-13 fecha, a vantagem da C3 não sobrevive ao teste, e o painel deixa de levar 140 s para abrir uma tela |
