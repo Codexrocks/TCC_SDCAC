@@ -35,6 +35,7 @@
 * [Citações pendentes](citacoes-pendentes.md)
 * [Insumos das encomendas](insumos/README.md)
   * [Referencial teórico — Yasmin, 28/09](insumos/referencial-teorico-yasmin-v2.md)
+  * [Auditoria das citações pendentes — v1](insumos/auditoria-citacoes-ia-v1.md)
   * [Metodologia — Davi, 28/09](insumos/metodologia-davi-v1.md)
   * [Cenários e desenho cego — Yasmin, 10/11](insumos/cenarios-yasmin-v2.md)
   * [Pesos e sensibilidade — Yasmin, 10/11](insumos/pesos-yasmin-v1.md)
