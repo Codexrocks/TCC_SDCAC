@@ -168,7 +168,9 @@ longo de dias sem que um evento isolado dispare alerta:
 
 A C2 detecta **os doze episódios longitudinais em todas as dez sementes** —
 desvio-padrão zero. Contra a C0 o ganho é significativo (p = 0,0020) e contra a
-C1 também (p = 0,0078 sobre os oito pares que não empataram em 100%).
+C1 também (p = 0,0078 sobre os oito pares que não empataram em 100%). **O
+critério de 0,80 da Seção 3.6 é cumprido pela C2 e pela C3 em dez das dez
+sementes, pela C1 em nove, e pela C0 em nenhuma.**
 
 > **As duas unidades, porque a D-12 está aberta.** A escolha entre evento,
 > usuário-dia e episódio é a **D-12**, e ela muda o número: um cenário
@@ -233,10 +235,9 @@ resultados que ela não previa — e são eles que decidem se o modelo serve.
 
 **A taxa de falsos positivos não é operável, e o motivo é aritmético antes de
 ser técnico.** No limiar herdado, as três primeiras configurações produzem mais
-de mil e trezentos alertas por dia útil e precisão abaixo de 1%. A tentação é ler
-isso como defeito de calibração, mas o número não melhora muito com calibração:
-há 2.583 ± 54 eventos maliciosos em 1.436.275 ± 9.681, isto é, **menos de dois em
-cada mil**. Com uma base-taxa dessa ordem, mesmo a FPR de 0,40% que a C2 alcança
+de mil e trezentos alertas por dia útil e precisão abaixo de 1% — e o número não
+melhora muito com calibração, porque há 2.583 ± 54 eventos maliciosos em
+1.436.275 ± 9.681, isto é, **menos de dois em cada mil**. Com uma base-taxa dessa ordem, mesmo a FPR de 0,40% que a C2 alcança
 a 0,20 de revocação deixa a precisão na casa de poucas unidades percentuais. É
 exatamente o argumento de Axelsson (2000): em detecção de intrusão o fator
 limitante é a taxa de falsos positivos, e não a de detecção, porque a raridade do
@@ -267,7 +268,7 @@ incômodo desta seção, e o primeiro que uma implantação real enfrentaria.
 
 **O ganho vem da segunda dimensão, não da terceira.** A D1 sozinha acrescenta
 pouco sobre a linha de base na família comportamental — 45,6% contra 28,7% — e
-muito na longitudinal — 89,2% contra 35,0%. O salto na família comportamental só
+muito na longitudinal, 89,2% contra 35,0%. O salto na família comportamental só
 aparece com a D2, que é o desvio em relação ao histórico da própria pessoa:
 98,8%, com p = 0,0020. É a validação empírica da ideia original de Denning
 (1987), de que o perfil de referência é por sujeito e não por população, e é o
@@ -295,11 +296,10 @@ que a pergunta afirma.
 > **A escrever.** Seção obrigatória, e a que mais protege o trabalho. As
 > primeiras já estão medidas e não dependem de mais nada:
 
-**Dez sementes medem variação de amostragem, não validade externa.** A **D-13**
-está atendida, e o teste pareado afasta a hipótese de a diferença ter vindo do
-sorteio — mas não a de o gerador ser previsível, já que todas as dez saem do
-mesmo gerador, com o mesmo catálogo e as mesmas regras de normalidade. Essa
-ameaça está na Seção 3.8 e **não se resolve com mais sementes**.
+**Dez sementes medem variação de amostragem, não validade externa.** O teste
+pareado afasta a hipótese de a diferença ter vindo do sorteio, mas não a de o
+gerador ser previsível — todas as dez saem do mesmo gerador. Essa ameaça está na
+Seção 3.8 e **não se resolve com mais sementes**.
 
 **O limiar não foi calibrado.** Os números da Seção 4.2 vêm de um corte herdado
 dos testes de unidade, não escolhido sobre dado em escala: aquela tabela serve
@@ -312,15 +312,13 @@ foram pontuados pela C3 sem ela, com a ausência registrada em cada nota. O efei
 é subestimá-la nos eventos afetados, e como eles concentram parte dos cenários de
 origem externa, o resultado da C3 é **conservador** nesse recorte.
 
-**A exposição acumulada é subestimada nos empates de instante.** O desenho
-exclui o evento corrente do termo de exposição, e a implementação exclui também
-os de instante idêntico, por não haver como distingui-los na resolução de
-segundo: **962 ocorrências na semente 42**. Mesmo sentido conservador.
+**A exposição acumulada é subestimada nos empates de instante**, por não haver
+como distinguir o evento corrente de um irmão de mesmo segundo: **962 ocorrências
+na semente 42**. Mesmo sentido conservador.
 
 **A C3 não é operável no limiar de operação**, onde alerta sobre 99,84 ± 0,01%
-do registro. A única comparação que vale para ela é a de revocação fixa — e
-nela, como a Seção 4.3.1 mostra, a quarta dimensão não traz vantagem
-significativa.
+do registro; e na comparação a revocação fixa, como a Seção 4.3.1 mostra, a
+quarta dimensão não traz vantagem significativa.
 
 **Ambiente simulado não é produção.** Acurácia alta sobre dado sintético pode
 indicar gerador previsível em vez de modelo bom. O conjunto de regras é pequeno,
