@@ -58,12 +58,11 @@ exclusivamente pela rotina de métricas; e `sdcac`, com padrões, notas e alerta
 O usuário de banco da aplicação **não recebe permissão de conexão** à
 `ground_truth`, o que impede por construção o vazamento de rótulo.
 
-Duas declarações se fazem necessárias. **Não há dado de pessoa real** em nenhuma
-etapa: funcionários, recursos, dispositivos e domínios são fictícios, estes no
-espaço reservado `.example`. E os valores que descrevem a simulação são
-**parâmetros declarados do gerador**, escolhidos para produzir um ambiente
-plausível, e não estimativas extraídas de organizações reais — nenhuma conclusão
-deste trabalho depende de sua correspondência com o mundo real.
+**Não há dado de pessoa real** em nenhuma etapa: funcionários, recursos,
+dispositivos e domínios são fictícios, estes no espaço reservado `.example`. E os
+valores que descrevem a simulação são **parâmetros declarados do gerador**, e não
+estimativas extraídas de organizações reais — nenhuma conclusão deste trabalho
+depende de sua correspondência com o mundo real.
 
 ## 3.3 Desenho experimental
 
@@ -92,7 +91,10 @@ ganho** às dimensões avaliadas.
 
 As quatro configurações não são quatro sistemas, mas um único código sob quatro
 parâmetros, de modo que a única variável entre as linhas da tabela de resultados
-seja a dimensão acrescentada. A terceira dimensão reporta **duas parcelas
+seja a dimensão acrescentada. Os pesos e os pontos de cada regra são
+**parâmetros declarados** do modelo, preliminares e sujeitos a análise de
+sensibilidade: eles ordenam o que o detector prioriza, e não a gravidade
+conceitual dos sinais de segurança, que é questão distinta. A terceira dimensão reporta **duas parcelas
 separadas** — exposição acumulada e higiene de segurança —, que não são somadas:
 a agregação exigiria um peso relativo entre conduta e postura sem justificativa
 defensável, e a separação preserva a decomponibilidade do risco por dimensão.
@@ -131,12 +133,10 @@ medido; um de seus cenários, a janela de manutenção noturna, não é injetado
 pertence à rotina normal do gerador, respondendo por 53 dos 72 episódios da
 família.
 
-O catálogo é **provisório**, e cada episódio do gabarito registra a versão que o
-produziu: descreve o conjunto efetivamente executado, o mesmo que produziu os
-resultados da Seção 4, e não uma especificação encerrada. A distinção importa
-para a objeção de desenho não cego da Seção 3.8, à qual se soma o fato de a
-especificação dos cenários ter sido produzida **sem acesso às fórmulas de
-pontuação**.
+Cada episódio do gabarito registra a versão do catálogo que o produziu, e a
+especificação dos cenários foi produzida **sem acesso às fórmulas de
+pontuação** — as duas coisas importam para a objeção de desenho não cego da
+Seção 3.8.
 
 ## 3.5 Unidade de análise
 
@@ -168,14 +168,23 @@ sobre a família L, em unidade de episódio.
 
 $$\mathrm{Revocação}_{L} = \frac{VP_{L}}{VP_{L} + FN_{L}}$$
 
+**O critério de sucesso é declarado em termos operacionais:** considera-se
+absorvível por um analista o teto de **45 alertas falsos por turno**, do que
+decorre a exigência de alcançar a revocação de referência de 0,20 sem ultrapassar
+esse volume. O número foi fixado **em 12/11/2026, posteriormente à primeira
+execução registrada**, e por isso se registra sua procedência: ele vem do
+argumento operacional sobre a capacidade de triagem de um analista, e não da
+tabela de resultados — critério derivado do resultado não é critério, é
+justificação. A revocação longitudinal mínima não foi declarada.
+
 A comparação a revocação fixa pressupõe que a linha de base alcance a revocação
 de referência em algum limiar. Como a C0 reúne poucas regras discretas e não
 dispara em cenários longitudinais, essa condição pode verificar-se apenas no
 limiar mínimo — e aí a taxa de falsos positivos resultante é o próprio resultado:
 alcançar a revocação alertando o registro inteiro.
 
-> **A escrever — lacuna 3 · Davi · imediato.** O critério de sucesso declarado
-> a priori, da **D-15**.
+> ✅ **Lacuna 3 fechada em 12/11/2026.** O critério da **D-15** está declarado
+> acima, em 45 alertas falsos por turno, com a data em que foi declarado.
 >
 > **A origem do número está decidida:** entre as três que a decisão admitia —
 > literatura, linha de base medida da C0, ou argumento operacional —, adotou-se o
@@ -243,11 +252,10 @@ Esta seção declara as ameaças à validade identificadas e as medidas adotadas
 segundo as quatro categorias usuais em experimentação em engenharia de software
 (Wohlin et al., 2012).
 
-**Validade de construto.** O risco comportamental é um construto, e não grandeza
-diretamente observável: o que se mede é a concordância entre a saída do sistema e
-um gabarito construído pelos próprios autores. Mitigam a ameaça a declaração
-explícita da unidade de análise (Seção 3.5) e o reporte separado das parcelas da
-terceira dimensão.
+**Validade de construto.** O risco comportamental é um construto: o que se mede
+é a concordância entre a saída do sistema e um gabarito construído pelos próprios
+autores. Mitigam a ameaça a declaração explícita da unidade de análise (Seção
+3.5) e o reporte separado das parcelas da terceira dimensão.
 
 **Validade interna.** O padrão individual é constituído sobre os três primeiros
 meses do período simulado, janela **anterior e disjunta** da de avaliação:
@@ -301,12 +309,12 @@ do projeto.
 
 * [x] ~~Lacuna 2~~ — desenho cego declarado em 14/10, confirmado pelo Davi
 * [x] ~~Lacuna 4~~ — **D-02 fechada pela opção A** em 14/10
-* [ ] **Lacuna 1** · **Yasmin** — a relação nominal dos cenários. Depende da
-      **D-06** e da **D-16**, e de o gerador de eventos existir: em 14/10 não há
-      gerador nem cenário nomeado no repositório
-* [ ] **Lacuna 3** · **Davi** · **imediato** — o número do critério a priori. A
-      origem já está escolhida; falta o valor, e ele perde o sentido no dia em
-      que a primeira execução for registrada
+* [x] ~~**Lacuna 1**~~ — a **D-06** e a **D-16** fecharam em 12/11/2026, com a
+      confirmação da Yasmin. O catálogo da § 3.4 descreve o que o gerador
+      implementa, e cada episódio registra a versão que o produziu
+* [x] ~~**Lacuna 3**~~ — o critério da D-15 foi declarado em 12/11/2026, em 45
+      alertas falsos por turno, com a data registrada. A revocação longitudinal
+      mínima continua por declarar
 * [ ] **As sete fontes conferidas na fonte** · **Davi** · antes de qualquer uma
       entrar em [`referencias.md`](referencias.md). As pendências estão em
       [citações pendentes](../docs/citacoes-pendentes.md), e o ano de
