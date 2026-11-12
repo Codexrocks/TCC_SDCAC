@@ -164,7 +164,7 @@ colunas acima.
 
 ## Dívida bibliográfica
 
-16 pendências. Referência não conferida na fonte é o único
+14 pendências. Referência não conferida na fonte é o único
 item deste quadro que pode reprovar o trabalho por fraude acadêmica, e é o
 que some mais fácil de vista.
 
@@ -179,8 +179,6 @@ que some mais fácil de vista.
 | `artigo/03-metodologia.md § 3.7` | Confirmar na fonte: (WILCOXON, 1945) — O teste em si | Davi | 28/09/2026 | 45 dias |
 | `artigo/03-metodologia.md § 3.8` | Confirmar na fonte: (KAUFMAN et al., 2012) — Vazamento na constituição do padrão individual | Davi | 28/09/2026 | 45 dias |
 | `artigo/03-metodologia.md § 3.8` | Confirmar na fonte: (SOMMER; PAXSON, 2010) — Limite das avaliações sobre dado sintético | Davi | 28/09/2026 | 45 dias |
-| `artigo/03-metodologia.md § 3.3 — a janela de falhas` | Afirmação sem chamada: "forma usual de regra de correlação em ferramentas de gestão de eventos de segurança". Entrou com a D-42 | Davi | 13/10/2026 | 30 dias |
-| `artigo/03-metodologia.md § 3.3 — "trivial para regras fixas"` | Afirmação sem fonte: detecção de tentativa sucessiva é "trivial para regras fixas". Pode ser reformulada sem fonte | Davi | 13/10/2026 | 30 dias |
 | `artigo/01-introducao.md — caso Target, 2013` | Confirmar na fonte: RILEY; ELGIN; LAWRENCE; MATLACK, Bloomberg Businessweek, 13 mar. 2014 | Yasmin | 10/11/2026 | 2 dias |
 | `artigo/01-introducao.md — caso GE / Zheng, 2018` | Confirmar na fonte: U.S. DOJ, Niskayuna man charged theft trade secrets, 2018 | Yasmin | 10/11/2026 | 2 dias |
 | `artigo/01-introducao.md — caso Capital One, 2019` | Confirmar na fonte: U.S. DOJ, usao-wdwa. **O próprio insumo admite estar incompleto**, com URL genérica | Yasmin | 10/11/2026 | 2 dias |
