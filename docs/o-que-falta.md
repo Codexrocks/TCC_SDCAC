@@ -87,27 +87,45 @@ motores.
 
 ## Yasmin — cenários, rótulos e o recorte de segurança
 
-**As duas que travam a Metodologia e a S7:**
+> 📦 **Rascunho entregue em 10/11/2026, e versionado em
+> [insumos](insumos/README.md).** Quatro arquivos cobrem **D-06, D-16, P18 a
+> P23, D-09 e D-19** — e os três primeiros declaram, no próprio cabeçalho,
+> *"Conferi tudo que a IA escreveu? **Ainda não**"*.
+>
+> **Isso os torna proposta, não entrega.** Pelo `AGENTS.md` seção 3, texto de IA
+> entra sob a responsabilidade de quem assina — então **nenhuma das decisões
+> fechou**, e o que falta mudou de natureza: era produzir, agora é **ler e
+> confirmar**.
 
-1. **D-06** — cenários de contexto (B) e longitudinais (L)
-2. **D-16** — o cenário de escalada legítima, que é o controle negativo
+**O que trava a Metodologia e a S7 — agora à espera de leitura, não de trabalho:**
 
-Das duas sai a **lacuna 1** da Metodologia: a relação nominal dos cenários, com
-no mínimo um por família e um de escalada legítima. Enquanto ela não existe, a
-§ 3.4 do artigo fica com um bloco *A escrever* aberto, e o aceite da S7 não tem
-contra o que ser medido.
+1. **Ler o [insumo dos cenários](insumos/cenarios-yasmin-v2.md) inteiro** e
+   marcar o campo de conferência. Dele saem a **D-06**, a **D-16** e as **P18 a
+   P23**, e a **lacuna 1** da § 3.4 do artigo
+2. **Ler o [insumo dos pesos](insumos/pesos-yasmin-v1.md)** — a **D-09**, e a
+   ratificação da **D-43**
+3. **Ler o [insumo de LGPD e ISO](insumos/lgpd-iso-yasmin-v1.md)** — a **D-19**,
+   que a § 3.8 do artigo já declara como ameaça à validade e que a S13 cobra nas
+   limitações da § 4.6 e nos trabalhos futuros da § 5.4
+
+> ⚠️ **Uma correção que a conferência achou, e que precisa ser lida junto.** O
+> insumo dos cenários afirma que o código "não tem" o cenário **N06** e abre
+> pendência para o Filipe implementá-lo. **O N06 existe**, em
+> `generator/normal.py:185`, e produz 53 dos 72 episódios da família N — o
+> código e o artigo do Drive **já concordam** nos 124. Detalhe e medição em
+> [insumos](insumos/README.md). A pendência não existe, e a decisão sobre os
+> cenários não depende dela.
 
 **O resto:**
 
-3. **P18 a P23** — catálogo de cenários, prevalência, modo de injeção, rótulos e
-   desenho cego, em [banco simulado](banco-simulado.md), seção 10
-4. **D-09** — pesos preliminares e análise de sensibilidade
-5. **D-19** — a vertente LGPD e ISO/IEC 27001. Já está declarada na § 3.8 do
-   artigo como ameaça à validade; falta o par dela nas **limitações da § 4.6** e
-   nos **trabalhos futuros da § 5.4**, que é onde a S13 a cobra
-6. **S11** — a execução de todos os cenários nas quatro configurações, que é de
+4. **Decidir o campo de conferência do
+   [insumo dos exemplos reais](insumos/exemplos-reais-yasmin-v1.md)**, que
+   declara "Sim" enquanto o pacote entregue dizia que nada foi conferido. As
+   **quatro fontes** estão em [citações pendentes](citacoes-pendentes.md) e não
+   entram no artigo antes disso
+5. **S11** — a execução de todos os cenários nas quatro configurações, que é de
    todos e tem a condução dela
-7. **Uma chamada bibliográfica** por conferir na fonte
+6. **Uma chamada bibliográfica** do referencial, por conferir na fonte
 
 ---
 

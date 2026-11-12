@@ -58,3 +58,4 @@ Use o [modelo](_modelo.md) e adicione a página nova ao
 | 19/10/2026 | [Sessão 37](2026-10-19-sessao-37.md) | O conflito do empilhamento é simulado antes de existir; e a passagem para o Filipe não estava pronta — quatro buracos, três fechados |
 | 19/10/2026 | [Sessão 38](2026-10-19-sessao-38.md) | O PR #79 havia sido mergeado na branch do #78 e nada dele chegou à `main`; recuperado do commit órfão. O que falta passa a estar dividido por frente |
 | 04/11/2026 | [Sessão 39](2026-11-04-sessao-39.md) | O gerador de eventos entra pelo #89, reaberto do #88 que reprovava na forma; os bloqueios se invertem — agora travam a ingestão e os cenários, não o gerador |
+| 11/11/2026 | [Sessão 40](2026-11-11-sessao-40.md) | A entrega da Yasmin entra como insumo, sem fechar decisão: três arquivos declaram não ter sido conferidos. A conferência derrubou a pendência do N06, que já existe no código |
