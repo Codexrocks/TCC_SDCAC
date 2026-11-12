@@ -41,7 +41,7 @@ explícito, descrito na Seção 3.3.
 A avaliação é conduzida sobre um ambiente corporativo simulado, gerado
 integralmente por software, que representa uma organização de 250 funcionários ao
 longo de um ano de operação, com volume médio de 20 a 50 eventos por dia útil por
-funcionário — de 1,15 a 2,9 milhões de eventos por semente de geração.
+funcionário.
 
 Os registros cobrem oito tipos de evento — autenticação, acesso e transferência
 de arquivos, dispositivos removíveis, navegação, *phishing* simulado e alteração
@@ -169,11 +169,10 @@ sobre a família L, em unidade de episódio.
 $$\mathrm{Revocação}_{L} = \frac{VP_{L}}{VP_{L} + FN_{L}}$$
 
 A comparação a revocação fixa pressupõe que a linha de base alcance a revocação
-de referência em algum limiar. Como a C0 combina um número reduzido de regras
-discretas e não dispara em cenários longitudinais, essa condição pode
-verificar-se apenas no limiar mínimo — caso em que a taxa de falsos positivos
-resultante é o próprio resultado, e se lê como alcançar a revocação alertando o
-registro inteiro.
+de referência em algum limiar. Como a C0 reúne poucas regras discretas e não
+dispara em cenários longitudinais, essa condição pode verificar-se apenas no
+limiar mínimo — e aí a taxa de falsos positivos resultante é o próprio resultado:
+alcançar a revocação alertando o registro inteiro.
 
 > **A escrever — lacuna 3 · Davi · imediato.** O critério de sucesso declarado
 > a priori, da **D-15**.
@@ -265,17 +264,15 @@ linha de base é mantida puramente estática, conforme a Seção 3.3.
 escalada gradual, os cenários longitudinais são projetados como escalada gradual,
 e o experimento mede se a primeira detecta os segundos — arranjo que,
 isoladamente, demonstra que a implementação funciona, não que a abordagem seja
-adequada. Reduzem a objeção o controle negativo longitudinal da Seção 3.4, que
-penaliza um detector excessivamente sensível, e a separação entre quem especifica
-os cenários e quem implementa as fórmulas.
+adequada. Reduzem a objeção o controle negativo longitudinal da Seção 3.4 e a
+separação entre quem especifica os cenários e quem implementa as fórmulas.
 
 **Validade externa.** Os resultados valem para o ambiente simulado e não são
 extrapoláveis a dados de produção: acurácia elevada sobre dados sintéticos deve
 ser lida como indício de gerador demasiadamente previsível, e não como evidência
-de qualidade do modelo (Sommer e Paxson, 2010). A mitigação é a presença de ruído
-legítimo no tráfego de fundo — viagens, trabalho remoto, afastamentos e mudanças
-de cargo —, de modo que o comportamento normal não seja artificialmente
-homogêneo.
+de qualidade do modelo (Sommer e Paxson, 2010). A mitigação é o ruído legítimo do
+tráfego de fundo — viagens, trabalho remoto, afastamentos e mudanças de cargo —,
+que impede o comportamento normal de ser artificialmente homogêneo.
 
 **Validade de conclusão estatística.** Uma única execução por configuração não
 distinguiria ganho sistemático de variação de amostragem; a mitigação é o desenho
