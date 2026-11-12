@@ -97,4 +97,5 @@
   * [2026-11-11 — Sessão 41: a ingestão nasce, e o experimento roda sobre dado gerado](relatorios/2026-11-11-sessao-41.md)
   * [2026-11-11 — Sessão 42: a parte do Filipe conserta, e a D3 aceita rodar sem postura](relatorios/2026-11-11-sessao-42.md)
   * [2026-11-12 — Sessão 43: dez sementes, estatística e a vantagem da C3 que caiu](relatorios/2026-11-12-sessao-43.md)
+  * [2026-11-12 — Sessão 45: legenda com fonte em toda tabela, e as 12 páginas resistem](relatorios/2026-11-12-sessao-45.md)
   * [Modelo de relatório](relatorios/_modelo.md)

@@ -120,6 +120,32 @@ isoladas na véspera de uma entrega.
 > requisito de aprovação, e sim o que distingue o trabalho. O que **é** requisito
 > são as 8 a 12 páginas com resultados concretos.
 
+### Tabelas e figuras
+
+Exigência que o professor apontou **por escrito, em 12/11/2026**, ao comentar a
+entrega da Seção de Resultados:
+
+> *"as tabelas e figuras devem possuir legenda com a respectiva fonte
+> indicada."*
+
+O que o artigo passou a fazer, e o montador passou a conferir:
+
+| | |
+|---|---|
+| **Legenda** | **Acima** da tabela, centralizada, no formato `Tabela N. Texto.` — é a forma do template da família ABCM |
+| **Fonte** | **Abaixo**, centralizada, em corpo 9: `Fonte: dados da pesquisa (2026).` para o que o experimento mediu, `Fonte: elaborada pelos autores (2026).` para o que a equipe definiu |
+| **Numeração** | **Contínua no documento inteiro**, e não por seção. A Tabela 1 está na Metodologia; as cinco seguintes, nos Resultados |
+| **Chamada no texto** | Pelo número — `Tab. 4` no meio da frase, `Tabela 4` no começo. O template exige, e nenhuma tabela era chamada assim antes de 12/11 |
+
+> **Isto é verificação, não lembrete.** `scripts/montar_artigo.py` **não monta o
+> documento** se uma tabela estiver sem legenda, sem fonte ou com a numeração
+> fora de sequência. Lembrete escrito não reprova nada — e esta exigência já
+> custou uma volta de entrega.
+
+**Figura o artigo não tem** — nenhuma das cinco seções usa imagem. A regra fica
+escrita porque a primeira que entrar vai precisar dela, e o montador já aceita
+`Figura N.` na mesma forma.
+
 ### Outras exigências
 
 - Trabalho **em grupo**, conforme as diretrizes da instituição — de 3 a 8 componentes
