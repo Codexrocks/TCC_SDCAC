@@ -26,8 +26,9 @@ A conversão foi feita com o LibreOffice, que não é dependência do projeto:
 soffice --headless --convert-to png --outdir results/figuras results/figuras/fpr-por-revocacao.svg
 ```
 
-**Por que não matplotlib.** O CI instala `pytest pyyaml fastapi httpx` e mais
-nada. Um teste que importasse matplotlib seria **pulado em silêncio** na nuvem —
+**Por que não matplotlib.** Não é por ele ser dependência nova — o
+`pyproject.toml` **já o declara**, e ele só não está instalado nesta máquina. É
+porque o CI instala `pytest pyyaml fastapi httpx` e mais nada. Um teste que importasse matplotlib seria **pulado em silêncio** na nuvem —
 exatamente o modo de falhar que `tests/test_dependencias_do_ci.py` existe para
 pegar. O desenho em SVG sai de função pura, e função pura tem teste.
 

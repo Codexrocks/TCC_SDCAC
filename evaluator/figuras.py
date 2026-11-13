@@ -1,10 +1,11 @@
 """As figuras da Secao 4, em SVG escrito a mao.
 
-**Por que SVG a mao, e nao matplotlib.** O CI instala `pytest pyyaml fastapi
-httpx` e mais nada; o `matplotlib` entraria so para desenhar duas figuras, e um
-teste que o importasse seria **pulado em silencio** na nuvem -- o modo de falhar
-que `tests/test_dependencias_do_ci.py` existe para pegar. SVG e texto: sai de
-uma funcao pura, entra em teste, e o diff mostra o que mudou.
+**Por que SVG a mao, e nao matplotlib.** Nao e por ele ser dependencia nova --
+o `pyproject.toml` ja o declara. E porque **o CI instala `pytest pyyaml fastapi
+httpx` e mais nada**: um teste que importasse matplotlib seria **pulado em
+silencio** na nuvem, que e o modo de falhar que `tests/test_dependencias_do_ci.py`
+existe para pegar. SVG e texto: sai de funcao pura, entra em teste, e o diff
+mostra o que mudou.
 
 Este modulo e para a figura que sai do **dado**. A captura de tela do painel
 nao sai daqui: ela e feita a mao e versionada como imagem.
