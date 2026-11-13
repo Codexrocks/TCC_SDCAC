@@ -63,23 +63,23 @@ anunciava como abertas três decisões já fechadas.
 
 | ID | Decisão | Estado | Situação |
 |---|---|---|---|
-| D-05 | Ablação em quatro configurações (C0 a C3) | A confirmar | ⚠️ Atrasado há 42 dias |
+| D-05 | Ablação em quatro configurações (C0 a C3) | A confirmar | ⚠️ Atrasado há 43 dias |
 | D-07 | Caneta rotativa por seção | Aberta | 🗓️ Sem prazo |
-| D-43 | Pesos de integração das dimensões na nota final | A confirmar | ⚠️ Atrasado há 21 dias |
+| D-43 | Pesos de integração das dimensões na nota final | A confirmar | ⚠️ Atrasado há 22 dias |
 
 **Yasmin** — 2 pendências
 
 | ID | Decisão | Estado | Situação |
 |---|---|---|---|
 | D-07 | Caneta rotativa por seção | Aberta | 🗓️ Sem prazo |
-| D-43 | Pesos de integração das dimensões na nota final | A confirmar | ⚠️ Atrasado há 21 dias |
+| D-43 | Pesos de integração das dimensões na nota final | A confirmar | ⚠️ Atrasado há 22 dias |
 
 **Filipe** — 2 pendências
 
 | ID | Decisão | Estado | Situação |
 |---|---|---|---|
 | D-07 | Caneta rotativa por seção | Aberta | 🗓️ Sem prazo |
-| D-10 | Isolation Forest como benchmark opcional | A confirmar | ⚠️ Atrasado há 7 dias |
+| D-10 | Isolation Forest como benchmark opcional | A confirmar | ⚠️ Atrasado há 8 dias |
 
 <!-- QUADRO:fim pendencias-por-pessoa -->
 
