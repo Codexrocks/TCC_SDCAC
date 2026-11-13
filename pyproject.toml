@@ -63,6 +63,18 @@ dev = [
     # Usado por scripts/validar.py para carregar os workflows e recusar YAML
     # que o GitHub nao aceitaria. Ver docs/padroes.md.
     "pyyaml>=6.0",
+    # Usado por scripts/montar_artigo.py para escrever o .docx de entrega.
+    #
+    # Entra em `dev` e nao em `dependencies` porque e ferramenta de quem monta
+    # o artigo, nao do sistema: o painel, a API e o avaliador rodam sem ela.
+    #
+    # O montador importa `docx` com tolerancia a falta -- de proposito, para o
+    # CI, que instala so `pytest pyyaml fastapi httpx`, nao pular teste em
+    # silencio. Mas tolerar a falta no import nao e declarar a dependencia:
+    # sem esta linha, quem segue `pip install -e ".[dev]"` monta um ambiente
+    # em que o .docx de entrega simplesmente nao se gera, e descobre isso no
+    # dia da entrega. Achado em 13/11/2026, no venv da maquina do Davi.
+    "python-docx>=1.1",
 ]
 
 # A S6 chegou e `detection/` existe, então a lista vazia saiu. A descoberta é
@@ -115,6 +127,8 @@ ignore = [
 "evaluator/cli.py" = ["T201"]
 "evaluator/agregado_cli.py" = ["T201"]
 "evaluator/figuras_cli.py" = ["T201"]
+# O montador do artigo tambem e interface: o `print` diz onde gravou.
+"scripts/montar_artigo.py" = ["T201"]
 
 [tool.ruff.lint.pydocstyle]
 convention = "google"
