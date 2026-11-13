@@ -157,12 +157,15 @@ rótulo nenhum pela **D-17**, com o gabarito separado em `ground_truth/`.
    planilha estão prontos desde 12/11, em
    [avaliação heurística](avaliacao-heuristica.md) — **são os três, cada um
    sozinho**
-6. **D-10** — confirmar se o Isolation Forest da S10 entra. É opcional por
+6. **A tela de Métricas**, pela **D-45**: lê `/runs/{id}/metrics`, e o que
+   falta antes dela é **o avaliador gravar as métricas**. Entra **depois da
+   avaliação heurística** — ver [o painel](painel.md)
+7. **D-10** — confirmar se o Isolation Forest da S10 entra. É opcional por
    definição, e cortá-lo não compromete o TCC
-7. **S12** — tabela de ablação, sensibilidade dos pesos e gráficos, com o Davi.
+8. **S12** — tabela de ablação, sensibilidade dos pesos e gráficos, com o Davi.
    Cada número sai de notebook versionado
-8. **S13** — a caneta do [`artigo/04-resultados.md`](../artigo/04-resultados.md)
-9. **Três chamadas bibliográficas** por conferir na fonte, em
+9. **S13** — a caneta do [`artigo/04-resultados.md`](../artigo/04-resultados.md)
+10. **Três chamadas bibliográficas** por conferir na fonte, em
    [citações pendentes](citacoes-pendentes.md)
 
 ---

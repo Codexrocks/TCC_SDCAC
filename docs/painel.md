@@ -106,6 +106,22 @@ API**: a execução 4, preset C3, semente 1, validadas contra o contrato por
 - [ ] **A tela de Métricas não existe** — `/metrics` responde vazio porque
       nenhum avaliador gravou métrica ainda · **Davi**
 
+> **Como ela entra, pela D-45, decidida em 12/11/2026.** A tela lê
+> **`/runs/{id}/metrics`**, e não o `results/agregado.json`. Ler o arquivo seria
+> barato — o desenho da curva já existe em `evaluator/figuras.py`, e o painel já
+> desenha HTML cru no selo e na barra —, mas um painel que mente sobre a origem
+> do dado é pior que um painel sem gráfico.
+>
+> **O que falta não é a tela: é o avaliador gravar as métricas.** O esquema
+> `Metrica` já está no contrato, com `threshold`, `unit`, `recall`,
+> `false_positive_rate`, `positives`, `negatives` e `detection_delay_days` — um
+> registro por limiar e por unidade dá a curva inteira, que é a mesma da Figura
+> 1 do artigo.
+>
+> **Entra depois da avaliação heurística**, e não antes: tela nova é superfície
+> não avaliada, e o [roteiro](avaliacao-heuristica.md) das três passagens
+> enumera quatro telas.
+
 > **Não há teste com usuários, e não é esquecimento.** A **D-02** fechou em
 > 14/10/2026 pela opção A: o painel é instrumento de análise, não objeto de um
 > segundo experimento. Sem participantes, o "menos de 1 min" do critério de
