@@ -51,18 +51,15 @@ e **não** separa os de maior risco. **A contribuição original do trabalho se
 verifica, portanto, na segunda dimensão — o desvio em relação ao padrão do
 próprio usuário —, e não na terceira.**
 
-Três restrições delimitam o alcance da resposta, declaradas na Seção 4.6: o
-**limiar de operação não calibrado**, razão pela qual a comparação válida é a de
-falsos positivos a revocação fixa; a **subestimação** de duas parcelas da
-configuração completa — a postura, nos eventos sem estado de equipamento, e a
-exposição, nos empates de instante —, que torna o resultado dela conservador
-nesse recorte; e o fato de dez sementes medirem variação de amostragem, não
-validade externa, já que todas saem do mesmo gerador.
+Três restrições delimitam o alcance da resposta, e estão declaradas na Seção
+4.6: o **limiar de operação não calibrado**, a **subestimação** de duas parcelas
+da configuração completa e o fato de dez sementes medirem variação de
+amostragem, não validade externa.
 
 ## 5.2 Objetivos alcançados
 
 Dos oito objetivos específicos da Seção 1.5.2, os seis primeiros estão cumpridos
-e verificáveis no repositório: o modelo de eventos e o gerador de logs
+e verificáveis no protótipo: o modelo de eventos e o gerador de logs
 sintéticos com gabarito em base separada (a); a linha de base de regras fixas,
 sem parâmetro estimado de comportamento (b); a avaliação do evento individual
 (c); a identificação de divergência em relação ao padrão de cada usuário, em
@@ -74,21 +71,20 @@ configurações, as duas grandezas primárias foram apuradas e o tratamento
 estatístico da Seção 3.7 foi aplicado sobre **dez sementes de geração
 independentes**, com teste de Wilcoxon pareado de p-valor exato. A análise é,
 nesse sentido, inferencial e não apenas descritiva — e foi a inferência que
-derrubou uma das conclusões que a execução de semente única autorizava, o que é
-precisamente a razão de ela vir antes da conclusão e não depois.
+derrubou uma das conclusões que a execução de semente única autorizava.
 
 ## 5.3 Contribuições
 
-O trabalho deixa cinco artefatos versionados: o **protótipo**, cuja camada de
+O trabalho deixa cinco artefatos: o **protótipo**, cuja camada de
 avaliação é independente do meio de armazenamento, o que permite reproduzir o
 experimento sem servidor de banco de dados; as **quatro configurações
 canônicas**, semeadas e somente-leitura, que tornam a ablação repetível; o
-**conjunto de regras e pesos** versionado, com resumo criptográfico preso a cada
+**conjunto de regras e pesos**, com resumo criptográfico preso a cada
 execução, de modo que duas execuções só são comparáveis se os resumos
 coincidirem; os **cenários de teste automatizados**, com as invariantes de
-desenho da Seção 3.8 impostas por teste a cada alteração do código; e o
-**contrato de leitura versionado**, que torna a nota decomponível inspecionável
-fora da interface. A avaliação de usabilidade **não** é contribuição deste
+desenho da Seção 3.8 verificadas a cada alteração do código; e o
+**contrato de leitura**, que torna a nota decomponível inspecionável fora da
+interface. A avaliação de usabilidade **não** é contribuição deste
 trabalho, como declara a Seção 3.9.
 
 ## 5.4 Trabalhos futuros
@@ -103,9 +99,8 @@ não ao mesmo corte das demais. O segundo é a **implantação sobre dado real �
 da Lei nº
 13.709/2018 e dos controles aplicáveis da ISO/IEC 27001:2022**: base legal,
 transparência ao titular, minimização e retenção. O terceiro é a **validação
-contra tráfego de produção**, que o ambiente simulado não substitui — acurácia
-elevada sobre dado sintético pode indicar gerador previsível em vez de modelo
-adequado, e só o registro real distingue as duas hipóteses.
+contra tráfego de produção**, que o ambiente simulado não substitui pelo motivo
+que a Seção 4.6 dá.
 
 > **A caneta desta seção é do Davi**, pela S14. O texto acima foi redigido a
 > partir dos resultados registrados e dos itens que as instruções anteriores

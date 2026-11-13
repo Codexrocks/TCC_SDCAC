@@ -84,16 +84,6 @@ abordagem baseada exclusivamente em regras fixas aplicadas a eventos isolados.
 
 ## 1.3 Justificativa
 
-A necessidade de aprimorar os mecanismos de interpretação de eventos
-computacionais torna relevante a investigação de abordagens capazes de considerar
-diferentes níveis de contexto durante a avaliação de riscos. Enquanto a análise
-isolada permite identificar características específicas de cada evento, a
-inclusão do histórico comportamental possibilita considerar as particularidades
-associadas a cada usuário. Adicionalmente, a análise temporal permite observar
-situações em que o risco não se manifesta de forma imediata, mas pode se
-desenvolver progressivamente por meio da recorrência e da combinação de
-atividades.
-
 Este trabalho contribui para essa discussão desenvolvendo um modelo experimental
 de avaliação multidimensional de risco comportamental, estruturado para permitir
 a comparação entre configurações de avaliação: parte de uma linha de base de
@@ -166,19 +156,6 @@ conjuntos de eventos e cenários experimentais; e
 
 h) analisar os resultados obtidos por meio das métricas e critérios definidos
 para o experimento.
-
-## 1.6 Estrutura do trabalho
-
-Esta introdução apresenta a contextualização do tema, o problema de pesquisa, a
-justificativa, a pergunta de pesquisa e os objetivos estabelecidos. Em seguida, o
-referencial teórico delimita os elementos que caracterizam o problema, apresenta
-como a literatura o enfrentou e identifica o processo adotado para implementar a
-solução. A metodologia descreve a natureza da pesquisa, o ambiente experimental,
-o desenho de comparação, as métricas e os critérios definidos. A seção de
-resultados e discussão apresenta os dados obtidos, a comparação entre as
-configurações e a análise das métricas. Por fim, a conclusão sintetiza as
-contribuições, apresenta as limitações identificadas e indica possibilidades para
-trabalhos futuros.
 
 ***
 

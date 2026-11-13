@@ -13,13 +13,16 @@ nao estao — em vez de devolver vazio, que a tela mostraria como "nao ha dados"
 
 import json
 import re
+import sys
 from pathlib import Path
+from unittest import mock
 
 import pytest
 
 from frontend.dashboard.cliente import (
     EXEMPLOS,
     FonteExemplos,
+    FonteHTTP,
     Painel,
     Resposta,
     SourceUnavailableError,
@@ -210,3 +213,41 @@ def test_a_execucao_inexistente_esta_gravada_como_erro():
 
 def test_o_caminho_padrao_dos_exemplos_existe():
     assert EXEMPLOS.is_file(), f"{EXEMPLOS} nao existe"
+
+
+# ------------------------------------------------- a fonte API sem o httpx
+# Em 12/11/2026 o painel do Davi morreu inteiro com `ModuleNotFoundError: No
+# module named 'httpx'` num ambiente recem-instalado. A barra lateral trata
+# `SourceUnavailableError` e mostra o erro em caixa vermelha; `ImportError`
+# atravessava e matava a tela, levando junto a fonte de exemplos, que nao
+# precisa de rede nenhuma.
+
+
+def test_sem_httpx_a_fonte_api_diz_o_que_falta_em_vez_de_estourar():
+    fonte = FonteHTTP("http://127.0.0.1:8000")
+
+    with mock.patch.dict(sys.modules, {"httpx": None}):
+        with pytest.raises(SourceUnavailableError, match="httpx"):
+            fonte.obter("/api/v1/health")
+
+
+def test_a_mensagem_diz_as_duas_saidas():
+    """Instalar, ou trocar para os exemplos gravados."""
+    fonte = FonteHTTP("http://127.0.0.1:8000")
+
+    with mock.patch.dict(sys.modules, {"httpx": None}):
+        try:
+            fonte.obter("/api/v1/health")
+        except SourceUnavailableError as erro:
+            mensagem = str(erro)
+
+    assert "pip install" in mensagem
+    assert "Exemplos gravados" in mensagem
+
+
+def test_a_fonte_de_exemplos_nao_depende_do_httpx():
+    """E o que torna a falta do httpx um aviso, e nao uma parede."""
+    with mock.patch.dict(sys.modules, {"httpx": None}):
+        resposta = FonteExemplos().obter("/api/v1/health")
+
+    assert resposta.ok

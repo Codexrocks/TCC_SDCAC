@@ -71,6 +71,13 @@ quando = "Quinzenal"
 estado = "recorrente"
 
 [[tarefa_professor]]
+id = "resultados-reenvio"
+titulo = "**Seção de Resultados reenviada**, com legenda e fonte em toda tabela"
+prazo = 2026-11-19
+estado = "pendente"
+ressalva = "Entregue em 12/11 e devolvida pelo orientador com correções: tabela e figura precisam de legenda com a respectiva fonte indicada"
+
+[[tarefa_professor]]
 id = "entrega-final"
 titulo = "**Entrega do TCC**"
 prazo = 2026-12-10
@@ -595,6 +602,12 @@ estado = "fechada"
 fechada_em = 2026-10-13
 
 [[decisao]]
+id = "D-45"
+titulo = "A tela de Metricas le a API, e entra depois da avaliacao heuristica"
+estado = "fechada"
+fechada_em = 2026-11-12
+
+[[decisao]]
 id = "D-44"
 titulo = "Evento cujo equipamento nao tem estado no dia"
 estado = "fechada"
@@ -616,6 +629,12 @@ estado = "a-confirmar"
 # no quadro. Referência não conferida é o único item desta lista que pode
 # reprovar o TCC por fraude acadêmica — e é o que some mais fácil de vista.
 # ---------------------------------------------------------------------------
+
+[[citacao]]
+onde = "artigo/04-resultados.md § 4.4 — WCAG 2.2"
+o_que = "Os critérios 1.4.1 e 1.4.3 são citados e a obra não tem entrada em referencias.md. Recomendação do W3C, pública; falta a entrada em ABNT e conferir os dois números"
+dono = "Davi"
+desde = 2026-11-12
 
 [[citacao]]
 onde = "artigo/03-metodologia.md § 3.8 · 04-resultados.md § 4.6 · 05-conclusao.md § 5.4"
@@ -678,18 +697,6 @@ onde = "docs/usabilidade.md § 9"
 o_que = "Edição e ano da obra de Shneiderman efetivamente consultada"
 dono = "Filipe"
 desde = 2026-09-03
-
-[[citacao]]
-onde = "artigo/03-metodologia.md § 3.3 — a janela de falhas"
-o_que = "Afirmação sem chamada: \"forma usual de regra de correlação em ferramentas de gestão de eventos de segurança\". Entrou com a D-42"
-dono = "Davi"
-desde = 2026-10-13
-
-[[citacao]]
-onde = "artigo/03-metodologia.md § 3.3 — \"trivial para regras fixas\""
-o_que = "Afirmação sem fonte: detecção de tentativa sucessiva é \"trivial para regras fixas\". Pode ser reformulada sem fonte"
-dono = "Davi"
-desde = 2026-10-13
 
 [[citacao]]
 onde = "artigo/01-introducao.md — caso Target, 2013"

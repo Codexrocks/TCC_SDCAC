@@ -121,7 +121,18 @@ class FonteHTTP:
 
     def obter(self, rota: str) -> Resposta:
         """A resposta da API para a rota."""
-        import httpx
+        try:
+            import httpx
+        except ImportError as erro:
+            # Sem o httpx a tela inteira morria com ModuleNotFoundError, em vez
+            # de dizer o que falta -- e a fonte de exemplos, que roda sem rede
+            # nenhuma, continuava disponivel do lado. Mesmo principio do
+            # montador do artigo, que nao monta e **diz por que**.
+            raise SourceUnavailableError(
+                "a fonte API precisa do httpx, e este ambiente nao o tem. "
+                "Instale as dependencias do projeto com `pip install -e .`, "
+                "ou use a fonte Exemplos gravados, que roda sem rede"
+            ) from erro
 
         try:
             bruta = httpx.get(f"{self.base}{rota}", timeout=self.espera)

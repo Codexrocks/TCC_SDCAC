@@ -21,9 +21,9 @@
 |---|---|
 | ⚠️ Atrasado | 14 |
 | ▶️ Em curso | 1 |
-| ⏳ A vencer em 7 dias | 2 |
+| ⏳ A vencer em 7 dias | 3 |
 | 🗓️ Depois | 11 |
-| ✅ Feito | 43 |
+| ✅ Feito | 44 |
 
 ## ⚠️ Atrasado
 
@@ -56,10 +56,11 @@
 
 ## ⏳ A vencer em 7 dias
 
-2 itens.
+3 itens.
 
 | Tipo | Item | O que é | Quem | Prazo | Situação |
 |---|---|---|---|---|---|
+| Professor | ****Seção de Resultados reenviada**, com legenda e fonte em toda tabela** | Entregue em 12/11 e devolvida pelo orientador com correções: tabela e figura precisam de legenda com a respectiva fonte indicada | Todos | 19/11/2026 | ⏳ Vence em 7 dias |
 | Marco | **M4 · Tabela de ablação** | Números finais das quatro configurações | Todos | 19/11/2026 | ⏳ Vence em 7 dias |
 | Semana | **S12** | Tabela de ablação, sensibilidade dos pesos, gráficos | Filipe, Davi | 13/11/2026 a 19/11/2026 | ⏳ Vence em 7 dias |
 
@@ -83,7 +84,7 @@
 
 ## ✅ Feito
 
-43 itens.
+44 itens.
 
 | Tipo | Item | O que é | Quem | Prazo | Situação |
 |---|---|---|---|---|---|
@@ -129,6 +130,7 @@
 | Decisão | **D-40** | Sede, filial e fusos horários | — | 28/09/2026 | ✅ Fechada em 28/09/2026 |
 | Decisão | **D-41** | Dispositivos e estado inicial de higiene | — | 28/09/2026 | ✅ Fechada em 28/09/2026 |
 | Decisão | **D-42** | A quarta regra da C0: janela de falhas ou evento isolado | — | 13/10/2026 | ✅ Fechada em 13/10/2026 |
+| Decisão | **D-45** | A tela de Metricas le a API, e entra depois da avaliacao heuristica | — | 12/11/2026 | ✅ Fechada em 12/11/2026 |
 | Decisão | **D-44** | Evento cujo equipamento nao tem estado no dia | — | 11/11/2026 | ✅ Fechada em 11/11/2026 |
 
 ## Critério de aceite do que está aberto
@@ -163,7 +165,7 @@ colunas acima.
 
 ## Dívida bibliográfica
 
-16 pendências. Referência não conferida na fonte é o único
+15 pendências. Referência não conferida na fonte é o único
 item deste quadro que pode reprovar o trabalho por fraude acadêmica, e é o
 que some mais fácil de vista.
 
@@ -178,13 +180,12 @@ que some mais fácil de vista.
 | `artigo/03-metodologia.md § 3.7` | Confirmar na fonte: (WILCOXON, 1945) — O teste em si | Davi | 28/09/2026 | 45 dias |
 | `artigo/03-metodologia.md § 3.8` | Confirmar na fonte: (KAUFMAN et al., 2012) — Vazamento na constituição do padrão individual | Davi | 28/09/2026 | 45 dias |
 | `artigo/03-metodologia.md § 3.8` | Confirmar na fonte: (SOMMER; PAXSON, 2010) — Limite das avaliações sobre dado sintético | Davi | 28/09/2026 | 45 dias |
-| `artigo/03-metodologia.md § 3.3 — a janela de falhas` | Afirmação sem chamada: "forma usual de regra de correlação em ferramentas de gestão de eventos de segurança". Entrou com a D-42 | Davi | 13/10/2026 | 30 dias |
-| `artigo/03-metodologia.md § 3.3 — "trivial para regras fixas"` | Afirmação sem fonte: detecção de tentativa sucessiva é "trivial para regras fixas". Pode ser reformulada sem fonte | Davi | 13/10/2026 | 30 dias |
 | `artigo/01-introducao.md — caso Target, 2013` | Confirmar na fonte: RILEY; ELGIN; LAWRENCE; MATLACK, Bloomberg Businessweek, 13 mar. 2014 | Yasmin | 10/11/2026 | 2 dias |
 | `artigo/01-introducao.md — caso GE / Zheng, 2018` | Confirmar na fonte: U.S. DOJ, Niskayuna man charged theft trade secrets, 2018 | Yasmin | 10/11/2026 | 2 dias |
 | `artigo/01-introducao.md — caso Capital One, 2019` | Confirmar na fonte: U.S. DOJ, usao-wdwa. **O próprio insumo admite estar incompleto**, com URL genérica | Yasmin | 10/11/2026 | 2 dias |
 | `artigo/01-introducao.md — caso Tesla / Tripp, 2018` | Confirmar na fonte: petição inicial Tesla, Inc. v. Martin Tripp (Nevada) ou GovInfoSecurity, 2018 | Yasmin | 10/11/2026 | 2 dias |
 | `artigo/03-metodologia.md § 3.8 · 04-resultados.md § 4.6 · 05-conclusao.md § 5.4` | A Lei nº 13.709/2018 é citada nos três lugares e não tem entrada em referencias.md. Fonte normativa: falta conferir os dados oficiais de publicação para a entrada em ABNT NBR 6023 | Davi | 11/11/2026 | 1 dias |
+| `artigo/04-resultados.md § 4.4 — WCAG 2.2` | Os critérios 1.4.1 e 1.4.3 são citados e a obra não tem entrada em referencias.md. Recomendação do W3C, pública; falta a entrada em ABNT e conferir os dois números | Davi | 12/11/2026 | 0 dias |
 
 ## O que ficou fora desta versão
 

@@ -29,7 +29,7 @@ depende do template.
 
 | Item | Valor |
 |---|---|
-| **Artigo completo** | **Mínimo 8, máximo 12 páginas** |
+| **Artigo completo** | **Mínimo 8, máximo 12 páginas** — confirmado pelo Davi em 12/11/2026 |
 | **Introdução** | **Mínimo 1, máximo 2 páginas** |
 
 > **A Introdução não leva figura, gráfico nem tabela.** É exigência explícita das
@@ -119,6 +119,38 @@ isoladas na véspera de uma entrega.
 > A simulação como diferencial opcional muda a leitura do protótipo: ele não é
 > requisito de aprovação, e sim o que distingue o trabalho. O que **é** requisito
 > são as 8 a 12 páginas com resultados concretos.
+
+> **O template do COBEM 2025 diz 6 a 10 páginas**, e o do CREEM 2026 também traz
+> número próprio. **Vale o do professor**: 8 a 12. Se o template de 2026 chegar
+> com outro número, é ele que muda o documento — e o artigo fecha hoje em 12.
+
+### Tabelas e figuras
+
+Exigência que o professor apontou **por escrito, em 12/11/2026**, ao comentar a
+entrega da Seção de Resultados:
+
+> *"as tabelas e figuras devem possuir legenda com a respectiva fonte
+> indicada."*
+
+O que o artigo passou a fazer, e o montador passou a conferir:
+
+| | |
+|---|---|
+| **Legenda** | **Acima** da tabela, centralizada, no formato `Tabela N. Texto.` — é a forma do template da família ABCM |
+| **Fonte** | **Abaixo**, centralizada, em corpo 9: `Fonte: dados da pesquisa (2026).` para o que o experimento mediu, `Fonte: elaborada pelos autores (2026).` para o que a equipe definiu |
+| **Numeração** | **Contínua no documento inteiro**, e não por seção. A Tabela 1 está na Metodologia; as cinco seguintes, nos Resultados |
+| **Chamada no texto** | Pelo número — `Tab. 4` no meio da frase, `Tabela 4` no começo. O template exige, e nenhuma tabela era chamada assim antes de 12/11 |
+| **Título de seção** | À esquerda, **em negrito**, Times 10, numerado com arábicos separados por ponto, **no máximo três níveis**. **Sem caixa alta** — o template não a pede, e ela saiu em 12/11/2026 |
+| **E-mail dos autores** | Em corpo 9, abaixo do nome. Mora fora do versionamento, em `artigo/emails.local.json` — o repositório é público |
+
+> **Isto é verificação, não lembrete.** `scripts/montar_artigo.py` **não monta o
+> documento** se uma tabela estiver sem legenda, sem fonte ou com a numeração
+> fora de sequência. Lembrete escrito não reprova nada — e esta exigência já
+> custou uma volta de entrega.
+
+**Figura o artigo não tem** — nenhuma das cinco seções usa imagem. A regra fica
+escrita porque a primeira que entrar vai precisar dela, e o montador já aceita
+`Figura N.` na mesma forma.
 
 ### Outras exigências
 
