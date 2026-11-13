@@ -193,6 +193,12 @@ com um só, a maior parte dos problemas passa batido.
 **Saída:** tabela `heurística violada | onde | severidade | correção` em
 `docs/relatorios/`.
 
+> 📋 **O roteiro e a planilha estão em
+> [avaliação heurística](avaliacao-heuristica.md)**, desde 12/11/2026 — o
+> caminho a percorrer, as três regras que fazem o método funcionar e o arquivo
+> para preencher. **Quem o escreveu não percorreu o painel**, para não
+> contaminar as três passagens.
+
 ### 6.2 Teste com usuários — não aplicado (D-02)
 
 Aproveitamos os seis cenários de teste que já existem em
