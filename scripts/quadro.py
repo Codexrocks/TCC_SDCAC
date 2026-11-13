@@ -454,12 +454,9 @@ def render_quadro(dados: Dados, hoje: datetime.date) -> str:
             "que falta para o critério de aceite fechar. Vem do campo `andamento` do"
         )
         linhas.append(
-            "`quadro.toml` — escrito ali direto, ou trazido do quadro compartilhado"
+            "`quadro.toml`, escrito ali direto. **Não é estado calculado**, ao"
         )
-        linhas.append(
-            "pela tarefa agendada. **Não é estado calculado**, ao contrário das"
-        )
-        linhas.append("colunas acima.")
+        linhas.append("contrário das colunas acima.")
         linhas.append("")
         linhas.append(
             tabela(
