@@ -625,6 +625,12 @@ estado = "a-confirmar"
 # ---------------------------------------------------------------------------
 
 [[citacao]]
+onde = "artigo/04-resultados.md § 4.4 — WCAG 2.2"
+o_que = "Os critérios 1.4.1 e 1.4.3 são citados e a obra não tem entrada em referencias.md. Recomendação do W3C, pública; falta a entrada em ABNT e conferir os dois números"
+dono = "Davi"
+desde = 2026-11-12
+
+[[citacao]]
 onde = "artigo/03-metodologia.md § 3.8 · 04-resultados.md § 4.6 · 05-conclusao.md § 5.4"
 o_que = "A Lei nº 13.709/2018 é citada nos três lugares e não tem entrada em referencias.md. Fonte normativa: falta conferir os dados oficiais de publicação para a entrada em ABNT NBR 6023"
 dono = "Davi"

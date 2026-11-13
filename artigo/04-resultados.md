@@ -8,25 +8,14 @@
 > execução registrada em `results/`, nunca de estimativa — de ninguém, e muito
 > menos de uma IA.
 
-**Dez execuções independentes, em 12/11/2026**, nos parâmetros da Tab. 2. Todos
-os números desta seção saem de `results/agregado.json`, gravado pelo avaliador a partir das dez pastas
-`results/semente-1` a `semente-10`. A procedência completa está em
-[`results/README.md`](../results/README.md) e o procedimento em
-[execução do experimento](../docs/execucao-do-experimento.md).
+**Dez execuções independentes.** Todos os números desta seção são lidos do
+arquivo de agregação descrito na Seção 3.7, e não transcritos manualmente.
 
-**Tabela 2.** Parâmetros da execução registrada.
-
-| | |
-|---|---|
-| Sementes | **dez**, as do gerador 42 a 51 |
-| Eventos pontuados por semente | **1.436.275 ± 9.681**, dos quais **2.583 ± 54** maliciosos |
-| Episódios na janela de avaliação | **111,9 ± 1,6** |
-| Janela de treino | 01/01 a 31/03/2026 — os três meses da **D-24** |
-| Janela de avaliação | 01/04 a 31/12/2026 |
-| Configurações executadas | **as quatro**, em todas as dez |
-| Limiar de alerta | 20, o teto da faixa normal do preset |
-
-Fonte: dados da pesquisa (2026).
+São **dez sementes**, as do gerador 42 a 51, com **1.436.275 ± 9.681** eventos
+pontuados em cada uma, dos quais **2.583 ± 54** maliciosos. O treino usa 01/01 a
+31/03/2026 e a avaliação, 01/04 a 31/12/2026. As
+quatro configurações rodaram em todas as dez sementes, no limiar de alerta 20,
+que é o teto da faixa normal de risco.
 
 **Toda célula de toda tabela desta seção é média ± desvio-padrão amostral sobre
 as dez sementes**, em pontos percentuais. O teste de hipótese é o de **Wilcoxon
@@ -51,7 +40,7 @@ ficam no baseline de três meses, onde o gerador não injeta cenário de ataque.
 episódio conta como detectado quando **pelo menos um** de seus eventos
 ultrapassa o limiar.
 
-**Tabela 3.** Episódios detectados, por família de cenário, em porcentagem.
+**Tabela 2.** Episódios detectados, por família de cenário, em porcentagem.
 
 | Família | Episódios | C0 | C1 | C2 | C3 |
 |---|---|---|---|---|---|
@@ -62,7 +51,7 @@ ultrapassa o limiar.
 
 Fonte: dados da pesquisa (2026).
 
-**A família N não é acerto.** Ela reúne, na Tab. 3, atividade legítima que *parece*
+**A família N não é acerto.** Ela reúne, na Tab. 2, atividade legítima que *parece*
 estranha — plantão noturno, viagem, janela de manutenção de infraestrutura —, e
 alertar sobre ela é falso positivo. A linha subiu junto com a cobertura, e o
 aumento é significativo: **p = 0,0020** entre C2 e C0 e **p = 0,0039** entre C3
@@ -75,14 +64,13 @@ porque os quatro que escapam dependem de um limiar que ela nunca cruza — e cer
 de um terço da longitudinal. É a lacuna que a pergunta de pesquisa nomeia, e ela
 se reproduz semente a semente.
 
-**A coluna da C3 não é resultado de detecção.** Neste limiar ela alerta sobre
-99,84 ± 0,01% do registro, e detectar todos os episódios é consequência
-aritmética disso, não evidência de discriminação. A C3 só se compara às outras
-no ponto de revocação fixa da Seção 4.3.
+**A coluna da C3 não é resultado de detecção:** neste limiar ela alerta sobre
+99,84 ± 0,01% do registro, e só se compara às outras no ponto de revocação fixa
+da Seção 4.3.
 
 ## 4.2 Matriz de confusão
 
-**Tabela 4.** Desempenho por evento no limiar de operação 20, em porcentagem, exceto os alertas.
+**Tabela 3.** Desempenho por evento no limiar de operação 20, em porcentagem, exceto os alertas.
 
 | Config | Revocação | FPR | Precisão | Alertas por dia útil |
 |---|---|---|---|---|
@@ -93,38 +81,31 @@ no ponto de revocação fixa da Seção 4.3.
 
 Fonte: dados da pesquisa (2026).
 
-**Nenhuma das quatro configurações é operável neste limiar**, como a Tab. 4
+**Nenhuma das quatro configurações é operável neste limiar**, como a Tab. 3
 mostra: mais de mil e
 trezentos alertas por dia útil nas três primeiras, com precisão abaixo de 1%, é
-um analista descartando alerta em tempo integral. A **C3 é o caso extremo** —
+um analista descartando alerta em tempo integral. A **C3 é o extremo** —
 deixa escapar menos de um evento malicioso por semente e, para isso, alerta
 sobre 99,84% do registro, porque a exposição acumulada cresce ao longo da janela
 e empurra quase toda nota acima do corte.
 
-O limiar 20 é o teto da faixa normal do preset, herdado dos testes de unidade, e
+O limiar 20 é o teto da faixa normal de risco, herdado da configuração inicial
+do protótipo, e
 **não foi calibrado sobre dado em escala**. Isso não invalida a comparação —
-invalida comparar as quatro *neste ponto*, e é por isso que a grandeza da
-**D-03** é a da seção seguinte.
+invalida comparar as quatro *neste ponto*, e é por isso que a comparação se faz
+a revocação fixa, na seção seguinte.
 
 ## 4.3 Métricas de desempenho
 
 ### 4.3.1 Ruído: FPR com a revocação fixada
 
-A primeira grandeza da pergunta de pesquisa está na Tab. 5.
+A primeira grandeza da pergunta de pesquisa está na Fig. 1, em escala
+logarítmica porque os valores cobrem quatro ordens de grandeza. Cada ponto é a
+média das dez sementes, e a barra vertical é o desvio-padrão amostral.
 
-**Tabela 5.** Falsos positivos, em porcentagem, no limiar mais alto que ainda alcança cada revocação.
+![Falsos positivos por nível de revocação fixada](../results/figuras/fpr-por-revocacao.png)
 
-| Revocação | C0 | C1 | C2 | C3 |
-|---|---|---|---|---|
-| **0,10** | 1,15 ± 0,71 | **0,01 ± 0,02** | 0,04 ± 0,02 | 0,05 ± 0,03 |
-| **0,20** | 18,44 ± 1,49 | 6,03 ± 2,75 | **0,40 ± 0,19** | 0,54 ± 0,29 |
-| **0,30** | 34,55 ± 34,52 | 14,05 ± 4,21 | **1,33 ± 0,55** | 1,70 ± 0,94 |
-| **0,40** | 100,00 ± 0,00 | 23,27 ± 17,36 | **3,18 ± 1,60** | 3,47 ± 1,36 |
-| **0,50** | 100,00 ± 0,00 | 58,75 ± 21,51 | **6,85 ± 1,01** | 7,18 ± 2,12 |
-| **0,60** | 100,00 ± 0,00 | 72,09 ± 0,47 | **11,93 ± 4,13** | 14,04 ± 4,48 |
-| **0,70** | 100,00 ± 0,00 | 72,09 ± 0,47 | **26,75 ± 4,24** | 28,33 ± 8,84 |
-| **0,80** | 100,00 ± 0,00 | 72,09 ± 0,47 | **47,42 ± 14,82** | 52,87 ± 11,11 |
-| **0,90** | 100,00 ± 0,00 | 100,00 ± 0,00 | 76,00 ± 1,41 | **73,69 ± 6,75** |
+**Figura 1.** Falsos positivos, em porcentagem, no limiar mais alto que ainda alcança cada revocação.
 
 Fonte: dados da pesquisa (2026).
 
@@ -171,10 +152,10 @@ segundo, na FPR — e que a troca, no desenho atual, não compensa.
 
 ### 4.3.2 Cobertura: revocação nos cenários longitudinais
 
-A segunda grandeza está na Tab. 6, medida na família **L** — aqueles em que o risco cresce ao
+A segunda grandeza está na Tab. 4, medida na família **L** — aqueles em que o risco cresce ao
 longo de dias sem que um evento isolado dispare alerta:
 
-**Tabela 6.** Revocação nos cenários longitudinais, em porcentagem, por episódio e por evento.
+**Tabela 4.** Revocação nos cenários longitudinais, em porcentagem, por episódio e por evento.
 
 | Unidade de análise | C0 | C1 | C2 | C3 |
 |---|---|---|---|---|
@@ -216,26 +197,29 @@ sustenta**.
 
 ## 4.4 Verificação do painel de análise
 
-> **A escrever.** A **D-02 fechou em 14/10/2026 pela opção A**: o painel é
-> instrumento de análise, e não objeto de avaliação — como declara a Seção 3.9.
-> **Não há escore SUS, métricas de tarefa nem participantes**, e esta subseção
-> não reporta satisfação de usuário.
->
-> O que entra aqui é a verificação do critério funcional declarado em
-> [usabilidade](../docs/usabilidade.md): decomposição do risco visível por
-> dimensão, rótulo textual acompanhando cada uso de cor e contraste mínimo de
-> 4,5:1 — a seção 5 daquele documento —, somada à avaliação heurística da seção
-> 6.1, que é feita por quem constrói e **não** requer participantes. As seções
-> 6.2 e 6.3 de lá, teste com usuários e SUS, ficam fora pela **D-02**.
->
-> A verificação é feita pelos autores sobre o painel construído, e o que se
-> reporta é se o critério foi cumprido.
->
-> As cinco parcelas que o painel precisa exibir separadas são as da Seção 3.3:
-> regras fixas, risco do evento individual, desvio do padrão do próprio
-> funcionário e as duas parcelas da terceira dimensão — exposição acumulada e
-> postura de segurança —, que pelas decisões **D-25** e **D-30** não se agregam
-> em um valor único.
+Pela decisão registrada na Seção 3.9, o painel é instrumento de análise e não
+objeto de avaliação: **não há escore de satisfação, métrica de tarefa nem
+participante**, e nada se afirma aqui sobre a qualidade da interface. O que se
+verifica é o critério funcional — a nota decomponível por dimensão, o rótulo
+textual acompanhando cada uso de cor e o contraste mínimo de 4,5:1 entre texto e
+fundo, exigências dos critérios 1.4.1 e 1.4.3 da WCAG 2.2.
+
+![A decomposição da nota de um evento, no painel](../results/figuras/painel-decomposicao.png)
+
+**Figura 2.** A decomposição da nota de um evento da configuração C3, no painel.
+
+Fonte: captura do painel sobre os exemplos gravados do projeto (2026).
+
+**A verificação é automática e roda a cada alteração do código:** quarenta casos
+de teste conferem o contraste par a par, os rótulos e intervalos de cada faixa —
+contra a documentação **e** contra a classificação do próprio motor, de modo que
+legenda divergente do sistema reprova — e as cinco parcelas da Seção 3.3, uma a
+uma, inclusive a exigência de que a parcela não ligada apareça **ausente, e não
+zero**: é o traço na linha das regras fixas, que a C3 não ativa.
+
+**O que não foi feito fica declarado:** a avaliação heurística prevista na Seção
+3.9 **não foi realizada**. Afirma-se que o critério funcional é cumprido — não
+que a interface seja adequada ao uso.
 
 ## 4.5 Discussão
 
@@ -310,9 +294,8 @@ pareado afasta a hipótese de a diferença ter vindo do sorteio, mas não a de o
 gerador ser previsível — todas as dez saem do mesmo gerador. Essa ameaça está na
 Seção 3.8 e **não se resolve com mais sementes**.
 
-**O limiar não foi calibrado.** Os números da Seção 4.2 vêm de um corte herdado
-dos testes de unidade, não escolhido sobre dado em escala: a Tab. 4 serve
-para mostrar o problema, não para comparar configurações.
+**O limiar não foi calibrado**, como a Seção 4.2 registra: a Tab. 3 serve para
+mostrar o problema, não para comparar configurações.
 
 **A parcela de postura não foi avaliada em parte dos eventos.** O gerador
 escreve estado diário de equipamento apenas para notebooks, e os eventos de
@@ -331,8 +314,8 @@ quarta dimensão não traz vantagem significativa.
 
 **Ambiente simulado não é produção.** Acurácia alta sobre dado sintético pode
 indicar gerador previsível em vez de modelo bom. O conjunto de regras é pequeno,
-e o painel não foi avaliado com usuários, pela **D-02**, de modo que nada se
-afirma sobre sua usabilidade.
+e o painel não foi avaliado com usuários, conforme a Seção 3.9, de modo que nada
+se afirma sobre sua usabilidade.
 
 **O tratamento de dados pessoais.** Monitorar comportamento de colaborador é
 tratamento de dado pessoal quando aplicado a organização real; este trabalho opera

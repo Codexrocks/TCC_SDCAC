@@ -30,12 +30,20 @@ comparação com regras fixas em ambiente corporativo simulado**
 
 *Centro Universitário UNA*
 
-> **Confirmar antes de publicar:** o template pede o endereço da instituição e os
-> **e-mails** dos autores logo abaixo do nome, e é a forma usual em artigo de
-> congresso. Este repositório é **público**, e a pasta `docs/` é publicada no
-> GitBook — a decisão de expor os três endereços é da equipe, e precisa ser dita
-> em voz alta uma vez em vez de passar por omissão. Os endereços entram na
-> montagem do documento de entrega; aqui ficam de fora até a confirmação.
+> **Os e-mails entram no documento, e não nesta página.** O template pede o
+> endereço de cada autor em corpo 9 abaixo do nome. Este repositório é
+> **público**, e endereço de pessoa não vai para repositório público só porque o
+> documento de entrega precisa dele.
+>
+> **Como funciona, desde 12/11/2026:** o montador lê os endereços de
+> `artigo/emails.local.json`, que o `.gitignore` ignora — o formato está em
+> [`emails.exemplo.json`](emails.exemplo.json). Sem o arquivo, o documento monta
+> **sem a linha**, e isso não é erro: é o caso de quem clonou o repositório e não
+> tem os endereços.
+>
+> O do Davi já é público, em [Tarefa 01](../docs/entregas/tarefa-01.md). **Os da
+> Yasmin e do Filipe precisam ser pedidos a eles** — e a decisão de constar no
+> documento entregue é de cada um.
 
 ***
 

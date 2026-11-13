@@ -40,6 +40,7 @@ que estão aqui e não na lista de referências.
 | Onde | O que falta | Quem | Desde |
 |---|---|---|---|
 | `03-metodologia.md` § 3.8 · `04-resultados.md` § 4.6 · `05-conclusao.md` § 5.4 | A **Lei nº 13.709/2018** é citada nos três lugares e **não tem entrada em [`referencias.md`](../artigo/referencias.md)**, nem estava registrada aqui. Achado em 11/11/2026, ao montar o documento. É fonte normativa e primária, não bibliografia que uma IA possa ter inventado — mas a **entrada em ABNT NBR 6023 precisa dos dados oficiais de publicação** (veículo, data, seção), e é isso que falta conferir. Proposta a conferir: `BRASIL. Lei nº 13.709, de 14 de agosto de 2018. Lei Geral de Proteção de Dados Pessoais (LGPD). Brasília, DF: Presidência da República, 2018.` | Davi | 11/11/2026 |
+| `04-resultados.md` § 4.4 | A **WCAG 2.2** é citada pelos critérios **1.4.1** e **1.4.3**, que dão a exigência de rótulo junto da cor e o contraste de 4,5:1, e **não tem entrada em [`referencias.md`](../artigo/referencias.md)**. Entrou em 12/11/2026, ao escrever a § 4.4. É **recomendação normativa do W3C**, pública — o que falta é a entrada em ABNT NBR 6023 e a conferência de que os dois números de critério são esses. A [`usabilidade.md`](usabilidade.md) já tem a obra numa lista formatada, e a própria página avisa que parte dela não foi conferida na fonte | Davi | 12/11/2026 |
 
 ### As 4 dos exemplos reais — **entregues em 10/11/2026, por conferir**
 
