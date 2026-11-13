@@ -100,4 +100,5 @@
   * [2026-11-12 — Sessão 43: dez sementes, estatística e a vantagem da C3 que caiu](relatorios/2026-11-12-sessao-43.md)
   * [2026-11-12 — Sessão 44: o montador entra, e uma auditoria de IA não fecha pendência](relatorios/2026-11-12-sessao-44.md)
   * [2026-11-12 — Sessão 45: legenda com fonte em toda tabela, e as 12 páginas resistem](relatorios/2026-11-12-sessao-45.md)
+  * [2026-11-12 — Sessão 46: duas figuras entram, e a Estrutura do trabalho é o preço](relatorios/2026-11-12-sessao-46.md)
   * [Modelo de relatório](relatorios/_modelo.md)

@@ -38,3 +38,8 @@ Thumbs.db
 # Montagem do artigo (saida de build, nao versionada)
 artigo/*.docx
 artigo/*.pdf
+
+# E-mails dos autores. O template pede o endereco de cada um abaixo do nome, e
+# este repositorio e publico: o arquivo fica na maquina de quem monta o
+# documento. O formato esta em artigo/emails.exemplo.json.
+artigo/emails.local.json
