@@ -137,8 +137,20 @@ evento, vistos em telas diferentes.
 
 ## 6. A planilha
 
-Preencha [`avaliacao-heuristica-planilha.csv`](avaliacao-heuristica-planilha.csv)
-— abra no Excel, no Google Planilhas ou no que preferir. As colunas:
+**Copie a tabela abaixo** para o Excel, para o Google Planilhas ou para o que
+preferir — uma cópia por pessoa:
+
+| avaliador | fonte | heuristica | onde | o_que_observei | por_que_viola | severidade | correcao_sugerida |
+|---|---|---|---|---|---|---|---|
+| | | | | | | | |
+
+> O mesmo cabeçalho está em
+> [`docs/avaliacao-heuristica-planilha.csv`](https://github.com/Codexrocks/TCC_SDCAC/blob/main/docs/avaliacao-heuristica-planilha.csv),
+> no repositório, pronto para baixar. **O site publicado não serve arquivo
+> `.csv`** — ele publica páginas, e um link relativo para o arquivo dá "página
+> não encontrada". Por isso a tabela está aqui também.
+
+As colunas:
 
 | Coluna | O que vai nela |
 |---|---|
