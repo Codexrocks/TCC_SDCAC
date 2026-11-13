@@ -104,4 +104,5 @@
   * [2026-11-12 — Sessão 46: duas figuras entram, e a Estrutura do trabalho é o preço](relatorios/2026-11-12-sessao-46.md)
   * [2026-11-12 — Sessão 47: a falta de uma dependência derrubava a tela inteira](relatorios/2026-11-12-sessao-47.md)
   * [2026-11-12 — Sessão 48: a tela de Métricas ganha dono, caminho e hora](relatorios/2026-11-12-sessao-48.md)
+  * [2026-11-13 — Sessão 50: a fila de PRs zera, e o montador entrou sem a própria dependência](relatorios/2026-11-13-sessao-50.md)
   * [Modelo de relatório](relatorios/_modelo.md)
