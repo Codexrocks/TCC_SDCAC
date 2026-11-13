@@ -34,6 +34,12 @@ Markdown -- `blocos` e `trechos`, que e onde os defeitos moram -- rodam sem a
 biblioteca, e por isso tem teste em `tests/test_montar_artigo.py`. O CI instala
 so `pytest pyyaml fastapi httpx`, e um teste que exigisse `docx` seria pulado em
 silencio.
+
+Tolerar a falta no import **nao** e deixar de declarar a dependencia: ela esta
+em `[project.optional-dependencies] dev` do `pyproject.toml`. As duas coisas
+respondem a perguntas diferentes -- a tolerancia e para o CI nao pular teste em
+silencio; a declaracao e para que `pip install -e ".[dev]"` produza um ambiente
+em que o `.docx` de entrega realmente se gera.
 """
 
 import argparse
