@@ -43,9 +43,21 @@ jobs:
         # ZoneInfoNotFoundError.
         #
         # A lista e explicita, e nao `pip install -e .`: as dependencias do
-        # projeto incluem pandas, matplotlib e streamlit, que nenhum teste usa
-        # e que levariam minutos a cada execucao.
-        run: pip install --quiet pytest pyyaml fastapi httpx
+        # projeto incluem matplotlib e streamlit, que nenhum teste usa e que
+        # levariam minutos a cada execucao.
+        #
+        # O numpy e o pandas entraram em 12/11/2026, pelo criterio que este
+        # proprio comentario enuncia: um teste passou a usa-los. O
+        # `tests/test_gerador_comportamento.py` executa o gerador, e o
+        # `tests/test_gerador.py` ja trazia um `importorskip("numpy")` desde o
+        # #92 -- ou seja, havia teste PULADO aqui, em silencio, com o verde
+        # afirmando o que ninguem conferia.
+        #
+        # Quem impede que isso volte a acontecer e o
+        # `tests/test_dependencias_do_ci.py`: ele le esta linha, varre `tests/`
+        # por tudo que e importado de fora da biblioteca padrao -- inclusive o
+        # que aparece em `importorskip` -- e reprova se algum nao estiver aqui.
+        run: pip install --quiet pytest pyyaml fastapi httpx numpy pandas
 
       # A ORDEM DOS DOIS PROXIMOS PASSOS IMPORTA.
       #
