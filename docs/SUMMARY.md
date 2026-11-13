@@ -20,6 +20,7 @@
 * [Execução do experimento](execucao-do-experimento.md)
 * [O painel](painel.md)
 * [Usabilidade](usabilidade.md)
+* [Avaliação heurística do painel — roteiro](avaliacao-heuristica.md)
 
 ## Como trabalhamos
 
