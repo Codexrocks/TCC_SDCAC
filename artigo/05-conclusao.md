@@ -17,26 +17,23 @@ grandezas, e cada uma recebe resposta própria.
 
 **Quanto ao ruído, a resposta é afirmativa com margem ampla e com
 significância estatística.** À revocação de 0,20 a taxa de falsos positivos caiu
-de 18,44% na linha de base para 0,40% na configuração que acrescenta o desvio em
-relação ao padrão individual, e a diferença se repete em **todos os nove níveis
-de revocação examinados**, com p = 0,0020 em cada um — o menor valor que dez
-pares produzem num teste de Wilcoxon pareado bilateral exato. À revocação de
-0,40 a linha de base **não alcança o ponto em nenhuma das dez execuções** sem
-emitir alerta sobre a totalidade do registro, enquanto a configuração com duas
-dimensões o alcança com 3,18%. **Quanto à cobertura longitudinal, também é
-afirmativa:** medida por episódio, a revocação passou de 35,0% para 100,0% —
-todos os doze cenários longitudinais, em todas as dez execuções —, o que é
-coerente com o desenho: aqueles cenários foram construídos para que nenhum
-evento isolado fosse notável, e é essa a situação que as regras fixas não
-alcançam.
+de 18,44% para 0,40% na configuração que acrescenta o desvio em relação ao padrão
+individual, e a diferença se repete nos **nove níveis examinados**, com
+p = 0,0020 em cada um — o menor valor que dez pares produzem num teste de
+Wilcoxon pareado bilateral exato. À revocação de 0,40 a linha de base **não
+alcança o ponto em nenhuma das dez execuções** sem alertar sobre a totalidade do
+registro. **Quanto à cobertura longitudinal, também é afirmativa:** medida por
+episódio, passou de 35,0% para 100,0% — os doze cenários, nas dez execuções —, o
+que é coerente com o desenho: eles foram construídos para que nenhum evento
+isolado fosse notável, e é essa a situação que as regras fixas não alcançam.
 
 **A contrapartida não estava na pergunta.** A mesma configuração elevou de 75,8%
-para 96,0% a proporção de episódios de controle negativo que produziram alerta,
-isto é, de atividade legítima sinalizada. A pergunta mede ruído sobre o conjunto
-de eventos e cobertura sobre os cenários longitudinais, e não o alarme sobre
-comportamento legítimo incomum; é nesse terceiro eixo, não interrogado, que o
-ganho encontra seu custo. O que os dados autorizam afirmar é redução de ruído e
-aumento de cobertura nos cenários medidos — não superioridade sem custo.
+para 96,0% a proporção de episódios de controle negativo que produziram alerta —
+atividade legítima sinalizada. A pergunta mede ruído sobre o conjunto de eventos
+e cobertura nos cenários longitudinais, não o alarme sobre comportamento legítimo
+incomum: é nesse terceiro eixo, não interrogado, que o ganho encontra seu custo.
+O que os dados autorizam afirmar é redução de ruído e aumento de cobertura nos
+cenários medidos — não superioridade sem custo.
 
 **Quanto à terceira dimensão, a resposta é negativa no eixo do ruído.** O
 acréscimo da exposição acumulada **não reduz a taxa de falsos positivos em
@@ -50,24 +47,19 @@ ganho inseparável do custo.
 
 A leitura é coerente com o que a exposição acumulada mede: um termo que cresce
 devagar e atinge muita gente alcança os casos que nenhum evento isolado denuncia
-e **não** separa os poucos eventos de maior risco. No limiar herdado, não
-calibrado, ela alerta sobre 99,84% do registro e não é operável. **A contribuição
-original do trabalho se verifica, portanto, na segunda dimensão — o desvio em
-relação ao padrão do próprio usuário —, e não na terceira.**
+e **não** separa os de maior risco. **A contribuição original do trabalho se
+verifica, portanto, na segunda dimensão — o desvio em relação ao padrão do
+próprio usuário —, e não na terceira.**
 
-Uma restrição delimita o alcance da resposta, declarada na Seção 4.6: o
-**limiar de operação não calibrado**, razão pela qual a comparação válida é a de
-falsos positivos a revocação fixa. Duas parcelas da configuração completa foram,
-além disso, **subestimadas** — a postura, nos eventos sem estado de equipamento,
-e a exposição, nos empates de instante —, o que torna o resultado dela
-conservador nesse recorte. E as dez sementes medem variação de amostragem, não
-validade externa: todas saem do mesmo gerador, e essa ameaça não se resolve com
-mais sementes.
+Três restrições delimitam o alcance da resposta, e estão declaradas na Seção
+4.6: o **limiar de operação não calibrado**, a **subestimação** de duas parcelas
+da configuração completa e o fato de dez sementes medirem variação de
+amostragem, não validade externa.
 
 ## 5.2 Objetivos alcançados
 
 Dos oito objetivos específicos da Seção 1.5.2, os seis primeiros estão cumpridos
-e verificáveis no repositório: o modelo de eventos e o gerador de logs
+e verificáveis no protótipo: o modelo de eventos e o gerador de logs
 sintéticos com gabarito em base separada (a); a linha de base de regras fixas,
 sem parâmetro estimado de comportamento (b); a avaliação do evento individual
 (c); a identificação de divergência em relação ao padrão de cada usuário, em
@@ -79,21 +71,20 @@ configurações, as duas grandezas primárias foram apuradas e o tratamento
 estatístico da Seção 3.7 foi aplicado sobre **dez sementes de geração
 independentes**, com teste de Wilcoxon pareado de p-valor exato. A análise é,
 nesse sentido, inferencial e não apenas descritiva — e foi a inferência que
-derrubou uma das conclusões que a execução de semente única autorizava, o que é
-precisamente a razão de ela vir antes da conclusão e não depois.
+derrubou uma das conclusões que a execução de semente única autorizava.
 
 ## 5.3 Contribuições
 
-O trabalho deixa cinco artefatos versionados: o **protótipo**, cuja camada de
+O trabalho deixa cinco artefatos: o **protótipo**, cuja camada de
 avaliação é independente do meio de armazenamento, o que permite reproduzir o
 experimento sem servidor de banco de dados; as **quatro configurações
 canônicas**, semeadas e somente-leitura, que tornam a ablação repetível; o
-**conjunto de regras e pesos** versionado, com resumo criptográfico preso a cada
+**conjunto de regras e pesos**, com resumo criptográfico preso a cada
 execução, de modo que duas execuções só são comparáveis se os resumos
 coincidirem; os **cenários de teste automatizados**, com as invariantes de
-desenho da Seção 3.8 impostas por teste a cada alteração do código; e o
-**contrato de leitura versionado**, que torna a nota decomponível inspecionável
-fora da interface. A avaliação de usabilidade **não** é contribuição deste
+desenho da Seção 3.8 verificadas a cada alteração do código; e o
+**contrato de leitura**, que torna a nota decomponível inspecionável fora da
+interface. A avaliação de usabilidade **não** é contribuição deste
 trabalho, como declara a Seção 3.9.
 
 ## 5.4 Trabalhos futuros
@@ -108,9 +99,8 @@ não ao mesmo corte das demais. O segundo é a **implantação sobre dado real �
 da Lei nº
 13.709/2018 e dos controles aplicáveis da ISO/IEC 27001:2022**: base legal,
 transparência ao titular, minimização e retenção. O terceiro é a **validação
-contra tráfego de produção**, que o ambiente simulado não substitui — acurácia
-elevada sobre dado sintético pode indicar gerador previsível em vez de modelo
-adequado, e só o registro real distingue as duas hipóteses.
+contra tráfego de produção**, que o ambiente simulado não substitui pelo motivo
+que a Seção 4.6 dá.
 
 > **A caneta desta seção é do Davi**, pela S14. O texto acima foi redigido a
 > partir dos resultados registrados e dos itens que as instruções anteriores

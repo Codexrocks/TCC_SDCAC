@@ -1,9 +1,9 @@
-# Cabeçalho, Resumo e Abstract
+# Cabeçalho e Resumo
 
 > **Esta página é o bloco de abertura do documento montado**, e a ordem abaixo é
 > a do [template COBEM](../docs/formato-do-artigo.md): título, autores,
-> instituição, e-mails, resumo, palavras-chave. O bloco em inglês vem na
-> sequência, pelo mesmo desenho.
+> instituição, e-mails, resumo, palavras-chave. **O bloco em inglês saiu em
+> 12/11/2026**, por autorização do orientador — ver a seção Abstract abaixo.
 >
 > O orçamento de páginas reserva **0,5 página** para ele — ver
 > [README](README.md).
@@ -30,12 +30,20 @@ comparação com regras fixas em ambiente corporativo simulado**
 
 *Centro Universitário UNA*
 
-> **Confirmar antes de publicar:** o template pede o endereço da instituição e os
-> **e-mails** dos autores logo abaixo do nome, e é a forma usual em artigo de
-> congresso. Este repositório é **público**, e a pasta `docs/` é publicada no
-> GitBook — a decisão de expor os três endereços é da equipe, e precisa ser dita
-> em voz alta uma vez em vez de passar por omissão. Os endereços entram na
-> montagem do documento de entrega; aqui ficam de fora até a confirmação.
+> **Os e-mails entram no documento, e não nesta página.** O template pede o
+> endereço de cada autor em corpo 9 abaixo do nome. Este repositório é
+> **público**, e endereço de pessoa não vai para repositório público só porque o
+> documento de entrega precisa dele.
+>
+> **Como funciona, desde 12/11/2026:** o montador lê os endereços de
+> `artigo/emails.local.json`, que o `.gitignore` ignora — o formato está em
+> [`emails.exemplo.json`](emails.exemplo.json). Sem o arquivo, o documento monta
+> **sem a linha**, e isso não é erro: é o caso de quem clonou o repositório e não
+> tem os endereços.
+>
+> O do Davi já é público, em [Tarefa 01](../docs/entregas/tarefa-01.md). **Os da
+> Yasmin e do Filipe precisam ser pedidos a eles** — e a decisão de constar no
+> documento entregue é de cada um.
 
 ***
 
@@ -62,11 +70,10 @@ trabalho desenvolve e avalia um modelo experimental de avaliação multidimensio
 de risco comportamental, que combina o risco do evento individual, o desvio em
 relação ao padrão de comportamento do próprio usuário e a exposição acumulada ao
 risco, esta última reportada em duas parcelas distintas — conduta e postura de
-segurança. O método consiste em um experimento comparativo conduzido em ambiente
-corporativo simulado, no qual quatro configurações de avaliação — uma linha de
-base de regras fixas e três configurações com acréscimo progressivo de dimensões
-— são aplicadas aos mesmos conjuntos de eventos e cenários, permitindo medir
-isoladamente a contribuição de cada dimensão. As grandezas de comparação são a taxa de falsos positivos a uma
+segurança. O método é um experimento comparativo em ambiente corporativo simulado, no qual
+quatro configurações — uma linha de base de regras fixas e três com acréscimo
+progressivo de dimensões — são aplicadas aos mesmos eventos e cenários,
+permitindo medir isoladamente a contribuição de cada dimensão. As grandezas de comparação são a taxa de falsos positivos a uma
 mesma revocação e a revocação em cenários longitudinais. Em dez execuções
 independentes, com 1.436.275 ± 9.681 eventos avaliados em cada uma, a
 configuração que soma o risco do evento ao desvio em relação ao padrão
@@ -74,12 +81,11 @@ individual reduziu a taxa de falsos positivos de 18,44% para 0,40% à revocaçã
 de 0,20 e elevou a revocação em cenários longitudinais de 35,0% para 100,0%,
 medida por episódio, com significância em teste pareado em todos os níveis
 examinados, enquanto a linha de base de regras fixas não alcançou revocação de
-0,40 sem emitir alerta sobre todo o registro. O ganho não se mostrou gratuito: a mesma
-configuração elevou de 75,8% para 96,0% a proporção de episódios legítimos que
-produziram alerta, e o acréscimo da exposição acumulada não reduziu
-significativamente a taxa de falsos positivos em nenhum regime, de modo que os
-resultados autorizam afirmar redução de ruído e aumento de cobertura nos
-cenários medidos, em regime de revocação declarado, e não ausência de custo.
+0,40 sem emitir alerta sobre todo o registro. O ganho não foi gratuito: a mesma configuração elevou de
+75,8% para 96,0% a proporção de episódios legítimos que produziram alerta, e o
+acréscimo da exposição acumulada não reduziu significativamente a taxa de falsos
+positivos em nenhum regime. Os resultados autorizam afirmar redução de ruído e
+aumento de cobertura nos cenários medidos, e não ausência de custo.
 
 **Palavras-chave:** risco comportamental, análise de logs, detecção de anomalias,
 regras fixas, ambiente corporativo simulado
@@ -94,65 +100,36 @@ regras fixas, ambiente corporativo simulado
 
 ## Abstract
 
-> **O abstract em inglês é obrigatório**, além do Resumo em português —
-> confirmado com o orientador em 04/09/2026, e exigido também pela estrutura do
-> [formato do artigo](../docs/formato-do-artigo.md).
+> ⚠️ **Removido em 12/11/2026, por autorização do orientador relatada pelo
+> Davi.** Esta página dizia, desde **04/09/2026**, que o abstract em inglês era
+> **obrigatório** e que isso havia sido *"confirmado com o orientador"*. A
+> autorização de agora **reverte** aquela confirmação, e fica registrada aqui com
+> data e com quem a trouxe, em vez de o texto simplesmente desaparecer.
 >
-> **É a única parte do artigo em inglês.** O resto é todo em português, decidido
-> em 07/09/2026.
+> **O que isso vale em páginas:** o bloco em inglês ocupava cerca de 0,4 página
+> das 0,89 da abertura, e o artigo estava três páginas acima do teto de 12.
 >
-> **Onde ele fica:** logo depois do bloco em português, antes da Introdução. O
-> template do COBEM 2025 põe o bloco de abstract no alto, imediatamente após os
-> autores, e esta página segue esse desenho. A observação anterior — de que na
-> família ABCM ele costuma ir depois das referências — não se confirmou no
-> template que está no repositório. **Confirmar quando o COBEM 2026 chegar.**
+> **O texto não se perdeu.** Ele está no histórico do git, no commit que o
+> removeu, e pode voltar inteiro se a autorização for revista — o que vale saber
+> porque ele **nunca foi lido por uma pessoa**: a nota anterior registrava que
+> tinha sido redigido com auxílio de IA e que precisava de leitura antes de ser
+> assinado. Se voltar, volta com essa pendência.
 >
-> ⚠️ **Este texto foi redigido com auxílio de IA e precisa ser lido por uma
-> pessoa antes de ser assinado** — está declarado no Pull Request que o
-> introduziu. Abstract gerado por máquina que ninguém conferiu é o mesmo
-> problema da referência inventada.
-
-The growing digitalization of organizations increases both the volume and the
-diversity of event records produced by corporate systems. Analysing such records
-solely through fixed rules applied to isolated events fails to distinguish
-unusual but legitimate activity from genuinely improper behaviour, and does not
-identify situations that develop gradually over time. This work develops and
-evaluates an experimental model for multidimensional assessment of behavioural
-risk, combining the risk of the individual event, the deviation from each user's
-own behavioural baseline, and the accumulated exposure to risk, the latter
-reported as two separate components — conduct and security posture. The method
-is a comparative experiment conducted in a simulated corporate environment, in
-which four assessment configurations — a fixed-rule baseline and three
-configurations adding dimensions progressively — are applied to the same sets of
-events and scenarios, so that the contribution of each dimension can be
-measured in isolation. The comparison
-quantities are the false positive rate at a fixed recall and the recall on
-longitudinal scenarios. Across ten independent executions, with 1,436,275 ±
-9,681 events assessed in each, the configuration that adds the deviation from
-the individual baseline to the event risk reduced the false positive rate from
-18.44% to 0.40% at a recall of 0.20 and raised the recall on longitudinal
-scenarios from 35.0% to 100.0%, measured per episode, significantly so under a
-paired Wilcoxon test at every recall level examined, whereas the fixed-rule
-baseline did not reach a recall of 0.40 without raising an alert on every event
-in the log. The gain was not free: the same
-configuration raised from 75.8% to 96.0% the share of legitimate episodes that
-produced an alert, and adding accumulated exposure did not significantly reduce
-the false positive rate under any recall regime, so that the results support a
-claim of reduced noise and increased coverage on the measured scenarios, at a
-declared recall regime, and not one of absent cost.
-
-**Keywords:** behavioural risk, log analysis, anomaly detection, fixed rules,
-simulated corporate environment
+> **Confirme por escrito com o orientador quando puder.** O que sustenta esta
+> remoção hoje é um relato verbal; o que sustentava a exigência era uma
+> confirmação de setembro registrada nesta página. A assimetria é do tipo que uma
+> banca pergunta.
 
 ***
 
 ## O que esta página ainda precisa
 
 * [x] As duas frases finais do Resumo, com o resultado principal e a conclusão
-* [x] As duas frases finais do Abstract, espelhando as do Resumo
+* [x] ~~As duas frases finais do Abstract~~ — o Abstract saiu em 12/11/2026
 * [x] **Reescritas sobre múltiplas sementes** em 12/11/2026, pela **D-13** — dez
   execuções independentes, com média, desvio-padrão e teste pareado
 * [x] **A quarta configuração**, executada em 11/11/2026 pela **D-44**
 * [ ] **A decisão sobre os e-mails** no bloco de autores, por ser repositório
   público
-* [ ] **Uma pessoa ler o Abstract inteiro** antes de assinar
+* [x] ~~Uma pessoa ler o Abstract inteiro~~ — não se aplica: ele saiu antes de
+  ser lido, e isso está dito na seção Abstract

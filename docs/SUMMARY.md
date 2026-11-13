@@ -20,6 +20,7 @@
 * [Execução do experimento](execucao-do-experimento.md)
 * [O painel](painel.md)
 * [Usabilidade](usabilidade.md)
+* [Avaliação heurística do painel — roteiro](avaliacao-heuristica.md)
 
 ## Como trabalhamos
 
@@ -35,6 +36,7 @@
 * [Citações pendentes](citacoes-pendentes.md)
 * [Insumos das encomendas](insumos/README.md)
   * [Referencial teórico — Yasmin, 28/09](insumos/referencial-teorico-yasmin-v2.md)
+  * [Auditoria das citações pendentes — v1](insumos/auditoria-citacoes-ia-v1.md)
   * [Metodologia — Davi, 28/09](insumos/metodologia-davi-v1.md)
   * [Cenários e desenho cego — Yasmin, 10/11](insumos/cenarios-yasmin-v2.md)
   * [Pesos e sensibilidade — Yasmin, 10/11](insumos/pesos-yasmin-v1.md)
@@ -97,4 +99,9 @@
   * [2026-11-11 — Sessão 41: a ingestão nasce, e o experimento roda sobre dado gerado](relatorios/2026-11-11-sessao-41.md)
   * [2026-11-11 — Sessão 42: a parte do Filipe conserta, e a D3 aceita rodar sem postura](relatorios/2026-11-11-sessao-42.md)
   * [2026-11-12 — Sessão 43: dez sementes, estatística e a vantagem da C3 que caiu](relatorios/2026-11-12-sessao-43.md)
+  * [2026-11-12 — Sessão 44: o montador entra, e uma auditoria de IA não fecha pendência](relatorios/2026-11-12-sessao-44.md)
+  * [2026-11-12 — Sessão 45: legenda com fonte em toda tabela, e as 12 páginas resistem](relatorios/2026-11-12-sessao-45.md)
+  * [2026-11-12 — Sessão 46: duas figuras entram, e a Estrutura do trabalho é o preço](relatorios/2026-11-12-sessao-46.md)
+  * [2026-11-12 — Sessão 47: a falta de uma dependência derrubava a tela inteira](relatorios/2026-11-12-sessao-47.md)
+  * [2026-11-12 — Sessão 48: a tela de Métricas ganha dono, caminho e hora](relatorios/2026-11-12-sessao-48.md)
   * [Modelo de relatório](relatorios/_modelo.md)

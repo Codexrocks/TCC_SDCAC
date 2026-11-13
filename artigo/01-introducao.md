@@ -20,29 +20,22 @@
 
 ## 1.1 Contextualização
 
-A crescente digitalização das organizações tem ampliado significativamente a
-quantidade de informações geradas pelos sistemas computacionais. Atividades como
-autenticações, acessos a arquivos, alterações de credenciais, conexões de
-dispositivos e demais interações realizadas pelos usuários são registradas na
-forma de eventos e logs, constituindo uma importante fonte de informação para o
-monitoramento e a compreensão do funcionamento dos ambientes corporativos.
+A crescente digitalização das organizações ampliou a quantidade de informações
+geradas pelos sistemas computacionais. Autenticações, acessos a arquivos,
+alterações de credenciais, conexões de dispositivos e demais interações dos
+usuários são registradas como eventos e logs, e constituem fonte importante para
+o monitoramento dos ambientes corporativos. Sua análise permite identificar
+padrões de utilização, desvios comportamentais e situações que demandam atenção
+das equipes de segurança — mas o aumento da quantidade e da diversidade dos dados
+amplia a complexidade da interpretação, especialmente quando o que se considera
+incomum depende do contexto em que o evento ocorre (Kent e Souppaya, 2006).
 
-A gestão adequada desses registros é fundamental para a análise das atividades
-realizadas nos sistemas, e sua análise permite identificar padrões de utilização,
-desvios comportamentais e situações que demandam maior atenção das equipes
-responsáveis pela segurança. Entretanto, o aumento da quantidade e da diversidade
-dos dados registrados amplia a complexidade associada à sua interpretação,
-especialmente quando o comportamento considerado incomum depende do contexto em
-que determinado evento ocorre (Kent e Souppaya, 2006).
-
-A análise de eventos isolados pode ser útil para identificar situações
-previamente conhecidas ou condições que ultrapassam determinados limites.
-Entretanto, uma atividade considerada incomum segundo uma regra genérica não
-representa necessariamente uma ameaça ou comportamento malicioso. O conceito de
-anomalia está relacionado à identificação de observações que divergem de um
-comportamento esperado, sendo necessário considerar o contexto e as
-características do conjunto analisado para interpretar adequadamente esses
-desvios (Chandola et al., 2009).
+A análise de eventos isolados identifica situações previamente conhecidas ou
+condições que ultrapassam determinados limites. Uma atividade incomum segundo
+regra genérica, porém, não representa necessariamente ameaça: anomalia é
+observação que diverge de um comportamento esperado, e interpretar o desvio exige
+considerar o contexto e as características do conjunto analisado
+(Chandola et al., 2009).
 
 Um acesso realizado fora do horário convencional, por exemplo, pode representar
 uma situação incomum para determinado usuário, mas pode ser compatível com a
@@ -91,45 +84,21 @@ abordagem baseada exclusivamente em regras fixas aplicadas a eventos isolados.
 
 ## 1.3 Justificativa
 
-A necessidade de aprimorar os mecanismos de interpretação de eventos
-computacionais torna relevante a investigação de abordagens capazes de considerar
-diferentes níveis de contexto durante a avaliação de riscos. Enquanto a análise
-isolada permite identificar características específicas de cada evento, a
-inclusão do histórico comportamental possibilita considerar as particularidades
-associadas a cada usuário. Adicionalmente, a análise temporal permite observar
-situações em que o risco não se manifesta de forma imediata, mas pode se
-desenvolver progressivamente por meio da recorrência e da combinação de
-atividades.
+Este trabalho contribui para essa discussão desenvolvendo um modelo experimental
+de avaliação multidimensional de risco comportamental, estruturado para permitir
+a comparação entre configurações de avaliação: parte de uma linha de base de
+regras fixas e incorpora progressivamente três dimensões — o risco do evento
+individual, o desvio em relação ao padrão do próprio usuário e a exposição
+acumulada ao risco, esta reportada em duas parcelas separadas. A Seção 3.3
+detalha cada uma.
 
-A proposta deste trabalho busca contribuir para essa discussão por meio do
-desenvolvimento de um modelo experimental de avaliação multidimensional de risco
-comportamental. A abordagem será estruturada para permitir a comparação entre
-diferentes configurações de avaliação, partindo de uma linha de base baseada em
-regras fixas e incorporando progressivamente novas dimensões de análise.
-
-A primeira dimensão considera características associadas diretamente ao evento
-registrado, incluindo atributos como horário, endereço de origem, dispositivo
-utilizado, localização e demais características relevantes ao contexto da
-atividade. A segunda dimensão considera a relação entre os eventos observados e o
-padrão comportamental previamente estabelecido para cada usuário. A terceira
-dimensão avalia a exposição acumulada ao risco, a partir da recorrência,
-combinação e evolução temporal dos comportamentos observados, em conjunto com a
-postura de segurança associada à conta e ao dispositivo utilizados; as duas
-parcelas são reportadas separadamente, e não agregadas em um valor único.
-
-A relevância científica da proposta está na possibilidade de avaliar
-separadamente a contribuição das dimensões consideradas por meio de uma
-comparação experimental realizada sobre os mesmos eventos e cenários. Dessa
-forma, busca-se analisar o efeito da inclusão progressiva das diferentes
-dimensões de avaliação, evitando atribuir os resultados observados a uma única
-solução sem a possibilidade de comparação com uma linha de base.
-
-Do ponto de vista tecnológico, o trabalho possibilita a aplicação integrada de
-conceitos de Engenharia de Software, análise de dados e sistemas de avaliação de
-risco. A construção de uma arquitetura capaz de gerar, ingerir, armazenar e
-avaliar eventos de forma estruturada permite a realização de experimentos
-controlados e reprodutíveis, mantendo condições equivalentes entre as diferentes
-configurações analisadas.
+A relevância científica está em avaliar **separadamente** a contribuição de cada
+dimensão, por comparação experimental sobre os mesmos eventos e cenários: o
+desenho evita atribuir o resultado observado a uma solução única, sem linha de
+base com que compará-la. Do ponto de vista tecnológico, o trabalho integra
+conceitos de Engenharia de Software, análise de dados e avaliação de risco numa
+arquitetura capaz de gerar, ingerir, armazenar e avaliar eventos de forma
+estruturada, o que torna o experimento controlado e reprodutível.
 
 ## 1.4 Pergunta de pesquisa
 
@@ -187,19 +156,6 @@ conjuntos de eventos e cenários experimentais; e
 
 h) analisar os resultados obtidos por meio das métricas e critérios definidos
 para o experimento.
-
-## 1.6 Estrutura do trabalho
-
-Esta introdução apresenta a contextualização do tema, o problema de pesquisa, a
-justificativa, a pergunta de pesquisa e os objetivos estabelecidos. Em seguida, o
-referencial teórico delimita os elementos que caracterizam o problema, apresenta
-como a literatura o enfrentou e identifica o processo adotado para implementar a
-solução. A metodologia descreve a natureza da pesquisa, o ambiente experimental,
-o desenho de comparação, as métricas e os critérios definidos. A seção de
-resultados e discussão apresenta os dados obtidos, a comparação entre as
-configurações e a análise das métricas. Por fim, a conclusão sintetiza as
-contribuições, apresenta as limitações identificadas e indica possibilidades para
-trabalhos futuros.
 
 ***
 

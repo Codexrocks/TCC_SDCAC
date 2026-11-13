@@ -27,9 +27,7 @@ material, o processo que este trabalho adota para implementar a solução.
 
 ## 2.1 Os elementos que caracterizam o problema
 
-### 2.1.1 O registro é a evidência, e ele é volumoso e heterogêneo
-
-A segurança da informação organiza-se, normativamente, em torno da preservação da
+**O registro é a evidência, e ele é volumoso e heterogêneo.** A segurança da informação organiza-se, normativamente, em torno da preservação da
 confidencialidade, integridade e disponibilidade da informação (International
 Organization for Standardization, 2022). Um evento de acesso pode ser lido como
 uma tentativa, bem-sucedida ou não, de comprometer uma dessas propriedades, o que
@@ -46,41 +44,32 @@ quantidade e em diversidade desses registros amplia a complexidade de
 interpretá-los — o volume que torna a evidência rica é o que torna a leitura
 difícil.
 
-### 2.1.2 O evento isolado não distingue falha de autenticação de abuso de autorização
-
-Autenticação e autorização descrevem processos distintos e sequenciais. A
+**O evento isolado não distingue falha de autenticação de abuso de autorização.** Autenticação e autorização descrevem processos distintos e sequenciais. A
 primeira verifica a identidade de um sujeito a partir de evidências vinculadas a
 essa identidade (Grassi et al., 2017); a segunda decide quais ações um sujeito já
 autenticado pode executar, tipicamente mediada por papéis (Sandhu et al., 1996).
 
-A distinção importa porque as duas deixam rastros de naturezas diferentes. Falhas
-de autenticação — horário atípico, repetição de tentativas, origem não habitual —
-produzem eventos discretos, delimitados e fáceis de registrar. Violações de
-autorização, ao contrário, costumam consistir em ações individualmente
-permitidas: o sujeito acessa o que lhe é facultado, na ordem, no volume ou na
-combinação que destoam do que lhe é habitual. Reconhecê-las exige conhecer o
-padrão esperado daquele sujeito, informação que o evento isolado, por definição,
-não carrega.
+A distinção importa porque as duas deixam rastros de naturezas diferentes.
+Falhas de autenticação produzem eventos discretos e delimitados. Violações de
+autorização costumam consistir em ações individualmente **permitidas**: o sujeito
+acessa o que lhe é facultado, na ordem, no volume ou na combinação que destoam do
+que lhe é habitual. Reconhecê-las exige conhecer o padrão esperado daquele
+sujeito, informação que o evento isolado, por definição, não carrega.
 
-### 2.1.3 A correlação por regras escritas à mão não acompanha o ambiente
-
-Sistemas de gerenciamento de informações e eventos de segurança (SIEM) combinam
+**A correlação por regras escritas à mão não acompanha o ambiente.** Sistemas de gerenciamento de informações e eventos de segurança (SIEM) combinam
 coleta multifonte, normalização e correlação de eventos para gerar alertas
 priorizados a um analista humano (Gonzalez-Granadillo et al., 2021). Os mesmos
 autores documentam uma limitação estrutural amplamente relatada: a correlação
 depende de regras escritas manualmente, e o volume de alertas gerado tende a
 exceder a capacidade de análise disponível.
 
-A consequência prática é que a qualidade da detecção fica limitada pela
-capacidade de alguém antecipar, por escrito, as condições que caracterizam um
-comportamento indevido. Regra que não foi escrita não dispara; regra escrita de
-forma genérica dispara sobre o legítimo. Em ambientes com rotinas heterogêneas —
-turnos, plantões, trabalho remoto, viagens —, o mesmo limiar aplicado a toda a
-organização produz os dois efeitos ao mesmo tempo.
+A qualidade da detecção fica, portanto, limitada pela capacidade de alguém
+antecipar por escrito o que caracteriza um comportamento indevido: regra que não
+foi escrita não dispara, e regra genérica dispara sobre o legítimo. Em ambientes
+com rotinas heterogêneas — turnos, plantões, trabalho remoto, viagens — o mesmo
+limiar produz os dois efeitos ao mesmo tempo.
 
-### 2.1.4 O volume de alertas excede a capacidade humana de triagem
-
-Um Centro de Operações de Segurança (SOC) é a função organizacional responsável
+**O volume de alertas excede a capacidade humana de triagem.** Um Centro de Operações de Segurança (SOC) é a função organizacional responsável
 por monitorar essa correlação e conduzir a triagem dos alertas resultantes. A
 revisão sistemática de Vielberth et al. (2020) identifica, entre os desafios em
 aberto mais recorrentes da literatura de SOC, exatamente esse descompasso entre o
@@ -88,41 +77,32 @@ volume de alertas e a capacidade humana de análise.
 
 Os mesmos autores apontam um agravante que interessa diretamente a este trabalho:
 a ausência de contexto comportamental na maior parte das ferramentas. O alerta
-sinaliza que um evento ocorreu e que ele cruzou um limiar, mas não informa se
-aquele evento é habitual para aquele usuário específico — que é precisamente a
-informação de que o analista precisa para decidir se vale investigar.
+diz que um evento cruzou um limiar, mas não se ele é habitual **para aquele
+usuário** — que é a informação de que o analista precisa para decidir se vale
+investigar.
 
-### 2.1.5 A raridade do evento malicioso faz o falso positivo dominar a fila
-
-A rigidez do limiar fixo tem um efeito quantificável quando eventos maliciosos
+**A raridade do evento malicioso faz o falso positivo dominar a fila.** A rigidez do limiar fixo tem um efeito quantificável quando eventos maliciosos
 são raros em relação ao volume total de eventos legítimos. Mesmo um detector com
 taxa de falso positivo percentualmente pequena produz, em termos absolutos, uma
 fila de alertas dominada por falsos positivos — a *base-rate fallacy*,
 demonstrada formalmente por Axelsson (2000) no contexto da detecção de intrusão.
 
-O resultado é que a precisão percebida de um detector não decorre apenas da sua
-acurácia, mas da proporção entre as classes no ambiente em que ele opera. Dois
-detectores com a mesma taxa de erro produzem experiências operacionais muito
-diferentes conforme a raridade do que procuram, e essa diferença não aparece em
-métricas que ignoram o desbalanceamento.
+A precisão percebida de um detector não decorre, portanto, apenas da sua
+acurácia, mas da proporção entre as classes no ambiente em que ele opera — e essa
+diferença não aparece em métricas que ignoram o desbalanceamento.
 
-### 2.1.6 O ruído se converte em exaustão, e a exaustão degrada a triagem
-
-Em operação contínua, esse volume de ruído é uma das causas documentadas de
+**O ruído se converte em exaustão, e a exaustão degrada a triagem.** Em operação contínua, esse volume de ruído é uma das causas documentadas de
 exaustão do analista de segurança, com impacto direto na qualidade da triagem
 (Sundaramurthy et al., 2015). O problema deixa de ser apenas estatístico e passa
 a ser organizacional: a fila que não se consegue examinar é, na prática, uma fila
 não examinada.
 
-Isso estabelece um critério de avaliação que a mera contagem de acertos não
-captura. Um detector que encontra o que procura, mas ao custo de uma fila que
-ninguém consegue percorrer, não resolve o problema de quem o opera — e é por isso
-que a redução do falso positivo, e não apenas o ganho de cobertura, precisa
-figurar entre as grandezas medidas.
+Um detector que encontra o que procura ao custo de uma fila que ninguém percorre
+não resolve o problema de quem o opera — e é por isso que a redução do falso
+positivo, e não apenas o ganho de cobertura, precisa figurar entre as grandezas
+medidas.
 
-### 2.1.7 O agente interno tem credencial válida e não dispara o perímetro
-
-A ameaça interna é um caso estruturalmente difícil para abordagens baseadas
+**O agente interno tem credencial válida e não dispara o perímetro.** A ameaça interna é um caso estruturalmente difícil para abordagens baseadas
 apenas em autenticação e perímetro: o agente possui credencial válida e não
 aciona os controles desenhados para deter um invasor externo.
 
@@ -135,9 +115,7 @@ interessa, para o problema aqui delimitado, o que se desenvolve ao longo do
 tempo: a conduta que se instala gradualmente, sem que nenhum episódio isolado
 reúna, sozinho, elementos suficientes para caracterizá-la.
 
-### 2.1.8 O limiar fixo não representa nem a diferença entre usuários nem a evolução temporal
-
-A ideia de inferir atividade maliciosa a partir do desvio em relação a um perfil
+**O limiar fixo não representa nem a diferença entre usuários nem a evolução temporal.** A ideia de inferir atividade maliciosa a partir do desvio em relação a um perfil
 de uso normal remonta a Denning (1987). Chandola et al. (2009) formalizam essa
 ideia distinguindo três tipos de anomalia: a pontual, quando uma instância
 isolada destoa do restante; a contextual, quando a mesma instância só é anômala
@@ -155,9 +133,9 @@ conjunto — e nenhum dos seus eventos, lido isoladamente, justifica alerta.
 
 ## 2.2 Como a literatura enfrentou o problema
 
-A resposta recorrente na literatura consultada consiste em deslocar a referência
-da avaliação: em vez de comparar o evento a um limiar externo, compara-se o
-evento ao comportamento previamente observado da própria entidade que o produziu.
+A resposta recorrente na literatura é deslocar a referência: em vez de comparar
+o evento a um limiar externo, compara-se ao comportamento já observado da
+própria entidade que o produziu.
 
 *User and Entity Behavior Analytics* (UEBA) formula esse deslocamento de modo
 explícito, substituindo a pergunta "este evento corresponde a um padrão de ataque
@@ -188,10 +166,7 @@ et al. (2009) e de Homoliak et al. (2019).
 
 ## 2.3 A metodologia que se extrai deste referencial
 
-Do material reunido nesta seção decorre um processo de implementação com quatro
-passos, que a Metodologia detalha e executa.
-
-O primeiro é **constituir o padrão individual** de cada usuário a partir de uma
+Do material reunido decorre um processo de quatro passos. O primeiro é **constituir o padrão individual** de cada usuário a partir de uma
 janela de observação anterior e separada daquela em que a avaliação ocorre, de
 modo que o comportamento a avaliar não participe da definição do que é normal
 para aquele usuário.
@@ -202,15 +177,11 @@ constituído no passo anterior, e a acumulação ao longo de uma janela temporal
 Mantê-las separáveis é o que permite medir a contribuição de cada uma.
 
 O terceiro é **estabelecer uma linha de base de regras fixas sobre eventos
-isolados**, sem acesso ao histórico individual, para funcionar como grupo de
-controle — a condição que a literatura descreve como o estado corrente do
-problema.
+isolados**, sem acesso ao histórico individual, como grupo de controle.
 
 O quarto é **comparar as configurações resultantes sobre os mesmos registros e
 os mesmos cenários**, ativando uma leitura por vez, e medir o efeito sobre a taxa
-de falsos positivos e sobre a cobertura dos casos temporais. O desenho de ablação
-resultante, as métricas e o tratamento estatístico adotados são descritos na
-seção seguinte.
+de falsos positivos e sobre a cobertura dos casos temporais.
 
 ***
 

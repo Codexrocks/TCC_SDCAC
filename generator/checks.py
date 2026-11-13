@@ -92,16 +92,19 @@ def run(data, full_scale):
     vac = np.array(
         [
             world.emp_by_id[i].vac[min(max(d, 0), world.ndays - 1)]
-            for i, d in zip(s["emp"], day_of_s)
+            for i, d in zip(s["emp"], day_of_s, strict=True)
         ]
     )
-    wk = world.wd[np.clip(day_of_s, 0, world.ndays - 1)] >= 5
     chk(
         "atividade residual em férias existe e é < 3% do volume",
         0 < ncnt[normal & vac].sum() < 0.03 * ncnt[normal].sum(),
         f"{ncnt[normal & vac].sum()} eventos em férias",
     )
     # 7. volume por dia útil (D-23)
+    # ATENCAO: o filtro de "dia util" aqui e `tot >= 10` eventos no dia, e
+    # nao o dia da semana. A pergunta esta aberta em docs/o-que-falta.md,
+    # secao do Filipe: as faixas da D-23 e da D-38 valem por dia de semana
+    # ou por dia com atividade? Trocar o filtro muda o que a checagem mede.
     key = np.array([world.emp_by_id[i].id for i in s["emp"]]) * 10000 + np.clip(
         day_of_s, 0, 9999
     )

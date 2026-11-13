@@ -105,12 +105,38 @@ rótulo nenhum pela **D-17**, com o gabarito separado em `ground_truth/`.
 
 1. ~~**Nenhum teste.**~~ `tests/test_gerador.py` entrou pelo #92, com 7 casos.
    **Continua sendo o único módulo sem teste do próprio comportamento**: os 7
-   medem a aderência do baseline à D-24, não o gerador
-2. ~~**226 apontamentos do Ruff.**~~ **23 restam**, e são de três tipos: 9
-   `B905` (`zip()` sem `strict=`), 6 `B007` e 4 `F841` (variável atribuída e não
-   usada), 4 `UP031`. Os `B905` são os que importam — `zip()` sem `strict`
-   esconde lista de tamanho diferente em silêncio, e corrigi-los exige saber a
-   intenção de cada um
+   medem a aderência do baseline à D-24, não o gerador.
+   ⚠️ **E não é falta de trabalho: é o CI.** Ele instala só
+   `pytest pyyaml fastapi httpx`, e o gerador precisa de `numpy` e `pandas` —
+   teste de comportamento dele seria **pulado em silêncio** na nuvem, que é
+   exatamente o modo de falhar que o cabeçalho do `test_gerador.py` existe para
+   impedir. Corrigir exige mexer em `.github/`, que é **arquivo protegido** e
+   espera 24 h
+
+> ⚠️ **Uma pergunta aberta que a limpeza do Ruff revelou, e que é de desenho, não
+> de estilo.** O `checks.py` calculava `wk` — se a sessão caiu em fim de semana —
+> e **nunca usava**. Logo abaixo estão as duas checagens que anunciam
+> "eventos/**dia útil**", da **D-23** e da **D-38**, e o filtro delas é
+> `tot >= 10` eventos no dia, **não o dia da semana**.
+>
+> Ou seja: a checagem passa, mas mede *dias com atividade*, não *dias úteis*. O
+> limiar de 10 exclui a maior parte do fim de semana na prática, o que faz dela um
+> bom aproximado — e aproximado não é o que o nome diz. O `wk` parece ter sido
+> escrito para esse filtro e ficado no caminho.
+>
+> **Não troquei o filtro**, porque trocar muda o que a checagem mede, e as faixas
+> da D-23 e da D-38 são o que o artigo cita como invariante do gerador. A linha
+> morta saiu e a pergunta ficou em comentário no próprio arquivo: **as faixas
+> valem por dia de semana ou por dia com atividade?** É do Davi, e é de uma linha
+> de resposta.
+2. ~~**226 apontamentos do Ruff.**~~ ~~**23 restam.**~~ **Zerados em
+   12/11/2026.** Os 9 `B905` viraram `strict=True`, porque em todos os nove as
+   sequências têm o mesmo tamanho por construção — a palavra afirma a invariante
+   em vez de supô-la. Os 6 `B007` ganharam `_` nos nomes não usados, os 4 `UP031`
+   viraram f-string e os 4 `F841` saíram. **Verificado por saída:** gerando com a
+   versão anterior e com a nova, na mesma semente, os **11 arquivos têm conteúdo
+   byte a byte idêntico** — o `.csv.gz` difere só no instante que o gzip grava no
+   cabeçalho
 3. ~~**Três grupos de parâmetros sem procedência.**~~ `_CAT_W`, `MFA0_*` e
    `PATCH_MEDIAN` agora se declaram **ASSUNÇÃO** no `config.py`. A declaração
    fecha a regra do cabeçalho; **a ratificação continua sendo do Davi** — e
@@ -127,13 +153,19 @@ rótulo nenhum pela **D-17**, com o gabarito separado em `ground_truth/`.
 4. **Revisar o painel** da S9. Ele foi escrito por outra pessoa com IA, e o que
    a banca vê precisa bater com quem assina — ver [o painel](painel.md)
 5. **Avaliação heurística** do painel, pela [usabilidade](usabilidade.md), § 6.1.
-   É feita por quem constrói, **sem participantes**, pela **D-02**
-6. **D-10** — confirmar se o Isolation Forest da S10 entra. É opcional por
+   É feita por quem constrói, **sem participantes**, pela **D-02**. O roteiro e a
+   planilha estão prontos desde 12/11, em
+   [avaliação heurística](avaliacao-heuristica.md) — **são os três, cada um
+   sozinho**
+6. **A tela de Métricas**, pela **D-45**: lê `/runs/{id}/metrics`, e o que
+   falta antes dela é **o avaliador gravar as métricas**. Entra **depois da
+   avaliação heurística** — ver [o painel](painel.md)
+7. **D-10** — confirmar se o Isolation Forest da S10 entra. É opcional por
    definição, e cortá-lo não compromete o TCC
-7. **S12** — tabela de ablação, sensibilidade dos pesos e gráficos, com o Davi.
+8. **S12** — tabela de ablação, sensibilidade dos pesos e gráficos, com o Davi.
    Cada número sai de notebook versionado
-8. **S13** — a caneta do [`artigo/04-resultados.md`](../artigo/04-resultados.md)
-9. **Três chamadas bibliográficas** por conferir na fonte, em
+9. **S13** — a caneta do [`artigo/04-resultados.md`](../artigo/04-resultados.md)
+10. **Três chamadas bibliográficas** por conferir na fonte, em
    [citações pendentes](citacoes-pendentes.md)
 
 ---
@@ -150,16 +182,30 @@ rótulo nenhum pela **D-17**, com o gabarito separado em `ground_truth/`.
 > fechou**, e o que falta mudou de natureza: era produzir, agora é **ler e
 > confirmar**.
 
-**O que trava a Metodologia e a S7 — agora à espera de leitura, não de trabalho:**
+> ✅ **Lidos e confirmados em 12/11/2026**, relatado pelo Davi. Fecharam a
+> **D-06**, a **D-16** e a **D-19**, e ratificaram a metade dela da **D-43**.
+>
+> ⚠️ **A D-09 continua aberta, e não por falta de leitura.** O que ela confirmou
+> — a ordenação de severidade dos sinais da D1 em Alto, Médio e Baixo — **diverge
+> do `presets.toml` em dois atributos**, e eles estão quase invertidos entre si:
+>
+> | A situação | O insumo diz | O código dá |
+> |---|---|---|
+> | `mfa_used = false` em login | **Alto** | **15** — 8º de 10 |
+> | Dispositivo pessoal | **Baixo** | **25** — acima de todo o Médio |
+>
+> Os outros sete atributos batem. Fechar a D-09 agora registraria no quadro uma
+> escolha que o sistema não implementa; mexer nos pontos **invalida as dez
+> sementes** e exige reexecutar tudo. É decisão do Davi com a Yasmin, e está
+> detalhada em [insumos](insumos/README.md).
 
-1. **Ler o [insumo dos cenários](insumos/cenarios-yasmin-v2.md) inteiro** e
-   marcar o campo de conferência. Dele saem a **D-06**, a **D-16** e as **P18 a
-   P23**, e a **lacuna 1** da § 3.4 do artigo
-2. **Ler o [insumo dos pesos](insumos/pesos-yasmin-v1.md)** — a **D-09**, e a
-   ratificação da **D-43**
-3. **Ler o [insumo de LGPD e ISO](insumos/lgpd-iso-yasmin-v1.md)** — a **D-19**,
-   que a § 3.8 do artigo já declara como ameaça à validade e que a S13 cobra nas
-   limitações da § 4.6 e nos trabalhos futuros da § 5.4
+**O que resta, e é de outra natureza:**
+
+1. **As quatro fontes dos exemplos reais**, em
+   [citações pendentes](citacoes-pendentes.md). Confirmar um insumo e conferir uma
+   fonte são atos diferentes — o primeiro diz "este texto é meu", o segundo diz
+   "abri a obra e ela sustenta o que o texto afirma"
+2. **Uma chamada bibliográfica do referencial**, por conferir na fonte
 
 > ⚠️ **Uma correção que a conferência achou, e que precisa ser lida junto.** O
 > insumo dos cenários afirma que o código "não tem" o cenário **N06** e abre

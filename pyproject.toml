@@ -27,6 +27,22 @@ dependencies = [
     "pandas>=2.2",
     "matplotlib>=3.9",
     "streamlit>=1.38",
+    # O painel importa httpx direto (frontend/dashboard/cliente.py) para falar
+    # com a API de leitura, e este arquivo nao o declarava. O CI o instala por
+    # conta propria -- o TestClient do FastAPI depende dele --, entao o teste
+    # passava verde enquanto `pip install -e .` produzia um ambiente em que a
+    # fonte "API" do painel estoura com ModuleNotFoundError na primeira
+    # chamada. Achado em 12/11/2026, num venv recem-criado. Mesmo raciocinio do
+    # numpy acima: dependencia direta nao declarada quebra no dia em que quem a
+    # trazia de carona muda.
+    "httpx>=0.27",
+    # Os tres abaixo vinham de carona e sao importados direto, que e o mesmo
+    # caso do numpy acima. O `pydantic` e o `starlette` chegam pelo fastapi e o
+    # `dateutil` pelo pandas; no dia em que qualquer um dos de cima trocar de
+    # dependencia, o import direto quebra sem aviso.
+    "pydantic>=2.7",
+    "starlette>=0.37",
+    "python-dateutil>=2.9",
     # O banco de fusos horários IANA. O Linux já traz um; o Windows não traz
     # nenhum, e sem esta dependência o `zoneinfo` estoura com
     # `ZoneInfoNotFoundError: America/Sao_Paulo` na máquina de quem trabalha —
@@ -98,6 +114,7 @@ ignore = [
 "ingest/cli.py" = ["T201"]
 "evaluator/cli.py" = ["T201"]
 "evaluator/agregado_cli.py" = ["T201"]
+"evaluator/figuras_cli.py" = ["T201"]
 
 [tool.ruff.lint.pydocstyle]
 convention = "google"
