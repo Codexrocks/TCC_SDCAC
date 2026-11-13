@@ -153,7 +153,10 @@ rótulo nenhum pela **D-17**, com o gabarito separado em `ground_truth/`.
 4. **Revisar o painel** da S9. Ele foi escrito por outra pessoa com IA, e o que
    a banca vê precisa bater com quem assina — ver [o painel](painel.md)
 5. **Avaliação heurística** do painel, pela [usabilidade](usabilidade.md), § 6.1.
-   É feita por quem constrói, **sem participantes**, pela **D-02**
+   É feita por quem constrói, **sem participantes**, pela **D-02**. O roteiro e a
+   planilha estão prontos desde 12/11, em
+   [avaliação heurística](avaliacao-heuristica.md) — **são os três, cada um
+   sozinho**
 6. **D-10** — confirmar se o Isolation Forest da S10 entra. É opcional por
    definição, e cortá-lo não compromete o TCC
 7. **S12** — tabela de ablação, sensibilidade dos pesos e gráficos, com o Davi.
