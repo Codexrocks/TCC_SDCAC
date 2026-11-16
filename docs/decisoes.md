@@ -36,9 +36,9 @@ fechada fica enterrada.
 
 | ID | Decisão | Proposta | Dono | Prazo | Situação |
 |---|---|---|---|---|---|
-| D-05 | Ablação em quatro configurações (C0 a C3) | Confirmar no M2 | Davi | 01/10/2026 | ⚠️ Atrasado há 45 dias |
-| D-10 | Isolation Forest como benchmark opcional | Cortável na S10, se as métricas estiverem em risco | Filipe | S10 | ⚠️ Atrasado há 10 dias |
-| D-43 | Pesos de integração das dimensões na nota final | Um conjunto só de pesos para C1, C2 e C3 — D1 1,0; D2 1,0; conduta 1,0; postura 0,5 — e a C0 sem ponderação nenhuma. Peso próprio por configuração faria a tabela de ablação medir duas coisas ao mesmo tempo: a dimensão acrescentada e o peso trocado. A postura entra com metade porque é estado, e não ação. Valores preliminares, sujeitos à análise de sensibilidade da D-09 | Davi, Yasmin | S8 | ⚠️ Atrasado há 24 dias |
+| D-05 | Ablação em quatro configurações (C0 a C3) | Confirmar no M2 | Davi | 01/10/2026 | ⚠️ Atrasado há 46 dias |
+| D-10 | Isolation Forest como benchmark opcional | Cortável na S10, se as métricas estiverem em risco | Filipe | S10 | ⚠️ Atrasado há 11 dias |
+| D-43 | Pesos de integração das dimensões na nota final | Um conjunto só de pesos para C1, C2 e C3 — D1 1,0; D2 1,0; conduta 1,0; postura 0,5 — e a C0 sem ponderação nenhuma. Peso próprio por configuração faria a tabela de ablação medir duas coisas ao mesmo tempo: a dimensão acrescentada e o peso trocado. A postura entra com metade porque é estado, e não ação. Valores preliminares, sujeitos à análise de sensibilidade da D-09 | Davi, Yasmin | S8 | ⚠️ Atrasado há 25 dias |
 <!-- QUADRO:fim decisoes-a-confirmar -->
 
 ## Fechadas
