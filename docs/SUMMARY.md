@@ -104,4 +104,5 @@
   * [2026-11-12 — Sessão 46: duas figuras entram, e a Estrutura do trabalho é o preço](relatorios/2026-11-12-sessao-46.md)
   * [2026-11-12 — Sessão 47: a falta de uma dependência derrubava a tela inteira](relatorios/2026-11-12-sessao-47.md)
   * [2026-11-12 — Sessão 48: a tela de Métricas ganha dono, caminho e hora](relatorios/2026-11-12-sessao-48.md)
+  * [2026-11-16 — Relatório semanal de 09/11 a 16/11](relatorios/2026-11-16-semana.md)
   * [Modelo de relatório](relatorios/_modelo.md)
