@@ -35,6 +35,7 @@ de afirmado.
 | [LGPD e ISO/IEC 27001](lgpd-iso-yasmin-v1.md) | **Yasmin**, rascunho integral por Claude Sonnet 5 | 10/11/2026 | **Nada ainda** — proposta até ela confirmar |
 | [Exemplos reais do problema](exemplos-reais-yasmin-v1.md) | **Yasmin**, rascunho integral por Claude Sonnet 5 | 10/11/2026 | **Nada ainda** — as 4 fontes vão para [citações pendentes](../citacoes-pendentes.md) |
 | [Auditoria das citações pendentes](auditoria-citacoes-ia-v1.md) | **Uma IA**, integralmente | 12/11/2026 | **Material de conferência** — não fecha pendência nenhuma |
+| [Avaliação heurística do painel](avaliacao-heuristica-davi-v1.md) | **Davi**, sem IA nenhuma | 12/11/2026 | [`artigo/04-resultados.md`](../../artigo/04-resultados.md), § 4.4 e § 4.6 |
 
 ## A entrega de 10/11/2026, e o que a conferência achou
 
