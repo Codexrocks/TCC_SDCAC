@@ -61,6 +61,18 @@ explícito: referência que a IA produziu e ninguém conferiu na fonte **não en
 | `01-introducao.md` — caso **Capital One, 2019** | Confirmar na fonte: U.S. DOJ, `usao-wdwa`. **O próprio insumo admite estar incompleto** — *"conferir o número exato"* —, com URL genérica e sem o documento | Yasmin | 10/11/2026 |
 | `01-introducao.md` — caso **Tesla / Tripp, 2018** | Confirmar na fonte: petição inicial *Tesla, Inc. v. Martin Tripp* (Nevada) **ou** *GovInfoSecurity*, 2018. São duas fontes para o mesmo caso, e a petição não tem link: decidir qual sustenta a afirmação | Yasmin | 10/11/2026 |
 
+> ✅ **As quatro estão vencidas desde 17/11/2026, e não por conferência: os
+> quatro casos não estão mais no artigo.** Foi conferido arquivo por arquivo —
+> `Target`, `Capital One`, `Tesla`, `Zheng`, `General Electric`, `Bloomberg` e
+> `DOJ` **não aparecem em nenhum dos cinco arquivos de `artigo/`**. Saíram no
+> resumo da Introdução, e as quatro linhas continuaram aqui como dívida de um
+> texto que já não existia.
+>
+> **A tabela acima fica, e fica vencida de propósito.** Se algum dos casos voltar
+> à Introdução, a linha volta a valer exatamente como está — inclusive a
+> contradição do campo *"Conferi tudo que a IA escreveu"*, que é o que impedia as
+> quatro de entrarem e continua impedindo.
+
 ***
 
 ### As 13 do referencial teórico — **conferidas em 13/10/2026**
@@ -104,6 +116,16 @@ explícito: referência que a IA produziu e ninguém conferiu na fonte **não en
 >
 > O segundo é o mais sério, e é do tipo que a validação automática não pega: a
 > obra existe, está citada, e **o que o texto afirma não é o que ela diz**.
+>
+> ⚠️ **E a entrada criada em 17/11/2026 não resolve nenhum dos três.** Entrada na
+> lista de referências responde *"a obra existe e está identificada"*. Os
+> apontamentos acima são de outra ordem:
+>
+> | Apontamento | O que a conferência de 17/11 resolveu |
+> |---|---|
+> | `KAUFMAN et al.` — o ano seria 2011 | **Resolvido.** Existem as duas publicações: o artigo do KDD '11 e o da **ACM TKDD, v. 6, n. 4, art. 15, dez. 2012**. A entrada é da segunda, e o ano de 2012 do texto está certo |
+> | `WOHLIN et al.` — edição divergente | **Metade.** A edição de 2012 da Springer existe, revisão da original de 2000, que era da Kluwer. A entrada entrou **sem número de edição**, como a auditoria recomendou. Qual das duas foi lida, só o Davi diz |
+> | `SOMMER; PAXSON` — o texto afirma o que a obra não diz | **Nada.** É leitura do argumento, não dado de publicação. Continua aberto, e é o único dos três que pede **mudar o texto da § 3.8**, não a lista |
 
 Situação diferente, e mais exigente. O
 [insumo entregue pelo Davi](insumos/metodologia-davi-v1.md) em 28/09 declara, no
@@ -116,8 +138,23 @@ sete citações foi conferida na fonte**.
 > [`referencias.md`](../artigo/referencias.md) — e o capítulo avisa disso no
 > cabeçalho, à vista de quem for escrever.
 
-Ao conferir, apague a linha e acrescente a referência em ABNT NBR 6023 na
-`## Lista`.
+> 🔄 **A ordem se inverteu em 17/11/2026, e vale saber por quê.** A instrução
+> aqui era *"ao conferir, apague a linha e acrescente a referência na `## Lista`"*
+> — primeiro a conferência, depois a entrada. **As sete entradas foram inseridas
+> antes**, porque a falta delas tinha um custo imediato e visível: o artigo citava
+> sete obras que não apareciam na lista de referências, e é a última página que
+> uma banca abre para procurar uma delas.
+>
+> **A fonte de cada uma foi aberta pelo assistente de IA em 17/11**, e os dados de
+> publicação vêm de lá. Isso **não** fecha estas linhas: o `AGENTS.md` seção 3
+> veda referência que a IA produziu e ninguém conferiu, e máquina abrindo a fonte
+> não é pessoa assumindo a referência. O que mudou é a natureza da dívida —
+> de **chamada sem referência** para **referência a confirmar**, que é o mesmo
+> estado em que as 13 do referencial estiveram entre a conversão e a confirmação
+> do Davi.
+>
+> **Ao confirmar, apague a linha.** A entrada já está na `## Lista`.
+
 
 | Chamada, como está no texto | Onde | O que sustenta | Quem | Desde |
 |---|---|---|---|---|

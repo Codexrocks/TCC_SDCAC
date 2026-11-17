@@ -1,20 +1,28 @@
 #!/usr/bin/env python3
-"""Exporta os cards do quadro.toml em JSON, para o quadro compartilhado.
+"""Exporta os cards do quadro.toml em JSON, para um quadro compartilhado.
 
 Uso:
     python scripts/cards_do_quadro.py cards.json
 
-O quadro compartilhado e uma pagina publicada fora do repositorio, em
-claude.ai, onde os tres marcam o que concluiram e escrevem o que estao
-fazendo. Os cards dela saem DAQUI: mesma fonte de verdade que o
-scripts/quadro.py le, para nao existir uma terceira copia dos prazos.
+**O quadro compartilhado nao existe mais, desde 12/11/2026.** Era uma pagina
+publicada fora do repositorio, onde os tres marcavam o que concluiram. Foi
+apagada a pedido do Davi: o banco dela tinha **cinco marcacoes, todas entre 26
+e 28/09**, e os cards estavam congelados em 15/10 — diziam que faltava o gerador
+de eventos e que a S9 nao tinha comecado, um mes depois de as duas coisas terem
+acontecido. Quadro que ninguem recalcula envelhece em silencio, que e
+exatamente o que o .github/workflows/quadro.yml existe para impedir.
 
-POR QUE ESTE ARQUIVO ESTA NO REPOSITORIO
-----------------------------------------
-Ele viveu num diretorio temporario entre 26/09 e 15/10, e **se perdeu** quando
-o temporario foi limpo. Era a unica peca capaz de regerar os cards: sem ela, a
-pagina publicada sO poderia ser atualizada a mao, card por card. Ferramenta que
-o projeto depende nao mora em pasta temporaria.
+Quem mostra a situacao hoje e o docs/quadro.md, gerado pelo scripts/quadro.py e
+publicado no GitBook: mesma fonte, recalculado contra a data de hoje.
+
+POR QUE ESTE ARQUIVO CONTINUA AQUI
+----------------------------------
+Porque e a unica peca capaz de montar um quadro desses de novo, a partir da
+mesma fonte de verdade, sem que exista uma terceira copia dos prazos. Ele ja
+viveu num diretorio temporario entre 26/09 e 15/10 e **se perdeu** quando o
+temporario foi limpo. Ferramenta de que o projeto pode depender nao mora em
+pasta temporaria -- e apagar a ferramenta junto com a pagina seria repetir o
+erro de 15/10 de proposito.
 
 O QUE ELE NAO FAZ
 -----------------
