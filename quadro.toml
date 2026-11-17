@@ -604,6 +604,12 @@ estado = "fechada"
 fechada_em = 2026-10-13
 
 [[decisao]]
+id = "D-46"
+titulo = "A avaliacao heuristica e consolidada com um avaliador"
+estado = "fechada"
+fechada_em = 2026-11-17
+
+[[decisao]]
 id = "D-45"
 titulo = "A tela de Metricas le a API, e entra depois da avaliacao heuristica"
 estado = "fechada"

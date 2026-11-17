@@ -180,6 +180,17 @@ avaliador contaminar o outro.
 **Quem:** os três integrantes. Nielsen recomenda de três a cinco avaliadores —
 com um só, a maior parte dos problemas passa batido.
 
+> ⚠️ **O que aconteceu de fato: um avaliador, não três.** O Davi percorreu o
+> painel em 12/11/2026 e registrou **20 achados**, publicados como
+> [insumo](insumos/avaliacao-heuristica-davi-v1.md). As passagens da Yasmin e do
+> Filipe **não chegaram**, e em 17/11 a consolidação foi feita com uma só, pela
+> **D-46**.
+>
+> **A frase acima continua valendo, e é o custo:** com um avaliador, a maior
+> parte dos problemas passa batido. O artigo declara isso na § 4.6 — os 20
+> achados são um piso, não um inventário. A recomendação de três a cinco **não
+> foi revista**; foi descumprida com o motivo e a data registrados.
+
 **Severidade** — escala de Nielsen, de 0 a 4:
 
 | Grau | Significado | O que fazemos |

@@ -23,7 +23,7 @@
 | ▶️ Em curso | 1 |
 | ⏳ A vencer em 7 dias | 1 |
 | 🗓️ Depois | 11 |
-| ✅ Feito | 47 |
+| ✅ Feito | 48 |
 
 ## ⚠️ Atrasado
 
@@ -81,7 +81,7 @@
 
 ## ✅ Feito
 
-47 itens.
+48 itens.
 
 | Tipo | Item | O que é | Quem | Prazo | Situação |
 |---|---|---|---|---|---|
@@ -130,6 +130,7 @@
 | Decisão | **D-40** | Sede, filial e fusos horários | — | 28/09/2026 | ✅ Fechada em 28/09/2026 |
 | Decisão | **D-41** | Dispositivos e estado inicial de higiene | — | 28/09/2026 | ✅ Fechada em 28/09/2026 |
 | Decisão | **D-42** | A quarta regra da C0: janela de falhas ou evento isolado | — | 13/10/2026 | ✅ Fechada em 13/10/2026 |
+| Decisão | **D-46** | A avaliacao heuristica e consolidada com um avaliador | — | 17/11/2026 | ✅ Fechada em 17/11/2026 |
 | Decisão | **D-45** | A tela de Metricas le a API, e entra depois da avaliacao heuristica | — | 12/11/2026 | ✅ Fechada em 12/11/2026 |
 | Decisão | **D-44** | Evento cujo equipamento nao tem estado no dia | — | 11/11/2026 | ✅ Fechada em 11/11/2026 |
 
