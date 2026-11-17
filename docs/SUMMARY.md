@@ -109,4 +109,5 @@
   * [2026-11-13 — Sessão 50: a fila de PRs zera, e o montador entrou sem a própria dependência](relatorios/2026-11-13-sessao-50.md)
   * [2026-11-16 — Relatório semanal de 09/11 a 16/11](relatorios/2026-11-16-semana.md)
   * [2026-11-17 — Sessão 51: o artigo citava sete obras fora da lista, e o quadro publicava outubro](relatorios/2026-11-17-sessao-51.md)
+  * [2026-11-17 — Sessão 52: a § 3.8 passa a dizer o que a obra diz, e a heurística entra com um avaliador](relatorios/2026-11-17-sessao-52.md)
   * [Modelo de relatório](relatorios/_modelo.md)
