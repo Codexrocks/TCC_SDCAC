@@ -82,9 +82,8 @@ da Seção 4.3.
 Fonte: dados da pesquisa (2026).
 
 **Nenhuma das quatro configurações é operável neste limiar**, como a Tab. 3
-mostra: mais de mil e
-trezentos alertas por dia útil nas três primeiras, com precisão abaixo de 1%, é
-um analista descartando alerta em tempo integral. A **C3 é o extremo** —
+mostra: nas três primeiras, é um analista descartando alerta em tempo integral.
+A **C3 é o extremo** —
 deixa escapar menos de um evento malicioso por semente e, para isso, alerta
 sobre 99,84% do registro, porque a exposição acumulada cresce ao longo da janela
 e empurra quase toda nota acima do corte.
@@ -155,7 +154,7 @@ segundo, na FPR — e que a troca, no desenho atual, não compensa.
 A segunda grandeza está na Tab. 4, medida na família **L** — aqueles em que o risco cresce ao
 longo de dias sem que um evento isolado dispare alerta:
 
-**Tabela 4.** Revocação nos cenários longitudinais, em porcentagem, por episódio e por evento.
+**Tabela 4.** Revocação nos cenários longitudinais, em porcentagem, por episódio.
 
 | Unidade de análise | C0 | C1 | C2 | C3 |
 |---|---|---|---|---|
@@ -169,31 +168,31 @@ C1 também (p = 0,0078 sobre os oito pares que não empataram em 100%). **O
 critério de 0,80 da Seção 3.6 é cumprido pela C2 e pela C3 em dez das dez
 sementes, pela C1 em nove, e pela C0 em nenhuma.**
 
-> **As duas unidades, porque a D-12 está aberta.** A escolha entre evento,
+> **Por que por episódio, e não por evento.** A escolha entre evento,
 > usuário-dia e episódio é a **D-12**, e ela muda o número: um cenário
 > longitudinal pode render revocação baixa medido por evento e completa medido
-> por episódio, porque basta um evento da sequência cruzar o limiar. A tabela
-> acima é por episódio. **Fechar a D-12 é pré-requisito para esta seção ir à
-> banca**, e a decisão não pode ser tomada depois de ver qual unidade favorece a
+> por episódio, porque basta um evento da sequência cruzar o limiar. A **D-12
+> fechou em 14/10/2026** — duas unidades, declaradas separadamente: evento para
+> os cenários pontuais, episódio para os longitudinais. A tabela acima é por
+> episódio porque a decisão diz que é assim, e não porque esta unidade favorece a
 > conclusão.
+>
+> ⚠️ **A legenda desta tabela dizia "por episódio e por evento" até 17/11/2026,
+> e a linha por evento não estava lá.** Ela saiu no PR #109 — o que atendeu o
+> pedido do orientador sobre legendas — e a legenda continuou prometendo-a. A
+> conferência automática de legendas do montador não pega isso: ela confere que
+> toda tabela tem legenda e fonte, não que a legenda descreva a tabela.
 
 ### 4.3.3 A resposta às duas grandezas
 
 **A direção declarada na pergunta se confirma nas duas, e com significância
-estatística.** À mesma revocação a FPR cai de 18,44% para 0,40% em 0,20 e de
+estatística.** À revocação fixa, a FPR cai de 18,44% para 0,40% em 0,20 e de
 34,55% para 1,33% em 0,30, com p = 0,0020 nos nove níveis; a cobertura
-longitudinal vai de 35,0% a 100,0%, com o mesmo p.
-
-**E vem com um contrapeso que a Seção 4.5 enfrenta:** o alarme sobre a família N
-— atividade legítima — subiu de 75,8% para 96,0% na C2 e para 100,0% na C3, e o
-aumento é significativo nas duas comparações. A pergunta admitia exatamente esta
-resposta: *uma sobe e a outra não — o modelo troca ruído por cobertura.* Aqui ele
-ganha nas duas grandezas medidas **e perde na terceira, que a pergunta não
-mede.**
-
-**O que as dez sementes acrescentam:** a diferença entre C2 e C0 não é variação
-de amostragem, e a diferença entre C3 e C2, que a semente única sugeria, **não se
-sustenta**.
+longitudinal vai de 35,0% a 100,0%, com o mesmo p. **O contrapeso está na
+Tab. 2**, e a Seção 4.5 o enfrenta: o alarme sobre a família N sobe junto com a
+cobertura. A pergunta admitia a resposta oposta — *uma sobe e a outra não, o
+modelo troca ruído por cobertura* —, e o que se observa é que ele ganha nas duas
+grandezas medidas **e perde na terceira, que a pergunta não mede**.
 
 ## 4.4 Verificação do painel de análise
 
@@ -273,12 +272,11 @@ isolado seja notável — a forma pela qual a ameaça interna costuma se desenvo
 (Cappelli, Moore e Trzeciak, 2012; Homoliak et al., 2019) — são precisamente os
 que a linha de base não alcança.
 
-A terceira dimensão, por sua vez, **não reduz o ruído em nenhum regime**, e a
-Seção 4.3.1 mostra por quê: a exposição acumulada é um termo que cresce devagar e
-atinge muita gente. Ela é boa para alcançar o caso que nenhum evento denuncia e
-ruim para ordenar a fila. A leitura que os dados sustentam é que ela **pertence a
-um segundo estágio de triagem** — uma lista de pessoas a examinar, com periodicidade
-própria — e não ao mesmo corte que decide se um evento gera alerta agora.
+A terceira dimensão, por sua vez, **não reduz o ruído em nenhum regime**, pelo
+motivo que a Seção 4.3.1 expõe. A leitura que os dados sustentam é que ela
+**pertence a um segundo estágio de triagem** — uma lista de pessoas a examinar,
+com periodicidade própria — e não ao mesmo corte que decide se um evento gera
+alerta agora.
 
 **O que esta comparação não resolve.** Os números saem de registro sintético e
 **não se comparam a FPR publicada sobre registro real**: a comparação é interna,

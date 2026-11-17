@@ -19,13 +19,12 @@ grandezas, e cada uma recebe resposta própria.
 significância estatística.** À revocação de 0,20 a taxa de falsos positivos caiu
 de 18,44% para 0,40% na configuração que acrescenta o desvio em relação ao padrão
 individual, e a diferença se repete nos **nove níveis examinados**, com
-p = 0,0020 em cada um — o menor valor que dez pares produzem num teste de
-Wilcoxon pareado bilateral exato. À revocação de 0,40 a linha de base **não
-alcança o ponto em nenhuma das dez execuções** sem alertar sobre a totalidade do
-registro. **Quanto à cobertura longitudinal, também é afirmativa:** medida por
-episódio, passou de 35,0% para 100,0% — os doze cenários, nas dez execuções —, o
-que é coerente com o desenho: eles foram construídos para que nenhum evento
-isolado fosse notável, e é essa a situação que as regras fixas não alcançam.
+p = 0,0020 em cada um. À revocação de 0,40 a linha de base **não alcança o ponto
+em nenhuma das dez execuções** sem alertar sobre a totalidade do registro.
+**Quanto à cobertura longitudinal, também é afirmativa:** medida por episódio,
+passou de 35,0% para 100,0%, o que é coerente com o desenho: os cenários foram
+construídos para que nenhum evento isolado fosse notável, e é essa a situação que
+as regras fixas não alcançam.
 
 **A contrapartida não estava na pergunta.** A mesma configuração elevou de 75,8%
 para 96,0% a proporção de episódios de controle negativo que produziram alerta —
