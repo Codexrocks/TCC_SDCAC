@@ -139,7 +139,6 @@ que a Seção 4.6 dá.
       removido em 12/11/2026, antes de ser lido. A ressalva está na seção
       [Abstract](00-resumo.md), e se o texto voltar, volta com esta pendência
 * [x] ~~Necessidade de abstract confirmada com o orientador — 04/09/2026~~ —
-      **revertido em 12/11/2026** por autorização verbal do orientador, relatada
-      pelo Davi. A reversão está registrada em [00-resumo.md](00-resumo.md), e a
-      própria nota de lá pede confirmação por escrito: o que sustenta a remoção
-      hoje é um relato, e o que sustentava a exigência era um registro
+      **revertido em 12/11/2026**, e a autorização da retirada **confirmada pelo
+      Davi em 17/11/2026**. A reversão e a confirmação estão registradas em
+      [00-resumo.md](00-resumo.md), com data e com quem as trouxe

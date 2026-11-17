@@ -278,10 +278,6 @@ motivo que a Seção 4.3.1 expõe. A leitura que os dados sustentam é que ela
 com periodicidade própria — e não ao mesmo corte que decide se um evento gera
 alerta agora.
 
-**O que esta comparação não resolve.** Os números saem de registro sintético e
-**não se comparam a FPR publicada sobre registro real**: a comparação é interna,
-sobre o mesmo dado, e é só isso que a pergunta afirma.
-
 ## 4.6 Limitações
 
 > **A escrever.** Seção obrigatória, e a que mais protege o trabalho. As
