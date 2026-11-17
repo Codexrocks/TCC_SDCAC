@@ -120,25 +120,27 @@ semana = "S5"
 numero = 3
 titulo = "Metodologia"
 donos = ["Davi (caneta)"]
-estado = "Escrita e versionada em 28/09 — 9 subseções. Faltam as 4 lacunas da M2 e as 7 fontes conferidas"
+estado = "Escrita e versionada em 28/09 — 9 subseções. **As quatro lacunas da M2 fecharam**, a última em 12/11. As 7 fontes já têm entrada em `referencias.md` (#121) e esperam confirmação de pessoa"
 pronto = false
-andamento = "Escrita e versionada em 28/09 — 9 subseções. As lacunas 2 e 4 fecharam em 14/10. Faltam a relação nominal dos cenários (lacuna 1) e o número do critério a priori (lacuna 3), além das 7 fontes por conferir."
+andamento = "Escrita e versionada em 28/09 — 9 subseções. **As quatro lacunas fecharam:** 2 e 4 em 14/10; a 1 em 12/11, pela D-06 e pela D-16, com os 20 cenários nomeados na seção 3.4; a 3 em 12/11, pela D-15, em 45 alertas falsos por turno. As 7 fontes entraram em `referencias.md` em 17/11 pelo #121, com a fonte aberta pelo assistente — **falta a confirmação de uma pessoa**, e a pendência segue em `docs/citacoes-pendentes.md`."
 semana = "S5"
 
 [[capitulo]]
 numero = 4
 titulo = "Resultados"
 donos = ["Filipe (caneta)"]
-estado = "Esqueleto"
+estado = "Escrita sobre dez sementes. Seis subseções, 4 tabelas e 2 figuras, todas com legenda e fonte. A 4.4 declara que a avaliação heurística não foi realizada"
 pronto = false
+andamento = "Escrita entre 11/11 e 17/11 sobre execução registrada em `results/`: seis subseções — execução dos cenários, matriz de confusão, métricas em três partes, verificação do painel, discussão e limitações. Quatro tabelas e duas figuras, com legenda e fonte, que é a correção que o professor pediu em 12/11. **Não está pronta por duas razões:** a 4.4 declara que a avaliação heurística não foi realizada, e nenhuma pessoa leu ainda a 4.3.3 reescrita em 17/11."
 semana = "S13"
 
 [[capitulo]]
 numero = 5
 titulo = "Conclusão"
 donos = ["Davi (caneta)"]
-estado = "Esqueleto"
+estado = "Escrita. Cinco subseções, com resposta própria para cada grandeza da pergunta e os oito objetivos avaliados"
 pronto = false
+andamento = "Escrita e reescrita sobre as dez sementes: retomada da pergunta com resposta própria para cada uma das duas grandezas, os oito objetivos específicos avaliados, contribuições, trabalhos futuros e as referências. **Não está pronta** porque a lista de referências tem sete entradas à espera de confirmação de pessoa."
 semana = "S14"
 
 
@@ -161,24 +163,24 @@ id = "M2"
 titulo = "Metodologia congelada"
 data = 2026-10-01
 fecha = "Cenários, métricas, quatro configurações, atributos"
-estado = "aberto"
-porque = "Congela o que será medido antes de existir código a defender"
+estado = "fechado"
+porque = "Congela o que será medido antes de existir código a defender. **Fechou com atraso, em 12/11/2026**, quando a última das quatro lacunas caiu — e o atraso é o fato: a metodologia congelou depois de o código existir, não antes"
 
 [[marco]]
 id = "M3"
 titulo = "Modelo executável"
 data = 2026-10-22
 fecha = "C0 a C3 rodando sobre o mesmo gerador"
-estado = "aberto"
-porque = "Última data em que uma dimensão pode ser cortada sem comprometer a comparação"
+estado = "fechado"
+porque = "Última data em que uma dimensão pode ser cortada sem comprometer a comparação. **Fechou em 12/11/2026**, com as quatro configurações sobre dez sementes do mesmo gerador — vinte dias depois da data"
 
 [[marco]]
 id = "M4"
 titulo = "Tabela de ablação"
 data = 2026-11-19
 fecha = "Números finais das quatro configurações"
-estado = "aberto"
-porque = "A partir daqui o trabalho é escrita. Nenhuma alteração de código é aceita"
+estado = "fechado"
+porque = "A partir daqui o trabalho é escrita. Nenhuma alteração de código é aceita. **Fechou em 12/11/2026**, antes da data: as quatro configurações sobre dez sementes, com Wilcoxon pareado, nas tabelas da seção 4"
 
 [[marco]]
 id = "M5"
@@ -201,7 +203,7 @@ inicio = 2026-09-25
 fim = 2026-10-01
 marco = "M2"
 pronto = false
-andamento = "Metodologia e referencial teórico escritos e versionados em 28/09. As lacunas 2 e 4 fecharam em 14/10. Faltam os cenários nomeados (lacuna 1, D-06 e D-16), o número do critério a priori (D-15) e o ajuste da Introdução à D-25."
+andamento = "Metodologia e referencial teórico escritos e versionados em 28/09. **As quatro lacunas fecharam:** a 2 e a 4 em 14/10; a 1 em 12/11, pela D-06 e pela D-16, com os 20 cenários nomeados na seção 3.4; e a 3 em 12/11, pela D-15. O ajuste da Introdução à D-25 estava feito desde 15/10."
 entregavel = "artigo/03-metodologia.md + arquitetura v2 · o atrasado de S2 a S4 · ajustar a Introdução à D-25"
 criterio = "Teste de coerência pergunta ↔ objetivos ↔ métricas aprovado · D-12 a D-19 fechadas · cenários definidos"
 donos = ["Davi (caneta)", "Yasmin (cenários)", "Filipe (métricas)"]
