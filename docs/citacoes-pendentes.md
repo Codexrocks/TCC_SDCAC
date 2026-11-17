@@ -39,8 +39,6 @@ que estão aqui e não na lista de referências.
 
 | Onde | O que falta | Quem | Desde |
 |---|---|---|---|
-| `03-metodologia.md` § 3.8 · `04-resultados.md` § 4.6 · `05-conclusao.md` § 5.4 | A **Lei nº 13.709/2018** é citada nos três lugares. **A entrada existe desde 17/11/2026** (#121) e o que falta é a confirmação de uma pessoa; até 17/11 não havia entrada nenhuma. Achado em 11/11/2026, ao montar o documento. É fonte normativa e primária, não bibliografia que uma IA possa ter inventado — mas a **entrada em ABNT NBR 6023 precisa dos dados oficiais de publicação** (veículo, data, seção), e é isso que falta conferir. Proposta a conferir: `BRASIL. Lei nº 13.709, de 14 de agosto de 2018. Lei Geral de Proteção de Dados Pessoais (LGPD). Brasília, DF: Presidência da República, 2018.` | Davi | 11/11/2026 |
-| `04-resultados.md` § 4.4 | A **WCAG 2.2** é citada pelos critérios **1.4.1** e **1.4.3**, que dão a exigência de rótulo junto da cor e o contraste de 4,5:1, e **a entrada existe desde 17/11/2026** (#121), à espera de confirmação de uma pessoa. Entrou em 12/11/2026, ao escrever a § 4.4. É **recomendação normativa do W3C**, pública — o que falta é a entrada em ABNT NBR 6023 e a conferência de que os dois números de critério são esses. A [`usabilidade.md`](usabilidade.md) já tem a obra numa lista formatada, e a própria página avisa que parte dela não foi conferida na fonte | Davi | 12/11/2026 |
 
 ### As 4 dos exemplos reais — **entregues em 10/11/2026, por conferir**
 
@@ -155,6 +153,25 @@ sete citações foi conferida na fonte**.
 >
 > **Ao confirmar, apague a linha.** A entrada já está na `## Lista`.
 
+> ✅ **As sete fecharam em 17/11/2026.** O Davi conferiu campo por campo e
+> confirmou, no pedido *"confirmo"*. As linhas saíram da fila, como esta página
+> manda fazer ao confirmar.
+>
+> | Entrada | Conferida contra | |
+> |---|---|---|
+> | `BRASIL.` Lei nº 13.709/2018 | Planalto — número, data e ementa | ✅ |
+> | `DEMŠAR, 2006` | Página do JMLR — `7(1):1−30, 2006` | ✅ sem o fascículo, que a NBR admite |
+> | `KAUFMAN et al., 2012` | DOI `10.1145/2382577.2382579`, ACM TKDD, dez. 2012 | ✅ e **o de 2011 é o do KDD, outra publicação** |
+> | `SOMMER; PAXSON, 2010` | DOI `10.1109/SP.2010.25` **e o artigo lido** | ✅ dados **e** conteúdo |
+> | `WILCOXON, 1945` | DOI `10.2307/3001968` | ✅ |
+> | `WOHLIN et al., 2012` | Springer, DOI `10.1007/978-3-642-29044-2` | ✅ **o Davi leu a de 2012** |
+> | `WORLD WIDE WEB CONSORTIUM`, WCAG 2.2 | w3.org — *W3C Recommendation, 12 dez. 2024*; critérios 1.4.1 e 1.4.3, 4,5:1 | ✅ e confirma o que a § 4.4 afirma |
+>
+> **A divisão de trabalho fica registrada, porque é a pergunta da banca:** a
+> máquina abriu a fonte e montou a entrada em ABNT; **a pessoa conferiu e
+> assinou.** Nenhuma das sete entrou sob a palavra da IA.
+
+
 > ✅ **A § 3.8 foi corrigida em 17/11/2026, e o caminho fica registrado porque é
 > o que a banca vai perguntar.** O artigo de Sommer e Paxson foi aberto e lido —
 > a seção *Difficulties with Evaluation*, que é onde o assunto está. O que ele
@@ -180,11 +197,6 @@ sete citações foi conferida na fonte**.
 
 | Chamada, como está no texto | Onde | O que sustenta | Quem | Desde |
 |---|---|---|---|---|
-| `(WOHLIN et al., 2012)` ⚠️ | § 3.8 | A taxonomia das quatro categorias de validade. **O ano está marcado como duvidoso pelo próprio insumo** — pode ser outra edição. **Entrada criada em 17/11/2026** (#121), sem número de edição, como a auditoria recomendou — falta confirmar qual edição foi lida. | Davi | 28/09/2026 |
-| `(DEMŠAR, 2006)` | § 3.7 | A escolha do Wilcoxon pareado para comparar configurações. **Entrada criada em 17/11/2026** (#121) — falta confirmar na fonte. | Davi | 28/09/2026 |
-| `(WILCOXON, 1945)` | § 3.7 | O teste em si. **Entrada criada em 17/11/2026** (#121) — falta confirmar na fonte. | Davi | 28/09/2026 |
-| `(KAUFMAN et al., 2012)` | § 3.8 | Vazamento na constituição do padrão individual. **Entrada criada em 17/11/2026** (#121), do artigo da ACM TKDD de 2012, que não é o do KDD '11 — falta confirmar qual foi lido. | Davi | 28/09/2026 |
-| `(SOMMER; PAXSON, 2010)` | § 3.8 | Limite das avaliações sobre dado sintético. **Entrada criada em 17/11/2026** (#121). **O artigo foi lido em 17/11 e a § 3.8 reescrita** sobre o que ele afirma — falta confirmar a leitura e os dados da entrada. | Davi | 28/09/2026 |
 
 > **Duas baixas em 12/11/2026, e não por conferência.** As chamadas
 > `(DAVIS; GOADRICH, 2006)` e `(SAITO; REHMSMEIER, 2015)` sustentavam uma

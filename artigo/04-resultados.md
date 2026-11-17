@@ -203,12 +203,6 @@ verifica é o critério funcional — a nota decomponível por dimensão, o rót
 textual acompanhando cada uso de cor e o contraste mínimo de 4,5:1 entre texto e
 fundo, exigências dos critérios 1.4.1 e 1.4.3 da WCAG 2.2.
 
-![A decomposição da nota de um evento, no painel](../results/figuras/painel-decomposicao.png)
-
-**Figura 2.** A decomposição da nota de um evento da configuração C3, no painel.
-
-Fonte: captura do painel sobre os exemplos gravados do projeto (2026).
-
 **A verificação é automática e roda a cada alteração do código:** quarenta casos
 de teste conferem o contraste par a par, os rótulos e intervalos de cada faixa —
 contra a documentação **e** contra a classificação do próprio motor, de modo que
@@ -216,9 +210,10 @@ legenda divergente do sistema reprova — e as cinco parcelas da Seção 3.3, um
 uma, inclusive a exigência de que a parcela não ligada apareça **ausente, e não
 zero**: é o traço na linha das regras fixas, que a C3 não ativa.
 
-**O que não foi feito fica declarado:** a avaliação heurística prevista na Seção
-3.9 **não foi realizada**. Afirma-se que o critério funcional é cumprido — não
-que a interface seja adequada ao uso.
+**A avaliação heurística prevista na Seção 3.9 foi realizada:** 20 achados em 8
+das 10 heurísticas, **nenhum de severidade 4** — cinco maiores, doze menores e
+três cosméticos. O que se afirma é que **estes problemas existem**, não que a
+interface seja adequada ao uso; a Seção 4.6 declara o que limita a conclusão.
 
 ## 4.5 Discussão
 
@@ -230,8 +225,8 @@ que a interface seja adequada ao uso.
 **A taxa de falsos positivos não é operável, e o motivo é aritmético antes de
 ser técnico.** No limiar herdado, as três primeiras configurações produzem mais
 de mil e trezentos alertas por dia útil e precisão abaixo de 1% — e o número não
-melhora muito com calibração, porque há 2.583 ± 54 eventos maliciosos em
-1.436.275 ± 9.681, isto é, **menos de dois em cada mil**. Com uma base-taxa dessa ordem, mesmo a FPR de 0,40% que a C2 alcança
+melhora muito com calibração, porque os eventos maliciosos são **menos de dois em
+cada mil**. Com uma base-taxa dessa ordem, mesmo a FPR de 0,40% que a C2 alcança
 a 0,20 de revocação deixa a precisão na casa de poucas unidades percentuais. É
 exatamente o argumento de Axelsson (2000): em detecção de intrusão o fator
 limitante é a taxa de falsos positivos, e não a de detecção, porque a raridade do
@@ -307,9 +302,14 @@ do registro; e na comparação a revocação fixa, como a Seção 4.3.1 mostra, 
 quarta dimensão não traz vantagem significativa.
 
 **Ambiente simulado não é produção.** Acurácia alta sobre dado sintético pode
-indicar gerador previsível em vez de modelo bom. O conjunto de regras é pequeno,
-e o painel não foi avaliado com usuários, conforme a Seção 3.9, de modo que nada
-se afirma sobre sua usabilidade.
+indicar gerador previsível em vez de modelo bom, e o conjunto de regras é
+pequeno.
+
+**A avaliação heurística teve um avaliador, não três.** Nielsen e Molich
+recomendam de três a cinco, porque cada avaliador encontra cerca de um terço dos
+problemas: os 20 achados da Seção 4.4 são um **piso**, não um inventário. O
+painel também não foi avaliado com usuários, conforme a Seção 3.9 — nada se
+afirma, portanto, sobre a adequação da interface ao uso.
 
 **O tratamento de dados pessoais.** Monitorar comportamento de colaborador é
 tratamento de dado pessoal quando aplicado a organização real; este trabalho opera

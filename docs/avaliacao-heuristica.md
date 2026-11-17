@@ -20,6 +20,18 @@ declara como **não realizada**.
 | **Até o fim** | Percorra o roteiro inteiro antes de consolidar. Interromper no meio enviesa o que vem depois |
 | **Só depois** | As três planilhas se juntam **quando as três estiverem prontas**. Antes disso, não compare, não comente, não mande print |
 
+> ✅ **Desfecho, 17/11/2026: a avaliação foi consolidada com uma passagem.** A do
+> Davi, de 12/11, está publicada como
+> [insumo](insumos/avaliacao-heuristica-davi-v1.md) com 20 achados. As da Yasmin
+> e do Filipe não chegaram, e a dois dias da entrega a **D-46** fechou a
+> consolidação com um avaliador.
+>
+> **As três regras acima continuam escritas de propósito.** A primeira e a
+> segunda foram cumpridas: a passagem foi sozinha e até o fim. A terceira
+> **deixou de ter o que esperar** — e, com o insumo publicado, uma passagem
+> posterior já não é independente. Quem percorrer o painel daqui para frente
+> está revisando, não avaliando às cegas.
+
 **Por que três.** Nielsen recomenda de três a cinco avaliadores porque cada um
 encontra cerca de um terço dos problemas. Com um só, a maior parte passa batido —
 e a união só cresce se as passagens forem independentes.
