@@ -39,8 +39,8 @@ que estão aqui e não na lista de referências.
 
 | Onde | O que falta | Quem | Desde |
 |---|---|---|---|
-| `03-metodologia.md` § 3.8 · `04-resultados.md` § 4.6 · `05-conclusao.md` § 5.4 | A **Lei nº 13.709/2018** é citada nos três lugares e **não tem entrada em [`referencias.md`](../artigo/referencias.md)**, nem estava registrada aqui. Achado em 11/11/2026, ao montar o documento. É fonte normativa e primária, não bibliografia que uma IA possa ter inventado — mas a **entrada em ABNT NBR 6023 precisa dos dados oficiais de publicação** (veículo, data, seção), e é isso que falta conferir. Proposta a conferir: `BRASIL. Lei nº 13.709, de 14 de agosto de 2018. Lei Geral de Proteção de Dados Pessoais (LGPD). Brasília, DF: Presidência da República, 2018.` | Davi | 11/11/2026 |
-| `04-resultados.md` § 4.4 | A **WCAG 2.2** é citada pelos critérios **1.4.1** e **1.4.3**, que dão a exigência de rótulo junto da cor e o contraste de 4,5:1, e **não tem entrada em [`referencias.md`](../artigo/referencias.md)**. Entrou em 12/11/2026, ao escrever a § 4.4. É **recomendação normativa do W3C**, pública — o que falta é a entrada em ABNT NBR 6023 e a conferência de que os dois números de critério são esses. A [`usabilidade.md`](usabilidade.md) já tem a obra numa lista formatada, e a própria página avisa que parte dela não foi conferida na fonte | Davi | 12/11/2026 |
+| `03-metodologia.md` § 3.8 · `04-resultados.md` § 4.6 · `05-conclusao.md` § 5.4 | A **Lei nº 13.709/2018** é citada nos três lugares. **A entrada existe desde 17/11/2026** (#121) e o que falta é a confirmação de uma pessoa; até 17/11 não havia entrada nenhuma. Achado em 11/11/2026, ao montar o documento. É fonte normativa e primária, não bibliografia que uma IA possa ter inventado — mas a **entrada em ABNT NBR 6023 precisa dos dados oficiais de publicação** (veículo, data, seção), e é isso que falta conferir. Proposta a conferir: `BRASIL. Lei nº 13.709, de 14 de agosto de 2018. Lei Geral de Proteção de Dados Pessoais (LGPD). Brasília, DF: Presidência da República, 2018.` | Davi | 11/11/2026 |
+| `04-resultados.md` § 4.4 | A **WCAG 2.2** é citada pelos critérios **1.4.1** e **1.4.3**, que dão a exigência de rótulo junto da cor e o contraste de 4,5:1, e **a entrada existe desde 17/11/2026** (#121), à espera de confirmação de uma pessoa. Entrou em 12/11/2026, ao escrever a § 4.4. É **recomendação normativa do W3C**, pública — o que falta é a entrada em ABNT NBR 6023 e a conferência de que os dois números de critério são esses. A [`usabilidade.md`](usabilidade.md) já tem a obra numa lista formatada, e a própria página avisa que parte dela não foi conferida na fonte | Davi | 12/11/2026 |
 
 ### As 4 dos exemplos reais — **entregues em 10/11/2026, por conferir**
 
@@ -158,11 +158,11 @@ sete citações foi conferida na fonte**.
 
 | Chamada, como está no texto | Onde | O que sustenta | Quem | Desde |
 |---|---|---|---|---|
-| `(WOHLIN et al., 2012)` ⚠️ | § 3.8 | A taxonomia das quatro categorias de validade. **O ano está marcado como duvidoso pelo próprio insumo** — pode ser outra edição | Davi | 28/09/2026 |
-| `(DEMŠAR, 2006)` | § 3.7 | A escolha do Wilcoxon pareado para comparar configurações | Davi | 28/09/2026 |
-| `(WILCOXON, 1945)` | § 3.7 | O teste em si | Davi | 28/09/2026 |
-| `(KAUFMAN et al., 2012)` | § 3.8 | Vazamento na constituição do padrão individual | Davi | 28/09/2026 |
-| `(SOMMER; PAXSON, 2010)` | § 3.8 | Limite das avaliações sobre dado sintético | Davi | 28/09/2026 |
+| `(WOHLIN et al., 2012)` ⚠️ | § 3.8 | A taxonomia das quatro categorias de validade. **O ano está marcado como duvidoso pelo próprio insumo** — pode ser outra edição. **Entrada criada em 17/11/2026** (#121), sem número de edição, como a auditoria recomendou — falta confirmar qual edição foi lida. | Davi | 28/09/2026 |
+| `(DEMŠAR, 2006)` | § 3.7 | A escolha do Wilcoxon pareado para comparar configurações. **Entrada criada em 17/11/2026** (#121) — falta confirmar na fonte. | Davi | 28/09/2026 |
+| `(WILCOXON, 1945)` | § 3.7 | O teste em si. **Entrada criada em 17/11/2026** (#121) — falta confirmar na fonte. | Davi | 28/09/2026 |
+| `(KAUFMAN et al., 2012)` | § 3.8 | Vazamento na constituição do padrão individual. **Entrada criada em 17/11/2026** (#121), do artigo da ACM TKDD de 2012, que não é o do KDD '11 — falta confirmar qual foi lido. | Davi | 28/09/2026 |
+| `(SOMMER; PAXSON, 2010)` | § 3.8 | Limite das avaliações sobre dado sintético. **Entrada criada em 17/11/2026** (#121). ⚠️ Falta o mais importante: **confirmar que a obra sustenta o que a § 3.8 afirma**, que é o apontamento aberto da auditoria. | Davi | 28/09/2026 |
 
 > **Duas baixas em 12/11/2026, e não por conferência.** As chamadas
 > `(DAVIS; GOADRICH, 2006)` e `(SAITO; REHMSMEIER, 2015)` sustentavam uma
