@@ -129,7 +129,11 @@ regras fixas, ambiente corporativo simulado
 * [x] **Reescritas sobre múltiplas sementes** em 12/11/2026, pela **D-13** — dez
   execuções independentes, com média, desvio-padrão e teste pareado
 * [x] **A quarta configuração**, executada em 11/11/2026 pela **D-44**
-* [ ] **A decisão sobre os e-mails** no bloco de autores, por ser repositório
-  público
+* [x] **A decisão sobre os e-mails** no bloco de autores — tomada em
+  12/11/2026: os três endereços ficam num arquivo **fora do versionamento**
+  (`artigo/emails.local.json`, ignorado pelo git), e `artigo/emails.exemplo.json`
+  mostra o formato. O documento sai com os e-mails; o repositório público, não.
+  Sem o arquivo, o montador monta sem a linha — e foi o que aconteceu até
+  17/11/2026, quando se descobriu que o arquivo existia no clone errado
 * [x] ~~Uma pessoa ler o Abstract inteiro~~ — não se aplica: ele saiu antes de
   ser lido, e isso está dito na seção Abstract

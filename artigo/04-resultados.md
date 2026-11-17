@@ -337,7 +337,9 @@ retenção. O par em trabalhos futuros está na Seção 5.4.
 * [x] **O limiar calibrado** — a tabela de pontos de operação está em
   [`results/README.md`](../results/README.md), e sai das dez sementes já
   registradas: calibrar é escolher uma linha, não reexecutar
-* [ ] **A D-12 fechada** antes de a unidade de análise ir à banca
+* [x] **A D-12 fechada** em 14/10/2026 — duas unidades declaradas
+  separadamente, evento e episódio, e é por isso que a § 4.3 e a § 4.4 reportam
+  as duas
 * [x] **A D-15 declarada** em 12/11/2026, em 45 alertas falsos por turno, com a
   data registrada na § 3.6 — e verificada na § 4.5
-* [ ] Limitações escritas antes de a banca perguntar
+* [x] Limitações escritas — a § 4.6, desde 11/11/2026
