@@ -125,7 +125,7 @@ explícito: referência que a IA produziu e ninguém conferiu na fonte **não en
 > |---|---|
 > | `KAUFMAN et al.` — o ano seria 2011 | **Resolvido.** Existem as duas publicações: o artigo do KDD '11 e o da **ACM TKDD, v. 6, n. 4, art. 15, dez. 2012**. A entrada é da segunda, e o ano de 2012 do texto está certo |
 > | `WOHLIN et al.` — edição divergente | **Metade.** A edição de 2012 da Springer existe, revisão da original de 2000, que era da Kluwer. A entrada entrou **sem número de edição**, como a auditoria recomendou. Qual das duas foi lida, só o Davi diz |
-> | `SOMMER; PAXSON` — o texto afirma o que a obra não diz | **Nada.** É leitura do argumento, não dado de publicação. Continua aberto, e é o único dos três que pede **mudar o texto da § 3.8**, não a lista |
+> | `SOMMER; PAXSON` — o texto afirma o que a obra não diz | ✅ **Resolvido em 17/11/2026, e pelo único caminho possível: lendo o artigo.** A § 3.8 foi reescrita para dizer o que a obra diz, e a inferência que era nossa ficou onde não precisa de fonte — a § 4.6, sem chamada |
 
 Situação diferente, e mais exigente. O
 [insumo entregue pelo Davi](insumos/metodologia-davi-v1.md) em 28/09 declara, no
@@ -155,6 +155,28 @@ sete citações foi conferida na fonte**.
 >
 > **Ao confirmar, apague a linha.** A entrada já está na `## Lista`.
 
+> ✅ **A § 3.8 foi corrigida em 17/11/2026, e o caminho fica registrado porque é
+> o que a banca vai perguntar.** O artigo de Sommer e Paxson foi aberto e lido —
+> a seção *Difficulties with Evaluation*, que é onde o assunto está. O que ele
+> sustenta:
+>
+> - *"Evaluating an anomaly detection system that strives to find novel attacks
+>   using only simulated activity will often lack any plausible degree of realism
+>   or relevance"*
+> - *"Conclusions drawn from analyzing a small environment cannot be generalized
+>   to settings of larger scale"*
+> - e a exigência de *"acknowledge shortcomings that one's evaluation dataset
+>   might impose"*
+>
+> **O que ele não sustenta** é a frase que estava na § 3.8: que acurácia elevada
+> sobre dado sintético indique **gerador previsível**. Isso é inferência nossa, e
+> a obra não a faz.
+>
+> A § 3.8 passou a citá-los pelo que afirmam. **A inferência não foi apagada** —
+> ela já estava na § 4.6, *"acurácia alta sobre dado sintético pode indicar
+> gerador previsível em vez de modelo bom"*, **sem chamada bibliográfica**, que é
+> o lugar certo de uma leitura que é do trabalho e não da fonte.
+
 
 | Chamada, como está no texto | Onde | O que sustenta | Quem | Desde |
 |---|---|---|---|---|
@@ -162,7 +184,7 @@ sete citações foi conferida na fonte**.
 | `(DEMŠAR, 2006)` | § 3.7 | A escolha do Wilcoxon pareado para comparar configurações. **Entrada criada em 17/11/2026** (#121) — falta confirmar na fonte. | Davi | 28/09/2026 |
 | `(WILCOXON, 1945)` | § 3.7 | O teste em si. **Entrada criada em 17/11/2026** (#121) — falta confirmar na fonte. | Davi | 28/09/2026 |
 | `(KAUFMAN et al., 2012)` | § 3.8 | Vazamento na constituição do padrão individual. **Entrada criada em 17/11/2026** (#121), do artigo da ACM TKDD de 2012, que não é o do KDD '11 — falta confirmar qual foi lido. | Davi | 28/09/2026 |
-| `(SOMMER; PAXSON, 2010)` | § 3.8 | Limite das avaliações sobre dado sintético. **Entrada criada em 17/11/2026** (#121). ⚠️ Falta o mais importante: **confirmar que a obra sustenta o que a § 3.8 afirma**, que é o apontamento aberto da auditoria. | Davi | 28/09/2026 |
+| `(SOMMER; PAXSON, 2010)` | § 3.8 | Limite das avaliações sobre dado sintético. **Entrada criada em 17/11/2026** (#121). **O artigo foi lido em 17/11 e a § 3.8 reescrita** sobre o que ele afirma — falta confirmar a leitura e os dados da entrada. | Davi | 28/09/2026 |
 
 > **Duas baixas em 12/11/2026, e não por conferência.** As chamadas
 > `(DAVIS; GOADRICH, 2006)` e `(SAITO; REHMSMEIER, 2015)` sustentavam uma
