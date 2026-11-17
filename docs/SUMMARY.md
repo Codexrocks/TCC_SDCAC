@@ -106,4 +106,5 @@
   * [2026-11-12 — Sessão 48: a tela de Métricas ganha dono, caminho e hora](relatorios/2026-11-12-sessao-48.md)
   * [2026-11-12 — Sessão 49: o quadro compartilhado é apagado](relatorios/2026-11-12-sessao-49.md)
   * [2026-11-13 — Sessão 50: a fila de PRs zera, e o montador entrou sem a própria dependência](relatorios/2026-11-13-sessao-50.md)
+  * [2026-11-16 — Relatório semanal de 09/11 a 16/11](relatorios/2026-11-16-semana.md)
   * [Modelo de relatório](relatorios/_modelo.md)

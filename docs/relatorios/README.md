@@ -69,3 +69,4 @@ Use o [modelo](_modelo.md) e adicione a página nova ao
 | 12/11/2026 | [Sessão 48](2026-11-12-sessao-48.md) | A **D-45**: a tela de Métricas lê a API e não o arquivo de resultados, e entra depois da avaliação heurística. O que falta antes dela não é a tela — é o avaliador gravar as métricas |
 | 12/11/2026 | [Sessão 49](2026-11-12-sessao-49.md) | O quadro compartilhado é apagado — cinco marcações em 46 dias e cards congelados em 15/10 —, e o GitBook é conferido abrindo o site: o link da planilha dava 404 |
 | 13/11/2026 | [Sessão 50](2026-11-13-sessao-50.md) | A fila de PRs zera, e o montador do artigo entrou no repositório quatro dias antes sem o `python-docx` declarado: quem instalasse pelo `pyproject` não gerava o `.docx` de entrega |
+| 16/11/2026 | [Relatório semanal](2026-11-16-semana.md) | 21 PRs mergeados na semana, todos do Davi; #117 e #118 parados há 3 dias; prazo de 19/11 a 3 dias |
