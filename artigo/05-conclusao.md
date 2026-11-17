@@ -19,13 +19,12 @@ grandezas, e cada uma recebe resposta própria.
 significância estatística.** À revocação de 0,20 a taxa de falsos positivos caiu
 de 18,44% para 0,40% na configuração que acrescenta o desvio em relação ao padrão
 individual, e a diferença se repete nos **nove níveis examinados**, com
-p = 0,0020 em cada um — o menor valor que dez pares produzem num teste de
-Wilcoxon pareado bilateral exato. À revocação de 0,40 a linha de base **não
-alcança o ponto em nenhuma das dez execuções** sem alertar sobre a totalidade do
-registro. **Quanto à cobertura longitudinal, também é afirmativa:** medida por
-episódio, passou de 35,0% para 100,0% — os doze cenários, nas dez execuções —, o
-que é coerente com o desenho: eles foram construídos para que nenhum evento
-isolado fosse notável, e é essa a situação que as regras fixas não alcançam.
+p = 0,0020 em cada um. À revocação de 0,40 a linha de base **não alcança o ponto
+em nenhuma das dez execuções** sem alertar sobre a totalidade do registro.
+**Quanto à cobertura longitudinal, também é afirmativa:** medida por episódio,
+passou de 35,0% para 100,0%, o que é coerente com o desenho: os cenários foram
+construídos para que nenhum evento isolado fosse notável, e é essa a situação que
+as regras fixas não alcançam.
 
 **A contrapartida não estava na pergunta.** A mesma configuração elevou de 75,8%
 para 96,0% a proporção de episódios de controle negativo que produziram alerta —
@@ -127,10 +126,19 @@ que a Seção 4.6 dá.
 
 ## O que esta seção ainda precisa
 
-* [ ] Resposta direta à pergunta de pesquisa da Introdução
-* [ ] Cada objetivo específico avaliado, inclusive os não cumpridos
-* [ ] Resumo escrito — contexto, objetivo e método já estão; faltam resultado e
-      conclusão, que dependem da Seção 4
+* [x] Resposta direta à pergunta de pesquisa da Introdução — a § 5.1, com
+      resposta própria para cada uma das duas grandezas, e com a contrapartida
+      que a pergunta não interrogava
+* [x] Cada objetivo específico avaliado — a § 5.2 percorre os oito da § 1.5.2.
+      **Não há objetivo não cumprido a relatar**, e é isso que ela diz
+* [x] Resumo escrito, completo desde 11/11/2026 e reescrito sobre dez sementes
+      em 12/11 — o item é o mesmo da página do
+      [Resumo](00-resumo.md), e vale a marcação de lá
 * [x] Palavras-chave definidas — recuperadas do `.docx`, em 15/10/2026
-* [ ] Abstract conferido por uma pessoa — foi redigido com auxílio de IA
-* [x] Necessidade de abstract confirmada com o orientador — 04/09/2026
+* [x] ~~Abstract conferido por uma pessoa~~ — **não se aplica**: o Abstract foi
+      removido em 12/11/2026, antes de ser lido. A ressalva está na seção
+      [Abstract](00-resumo.md), e se o texto voltar, volta com esta pendência
+* [x] ~~Necessidade de abstract confirmada com o orientador — 04/09/2026~~ —
+      **revertido em 12/11/2026**, e a autorização da retirada **confirmada pelo
+      Davi em 17/11/2026**. A reversão e a confirmação estão registradas em
+      [00-resumo.md](00-resumo.md), com data e com quem as trouxe
