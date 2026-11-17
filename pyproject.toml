@@ -129,6 +129,12 @@ ignore = [
 "evaluator/figuras_cli.py" = ["T201"]
 # O montador do artigo tambem e interface: o `print` diz onde gravou.
 "scripts/montar_artigo.py" = ["T201"]
+# Os dois programas do quadro sempre foram linha de comando, e nunca
+# estiveram nesta lista: `ruff check scripts/quadro.py` acusava 12 `T201`
+# desde que o arquivo existe. Achado em 12/11/2026, ao mexer no cabecalho
+# dos dois. O CI nao roda Ruff, entao ninguem tropecava nisso.
+"scripts/quadro.py" = ["T201"]
+"scripts/cards_do_quadro.py" = ["T201"]
 
 [tool.ruff.lint.pydocstyle]
 convention = "google"

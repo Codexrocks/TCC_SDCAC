@@ -63,29 +63,29 @@ comparação com regras fixas em ambiente corporativo simulado**
 
 A crescente digitalização das organizações amplia o volume e a diversidade dos
 registros de eventos produzidos por sistemas corporativos, e a análise desses
-registros apoiada exclusivamente em regras fixas aplicadas a eventos isolados
-não distingue atividade legítima incomum de comportamento efetivamente
-indevido, nem identifica situações que se desenvolvem gradualmente. Este
-trabalho desenvolve e avalia um modelo experimental de avaliação multidimensional
-de risco comportamental, que combina o risco do evento individual, o desvio em
-relação ao padrão de comportamento do próprio usuário e a exposição acumulada ao
-risco, esta última reportada em duas parcelas distintas — conduta e postura de
-segurança. O método é um experimento comparativo em ambiente corporativo simulado, no qual
-quatro configurações — uma linha de base de regras fixas e três com acréscimo
-progressivo de dimensões — são aplicadas aos mesmos eventos e cenários,
-permitindo medir isoladamente a contribuição de cada dimensão. As grandezas de comparação são a taxa de falsos positivos a uma
-mesma revocação e a revocação em cenários longitudinais. Em dez execuções
+registros apoiada exclusivamente em regras fixas aplicadas a eventos isolados não
+distingue atividade legítima incomum de comportamento indevido, nem identifica
+situações que se desenvolvem gradualmente. Este trabalho desenvolve e avalia um
+modelo experimental de avaliação multidimensional de risco comportamental, que
+combina o risco do evento individual, o desvio em relação ao padrão de
+comportamento do próprio usuário e a exposição acumulada ao risco, esta última em
+duas parcelas separadas, conduta e postura de segurança. O método é um
+experimento comparativo em ambiente corporativo simulado: quatro configurações —
+uma linha de base de regras fixas e três com acréscimo progressivo de dimensões —
+aplicadas aos mesmos eventos e cenários, o que permite medir isoladamente a
+contribuição de cada dimensão. Comparam-se a taxa de falsos positivos a uma mesma
+revocação e a revocação em cenários longitudinais. Em dez execuções
 independentes, com 1.436.275 ± 9.681 eventos avaliados em cada uma, a
-configuração que soma o risco do evento ao desvio em relação ao padrão
-individual reduziu a taxa de falsos positivos de 18,44% para 0,40% à revocação
-de 0,20 e elevou a revocação em cenários longitudinais de 35,0% para 100,0%,
-medida por episódio, com significância em teste pareado em todos os níveis
-examinados, enquanto a linha de base de regras fixas não alcançou revocação de
-0,40 sem emitir alerta sobre todo o registro. O ganho não foi gratuito: a mesma configuração elevou de
-75,8% para 96,0% a proporção de episódios legítimos que produziram alerta, e o
-acréscimo da exposição acumulada não reduziu significativamente a taxa de falsos
-positivos em nenhum regime. Os resultados autorizam afirmar redução de ruído e
-aumento de cobertura nos cenários medidos, e não ausência de custo.
+configuração que soma o risco do evento ao desvio em relação ao padrão individual
+reduziu a taxa de falsos positivos de 18,44% para 0,40% à revocação de 0,20 e
+elevou a revocação em cenários longitudinais de 35,0% para 100,0%, medida por
+episódio, com significância em teste pareado em todos os níveis examinados,
+enquanto a linha de base não alcançou revocação de 0,40 sem alertar sobre todo o
+registro. O ganho não foi gratuito: a mesma configuração elevou de 75,8% para
+96,0% a proporção de episódios legítimos que produziram alerta, e o acréscimo da
+exposição acumulada não reduziu significativamente a taxa de falsos positivos em
+nenhum regime. Os resultados autorizam afirmar redução de ruído e aumento de
+cobertura nos cenários medidos, e não ausência de custo.
 
 **Palavras-chave:** risco comportamental, análise de logs, detecção de anomalias,
 regras fixas, ambiente corporativo simulado
@@ -115,10 +115,15 @@ regras fixas, ambiente corporativo simulado
 > tinha sido redigido com auxílio de IA e que precisava de leitura antes de ser
 > assinado. Se voltar, volta com essa pendência.
 >
-> **Confirme por escrito com o orientador quando puder.** O que sustenta esta
-> remoção hoje é um relato verbal; o que sustentava a exigência era uma
-> confirmação de setembro registrada nesta página. A assimetria é do tipo que uma
-> banca pergunta.
+> ✅ **A autorização está confirmada.** O Davi declarou em **17/11/2026** que tem
+> a autorização do professor para a retirada do Abstract. A pendência que esta
+> nota registrava — a remoção sustentada só por relato verbal, contra uma
+> exigência de setembro que estava escrita — **está fechada**, e fecha pela
+> palavra de quem fala com o orientador.
+>
+> O texto do Abstract continua no histórico do git, no commit que o removeu. Se
+> algum dia voltar, volta com a pendência que tinha: **nunca foi lido por uma
+> pessoa**.
 
 ***
 
@@ -129,7 +134,11 @@ regras fixas, ambiente corporativo simulado
 * [x] **Reescritas sobre múltiplas sementes** em 12/11/2026, pela **D-13** — dez
   execuções independentes, com média, desvio-padrão e teste pareado
 * [x] **A quarta configuração**, executada em 11/11/2026 pela **D-44**
-* [ ] **A decisão sobre os e-mails** no bloco de autores, por ser repositório
-  público
+* [x] **A decisão sobre os e-mails** no bloco de autores — tomada em
+  12/11/2026: os três endereços ficam num arquivo **fora do versionamento**
+  (`artigo/emails.local.json`, ignorado pelo git), e `artigo/emails.exemplo.json`
+  mostra o formato. O documento sai com os e-mails; o repositório público, não.
+  Sem o arquivo, o montador monta sem a linha — e foi o que aconteceu até
+  17/11/2026, quando se descobriu que o arquivo existia no clone errado
 * [x] ~~Uma pessoa ler o Abstract inteiro~~ — não se aplica: ele saiu antes de
   ser lido, e isso está dito na seção Abstract
