@@ -278,11 +278,14 @@ adequada. Reduzem a objeção o controle negativo longitudinal da Seção 3.4 e 
 separação entre quem especifica os cenários e quem implementa as fórmulas.
 
 **Validade externa.** Os resultados valem para o ambiente simulado e não são
-extrapoláveis a dados de produção: acurácia elevada sobre dados sintéticos deve
-ser lida como indício de gerador demasiadamente previsível, e não como evidência
-de qualidade do modelo (Sommer e Paxson, 2010). A mitigação é o ruído legítimo do
-tráfego de fundo — viagens, trabalho remoto, afastamentos e mudanças de cargo —,
-que impede o comportamento normal de ser artificialmente homogêneo.
+extrapoláveis a dados de produção: avaliar um detector de anomalias apenas sobre
+atividade simulada tende a carecer de realismo e de relevância, e conclusões
+obtidas num ambiente não se generalizam a outro de escala diferente (Sommer e
+Paxson, 2010) — do que decorre a exigência que esses autores formulam e esta
+seção cumpre, de declarar as limitações que o conjunto de avaliação impõe. A
+mitigação é o ruído legítimo do tráfego de fundo — viagens, trabalho remoto,
+afastamentos e mudanças de cargo —, que impede o comportamento normal de ser
+artificialmente homogêneo.
 
 **Validade de conclusão estatística.** Uma única execução por configuração não
 distinguiria ganho sistemático de variação de amostragem; a mitigação é o desenho
