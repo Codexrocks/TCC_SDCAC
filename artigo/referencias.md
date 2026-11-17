@@ -81,25 +81,21 @@ AUTOR. **Título**. Ano. Disponível em: URL. Acesso em: dia mês ano.
 > para a ABNT NBR 6023 — foi assistida por IA, e os dados de cada entrada vêm do
 > insumo, não de busca nova.
 >
-> **As 7 que faltavam entraram em 17/11/2026, e entraram marcadas.** Eram as
-> chamadas da § 3.7 e da § 3.8, mais a LGPD e a WCAG 2.2 — citadas no texto sem
-> entrada aqui. A nota anterior dizia que ficariam fora *"até alguém abrir a
-> fonte"*; a fonte de cada uma **foi aberta pelo assistente de IA em 17/11**, e
-> os dados de publicação vêm de lá, não de memória. As sete estão em
-> [citações pendentes](../docs/citacoes-pendentes.md) **como entradas a
-> confirmar**, e não mais como entradas ausentes.
+> **As 7 que faltavam entraram em 17/11/2026, e o Davi as confirmou no mesmo
+> dia.** Eram as chamadas da § 3.7 e da § 3.8, mais a LGPD e a WCAG 2.2 — citadas
+> no texto sem entrada aqui.
 >
-> **A diferença entre as duas coisas importa.** A dívida mudou de natureza, não
-> desapareceu: antes era chamada sem referência, que uma banca encontra abrindo a
-> última página; agora é referência cuja conferência foi feita por máquina e
-> espera a confirmação de uma pessoa — o mesmo arranjo das 13 do Referencial, que
-> a Yasmin conferiu e o Davi confirmou. **Quem assina continua sendo gente.**
+> **Como foi, em duas etapas, porque a distinção é o que a banca pergunta:** a
+> fonte de cada uma foi aberta pelo **assistente de IA**, e os dados de
+> publicação vêm de lá, não de memória; depois o **Davi conferiu campo por campo
+> e confirmou**, em 17/11/2026. É o mesmo arranjo das 13 do Referencial, que a
+> Yasmin conferiu e ele confirmou. **Quem assina é gente.**
 >
-> ⚠️ **Uma delas tem ressalva de edição.** Para `WOHLIN et al., 2012`, o insumo
-> marcava o ano como duvidoso. A conferência resolveu metade: a edição de 2012 da
-> Springer **existe** (revisão da original de 2000, que era da Kluwer). O que a
-> conferência **não** pode dizer é qual das duas foi efetivamente lida — isso é o
-> Davi quem sabe.
+> ✅ **A ressalva de edição fechou.** Para `WOHLIN et al., 2012`, o insumo
+> marcava o ano como duvidoso. A conferência mostrou que a edição de 2012 da
+> Springer existe, revisão da original de 2000, que era da Kluwer — e **o Davi
+> declarou em 17/11 que leu a de 2012**. A entrada fica sem número de edição,
+> como a auditoria recomendou.
 
 AXELSSON, S. The base-rate fallacy and the difficulty of intrusion detection.
 **ACM Transactions on Information and System Security**, v. 3, n. 3, p. 186-205,

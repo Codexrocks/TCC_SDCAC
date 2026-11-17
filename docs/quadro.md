@@ -166,7 +166,7 @@ contrário das colunas acima.
 
 ## Dívida bibliográfica
 
-15 pendências. Referência não conferida na fonte é o único
+8 pendências. Referência não conferida na fonte é o único
 item deste quadro que pode reprovar o trabalho por fraude acadêmica, e é o
 que some mais fácil de vista.
 
@@ -176,17 +176,10 @@ que some mais fácil de vista.
 | `docs/usabilidade.md § 6.3` | Limites exatos de cada faixa adjetiva do SUS, em Bangor, Kortum e Miller (2009) | Filipe | 03/09/2026 | 75 dias |
 | `docs/usabilidade.md § 7` | Literatura de carga de trabalho e fadiga de alerta em analistas de SOC | Yasmin | 03/09/2026 | 75 dias |
 | `docs/usabilidade.md § 9` | Edição e ano da obra de Shneiderman efetivamente consultada | Filipe | 03/09/2026 | 75 dias |
-| `artigo/03-metodologia.md § 3.8` | Confirmar na fonte: (WOHLIN et al., 2012) — A taxonomia das quatro categorias de validade. **O ano está marcado como duvidoso pelo… | Davi | 28/09/2026 | 50 dias |
-| `artigo/03-metodologia.md § 3.7` | Confirmar na fonte: (DEMŠAR, 2006) — A escolha do Wilcoxon pareado para comparar configurações | Davi | 28/09/2026 | 50 dias |
-| `artigo/03-metodologia.md § 3.7` | Confirmar na fonte: (WILCOXON, 1945) — O teste em si | Davi | 28/09/2026 | 50 dias |
-| `artigo/03-metodologia.md § 3.8` | Confirmar na fonte: (KAUFMAN et al., 2012) — Vazamento na constituição do padrão individual | Davi | 28/09/2026 | 50 dias |
-| `artigo/03-metodologia.md § 3.8` | Confirmar na fonte: (SOMMER; PAXSON, 2010) — Limite das avaliações sobre dado sintético | Davi | 28/09/2026 | 50 dias |
 | `artigo/01-introducao.md — caso Target, 2013` | Confirmar na fonte: RILEY; ELGIN; LAWRENCE; MATLACK, Bloomberg Businessweek, 13 mar. 2014 | Yasmin | 10/11/2026 | 7 dias |
 | `artigo/01-introducao.md — caso GE / Zheng, 2018` | Confirmar na fonte: U.S. DOJ, Niskayuna man charged theft trade secrets, 2018 | Yasmin | 10/11/2026 | 7 dias |
 | `artigo/01-introducao.md — caso Capital One, 2019` | Confirmar na fonte: U.S. DOJ, usao-wdwa. **O próprio insumo admite estar incompleto**, com URL genérica | Yasmin | 10/11/2026 | 7 dias |
 | `artigo/01-introducao.md — caso Tesla / Tripp, 2018` | Confirmar na fonte: petição inicial Tesla, Inc. v. Martin Tripp (Nevada) ou GovInfoSecurity, 2018 | Yasmin | 10/11/2026 | 7 dias |
-| `artigo/03-metodologia.md § 3.8 · 04-resultados.md § 4.6 · 05-conclusao.md § 5.4` | A Lei nº 13.709/2018 é citada nos três lugares e não tem entrada em referencias.md. Fonte normativa: falta conferir os dados oficiais de publicação para a entrada em ABNT NBR 6023 | Davi | 11/11/2026 | 6 dias |
-| `artigo/04-resultados.md § 4.4 — WCAG 2.2` | Os critérios 1.4.1 e 1.4.3 são citados e a obra não tem entrada em referencias.md. Recomendação do W3C, pública; falta a entrada em ABNT e conferir os dois números | Davi | 12/11/2026 | 5 dias |
 
 ## O que ficou fora desta versão
 

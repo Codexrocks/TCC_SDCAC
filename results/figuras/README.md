@@ -1,7 +1,17 @@
 # Figuras da Seção 4
 
-Duas figuras entram no artigo, e **as duas nascem de formas diferentes** — o que
-muda o que é preciso guardar de cada uma.
+**Uma figura entra no artigo desde 17/11/2026, e não duas.** A
+`painel-decomposicao.png` **saiu** quando a § 4.4 passou a reportar a avaliação
+heurística: os 20 achados e os 40 casos de teste demonstram a decomposição
+melhor do que uma captura de tela, e o documento voltou ao teto de 12 páginas.
+Pela D-46 e a pedido do Davi em 17/11.
+
+**O arquivo fica**, e as condições da captura continuam registradas abaixo: ele
+é a prova de que a tela existiu como descrita, e se a figura voltar, volta sem
+precisar refazer a captura.
+
+As duas **nascem de formas diferentes** — o que muda o que é preciso guardar de
+cada uma.
 
 | Arquivo | Como nasce | É reprodutível por comando? |
 |---|---|---|

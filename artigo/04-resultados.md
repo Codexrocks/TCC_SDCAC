@@ -203,12 +203,6 @@ verifica é o critério funcional — a nota decomponível por dimensão, o rót
 textual acompanhando cada uso de cor e o contraste mínimo de 4,5:1 entre texto e
 fundo, exigências dos critérios 1.4.1 e 1.4.3 da WCAG 2.2.
 
-![A decomposição da nota de um evento, no painel](../results/figuras/painel-decomposicao.png)
-
-**Figura 2.** A decomposição da nota de um evento da configuração C3, no painel.
-
-Fonte: captura do painel sobre os exemplos gravados do projeto (2026).
-
 **A verificação é automática e roda a cada alteração do código:** quarenta casos
 de teste conferem o contraste par a par, os rótulos e intervalos de cada faixa —
 contra a documentação **e** contra a classificação do próprio motor, de modo que
