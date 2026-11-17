@@ -81,14 +81,35 @@ AUTOR. **Título**. Ano. Disponível em: URL. Acesso em: dia mês ano.
 > para a ABNT NBR 6023 — foi assistida por IA, e os dados de cada entrada vêm do
 > insumo, não de busca nova.
 >
-> **As 7 da Metodologia continuam fora.** Seguem em
-> [citações pendentes](../docs/citacoes-pendentes.md) até alguém abrir a fonte, e
-> por isso a § 3.6, a § 3.7 e a § 3.8 têm chamada no texto sem entrada aqui. É
-> estado conhecido e declarado, não esquecimento.
+> **As 7 que faltavam entraram em 17/11/2026, e entraram marcadas.** Eram as
+> chamadas da § 3.7 e da § 3.8, mais a LGPD e a WCAG 2.2 — citadas no texto sem
+> entrada aqui. A nota anterior dizia que ficariam fora *"até alguém abrir a
+> fonte"*; a fonte de cada uma **foi aberta pelo assistente de IA em 17/11**, e
+> os dados de publicação vêm de lá, não de memória. As sete estão em
+> [citações pendentes](../docs/citacoes-pendentes.md) **como entradas a
+> confirmar**, e não mais como entradas ausentes.
+>
+> **A diferença entre as duas coisas importa.** A dívida mudou de natureza, não
+> desapareceu: antes era chamada sem referência, que uma banca encontra abrindo a
+> última página; agora é referência cuja conferência foi feita por máquina e
+> espera a confirmação de uma pessoa — o mesmo arranjo das 13 do Referencial, que
+> a Yasmin conferiu e o Davi confirmou. **Quem assina continua sendo gente.**
+>
+> ⚠️ **Uma delas tem ressalva de edição.** Para `WOHLIN et al., 2012`, o insumo
+> marcava o ano como duvidoso. A conferência resolveu metade: a edição de 2012 da
+> Springer **existe** (revisão da original de 2000, que era da Kluwer). O que a
+> conferência **não** pode dizer é qual das duas foi efetivamente lida — isso é o
+> Davi quem sabe.
 
 AXELSSON, S. The base-rate fallacy and the difficulty of intrusion detection.
 **ACM Transactions on Information and System Security**, v. 3, n. 3, p. 186-205,
 2000.
+
+BRASIL. **Lei nº 13.709, de 14 de agosto de 2018**. Dispõe sobre a proteção de
+dados pessoais e altera a Lei nº 12.965, de 23 de abril de 2014 (Marco Civil da
+Internet). Brasília, DF: Presidência da República, 2018. Disponível em:
+https://www.planalto.gov.br/ccivil_03/_ato2015-2018/2018/lei/l13709.htm. Acesso
+em: 17 nov. 2026.
 
 CAPPELLI, D. M.; MOORE, A. P.; TRZECIAK, R. F. **The CERT guide to insider
 threats**: how to prevent, detect, and respond to information technology crimes.
@@ -96,6 +117,9 @@ Boston: Addison-Wesley, 2012.
 
 CHANDOLA, V.; BANERJEE, A.; KUMAR, V. Anomaly detection: a survey. **ACM
 Computing Surveys**, v. 41, n. 3, art. 15, 2009.
+
+DEMŠAR, J. Statistical comparisons of classifiers over multiple data sets.
+**Journal of Machine Learning Research**, v. 7, p. 1-30, 2006.
 
 DENNING, D. E. An intrusion-detection model. **IEEE Transactions on Software
 Engineering**, v. SE-13, n. 2, p. 222-232, 1987.
@@ -115,6 +139,10 @@ INTERNATIONAL ORGANIZATION FOR STANDARDIZATION. **ISO/IEC 27001:2022**:
 information security, cybersecurity and privacy protection — information security
 management systems — requirements. Genebra: ISO, 2022.
 
+KAUFMAN, S. et al. Leakage in data mining: formulation, detection, and avoidance.
+**ACM Transactions on Knowledge Discovery from Data**, v. 6, n. 4, art. 15,
+2012.
+
 KENT, K.; SOUPPAYA, M. **Guide to computer security log management**.
 Gaithersburg: NIST, 2006. (NIST Special Publication 800-92).
 
@@ -125,12 +153,26 @@ SHASHANKA, M.; SHEN, M.-Y.; WAN, J. User and entity behavior analytics for
 enterprise security. In: **2016 IEEE International Conference on Big Data**.
 Washington, D.C.: IEEE, 2016. p. 1867-1874.
 
+SOMMER, R.; PAXSON, V. Outside the closed world: on using machine learning for
+network intrusion detection. In: **2010 IEEE Symposium on Security and
+Privacy**. Oakland: IEEE, 2010. p. 305-316.
+
 SUNDARAMURTHY, S. C. et al. A human capital model for mitigating security
 analyst burnout. In: **Proceedings of the Eleventh Symposium on Usable Privacy
 and Security (SOUPS 2015)**. Ottawa: USENIX Association, 2015. p. 347-359.
 
 VIELBERTH, M. et al. Security operations center: a systematic study and open
 challenges. **IEEE Access**, v. 8, p. 227756-227779, 2020.
+
+WILCOXON, F. Individual comparisons by ranking methods. **Biometrics Bulletin**,
+v. 1, n. 6, p. 80-83, 1945.
+
+WOHLIN, C. et al. **Experimentation in software engineering**. Berlin: Springer,
+2012.
+
+WORLD WIDE WEB CONSORTIUM. **Web Content Accessibility Guidelines (WCAG) 2.2**:
+W3C Recommendation. [S. l.]: W3C, 2024. Disponível em:
+https://www.w3.org/TR/WCAG22/. Acesso em: 17 nov. 2026.
 
 ### Critérios aplicados na conversão
 
