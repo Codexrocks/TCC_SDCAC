@@ -148,9 +148,8 @@ atrito.
 
 Declaração de quem está com o item na mão: o que já foi produzido e o
 que falta para o critério de aceite fechar. Vem do campo `andamento` do
-`quadro.toml` — escrito ali direto, ou trazido do quadro compartilhado
-pela tarefa agendada. **Não é estado calculado**, ao contrário das
-colunas acima.
+`quadro.toml`, escrito ali direto. **Não é estado calculado**, ao
+contrário das colunas acima.
 
 | Tipo | Item | Quem | O que está fazendo |
 |---|---|---|---|
