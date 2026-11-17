@@ -70,3 +70,4 @@ Use o [modelo](_modelo.md) e adicione a página nova ao
 | 12/11/2026 | [Sessão 49](2026-11-12-sessao-49.md) | O quadro compartilhado é apagado — cinco marcações em 46 dias e cards congelados em 15/10 —, e o GitBook é conferido abrindo o site: o link da planilha dava 404 |
 | 13/11/2026 | [Sessão 50](2026-11-13-sessao-50.md) | A fila de PRs zera, e o montador do artigo entrou no repositório quatro dias antes sem o `python-docx` declarado: quem instalasse pelo `pyproject` não gerava o `.docx` de entrega |
 | 16/11/2026 | [Relatório semanal](2026-11-16-semana.md) | 21 PRs mergeados na semana, todos do Davi; #117 e #118 parados há 3 dias; prazo de 19/11 a 3 dias |
+| 17/11/2026 | [Sessão 51](2026-11-17-sessao-51.md) | O artigo citava sete obras sem entrada na lista de referências, e o `quadro.toml` dava Resultados e Conclusão por esqueleto a dois dias da entrega; o `.docx` vinha saindo sem os três e-mails porque o arquivo estava no clone errado |
