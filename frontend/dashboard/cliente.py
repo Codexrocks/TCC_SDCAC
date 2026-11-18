@@ -68,6 +68,9 @@ class Resposta:
 class FonteDoPainel(Protocol):
     """Qualquer coisa de onde o painel saiba ler uma rota da API."""
 
+    filtra: bool
+
+
     def obter(self, rota: str) -> Resposta:
         """A resposta para uma rota, com a query string ja montada."""
         ...
@@ -75,6 +78,12 @@ class FonteDoPainel(Protocol):
 
 class FonteExemplos:
     """As respostas gravadas em `backend/exemplos.json`."""
+
+    #: Esta fonte devolve a resposta gravada e **ignora a query string**, de
+    #: modo que filtro e paginacao nao tem efeito. A tela precisa saber disso
+    #: para avisar: filtro sem efeito e sem aviso foi o achado 6 da avaliacao
+    #: heuristica de 12/11/2026, de severidade 3.
+    filtra = False
 
     def __init__(self, caminho: Path | None = None) -> None:
         self.caminho = caminho or EXEMPLOS
@@ -112,6 +121,9 @@ class FonteExemplos:
 
 class FonteHTTP:
     """A API de leitura, por HTTP."""
+
+    filtra = True
+
 
     def __init__(
         self, base: str = "http://127.0.0.1:8000", *, espera: float = 60.0
@@ -162,6 +174,11 @@ class Painel:
 
     def __init__(self, fonte: FonteDoPainel) -> None:
         self.fonte = fonte
+
+    @property
+    def filtra(self) -> bool:
+        """A fonte aplica filtro, ou devolve sempre a mesma resposta?"""
+        return getattr(self.fonte, "filtra", True)
 
     def saude(self) -> Resposta:
         """`/health` — vale a pena tentar o resto?"""

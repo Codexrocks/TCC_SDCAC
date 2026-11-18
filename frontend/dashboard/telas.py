@@ -15,6 +15,7 @@ por defeito. Quando o gerador da S6 existir, as mesmas telas mostram o resto sem
 uma linha nova.
 """
 
+from datetime import datetime
 from typing import Any
 
 import streamlit as st
@@ -49,6 +50,22 @@ def _instante(iso: str | None) -> str:
         return f"{dia}/{mes} {hora[:5]}"
     except ValueError:
         return iso
+
+
+def _iso_ok(valor: str) -> bool:
+    """O campo esta vazio ou traz um instante ISO 8601 que o Python aceita?
+
+    Campo de texto livre que engole data invalida sem dizer nada foi o achado 7
+    da avaliacao heuristica de 12/11/2026, de severidade 3: digitar `banana` e
+    dar Enter nao produzia erro nem mudanca na fila.
+    """
+    if not valor.strip():
+        return True
+    try:
+        datetime.fromisoformat(valor.strip().replace("Z", "+00:00"))
+    except ValueError:
+        return False
+    return True
 
 
 def _rotulo_da_pessoa(pessoas: list[dict], identificador: int) -> str:
@@ -138,7 +155,26 @@ def tela_alertas(painel: Painel, execucao: int) -> None:
     desde = b.text_input("Desde (ISO 8601)", "", placeholder="2026-04-01T00:00:00Z")
     ate = c.text_input("Ate (ISO 8601)", "", placeholder="2026-04-03T23:59:59Z")
 
+    invalidos = [
+        rotulo for rotulo, valor in (("Desde", desde), ("Ate", ate)) if not _iso_ok(valor)
+    ]
+    if invalidos:
+        st.error(
+            f"{' e '.join(invalidos)}: data invalida. Use o formato "
+            "`AAAA-MM-DDThh:mm:ssZ`, como `2026-04-01T00:00:00Z`.",
+            icon=":material/event_busy:",
+        )
+        return
+
     filtrando = faixa != "todas" or desde or ate
+    if filtrando and not painel.filtra:
+        st.warning(
+            "**O filtro nao tem efeito nesta fonte.** Os exemplos gravados "
+            "guardam uma resposta por rota e ignoram a query string: a fila "
+            "abaixo e a lista inteira, nao o resultado do filtro. Para filtrar "
+            "de verdade, aponte a barra lateral para a API.",
+            icon=":material/filter_alt_off:",
+        )
     try:
         resposta = painel.alertas(
             execucao,
