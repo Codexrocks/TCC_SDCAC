@@ -9,11 +9,11 @@
 > data do retrato. É o que impede esta página de dizer "amanhã" três dias
 > depois — que foi exatamente o que o cronograma fez em 26/09/2026.
 
-<!-- QUADRO:gerado-em 2026-11-17 -->
+<!-- QUADRO:gerado-em 2026-11-18 -->
 
 **TCC_SDCAC** · TCC 2026/2 · Prof. Euzébio D. de Souza
 
-**Retrato de 17/11/2026.** Entrega do TCC em **10/12/2026**, daqui a **23 dias**.
+**Retrato de 18/11/2026.** Entrega do TCC em **10/12/2026**, daqui a **22 dias**.
 
 ## Resumo
 
@@ -31,19 +31,19 @@
 
 | Tipo | Item | O que é | Quem | Prazo | Situação |
 |---|---|---|---|---|---|
-| Semana | **S5** | artigo/03-metodologia.md + arquitetura v2 · o atrasado de S2 a S4 · ajustar a Introdução à D-25 | Davi (caneta), Yasmin (cenários), Filipe (métricas) | 25/09/2026 a 01/10/2026 | ⚠️ Atrasado há 47 dias |
-| Semana | **S6** | Schema, migrações, gerador de eventos e ingestão | Filipe (gerador), Davi (schema e ingestão) | 02/10/2026 a 08/10/2026 | ⚠️ Atrasado há 40 dias |
-| Semana | **S7** | C0 (regras fixas) e motor D1 | Davi, Yasmin | 09/10/2026 a 15/10/2026 | ⚠️ Atrasado há 33 dias |
-| Semana | **S8** | D2 (desvio do padrão) e D3 (exposição + higiene) | Davi, Yasmin | 16/10/2026 a 22/10/2026 | ⚠️ Atrasado há 26 dias |
-| Semana | **S9** | Dashboard Streamlit | Filipe | 23/10/2026 a 29/10/2026 | ⚠️ Atrasado há 19 dias |
-| Semana | **S10 · opcional** | Isolation Forest — opcional | Filipe | 30/10/2026 a 05/11/2026 | ⚠️ Atrasado há 12 dias |
-| Semana | **S11** | Execução de todos os cenários nas quatro configurações | Todos (Yasmin) | 06/11/2026 a 12/11/2026 | ⚠️ Atrasado há 5 dias |
-| Capítulo | **1. Introdução** | Entregue parcial em 24/09. Os seis blocos de complementação foram preenchidos fora do repositório e sincronizados em 13/10; falta conferir a extensão no template, cujo teto é de 2 páginas | Yasmin, Filipe | S5 | ⚠️ Atrasado há 47 dias |
-| Capítulo | **2. Referencial teórico** | Escrito pela Yasmin em 28/09 e reorganizado em 13/10 para a estrutura da 3ª reunião — 3 seções, 8 elementos do problema. As 13 fontes foram conferidas e entraram na lista em ABNT (#64) | Yasmin | S5 | ⚠️ Atrasado há 47 dias |
-| Capítulo | **3. Metodologia** | Escrita e versionada em 28/09 — 9 subseções. **As quatro lacunas da M2 fecharam**, a última em 12/11. As 7 fontes já têm entrada em `referencias.md` (#121) e esperam confirmação de pessoa | Davi (caneta) | S5 | ⚠️ Atrasado há 47 dias |
-| Decisão | **D-05** | Ablação em quatro configurações (C0 a C3) | Davi | 01/10/2026 | ⚠️ Atrasado há 47 dias · a confirmar |
-| Decisão | **D-10** | Isolation Forest como benchmark opcional | Filipe | S10 | ⚠️ Atrasado há 12 dias · a confirmar |
-| Decisão | **D-43** | Pesos de integração das dimensões na nota final | Davi, Yasmin | S8 | ⚠️ Atrasado há 26 dias · a confirmar |
+| Semana | **S5** | artigo/03-metodologia.md + arquitetura v2 · o atrasado de S2 a S4 · ajustar a Introdução à D-25 | Davi (caneta), Yasmin (cenários), Filipe (métricas) | 25/09/2026 a 01/10/2026 | ⚠️ Atrasado há 48 dias |
+| Semana | **S6** | Schema, migrações, gerador de eventos e ingestão | Filipe (gerador), Davi (schema e ingestão) | 02/10/2026 a 08/10/2026 | ⚠️ Atrasado há 41 dias |
+| Semana | **S7** | C0 (regras fixas) e motor D1 | Davi, Yasmin | 09/10/2026 a 15/10/2026 | ⚠️ Atrasado há 34 dias |
+| Semana | **S8** | D2 (desvio do padrão) e D3 (exposição + higiene) | Davi, Yasmin | 16/10/2026 a 22/10/2026 | ⚠️ Atrasado há 27 dias |
+| Semana | **S9** | Dashboard Streamlit | Filipe | 23/10/2026 a 29/10/2026 | ⚠️ Atrasado há 20 dias |
+| Semana | **S10 · opcional** | Isolation Forest — opcional | Filipe | 30/10/2026 a 05/11/2026 | ⚠️ Atrasado há 13 dias |
+| Semana | **S11** | Execução de todos os cenários nas quatro configurações | Todos (Yasmin) | 06/11/2026 a 12/11/2026 | ⚠️ Atrasado há 6 dias |
+| Capítulo | **1. Introdução** | Entregue parcial em 24/09. Os seis blocos de complementação foram preenchidos fora do repositório e sincronizados em 13/10; falta conferir a extensão no template, cujo teto é de 2 páginas | Yasmin, Filipe | S5 | ⚠️ Atrasado há 48 dias |
+| Capítulo | **2. Referencial teórico** | Escrito pela Yasmin em 28/09 e reorganizado em 13/10 para a estrutura da 3ª reunião — 3 seções, 8 elementos do problema. As 13 fontes foram conferidas e entraram na lista em ABNT (#64) | Yasmin | S5 | ⚠️ Atrasado há 48 dias |
+| Capítulo | **3. Metodologia** | Escrita e versionada em 28/09 — 9 subseções. **As quatro lacunas da M2 fecharam**, a última em 12/11. As 7 fontes já têm entrada em `referencias.md` (#121) e esperam confirmação de pessoa | Davi (caneta) | S5 | ⚠️ Atrasado há 48 dias |
+| Decisão | **D-05** | Ablação em quatro configurações (C0 a C3) | Davi | 01/10/2026 | ⚠️ Atrasado há 48 dias · a confirmar |
+| Decisão | **D-10** | Isolation Forest como benchmark opcional | Filipe | S10 | ⚠️ Atrasado há 13 dias · a confirmar |
+| Decisão | **D-43** | Pesos de integração das dimensões na nota final | Davi, Yasmin | S8 | ⚠️ Atrasado há 27 dias · a confirmar |
 
 ## ▶️ Em curso
 
@@ -51,7 +51,7 @@
 
 | Tipo | Item | O que é | Quem | Prazo | Situação |
 |---|---|---|---|---|---|
-| Semana | **S12** | Tabela de ablação, sensibilidade dos pesos, gráficos | Filipe, Davi | 13/11/2026 a 19/11/2026 | ▶️ Em curso · 2 dias até o fim |
+| Semana | **S12** | Tabela de ablação, sensibilidade dos pesos, gráficos | Filipe, Davi | 13/11/2026 a 19/11/2026 | ▶️ Em curso · 1 dia até o fim |
 
 ## ⏳ A vencer em 7 dias
 
@@ -59,7 +59,7 @@
 
 | Tipo | Item | O que é | Quem | Prazo | Situação |
 |---|---|---|---|---|---|
-| Professor | ****Seção de Resultados reenviada**, com legenda e fonte em toda tabela** | Entregue em 12/11 e devolvida pelo orientador com correções: tabela e figura precisam de legenda com a respectiva fonte indicada | Todos | 19/11/2026 | ⏳ Vence em 2 dias |
+| Professor | ****Seção de Resultados reenviada**, com legenda e fonte em toda tabela** | Entregue em 12/11 e devolvida pelo orientador com correções: tabela e figura precisam de legenda com a respectiva fonte indicada | Todos | 19/11/2026 | ⏳ Vence em 1 dia |
 
 ## 🗓️ Depois
 
@@ -68,15 +68,15 @@
 | Tipo | Item | O que é | Quem | Prazo | Situação |
 |---|---|---|---|---|---|
 | Professor | **Reunião de acompanhamento com o orientador** |  | Todos | Quinzenal | 🔁 Recorrente |
-| Professor | ****Entrega do TCC**** |  | Todos | 10/12/2026 | 🗓️ Em 23 dias |
+| Professor | ****Entrega do TCC**** |  | Todos | 10/12/2026 | 🗓️ Em 22 dias |
 | Professor | **Apresentação e defesa** |  | Todos | Dezembro | 🗓️ Sem prazo |
-| Marco | **M5 · Entrega** | Artigo diagramado e submetido | Todos | 10/12/2026 | 🗓️ Em 23 dias |
-| Semana | **S13** | artigo/04-resultados.md | Filipe (caneta) | 20/11/2026 a 26/11/2026 | 🗓️ Em 9 dias |
-| Semana | **S14** | artigo/05-conclusao.md | Davi (caneta) | 27/11/2026 a 03/12/2026 | 🗓️ Em 16 dias |
-| Semana | **S15** | Versão final diagramada · ENTREGA 10/12 | Todos | 04/12/2026 a 10/12/2026 | 🗓️ Em 23 dias |
-| Semana | **S16** | Slides, ensaio cronometrado, defesa | Todos | a partir de 11/12/2026 | 🗓️ Em 24 dias |
-| Capítulo | **4. Resultados** | Escrita sobre dez sementes. Seis subseções, 4 tabelas e 2 figuras, todas com legenda e fonte. A 4.4 declara que a avaliação heurística não foi realizada | Filipe (caneta) | S13 | 🗓️ Em 9 dias |
-| Capítulo | **5. Conclusão** | Escrita. Cinco subseções, com resposta própria para cada grandeza da pergunta e os oito objetivos avaliados | Davi (caneta) | S14 | 🗓️ Em 16 dias |
+| Marco | **M5 · Entrega** | Artigo diagramado e submetido | Todos | 10/12/2026 | 🗓️ Em 22 dias |
+| Semana | **S13** | artigo/04-resultados.md | Filipe (caneta) | 20/11/2026 a 26/11/2026 | 🗓️ Em 8 dias |
+| Semana | **S14** | artigo/05-conclusao.md | Davi (caneta) | 27/11/2026 a 03/12/2026 | 🗓️ Em 15 dias |
+| Semana | **S15** | Versão final diagramada · ENTREGA 10/12 | Todos | 04/12/2026 a 10/12/2026 | 🗓️ Em 22 dias |
+| Semana | **S16** | Slides, ensaio cronometrado, defesa | Todos | a partir de 11/12/2026 | 🗓️ Em 23 dias |
+| Capítulo | **4. Resultados** | Escrita sobre dez sementes. Seis subseções, 4 tabelas e 1 figura, todas com legenda e fonte. A 4.4 reporta a avaliação heurística — 20 achados, nenhum grau 4 — e a 4.6 declara que ela teve um avaliador | Filipe (caneta) | S13 | 🗓️ Em 8 dias |
+| Capítulo | **5. Conclusão** | Escrita. Cinco subseções, com resposta própria para cada grandeza da pergunta e os oito objetivos avaliados | Davi (caneta) | S14 | 🗓️ Em 15 dias |
 | Decisão | **D-07** | Caneta rotativa por seção | Davi, Yasmin, Filipe | — | 🗓️ Sem prazo |
 
 ## ✅ Feito
@@ -161,7 +161,7 @@ contrário das colunas acima.
 | Capítulo | **1. Introdução** | Yasmin, Filipe | Entregue parcial ao professor em 24/09. Os seis blocos de complementação foram preenchidos fora do repositório e sincronizados em 13/10, e a dimensão 3 já está ajustada à D-25 — as duas coisas foram declaradas como pendentes por engano até 15/10. Falta conferir a extensão no template, as fontes da contextualização com até 5 anos, e alinhar a granularidade dos objetivos ao plano. |
 | Capítulo | **2. Referencial teórico** | Yasmin | Reorganizado em 13/10 para a estrutura da 3ª reunião — problema por elementos, como a literatura enfrentou, metodologia que se extrai — sem fonte nova. **As 13 fontes foram conferidas e entraram em `referencias.md` em ABNT NBR 6023** (#64). Falta a Yasmin reler a reorganização e concordar com o que ficou atribuído a cada obra. |
 | Capítulo | **3. Metodologia** | Davi (caneta) | Escrita e versionada em 28/09 — 9 subseções. **As quatro lacunas fecharam:** 2 e 4 em 14/10; a 1 em 12/11, pela D-06 e pela D-16, com os 20 cenários nomeados na seção 3.4; a 3 em 12/11, pela D-15, em 45 alertas falsos por turno. As 7 fontes entraram em `referencias.md` em 17/11 pelo #121, com a fonte aberta pelo assistente — **falta a confirmação de uma pessoa**, e a pendência segue em `docs/citacoes-pendentes.md`. |
-| Capítulo | **4. Resultados** | Filipe (caneta) | Escrita entre 11/11 e 17/11 sobre execução registrada em `results/`: seis subseções — execução dos cenários, matriz de confusão, métricas em três partes, verificação do painel, discussão e limitações. Quatro tabelas e duas figuras, com legenda e fonte, que é a correção que o professor pediu em 12/11. **Não está pronta por duas razões:** a 4.4 declara que a avaliação heurística não foi realizada, e nenhuma pessoa leu ainda a 4.3.3 reescrita em 17/11. |
+| Capítulo | **4. Resultados** | Filipe (caneta) | Escrita entre 11/11 e 17/11 sobre execução registrada em `results/`: seis subseções — execução dos cenários, matriz de confusão, métricas em três partes, verificação do painel, discussão e limitações. Quatro tabelas e **uma** figura, com legenda e fonte, que é a correção que o professor pediu em 12/11 — a Figura 2, a captura do painel, saiu em 17/11 para o documento caber em 12 páginas, e o arquivo ficou em `results/figuras/`. A 4.4 passou a reportar a avaliação heurística, com 20 achados e nenhum grau 4, e a 4.6 declara que ela teve **um avaliador, não três**, pela D-46. **Não está pronta** porque nenhuma pessoa leu ainda a 4.3.3 e a 4.4 reescritas em 17/11. |
 | Capítulo | **5. Conclusão** | Davi (caneta) | Escrita e reescrita sobre as dez sementes: retomada da pergunta com resposta própria para cada uma das duas grandezas, os oito objetivos específicos avaliados, contribuições, trabalhos futuros e as referências. **Não está pronta** porque a lista de referências tem sete entradas à espera de confirmação de pessoa. |
 
 ## Dívida bibliográfica
@@ -172,14 +172,14 @@ que some mais fácil de vista.
 
 | Onde | O que falta | Quem | Aberta desde | Idade |
 |---|---|---|---|---|
-| `docs/usabilidade.md § 6.2` | Formulação exata e porcentagem de Nielsen e Landauer | Filipe | 03/09/2026 | 75 dias |
-| `docs/usabilidade.md § 6.3` | Limites exatos de cada faixa adjetiva do SUS, em Bangor, Kortum e Miller (2009) | Filipe | 03/09/2026 | 75 dias |
-| `docs/usabilidade.md § 7` | Literatura de carga de trabalho e fadiga de alerta em analistas de SOC | Yasmin | 03/09/2026 | 75 dias |
-| `docs/usabilidade.md § 9` | Edição e ano da obra de Shneiderman efetivamente consultada | Filipe | 03/09/2026 | 75 dias |
-| `artigo/01-introducao.md — caso Target, 2013` | Confirmar na fonte: RILEY; ELGIN; LAWRENCE; MATLACK, Bloomberg Businessweek, 13 mar. 2014 | Yasmin | 10/11/2026 | 7 dias |
-| `artigo/01-introducao.md — caso GE / Zheng, 2018` | Confirmar na fonte: U.S. DOJ, Niskayuna man charged theft trade secrets, 2018 | Yasmin | 10/11/2026 | 7 dias |
-| `artigo/01-introducao.md — caso Capital One, 2019` | Confirmar na fonte: U.S. DOJ, usao-wdwa. **O próprio insumo admite estar incompleto**, com URL genérica | Yasmin | 10/11/2026 | 7 dias |
-| `artigo/01-introducao.md — caso Tesla / Tripp, 2018` | Confirmar na fonte: petição inicial Tesla, Inc. v. Martin Tripp (Nevada) ou GovInfoSecurity, 2018 | Yasmin | 10/11/2026 | 7 dias |
+| `docs/usabilidade.md § 6.2` | Formulação exata e porcentagem de Nielsen e Landauer | Filipe | 03/09/2026 | 76 dias |
+| `docs/usabilidade.md § 6.3` | Limites exatos de cada faixa adjetiva do SUS, em Bangor, Kortum e Miller (2009) | Filipe | 03/09/2026 | 76 dias |
+| `docs/usabilidade.md § 7` | Literatura de carga de trabalho e fadiga de alerta em analistas de SOC | Yasmin | 03/09/2026 | 76 dias |
+| `docs/usabilidade.md § 9` | Edição e ano da obra de Shneiderman efetivamente consultada | Filipe | 03/09/2026 | 76 dias |
+| `artigo/01-introducao.md — caso Target, 2013` | Confirmar na fonte: RILEY; ELGIN; LAWRENCE; MATLACK, Bloomberg Businessweek, 13 mar. 2014 | Yasmin | 10/11/2026 | 8 dias |
+| `artigo/01-introducao.md — caso GE / Zheng, 2018` | Confirmar na fonte: U.S. DOJ, Niskayuna man charged theft trade secrets, 2018 | Yasmin | 10/11/2026 | 8 dias |
+| `artigo/01-introducao.md — caso Capital One, 2019` | Confirmar na fonte: U.S. DOJ, usao-wdwa. **O próprio insumo admite estar incompleto**, com URL genérica | Yasmin | 10/11/2026 | 8 dias |
+| `artigo/01-introducao.md — caso Tesla / Tripp, 2018` | Confirmar na fonte: petição inicial Tesla, Inc. v. Martin Tripp (Nevada) ou GovInfoSecurity, 2018 | Yasmin | 10/11/2026 | 8 dias |
 
 ## O que ficou fora desta versão
 
