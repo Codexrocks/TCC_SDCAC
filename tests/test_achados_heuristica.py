@@ -21,8 +21,8 @@ from __future__ import annotations
 
 import pytest
 
+from frontend.components.periodo import iso_ok
 from frontend.dashboard.cliente import FonteExemplos, FonteHTTP, Painel
-from frontend.dashboard.telas import _iso_ok
 
 # ---------------------------------------------------------------------------
 # Achado 6 — o filtro não tinha efeito, e a tela não dizia
@@ -78,7 +78,7 @@ def test_painel_assume_que_filtra_quando_a_fonte_nao_diz() -> None:
     ],
 )
 def test_iso_aceita_o_que_e_data(valor: str) -> None:
-    assert _iso_ok(valor) is True
+    assert iso_ok(valor) is True
 
 
 @pytest.mark.parametrize(
@@ -93,9 +93,9 @@ def test_iso_aceita_o_que_e_data(valor: str) -> None:
     ],
 )
 def test_iso_recusa_o_que_nao_e_data(valor: str) -> None:
-    assert _iso_ok(valor) is False
+    assert iso_ok(valor) is False
 
 
 def test_banana_e_o_caso_da_planilha() -> None:
     """O achado 7 cita o valor exato: `banana`, aceito sem mensagem."""
-    assert _iso_ok("banana") is False
+    assert iso_ok("banana") is False
