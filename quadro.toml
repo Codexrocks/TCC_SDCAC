@@ -303,7 +303,7 @@ fim = 2026-12-10
 marco = "M5"
 pronto = false
 entregavel = "Versão final diagramada · ENTREGA 10/12"
-criterio = "8 a 12 páginas no template COBEM 2026 · zero referência não conferida · bloco em inglês depois das referências · responsabilidade autoral"
+criterio = "8 a 12 páginas no template do professor · zero referência não conferida · responsabilidade autoral"
 donos = ["Todos"]
 
 [[semana]]
