@@ -63,7 +63,7 @@ acúmulo declarado — depois dela o cronograma volta a ter uma entrega por sema
 | **S12** | 13–19/11 | Tabela de ablação, sensibilidade dos pesos, gráficos | Cada número sai de notebook versionado · Wilcoxon pareado sobre as diferenças | Filipe + Davi |
 | **S13** | 20–26/11 | `artigo/04-resultados.md` | Cada limitação nomeada tem proposta de trabalho futuro · LGPD e ISO 27001 entram aqui | Filipe (caneta) |
 | **S14** | 27/11–03/12 | `artigo/05-conclusao.md` | A pergunta é respondida com **sim, não ou parcialmente — e um número** | Davi (caneta) |
-| **S15** | 04–10/12 | Versão final diagramada · **ENTREGA 10/12** | 8 a 12 páginas no template COBEM 2026 · zero referência não conferida · bloco em inglês depois das referências · responsabilidade autoral | Todos |
+| **S15** | 04–10/12 | Versão final diagramada · **ENTREGA 10/12** | 8 a 12 páginas no template do professor · zero referência não conferida · responsabilidade autoral | Todos |
 | **S16** | 11/12 em diante | Slides, ensaio cronometrado, defesa | Cada integrante apresenta qualquer seção sob sorteio | Todos |
 
 ## Como o trabalho chega ao repositório
@@ -180,6 +180,12 @@ Cinco seções, conforme o escopo definido pelo professor:
 4. Resultados e Discussões
 5. Conclusão
 
-O [formato do artigo](formato-do-artigo.md) — COBEM 2026, com as referências em
-ABNT — define o resto: de 8 a 12 páginas, títulos de seção em maiúsculas, e o
-bloco em inglês depois das referências.
+O [formato do artigo](formato-do-artigo.md) — o template do professor, com as
+referências em ABNT — define o resto: de 8 a 12 páginas e títulos de seção
+alinhados à esquerda, em negrito e numerados em algarismos arábicos.
+
+> **Duas coisas que esta frase dizia e deixaram de valer.** Os títulos **não**
+> vão em maiúsculas: o template pede *"left-aligned and bolded in Times New
+> Roman, size 10"*, e a caixa alta saiu do montador em 12/11/2026. E o **bloco
+> em inglês depois das referências** foi dispensado pelo orientador em 12/11,
+> confirmado pelo Davi em 17/11.

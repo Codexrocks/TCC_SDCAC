@@ -5,13 +5,24 @@
 > [orientações do professor](../templates/orientacoes-tcc-reuniao-02.pdf),
 > apresentadas na 2ª reunião. Decisão [D-11](decisoes.md).
 
-## ⚠️ O template do COBEM 2026 ainda não está no repositório
+## ✅ O template do professor chegou em 18/11/2026 — e é o COBEM 2025
 
-O que está versionado em [`templates/`](../templates/README.md) é o **COBEM
-2025** e o **CREEM 2026** — nenhum dos dois é o arquivo que o professor pede.
+O Davi entregou o arquivo que o professor distribui, sob o nome *Modelo Formato
+COBEM*, versionado em
+[`templates/COBEM-2026-modelo-do-professor.docx`](../templates/README.md).
 
-As orientações dizem: *"O Artigo deve ser produzido e entregue no template
-fornecido."* Enquanto o arquivo do COBEM 2026 não for obtido e versionado, esta
+**No conteúdo, ele é o mesmo COBEM 2025 que a equipe já tinha** — 106
+parágrafos, 3 tabelas e 14.036 caracteres, com **zero linhas de diferença** na
+comparação. O cabeçalho do próprio arquivo diz `COB-2025-XXXX` e *"28th
+COBEM"*.
+
+**Nada no artigo precisa mudar:** ele foi escrito contra estas regras desde
+setembro, e o documento montado cumpre A4, margens 3/2/2/2, Times New Roman 10
+e entrelinha simples — conferido no `.docx` em 18/11/2026.
+
+> O texto abaixo foi escrito quando o arquivo ainda não existia no
+> repositório. Fica como estava, porque descreve de onde as regras vieram:
+> esta
 página descreve **o que o professor exige**, que é verificável, e sinaliza o que
 depende do template.
 
@@ -93,7 +104,7 @@ era CREEM, a orientação aqui era converter para `(Chandola et al., 2009)`.
 |---|---|
 | O professor disse | "As referências seguem a **ABNT**" |
 | A NBR 10520 é | **a norma ABNT da chamada no texto** |
-| O template COBEM 2026 | **não está no repositório** |
+| O template do professor | **versionado desde 18/11/2026**, e silencioso sobre a forma da chamada |
 
 Ou seja: a forma que está escrita é **consistente com a ABNT**, que é a única
 instrução escrita que existe sobre referências. A forma autor-ano em caixa
@@ -206,10 +217,17 @@ do arquivo errado.
 
 ## O que ainda precisa ser feito
 
-- [ ] **Obter o template COBEM 2026 com o professor** e versionar em
-      `templates/` · **Davi** · antes da diagramação
-- [ ] **Decidir a forma da chamada no texto** quando o template chegar, e
-      converter o artigo inteiro de uma vez se for o caso · **Davi**
+- [x] ~~**Obter o template COBEM 2026 com o professor**~~ — entregue pelo Davi
+      em **18/11/2026** e versionado em `templates/`. É o COBEM 2025 no
+      conteúdo, e o artigo já o cumpre
+- [x] ~~**Decidir a forma da chamada no texto** quando o template chegar~~ —
+      resolvida em 18/11/2026, **a favor do que já estava escrito**. O template
+      prescreve a chamada por sobrenome e ano: *"Recent work (Choma and Ugaya,
+      2017)..."*, *"Recently, Choma and Ugaya (2017)..."*, e
+      *"(Porto-Hernandez et al., 2023)"* para três ou mais autores. **É a forma
+      que o artigo usa** — `(Wohlin et al., 2012)`, `Axelsson (2000)`,
+      `(Sommer e Paxson, 2010)` —, com "e" no lugar de "and" porque o texto é
+      em português. Nada a converter
       · ⚠️ **não converter as três citações da Introdução antes disso** — ver a
       seção de referências acima
 - [ ] Combinar a divisão de páginas por seção dentro de 8 a 12, no
