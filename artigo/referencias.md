@@ -7,25 +7,24 @@
 > Um aviso anterior dizia o contrário e foi retirado. Ver
 > [formato do artigo](../docs/formato-do-artigo.md).
 
-> **A lista é ABNT NBR 6023; a chamada no texto é ABNT NBR 10520 — e fica como
-> está até o template do COBEM 2026 chegar.**
+> **A lista é ABNT NBR 6023; a chamada no texto segue o template do COBEM, que
+> chegou em 18/11/2026** — e é a forma que o texto já usava.
 >
 > | Onde | Formato | Exemplo |
 > |---|---|---|
-> | **Chamada no texto** | **Em aberto até o template COBEM 2026 chegar.** O que está escrito hoje usa a NBR 10520, e é consistente com a lista em ABNT — ver [formato do artigo](../docs/formato-do-artigo.md) | `(CHANDOLA; BANERJEE; KUMAR, 2009)` hoje · possivelmente `(Chandola et al., 2009)` depois |
+> | **Chamada no texto** | **Autor e ano, como o template prescreve:** `(Choma e Ugaya, 2017)` ou `Choma e Ugaya (2017)`; com três ou mais autores, `(Wohlin et al., 2012)`. Conferido contra o arquivo do professor em 18/11/2026 — ver [`templates/`](../templates/README.md) | `(Sommer e Paxson, 2010)` |
 > | **Lista, aqui** | **ABNT NBR 6023** | `CHANG, M.; PAKZAD, S. N. Título...` |
 >
-> Três ou mais autores na chamada, na forma que o texto usa hoje:
-> `(BORDALO et al., 1989)`. Mesmo autor e ano: `2017a`, `2017b`.
+> Mesmo autor e ano: `2017a`, `2017b` — caso que o artigo não tem, conferido em
+> 18/11/2026.
 >
 > Chang e Pakzad (2013) e Bordalo et al. (1989) vieram do template do **CREEM
 > 2026**, que foi tratado por engano como sendo o do professor em 23/09. Servem
 > de modelo de forma, não de referência a citar — e a conversão para ABNT foi
 > feita aqui, não está em template nenhum.
 >
-> **Até o template do COBEM 2026 chegar, mantenha a forma que já está no texto.**
-> A NBR 10520 é a norma ABNT da chamada, e "ABNT" é a única instrução escrita
-> que existe sobre as referências deste trabalho.
+> **O template chegou em 18/11/2026 e confirmou a forma que já está no texto.**
+> Nada a converter.
 >
 > A lista vai em ordem alfabética pelo sobrenome do primeiro autor, primeira
 > linha alinhada à esquerda e as demais com recuo. **Toda referência da lista
