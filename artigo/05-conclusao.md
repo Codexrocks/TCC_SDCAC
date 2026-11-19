@@ -50,10 +50,10 @@ e **não** separa os de maior risco. **A contribuição original do trabalho se
 verifica, portanto, na segunda dimensão — o desvio em relação ao padrão do
 próprio usuário —, e não na terceira.**
 
-Três restrições delimitam o alcance da resposta, e estão declaradas na Seção
-4.6: o **limiar de operação não calibrado**, a **subestimação** de duas parcelas
-da configuração completa e o fato de dez sementes medirem variação de
-amostragem, não validade externa.
+Quatro restrições delimitam o alcance da resposta, e estão declaradas na Seção
+4.6: o **limiar de operação não calibrado**, os **pesos sem análise de
+sensibilidade**, a **subestimação** de duas parcelas da configuração completa e
+o fato de dez sementes medirem variação de amostragem, não validade externa.
 
 ## 5.2 Objetivos alcançados
 
@@ -99,8 +99,9 @@ não ao mesmo corte das demais. O segundo é a **implantação sobre dado real �
 da Lei nº
 13.709/2018 e dos controles aplicáveis da ISO/IEC 27001:2022**: base legal,
 transparência ao titular, minimização e retenção. O terceiro é a **validação
-contra tráfego de produção**, que o ambiente simulado não substitui pelo motivo
-que a Seção 4.6 dá. As limitações de medição da mesma seção têm correção direta:
+contra tráfego de produção** e contra cenários e perfis organizacionais
+construídos fora da lógica do gerador, que o ambiente simulado não substitui
+pelo motivo que a Seção 4.6 dá. As limitações de medição da mesma seção têm correção direta:
 estado diário para todos os equipamentos, e não só para os notebooks; distinção
 entre eventos de mesmo instante no cálculo da exposição; e avaliação do painel
 com três a cinco avaliadores e com usuários.
