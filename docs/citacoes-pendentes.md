@@ -40,6 +40,19 @@ que estão aqui e não na lista de referências.
 | Onde | O que falta | Quem | Desde |
 |---|---|---|---|
 
+### 1 da Introdução — **aberta pelo assistente em 19/11/2026, por confirmar**
+
+As orientações pedem referência de **até 5 anos no contexto**, e as duas
+chamadas da § 1.1 eram de 2006 e 2009. Entrou uma de 2022. **O assistente de IA
+abriu o PDF dos anais** e conferiu título, autores, evento, páginas 2783 a 2800
+e a frase do resumo que sustenta o texto — *"most are attributed to benign
+triggers"*. Falta a segunda etapa do arranjo de 17/11: **uma pessoa conferir e
+confirmar**.
+
+| Onde | O que falta | Quem | Desde |
+|---|---|---|---|
+| `01-introducao.md` § 1.1 e [`usabilidade.md`](usabilidade.md) § 7 — **Alahmadi et al., 2022** | Abrir <https://www.usenix.org/system/files/sec22-alahmadi.pdf>, ler o resumo e confirmar que a frase da Introdução diz o que ele diz | Davi | 19/11/2026 |
+
 ### As 4 dos exemplos reais — **entregues em 10/11/2026, por conferir**
 
 O insumo [exemplos reais](insumos/exemplos-reais-yasmin-v1.md) traz quatro casos
@@ -243,7 +256,6 @@ escreve em `docs/`.
 |---|---|---|---|
 | [`usabilidade.md`](usabilidade.md) § 6.2 | Formulação exata e porcentagem de Nielsen e Landauer | Filipe | 03/09/2026 |
 | [`usabilidade.md`](usabilidade.md) § 6.3 | Limites exatos de cada faixa adjetiva do SUS, em Bangor, Kortum e Miller (2009) | Filipe | 03/09/2026 |
-| [`usabilidade.md`](usabilidade.md) § 7 | Literatura de carga de trabalho e fadiga de alerta em analistas de SOC | Yasmin | 03/09/2026 |
 | [`usabilidade.md`](usabilidade.md) § 9 | Edição e ano da obra de Shneiderman efetivamente consultada | Filipe | 03/09/2026 |
 
 ***
