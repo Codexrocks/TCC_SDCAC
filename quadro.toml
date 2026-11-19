@@ -129,9 +129,9 @@ semana = "S5"
 numero = 4
 titulo = "Resultados"
 donos = ["Filipe (caneta)"]
-estado = "Escrita sobre dez sementes. Seis subseções, 4 tabelas e 2 figuras, todas com legenda e fonte. A 4.4 declara que a avaliação heurística não foi realizada"
+estado = "Escrita sobre dez sementes. Seis subseções, 4 tabelas e 1 figura, todas com legenda e fonte. A 4.4 reporta a avaliação heurística — 20 achados, nenhum grau 4 — e a 4.6 declara que ela teve um avaliador"
 pronto = false
-andamento = "Escrita entre 11/11 e 17/11 sobre execução registrada em `results/`: seis subseções — execução dos cenários, matriz de confusão, métricas em três partes, verificação do painel, discussão e limitações. Quatro tabelas e duas figuras, com legenda e fonte, que é a correção que o professor pediu em 12/11. **Não está pronta por duas razões:** a 4.4 declara que a avaliação heurística não foi realizada, e nenhuma pessoa leu ainda a 4.3.3 reescrita em 17/11."
+andamento = "Escrita entre 11/11 e 17/11 sobre execução registrada em `results/`: seis subseções — execução dos cenários, matriz de confusão, métricas em três partes, verificação do painel, discussão e limitações. Quatro tabelas e **uma** figura, com legenda e fonte, que é a correção que o professor pediu em 12/11 — a Figura 2, a captura do painel, saiu em 17/11 para o documento caber em 12 páginas, e o arquivo ficou em `results/figuras/`. A 4.4 passou a reportar a avaliação heurística, com 20 achados e nenhum grau 4, e a 4.6 declara que ela teve **um avaliador, não três**, pela D-46. **Não está pronta** porque nenhuma pessoa leu ainda a 4.3.3 e a 4.4 reescritas em 17/11."
 semana = "S13"
 
 [[capitulo]]

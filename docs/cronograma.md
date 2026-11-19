@@ -35,7 +35,7 @@ não há data escrita à mão aqui, porque data escrita à mão envelhece:
 | 1. Introdução | Entregue parcial em 24/09. Os seis blocos de complementação foram preenchidos fora do repositório e sincronizados em 13/10; falta conferir a extensão no template, cujo teto é de 2 páginas | Yasmin, Filipe | S5 | ⚠️ Atrasado há 48 dias |
 | 2. Referencial teórico | Escrito pela Yasmin em 28/09 e reorganizado em 13/10 para a estrutura da 3ª reunião — 3 seções, 8 elementos do problema. As 13 fontes foram conferidas e entraram na lista em ABNT (#64) | Yasmin | S5 | ⚠️ Atrasado há 48 dias |
 | 3. Metodologia | Escrita e versionada em 28/09 — 9 subseções. **As quatro lacunas da M2 fecharam**, a última em 12/11. As 7 fontes já têm entrada em `referencias.md` (#121) e esperam confirmação de pessoa | Davi (caneta) | S5 | ⚠️ Atrasado há 48 dias |
-| 4. Resultados | Escrita sobre dez sementes. Seis subseções, 4 tabelas e 2 figuras, todas com legenda e fonte. A 4.4 declara que a avaliação heurística não foi realizada | Filipe (caneta) | S13 | 🗓️ Em 8 dias |
+| 4. Resultados | Escrita sobre dez sementes. Seis subseções, 4 tabelas e 1 figura, todas com legenda e fonte. A 4.4 reporta a avaliação heurística — 20 achados, nenhum grau 4 — e a 4.6 declara que ela teve um avaliador | Filipe (caneta) | S13 | 🗓️ Em 8 dias |
 | 5. Conclusão | Escrita. Cinco subseções, com resposta própria para cada grandeza da pergunta e os oito objetivos avaliados | Davi (caneta) | S14 | 🗓️ Em 15 dias |
 <!-- QUADRO:fim capitulos -->
 
@@ -63,7 +63,7 @@ acúmulo declarado — depois dela o cronograma volta a ter uma entrega por sema
 | **S12** | 13–19/11 | Tabela de ablação, sensibilidade dos pesos, gráficos | Cada número sai de notebook versionado · Wilcoxon pareado sobre as diferenças | Filipe + Davi |
 | **S13** | 20–26/11 | `artigo/04-resultados.md` | Cada limitação nomeada tem proposta de trabalho futuro · LGPD e ISO 27001 entram aqui | Filipe (caneta) |
 | **S14** | 27/11–03/12 | `artigo/05-conclusao.md` | A pergunta é respondida com **sim, não ou parcialmente — e um número** | Davi (caneta) |
-| **S15** | 04–10/12 | Versão final diagramada · **ENTREGA 10/12** | 8 a 12 páginas no template COBEM 2026 · zero referência não conferida · bloco em inglês depois das referências · responsabilidade autoral | Todos |
+| **S15** | 04–10/12 | Versão final diagramada · **ENTREGA 10/12** | 8 a 12 páginas no template do professor · zero referência não conferida · responsabilidade autoral | Todos |
 | **S16** | 11/12 em diante | Slides, ensaio cronometrado, defesa | Cada integrante apresenta qualquer seção sob sorteio | Todos |
 
 ## Como o trabalho chega ao repositório
@@ -180,6 +180,12 @@ Cinco seções, conforme o escopo definido pelo professor:
 4. Resultados e Discussões
 5. Conclusão
 
-O [formato do artigo](formato-do-artigo.md) — COBEM 2026, com as referências em
-ABNT — define o resto: de 8 a 12 páginas, títulos de seção em maiúsculas, e o
-bloco em inglês depois das referências.
+O [formato do artigo](formato-do-artigo.md) — o template do professor, com as
+referências em ABNT — define o resto: de 8 a 12 páginas e títulos de seção
+alinhados à esquerda, em negrito e numerados em algarismos arábicos.
+
+> **Duas coisas que esta frase dizia e deixaram de valer.** Os títulos **não**
+> vão em maiúsculas: o template pede *"left-aligned and bolded in Times New
+> Roman, size 10"*, e a caixa alta saiu do montador em 12/11/2026. E o **bloco
+> em inglês depois das referências** foi dispensado pelo orientador em 12/11,
+> confirmado pelo Davi em 17/11.
