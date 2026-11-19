@@ -59,27 +59,23 @@ anunciava como abertas três decisões já fechadas.
 <!-- QUADRO:inicio pendencias-por-pessoa -->
 <!-- Bloco gerado por scripts/quadro.py a partir de quadro.toml. Editar aqui nao adianta: a proxima execucao reescreve. -->
 
-**Davi** — 3 pendências
-
-| ID | Decisão | Estado | Situação |
-|---|---|---|---|
-| D-05 | Ablação em quatro configurações (C0 a C3) | A confirmar | ⚠️ Atrasado há 48 dias |
-| D-07 | Caneta rotativa por seção | Aberta | 🗓️ Sem prazo |
-| D-43 | Pesos de integração das dimensões na nota final | A confirmar | ⚠️ Atrasado há 27 dias |
-
-**Yasmin** — 2 pendências
+**Davi** — 1 pendência
 
 | ID | Decisão | Estado | Situação |
 |---|---|---|---|
 | D-07 | Caneta rotativa por seção | Aberta | 🗓️ Sem prazo |
-| D-43 | Pesos de integração das dimensões na nota final | A confirmar | ⚠️ Atrasado há 27 dias |
 
-**Filipe** — 2 pendências
+**Yasmin** — 1 pendência
 
 | ID | Decisão | Estado | Situação |
 |---|---|---|---|
 | D-07 | Caneta rotativa por seção | Aberta | 🗓️ Sem prazo |
-| D-10 | Isolation Forest como benchmark opcional | A confirmar | ⚠️ Atrasado há 13 dias |
+
+**Filipe** — 1 pendência
+
+| ID | Decisão | Estado | Situação |
+|---|---|---|---|
+| D-07 | Caneta rotativa por seção | Aberta | 🗓️ Sem prazo |
 
 <!-- QUADRO:fim pendencias-por-pessoa -->
 

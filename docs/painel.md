@@ -96,13 +96,14 @@ API**: a execução 4, preset C3, semente 1, validadas contra o contrato por
 
 - [ ] **Revisão do Filipe.** O painel foi escrito por outra pessoa com IA; o que
       a banca vê precisa bater com quem fez · **Filipe**
-- [ ] **O critério de aceite não é demonstrável** no caminho do risco alto:
-      continua sem ninguém em `high`. O **gerador entrou em 04/11** e produz
-      1,9 M de eventos por semente — o que falta agora é a **ingestão**, que
-      ligue esse CSV aos motores · **Davi**
-- [ ] **Avaliação heurística**, que a [usabilidade](usabilidade.md) seção 6.1
-      marca para a S9. É feita por quem constrói, **sem participantes** ·
-      **Filipe**
+- [x] ~~**O critério de aceite não é demonstrável** no caminho do risco
+      alto.~~ A **ingestão entrou em 11/11/2026**, e desde então há execução
+      registrada sobre dado gerado para o painel ler. **A S9 foi dada como
+      pronta pelo Davi em 18/11/2026**
+- [x] ~~**Avaliação heurística**~~ — feita e consolidada com um avaliador pela
+      **D-46**, em 17/11/2026, com 20 achados e nenhum de severidade 4. Dos cinco
+      de severidade 3, três foram corrigidos (#114, #128); os achados **2** e
+      **10** exigem mudar o contrato da API, e são decisão do Davi
 - [ ] **A tela de Métricas não existe** — `/metrics` responde vazio porque
       nenhum avaliador gravou métrica ainda · **Davi**
 

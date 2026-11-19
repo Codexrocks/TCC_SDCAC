@@ -288,6 +288,12 @@ Seção 3.8 e **não se resolve com mais sementes**.
 **O limiar não foi calibrado**, como a Seção 4.2 registra: a Tab. 3 serve para
 mostrar o problema, não para comparar configurações.
 
+**Os pesos não passaram por análise de sensibilidade.** Os pesos de integração e
+os pontos das regras, declarados preliminares na Seção 3.3, ficaram fixos nas dez
+sementes, e a variação deles não foi executada. As diferenças entre
+configurações valem para este conjunto de pesos, e nada se afirma sobre a
+estabilidade delas sob outro.
+
 **A parcela de postura não foi avaliada em parte dos eventos.** O gerador
 escreve estado diário de equipamento apenas para notebooks, e os eventos de
 celular e de origem externa — **79.456, ou 5,5% da janela, na semente 42** —

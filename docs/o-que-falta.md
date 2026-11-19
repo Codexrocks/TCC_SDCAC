@@ -1,306 +1,136 @@
 # O que falta, e de quem é
 
-Divisão do trabalho que resta, de 19/10/2026 até a entrega em 10/12.
+Divisão do trabalho que resta até a entrega em **10/12/2026**. Retrato de
+**18/11/2026**.
 
-> **Esta página não é lista de pendência.** Ela diz **quem responde por cada
-> frente** e **qual é o critério de aceite** — fatos que mudam devagar. O estado
-> ao vivo, recalculado contra a data de hoje, está no [quadro](quadro.md) e na
-> [página inicial](README.md), as duas geradas do `quadro.toml`. Lista de
-> pendência escrita à mão apodrece, e esta documentação já aprendeu isso duas
-> vezes.
+> **O estado ao vivo está no [quadro](quadro.md)** e na
+> [página inicial](README.md), as duas geradas do `quadro.toml` e recalculadas
+> contra a data de hoje. Esta página diz **quem responde por cada frente** e
+> **o que precisa acontecer para ela fechar** — e por isso envelhece. Quando
+> discordar do quadro, vale o quadro.
+>
+> A versão anterior desta página, que acompanhou a construção de 19/10 a
+> 12/11, está no histórico do Git. Ela foi reescrita em 18/11 porque descrevia
+> como pendente o que já tinha fechado: a ingestão, a C3, a D-09, a D-15 e o
+> teste do gerador no CI.
 
 ---
 
-## A peça que trava quatro semanas
+## Onde o trabalho está
 
-O código das semanas 6 a 9 **está escrito e testado**: schema, as quatro
-configurações, o experimento ponta a ponta, a API de leitura, o painel e — desde
-**04/11/2026, pelo #89** — o gerador de eventos. Nenhuma das quatro fecha ainda,
-e **o motivo mudou**.
+**A construção acabou.** O caminho crítico — gerador, ingestão, C3, dez
+sementes, cenários nomeados, tabela de ablação, Resultados, Conclusão — fechou
+em 12/11/2026, e as semanas **S5 a S11** foram dadas como prontas pelo Davi em
+18/11/2026.
 
-| Semana | O que existe | Por que o aceite não fecha |
-|---|---|---|
-| **S6** | Schema, migrações, **o gerador** e **a ingestão** — o experimento roda sobre dado gerado desde 11/11/2026 | O aceite pede **"carga por `COPY`"**, e o caminho que existe é outro: a ingestão traduz o CSV para o formato do adaptador de arquivo. O dado chega aos motores; a carga para o PostgreSQL não existe. **O Davi decide se o critério se cumpre por este caminho** ou se o `COPY` continua exigido |
-| **S7** | C0 e motor D1, selecionáveis por configuração | O aceite pede que "cenários pontuais produzam o score esperado" — e os cenários nomeados dependem da **D-06**. A família P já é detectada em 100% dos episódios pela C1, mas "o escore esperado" só existe depois do catálogo |
-| **S8** | D2 e D3, com as duas parcelas separadas | O aceite pede "cenário longitudinal com exposição crescente sem alerta pontual", que depende da **D-16** — e a **C3 ainda não executa** (ver abaixo) |
-| **S9** | As três telas do painel, com decomposição por dimensão | O aceite pede "por que um usuário está em **risco alto**", e agora **há dado para isso**: a execução de 11/11 produziu 280 a 315 mil alertas. Falta apontar o painel para uma execução registrada |
+| | |
+|---|---|
+| Experimento | Dez sementes, as quatro configurações em cada uma, Wilcoxon pareado — [`results/agregado.md`](../results/README.md) |
+| Artigo montado | **12 páginas**, o teto do template, por `scripts/montar_artigo.py` |
+| Referências | 20 na lista, conferidas e confirmadas |
+| Template | O do professor chegou em 18/11 e é, no conteúdo, o COBEM 2025 que o artigo já seguia |
+| Decisões | Todas fechadas, menos a **D-07** (caneta rotativa), que não tem prazo |
 
-**O que o gerador produz**, em escala cheia e 67 segundos: 1.905.111 eventos,
-73.604 sessões, 124 episódios, e as 17 checagens da seção 9 passando — volume
-anual na faixa da **D-23**, média por dia útil na faixa de cada persona pela
-**D-38**, cenários depois do baseline de três meses pela **D-24**, e `corp` sem
-rótulo nenhum pela **D-17**, com o gabarito separado em `ground_truth/`.
+**O que resta não é construção: é leitura de quem assina, envio e diagramação.**
 
-> ✅ **A ingestão entrou em 11/11/2026, e com ela o avaliador.** O experimento
-> deixou de rodar sobre *fixture* de 2 funcionários: **1.435.546 eventos
-> pontuados** pelas configurações C0, C1 e C2, com as métricas da **D-03** em
-> [`results/semente-1`](../results/README.md) e a §4 do artigo escrita sobre
-> elas. Procedimento em
-> [execução do experimento](execucao-do-experimento.md).
+### O que fechou em 18/11/2026, por decisão do Davi
 
-> ✅ **A C3 passou a executar em 11/11/2026.** Pela decisão de que a D3 pontua a
-> conduta e deixa a parcela de postura como **não avaliada** quando o
-> equipamento do evento não tem estado no dia — o gerador escreve estado diário
-> só do notebook. **As quatro configurações rodaram**, e a §4 do artigo tem a
-> tabela de ablação completa.
->
-> Três números que a execução da C3 trouxe, e que estão na §4.6:
->
-> | | |
-> |---|---|
-> | Eventos sem a parcela de postura | **79.456**, 5,5% da janela |
-> | Riscos anteriores fora da janela por empate de instante | **962** |
-> | Fração do registro que a C3 alerta no limiar 20 | **99,8%** — ela não é operável nesse corte |
->
-> Os dois primeiros subestimam parcelas da C3, e portanto são **conservadores**.
-> O terceiro é o limiar, não o modelo.
->
-> ⚠️ **A leitura seguinte, de que a revocação fixa mostrava a C3 como a melhor
-> configuração a partir de 0,40, caiu em 12/11/2026**: ela vinha de uma semente,
-> e o Wilcoxon sobre dez não rejeita a nula naquele regime. Ver a §4.3.1.
-
-> ✅ **As dez sementes entraram em 12/11/2026, e com elas a D-13.** Dez
-> execuções independentes, as quatro configurações em cada uma, com média,
-> desvio-padrão e **Wilcoxon pareado de p-valor exato** em
-> [`results/agregado.md`](../results/README.md). A §4 do artigo deixou de ser
-> descritiva.
->
-> Dois resultados que só dez sementes davam, e que mudaram o texto:
->
-> | | |
-> |---|---|
-> | C2 contra C0, FPR a revocação fixa | menor nos **nove** níveis, **p = 0,0020** em cada um |
-> | C3 contra C2 | nula **não rejeitada** em seis dos nove; nos três restantes a C3 está **pior** |
->
-> A vantagem que a semente única atribuía à C3 acima de 0,40 de revocação **não
-> sobreviveu ao teste pareado** — e a afirmação de que a C0 "só alcança 0,30
-> alertando tudo" valia para a semente 42, não em geral: nas dez, isso só
-> acontece em duas.
->
-> **A M3 venceu em 22/10** e o critério dela é "C0 a C3 rodando sobre **o mesmo
-> gerador**". Com as dez sementes, está cumprido.
+| O quê | Como ficou |
+|---|---|
+| **D-05** | Confirmada: quatro configurações, como a D-26 já dizia |
+| **D-10** | **O Isolation Forest não entra.** A S10 fecha sem ele |
+| **D-43** | Fechada com os pesos com que as dez sementes rodaram, com a concordância da Yasmin |
+| **Critério da S6** | A carga por `COPY` foi substituída pela ingestão do CSV em `ingest/` |
+| **Análise de sensibilidade dos pesos** | **Não foi executada.** Entrou como limitação na § 4.6 e como trabalho futuro na § 5.4, e a § 3.3 deixou de prometê-la |
 
 ---
 
-## Filipe — dados, gerador e painel
+## Todos
 
-> ✅ **O gerador entrou em 04/11/2026**, pelo [#89](https://github.com/Codexrocks/TCC_SDCAC/pull/89)
-> — 9 arquivos, 1.170 linhas, as checagens da seção 9 passando. Era o item que
-> travava quatro semanas, e saiu do caminho crítico. Os parâmetros **P15** e
-> **P17** ficaram embutidos no gerador e seguem valendo como registro em
-> [banco simulado](banco-simulado.md), seção 10.
+1. **Reenviar a Seção de Resultados ao orientador — prazo 19/11/2026.** As
+   correções que ele pediu, legenda e fonte em toda tabela e figura, estão na
+   `main` desde o #109 e o #127. O envio é de uma pessoa
+2. **Ler o que cada um assina.** Nenhum capítulo está marcado como pronto no
+   quadro, e o motivo é o mesmo em todos: o texto existe e falta a leitura de
+   quem responde por ele. A divisão está nas seções abaixo
+3. **S15 — a versão final, até 10/12.** Montar com
+   `python scripts/montar_artigo.py`, converter e conferir as 12 páginas.
+   Falta conferir no template como ele numera equação — por referência
+   cruzada, e não em `$$…$$`
+4. **S16 — slides e ensaio da defesa**, depois da entrega. O critério é que
+   cada um apresente qualquer seção sob sorteio
 
-> ✅ **A dívida de qualidade do gerador foi paga em 11/11/2026.** O Filipe
-> formatou os 9 arquivos, renomeou os identificadores de uma letra e marcou os
-> três grupos de parâmetros como **ASSUNÇÃO (a ratificar: Davi)**. O Ruff caiu de
-> **226 para 23 apontamentos**, e a formatação passa.
->
-> **A refatoração foi verificada por saída, não por leitura:** gerando com a
-> versão anterior e com a nova, na mesma semente, os **11 arquivos saem byte a
-> byte idênticos**. É o que prova que renomear `W` para `world` em 751 linhas
-> não mudou um número — e é por isso que resultado já medido sobre a versão
-> anterior continua valendo.
+---
 
-**O que ficou dele, e é dívida de qualidade do próprio gerador:**
+## Davi
 
-1. ~~**Nenhum teste.**~~ `tests/test_gerador.py` entrou pelo #92, com 7 casos.
-   **Continua sendo o único módulo sem teste do próprio comportamento**: os 7
-   medem a aderência do baseline à D-24, não o gerador.
-   ⚠️ **E não é falta de trabalho: é o CI.** Ele instala só
-   `pytest pyyaml fastapi httpx`, e o gerador precisa de `numpy` e `pandas` —
-   teste de comportamento dele seria **pulado em silêncio** na nuvem, que é
-   exatamente o modo de falhar que o cabeçalho do `test_gerador.py` existe para
-   impedir. Corrigir exige mexer em `.github/`, que é **arquivo protegido** e
-   espera 24 h
+1. **Ler a § 5.4**, reescrita em 18/11 para incluir a análise de
+   sensibilidade e o par de trabalho futuro das limitações de medição — é o
+   que o critério da S13 pede: *"cada limitação nomeada tem proposta de
+   trabalho futuro"*
+2. **Ratificar as três correspondências da ingestão**, nomeadas no topo de
+   `ingest/corp.py`:
 
-> ⚠️ **Uma pergunta aberta que a limpeza do Ruff revelou, e que é de desenho, não
-> de estilo.** O `checks.py` calculava `wk` — se a sessão caiu em fim de semana —
-> e **nunca usava**. Logo abaixo estão as duas checagens que anunciam
-> "eventos/**dia útil**", da **D-23** e da **D-38**, e o filtro delas é
-> `tot >= 10` eventos no dia, **não o dia da semana**.
->
-> Ou seja: a checagem passa, mas mede *dias com atividade*, não *dias úteis*. O
-> limiar de 10 exclui a maior parte do fim de semana na prática, o que faz dela um
-> bom aproximado — e aproximado não é o que o nome diz. O `wk` parece ter sido
-> escrito para esse filtro e ficado no caminho.
->
-> **Não troquei o filtro**, porque trocar muda o que a checagem mede, e as faixas
-> da D-23 e da D-38 são o que o artigo cita como invariante do gerador. A linha
-> morta saiu e a pergunta ficou em comentário no próprio arquivo: **as faixas
-> valem por dia de semana ou por dia com atividade?** É do Davi, e é de uma linha
-> de resposta.
-2. ~~**226 apontamentos do Ruff.**~~ ~~**23 restam.**~~ **Zerados em
-   12/11/2026.** Os 9 `B905` viraram `strict=True`, porque em todos os nove as
-   sequências têm o mesmo tamanho por construção — a palavra afirma a invariante
-   em vez de supô-la. Os 6 `B007` ganharam `_` nos nomes não usados, os 4 `UP031`
-   viraram f-string e os 4 `F841` saíram. **Verificado por saída:** gerando com a
-   versão anterior e com a nova, na mesma semente, os **11 arquivos têm conteúdo
-   byte a byte idêntico** — o `.csv.gz` difere só no instante que o gzip grava no
-   cabeçalho
-3. ~~**Três grupos de parâmetros sem procedência.**~~ `_CAT_W`, `MFA0_*` e
-   `PATCH_MEDIAN` agora se declaram **ASSUNÇÃO** no `config.py`. A declaração
-   fecha a regra do cabeçalho; **a ratificação continua sendo do Davi** — e
-   agora ela é a pendência, não a omissão. Detalhe em
+   | O quê | O gerador escreve | Os motores esperam |
+   |---|---|---|
+   | **Persona** | `day_admin`, `shift_ops`, `sales_traveler`, `hybrid_eng` | `office_daytime`, `shift`, `sales_travel`, `hybrid` |
+   | **Fuso** (D-31, D-40) | deslocamento fixo, `UTC-3` | chave IANA, `America/Sao_Paulo` |
+   | **Privilégio** | `privileged`, booleano | `standard`, `elevated`, `admin` |
+
+3. **Ratificar as assunções do gerador** — `_CAT_W`, `MFA0_*` e
+   `PATCH_MEDIAN`, e os parâmetros **P15** e **P17** —, em
    [banco simulado](banco-simulado.md), seção 10
-> ✅ **O baseline foi alinhado em 04/11, pelo #92:** o `EVAL_START_DAY` passou de
-> 100 para **90** — os três meses exatos da **D-24** —, entrou a checagem que
-> mede a decisão em vez do parâmetro, e `tests/test_gerador.py` tornou-se o
-> primeiro teste do módulo. Detalhe em
-> [banco simulado](banco-simulado.md), seção 10.
+4. **Responder a pergunta do `generator/checks.py`**: as faixas da D-23 e da
+   D-38 valem por **dia de semana** ou por **dia com atividade**? Hoje o filtro
+   é `tot >= 10` eventos no dia. Uma linha de resposta
+5. **Os achados 2 e 10 da avaliação heurística**, de severidade 3. Os dois
+   exigem mudar o contrato de leitura da API — ver [o painel](painel.md)
+6. **A tela de Métricas**, pela D-45, depois de o avaliador gravar as métricas
+   na API. Não bloqueia o artigo
+7. **O merge** de todo Pull Request. O ruleset recusa qualquer outra origem
 
-**Na ordem do cronograma:**
+## Filipe
 
-4. **Revisar o painel** da S9. Ele foi escrito por outra pessoa com IA, e o que
-   a banca vê precisa bater com quem assina — ver [o painel](painel.md)
-5. **Avaliação heurística** do painel, pela [usabilidade](usabilidade.md), § 6.1.
-   É feita por quem constrói, **sem participantes**, pela **D-02**. O roteiro e a
-   planilha estão prontos desde 12/11, em
-   [avaliação heurística](avaliacao-heuristica.md) — **são os três, cada um
-   sozinho**
-6. **A tela de Métricas**, pela **D-45**: lê `/runs/{id}/metrics`, e o que
-   falta antes dela é **o avaliador gravar as métricas**. Entra **depois da
-   avaliação heurística** — ver [o painel](painel.md)
-7. **D-10** — confirmar se o Isolation Forest da S10 entra. É opcional por
-   definição, e cortá-lo não compromete o TCC
-8. **S12** — tabela de ablação, sensibilidade dos pesos e gráficos, com o Davi.
-   Cada número sai de notebook versionado
-9. **S13** — a caneta do [`artigo/04-resultados.md`](../artigo/04-resultados.md)
-10. **Três chamadas bibliográficas** por conferir na fonte, em
+1. **Ler as §§ 4.3.3 e 4.4**, reescritas em 17/11, e a limitação dos pesos que
+   entrou na § 4.6 em 18/11. É a caneta da S13
+2. **A revisão do painel**, que [o painel](painel.md) ainda lista em seu nome
+3. **Três citações em [`usabilidade.md`](usabilidade.md)** — §§ 6.2, 6.3 e 9.
+   Estão na documentação, não no artigo, em
    [citações pendentes](citacoes-pendentes.md)
 
----
+## Yasmin
 
-## Yasmin — cenários, rótulos e o recorte de segurança
+1. **Reler a reorganização do Referencial**, de 13/10, e concordar com o que
+   ficou atribuído a cada obra
+2. **Introdução, com o Filipe:**
+   - A extensão **cabe**: no documento montado em 18/11 ela vai da metade da
+     página 1 ao alto da página 3, cerca de 1,6 página para um teto de 2
+   - ⚠️ **As referências do contexto não cumprem a regra dos 5 anos.** As
+     orientações pedem publicação de até 5 anos no contexto
+     ([formato do artigo](formato-do-artigo.md)), e as duas únicas chamadas da
+     Introdução são **Kent e Souppaya (2006)** e **Chandola et al. (2009)**.
+     Uma obra já conferida da lista, **Gonzalez-Granadillo et al. (2021)**, está
+     no limite dos 5 anos e trata de SIEM — **só entra se quem abrir o artigo
+     confirmar que ele sustenta a frase**. Fonte nova passa pelo mesmo caminho
+     das outras vinte: conferida na fonte antes de entrar
+   - Alinhar a granularidade dos objetivos ao plano
+3. **Uma citação em [`usabilidade.md`](usabilidade.md) § 7**, sobre fadiga de
+   alerta em SOC
 
-> 📦 **Rascunho entregue em 10/11/2026, e versionado em
-> [insumos](insumos/README.md).** Quatro arquivos cobrem **D-06, D-16, P18 a
-> P23, D-09 e D-19** — e os três primeiros declaram, no próprio cabeçalho,
-> *"Conferi tudo que a IA escreveu? **Ainda não**"*.
->
-> **Isso os torna proposta, não entrega.** Pelo `AGENTS.md` seção 3, texto de IA
-> entra sob a responsabilidade de quem assina — então **nenhuma das decisões
-> fechou**, e o que falta mudou de natureza: era produzir, agora é **ler e
-> confirmar**.
-
-> ✅ **Lidos e confirmados em 12/11/2026**, relatado pelo Davi. Fecharam a
-> **D-06**, a **D-16** e a **D-19**, e ratificaram a metade dela da **D-43**.
->
-> ⚠️ **A D-09 continua aberta, e não por falta de leitura.** O que ela confirmou
-> — a ordenação de severidade dos sinais da D1 em Alto, Médio e Baixo — **diverge
-> do `presets.toml` em dois atributos**, e eles estão quase invertidos entre si:
->
-> | A situação | O insumo diz | O código dá |
-> |---|---|---|
-> | `mfa_used = false` em login | **Alto** | **15** — 8º de 10 |
-> | Dispositivo pessoal | **Baixo** | **25** — acima de todo o Médio |
->
-> Os outros sete atributos batem. Fechar a D-09 agora registraria no quadro uma
-> escolha que o sistema não implementa; mexer nos pontos **invalida as dez
-> sementes** e exige reexecutar tudo. É decisão do Davi com a Yasmin, e está
-> detalhada em [insumos](insumos/README.md).
-
-**O que resta, e é de outra natureza:**
-
-1. **As quatro fontes dos exemplos reais**, em
-   [citações pendentes](citacoes-pendentes.md). Confirmar um insumo e conferir uma
-   fonte são atos diferentes — o primeiro diz "este texto é meu", o segundo diz
-   "abri a obra e ela sustenta o que o texto afirma"
-2. **Uma chamada bibliográfica do referencial**, por conferir na fonte
-
-> ⚠️ **Uma correção que a conferência achou, e que precisa ser lida junto.** O
-> insumo dos cenários afirma que o código "não tem" o cenário **N06** e abre
-> pendência para o Filipe implementá-lo. **O N06 existe**, em
-> `generator/normal.py:185`, e produz 53 dos 72 episódios da família N — o
-> código e o artigo do Drive **já concordam** nos 124. Detalhe e medição em
-> [insumos](insumos/README.md). A pendência não existe, e a decisão sobre os
-> cenários não depende dela.
-
-**O resto:**
-
-4. **Decidir o campo de conferência do
-   [insumo dos exemplos reais](insumos/exemplos-reais-yasmin-v1.md)**, que
-   declara "Sim" enquanto o pacote entregue dizia que nada foi conferido. As
-   **quatro fontes** estão em [citações pendentes](citacoes-pendentes.md) e não
-   entram no artigo antes disso
-5. **S11** — a execução de todos os cenários nas quatro configurações, que é de
-   todos e tem a condução dela
-6. **Uma chamada bibliográfica** do referencial, por conferir na fonte
+> **Os quatro casos reais** (Target, GE, Capital One, Tesla) **não estão mais
+> no artigo**, e as linhas deles em [citações pendentes](citacoes-pendentes.md)
+> ficam vencidas de propósito: só voltam a valer se um caso voltar à
+> Introdução.
 
 ---
 
-## O que não dá para dividir
+## Depois da entrega
 
-Quatro coisas continuam no Davi por construção, não por combinação:
+Dívida técnica que não muda o artigo, registrada no relatório da sessão 52:
 
-> ✅ **A ingestão entrou em 11/11/2026** — `ingest/` e `evaluator/`, com 21
-> testes. O elo que faltava desde 04/11 saiu do caminho crítico, e o
-> experimento passou a rodar sobre dado gerado.
-
-**O que ficou dela, e é do Davi:** ratificar as **três correspondências** que a
-tradução precisou declarar, e que estão nomeadas em constantes no topo de
-`ingest/corp.py` justamente para serem ratificáveis:
-
-| O quê | O gerador escreve | Os motores esperam |
-|---|---|---|
-| **Persona** | `day_admin`, `shift_ops`, `sales_traveler`, `hybrid_eng` | `office_daytime`, `shift`, `sales_travel`, `hybrid` |
-| **Fuso** (D-31, D-40) | deslocamento fixo, `UTC-3` | chave IANA, `America/Sao_Paulo` |
-| **Privilégio** | `privileged`, booleano | `standard`, `elevated`, `admin` |
-
-O do fuso **derrubou a pontuação no primeiro evento**; os outros dois não
-quebravam nada — produziriam nota errada em silêncio. Persona ou fuso novo no
-gerador faz a ingestão **recusar**, em vez de adivinhar.
-
-**A carga por `COPY` continua não existindo** — `database/` tem só o schema, e é
-dela que o critério de aceite da S6 fala. Ver a tabela acima.
-
-**A D-15 — o critério de relevância declarado a priori.** A origem do número já
-foi decidida em 14/10: argumento operacional, de quantos alertas falsos um
-analista absorve por turno. **Falta o valor, e o prazo já passou.** O texto
-desta seção dizia que o número "perde o sentido no dia em que a primeira
-execução for registrada" — **esse dia foi 11/11/2026**. O que resta é declarar o
-valor pelo argumento operacional, sem olhar a tabela da §4.3, e registrar que
-foi declarado depois. É a **lacuna 3** da Metodologia.
-
-**O merge.** O ruleset `Merge restrito ao líder` recusa qualquer outra origem, e
-o GitHub não deixa ninguém aprovar o próprio Pull Request. Todo trabalho da
-Yasmin e do Filipe chega ao repositório pela mão dele — ver
-[cronograma](cronograma.md#como-o-trabalho-chega-ao-repositório).
-
-**Nove das treze chamadas bibliográficas** por conferir estão no nome dele, em
-[citações pendentes](citacoes-pendentes.md). Referência que ninguém abriu na
-fonte não entra no artigo, e a validação não pega isso — a banca pega.
-
-Além dessas, seguem em aberto e são dele ou compartilhadas: a **D-05**, a
-**D-07** (a caneta rotativa, dos três), a **D-43** (com a Yasmin), a decisão de
-o CI passar a instalar o Streamlit, a tela de Métricas — que depende de um
-avaliador que grave métrica — e a caneta da **S14**.
-
----
-
-## O caminho crítico, em uma frase
-
-~~Gerador~~ → ~~ingestão~~ → ~~a C3~~ → ~~múltiplas sementes~~ → ~~cenários
-nomeados~~ → ~~tabela de ablação~~ → ~~Resultados~~ → ~~Conclusão~~.
-
-**O caminho crítico acabou em 12/11/2026.** Os cenários nomeados caíram com a
-**D-06** e a **D-16**, e a tabela de ablação saiu das dez sementes no mesmo
-dia. **O que resta não é construção: é conferência humana, decisão e
-diagramação** — está listado abaixo, por pessoa.
-
-O gerador caiu em 04/11; a ingestão e a C3, em 11/11; as **dez sementes da
-D-13** e os **cenários nomeados** das **D-06** e **D-16**, em 12/11. A **Seção
-4 do artigo está escrita sobre números de execução registrada, com as quatro
-configurações e tratamento estatístico**, a Conclusão responde à pergunta de
-pesquisa, e a avaliação heurística entrou pela **D-46** em 17/11, com um
-avaliador e o custo declarado na § 4.6.
-
-Duas decisões passaram a vencer antes da banca, e não depois:
-
-- **A D-12** — evento, usuário-dia ou episódio. Os resultados de hoje reportam
-  as duas unidades porque ela está aberta, e escolher depois de ver qual
-  favorece a conclusão não é rigor
-- **A D-15** — o critério de relevância. A execução de 11/11 **já existe**, e
-  cada dia que passa torna a declaração a priori menos a priori
-
-A **S10 é o único corte disponível** no cronograma: o Isolation Forest é opcional
-por definição.
+- O `confere_legendas` não confere se a legenda descreve a tabela
+- A trava do #113 não cobre `scripts/`
+- O PR do quadro nunca recebe check, e só entra por liberação de administrador
+- `scripts/` tem 31 apontamentos de Ruff, e o CI não roda o Ruff
+- A docstring de `scripts/montar_artigo.py` ainda diz que o template de 2026
+  não está no repositório. É arquivo protegido, e a correção espera 24 h

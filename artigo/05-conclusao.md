@@ -92,14 +92,18 @@ Três desdobramentos decorrem das limitações da Seção 4.6. O primeiro, e mai
 imediato, é **calibrar o limiar de operação** sobre dado em escala: sem isso,
 nenhuma das quatro configurações é operável no corte herdado, e a única
 comparação que o trabalho pode fazer é a de falsos positivos a revocação fixa.
-A ele se soma o **reexame da terceira dimensão**, que no desenho atual não
+Junto dele vem a **análise de sensibilidade dos pesos**, prevista e não
+executada. A esses dois se soma o **reexame da terceira dimensão**, que no desenho atual não
 contribui para a separação e talvez pertença a um segundo estágio de triagem, e
 não ao mesmo corte das demais. O segundo é a **implantação sobre dado real à luz
 da Lei nº
 13.709/2018 e dos controles aplicáveis da ISO/IEC 27001:2022**: base legal,
 transparência ao titular, minimização e retenção. O terceiro é a **validação
 contra tráfego de produção**, que o ambiente simulado não substitui pelo motivo
-que a Seção 4.6 dá.
+que a Seção 4.6 dá. As limitações de medição da mesma seção têm correção direta:
+estado diário para todos os equipamentos, e não só para os notebooks; distinção
+entre eventos de mesmo instante no cálculo da exposição; e avaliação do painel
+com três a cinco avaliadores e com usuários.
 
 > **A caneta desta seção é do Davi**, pela S14. O texto acima foi redigido a
 > partir dos resultados registrados e dos itens que as instruções anteriores
