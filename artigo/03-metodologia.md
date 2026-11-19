@@ -95,8 +95,8 @@ ganho** às dimensões avaliadas.
 As quatro configurações não são quatro sistemas, mas um único código sob quatro
 parâmetros, de modo que a única variável entre as linhas da tabela de resultados
 seja a dimensão acrescentada. Os pesos e os pontos de cada regra são
-**parâmetros declarados** do modelo, preliminares e sujeitos a análise de
-sensibilidade: eles ordenam o que o detector prioriza, e não a gravidade
+**parâmetros declarados** do modelo, preliminares e não submetidos a análise de
+sensibilidade (Seção 4.6): eles ordenam o que o detector prioriza, e não a gravidade
 conceitual dos sinais de segurança, que é questão distinta. A terceira dimensão reporta **duas parcelas
 separadas** — exposição acumulada e higiene de segurança —, que não são somadas:
 a agregação exigiria um peso relativo entre conduta e postura sem justificativa

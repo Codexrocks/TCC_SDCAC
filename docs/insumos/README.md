@@ -54,15 +54,18 @@ discorda deles. A correção mora aqui; o insumo fica como prova do que chegou.
 >
 > **O que isso fecha:** a **D-06** e a **D-16**, que são o desenho dos cenários, e
 > a **D-19**, que é o recorte de LGPD e ISO. A metade dela da **D-43** também está
-> ratificada; falta a do Davi.
+> ratificada, e a do Davi veio em 18/11/2026: a D-43 está fechada.
 >
 > **O que isso não fecha, e por dois motivos diferentes:**
 >
-> 1. **A D-09 continua aberta**, e não por falta de leitura: o que ela confirmou
->    **contradiz o código** em dois atributos da D1, como a seção abaixo mostra.
->    Fechar a decisão agora registraria no quadro uma escolha que o sistema não
->    implementa. Ela fecha quando a contradição for resolvida — por qualquer um
->    dos dois lados
+> 1. **A D-09 ficou aberta até 12/11/2026**, e não por falta de leitura: o que
+>    ela confirmou **contradiz o código** em dois atributos da D1, como a seção
+>    abaixo mostra. **Fechou pela saída C:** a ordenação de gravidade do insumo e
+>    os pontos do `presets.toml` descrevem coisas diferentes, e a § 3.3 do artigo
+>    diz isso — os pontos ordenam o que o detector prioriza. Os pontos não
+>    mudaram, porque mudar invalidaria as dez sementes. A análise de
+>    sensibilidade que a D-09 previa **não foi executada**, e entrou em 18/11
+>    como limitação na § 4.6
 > 2. **As quatro fontes dos exemplos reais continuam em
 >    [citações pendentes](../citacoes-pendentes.md).** Confirmar um insumo e
 >    conferir uma fonte são atos diferentes: o primeiro diz "este texto é meu", o
