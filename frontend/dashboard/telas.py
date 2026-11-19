@@ -26,6 +26,7 @@ from frontend.components.parcelas import (
     parcelas_de,
     soma_das_parcelas,
 )
+from frontend.components.periodo import iso_ok
 from frontend.dashboard.cliente import Painel, SourceUnavailableError
 
 FAIXAS_DO_FILTRO = ("todas", "normal", "low", "medium", "high")
@@ -138,7 +139,26 @@ def tela_alertas(painel: Painel, execucao: int) -> None:
     desde = b.text_input("Desde (ISO 8601)", "", placeholder="2026-04-01T00:00:00Z")
     ate = c.text_input("Ate (ISO 8601)", "", placeholder="2026-04-03T23:59:59Z")
 
+    invalidos = [
+        rotulo for rotulo, valor in (("Desde", desde), ("Ate", ate)) if not iso_ok(valor)
+    ]
+    if invalidos:
+        st.error(
+            f"{' e '.join(invalidos)}: data invalida. Use o formato "
+            "`AAAA-MM-DDThh:mm:ssZ`, como `2026-04-01T00:00:00Z`.",
+            icon=":material/event_busy:",
+        )
+        return
+
     filtrando = faixa != "todas" or desde or ate
+    if filtrando and not painel.filtra:
+        st.warning(
+            "**O filtro nao tem efeito nesta fonte.** Os exemplos gravados "
+            "guardam uma resposta por rota e ignoram a query string: a fila "
+            "abaixo e a lista inteira, nao o resultado do filtro. Para filtrar "
+            "de verdade, aponte a barra lateral para a API.",
+            icon=":material/filter_alt_off:",
+        )
     try:
         resposta = painel.alertas(
             execucao,
