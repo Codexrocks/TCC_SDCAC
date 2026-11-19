@@ -98,7 +98,7 @@ O que cada dimensão lê de cada atributo está na matriz da
 | **D2** Desvio do padrão | Este conjunto destoa do que **esta pessoa** costuma fazer? | Padrão dos **três primeiros meses** (**D-24**) | Sessão ou usuário-dia (**P25**) |
 | **D3** Exposição acumulada | O risco vem **crescendo** ao longo de dias, sem que nenhum evento isolado dispare? | Janela deslizante, com decaimento | Episódio (**D-12**) |
 
-### A D3 reporta duas parcelas, nunca somadas
+### A D3 reporta duas parcelas, separadas
 
 A **D-25** fechou o que a dimensão 3 é: **exposição acumulada e higiene de
 segurança**, com **as duas parcelas reportadas separadas**.
@@ -108,10 +108,17 @@ segurança**, com **as duas parcelas reportadas separadas**.
 | **D3a — conduta** | Recorrência, combinação e evolução temporal dos comportamentos |
 | **D3b — postura** | Higiene de segurança: MFA, privilégio, atualização de dispositivo e resultado da campanha de phishing (**P28**) |
 
-Somar as duas num número só exigiria um peso entre "o que a pessoa fez" e "como
-a conta dela está configurada" — peso que ninguém consegue justificar perante a
-banca. Separadas, atendem também à regra de **risco decomponível** da
-[usabilidade](usabilidade.md).
+Somar as duas num número só exige um peso entre "o que a pessoa fez" e "como a
+conta dela está configurada". A D-25 recusava esse peso; **a D-43 o fixou**, e é
+assim que o experimento rodou: a nota final soma conduta com peso 1,0 e postura
+com peso 0,5, por ser estado e não ação, em `detection/integracao/composition.py`.
+O que a D-25 preserva é o **registro separado**: as duas parcelas ficam em campos
+próprios, `d3_conduct` e `d3_posture`, e o painel as mostra lado a lado — a regra
+de **risco decomponível** da [usabilidade](usabilidade.md).
+
+> **Corrigido em 19/11/2026.** Esta seção dizia "nunca somadas", e a § 3.3 do
+> artigo também — as duas contrariavam o código que produziu os resultados. Foi
+> apontado numa revisão externa do artigo e conferido no código.
 
 ---
 

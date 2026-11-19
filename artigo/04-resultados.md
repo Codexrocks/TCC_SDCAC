@@ -136,7 +136,7 @@ Três achados que as dez sementes sustentam e uma só não sustentava:
   que a D1 sozinha deixaria abaixo do corte;
 * **a C2 domina de 0,20 a 0,80**, e a vantagem sobre a C0 é de uma a duas ordens
   de grandeza;
-* **a quarta dimensão não reduz o ruído.** A vantagem que a execução de semente
+* **a terceira dimensão não reduz o ruído.** A vantagem que a execução de semente
   única atribuía à C3 acima de 0,40 **não sobrevive ao teste pareado**: nos seis
   níveis em que a média favorece a C3, nenhuma diferença é significativa; nos
   três em que o teste rejeita a nula, é a C3 que está pior. O ganho da C3 está
@@ -237,6 +237,9 @@ O custo recai sobre o analista, e a fadiga de alerta é causa documentada de
 abandono do posto (Sundaramurthy et al., 2015; Vielberth et al., 2020). Daí a
 pergunta útil não ser "a FPR é baixa?", mas **a que revocação o sistema cabe num
 turno** — e é o que o critério da Seção 3.6 fixa, em 45 alertas falsos por turno.
+A grandeza medida é mais larga que a do critério: conta **todos** os alertas,
+verdadeiros e falsos, divididos pelos 189 dias úteis da janela, e um turno não
+excede o dia. Cumprir 45 nela cumpre, com folga, o critério.
 
 **O critério é cumprido, e não em toda população.** A 0,20 de revocação a C2
 produz **33 ± 14 alertas por dia útil** e o cumpre em **sete das dez sementes**
@@ -307,7 +310,7 @@ na semente 42**. Mesmo sentido conservador.
 
 **A C3 não é operável no limiar de operação**, onde alerta sobre 99,84 ± 0,01%
 do registro; e na comparação a revocação fixa, como a Seção 4.3.1 mostra, a
-quarta dimensão não traz vantagem significativa.
+terceira dimensão não traz vantagem significativa.
 
 **Ambiente simulado não é produção.** Acurácia alta sobre dado sintético pode
 indicar gerador previsível em vez de modelo bom, e o conjunto de regras é
