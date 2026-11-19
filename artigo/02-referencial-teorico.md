@@ -187,7 +187,10 @@ de falsos positivos e sobre a cobertura dos casos temporais.
 
 ## O que esta seção ainda precisa
 
-* [ ] **As treze fontes conferidas na fonte** · **Yasmin** · antes de qualquer
+* [x] ~~**As treze fontes conferidas na fonte**~~ — a **Yasmin declarou ter
+      conferido cada uma** e o **Davi confirmou a declaração**, em 13/10/2026.
+      As 13 entraram em `referencias.md` em ABNT · **Yasmin** · antes de
+      qualquer
       uma entrar em [`referencias.md`](referencias.md). É o bloqueio da entrega
       de **18/10**
 * [ ] **Leitura da Yasmin sobre a reorganização.** O texto é dela; a estrutura

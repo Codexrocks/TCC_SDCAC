@@ -279,15 +279,20 @@ avaliador que grave métrica — e a caneta da **S14**.
 
 ## O caminho crítico, em uma frase
 
-~~Gerador~~ → ~~ingestão~~ → ~~a C3~~ → ~~múltiplas sementes~~ → **cenários
-nomeados** → tabela de ablação → ~~Resultados~~ → ~~Conclusão~~.
+~~Gerador~~ → ~~ingestão~~ → ~~a C3~~ → ~~múltiplas sementes~~ → ~~cenários
+nomeados~~ → ~~tabela de ablação~~ → ~~Resultados~~ → ~~Conclusão~~.
+
+**O caminho crítico acabou em 12/11/2026.** Os cenários nomeados caíram com a
+**D-06** e a **D-16**, e a tabela de ablação saiu das dez sementes no mesmo
+dia. **O que resta não é construção: é conferência humana, decisão e
+diagramação** — está listado abaixo, por pessoa.
 
 O gerador caiu em 04/11; a ingestão e a C3, em 11/11; as **dez sementes da
-D-13**, em 12/11. A **Seção 4 do artigo está escrita sobre números de execução
-registrada, com as quatro configurações e tratamento estatístico**, e a
-Conclusão responde à pergunta de pesquisa. O elo que resta no caminho crítico
-são os **cenários nomeados** da Yasmin pelas **D-06** e **D-16**, atrasadas
-desde 01/10.
+D-13** e os **cenários nomeados** das **D-06** e **D-16**, em 12/11. A **Seção
+4 do artigo está escrita sobre números de execução registrada, com as quatro
+configurações e tratamento estatístico**, a Conclusão responde à pergunta de
+pesquisa, e a avaliação heurística entrou pela **D-46** em 17/11, com um
+avaliador e o custo declarado na § 4.6.
 
 Duas decisões passaram a vencer antes da banca, e não depois:
 
