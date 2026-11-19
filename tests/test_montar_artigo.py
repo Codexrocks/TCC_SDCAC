@@ -316,6 +316,15 @@ def test_comando_sem_traducao_reprova_em_vez_de_vazar():
         formula(r"\sqrt{x}")
 
 
+def test_indice_aninhado_reprova_em_vez_de_achatar():
+    with pytest.raises(ValueError, match="aninhado"):
+        formula("x_{a_b}")
+
+
+def test_indice_de_um_caractere_sem_chaves():
+    assert formula("x_i + y^2") == [("x", ""), ("i", "sub"), (" + y", ""), ("2", "sup")]
+
+
 def test_chave_sem_par_reprova():
     with pytest.raises(ValueError):
         formula(r"\frac{a}{b")

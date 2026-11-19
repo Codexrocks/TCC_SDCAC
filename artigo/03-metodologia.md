@@ -340,7 +340,9 @@ do projeto.
       em 18/11/2026. O template pede equação recuada 0,5 cm, em itálico, com o
       número entre parênteses à direita, e **o documento montado imprimia o
       LaTeX cru**. O montador passou a traduzir as duas fórmulas e a inline da
-      § 3.7 nessa forma; o Markdown não mudou · **Davi**
+      § 3.7 nessa forma; o Markdown não mudou. **Conferido pelo assistente**,
+      no PDF convertido do documento montado; a fração em barra é escolha do
+      montador, e não do template · **Davi**
 * [ ] **Confirmar o tempo verbal.** A seção está no presente — "o ambiente
       representa", "cada configuração é executada" —, que lê corretamente antes
       e depois da execução. Se preferir futuro, a troca é mecânica · **Davi**

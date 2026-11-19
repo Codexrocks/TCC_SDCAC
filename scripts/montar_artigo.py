@@ -320,18 +320,35 @@ def formula(latex: str) -> list[tuple[str, str]]:
 
     `posicao` e `""`, `"sub"` ou `"sup"`. A fracao vira barra, com parenteses
     no termo composto: `\frac{FP}{FP + VN}` da `FP/(FP + VN)`.
+
+    **A fracao em barra e escolha deste montador, nao do template**, que so
+    prescreve recuo, italico e numero. Fracao empilhada exigiria equacao nativa
+    do Word (OMML), que o `python-docx` nao escreve; a barra com parenteses e a
+    forma linear sem ambiguidade de leitura. Indice ou expoente aninhado
+    (`x_{a_b}`) **reprova**, em vez de sair achatado.
     """
+    linear = _linear(latex.strip())
     saida: list[tuple[str, str]] = []
-    for parte in re.split(r"([_^](?:\{[^{}]*\}|.))", _linear(latex.strip())):
-        if not parte:
+    corrente: list[str] = []
+    i = 0
+    while i < len(linear):
+        marca = linear[i]
+        if marca not in "_^" or i + 1 >= len(linear):
+            corrente.append(marca)
+            i += 1
             continue
-        if parte[0] in "_^" and len(parte) > 1:
-            texto = parte[1:]
-            if texto.startswith("{"):
-                texto = texto[1:-1]
-            saida.append((texto, "sub" if parte[0] == "_" else "sup"))
+        if corrente:
+            saida.append(("".join(corrente), ""))
+            corrente = []
+        if linear[i + 1] == "{":
+            texto, i = _grupo(linear, i + 1)
         else:
-            saida.append((parte, ""))
+            texto, i = linear[i + 1], i + 2
+        if any(c in texto for c in "_^{}"):
+            raise ValueError(f"formula: indice ou expoente aninhado em {latex!r}")
+        saida.append((texto, "sub" if marca == "_" else "sup"))
+    if corrente:
+        saida.append(("".join(corrente), ""))
     return saida
 
 
