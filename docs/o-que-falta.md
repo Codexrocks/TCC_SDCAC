@@ -27,7 +27,7 @@ em 12/11/2026, e as semanas **S5 a S11** foram dadas como prontas pelo Davi em
 |---|---|
 | Experimento | Dez sementes, as quatro configurações em cada uma, Wilcoxon pareado — [`results/agregado.md`](../results/README.md) |
 | Artigo montado | **12 páginas**, o teto do template, por `scripts/montar_artigo.py` |
-| Referências | 20 na lista, conferidas e confirmadas |
+| Referências | 21 na lista: 20 conferidas e confirmadas, e Alahmadi et al. (2022) à espera da confirmação do Davi |
 | Template | O do professor chegou em 18/11 e é, no conteúdo, o COBEM 2025 que o artigo já seguia |
 | Decisões | Todas fechadas, menos a **D-07** (caneta rotativa), que não tem prazo |
 
@@ -105,14 +105,12 @@ em 12/11/2026, e as semanas **S5 a S11** foram dadas como prontas pelo Davi em
 2. **Introdução, com o Filipe:**
    - A extensão **cabe**: no documento montado em 18/11 ela vai da metade da
      página 1 ao alto da página 3, cerca de 1,6 página para um teto de 2
-   - ⚠️ **As referências do contexto não cumprem a regra dos 5 anos.** As
+   - ~~**As referências do contexto não cumprem a regra dos 5 anos.**~~ As
      orientações pedem publicação de até 5 anos no contexto
-     ([formato do artigo](formato-do-artigo.md)), e as duas únicas chamadas da
-     Introdução são **Kent e Souppaya (2006)** e **Chandola et al. (2009)**.
-     Uma obra já conferida da lista, **Gonzalez-Granadillo et al. (2021)**, está
-     no limite dos 5 anos e trata de SIEM — **só entra se quem abrir o artigo
-     confirmar que ele sustenta a frase**. Fonte nova passa pelo mesmo caminho
-     das outras vinte: conferida na fonte antes de entrar
+     ([formato do artigo](formato-do-artigo.md)), e as duas chamadas da § 1.1
+     eram de 2006 e 2009. **Entrou Alahmadi et al. (2022) em 19/11**, aberta e
+     conferida pelo assistente no PDF dos anais; **falta o Davi confirmar**, em
+     [citações pendentes](citacoes-pendentes.md)
    - Alinhar a granularidade dos objetivos ao plano
 3. **Uma citação em [`usabilidade.md`](usabilidade.md) § 7**, sobre fadiga de
    alerta em SOC

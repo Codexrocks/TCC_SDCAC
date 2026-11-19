@@ -35,7 +35,10 @@ condições que ultrapassam determinados limites. Uma atividade incomum segundo
 regra genérica, porém, não representa necessariamente ameaça: anomalia é
 observação que diverge de um comportamento esperado, e interpretar o desvio exige
 considerar o contexto e as características do conjunto analisado
-(Chandola et al., 2009).
+(Chandola et al., 2009). Em centros de operações de segurança, a maior parte dos
+falsos positivos relatados por analistas é de disparos benignos: alertas
+corretos segundo a regra, explicados por atividade legítima da própria
+organização (Alahmadi et al., 2022).
 
 Um acesso realizado fora do horário convencional, por exemplo, pode representar
 uma situação incomum para determinado usuário, mas pode ser compatível com a

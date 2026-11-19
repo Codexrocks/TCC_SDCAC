@@ -284,9 +284,13 @@ vista de usabilidade.
 A taxa de falsos positivos medida na S12 é, portanto, também um indicador de
 usabilidade — e deve ser lida junto do SUS na discussão dos resultados.
 
-<!-- FALTA CITAÇÃO --> há literatura específica sobre carga de trabalho e
-fadiga de alerta em analistas de SOC. Yasmin: vale procurar na S4, quando o
-referencial cobrir SIEM e SOC.
+A literatura sobre analistas de SOC confirma o risco. **Alahmadi, Axon e
+Martinovic (2022)**, *USENIX Security Symposium*, fizeram um levantamento com 20
+profissionais de SOC e um estudo qualitativo com 21: a validação de alarmes é tarefa tediosa que leva ao esgotamento e, por
+fim, à dessensibilização, e a maior parte dos falsos positivos é de disparos
+benignos — alertas corretos sobre atividade legítima da organização. A fonte foi
+aberta pelo assistente em 19/11/2026 e espera a confirmação do Davi, em
+[citações pendentes](citacoes-pendentes.md).
 
 ---
 

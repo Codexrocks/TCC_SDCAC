@@ -9,11 +9,11 @@
 > data do retrato. É o que impede esta página de dizer "amanhã" três dias
 > depois — que foi exatamente o que o cronograma fez em 26/09/2026.
 
-<!-- QUADRO:gerado-em 2026-11-18 -->
+<!-- QUADRO:gerado-em 2026-11-19 -->
 
 **TCC_SDCAC** · TCC 2026/2 · Prof. Euzébio D. de Souza
 
-**Retrato de 18/11/2026.** Entrega do TCC em **10/12/2026**, daqui a **22 dias**.
+**Retrato de 19/11/2026.** Entrega do TCC em **10/12/2026**, daqui a **21 dias**.
 
 ## Resumo
 
@@ -21,8 +21,8 @@
 |---|---|
 | ⚠️ Atrasado | 3 |
 | ▶️ Em curso | 1 |
-| ⏳ A vencer em 7 dias | 1 |
-| 🗓️ Depois | 11 |
+| ⏳ A vencer em 7 dias | 3 |
+| 🗓️ Depois | 9 |
 | ✅ Feito | 58 |
 
 ## ⚠️ Atrasado
@@ -31,9 +31,9 @@
 
 | Tipo | Item | O que é | Quem | Prazo | Situação |
 |---|---|---|---|---|---|
-| Capítulo | **1. Introdução** | Entregue parcial em 24/09. Os seis blocos de complementação foram preenchidos fora do repositório e sincronizados em 13/10; falta conferir a extensão no template, cujo teto é de 2 páginas | Yasmin, Filipe | S5 | ⚠️ Atrasado há 48 dias |
-| Capítulo | **2. Referencial teórico** | Escrito pela Yasmin em 28/09 e reorganizado em 13/10 para a estrutura da 3ª reunião — 3 seções, 8 elementos do problema. As 13 fontes foram conferidas e entraram na lista em ABNT (#64) | Yasmin | S5 | ⚠️ Atrasado há 48 dias |
-| Capítulo | **3. Metodologia** | Escrita e versionada em 28/09 — 9 subseções. **As quatro lacunas da M2 fecharam**, a última em 12/11. As 7 fontes já têm entrada em `referencias.md` (#121) e esperam confirmação de pessoa | Davi (caneta) | S5 | ⚠️ Atrasado há 48 dias |
+| Capítulo | **1. Introdução** | Entregue parcial em 24/09. Os seis blocos de complementação foram preenchidos fora do repositório e sincronizados em 13/10; falta conferir a extensão no template, cujo teto é de 2 páginas | Yasmin, Filipe | S5 | ⚠️ Atrasado há 49 dias |
+| Capítulo | **2. Referencial teórico** | Escrito pela Yasmin em 28/09 e reorganizado em 13/10 para a estrutura da 3ª reunião — 3 seções, 8 elementos do problema. As 13 fontes foram conferidas e entraram na lista em ABNT (#64) | Yasmin | S5 | ⚠️ Atrasado há 49 dias |
+| Capítulo | **3. Metodologia** | Escrita e versionada em 28/09 — 9 subseções. **As quatro lacunas da M2 fecharam**, a última em 12/11. As 7 fontes já têm entrada em `referencias.md` (#121) e esperam confirmação de pessoa | Davi (caneta) | S5 | ⚠️ Atrasado há 49 dias |
 
 ## ▶️ Em curso
 
@@ -41,32 +41,32 @@
 
 | Tipo | Item | O que é | Quem | Prazo | Situação |
 |---|---|---|---|---|---|
-| Semana | **S12** | Tabela de ablação, sensibilidade dos pesos, gráficos | Filipe, Davi | 13/11/2026 a 19/11/2026 | ▶️ Em curso · 1 dia até o fim |
+| Semana | **S12** | Tabela de ablação, sensibilidade dos pesos, gráficos | Filipe, Davi | 13/11/2026 a 19/11/2026 | ▶️ Em curso · 0 dias até o fim |
 
 ## ⏳ A vencer em 7 dias
 
-1 item.
+3 itens.
 
 | Tipo | Item | O que é | Quem | Prazo | Situação |
 |---|---|---|---|---|---|
-| Professor | ****Seção de Resultados reenviada**, com legenda e fonte em toda tabela** | Entregue em 12/11 e devolvida pelo orientador com correções: tabela e figura precisam de legenda com a respectiva fonte indicada | Todos | 19/11/2026 | ⏳ Vence em 1 dia |
+| Professor | ****Seção de Resultados reenviada**, com legenda e fonte em toda tabela** | Entregue em 12/11 e devolvida pelo orientador com correções: tabela e figura precisam de legenda com a respectiva fonte indicada | Todos | 19/11/2026 | ⏳ Vence hoje |
+| Semana | **S13** | artigo/04-resultados.md | Filipe (caneta) | 20/11/2026 a 26/11/2026 | ⏳ Vence em 7 dias |
+| Capítulo | **4. Resultados** | Escrita sobre dez sementes. Seis subseções, 4 tabelas e 1 figura, todas com legenda e fonte. A 4.4 reporta a avaliação heurística — 20 achados, nenhum grau 4 — e a 4.6 declara que ela teve um avaliador | Filipe (caneta) | S13 | ⏳ Vence em 7 dias |
 
 ## 🗓️ Depois
 
-11 itens.
+9 itens.
 
 | Tipo | Item | O que é | Quem | Prazo | Situação |
 |---|---|---|---|---|---|
 | Professor | **Reunião de acompanhamento com o orientador** |  | Todos | Quinzenal | 🔁 Recorrente |
-| Professor | ****Entrega do TCC**** |  | Todos | 10/12/2026 | 🗓️ Em 22 dias |
+| Professor | ****Entrega do TCC**** |  | Todos | 10/12/2026 | 🗓️ Em 21 dias |
 | Professor | **Apresentação e defesa** |  | Todos | Dezembro | 🗓️ Sem prazo |
-| Marco | **M5 · Entrega** | Artigo diagramado e submetido | Todos | 10/12/2026 | 🗓️ Em 22 dias |
-| Semana | **S13** | artigo/04-resultados.md | Filipe (caneta) | 20/11/2026 a 26/11/2026 | 🗓️ Em 8 dias |
-| Semana | **S14** | artigo/05-conclusao.md | Davi (caneta) | 27/11/2026 a 03/12/2026 | 🗓️ Em 15 dias |
-| Semana | **S15** | Versão final diagramada · ENTREGA 10/12 | Todos | 04/12/2026 a 10/12/2026 | 🗓️ Em 22 dias |
-| Semana | **S16** | Slides, ensaio cronometrado, defesa | Todos | a partir de 11/12/2026 | 🗓️ Em 23 dias |
-| Capítulo | **4. Resultados** | Escrita sobre dez sementes. Seis subseções, 4 tabelas e 1 figura, todas com legenda e fonte. A 4.4 reporta a avaliação heurística — 20 achados, nenhum grau 4 — e a 4.6 declara que ela teve um avaliador | Filipe (caneta) | S13 | 🗓️ Em 8 dias |
-| Capítulo | **5. Conclusão** | Escrita. Cinco subseções, com resposta própria para cada grandeza da pergunta e os oito objetivos avaliados | Davi (caneta) | S14 | 🗓️ Em 15 dias |
+| Marco | **M5 · Entrega** | Artigo diagramado e submetido | Todos | 10/12/2026 | 🗓️ Em 21 dias |
+| Semana | **S14** | artigo/05-conclusao.md | Davi (caneta) | 27/11/2026 a 03/12/2026 | 🗓️ Em 14 dias |
+| Semana | **S15** | Versão final diagramada · ENTREGA 10/12 | Todos | 04/12/2026 a 10/12/2026 | 🗓️ Em 21 dias |
+| Semana | **S16** | Slides, ensaio cronometrado, defesa | Todos | a partir de 11/12/2026 | 🗓️ Em 22 dias |
+| Capítulo | **5. Conclusão** | Escrita. Cinco subseções, com resposta própria para cada grandeza da pergunta e os oito objetivos avaliados | Davi (caneta) | S14 | 🗓️ Em 14 dias |
 | Decisão | **D-07** | Caneta rotativa por seção | Davi, Yasmin, Filipe | — | 🗓️ Sem prazo |
 
 ## ✅ Feito
@@ -143,6 +143,7 @@ atrito.
 | Semana | Entregável | Critério de aceite | Quem |
 |---|---|---|---|
 | **S12** | Tabela de ablação, sensibilidade dos pesos, gráficos | Cada número sai de notebook versionado · Wilcoxon pareado sobre as diferenças | Filipe, Davi |
+| **S13** | artigo/04-resultados.md | Cada limitação nomeada tem proposta de trabalho futuro · LGPD e ISO 27001 entram aqui | Filipe (caneta) |
 
 ## O que está em andamento
 
@@ -168,14 +169,14 @@ que some mais fácil de vista.
 
 | Onde | O que falta | Quem | Aberta desde | Idade |
 |---|---|---|---|---|
-| `docs/usabilidade.md § 6.2` | Formulação exata e porcentagem de Nielsen e Landauer | Filipe | 03/09/2026 | 76 dias |
-| `docs/usabilidade.md § 6.3` | Limites exatos de cada faixa adjetiva do SUS, em Bangor, Kortum e Miller (2009) | Filipe | 03/09/2026 | 76 dias |
-| `docs/usabilidade.md § 7` | Literatura de carga de trabalho e fadiga de alerta em analistas de SOC | Yasmin | 03/09/2026 | 76 dias |
-| `docs/usabilidade.md § 9` | Edição e ano da obra de Shneiderman efetivamente consultada | Filipe | 03/09/2026 | 76 dias |
-| `artigo/01-introducao.md — caso Target, 2013` | Confirmar na fonte: RILEY; ELGIN; LAWRENCE; MATLACK, Bloomberg Businessweek, 13 mar. 2014 | Yasmin | 10/11/2026 | 8 dias |
-| `artigo/01-introducao.md — caso GE / Zheng, 2018` | Confirmar na fonte: U.S. DOJ, Niskayuna man charged theft trade secrets, 2018 | Yasmin | 10/11/2026 | 8 dias |
-| `artigo/01-introducao.md — caso Capital One, 2019` | Confirmar na fonte: U.S. DOJ, usao-wdwa. **O próprio insumo admite estar incompleto**, com URL genérica | Yasmin | 10/11/2026 | 8 dias |
-| `artigo/01-introducao.md — caso Tesla / Tripp, 2018` | Confirmar na fonte: petição inicial Tesla, Inc. v. Martin Tripp (Nevada) ou GovInfoSecurity, 2018 | Yasmin | 10/11/2026 | 8 dias |
+| `docs/usabilidade.md § 6.2` | Formulação exata e porcentagem de Nielsen e Landauer | Filipe | 03/09/2026 | 77 dias |
+| `docs/usabilidade.md § 6.3` | Limites exatos de cada faixa adjetiva do SUS, em Bangor, Kortum e Miller (2009) | Filipe | 03/09/2026 | 77 dias |
+| `docs/usabilidade.md § 9` | Edição e ano da obra de Shneiderman efetivamente consultada | Filipe | 03/09/2026 | 77 dias |
+| `artigo/01-introducao.md — caso Target, 2013` | Confirmar na fonte: RILEY; ELGIN; LAWRENCE; MATLACK, Bloomberg Businessweek, 13 mar. 2014 | Yasmin | 10/11/2026 | 9 dias |
+| `artigo/01-introducao.md — caso GE / Zheng, 2018` | Confirmar na fonte: U.S. DOJ, Niskayuna man charged theft trade secrets, 2018 | Yasmin | 10/11/2026 | 9 dias |
+| `artigo/01-introducao.md — caso Capital One, 2019` | Confirmar na fonte: U.S. DOJ, usao-wdwa. **O próprio insumo admite estar incompleto**, com URL genérica | Yasmin | 10/11/2026 | 9 dias |
+| `artigo/01-introducao.md — caso Tesla / Tripp, 2018` | Confirmar na fonte: petição inicial Tesla, Inc. v. Martin Tripp (Nevada) ou GovInfoSecurity, 2018 | Yasmin | 10/11/2026 | 9 dias |
+| `artigo/01-introducao.md § 1.1 e docs/usabilidade.md § 7 — Alahmadi et al., 2022` | Fonte de contexto de até 5 anos, aberta pelo assistente; falta uma pessoa confirmar que a frase diz o que o resumo diz | Davi | 19/11/2026 | 0 dias |
 
 ## O que ficou fora desta versão
 

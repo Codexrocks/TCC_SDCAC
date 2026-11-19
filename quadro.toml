@@ -638,6 +638,12 @@ fechada_em = 2026-11-18
 # ---------------------------------------------------------------------------
 
 [[citacao]]
+onde = "artigo/01-introducao.md § 1.1 e docs/usabilidade.md § 7 — Alahmadi et al., 2022"
+o_que = "Fonte de contexto de até 5 anos, aberta pelo assistente; falta uma pessoa confirmar que a frase diz o que o resumo diz"
+dono = "Davi"
+desde = 2026-11-19
+
+[[citacao]]
 onde = "docs/usabilidade.md § 6.2"
 o_que = "Formulação exata e porcentagem de Nielsen e Landauer"
 dono = "Filipe"
@@ -647,12 +653,6 @@ desde = 2026-09-03
 onde = "docs/usabilidade.md § 6.3"
 o_que = "Limites exatos de cada faixa adjetiva do SUS, em Bangor, Kortum e Miller (2009)"
 dono = "Filipe"
-desde = 2026-09-03
-
-[[citacao]]
-onde = "docs/usabilidade.md § 7"
-o_que = "Literatura de carga de trabalho e fadiga de alerta em analistas de SOC"
-dono = "Yasmin"
 desde = 2026-09-03
 
 [[citacao]]
