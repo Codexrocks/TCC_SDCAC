@@ -336,10 +336,11 @@ do projeto.
       acumulada**~~ — ajustada. A § 1 já traz *"exposição acumulada ao risco,
       esta reportada em duas parcelas separadas"*, e os dois capítulos
       concordam · **Davi** · S5
-* [ ] **Confirmar se o template aceita fórmula em `$$…$$`**; se não aceitar,
-      viram imagem ou texto corrido. O template chegou em 18/11/2026 e usa
-      referência cruzada para equações — **falta conferir no arquivo** ·
-      **Davi** · antes da diagramação
+* [x] ~~**Confirmar se o template aceita fórmula em `$$…$$`**~~ — conferido
+      em 18/11/2026. O template pede equação recuada 0,5 cm, em itálico, com o
+      número entre parênteses à direita, e **o documento montado imprimia o
+      LaTeX cru**. O montador passou a traduzir as duas fórmulas e a inline da
+      § 3.7 nessa forma; o Markdown não mudou · **Davi**
 * [ ] **Confirmar o tempo verbal.** A seção está no presente — "o ambiente
       representa", "cada configuração é executada" —, que lê corretamente antes
       e depois da execução. Se preferir futuro, a troca é mecânica · **Davi**

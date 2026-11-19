@@ -26,8 +26,10 @@ sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "scripts"))
 from montar_artigo import (  # noqa: E402
     SECOES_DE_CONTROLE,
     blocos,
+    com_formulas,
     confere_legendas,
     emails,
+    formula,
     trechos,
 )
 
@@ -289,3 +291,60 @@ def test_o_lugar_padrao_e_dentro_de_artigo(tmp_path):
         '["so@x.br"]', encoding="utf-8"
     )
     assert emails(tmp_path) == "so@x.br"
+
+
+# ----------------------------------------------------------------- formulas
+# Ate 18/11/2026 o montador copiava o LaTeX cru para o `.docx`, e o documento de
+# entrega saia com `\mathrm{FPR} = \frac{FP}{FP + VN}` impresso. Ninguem viu,
+# porque o GitBook desenha o LaTeX e o defeito so existia no arquivo montado.
+def test_fracao_vira_barra_e_o_termo_composto_ganha_parenteses():
+    assert formula(r"\mathrm{FPR} = \frac{FP}{FP + VN}") == [("FPR = FP/(FP + VN)", "")]
+
+
+def test_indice_vira_subscrito_de_verdade():
+    trechos_ = formula(r"\mathrm{Revocação}_{L} = \frac{VP_{L}}{VP_{L} + FN_{L}}")
+    assert "".join(t for t, _ in trechos_) == "RevocaçãoL = VPL/(VPL + FNL)"
+    assert [t for t, pos in trechos_ if pos == "sub"] == ["L", "L", "L", "L"]
+
+
+def test_expoente_vira_sobrescrito():
+    assert formula("2/2^{n}") == [("2/2", ""), ("n", "sup")]
+
+
+def test_comando_sem_traducao_reprova_em_vez_de_vazar():
+    with pytest.raises(ValueError, match="sqrt"):
+        formula(r"\sqrt{x}")
+
+
+def test_chave_sem_par_reprova():
+    with pytest.raises(ValueError):
+        formula(r"\frac{a}{b")
+
+
+def test_formula_inline_sai_do_meio_da_frase():
+    partes = com_formulas("o menor p é $2/2^{n}$, de modo que")
+    assert partes[0] == ("o menor p é ", "", False)
+    assert ("n", "sup", True) in partes
+    assert partes[-1] == (", de modo que", "", False)
+
+
+def test_dinheiro_nao_vira_formula():
+    texto = "custa R$ 10 e R$ 20"
+    assert com_formulas(texto) == [(texto, "", False)]
+
+
+def test_toda_formula_do_artigo_tem_traducao():
+    """Formula nova com comando sem traducao reprova aqui, e nao na banca."""
+    raiz = Path(__file__).resolve().parent.parent / "artigo"
+    vistas = 0
+    for caminho in sorted(raiz.glob("0[1-5]-*.md")):
+        for tipo, _, conteudo in blocos(caminho.read_text(encoding="utf-8")):
+            if tipo == "titulo" and conteudo in SECOES_DE_CONTROLE:
+                break
+            if tipo == "formula":
+                formula(str(conteudo))
+                vistas += 1
+            elif tipo in ("paragrafo", "item"):
+                for texto, *_ in trechos(str(conteudo)):
+                    vistas += sum(e for *_, e in com_formulas(texto))
+    assert vistas >= 2, "o artigo tem formula; se nao achou nenhuma, a leitura quebrou"
