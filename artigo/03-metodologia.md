@@ -320,7 +320,9 @@ do projeto.
 * [x] ~~**Lacuna 3**~~ — o critério da D-15 foi declarado em 12/11/2026, em 45
       alertas falsos por turno, com a data registrada. A revocação longitudinal
       mínima continua por declarar
-* [ ] **As sete fontes conferidas na fonte** · **Davi** · antes de qualquer uma
+* [x] ~~**As sete fontes conferidas na fonte**~~ — as sete entraram em
+      `referencias.md` em 17/11/2026, com a fonte aberta uma a uma, e o
+      **Davi confirmou** no mesmo dia · **Davi** · antes de qualquer uma
       entrar em [`referencias.md`](referencias.md). As pendências estão em
       [citações pendentes](../docs/citacoes-pendentes.md), e o ano de
       `WOHLIN et al., 2012` está marcado como merecedor de atenção redobrada
@@ -330,13 +332,14 @@ do projeto.
       [Introdução](01-introducao.md), que lista **a) a h)** onde o
       [plano](../docs/plano.md) §1.5 lista **OE1 a OE6**. Não é contradição, é
       recorte — mas quem lê o artigo é a banca · **Davi**
-* [ ] **A Introdução ainda descreve a dimensão 3 só como exposição acumulada**,
-      e esta seção a descreve como exposição **e higiene**, com duas parcelas
-      separadas (**D-25**). Enquanto não for ajustada, os dois capítulos se
-      contradizem · **Davi** · S5
+* [x] ~~**A Introdução ainda descreve a dimensão 3 só como exposição
+      acumulada**~~ — ajustada. A § 1 já traz *"exposição acumulada ao risco,
+      esta reportada em duas parcelas separadas"*, e os dois capítulos
+      concordam · **Davi** · S5
 * [ ] **Confirmar se o template aceita fórmula em `$$…$$`**; se não aceitar,
-      viram imagem ou texto corrido · **Davi** · quando o template do COBEM 2026
-      chegar
+      viram imagem ou texto corrido. O template chegou em 18/11/2026 e usa
+      referência cruzada para equações — **falta conferir no arquivo** ·
+      **Davi** · antes da diagramação
 * [ ] **Confirmar o tempo verbal.** A seção está no presente — "o ambiente
       representa", "cada configuração é executada" —, que lê corretamente antes
       e depois da execução. Se preferir futuro, a troca é mecânica · **Davi**

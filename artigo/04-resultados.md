@@ -275,8 +275,10 @@ alerta agora.
 
 ## 4.6 Limitações
 
-> **A escrever.** Seção obrigatória, e a que mais protege o trabalho. As
-> primeiras já estão medidas e não dependem de mais nada:
+> **Escrita.** Seção obrigatória, e a que mais protege o trabalho. São nove
+> limitações, todas medidas ou declaradas, e nenhuma delas favorece o
+> resultado — as duas de subestimação deixam a C3 **conservadora** no recorte
+> afetado.
 
 **Dez sementes medem variação de amostragem, não validade externa.** O teste
 pareado afasta a hipótese de a diferença ter vindo do sorteio, mas não a de o
