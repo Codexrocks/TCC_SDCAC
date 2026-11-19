@@ -19,21 +19,19 @@
 
 | Coluna | Itens |
 |---|---|
-| ⚠️ Atrasado | 3 |
+| ⚠️ Atrasado | 1 |
 | ▶️ Em curso | 1 |
-| ⏳ A vencer em 7 dias | 3 |
+| ⏳ A vencer em 7 dias | 1 |
 | 🗓️ Depois | 9 |
-| ✅ Feito | 58 |
+| ✅ Feito | 62 |
 
 ## ⚠️ Atrasado
 
-3 itens.
+1 item.
 
 | Tipo | Item | O que é | Quem | Prazo | Situação |
 |---|---|---|---|---|---|
 | Capítulo | **1. Introdução** | Entregue parcial em 24/09. Os seis blocos de complementação foram preenchidos fora do repositório e sincronizados em 13/10; falta conferir a extensão no template, cujo teto é de 2 páginas | Yasmin, Filipe | S5 | ⚠️ Atrasado há 49 dias |
-| Capítulo | **2. Referencial teórico** | Escrito pela Yasmin em 28/09 e reorganizado em 13/10 para a estrutura da 3ª reunião — 3 seções, 8 elementos do problema. As 13 fontes foram conferidas e entraram na lista em ABNT (#64) | Yasmin | S5 | ⚠️ Atrasado há 49 dias |
-| Capítulo | **3. Metodologia** | Escrita e versionada em 28/09 — 9 subseções. **As quatro lacunas da M2 fecharam**, a última em 12/11. As 7 fontes já têm entrada em `referencias.md` (#121) e esperam confirmação de pessoa | Davi (caneta) | S5 | ⚠️ Atrasado há 49 dias |
 
 ## ▶️ Em curso
 
@@ -45,13 +43,11 @@
 
 ## ⏳ A vencer em 7 dias
 
-3 itens.
+1 item.
 
 | Tipo | Item | O que é | Quem | Prazo | Situação |
 |---|---|---|---|---|---|
 | Professor | ****Seção de Resultados reenviada**, com legenda e fonte em toda tabela** | Entregue em 12/11 e devolvida pelo orientador com correções: tabela e figura precisam de legenda com a respectiva fonte indicada | Todos | 19/11/2026 | ⏳ Vence hoje |
-| Semana | **S13** | artigo/04-resultados.md | Filipe (caneta) | 20/11/2026 a 26/11/2026 | ⏳ Vence em 7 dias |
-| Capítulo | **4. Resultados** | Escrita sobre dez sementes. Seis subseções, 4 tabelas e 1 figura, todas com legenda e fonte. A 4.4 reporta a avaliação heurística — 20 achados, nenhum grau 4 — e a 4.6 declara que ela teve um avaliador | Filipe (caneta) | S13 | ⏳ Vence em 7 dias |
 
 ## 🗓️ Depois
 
@@ -71,7 +67,7 @@
 
 ## ✅ Feito
 
-58 itens.
+62 itens.
 
 | Tipo | Item | O que é | Quem | Prazo | Situação |
 |---|---|---|---|---|---|
@@ -88,6 +84,10 @@
 | Semana | **S9** | Dashboard Streamlit | Filipe | 23/10/2026 a 29/10/2026 | ✅ Entregue |
 | Semana | **S10 · opcional** | Isolation Forest — opcional | Filipe | 30/10/2026 a 05/11/2026 | ✅ Entregue |
 | Semana | **S11** | Execução de todos os cenários nas quatro configurações | Todos (Yasmin) | 06/11/2026 a 12/11/2026 | ✅ Entregue |
+| Semana | **S13** | artigo/04-resultados.md | Filipe (caneta) | 20/11/2026 a 26/11/2026 | ✅ Entregue |
+| Capítulo | **2. Referencial teórico** | Escrito pela Yasmin em 28/09 e reorganizado em 13/10 para a estrutura da 3ª reunião — 3 seções, 8 elementos do problema. As 13 fontes foram conferidas e entraram na lista em ABNT (#64) | Yasmin | S5 | ✅ Escrito |
+| Capítulo | **3. Metodologia** | Escrita e versionada em 28/09 — 9 subseções. **As quatro lacunas da M2 fecharam**, a última em 12/11. As 7 fontes entraram em `referencias.md` (#121) e foram confirmadas pelo Davi em 17/11 | Davi (caneta) | S5 | ✅ Escrito |
+| Capítulo | **4. Resultados** | Escrita sobre dez sementes. Seis subseções, 4 tabelas e 1 figura, todas com legenda e fonte. A 4.4 reporta a avaliação heurística — 20 achados, nenhum grau 4 — e a 4.6 declara que ela teve um avaliador | Filipe (caneta) | S13 | ✅ Escrito |
 | Decisão | **D-02** | Dashboard: objetivo, instrumento ou fora do escopo | — | 14/10/2026 | ✅ Fechada em 14/10/2026 |
 | Decisão | **D-06** | Cenários de contexto (B) e longitudinais (L) | Yasmin | 12/11/2026 | ✅ Fechada em 12/11/2026 |
 | Decisão | **D-09** | Pesos preliminares e análise de sensibilidade | Yasmin | 12/11/2026 | ✅ Fechada em 12/11/2026 |
@@ -143,7 +143,6 @@ atrito.
 | Semana | Entregável | Critério de aceite | Quem |
 |---|---|---|---|
 | **S12** | Tabela de ablação, sensibilidade dos pesos, gráficos | Cada número sai de notebook versionado · Wilcoxon pareado sobre as diferenças | Filipe, Davi |
-| **S13** | artigo/04-resultados.md | Cada limitação nomeada tem proposta de trabalho futuro · LGPD e ISO 27001 entram aqui | Filipe (caneta) |
 
 ## O que está em andamento
 
@@ -155,11 +154,11 @@ contrário das colunas acima.
 | Tipo | Item | Quem | O que está fazendo |
 |---|---|---|---|
 | Semana | **S12** | Filipe, Davi | Tabela de ablação e gráfico prontos, com Wilcoxon pareado sobre as dez sementes, em `results/agregado.md`. **A sensibilidade dos pesos não foi executada** e entrou em 18/11 como limitação declarada na § 4.6 e trabalho futuro na § 5.4, por decisão do Davi. Os números saem dos scripts de `evaluator/`, não de notebook. |
-| Capítulo | **1. Introdução** | Yasmin, Filipe | Entregue parcial ao professor em 24/09. Os seis blocos de complementação foram preenchidos fora do repositório e sincronizados em 13/10, e a dimensão 3 já está ajustada à D-25 — as duas coisas foram declaradas como pendentes por engano até 15/10. Falta conferir a extensão no template, as fontes da contextualização com até 5 anos, e alinhar a granularidade dos objetivos ao plano. |
-| Capítulo | **2. Referencial teórico** | Yasmin | Reorganizado em 13/10 para a estrutura da 3ª reunião — problema por elementos, como a literatura enfrentou, metodologia que se extrai — sem fonte nova. **As 13 fontes foram conferidas e entraram em `referencias.md` em ABNT NBR 6023** (#64). Falta a Yasmin reler a reorganização e concordar com o que ficou atribuído a cada obra. |
-| Capítulo | **3. Metodologia** | Davi (caneta) | Escrita e versionada em 28/09 — 9 subseções. **As quatro lacunas fecharam:** 2 e 4 em 14/10; a 1 em 12/11, pela D-06 e pela D-16, com os 20 cenários nomeados na seção 3.4; a 3 em 12/11, pela D-15, em 45 alertas falsos por turno. As 7 fontes entraram em `referencias.md` em 17/11 pelo #121, com a fonte aberta pelo assistente — **falta a confirmação de uma pessoa**, e a pendência segue em `docs/citacoes-pendentes.md`. |
-| Capítulo | **4. Resultados** | Filipe (caneta) | Escrita entre 11/11 e 17/11 sobre execução registrada em `results/`: seis subseções — execução dos cenários, matriz de confusão, métricas em três partes, verificação do painel, discussão e limitações. Quatro tabelas e **uma** figura, com legenda e fonte, que é a correção que o professor pediu em 12/11 — a Figura 2, a captura do painel, saiu em 17/11 para o documento caber em 12 páginas, e o arquivo ficou em `results/figuras/`. A 4.4 passou a reportar a avaliação heurística, com 20 achados e nenhum grau 4, e a 4.6 declara que ela teve **um avaliador, não três**, pela D-46. **Não está pronta** porque nenhuma pessoa leu ainda a 4.3.3 e a 4.4 reescritas em 17/11. |
-| Capítulo | **5. Conclusão** | Davi (caneta) | Escrita e reescrita sobre as dez sementes: retomada da pergunta com resposta própria para cada uma das duas grandezas, os oito objetivos específicos avaliados, contribuições, trabalhos futuros e as referências. **Não está pronta** porque a lista de referências tem sete entradas à espera de confirmação de pessoa. |
+| Capítulo | **1. Introdução** | Yasmin, Filipe | Lida e assinada por Yasmin e Filipe, relatado pelo Davi em 19/11/2026: a extensão cabe — cerca de 1,6 página para um teto de 2 — e a contextualização ganhou fonte de 2022, Alahmadi et al. **Falta só o Davi confirmar essa fonte**, em `docs/citacoes-pendentes.md`. |
+| Capítulo | **2. Referencial teórico** | Yasmin | Reorganizado em 13/10 para a estrutura da 3ª reunião, com as 13 fontes conferidas (#64). **A Yasmin releu e assinou**, relatado pelo Davi em 19/11/2026. |
+| Capítulo | **3. Metodologia** | Davi (caneta) | As quatro lacunas da M2 fecharam em 12/11, e as 7 fontes da § 3.7 e da § 3.8 foram confirmadas pelo Davi em 17/11. A § 3.3 foi corrigida em 19/11 pelo #134 e **lida e aprovada pelo Davi**; Yasmin e Filipe assinaram, relatado pelo Davi em 19/11/2026. |
+| Capítulo | **4. Resultados** | Filipe (caneta) | Escrita entre 11/11 e 17/11 sobre as dez sementes, com quatro tabelas e uma figura, todas com legenda e fonte. **O Filipe leu e assinou**, relatado pelo Davi em 19/11/2026, depois das correções de 18/11 e 19/11 (#132, #134). |
+| Capítulo | **5. Conclusão** | Davi (caneta) | Escrita sobre as dez sementes, com as referências confirmadas e a § 5.1 com as quatro restrições da § 4.6. Yasmin e Filipe assinaram, relatado pelo Davi em 19/11/2026. **Falta o Davi ler a § 5.4**, reescrita em 18/11 e 19/11. |
 
 ## Dívida bibliográfica
 
