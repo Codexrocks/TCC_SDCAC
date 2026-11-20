@@ -16,8 +16,8 @@ como recusar uma entrega, e a recusa vira atrito.
 | **05/09/26** | Tema do trabalho e composição do grupo — *Tarefa 01* | ✅ **Entregue em 03/09/2026** — [registro](entregas/tarefa-01.md) |
 | **24/09/26** | Introdução do artigo no template **COBEM 2026** — *Tarefa 02* | ✅ **Entregue parcial em 24/09/2026** — [registro](entregas/tarefa-02.md) |
 | Quinzenal | Reunião de acompanhamento com o orientador | 🔁 Recorrente |
-| **19/11/26** | **Seção de Resultados reenviada**, com legenda e fonte em toda tabela | ⏳ Vence em 1 dia |
-| **10/12/26** | **Entrega do TCC** | 🗓️ Em 22 dias |
+| **19/11/26** | **Seção de Resultados reenviada**, com legenda e fonte em toda tabela | ⏳ Vence hoje |
+| **10/12/26** | **Entrega do TCC** | 🗓️ Em 21 dias |
 | Dezembro | Apresentação e defesa | 🗓️ Sem prazo |
 <!-- QUADRO:fim prazos-do-professor -->
 
@@ -32,11 +32,11 @@ não há data escrita à mão aqui, porque data escrita à mão envelhece:
 
 | Capítulo | Estado | Quem | Semana prevista | Situação |
 |---|---|---|---|---|
-| 1. Introdução | Entregue parcial em 24/09. Os seis blocos de complementação foram preenchidos fora do repositório e sincronizados em 13/10; falta conferir a extensão no template, cujo teto é de 2 páginas | Yasmin, Filipe | S5 | ⚠️ Atrasado há 48 dias |
-| 2. Referencial teórico | Escrito pela Yasmin em 28/09 e reorganizado em 13/10 para a estrutura da 3ª reunião — 3 seções, 8 elementos do problema. As 13 fontes foram conferidas e entraram na lista em ABNT (#64) | Yasmin | S5 | ⚠️ Atrasado há 48 dias |
-| 3. Metodologia | Escrita e versionada em 28/09 — 9 subseções. **As quatro lacunas da M2 fecharam**, a última em 12/11. As 7 fontes já têm entrada em `referencias.md` (#121) e esperam confirmação de pessoa | Davi (caneta) | S5 | ⚠️ Atrasado há 48 dias |
-| 4. Resultados | Escrita sobre dez sementes. Seis subseções, 4 tabelas e 1 figura, todas com legenda e fonte. A 4.4 reporta a avaliação heurística — 20 achados, nenhum grau 4 — e a 4.6 declara que ela teve um avaliador | Filipe (caneta) | S13 | 🗓️ Em 8 dias |
-| 5. Conclusão | Escrita. Cinco subseções, com resposta própria para cada grandeza da pergunta e os oito objetivos avaliados | Davi (caneta) | S14 | 🗓️ Em 15 dias |
+| 1. Introdução | Entregue parcial em 24/09. Os seis blocos de complementação foram preenchidos fora do repositório e sincronizados em 13/10; falta conferir a extensão no template, cujo teto é de 2 páginas | Yasmin, Filipe | S5 | ⚠️ Atrasado há 49 dias |
+| 2. Referencial teórico | Escrito pela Yasmin em 28/09 e reorganizado em 13/10 para a estrutura da 3ª reunião — 3 seções, 8 elementos do problema. As 13 fontes foram conferidas e entraram na lista em ABNT (#64) | Yasmin | S5 | ✅ Escrito |
+| 3. Metodologia | Escrita e versionada em 28/09 — 9 subseções. **As quatro lacunas da M2 fecharam**, a última em 12/11. As 7 fontes entraram em `referencias.md` (#121) e foram confirmadas pelo Davi em 17/11 | Davi (caneta) | S5 | ✅ Escrito |
+| 4. Resultados | Escrita sobre dez sementes. Seis subseções, 4 tabelas e 1 figura, todas com legenda e fonte. A 4.4 reporta a avaliação heurística — 20 achados, nenhum grau 4 — e a 4.6 declara que ela teve um avaliador | Filipe (caneta) | S13 | ✅ Escrito |
+| 5. Conclusão | Escrita. Cinco subseções, com resposta própria para cada grandeza da pergunta e os oito objetivos avaliados | Davi (caneta) | S14 | 🗓️ Em 14 dias |
 <!-- QUADRO:fim capitulos -->
 
 **O código existe, e ainda não está na `main`.** O motor de análise — schema
@@ -149,7 +149,7 @@ Três consequências que valem saber:
 | **M2** Metodologia congelada | **01/10** | Cenários, métricas, quatro configurações, atributos | Congela o que será medido antes de existir código a defender. **Fechou com atraso, em 12/11/2026**, quando a última das quatro lacunas caiu — e o atraso é o fato: a metodologia congelou depois de o código existir, não antes | ✅ Fechado |
 | **M3** Modelo executável | **22/10** | C0 a C3 rodando sobre o mesmo gerador | Última data em que uma dimensão pode ser cortada sem comprometer a comparação. **Fechou em 12/11/2026**, com as quatro configurações sobre dez sementes do mesmo gerador — vinte dias depois da data | ✅ Fechado |
 | **M4** Tabela de ablação | **19/11** | Números finais das quatro configurações | A partir daqui o trabalho é escrita. Nenhuma alteração de código é aceita. **Fechou em 12/11/2026**, antes da data: as quatro configurações sobre dez sementes, com Wilcoxon pareado, nas tabelas da seção 4 | ✅ Fechado |
-| **M5** Entrega | **10/12** | Artigo diagramado e submetido | — | 🗓️ Em 22 dias |
+| **M5** Entrega | **10/12** | Artigo diagramado e submetido | — | 🗓️ Em 21 dias |
 <!-- QUADRO:fim marcos -->
 
 **Caminho crítico:** M2 → S6 (gerador com histórico de um ano) → S8 (D3) → S11 (execução) → S12 (tabela) → M4.

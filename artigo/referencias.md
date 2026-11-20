@@ -96,6 +96,10 @@ AUTOR. **Título**. Ano. Disponível em: URL. Acesso em: dia mês ano.
 > declarou em 17/11 que leu a de 2012**. A entrada fica sem número de edição,
 > como a auditoria recomendou.
 
+ALAHMADI, B. A.; AXON, L.; MARTINOVIC, I. 99% false positives: a qualitative
+study of SOC analysts' perspectives on security alarms. In: **31st USENIX
+Security Symposium**. Boston: USENIX Association, 2022. p. 2783-2800.
+
 AXELSSON, S. The base-rate fallacy and the difficulty of intrusion detection.
 **ACM Transactions on Information and System Security**, v. 3, n. 3, p. 186-205,
 2000.

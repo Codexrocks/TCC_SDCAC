@@ -97,10 +97,11 @@ parâmetros, de modo que a única variável entre as linhas da tabela de resulta
 seja a dimensão acrescentada. Os pesos e os pontos de cada regra são
 **parâmetros declarados** do modelo, preliminares e não submetidos a análise de
 sensibilidade (Seção 4.6): eles ordenam o que o detector prioriza, e não a gravidade
-conceitual dos sinais de segurança, que é questão distinta. A terceira dimensão reporta **duas parcelas
-separadas** — exposição acumulada e higiene de segurança —, que não são somadas:
-a agregação exigiria um peso relativo entre conduta e postura sem justificativa
-defensável, e a separação preserva a decomponibilidade do risco por dimensão.
+conceitual dos sinais de segurança, que é questão distinta. A terceira dimensão
+tem **duas parcelas** — exposição acumulada e higiene de segurança —, que não são
+dimensões adicionais: entram na nota final com pesos declarados, a higiene com
+metade do peso por ser estado e não ação, mas são **registradas e exibidas
+separadamente**, o que preserva a decomponibilidade do risco por dimensão.
 
 A hipótese admite refutação: caso a C3 não apresente ganho mensurável sobre a C2,
 esse resultado responde negativamente à pergunta de pesquisa e é reportado como

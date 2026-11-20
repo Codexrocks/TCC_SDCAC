@@ -103,7 +103,7 @@ titulo = "Introdução"
 donos = ["Yasmin", "Filipe"]
 estado = "Entregue parcial em 24/09. Os seis blocos de complementação foram preenchidos fora do repositório e sincronizados em 13/10; falta conferir a extensão no template, cujo teto é de 2 páginas"
 pronto = false
-andamento = "Entregue parcial ao professor em 24/09. Os seis blocos de complementação foram preenchidos fora do repositório e sincronizados em 13/10, e a dimensão 3 já está ajustada à D-25 — as duas coisas foram declaradas como pendentes por engano até 15/10. Falta conferir a extensão no template, as fontes da contextualização com até 5 anos, e alinhar a granularidade dos objetivos ao plano."
+andamento = "Lida e assinada por Yasmin e Filipe, relatado pelo Davi em 19/11/2026: a extensão cabe — cerca de 1,6 página para um teto de 2 — e a contextualização ganhou fonte de 2022, Alahmadi et al. **Falta só o Davi confirmar essa fonte**, em `docs/citacoes-pendentes.md`."
 semana = "S5"
 registro = "entregas/tarefa-02.md"
 
@@ -112,17 +112,17 @@ numero = 2
 titulo = "Referencial teórico"
 donos = ["Yasmin"]
 estado = "Escrito pela Yasmin em 28/09 e reorganizado em 13/10 para a estrutura da 3ª reunião — 3 seções, 8 elementos do problema. As 13 fontes foram conferidas e entraram na lista em ABNT (#64)"
-pronto = false
-andamento = "Reorganizado em 13/10 para a estrutura da 3ª reunião — problema por elementos, como a literatura enfrentou, metodologia que se extrai — sem fonte nova. **As 13 fontes foram conferidas e entraram em `referencias.md` em ABNT NBR 6023** (#64). Falta a Yasmin reler a reorganização e concordar com o que ficou atribuído a cada obra."
+pronto = true
+andamento = "Reorganizado em 13/10 para a estrutura da 3ª reunião, com as 13 fontes conferidas (#64). **A Yasmin releu e assinou**, relatado pelo Davi em 19/11/2026."
 semana = "S5"
 
 [[capitulo]]
 numero = 3
 titulo = "Metodologia"
 donos = ["Davi (caneta)"]
-estado = "Escrita e versionada em 28/09 — 9 subseções. **As quatro lacunas da M2 fecharam**, a última em 12/11. As 7 fontes já têm entrada em `referencias.md` (#121) e esperam confirmação de pessoa"
-pronto = false
-andamento = "Escrita e versionada em 28/09 — 9 subseções. **As quatro lacunas fecharam:** 2 e 4 em 14/10; a 1 em 12/11, pela D-06 e pela D-16, com os 20 cenários nomeados na seção 3.4; a 3 em 12/11, pela D-15, em 45 alertas falsos por turno. As 7 fontes entraram em `referencias.md` em 17/11 pelo #121, com a fonte aberta pelo assistente — **falta a confirmação de uma pessoa**, e a pendência segue em `docs/citacoes-pendentes.md`."
+estado = "Escrita e versionada em 28/09 — 9 subseções. **As quatro lacunas da M2 fecharam**, a última em 12/11. As 7 fontes entraram em `referencias.md` (#121) e foram confirmadas pelo Davi em 17/11"
+pronto = true
+andamento = "As quatro lacunas da M2 fecharam em 12/11, e as 7 fontes da § 3.7 e da § 3.8 foram confirmadas pelo Davi em 17/11. A § 3.3 foi corrigida em 19/11 pelo #134 e **lida e aprovada pelo Davi**; Yasmin e Filipe assinaram, relatado pelo Davi em 19/11/2026."
 semana = "S5"
 
 [[capitulo]]
@@ -130,8 +130,8 @@ numero = 4
 titulo = "Resultados"
 donos = ["Filipe (caneta)"]
 estado = "Escrita sobre dez sementes. Seis subseções, 4 tabelas e 1 figura, todas com legenda e fonte. A 4.4 reporta a avaliação heurística — 20 achados, nenhum grau 4 — e a 4.6 declara que ela teve um avaliador"
-pronto = false
-andamento = "Escrita entre 11/11 e 17/11 sobre execução registrada em `results/`: seis subseções — execução dos cenários, matriz de confusão, métricas em três partes, verificação do painel, discussão e limitações. Quatro tabelas e **uma** figura, com legenda e fonte, que é a correção que o professor pediu em 12/11 — a Figura 2, a captura do painel, saiu em 17/11 para o documento caber em 12 páginas, e o arquivo ficou em `results/figuras/`. A 4.4 passou a reportar a avaliação heurística, com 20 achados e nenhum grau 4, e a 4.6 declara que ela teve **um avaliador, não três**, pela D-46. **Não está pronta** porque nenhuma pessoa leu ainda a 4.3.3 e a 4.4 reescritas em 17/11."
+pronto = true
+andamento = "Escrita entre 11/11 e 17/11 sobre as dez sementes, com quatro tabelas e uma figura, todas com legenda e fonte. **O Filipe leu e assinou**, relatado pelo Davi em 19/11/2026, depois das correções de 18/11 e 19/11 (#132, #134)."
 semana = "S13"
 
 [[capitulo]]
@@ -140,7 +140,7 @@ titulo = "Conclusão"
 donos = ["Davi (caneta)"]
 estado = "Escrita. Cinco subseções, com resposta própria para cada grandeza da pergunta e os oito objetivos avaliados"
 pronto = false
-andamento = "Escrita e reescrita sobre as dez sementes: retomada da pergunta com resposta própria para cada uma das duas grandezas, os oito objetivos específicos avaliados, contribuições, trabalhos futuros e as referências. **Não está pronta** porque a lista de referências tem sete entradas à espera de confirmação de pessoa."
+andamento = "Escrita sobre as dez sementes, com as referências confirmadas e a § 5.1 com as quatro restrições da § 4.6. Yasmin e Filipe assinaram, relatado pelo Davi em 19/11/2026. **Falta o Davi ler a § 5.4**, reescrita em 18/11 e 19/11."
 semana = "S14"
 
 
@@ -278,7 +278,7 @@ donos = ["Filipe", "Davi"]
 id = "S13"
 inicio = 2026-11-20
 fim = 2026-11-26
-pronto = false
+pronto = true
 entregavel = "artigo/04-resultados.md"
 criterio = "Cada limitação nomeada tem proposta de trabalho futuro · LGPD e ISO 27001 entram aqui"
 donos = ["Filipe (caneta)"]
@@ -638,6 +638,12 @@ fechada_em = 2026-11-18
 # ---------------------------------------------------------------------------
 
 [[citacao]]
+onde = "artigo/01-introducao.md § 1.1 e docs/usabilidade.md § 7 — Alahmadi et al., 2022"
+o_que = "Fonte de contexto de até 5 anos, aberta pelo assistente; falta uma pessoa confirmar que a frase diz o que o resumo diz"
+dono = "Davi"
+desde = 2026-11-19
+
+[[citacao]]
 onde = "docs/usabilidade.md § 6.2"
 o_que = "Formulação exata e porcentagem de Nielsen e Landauer"
 dono = "Filipe"
@@ -647,12 +653,6 @@ desde = 2026-09-03
 onde = "docs/usabilidade.md § 6.3"
 o_que = "Limites exatos de cada faixa adjetiva do SUS, em Bangor, Kortum e Miller (2009)"
 dono = "Filipe"
-desde = 2026-09-03
-
-[[citacao]]
-onde = "docs/usabilidade.md § 7"
-o_que = "Literatura de carga de trabalho e fadiga de alerta em analistas de SOC"
-dono = "Yasmin"
 desde = 2026-09-03
 
 [[citacao]]
