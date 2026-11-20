@@ -23,11 +23,19 @@ Roman 10, entrelinha simples, texto justificado, primeira linha recuada 0,5 cm,
 titulo centralizado em negrito corpo 14, autores em negrito 10, instituicao em
 9, resumo e palavras-chave em italico 10 com a barra vertical a esquerda,
 titulos de secao a esquerda em negrito 10 numerados com algarismos arabes
-separados por ponto, tabelas centralizadas, e **paginas sem numero**.
+separados por ponto, tabelas centralizadas, equacoes recuadas 0,5 cm em
+italico com o numero entre parenteses a direita, e **paginas sem numero**.
 
-⚠️ **O template do COBEM 2026 nao esta no repositorio.** O que esta versionado e
-o de 2025, e foi dele que estas regras sairam. Divergencia de 2025 para 2026
-muda este programa, nao o texto.
+O modelo que o professor distribui chegou em 18/11/2026, em
+`templates/COBEM-2026-modelo-do-professor.docx`, e e no conteudo o mesmo de
+2025: as regras acima valem para ele.
+
+**Formula.** O Markdown escreve formula em LaTeX, que o GitBook desenha e o
+`.docx` nao. Ate 18/11/2026 o LaTeX ia cru para o documento de entrega. Agora
+`formula` traduz o subconjunto que o artigo usa em texto linear com indice e
+expoente de verdade, e **comando fora dele reprova a montagem** -- e o mesmo
+principio de `confere_legendas`: defeito que so se ve no `.docx` vira erro aqui,
+e nao surpresa na banca.
 
 **O `python-docx` e importado com tolerancia a falta.** As funcoes que leem
 Markdown -- `blocos` e `trechos`, que e onde os defeitos moram -- rodam sem a
@@ -51,7 +59,7 @@ from pathlib import Path
 try:
     from docx import Document
     from docx.enum.table import WD_TABLE_ALIGNMENT
-    from docx.enum.text import WD_ALIGN_PARAGRAPH
+    from docx.enum.text import WD_ALIGN_PARAGRAPH, WD_TAB_ALIGNMENT
     from docx.oxml.ns import qn
     from docx.shared import Cm, Pt
 
@@ -68,6 +76,8 @@ CORPO_PT = 10.0
 # as duas do artigo passariam de 9 cm de altura cada uma, e o documento tem
 # teto de 12 paginas.
 LARGURA_FIGURA_CM = 12.0
+# A4 de 21 cm menos as margens de 2 cm: e onde fica o numero da equacao.
+LARGURA_TEXTO_CM = 17.0
 
 SECOES_DE_CONTROLE = (
     "O que esta seção ainda precisa",
@@ -251,6 +261,111 @@ def trechos(texto: str) -> list[tuple[str, bool, bool, bool]]:
     return saida
 
 
+# --------------------------------------------------------------- formulas
+# Formula inline: `$...$`, sem espaco colado no cifrao -- para que "R$ 10"
+# continue sendo dinheiro, e nao formula.
+FORMULA_INLINE = re.compile(r"\$(?=\S)([^$]+?)(?<=\S)\$")
+
+
+def _grupo(latex: str, i: int) -> tuple[str, int]:
+    """O conteudo do grupo `{...}` que comeca em `i`, e onde ele termina."""
+    if i >= len(latex) or latex[i] != "{":
+        raise ValueError(f"formula: esperava '{{' na posicao {i} de {latex!r}")
+    nivel = 0
+    for j in range(i, len(latex)):
+        if latex[j] == "{":
+            nivel += 1
+        elif latex[j] == "}":
+            nivel -= 1
+            if nivel == 0:
+                return latex[i + 1 : j], j + 1
+    raise ValueError(f"formula: chave sem par em {latex!r}")
+
+
+def _entre_parenteses(termo: str) -> str:
+    """Termo composto ganha parenteses na fracao linear; termo simples, nao."""
+    return termo if re.fullmatch(r"[\w{}^]+", termo) else f"({termo})"
+
+
+def _linear(latex: str) -> str:
+    r"""Desfaz `\frac` e `\mathrm`; qualquer outro comando reprova."""
+    saida: list[str] = []
+    i = 0
+    while i < len(latex):
+        if latex.startswith("\\frac", i):
+            cima, i = _grupo(latex, i + len("\\frac"))
+            baixo, i = _grupo(latex, i)
+            saida.append(
+                f"{_entre_parenteses(_linear(cima))}/"
+                f"{_entre_parenteses(_linear(baixo))}"
+            )
+        elif latex.startswith("\\mathrm", i):
+            dentro, i = _grupo(latex, i + len("\\mathrm"))
+            saida.append(_linear(dentro))
+        elif latex[i] == "\\":
+            comando = re.match(r"\\[A-Za-z]+|\\.", latex[i:])
+            nome = comando.group(0) if comando else latex[i:]
+            raise ValueError(
+                f"formula: o montador nao traduz {nome} -- acrescente a "
+                "traducao em `_linear` ou reescreva a formula"
+            )
+        else:
+            saida.append(latex[i])
+            i += 1
+    return "".join(saida)
+
+
+def formula(latex: str) -> list[tuple[str, str]]:
+    r"""Traduz o LaTeX do artigo em trechos `(texto, posicao)` para o `.docx`.
+
+    `posicao` e `""`, `"sub"` ou `"sup"`. A fracao vira barra, com parenteses
+    no termo composto: `\frac{FP}{FP + VN}` da `FP/(FP + VN)`.
+
+    **A fracao em barra e escolha deste montador, nao do template**, que so
+    prescreve recuo, italico e numero. Fracao empilhada exigiria equacao nativa
+    do Word (OMML), que o `python-docx` nao escreve; a barra com parenteses e a
+    forma linear sem ambiguidade de leitura. Indice ou expoente aninhado
+    (`x_{a_b}`) **reprova**, em vez de sair achatado.
+    """
+    linear = _linear(latex.strip())
+    saida: list[tuple[str, str]] = []
+    corrente: list[str] = []
+    i = 0
+    while i < len(linear):
+        marca = linear[i]
+        if marca not in "_^" or i + 1 >= len(linear):
+            corrente.append(marca)
+            i += 1
+            continue
+        if corrente:
+            saida.append(("".join(corrente), ""))
+            corrente = []
+        if linear[i + 1] == "{":
+            texto, i = _grupo(linear, i + 1)
+        else:
+            texto, i = linear[i + 1], i + 2
+        if any(c in texto for c in "_^{}"):
+            raise ValueError(f"formula: indice ou expoente aninhado em {latex!r}")
+        saida.append((texto, "sub" if marca == "_" else "sup"))
+    if corrente:
+        saida.append(("".join(corrente), ""))
+    return saida
+
+
+def com_formulas(texto: str) -> list[tuple[str, str, bool]]:
+    """Separa as formulas inline do texto: `(texto, posicao, e_formula)`."""
+    saida: list[tuple[str, str, bool]] = []
+    inicio = 0
+    for m in FORMULA_INLINE.finditer(texto):
+        if m.start() > inicio:
+            saida.append((texto[inicio : m.start()], "", False))
+        saida.extend((pedaco, pos, True) for pedaco, pos in formula(m.group(1)))
+        inicio = m.end()
+    if inicio < len(texto):
+        saida.append((texto[inicio:], "", False))
+    return saida
+
+
 def escreve(
     doc,
     texto,
@@ -272,11 +387,42 @@ def escreve(
         pf.left_indent = recuo_esq
     pf.space_before, pf.space_after = Pt(antes), Pt(depois)
     for conteudo, n, it, mono in trechos(texto):
-        r = p.add_run(re.sub(r"\[([^\]]+)\]\([^)]+\)", r"\1", conteudo))
-        r.bold = n or negrito
-        r.italic = it or italico
-        r.font.size = tamanho or Pt(CORPO_PT)
-        r.font.name = "Consolas" if mono else FONTE
+        conteudo = re.sub(r"\[([^\]]+)\]\([^)]+\)", r"\1", conteudo)
+        partes = [(conteudo, "", False)] if mono else com_formulas(conteudo)
+        for pedaco, posicao, e_formula in partes:
+            r = p.add_run(pedaco)
+            r.bold = n or negrito
+            r.italic = it or italico or e_formula
+            r.font.size = tamanho or Pt(CORPO_PT)
+            r.font.name = "Consolas" if mono else FONTE
+            if posicao == "sub":
+                r.font.subscript = True
+            elif posicao == "sup":
+                r.font.superscript = True
+    return p
+
+
+def equacao(doc, latex: str, numero: int):
+    """A equacao na forma do template: recuo de 0,5 cm, italico, `(n)` a direita."""
+    p = doc.add_paragraph()
+    pf = p.paragraph_format
+    pf.alignment = WD_ALIGN_PARAGRAPH.LEFT
+    pf.first_line_indent = Cm(0)
+    pf.left_indent = Cm(0.5)
+    pf.space_before, pf.space_after = Pt(5.75), Pt(5.75)
+    pf.tab_stops.add_tab_stop(Cm(LARGURA_TEXTO_CM), WD_TAB_ALIGNMENT.RIGHT)
+    for pedaco, posicao in formula(latex):
+        r = p.add_run(pedaco)
+        r.italic = True
+        r.font.size = Pt(CORPO_PT)
+        r.font.name = FONTE
+        if posicao == "sub":
+            r.font.subscript = True
+        elif posicao == "sup":
+            r.font.superscript = True
+    r = p.add_run(f"\t({numero})")
+    r.font.size = Pt(CORPO_PT)
+    r.font.name = FONTE
     return p
 
 
@@ -425,7 +571,9 @@ def abertura(doc, raiz, caminho_emails=None):
         barra_lateral(p)
 
 
-def secao(doc, caminho, *, titulo_de_nivel1=True):
+def secao(doc, caminho, *, titulo_de_nivel1=True, equacoes=None):
+    # a numeracao das equacoes corre pelo artigo inteiro, e nao por arquivo
+    equacoes = equacoes if equacoes is not None else [0]
     for tipo, nivel, conteudo in blocos(caminho.read_text(encoding="utf-8")):
         if tipo == "titulo":
             if conteudo in SECOES_DE_CONTROLE:
@@ -466,15 +614,8 @@ def secao(doc, caminho, *, titulo_de_nivel1=True):
         elif tipo == "tabela":
             tabela(doc, conteudo)
         elif tipo == "formula":
-            escreve(
-                doc,
-                conteudo,
-                italico=True,
-                centro=True,
-                recuo=False,
-                antes=5.75,
-                depois=5.75,
-            )
+            equacoes[0] += 1
+            equacao(doc, str(conteudo), equacoes[0])
         elif tipo == "item":
             escreve(doc, conteudo.lstrip("*+- "), recuo=False, recuo_esq=Cm(0.5))
         else:
@@ -564,8 +705,9 @@ def main(argv: list[str] | None = None) -> int:
     doc = Document()
     estilo(doc)
     abertura(doc, raiz, args.emails)
+    equacoes = [0]
     for caminho in paginas:
-        secao(doc, caminho)
+        secao(doc, caminho, equacoes=equacoes)
     referencias(doc, raiz)
     destino.parent.mkdir(parents=True, exist_ok=True)
     doc.save(destino)
