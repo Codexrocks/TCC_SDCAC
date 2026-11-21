@@ -74,8 +74,9 @@ estado = "recorrente"
 id = "resultados-reenvio"
 titulo = "**Seção de Resultados reenviada**, com legenda e fonte em toda tabela"
 prazo = 2026-11-19
-estado = "pendente"
-ressalva = "Entregue em 12/11 e devolvida pelo orientador com correções: tabela e figura precisam de legenda com a respectiva fonte indicada"
+estado = "entregue"
+entregue_em = 2026-11-19
+ressalva = "Entregue em 12/11 e devolvida pelo orientador com correções: tabela e figura precisam de legenda com a respectiva fonte indicada. Reenviada pelo Davi em 19/11, no prazo, relatado por ele em 21/11/2026"
 
 [[tarefa_professor]]
 id = "entrega-final"

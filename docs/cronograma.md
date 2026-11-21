@@ -16,7 +16,7 @@ como recusar uma entrega, e a recusa vira atrito.
 | **05/09/26** | Tema do trabalho e composição do grupo — *Tarefa 01* | ✅ **Entregue em 03/09/2026** — [registro](entregas/tarefa-01.md) |
 | **24/09/26** | Introdução do artigo no template **COBEM 2026** — *Tarefa 02* | ✅ **Entregue parcial em 24/09/2026** — [registro](entregas/tarefa-02.md) |
 | Quinzenal | Reunião de acompanhamento com o orientador | 🔁 Recorrente |
-| **19/11/26** | **Seção de Resultados reenviada**, com legenda e fonte em toda tabela | ⚠️ Atrasado há 2 dias |
+| **19/11/26** | **Seção de Resultados reenviada**, com legenda e fonte em toda tabela | ✅ **Entregue em 19/11/2026** |
 | **10/12/26** | **Entrega do TCC** | 🗓️ Em 19 dias |
 | Dezembro | Apresentação e defesa | 🗓️ Sem prazo |
 <!-- QUADRO:fim prazos-do-professor -->
