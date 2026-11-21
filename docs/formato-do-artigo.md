@@ -114,6 +114,15 @@ author(s) and the year of publication"*, com os exemplos `(Choma and Ugaya, 2017
 > [decisões](decisoes.md). Se a equipe quiser a regra numerada, é uma decisão a
 > registrar, e não algo que esta página possa afirmar por conta própria.
 >
+> **Duas datas ainda não foram reconciliadas.** A tabela *O que mudou em 13/10* da
+> Introdução diz que o template *"chegou em 13/10"*. O arquivo que o professor
+> distribui foi versionado em **18/11/2026**, como registram esta página e
+> [templates](../templates/README.md), e o `COBEM-2025-template.docx`, de mesmo
+> conteúdo, foi encontrado pela equipe em 07/09. Pode ser que o texto de 13/10 se
+> refira a um desses arquivos, mas o repositório não diz qual. **Esta página não
+> escolhe entre as datas**; o Davi confirma qual vale e, se for o caso, ajusta a
+> Introdução, que é texto do artigo.
+>
 > Conferido em 21/11/2026 que nenhuma chamada dos capítulos de `artigo/` está em
 > caixa alta com ponto e vírgula, como a NBR 10520 pediria. **Isso é uma busca,
 > não a conferência por pessoa** que o relatório da sessão 55 atribui ao Davi e
