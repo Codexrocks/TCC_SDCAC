@@ -40,18 +40,18 @@ que estão aqui e não na lista de referências.
 | Onde | O que falta | Quem | Desde |
 |---|---|---|---|
 
-### 1 da Introdução — **aberta pelo assistente em 19/11/2026, por confirmar**
+### 1 da Introdução — **fechada em 21/11/2026, por delegação do Davi**
 
 As orientações pedem referência de **até 5 anos no contexto**, e as duas
-chamadas da § 1.1 eram de 2006 e 2009. Entrou uma de 2022. **O assistente de IA
-abriu o PDF dos anais** e conferiu título, autores, evento, páginas 2783 a 2800
-e a frase do resumo que sustenta o texto — *"most are attributed to benign
-triggers"*. Falta a segunda etapa do arranjo de 17/11: **uma pessoa conferir e
-confirmar**.
+chamadas da § 1.1 eram de 2006 e 2009. Entrou Alahmadi et al. (2022). **O
+assistente de IA abriu o PDF dos anais** em 19/11 e conferiu título, autores,
+evento, páginas 2783 a 2800 e a frase do resumo que sustenta o texto —
+*"most are attributed to benign triggers"*.
 
-| Onde | O que falta | Quem | Desde |
-|---|---|---|---|
-| `01-introducao.md` § 1.1 e [`usabilidade.md`](usabilidade.md) § 7 — **Alahmadi et al., 2022** | Abrir <https://www.usenix.org/system/files/sec22-alahmadi.pdf>, ler o resumo e confirmar que a frase da Introdução diz o que ele diz | Davi | 19/11/2026 |
+**A segunda etapa não foi a de 17/11.** Lá, uma pessoa conferiu campo por campo.
+Aqui, em 21/11, o Davi **pediu ao assistente que confirmasse** em vez de abrir a
+fonte. A linha sai da tabela por decisão dele, e o registro diz o que houve: a
+conferência é da máquina, a decisão de aceitá-la é da pessoa.
 
 ### As 4 dos exemplos reais — **entregues em 10/11/2026, por conferir**
 
@@ -257,8 +257,6 @@ escreve em `docs/`.
 | [`usabilidade.md`](usabilidade.md) § 6.2 | Formulação exata e porcentagem de Nielsen e Landauer | Filipe | 03/09/2026 |
 | [`usabilidade.md`](usabilidade.md) § 6.3 | Limites exatos de cada faixa adjetiva do SUS, em Bangor, Kortum e Miller (2009) | Filipe | 03/09/2026 |
 | [`usabilidade.md`](usabilidade.md) § 9 | Edição e ano da obra de Shneiderman efetivamente consultada | Filipe | 03/09/2026 |
-| [`seguranca.md`](seguranca.md) — **Referências** | **Aberta pelo assistente por busca, nenhuma na fonte.** Abrir e conferir CWE-79 e CWE-942 (MITRE), OWASP Top 10:2021 e o *XSS prevention cheat sheet*, as notas do PostgreSQL 15, Saltzer e Schroeder (1975, **paginação não conferida**), Rubinstein et al. (2009), Wagner e Soto (2002), Barreno et al. (2010), NIST SP 800-218 e a página do `st.markdown` | Yasmin | 21/11/2026 |
-| [`seguranca.md`](seguranca.md) — **S-05, recomendação 1** | Conferir, na documentação do GitHub, a recomendação de referenciar ações por SHA de commit, e, em fonte primária, o relato da falha do `claude-code-action`, que a página cita a partir de notícia | Yasmin | 21/11/2026 |
 
 ***
 

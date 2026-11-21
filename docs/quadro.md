@@ -19,21 +19,19 @@
 
 | Coluna | Itens |
 |---|---|
-| ⚠️ Atrasado | 3 |
+| ⚠️ Atrasado | 1 |
 | ▶️ Em curso | 0 |
 | ⏳ A vencer em 7 dias | 0 |
-| 🗓️ Depois | 9 |
-| ✅ Feito | 62 |
+| 🗓️ Depois | 8 |
+| ✅ Feito | 65 |
 
 ## ⚠️ Atrasado
 
-3 itens.
+1 item.
 
 | Tipo | Item | O que é | Quem | Prazo | Situação |
 |---|---|---|---|---|---|
 | Professor | ****Seção de Resultados reenviada**, com legenda e fonte em toda tabela** | Entregue em 12/11 e devolvida pelo orientador com correções: tabela e figura precisam de legenda com a respectiva fonte indicada | Todos | 19/11/2026 | ⚠️ Atrasado há 2 dias |
-| Semana | **S12** | Tabela de ablação, sensibilidade dos pesos, gráficos | Filipe, Davi | 13/11/2026 a 19/11/2026 | ⚠️ Atrasado há 2 dias |
-| Capítulo | **1. Introdução** | Entregue parcial em 24/09. Os seis blocos de complementação foram preenchidos fora do repositório e sincronizados em 13/10; falta conferir a extensão no template, cujo teto é de 2 páginas | Yasmin, Filipe | S5 | ⚠️ Atrasado há 51 dias |
 
 ## ▶️ Em curso
 
@@ -45,7 +43,7 @@ Nada nesta coluna.
 
 ## 🗓️ Depois
 
-9 itens.
+8 itens.
 
 | Tipo | Item | O que é | Quem | Prazo | Situação |
 |---|---|---|---|---|---|
@@ -56,12 +54,11 @@ Nada nesta coluna.
 | Semana | **S14** | artigo/05-conclusao.md | Davi (caneta) | 27/11/2026 a 03/12/2026 | 🗓️ Em 12 dias |
 | Semana | **S15** | Versão final diagramada · ENTREGA 10/12 | Todos | 04/12/2026 a 10/12/2026 | 🗓️ Em 19 dias |
 | Semana | **S16** | Slides, ensaio cronometrado, defesa | Todos | a partir de 11/12/2026 | 🗓️ Em 20 dias |
-| Capítulo | **5. Conclusão** | Escrita. Cinco subseções, com resposta própria para cada grandeza da pergunta e os oito objetivos avaliados | Davi (caneta) | S14 | 🗓️ Em 12 dias |
 | Decisão | **D-07** | Caneta rotativa por seção | Davi, Yasmin, Filipe | — | 🗓️ Sem prazo |
 
 ## ✅ Feito
 
-62 itens.
+65 itens.
 
 | Tipo | Item | O que é | Quem | Prazo | Situação |
 |---|---|---|---|---|---|
@@ -78,10 +75,13 @@ Nada nesta coluna.
 | Semana | **S9** | Dashboard Streamlit | Filipe | 23/10/2026 a 29/10/2026 | ✅ Entregue |
 | Semana | **S10 · opcional** | Isolation Forest — opcional | Filipe | 30/10/2026 a 05/11/2026 | ✅ Entregue |
 | Semana | **S11** | Execução de todos os cenários nas quatro configurações | Todos (Yasmin) | 06/11/2026 a 12/11/2026 | ✅ Entregue |
+| Semana | **S12** | Tabela de ablação, sensibilidade dos pesos, gráficos | Filipe, Davi | 13/11/2026 a 19/11/2026 | ✅ Entregue |
 | Semana | **S13** | artigo/04-resultados.md | Filipe (caneta) | 20/11/2026 a 26/11/2026 | ✅ Entregue |
+| Capítulo | **1. Introdução** | Entregue parcial em 24/09. Os seis blocos de complementação foram preenchidos fora do repositório e sincronizados em 13/10; falta conferir a extensão no template, cujo teto é de 2 páginas | Yasmin, Filipe | S5 | ✅ Escrito |
 | Capítulo | **2. Referencial teórico** | Escrito pela Yasmin em 28/09 e reorganizado em 13/10 para a estrutura da 3ª reunião — 3 seções, 8 elementos do problema. As 13 fontes foram conferidas e entraram na lista em ABNT (#64) | Yasmin | S5 | ✅ Escrito |
 | Capítulo | **3. Metodologia** | Escrita e versionada em 28/09 — 9 subseções. **As quatro lacunas da M2 fecharam**, a última em 12/11. As 7 fontes entraram em `referencias.md` (#121) e foram confirmadas pelo Davi em 17/11 | Davi (caneta) | S5 | ✅ Escrito |
 | Capítulo | **4. Resultados** | Escrita sobre dez sementes. Seis subseções, 4 tabelas e 1 figura, todas com legenda e fonte. A 4.4 reporta a avaliação heurística — 20 achados, nenhum grau 4 — e a 4.6 declara que ela teve um avaliador | Filipe (caneta) | S13 | ✅ Escrito |
+| Capítulo | **5. Conclusão** | Escrita. Cinco subseções, com resposta própria para cada grandeza da pergunta e os oito objetivos avaliados | Davi (caneta) | S14 | ✅ Escrito |
 | Decisão | **D-02** | Dashboard: objetivo, instrumento ou fora do escopo | — | 14/10/2026 | ✅ Fechada em 14/10/2026 |
 | Decisão | **D-06** | Cenários de contexto (B) e longitudinais (L) | Yasmin | 12/11/2026 | ✅ Fechada em 12/11/2026 |
 | Decisão | **D-09** | Pesos preliminares e análise de sensibilidade | Yasmin | 12/11/2026 | ✅ Fechada em 12/11/2026 |
@@ -137,16 +137,15 @@ contrário das colunas acima.
 
 | Tipo | Item | Quem | O que está fazendo |
 |---|---|---|---|
-| Semana | **S12** | Filipe, Davi | Tabela de ablação e gráfico prontos, com Wilcoxon pareado sobre as dez sementes, em `results/agregado.md`. **A sensibilidade dos pesos não foi executada** e entrou em 18/11 como limitação declarada na § 4.6 e trabalho futuro na § 5.4, por decisão do Davi. Os números saem dos scripts de `evaluator/`, não de notebook. |
-| Capítulo | **1. Introdução** | Yasmin, Filipe | Lida e assinada por Yasmin e Filipe, relatado pelo Davi em 19/11/2026: a extensão cabe — cerca de 1,6 página para um teto de 2 — e a contextualização ganhou fonte de 2022, Alahmadi et al. **Falta só o Davi confirmar essa fonte**, em `docs/citacoes-pendentes.md`. |
+| Capítulo | **1. Introdução** | Yasmin, Filipe | Lida e assinada por Yasmin e Filipe. A fonte de contexto de 2022, Alahmadi et al., foi conferida pelo assistente e aceita pelo Davi em 21/11/2026, que delegou a confirmação. |
 | Capítulo | **2. Referencial teórico** | Yasmin | Reorganizado em 13/10 para a estrutura da 3ª reunião, com as 13 fontes conferidas (#64). **A Yasmin releu e assinou**, relatado pelo Davi em 19/11/2026. |
 | Capítulo | **3. Metodologia** | Davi (caneta) | As quatro lacunas da M2 fecharam em 12/11, e as 7 fontes da § 3.7 e da § 3.8 foram confirmadas pelo Davi em 17/11. A § 3.3 foi corrigida em 19/11 pelo #134 e **lida e aprovada pelo Davi**; Yasmin e Filipe assinaram, relatado pelo Davi em 19/11/2026. |
 | Capítulo | **4. Resultados** | Filipe (caneta) | Escrita entre 11/11 e 17/11 sobre as dez sementes, com quatro tabelas e uma figura, todas com legenda e fonte. **O Filipe leu e assinou**, relatado pelo Davi em 19/11/2026, depois das correções de 18/11 e 19/11 (#132, #134). |
-| Capítulo | **5. Conclusão** | Davi (caneta) | Escrita sobre as dez sementes, com as referências confirmadas e a § 5.1 com as quatro restrições da § 4.6. Yasmin e Filipe assinaram, relatado pelo Davi em 19/11/2026. **Falta o Davi ler a § 5.4**, reescrita em 18/11 e 19/11. |
+| Capítulo | **5. Conclusão** | Davi (caneta) | Escrita sobre as dez sementes. Yasmin e Filipe assinaram; **o Davi leu a § 5.4**, relatado pelo Davi em 21/11/2026. |
 
 ## Dívida bibliográfica
 
-10 pendências. Referência não conferida na fonte é o único
+7 pendências. Referência não conferida na fonte é o único
 item deste quadro que pode reprovar o trabalho por fraude acadêmica, e é o
 que some mais fácil de vista.
 
@@ -159,9 +158,6 @@ que some mais fácil de vista.
 | `artigo/01-introducao.md — caso GE / Zheng, 2018` | Confirmar na fonte: U.S. DOJ, Niskayuna man charged theft trade secrets, 2018 | Yasmin | 10/11/2026 | 11 dias |
 | `artigo/01-introducao.md — caso Capital One, 2019` | Confirmar na fonte: U.S. DOJ, usao-wdwa. **O próprio insumo admite estar incompleto**, com URL genérica | Yasmin | 10/11/2026 | 11 dias |
 | `artigo/01-introducao.md — caso Tesla / Tripp, 2018` | Confirmar na fonte: petição inicial Tesla, Inc. v. Martin Tripp (Nevada) ou GovInfoSecurity, 2018 | Yasmin | 10/11/2026 | 11 dias |
-| `artigo/01-introducao.md § 1.1 e docs/usabilidade.md § 7 — Alahmadi et al., 2022` | Fonte de contexto de até 5 anos, aberta pelo assistente; falta uma pessoa confirmar que a frase diz o que o resumo diz | Davi | 19/11/2026 | 2 dias |
-| `docs/seguranca.md — Referências` | Referências achadas por busca, nenhuma aberta na fonte: CWE-79 e CWE-942, OWASP, PostgreSQL 15, Saltzer e Schroeder, Rubinstein et al., Wagner e Soto, Barreno et al., NIST SP 800-218, Streamlit | Yasmin | 21/11/2026 | 0 dias |
-| `docs/seguranca.md — S-05, recomendação 1` | Pinagem de ações por SHA (documentação do GitHub) e relato da falha do claude-code-action, citado a partir de notícia | Yasmin | 21/11/2026 | 0 dias |
 
 ## O que ficou fora desta versão
 
