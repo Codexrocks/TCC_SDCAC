@@ -1,7 +1,7 @@
 # Revisão de segurança
 
 Revisão de segurança do código do SDCAC, feita em **21/11/2026** por **Claude
-Sonnet 5.5** a pedido da **Yasmin**, dona da vertente de segurança (D-19). O texto
+Sonnet 5.5** a pedido da **Yasmin**, responsável pelo conteúdo de segurança do projeto ([equipe](equipe.md)) e dona da **D-19**, a vertente de LGPD e ISO/IEC 27001. O texto
 é o registro do que foi lido, do que foi achado, do que foi corrigido e do que
 ficou como recomendação — com a base pública de cada afirmação.
 
@@ -67,7 +67,7 @@ antigo; *Recomendação* quer dizer que o arquivo é protegido pelo
 | S-03 | Os `002_privilegios.sql` não retiravam `CREATE` no schema `public` de `PUBLIC` | CVE-2018-1058 | Baixa | **Corrigido** |
 | S-04 | Cada leitura relê, converte e ordena o arquivo de eventos inteiro | CWE-400 | Média | Recomendação |
 | S-05 | Ações do GitHub referenciadas por **tag móvel**; sem Dependabot nem arquivo de travamento | Cadeia de suprimento | Média | Recomendação |
-| S-06 | A API não tem autenticação | OWASP A01:2021 | Baixa, **aceito** | Decisão D-32 |
+| S-06 | A API não tem autenticação | OWASP A01:2021 | Baixa | Escopo da v1 (D-32) |
 | S-07 | A linha de base da D2 pode ser **contaminada dentro da janela de treino** | Envenenamento de modelo | Média | Limitação do modelo |
 
 ### S-01 — HTML sem escape no painel · Média · corrigido
@@ -76,9 +76,9 @@ antigo; *Recomendação* quer dizer que o arquivo é protegido pelo
 `frontend/dashboard/telas.py` com `unsafe_allow_html=True`.
 
 **O quê:** o motivo de cada regra é montado pelo motor **com campo do evento** —
-`recurso.name` (`detection/c0/rules.py:131`, `detection/d1/scoring.py:109`), o
-destino de um download (`detection/d1/scoring.py:180`), a categoria de navegação
-(`detection/d1/scoring.py:208`). Esses campos nascem de log, e log carrega texto
+`recurso.name` (`restricted_access`, em `detection/c0/rules.py`, e `_sensitivity`,
+em `detection/d1/scoring.py`), o destino de um download (`_download`) e a
+categoria de navegação (`_risky_browsing`), as duas em `detection/d1/scoring.py`. Esses campos nascem de log, e log carrega texto
 que alguém controla. O valor chegava ao painel e era interpolado em HTML sem
 `escape`. O `!r` do Python coloca aspas, mas **não** neutraliza `<` nem `>`.
 
@@ -106,7 +106,10 @@ código aceitava `SDCAC_ORIGENS="*"` sem reclamar. A API só lê e não usa
 credencial, o que limita o estrago, mas qualquer página aberta no navegador de
 quem analisa passaria a poder consultá-la.
 
-**Correção:** a partida **falha** com `ValueError` se a lista contiver `*`.
+**Correção:** a partida **falha** com `ValueError` se a lista contiver `*`. É
+um comportamento mais restritivo, e foi conferido que **nenhuma página de
+documentação ou arquivo de exemplo manda definir `*`**: a única menção ao
+assunto é o relatório da sessão 29, que diz *"nunca `*`"*.
 **Teste:** `tests/test_api.py::test_o_cors_recusa_curinga_vindo_do_ambiente`, com
 três formas de escrever o curinga.
 
@@ -115,8 +118,12 @@ três formas de escrever o curinga.
 **Onde:** `database/{corp,ground_truth,sdcac}/002_privilegios.sql`.
 
 **O quê:** até o PostgreSQL 14, todo papel com `CONNECT` podia criar objeto no
-schema `public`. O 15 mudou o padrão, mas **banco criado antes continua como
-era**, e as notas da versão recomendam o `REVOKE` para quem tem vários usuários.
+schema `public`. As notas da versão 15 (seção E.21) listam, entre as
+incompatibilidades, *"Remove PUBLIC creation permission on the public schema"* e
+dizem que, *"for existing databases, especially those having multiple users"*,
+convém revogar o `CREATE` para adotar o novo padrão. **Banco criado antes
+continua como era.** Esta é a única fonte da página que o assistente **abriu**,
+em 21/11/2026; uma pessoa ainda precisa conferir.
 Criar objeto em `public` permite sombrear objetos do catálogo e enganar quem os
 usa. A separação em três bancos já fecha o `CONNECT`, mas este era o buraco que
 sobrava dentro de cada um.
@@ -124,6 +131,10 @@ sobrava dentro de cada um.
 **Correção:** `REVOKE CREATE ON SCHEMA public FROM PUBLIC;` nos três arquivos. O
 `GRANT CREATE … TO generator` do `corp` continua, depois dele.
 **Teste:** `tests/test_schema.py::test_ninguem_cria_objeto_no_schema_public_por_ser_public`.
+**O que o teste não prova:** ele confere que o texto do `REVOKE` está nos três
+arquivos, e não o **efeito** num banco real. Nenhum teste do projeto aplica o
+esquema num PostgreSQL, e esta máquina não tem um. Aplicar os três arquivos num
+servidor e tentar `CREATE TABLE` como `sdcac_app` é a conferência que falta.
 
 ### S-04 — Custo por requisição · Média · recomendação
 
@@ -149,8 +160,8 @@ indexar por `event_id` uma única vez.
 
 | O quê | Evidência |
 |---|---|
-| Ações referenciadas por **tag móvel** (`@v4`, `@v5`, `@v1`), não por *commit* | `claude.yml:60,65` e demais |
-| O workflow `claude.yml` roda com `contents: write`, `id-token: write` e os *secrets* do Claude | `claude.yml:52-57,67-68` |
+| Ações referenciadas por **tag móvel** (`@v4`, `@v5`, `@v1`), não por *commit* | Os passos `Checkout` e `Claude Code` de `claude.yml`, e os demais workflows |
+| O workflow `claude.yml` roda com `contents: write`, `id-token: write` e os *secrets* do Claude | O bloco `permissions` e o passo `Claude Code` de `claude.yml` |
 | **Não há** `dependabot.yml`, análise de código nem arquivo de travamento das dependências Python | `ls .github`, `ls` na raiz |
 | `pyproject.toml` declara só limite inferior (`fastapi>=0.115`) | `pyproject.toml` |
 
@@ -178,14 +189,24 @@ pela outra sem decisão.
 4. Manter `allowed_non_write_users` **ausente** e a lista de `allowed_bots` do
    `revisor.yml` **sem curinga**, como estão.
 
-### S-06 — API sem autenticação · Baixa · aceito
+### S-06 — API sem autenticação · Baixa · escopo da v1
 
-É a **D-32**, e o próprio `backend/main.py` a explica: a trava é de rede
-(`127.0.0.1`) e a que protege o experimento é o **papel de banco**, não a
-aplicação. A revisão **concorda com o desenho para a v1** e registra só o limite:
-nada na aplicação impede `--host 0.0.0.0`, e a segurança dessa escolha é de quem
-inicia o servidor. Se a API sair de `localhost`, autenticação, limite de taxa e
-auditoria de consulta deixam de ser opcionais — é o que a **D-19** já registra.
+**O que a D-32 diz, e o que não diz.** A D-32
+([decisões](decisoes.md)) separa a v1 (motor, executor e API somente de leitura) da
+v2 (login, configuração editável e execução por job) e põe o login na **v2**. Ela
+**não** registra o risco como aceito: é uma decisão de **ordem de entrega**. Quem
+descreve a ausência de login como escolha explícita é o comentário de
+`backend/main.py`, que diz que a trava é de rede (`127.0.0.1`) e que a que protege o
+experimento é o **papel de banco**, não a aplicação.
+
+**Avaliação da revisão:** a revisão **concorda com o desenho para a v1**, mas a
+aceitação do risco consta no comentário do código, e **não** em uma decisão. Se a
+equipe quiser que ela seja formal, é uma decisão a registrar.
+
+**O limite:** nada na aplicação impede `--host 0.0.0.0`, e a segurança dessa
+escolha é de quem inicia o servidor. Se a API sair de `localhost`, autenticação,
+limite de taxa e auditoria de consulta deixam de ser opcionais — é o que a **D-19**
+já registra como o que uma implantação real exigiria.
 
 ### S-07 — Contaminação da linha de base · Média · limitação do modelo
 
@@ -209,8 +230,9 @@ ser envenenados de forma gradual (Rubinstein et al., 2009) e que um atacante que
 conhece o detector pode imitar o comportamento normal (Wagner e Soto, 2002).
 
 **O que o experimento mede e o que não mede.** Por construção, os cenários
-**só começam depois** da janela de treino: `generator/config.py:150` registra
-*"primeiros 3 meses = baseline; cenários só depois"*, e o gerador tem uma
+**só começam depois** da janela de treino: o comentário da D-24 em
+`generator/config.py` registra *"primeiros 3 meses = baseline; cenários só
+depois"*, e o gerador tem uma
 checagem de que eles começam após o baseline
 ([banco simulado](banco-simulado.md), seção *O baseline de 100 dias e a D-24*).
 **Por isso nenhum número deste trabalho mede o caso de um insider que já age
@@ -221,7 +243,29 @@ nele: afirma que **não foi medido**.
 janela de treino como período de vigilância reforçada, comparar a pessoa também
 com o grupo de pares, e reaprender o padrão com validação do que entra nele.
 
-## 5. O que mudou no repositório
+## 5. Como cada achado foi confirmado
+
+Esta seção responde à pergunta que a banca fará: **o que foi confirmado por
+execução, o que por fonte aberta e o que repousa só na leitura do assistente.**
+**Nenhuma conclusão foi confirmada por uma pessoa abrindo a fonte**; isso é o que
+falta para a Yasmin assinar.
+
+| # | Base da afirmação | Por execução? | Fonte aberta? |
+|---|---|---|---|
+| S-01 | Leitura do código e dos usos de `unsafe_allow_html` | **Sim, do escape:** o teste falha sem a correção. **Não** de exploração no navegador | Não: Streamlit, OWASP e CWE só por busca |
+| S-02 | Leitura do código | **Sim:** o teste falha sem a correção e cobre três formas do curinga | Não: CWE-942 só por busca |
+| S-03 | Leitura do SQL e das notas do PostgreSQL 15 | **Não.** O teste confere o texto, e não o efeito num banco | **Sim, pelo assistente:** a página das notas da versão 15, em 21/11/2026 |
+| S-04 | Leitura de `ArquivoStorage.events` | **Não:** o tempo de uma chamada não foi medido | Não |
+| S-05 | **Busca** por referências e permissões nos workflows; o relato da falha da ação é de notícia | Sim, da busca; **não** da falha | Não |
+| S-06 | Leitura de `backend/main.py` e da D-32 | Não | Não |
+| S-07 | Leitura de `detection/d2/baseline.py` e do calendário do gerador | Não: **justamente o caso não foi medido** | Não: literatura só por busca |
+
+**Em resumo:** duas correções (S-01 e S-02) têm **execução** que as sustenta; uma
+(S-03) tem **uma fonte aberta pelo assistente**, mas sem execução; as outras quatro
+repousam **só na leitura**. É esse o peso de cada conclusão, e a página não pede
+mais que isso dela.
+
+## 6. O que mudou no repositório
 
 | Arquivo | Mudança |
 |---|---|
@@ -236,10 +280,11 @@ tests/test_schema.py`. Para ver o teste cair, desfaça a correção corresponden
 > **`frontend/components/parcelas.py` é da área do Filipe** (S9), e o painel é
 > dele. A mudança é pequena e está coberta por teste, mas **ele precisa ler**.
 
-## 6. Limites desta revisão
+## 7. Limites desta revisão
 
-- **Leitura, não execução.** Nenhum achado foi explorado, e nenhuma ferramenta de
-  análise estática foi rodada.
+- **Leitura, não execução.** Nenhum achado foi explorado, nenhuma ferramenta de
+  análise estática foi rodada e o efeito do `REVOKE` não foi testado num
+  PostgreSQL real.
 - **Cobertura parcial**, como a seção 1 declara.
 - **Gravidade é julgamento.** Uma pessoa pode discordar de qualquer classificação.
 - **O modelo de ameaça é curto.** Não cobre ameaça física, engenharia social nem a
