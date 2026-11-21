@@ -265,7 +265,7 @@ aparece com a D2, que é o desvio em relação ao histórico da própria pessoa:
 98,8%, com p = 0,0020. É a validação empírica da ideia original de Denning
 (1987), de que o perfil de referência é por sujeito e não por população, e é o
 que a literatura de análise de comportamento de usuário e entidade retomou
-(Shashanka, Shen e Wan, 2016). Cenários desenhados para que nenhum evento
+(Shashanka, Shen e Wang, 2016). Cenários desenhados para que nenhum evento
 isolado seja notável — a forma pela qual a ameaça interna costuma se desenvolver
 (Cappelli, Moore e Trzeciak, 2012; Homoliak et al., 2019) — são precisamente os
 que a linha de base não alcança.

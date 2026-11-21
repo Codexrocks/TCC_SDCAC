@@ -146,7 +146,7 @@ contrário das colunas acima.
 
 ## Dívida bibliográfica
 
-11 pendências. Referência não conferida na fonte é o único
+10 pendências. Referência não conferida na fonte é o único
 item deste quadro que pode reprovar o trabalho por fraude acadêmica, e é o
 que some mais fácil de vista.
 
@@ -160,7 +160,6 @@ que some mais fácil de vista.
 | `artigo/01-introducao.md — caso Capital One, 2019` | Confirmar na fonte: U.S. DOJ, usao-wdwa. **O próprio insumo admite estar incompleto**, com URL genérica | Yasmin | 10/11/2026 | 11 dias |
 | `artigo/01-introducao.md — caso Tesla / Tripp, 2018` | Confirmar na fonte: petição inicial Tesla, Inc. v. Martin Tripp (Nevada) ou GovInfoSecurity, 2018 | Yasmin | 10/11/2026 | 11 dias |
 | `artigo/01-introducao.md § 1.1 e docs/usabilidade.md § 7 — Alahmadi et al., 2022` | Fonte de contexto de até 5 anos, aberta pelo assistente; falta uma pessoa confirmar que a frase diz o que o resumo diz | Davi | 19/11/2026 | 2 dias |
-| `artigo/referencias.md e artigo/04-resultados.md § 4.2 — Shashanka, Shen e Wan, 2016` | Erro de autor: o terceiro é Jisheng Wang, e não Wan (DBLP, 21/11/2026). Conferir na folha de rosto, corrigir os dois lugares e remontar o artigo | Davi | 21/11/2026 | 0 dias |
 | `docs/seguranca.md — Referências` | Referências achadas por busca, nenhuma aberta na fonte: CWE-79 e CWE-942, OWASP, PostgreSQL 15, Saltzer e Schroeder, Rubinstein et al., Wagner e Soto, Barreno et al., NIST SP 800-218, Streamlit | Yasmin | 21/11/2026 | 0 dias |
 | `docs/seguranca.md — S-05, recomendação 1` | Pinagem de ações por SHA (documentação do GitHub) e relato da falha do claude-code-action, citado a partir de notícia | Yasmin | 21/11/2026 | 0 dias |
 
