@@ -134,6 +134,7 @@ contrário das colunas acima.
 
 | Tipo | Item | Quem | O que está fazendo |
 |---|---|---|---|
+| Semana | **S16** | Todos | Os slides e o roteiro entraram em 21/11/2026 pelo #144, em `apresentacao/`: 14 slides em `.pptx`, com a fala nas notas, e 14:30 de fala. Os números dos slides de resultado foram conferidos contra `results/`. **Falta o ensaio cronometrado**, com cada integrante apresentando qualquer seção sob sorteio. |
 | Capítulo | **1. Introdução** | Yasmin, Filipe | Lida e assinada por Yasmin e Filipe. A fonte de contexto de 2022, Alahmadi et al., foi conferida pelo assistente e aceita pelo Davi em 21/11/2026, que delegou a confirmação. |
 | Capítulo | **2. Referencial teórico** | Yasmin | Reorganizado em 13/10 para a estrutura da 3ª reunião, com as 13 fontes conferidas (#64). **A Yasmin releu e assinou**, relatado pelo Davi em 19/11/2026. |
 | Capítulo | **3. Metodologia** | Davi (caneta) | As quatro lacunas da M2 fecharam em 12/11, e as 7 fontes da § 3.7 e da § 3.8 foram confirmadas pelo Davi em 17/11. A § 3.3 foi corrigida em 19/11 pelo #134 e **lida e aprovada pelo Davi**; Yasmin e Filipe assinaram, relatado pelo Davi em 19/11/2026. |
