@@ -19,9 +19,8 @@
 > entraram em [`referencias.md`](referencias.md), que só aceita entrada depois
 > de alguém abrir a obra.
 >
-> Os três blocos **A escrever** abaixo são lacunas conhecidas, com dono e
-> prazo. Estão visíveis de propósito: comentário HTML desaparece quando o
-> GitBook salva.
+> As lacunas que esta seção marcava como **A escrever** fecharam todas, a
+> última em 12/11/2026; os blocos abaixo registram como cada uma fechou.
 
 ***
 
@@ -195,9 +194,9 @@ alcançar a revocação alertando o registro inteiro.
 > turno. É a origem defensável sem resultado na mão, e dialoga com a fadiga de
 > alerta tratada na [usabilidade](../docs/usabilidade.md).
 >
-> **Falta o número.** A frase a escrever fixa três valores: o teto de alertas
-> falsos por turno que se considera absorvível; a redução de falsos positivos
-> sobre a configuração C0 que daí decorre; e a revocação longitudinal mínima.
+> **O número foi declarado em 12/11/2026:** 45 alertas falsos por turno, com a
+> revocação de referência de 0,20 e a revocação longitudinal mínima de 0,80, no
+> texto acima.
 >
 > ⚠️ **O prazo venceu em 11/11/2026**, com a primeira execução registrada. O
 > texto anterior desta nota dizia que "ainda dá tempo de ser *a priori*", e a

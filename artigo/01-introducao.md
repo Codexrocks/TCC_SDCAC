@@ -171,7 +171,7 @@ para o experimento.
 | **Saiu o parágrafo final do Problema**, que começava com "Assim, uma abordagem baseada exclusivamente…" | Repetia, em outras palavras, os três parágrafos anteriores |
 | **Saiu "uma avaliação mais contextualizada"** do fecho do Problema | O [plano](../docs/plano.md), seção 1.3, registra que essa expressão fica **fora** da formulação: ela é a conclusão que os números autorizam ou não, não a hipótese |
 | **A Estrutura do trabalho foi condensada** de seis parágrafos para um | Era a seção mais repetitiva, e o conteúdo não se perdeu |
-| **A chamada no texto ficou como está** — autor-ano em caixa normal | É a forma do template, que chegou em 13/10. A conversão valeu para o artigo inteiro de uma vez |
+| **A chamada no texto ficou como está** — autor-ano em caixa normal | É a forma que o template prescreve, conferida no arquivo do professor em 18/11/2026. A conversão valeu para o artigo inteiro de uma vez |
 
 ## O que esta seção ainda precisa
 

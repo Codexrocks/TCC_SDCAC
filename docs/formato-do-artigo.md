@@ -114,14 +114,13 @@ author(s) and the year of publication"*, com os exemplos `(Choma and Ugaya, 2017
 > [decisões](decisoes.md). Se a equipe quiser a regra numerada, é uma decisão a
 > registrar, e não algo que esta página possa afirmar por conta própria.
 >
-> **Duas datas ainda não foram reconciliadas.** A tabela *O que mudou em 13/10* da
-> Introdução diz que o template *"chegou em 13/10"*. O arquivo que o professor
-> distribui foi versionado em **18/11/2026**, como registram esta página e
-> [templates](../templates/README.md), e o `COBEM-2025-template.docx`, de mesmo
-> conteúdo, foi encontrado pela equipe em 07/09. Pode ser que o texto de 13/10 se
-> refira a um desses arquivos, mas o repositório não diz qual. **Esta página não
-> escolhe entre as datas**; o Davi confirma qual vale e, se for o caso, ajusta a
-> Introdução, que é texto do artigo.
+> **As duas datas foram reconciliadas em 21/11/2026.** A tabela *O que mudou em
+> 13/10* da Introdução dizia que o template *"chegou em 13/10"*, e o repositório
+> não sustentava a data: o arquivo do professor foi versionado em **18/11/2026**,
+> e o `COBEM-2025-template.docx`, de mesmo conteúdo, estava aqui desde 07/09. A
+> tabela e o [`artigo/README.md`](../artigo/README.md) passaram a dizer o que se
+> verifica — **a conversão** foi em 13/10, e **a forma** foi conferida no arquivo
+> do professor em 18/11. Nenhum dos dois trechos entra no documento de entrega.
 >
 > Conferido em 21/11/2026 que nenhuma chamada dos capítulos de `artigo/` está em
 > caixa alta com ponto e vírgula, como a NBR 10520 pediria. **Isso é uma busca,

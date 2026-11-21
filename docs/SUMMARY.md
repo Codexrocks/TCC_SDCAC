@@ -117,4 +117,5 @@
   * [2026-11-21 — Sessão 56: revisão de segurança do código](relatorios/2026-11-21-sessao-56.md)
   * [2026-11-21 — Sessão 57: a verificação do repositório, três PRs e o Wang](relatorios/2026-11-21-sessao-57.md)
   * [2026-11-21 — Sessão 58: os capítulos fecham, e as fontes da página de segurança](relatorios/2026-11-21-sessao-58.md)
+  * [2026-11-21 — Sessão 59: o reenvio registrado, e os textos que ainda falavam do passado](relatorios/2026-11-21-sessao-59.md)
   * [Modelo de relatório](relatorios/_modelo.md)

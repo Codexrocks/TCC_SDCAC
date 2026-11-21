@@ -60,9 +60,9 @@ insumos da Yasmin em 12/11. **O Davi leu e aprovou a § 3.3** corrigida pelo
 1. ~~**Reenviar a Seção de Resultados ao orientador**~~ — reenviada pelo Davi
    em 19/11/2026, no prazo, relatado por ele em 21/11
 2. **S15 — a versão final, até 10/12.** Montar com
-   `python scripts/montar_artigo.py`, converter e conferir as 12 páginas —
-   **depois do #131**, que faz o montador escrever as fórmulas no formato do
-   template; antes dele, elas saem em LaTeX cru
+   `python scripts/montar_artigo.py`, converter e conferir as 12 páginas. O
+   #131 entrou em 20/11, e o montador já escreve as fórmulas no formato do
+   template
 3. **S16 — slides e ensaio da defesa**, depois da entrega. O critério é que
    cada um apresente qualquer seção sob sorteio
 
@@ -94,8 +94,9 @@ insumos da Yasmin em 12/11. **O Davi leu e aprovou a § 3.3** corrigida pelo
    exigem mudar o contrato de leitura da API — ver [o painel](painel.md)
 7. **A tela de Métricas**, pela D-45, depois de o avaliador gravar as métricas
    na API. Não bloqueia o artigo
-8. **O merge** de todo Pull Request — o próximo é o #131, depois das 23:26
-   de 19/11. O ruleset recusa qualquer outra origem
+8. **O merge** de todo Pull Request — o próximo é o #141, depois de 24 h
+   aberto: atualizar a branch, esperar os checks e só então o merge. O ruleset
+   recusa qualquer outra origem
 
 ## Filipe
 
@@ -118,8 +119,8 @@ insumos da Yasmin em 12/11. **O Davi leu e aprovou a § 3.3** corrigida pelo
      orientações pedem publicação de até 5 anos no contexto
      ([formato do artigo](formato-do-artigo.md)), e as duas chamadas da § 1.1
      eram de 2006 e 2009. **Entrou Alahmadi et al. (2022) em 19/11**, aberta e
-     conferida pelo assistente no PDF dos anais; **falta o Davi confirmar**, em
-     [citações pendentes](citacoes-pendentes.md)
+     conferida pelo assistente no PDF dos anais, e aceita pelo Davi em 21/11 —
+     ver [citações pendentes](citacoes-pendentes.md)
 3. ~~**Uma citação em [`usabilidade.md`](usabilidade.md) § 7**~~ — fechada em
    19/11 com Alahmadi et al. (2022), a mesma fonte da Introdução
 
