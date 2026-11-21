@@ -644,6 +644,12 @@ dono = "Davi"
 desde = 2026-11-19
 
 [[citacao]]
+onde = "artigo/referencias.md e artigo/04-resultados.md § 4.2 — Shashanka, Shen e Wan, 2016"
+o_que = "Erro de autor: o terceiro é Jisheng Wang, e não Wan (DBLP, 21/11/2026). Conferir na folha de rosto, corrigir os dois lugares e remontar o artigo"
+dono = "Davi"
+desde = 2026-11-21
+
+[[citacao]]
 onde = "docs/usabilidade.md § 6.2"
 o_que = "Formulação exata e porcentagem de Nielsen e Landauer"
 dono = "Filipe"

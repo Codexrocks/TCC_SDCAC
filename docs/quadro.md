@@ -162,7 +162,7 @@ contrário das colunas acima.
 
 ## Dívida bibliográfica
 
-8 pendências. Referência não conferida na fonte é o único
+9 pendências. Referência não conferida na fonte é o único
 item deste quadro que pode reprovar o trabalho por fraude acadêmica, e é o
 que some mais fácil de vista.
 
@@ -176,6 +176,7 @@ que some mais fácil de vista.
 | `artigo/01-introducao.md — caso Capital One, 2019` | Confirmar na fonte: U.S. DOJ, usao-wdwa. **O próprio insumo admite estar incompleto**, com URL genérica | Yasmin | 10/11/2026 | 9 dias |
 | `artigo/01-introducao.md — caso Tesla / Tripp, 2018` | Confirmar na fonte: petição inicial Tesla, Inc. v. Martin Tripp (Nevada) ou GovInfoSecurity, 2018 | Yasmin | 10/11/2026 | 9 dias |
 | `artigo/01-introducao.md § 1.1 e docs/usabilidade.md § 7 — Alahmadi et al., 2022` | Fonte de contexto de até 5 anos, aberta pelo assistente; falta uma pessoa confirmar que a frase diz o que o resumo diz | Davi | 19/11/2026 | 0 dias |
+| `artigo/referencias.md e artigo/04-resultados.md § 4.2 — Shashanka, Shen e Wan, 2016` | Erro de autor: o terceiro é Jisheng Wang, e não Wan (DBLP, 21/11/2026). Conferir na folha de rosto, corrigir os dois lugares e remontar o artigo | Davi | 21/11/2026 | -2 dias |
 
 ## O que ficou fora desta versão
 
