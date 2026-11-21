@@ -29,8 +29,8 @@ depende do template.
 | Fonte | O que dá |
 |---|---|
 | Orientações do professor | Extensão, estrutura, limites da Introdução, prazos — **tudo abaixo** |
-| Template COBEM 2026 | Margens, fontes, estilos, blocos de abertura e fechamento — **falta** |
-| `COBEM-2025-template.docx` | Aproximação da família, útil para diagramar enquanto o de 2026 não chega |
+| Template do professor (`COBEM-2026-modelo-do-professor.docx`) | Margens, fontes, estilos, blocos de abertura e fechamento — **versionado desde 18/11/2026** |
+| `COBEM-2025-template.docx` | Mesmo conteúdo do arquivo do professor, conferido em 18/11/2026 |
 
 ***
 
@@ -93,31 +93,28 @@ CHANG, M.; PAKZAD, S. N. Modified natural excitation technique for stochastic
 modal identification. Journal of Structural Engineering, v. 139, n. 10, 2013.
 ```
 
-#### E a chamada dentro do texto? **Não converta nada até o template chegar**
+#### E a chamada dentro do texto? **Autor-ano, em caixa normal**
 
-A Introdução já escrita usa a forma da **NBR 10520** — `(CHANDOLA; BANERJEE;
-KUMAR, 2009)`, caixa alta e ponto e vírgula. Enquanto se supunha que o formato
-era CREEM, a orientação aqui era converter para `(Chandola et al., 2009)`.
-**Essa orientação caiu, e converter agora seria andar para trás.**
+A chamada no texto está em **autor-ano, em caixa normal** — `(Chandola et al.,
+2009)` —, que é a forma do template. Conferido em 21/11/2026 nos capítulos de
+`artigo/`: nenhuma chamada em caixa alta com ponto e vírgula, como a NBR 10520
+pediria. A conversão valeu para o artigo inteiro de uma vez, e o registro dela
+está na tabela *O que mudou em 13/10* da
+[Introdução](../artigo/01-introducao.md).
 
 | | |
 |---|---|
 | O professor disse | "As referências seguem a **ABNT**" |
-| A NBR 10520 é | **a norma ABNT da chamada no texto** |
+| A **lista de referências** segue | **ABNT NBR 6023** |
+| A **chamada no texto** segue | **O template do professor**, em autor-ano |
 | O template do professor | **versionado desde 18/11/2026**, e silencioso sobre a forma da chamada |
 
-Ou seja: a forma que está escrita é **consistente com a ABNT**, que é a única
-instrução escrita que existe sobre referências. A forma autor-ano em caixa
-normal é o costume da família ABCM — costume, não instrução que alguém tenha
-dado a este trabalho.
-
-**Para a entrega de 24/09:** deixe como está. Texto internamente consistente com
-a ABNT é defensável; texto convertido para uma forma que ninguém pediu, e que não
-casa com a lista, não é.
-
-**Quando o template chegar:** se ele exigir autor-ano em caixa normal, a conversão
-é mecânica e vale para o artigo inteiro de uma vez — não para três citações
-isoladas na véspera de uma entrega.
+> **Uma versão anterior desta seção mandava não converter nada até o template
+> chegar**, por supor que a Introdução usava `(CHANDOLA; BANERJEE; KUMAR, 2009)`.
+> A orientação caiu quando a conversão aconteceu, e deixá-la aqui induziria a
+> reverter o artigo inteiro. A regra que fica vale daqui em diante: **mudança de
+> forma de chamada vale para o artigo inteiro de uma vez**, e não para citações
+> isoladas na véspera de uma entrega.
 
 ### Entrega final
 
@@ -132,8 +129,9 @@ isoladas na véspera de uma entrega.
 > são as 8 a 12 páginas com resultados concretos.
 
 > **O template do COBEM 2025 diz 6 a 10 páginas**, e o do CREEM 2026 também traz
-> número próprio. **Vale o do professor**: 8 a 12. Se o template de 2026 chegar
-> com outro número, é ele que muda o documento — e o artigo fecha hoje em 12.
+> número próprio. **Vale o do professor**: 8 a 12. O template do professor
+> chegou em 18/11/2026 e, por ter o mesmo conteúdo do COBEM 2025, traz o mesmo número.
+> Vale o das orientações — e o artigo fecha hoje em 12.
 
 ### Tabelas e figuras
 
