@@ -460,7 +460,10 @@ def test_o_cors_tem_lista_explicita_e_nao_curinga(monkeypatch):
     assert origens_permitidas() == ["https://painel.exemplo", "https://outro.exemplo"]
 
 
-@pytest.mark.parametrize("valor", ["*", "https://painel.exemplo, *", " * "])
+@pytest.mark.parametrize(
+    "valor",
+    ["*", "https://painel.exemplo, *", " * ", "https://*.exemplo"],
+)
 def test_o_cors_recusa_curinga_vindo_do_ambiente(monkeypatch, valor):
     """O comentario do modulo dizia que `*` nao entra, mas a variavel aceitava.
 

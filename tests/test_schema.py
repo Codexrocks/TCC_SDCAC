@@ -291,3 +291,24 @@ def test_ninguem_cria_objeto_no_schema_public_por_ser_public():
         assert "REVOKE CREATE ON SCHEMA public FROM PUBLIC;" in sem_comentarios(sql), (
             f"{nome}: falta o REVOKE CREATE ON SCHEMA public FROM PUBLIC"
         )
+
+
+def test_o_gerador_continua_criando_particao_no_corp_depois_do_revoke():
+    """O REVOKE tira o CREATE herdado de PUBLIC, e nao o do gerador.
+
+    O `corp` particiona os eventos por semente, e quem cria a particao e o
+    `generator`. Se o GRANT viesse antes do REVOKE, ou sumisse, a carga quebraria.
+    """
+    sql = sem_comentarios(CORP_PRIV)
+    revoke = sql.index("REVOKE CREATE ON SCHEMA public FROM PUBLIC;")
+    grant = sql.index("GRANT CREATE ON SCHEMA public TO generator;")
+
+    assert revoke < grant, "o GRANT CREATE do gerador precisa vir depois do REVOKE"
+
+
+def test_ninguem_mais_recebe_create_no_schema_public():
+    """So o `generator`, e so no `corp`, tem `GRANT CREATE ON SCHEMA public`."""
+    for nome, sql in (("ground_truth", GABARITO_PRIV), ("sdcac", SDCAC_PRIV)):
+        assert "GRANT CREATE ON SCHEMA" not in sem_comentarios(sql), (
+            f"{nome}: alguem recebeu CREATE no schema public"
+        )

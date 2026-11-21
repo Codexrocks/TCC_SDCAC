@@ -62,7 +62,7 @@ Legenda de gravidade, **estimada pela revisão**: **Alta** · **Média** · **Ba
 antigo; *Recomendação* quer dizer que o arquivo é protegido pelo
 [`AGENTS.md`](../AGENTS.md) seção 4 e a mudança exige 24 h de espera.
 
-| # | Achado | Classe | Gravidade | Estado |
+| # | Achado | Classe | Gravidade (estimada) | Estado |
 |---|---|---|---|---|
 | S-01 | O painel monta HTML com o motivo da regra **sem escapar** | CWE-79 · OWASP A03:2021 | Média | **Corrigido** |
 | S-02 | A variável `SDCAC_ORIGENS` aceitava `*`, embora o comentário do módulo dissesse que não | CWE-942 · OWASP A05:2021 | Baixa | **Corrigido** |
@@ -113,7 +113,9 @@ um comportamento mais restritivo, e foi conferido que **nenhuma página de
 documentação ou arquivo de exemplo manda definir `*`**: a única menção ao
 assunto é o relatório da sessão 29, que diz *"nunca `*`"*.
 **Teste:** `tests/test_api.py::test_o_cors_recusa_curinga_vindo_do_ambiente`, com
-três formas de escrever o curinga.
+quatro formas de escrever o curinga, **inclusive `https://*.exemplo`**. A recusa
+cobre qualquer `*` porque o `CORSMiddleware` compara a origem **literalmente**:
+um padrão parcial nunca casaria, e falhar na partida avisa quem achou que casaria.
 
 ### S-03 — `CREATE` herdado de `PUBLIC` · Baixa · corrigido
 
@@ -132,7 +134,11 @@ sobrava dentro de cada um.
 
 **Correção:** `REVOKE CREATE ON SCHEMA public FROM PUBLIC;` nos três arquivos. O
 `GRANT CREATE … TO generator` do `corp` continua, depois dele.
-**Teste:** `tests/test_schema.py::test_ninguem_cria_objeto_no_schema_public_por_ser_public`.
+**Testes:** `tests/test_schema.py::test_ninguem_cria_objeto_no_schema_public_por_ser_public`,
+e dois que fixam o que **não** pode mudar: o `GRANT CREATE` do gerador no `corp`
+continua **depois** do `REVOKE`, e nenhum outro papel recebe `CREATE` em `public`. No
+`ground_truth` e no `sdcac` nunca houve `GRANT CREATE`, e o `ground_truth` não tem
+tabela particionada, então nada ali dependia do `CREATE` que vinha de `PUBLIC`.
 **O que o teste não prova:** ele confere que o texto do `REVOKE` está nos três
 arquivos, e não o **efeito** num banco real. Nenhum teste do projeto aplica o
 esquema num PostgreSQL, e esta máquina não tem um. Aplicar os três arquivos num
@@ -255,7 +261,7 @@ falta para a Yasmin assinar.
 | # | Base da afirmação | Por execução? | Fonte aberta? |
 |---|---|---|---|
 | S-01 | Leitura do código e dos usos de `unsafe_allow_html` | **Sim, do escape:** o teste falha sem a correção. **Não** de exploração no navegador | Não: Streamlit, OWASP e CWE só por busca |
-| S-02 | Leitura do código | **Sim:** o teste falha sem a correção e cobre três formas do curinga | Não: CWE-942 só por busca |
+| S-02 | Leitura do código | **Sim:** o teste falha sem a correção e cobre quatro formas do curinga | Não: CWE-942 só por busca |
 | S-03 | Leitura do SQL e das notas do PostgreSQL 15 | **Não.** O teste confere o texto, e não o efeito num banco | **Sim, pelo assistente:** a página das notas da versão 15, em 21/11/2026 |
 | S-04 | Leitura de `ArquivoStorage.events` | **Não:** o tempo de uma chamada não foi medido | Não |
 | S-05 | **Busca** por referências e permissões nos workflows; o relato da falha da ação é de notícia | Sim, da busca; **não** da falha | Não |
@@ -274,10 +280,43 @@ mais que isso dela.
 | `backend/main.py` | `origens_permitidas` recusa `*` (S-02) |
 | `frontend/components/parcelas.py` | `escape` no motivo e no rótulo da barra (S-01) |
 | `database/{corp,ground_truth,sdcac}/002_privilegios.sql` | `REVOKE CREATE ON SCHEMA public FROM PUBLIC` (S-03) |
-| `tests/test_api.py`, `tests/test_parcelas.py`, `tests/test_schema.py` | Um teste por correção; **os cinco testes novos falham no código antigo** |
+| `tests/test_api.py`, `tests/test_parcelas.py`, `tests/test_schema.py` | Um teste por correção, mais dois que fixam o que não pode mudar no banco. **Os testes das três correções falham no código antigo** |
 
 Para reproduzir: `python -m pytest tests/test_api.py tests/test_parcelas.py
 tests/test_schema.py`. Para ver o teste cair, desfaça a correção correspondente.
+
+### Exceção ao marco M4, que o Davi precisa autorizar
+
+O [cronograma](cronograma.md) diz, no marco **M4**, que *"a partir daqui o trabalho
+é escrita. Nenhuma alteração de código é aceita"*, e o M4 fechou em 12/11/2026. **Este
+PR altera código em 21/11/2026**: `backend/main.py`, `frontend/components/parcelas.py`
+e três arquivos SQL. **O assistente não verificou o M4 antes de alterar**, e isso está
+registrado como erro no relatório da sessão 56.
+
+**Quem pediu, e quem precisa autorizar.** O pedido foi da **Yasmin**, e o
+[`AGENTS.md`](../AGENTS.md) seção 4 exige pedido explícito do **Davi** para mexer em
+escopo ou cronograma. **A autorização dele não está registrada.** Sem ela, as três
+correções são uma proposta, e não uma mudança aceita.
+
+**O que a evidência mostra sobre os números da seção 4 do artigo** (conferida em
+21/11/2026 por busca e leitura, sem reexecutar o experimento):
+
+| Verificação | Resultado |
+|---|---|
+| Algum módulo do experimento (`detection`, `runner`, `evaluator`, `generator`, `ingest`, `storage`) importa `backend/` ou `frontend/`? | **Não.** A busca por `import backend` e `import frontend` fora de `backend/`, `frontend/` e `tests/` volta vazia |
+| O `detection/` pode importar `backend/`? | **Não**, e há teste que reprova (`tests/test_arquitetura.py`) |
+| Algum código lê os `002_privilegios.sql`? | **Só testes.** O experimento usa o adaptador de arquivos, e não PostgreSQL |
+| Este PR altera `results/` ou `artigo/`? | **Não**: nenhum arquivo |
+| A suíte inteira, inclusive os testes do experimento? | **765 passam** |
+
+**O que isto não prova.** É evidência **estática**: o experimento não foi rodado de
+novo, e `results/agregado.md` não foi regenerado nem comparado. A conclusão correta é
+que **nada no caminho que gera os números importa o código alterado**, e não que um
+reexecução daria byte a byte o mesmo resultado.
+
+**Opção que não depende da autorização.** A documentação (`docs/seguranca.md`, o
+relatório, o quadro) **não é código**. Se o Davi não autorizar a exceção, o PR pode
+entrar só com ela, e as três correções ficam como recomendação.
 
 > **`frontend/components/parcelas.py` é da área do Filipe** (S9), e o painel é
 > dele. A mudança é pequena e está coberta por teste, mas **ele precisa ler**.
@@ -320,7 +359,7 @@ referências do artigo.
 **Como a banca verifica.** Pelo que fica no repositório, e não pela palavra de
 ninguém: o histórico do PR mostra quem escreveu cada commit e a declaração de IA;
 as linhas de `docs/citacoes-pendentes.md` só saem quando alguém abriu a fonte; os
-cinco testes novos **falham sem a correção** e qualquer pessoa pode repetir isso; e
+testes das três correções **falham sem a correção** e qualquer pessoa pode repetir isso; e
 o relatório da sessão 56 lista os erros do assistente e **quem os pegou**.
 
 ## Referências
