@@ -3,7 +3,9 @@
 Revisão de segurança do código do SDCAC, feita em **21/11/2026** por **Claude
 Sonnet 5.5** a pedido da **Yasmin**, responsável pelo conteúdo de segurança do projeto ([equipe](equipe.md)) e dona da **D-19**, a vertente de LGPD e ISO/IEC 27001. O texto
 é o registro do que foi lido, do que foi achado, do que foi corrigido e do que
-ficou como recomendação — com a base pública de cada afirmação.
+ficou como recomendação — com a **base pública indicada**, e **ainda não
+conferida em fonte aberta por uma pessoa**: a seção 5 diz o que cada
+conclusão sustenta, e a seção 8 diz o que falta para a Yasmin assinar.
 
 > **O que esta página é, e o que não é.** É uma **revisão por leitura de código**,
 > com testes que fixam cada correção. **Não é teste de intrusão**, não rodou
@@ -292,6 +294,34 @@ tests/test_schema.py`. Para ver o teste cair, desfaça a correção corresponden
 - **A quem cabe conferir:** o assistente leu e escreveu; **a Yasmin lê, confirma e
   assina**. As referências abaixo foram achadas por busca e **não** foram abertas
   na fonte pelo assistente.
+
+## 8. Para a Yasmin assinar
+
+**Enquanto as caixas abaixo não estiverem marcadas, esta página é do assistente, e a
+revisão não está assinada.** O assistente leu, escreveu, testou e registrou os
+próprios erros; **não** confirmou nenhuma fonte, e quem assume uma revisão diante
+da banca é quem a leu. É a mesma divisão que o repositório já usa para as
+referências do artigo.
+
+- [ ] Li a página inteira, e discordo ou concordo de cada gravidade da seção 4
+- [ ] Abri cada fonte da lista de [Referências](#referências) e conferi autor, título,
+      veículo e o trecho que sustenta a afirmação — **apagando a linha
+      correspondente** em [citações pendentes](citacoes-pendentes.md) e no
+      `quadro.toml`, só depois de abrir
+- [ ] Abri o relato da falha do `claude-code-action` em **fonte primária**, e a
+      recomendação de pinagem na documentação do GitHub, que a página cita a partir
+      de notícia e de memória do assistente
+- [ ] Rodei `python -m pytest tests/test_api.py tests/test_parcelas.py tests/test_schema.py`
+      e desfiz uma correção para **ver o teste falhar**
+- [ ] Abri `frontend/components/parcelas.py` e `backend/main.py` e li as duas
+      mudanças
+- [ ] Declarei no PR **"Conferi tudo que a IA escreveu: sim"**
+
+**Como a banca verifica.** Pelo que fica no repositório, e não pela palavra de
+ninguém: o histórico do PR mostra quem escreveu cada commit e a declaração de IA;
+as linhas de `docs/citacoes-pendentes.md` só saem quando alguém abriu a fonte; os
+cinco testes novos **falham sem a correção** e qualquer pessoa pode repetir isso; e
+o relatório da sessão 56 lista os erros do assistente e **quem os pegou**.
 
 ## Referências
 
