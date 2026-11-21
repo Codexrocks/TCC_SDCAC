@@ -116,4 +116,5 @@
   * [2026-11-21 — Sessão 55: auditoria do repositório e conferência das referências](relatorios/2026-11-21-sessao-55.md)
   * [2026-11-21 — Sessão 56: revisão de segurança do código](relatorios/2026-11-21-sessao-56.md)
   * [2026-11-21 — Sessão 57: a verificação do repositório, três PRs e o Wang](relatorios/2026-11-21-sessao-57.md)
+  * [2026-11-21 — Sessão 58: os capítulos fecham, e as fontes da página de segurança](relatorios/2026-11-21-sessao-58.md)
   * [Modelo de relatório](relatorios/_modelo.md)

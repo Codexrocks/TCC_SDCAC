@@ -32,7 +32,8 @@ em 12/11/2026, e as semanas **S5 a S11** foram dadas como prontas pelo Davi em
 | Decisões | Todas fechadas, menos a **D-07** (caneta rotativa), que não tem prazo |
 
 **O que resta não é construção: é envio e diagramação.** As leituras de quem
-assina fecharam em 19/11/2026 — ver abaixo —, com duas exceções do Davi.
+assina fecharam em 19/11 e 21/11/2026 — ver abaixo —, e **os cinco capítulos
+estão prontos no quadro**.
 
 ### As leituras de quem assina
 
@@ -70,11 +71,11 @@ insumos da Yasmin em 12/11. **O Davi leu e aprovou a § 3.3** corrigida pelo
 
 ## Davi
 
-1. **Ler a § 5.4**, reescrita em 18/11 e 19/11. É o que falta para o capítulo
-   5 ficar pronto
-2. **Confirmar Alahmadi et al. (2022)** na fonte, em
-   [citações pendentes](citacoes-pendentes.md). É o que falta para o capítulo
-   1 ficar pronto
+1. ~~**Ler a § 5.4**~~ — lida, relatado pelo Davi em 21/11/2026; o capítulo 5
+   está pronto
+2. ~~**Confirmar Alahmadi et al. (2022)**~~ — o Davi delegou a confirmação ao
+   assistente em 21/11/2026, e o capítulo 1 está pronto. O registro está em
+   [citações pendentes](citacoes-pendentes.md)
 3. **Ratificar as três correspondências da ingestão**, nomeadas no topo de
    `ingest/corp.py`:
 
