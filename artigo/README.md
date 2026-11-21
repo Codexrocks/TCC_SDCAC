@@ -167,9 +167,10 @@ Quatro coisas para saber antes de escrever:
    mais antiga continua válida em outras partes, mas o contexto mostra o estado
    atual
 3. **A chamada no texto está em autor-ano, caixa normal** —
-   `(Chandola et al., 2009)`. Esta é a forma do template, e a conversão **já
-   aconteceu**: o template chegou em 13/10/2026 e a troca valeu para o artigo
-   inteiro de uma vez, como registra a tabela *O que mudou em 13/10* da
+   `(Chandola et al., 2009)`. Esta é a forma que o template prescreve,
+   conferida no arquivo do professor em 18/11/2026, e a conversão **já
+   aconteceu**: a troca valeu para o artigo inteiro de uma vez, em 13/10/2026,
+   como registra a tabela *O que mudou em 13/10* da
    [Introdução](01-introducao.md). Antes disso a instrução aqui era a caixa alta
    da NBR 10520, `(CHANDOLA; BANERJEE; KUMAR, 2009)`, e **ficou desatualizada** —
    quem a lesse hoje reverteria o artigo inteiro.
@@ -179,9 +180,9 @@ Quatro coisas para saber antes de escrever:
    referências deste trabalho, e mudança de forma de chamada vale para o artigo
    inteiro de uma vez — **não para citações isoladas na véspera de uma
    entrega**. Ver [formato do artigo](../docs/formato-do-artigo.md)
-4. ⚠️ **O template do COBEM 2026 ainda não está no repositório.** O que está
-   versionado é o COBEM 2025 e o CREEM 2026, e nenhum dos dois é o que o
-   professor pede
+4. **O template do professor está no repositório desde 18/11/2026**, em
+   [`templates/`](../templates/README.md), e é no conteúdo o mesmo COBEM 2025
+   que o artigo já seguia
 
 A estrutura de cinco seções é a do professor, e a quinta junta **Conclusão e
 Referências** — aqui elas ficam em arquivos separados só por organização de
