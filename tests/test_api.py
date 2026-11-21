@@ -460,6 +460,22 @@ def test_o_cors_tem_lista_explicita_e_nao_curinga(monkeypatch):
     assert origens_permitidas() == ["https://painel.exemplo", "https://outro.exemplo"]
 
 
+@pytest.mark.parametrize(
+    "valor",
+    ["*", "https://painel.exemplo, *", " * ", "https://*.exemplo"],
+)
+def test_o_cors_recusa_curinga_vindo_do_ambiente(monkeypatch, valor):
+    """O comentario do modulo dizia que `*` nao entra, mas a variavel aceitava.
+
+    Convencao nao e trava: a partida falha em vez de abrir a API para qualquer
+    pagina do navegador (CWE-942).
+    """
+    monkeypatch.setenv("SDCAC_ORIGENS", valor)
+
+    with pytest.raises(ValueError, match="nao aceita"):
+        origens_permitidas()
+
+
 def test_o_contrato_versionado_esta_em_dia():
     """O arquivo no git tem de bater com o que a aplicacao gera.
 

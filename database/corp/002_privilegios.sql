@@ -6,6 +6,11 @@
 -- DELETE, por privilegio de banco. Log e evidencia." Nenhum GRANT UPDATE ou
 -- DELETE aparece neste arquivo, e tests/test_schema.py reprova se aparecer.
 
+-- Nenhum papel cria objeto no schema `public` so por ser PUBLIC. Ate o
+-- PostgreSQL 14 esse CREATE vinha de fabrica; no 15 deixou de vir, mas banco
+-- criado antes continua com ele. O REVOKE vale nos dois casos (CVE-2018-1058).
+REVOKE CREATE ON SCHEMA public FROM PUBLIC;
+
 GRANT USAGE ON SCHEMA public TO generator, sdcac_app, evaluator;
 
 -- O gerador tambem cria particao por semente, e CREATE no schema e o que

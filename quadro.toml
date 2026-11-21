@@ -668,6 +668,18 @@ dono = "Filipe"
 desde = 2026-09-03
 
 [[citacao]]
+onde = "docs/seguranca.md — Referências"
+o_que = "Referências achadas por busca, nenhuma aberta na fonte: CWE-79 e CWE-942, OWASP, PostgreSQL 15, Saltzer e Schroeder, Rubinstein et al., Wagner e Soto, Barreno et al., NIST SP 800-218, Streamlit"
+dono = "Yasmin"
+desde = 2026-11-21
+
+[[citacao]]
+onde = "docs/seguranca.md — S-05, recomendação 1"
+o_que = "Pinagem de ações por SHA (documentação do GitHub) e relato da falha do claude-code-action, citado a partir de notícia"
+dono = "Yasmin"
+desde = 2026-11-21
+
+[[citacao]]
 onde = "artigo/01-introducao.md — caso Target, 2013"
 o_que = "Confirmar na fonte: RILEY; ELGIN; LAWRENCE; MATLACK, Bloomberg Businessweek, 13 mar. 2014"
 dono = "Yasmin"
