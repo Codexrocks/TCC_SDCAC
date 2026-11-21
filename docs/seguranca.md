@@ -3,9 +3,10 @@
 Revisão de segurança do código do SDCAC, feita em **21/11/2026** por **Claude
 Sonnet 5.5** a pedido da **Yasmin**, responsável pelo conteúdo de segurança do projeto ([equipe](equipe.md)) e dona da **D-19**, a vertente de LGPD e ISO/IEC 27001. O texto
 é o registro do que foi lido, do que foi achado, do que foi corrigido e do que
-ficou como recomendação — com a **base pública indicada**, e **ainda não
-conferida em fonte aberta por uma pessoa**: a seção 5 diz o que cada
-conclusão sustenta, e a seção 8 diz o que falta para a Yasmin assinar.
+ficou como recomendação — com a **base pública indicada**. **As fontes foram
+abertas e conferidas pelo assistente em 21/11/2026, a pedido do Davi**, e não por
+uma pessoa: a seção 5 diz o que cada conclusão sustenta, e a seção 8 diz o que
+falta para a Yasmin assinar.
 
 > **O que esta página é, e o que não é.** É uma **revisão por leitura de código**,
 > com testes que fixam cada correção. **Não é teste de intrusão**, não rodou
@@ -90,9 +91,10 @@ e fala com o navegador do analista. Hoje os dados são sintéticos, e por isso a
 gravidade é **Média** e não Alta: o risco real começa quando a ingestão passar a
 ler log de verdade.
 
-**O que não foi demonstrado:** a Streamlit avisa que HTML inserido é risco do
-desenvolvedor, e sanitiza parte do que renderiza. **Não testei** o que ela barra
-neste caminho. A correção vale de qualquer forma, porque escapar na saída é a
+**O que não foi demonstrado:** a documentação do `st.markdown` avisa que HTML
+customizado *"impacts safety, styling, and maintainability"* do app, e que, com
+`unsafe_allow_html` desligado, as marcas são escapadas. **Não testei** o que o
+navegador executa neste caminho. A correção vale de qualquer forma, porque escapar na saída é a
 defesa correta e não depende do que o renderizador faz depois.
 
 **Correção:** `html.escape` em tudo que vem da API em `motivo_html` e no rótulo de
@@ -174,10 +176,19 @@ indexar por `event_id` uma única vez.
 | `pyproject.toml` declara só limite inferior (`fastapi>=0.115`) | `pyproject.toml` |
 
 **Por que importa, com um caso público.** A ação que o repositório usa para o
-assistente, `claude-code-action`, teve em 2026 uma falha divulgada: a verificação
-de que o ator tem permissão de escrita podia ser contornada por conta de bot. A
-correção saiu na versão 1.0.94, e a orientação foi atualizar e revisar quem pode
-disparar a ação. Nenhum workflow usa `allowed_non_write_users`
+assistente, `claude-code-action`, publicou em 2026 o aviso de segurança
+**GHSA-8q5r-mmjf-575q**: um PR com um `.mcp.json` malicioso podia executar código
+no *runner* e vazar os segredos do workflow quando alguém com permissão disparava
+a ação sobre ele; a correção saiu na versão **1.0.74** (Anthropic, 2026a). Em
+12/11/2026 a versão **1.0.273** passou a exigir, para execução disparada pela
+atividade de um bot num PR, que o autor do PR tenha permissão de escrita ou seja
+bot permitido (Anthropic, 2026b).
+
+> **Corrigido em 21/11/2026.** A versão anterior desta página dizia, a partir de
+> notícia, que uma falha de contorno da permissão de escrita por bot fora
+> corrigida na 1.0.94. **As notas da 1.0.94 não dizem isso** — tratam do `PATH`
+> quando `allowed_non_write_users` está definido —, e o único aviso de segurança
+> publicado no repositório da ação é o acima. Nenhum workflow usa `allowed_non_write_users`
 (conferido por busca). O `claude.yml` **não** define `allowed_bots`, e registra
 isso como trava; o `revisor.yml` define `allowed_bots: "github-actions,gitbook-com"`,
 uma lista **explícita**, sem curinga. Vale o Davi reler essa lista à luz da falha. Como a referência é a
@@ -188,8 +199,9 @@ pela outra sem decisão.
 **Recomendações, todas em arquivo protegido (24 h e seção `Arquivo protegido`):**
 
 1. Referenciar as ações por **SHA de commit completo**, com o comentário da
-   versão, e deixar o Dependabot atualizar. <!-- FALTA CITAÇÃO --> a recomendação
-   de pinagem é da documentação do GitHub, e eu não abri a página.
+   versão, e deixar o Dependabot atualizar. É a recomendação da documentação do
+   GitHub, que acrescenta que o *lockfile* de dependências do workflow a
+   substitui para quem o adotar (GitHub, 2026).
 2. Acrescentar `.github/dependabot.yml` para `pip` e `github-actions`.
 3. Ligar, nas configurações do GitHub, a **varredura de segredos** e a
    **proteção contra push de segredo**. É configuração fora do repositório, e o
@@ -233,7 +245,7 @@ contra manipulação:
 esse comportamento aprendido como normal, e a D2 passa a medir desvio em relação
 a um padrão já contaminado. É o que a literatura de aprendizado de máquina
 adversarial chama de ataque **causativo**: o adversário atua sobre o treino, e
-não sobre o teste. A literatura também mostra que detectores de anomalia podem
+não sobre o teste (Barreno et al., 2010). A literatura também mostra que detectores de anomalia podem
 ser envenenados de forma gradual (Rubinstein et al., 2009) e que um atacante que
 conhece o detector pode imitar o comportamento normal (Wagner e Soto, 2002).
 
@@ -255,22 +267,22 @@ com o grupo de pares, e reaprender o padrão com validação do que entra nele.
 
 Esta seção responde à pergunta que a banca fará: **o que foi confirmado por
 execução, o que por fonte aberta e o que repousa só na leitura do assistente.**
-**Nenhuma conclusão foi confirmada por uma pessoa abrindo a fonte**; isso é o que
-falta para a Yasmin assinar.
+**As fontes foram abertas pelo assistente em 21/11/2026, a pedido do Davi**, e
+nenhuma por uma pessoa.
 
 | # | Base da afirmação | Por execução? | Fonte aberta? |
 |---|---|---|---|
-| S-01 | Leitura do código e dos usos de `unsafe_allow_html` | **Sim, do escape:** o teste falha sem a correção. **Não** de exploração no navegador | Não: Streamlit, OWASP e CWE só por busca |
-| S-02 | Leitura do código | **Sim:** o teste falha sem a correção e cobre quatro formas do curinga | Não: CWE-942 só por busca |
+| S-01 | Leitura do código e dos usos de `unsafe_allow_html` | **Sim, do escape:** o teste falha sem a correção. **Não** de exploração no navegador | **Sim, pelo assistente:** `st.markdown`, OWASP A03:2021 e CWE-79, em 21/11 |
+| S-02 | Leitura do código | **Sim:** o teste falha sem a correção e cobre quatro formas do curinga | **Sim, pelo assistente:** CWE-942 e OWASP A05:2021, em 21/11 |
 | S-03 | Leitura do SQL e das notas do PostgreSQL 15 | **Não.** O teste confere o texto, e não o efeito num banco | **Sim, pelo assistente:** a página das notas da versão 15, em 21/11/2026 |
 | S-04 | Leitura de `ArquivoStorage.events` | **Não:** o tempo de uma chamada não foi medido | Não |
-| S-05 | **Busca** por referências e permissões nos workflows; o relato da falha da ação é de notícia | Sim, da busca; **não** da falha | Não |
+| S-05 | **Busca** por referências e permissões nos workflows | Sim, da busca | **Sim, pelo assistente:** o aviso GHSA e as notas de versão da ação, e a documentação do GitHub, em 21/11 |
 | S-06 | Leitura de `backend/main.py` e da D-32 | Não | Não |
-| S-07 | Leitura de `detection/d2/baseline.py` e do calendário do gerador | Não: **justamente o caso não foi medido** | Não: literatura só por busca |
+| S-07 | Leitura de `detection/d2/baseline.py` e do calendário do gerador | Não: **justamente o caso não foi medido** | **Sim, pelo assistente:** os três artigos, em 21/11 |
 
 **Em resumo:** duas correções (S-01 e S-02) têm **execução** que as sustenta; uma
-(S-03) tem **uma fonte aberta pelo assistente**, mas sem execução; as outras quatro
-repousam **só na leitura**. É esse o peso de cada conclusão, e a página não pede
+(S-03) tem fonte aberta, mas sem execução; as outras quatro repousam na leitura,
+com a literatura que as cerca conferida. É esse o peso de cada conclusão, e a página não pede
 mais que isso dela.
 
 ## 6. O que mudou no repositório
@@ -331,30 +343,33 @@ entrar só com ela, e as três correções ficam como recomendação.
 - **O modelo de ameaça é curto.** Não cobre ameaça física, engenharia social nem a
   máquina de quem roda o sistema.
 - **A quem cabe conferir:** o assistente leu e escreveu; **a Yasmin lê, confirma e
-  assina**. As referências abaixo foram achadas por busca e **não** foram abertas
-  na fonte pelo assistente.
+  assina**. As referências abaixo foram abertas e conferidas pelo assistente em
+  21/11/2026, a pedido do Davi.
 
 ## 8. Para a Yasmin assinar
 
 **Enquanto as caixas abaixo não estiverem marcadas, esta página é do assistente, e a
 revisão não está assinada.** O assistente leu, escreveu, testou e registrou os
-próprios erros; **não** confirmou nenhuma fonte, e quem assume uma revisão diante
+próprios erros, e conferiu as fontes em 21/11 a pedido do Davi; quem assume uma revisão diante
 da banca é quem a leu. É a mesma divisão que o repositório já usa para as
 referências do artigo.
 
 - [ ] Li a página inteira, e discordo ou concordo de cada gravidade da seção 4
-- [ ] Abri cada fonte da lista de [Referências](#referências) e conferi autor, título,
-      veículo e o trecho que sustenta a afirmação — **apagando a linha
-      correspondente** em [citações pendentes](citacoes-pendentes.md) e no
-      `quadro.toml`, só depois de abrir
-- [ ] Abri o relato da falha do `claude-code-action` em **fonte primária**, e a
-      recomendação de pinagem na documentação do GitHub, que a página cita a partir
-      de notícia e de memória do assistente
+- [x] ~~Abri cada fonte da lista de [Referências](#referências)~~ — **conferidas
+      pelo assistente em 21/11/2026, a pedido do Davi**, que delegou a conferência:
+      autor, título, veículo, paginação e o trecho que sustenta cada afirmação. Duas
+      correções saíram dela, e estão nas seções 4 e 5
+- [x] ~~Abri o relato da falha do `claude-code-action` em fonte primária~~ — feito
+      pelo assistente no mesmo dia: o relato da notícia **não se confirmou**, e o
+      texto passou a citar o aviso GHSA e as notas de versão
 - [ ] Rodei `python -m pytest tests/test_api.py tests/test_parcelas.py tests/test_schema.py`
       e desfiz uma correção para **ver o teste falhar**
 - [ ] Abri `frontend/components/parcelas.py` e `backend/main.py` e li as duas
       mudanças
 - [ ] Declarei no PR **"Conferi tudo que a IA escreveu: sim"**
+
+> **O Filipe leu a mudança em `frontend/components/parcelas.py`**, que é da área
+> dele (S9), relatado pelo Davi em 21/11/2026.
 
 **Como a banca verifica.** Pelo que fica no repositório, e não pela palavra de
 ninguém: o histórico do PR mostra quem escreveu cada commit e a declaração de IA;
@@ -364,11 +379,18 @@ o relatório da sessão 56 lista os erros do assistente e **quem os pegou**.
 
 ## Referências
 
-<!-- FALTA CITAÇÃO --> **Todas as entradas abaixo foram localizadas por busca e
-precisam ser abertas na fonte por uma pessoa**, em
-[citações pendentes](citacoes-pendentes.md). Os dados de publicação vêm de
-registros bibliográficos, e a paginação de Saltzer e Schroeder **não** foi
-conferida.
+**Conferidas pelo assistente em 21/11/2026, a pedido do Davi.** As obras
+acadêmicas foram conferidas no Crossref e no texto dos autores; as páginas da web,
+abertas. O NIST SP 800-218 saiu da lista: não era citado no texto.
+
+ANTHROPIC. **GHSA-8q5r-mmjf-575q**: malicious MCP server configuration in PRs
+enables remote code execution and secret exfiltration. [S. l.]: GitHub, 2026a.
+Disponível em: https://github.com/anthropics/claude-code-action/security/advisories/GHSA-8q5r-mmjf-575q.
+Acesso em: 21 nov. 2026.
+
+ANTHROPIC. **claude-code-action v1.0.273**: notas de versão. [S. l.]: GitHub,
+2026b. Disponível em: https://github.com/anthropics/claude-code-action/releases/tag/v1.0.273.
+Acesso em: 21 nov. 2026.
 
 BARRENO, M. et al. The security of machine learning. **Machine Learning**, v. 81,
 n. 2, p. 121-148, 2010.
@@ -379,9 +401,8 @@ MITRE. **CWE-79**: improper neutralization of input during web page generation
 MITRE. **CWE-942**: permissive cross-domain security policy with untrusted
 domains. Disponível em: https://cwe.mitre.org/data/definitions/942.html.
 
-NATIONAL INSTITUTE OF STANDARDS AND TECHNOLOGY. **Secure software development
-framework (SSDF) version 1.1**: recommendations for mitigating the risk of software
-vulnerabilities. Gaithersburg: NIST, 2022. (NIST Special Publication 800-218).
+GITHUB. **Secure use reference**: GitHub Actions. [S. l.]: GitHub, 2026. Disponível em:
+https://docs.github.com/en/actions/reference/security/secure-use. Acesso em: 21 nov. 2026.
 
 OWASP FOUNDATION. **OWASP Top 10:2021**. Disponível em: https://owasp.org/Top10/2021/.
 
@@ -396,7 +417,7 @@ of anomaly detectors. In: **Proceedings of the 9th ACM SIGCOMM Internet Measurem
 Conference (IMC 2009)**. Chicago: ACM, 2009. p. 1-14.
 
 SALTZER, J. H.; SCHROEDER, M. D. The protection of information in computer systems.
-**Proceedings of the IEEE**, v. 63, n. 9, 1975.
+**Proceedings of the IEEE**, v. 63, n. 9, p. 1278-1308, 1975.
 
 STREAMLIT. **st.markdown**. Disponível em:
 https://docs.streamlit.io/develop/api-reference/text/st.markdown.

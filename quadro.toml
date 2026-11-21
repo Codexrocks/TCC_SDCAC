@@ -102,8 +102,8 @@ numero = 1
 titulo = "Introdução"
 donos = ["Yasmin", "Filipe"]
 estado = "Entregue parcial em 24/09. Os seis blocos de complementação foram preenchidos fora do repositório e sincronizados em 13/10; falta conferir a extensão no template, cujo teto é de 2 páginas"
-pronto = false
-andamento = "Lida e assinada por Yasmin e Filipe, relatado pelo Davi em 19/11/2026: a extensão cabe — cerca de 1,6 página para um teto de 2 — e a contextualização ganhou fonte de 2022, Alahmadi et al. **Falta só o Davi confirmar essa fonte**, em `docs/citacoes-pendentes.md`."
+pronto = true
+andamento = "Lida e assinada por Yasmin e Filipe. A fonte de contexto de 2022, Alahmadi et al., foi conferida pelo assistente e aceita pelo Davi em 21/11/2026, que delegou a confirmação."
 semana = "S5"
 registro = "entregas/tarefa-02.md"
 
@@ -139,8 +139,8 @@ numero = 5
 titulo = "Conclusão"
 donos = ["Davi (caneta)"]
 estado = "Escrita. Cinco subseções, com resposta própria para cada grandeza da pergunta e os oito objetivos avaliados"
-pronto = false
-andamento = "Escrita sobre as dez sementes, com as referências confirmadas e a § 5.1 com as quatro restrições da § 4.6. Yasmin e Filipe assinaram, relatado pelo Davi em 19/11/2026. **Falta o Davi ler a § 5.4**, reescrita em 18/11 e 19/11."
+pronto = true
+andamento = "Escrita sobre as dez sementes. Yasmin e Filipe assinaram; **o Davi leu a § 5.4**, relatado pelo Davi em 21/11/2026."
 semana = "S14"
 
 
@@ -268,10 +268,9 @@ id = "S12"
 inicio = 2026-11-13
 fim = 2026-11-19
 marco = "M4"
-pronto = false
-andamento = "Tabela de ablação e gráfico prontos, com Wilcoxon pareado sobre as dez sementes, em `results/agregado.md`. **A sensibilidade dos pesos não foi executada** e entrou em 18/11 como limitação declarada na § 4.6 e trabalho futuro na § 5.4, por decisão do Davi. Os números saem dos scripts de `evaluator/`, não de notebook."
+pronto = true
 entregavel = "Tabela de ablação, sensibilidade dos pesos, gráficos"
-criterio = "Cada número sai de notebook versionado · Wilcoxon pareado sobre as diferenças"
+criterio = "Cada número sai de notebook versionado · Wilcoxon pareado sobre as diferenças — fechada pelo Davi em 21/11/2026, com os números saindo dos scripts de `evaluator/` e a sensibilidade dos pesos declarada como limitação na § 4.6"
 donos = ["Filipe", "Davi"]
 
 [[semana]]
@@ -638,12 +637,6 @@ fechada_em = 2026-11-18
 # ---------------------------------------------------------------------------
 
 [[citacao]]
-onde = "artigo/01-introducao.md § 1.1 e docs/usabilidade.md § 7 — Alahmadi et al., 2022"
-o_que = "Fonte de contexto de até 5 anos, aberta pelo assistente; falta uma pessoa confirmar que a frase diz o que o resumo diz"
-dono = "Davi"
-desde = 2026-11-19
-
-[[citacao]]
 onde = "docs/usabilidade.md § 6.2"
 o_que = "Formulação exata e porcentagem de Nielsen e Landauer"
 dono = "Filipe"
@@ -660,18 +653,6 @@ onde = "docs/usabilidade.md § 9"
 o_que = "Edição e ano da obra de Shneiderman efetivamente consultada"
 dono = "Filipe"
 desde = 2026-09-03
-
-[[citacao]]
-onde = "docs/seguranca.md — Referências"
-o_que = "Referências achadas por busca, nenhuma aberta na fonte: CWE-79 e CWE-942, OWASP, PostgreSQL 15, Saltzer e Schroeder, Rubinstein et al., Wagner e Soto, Barreno et al., NIST SP 800-218, Streamlit"
-dono = "Yasmin"
-desde = 2026-11-21
-
-[[citacao]]
-onde = "docs/seguranca.md — S-05, recomendação 1"
-o_que = "Pinagem de ações por SHA (documentação do GitHub) e relato da falha do claude-code-action, citado a partir de notícia"
-dono = "Yasmin"
-desde = 2026-11-21
 
 [[citacao]]
 onde = "artigo/01-introducao.md — caso Target, 2013"
