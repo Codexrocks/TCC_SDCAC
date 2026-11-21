@@ -63,7 +63,9 @@ insumos da Yasmin em 12/11. **O Davi leu e aprovou a § 3.3** corrigida pelo
    `python scripts/montar_artigo.py`, converter e conferir as 12 páginas. O
    #131 entrou em 20/11, e o montador já escreve as fórmulas no formato do
    template
-3. **S16 — slides e ensaio da defesa**, depois da entrega. O critério é que
+3. **S16 — o ensaio da defesa.** Os slides e o roteiro entraram em 21/11 pelo
+   #144, em [`apresentacao/`](../apresentacao/README.md): 14 slides em `.pptx`,
+   com a fala nas notas, e 14:30 de fala. **Falta ensaiar**: o critério é que
    cada um apresente qualquer seção sob sorteio
 
 ---
