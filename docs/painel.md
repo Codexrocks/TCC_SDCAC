@@ -26,6 +26,12 @@ uvicorn backend.main:app
 
 com a variável `SDCAC_DADOS` apontando para o diretório onde o executor gravou.
 
+Se o painel rodar em outro endereço que não o padrão local, informe-o em
+`SDCAC_ORIGENS`, separando as origens por vírgula. **`*` não é aceito**, nem como parte de uma origem
+(`https://*.exemplo`): a API recusa subir e diz por quê. A lista é explícita de propósito — com curinga,
+qualquer página aberta no navegador de quem analisa poderia consultar a API. Ver a
+[revisão de segurança](seguranca.md), achado S-02.
+
 > **Streamlit não vem com `pip install pytest`.** Ele está nas dependências do
 > projeto (`pyproject.toml`), mas o CI **não o instala** de propósito — ver
 > [O que o CI não cobre](#o-que-o-ci-nao-cobre).

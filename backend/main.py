@@ -69,7 +69,20 @@ def origens_permitidas() -> list[str]:
     bruto = os.environ.get(VARIAVEL_DE_ORIGENS, "")
     if not bruto.strip():
         return list(ORIGENS_PADRAO)
-    return [parte.strip() for parte in bruto.split(",") if parte.strip()]
+    origens = [parte.strip() for parte in bruto.split(",") if parte.strip()]
+    # O comentario do modulo diz que `*` nao entra, mas era so convencao: a
+    # variavel de ambiente aceitava. Politica de CORS ampla demais e a fraqueza
+    # CWE-942, e falhar na partida e melhor que abrir a API sem ninguem notar.
+    # Qualquer `*`, e nao so o curinga inteiro: o CORSMiddleware compara a origem
+    # literalmente, entao `https://*.exemplo` nunca casaria com nada. Falhar na
+    # partida avisa quem achou que casaria, em vez de deixar o painel sem acesso
+    # sem explicacao.
+    if any("*" in origem for origem in origens):
+        raise ValueError(
+            f"{VARIAVEL_DE_ORIGENS} nao aceita '*' nem origem com '*': "
+            "liste as origens do painel por extenso"
+        )
+    return origens
 
 
 def _erro(

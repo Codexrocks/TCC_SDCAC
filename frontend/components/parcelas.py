@@ -22,6 +22,7 @@ interpretavel em menos de um minuto.
 """
 
 from dataclasses import dataclass
+from html import escape
 
 CINZA_FUNDO = "#EDEFF2"
 CINZA_TEXTO = "#1F2430"
@@ -122,7 +123,7 @@ def barra_html(parcelas: list[Parcela], largura: int = 420) -> str:
         fatia = pontos / total
         tom = 0.45 + 0.4 * (i / max(len(com_ponto) - 1, 1))
         pedacos.append(
-            f'<div title="{rotulo}: {pontos:g}" '
+            f'<div title="{escape(rotulo)}: {pontos:g}" '
             f'style="width:{fatia * 100:.1f}%;background:{BARRA};'
             f'opacity:{tom:.2f};height:14px"></div>'
         )
@@ -134,10 +135,18 @@ def barra_html(parcelas: list[Parcela], largura: int = 420) -> str:
 
 
 def motivo_html(hit: dict) -> str:
-    """Uma regra que disparou, com o motivo em texto e os pontos."""
-    regra = hit.get("rule", "?")
-    pontos = hit.get("points", 0)
-    motivo = hit.get("reason", "").strip() or "sem motivo registrado"
+    """Uma regra que disparou, com o motivo em texto e os pontos.
+
+    **Tudo que vem da API passa por `escape`.** O motivo e montado pelo motor
+    com campo do evento — nome de recurso, destino de download, categoria —, e
+    esses campos nascem de log. Entrar como HTML num painel de analista e a
+    fraqueza CWE-79: o painel que existe para vigiar log nao pode executar o que
+    o log diz. A tela usa `unsafe_allow_html`, e a Streamlit avisa que isso e
+    risco do desenvolvedor.
+    """
+    regra = escape(str(hit.get("rule", "?")))
+    pontos = escape(str(hit.get("points", 0)))
+    motivo = escape(str(hit.get("reason", "")).strip()) or "sem motivo registrado"
     return (
         f'<div style="background:{CINZA_FUNDO};color:{CINZA_TEXTO};'
         'padding:8px 10px;border-radius:6px;margin-bottom:6px">'
