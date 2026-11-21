@@ -4,18 +4,20 @@ Material da defesa, em 15 minutos, apresentada pelo Filipe.
 
 | O que | Onde |
 |---|---|
-| **Roteiro**, com a fala, o tempo e as palavras-chave de cada slide, e as perguntas prováveis da banca | [`roteiro.md`](roteiro.md) |
-| **Fontes do deck**, como estavam publicadas | [`deck/`](deck) |
+| **A apresentação**, em PowerPoint, com a fala nas notas do apresentador | [`apresentacao-sdcac.pptx`](apresentacao-sdcac.pptx) |
+| **O roteiro**, com a fala, o tempo e as palavras-chave de cada slide e as perguntas prováveis da banca | [`roteiro.md`](roteiro.md) |
+| **O mesmo roteiro em PDF**, em página pequena, para ler no celular | [`roteiro-filipe.pdf`](roteiro-filipe.pdf) |
 
-## Sobre o deck
+## Sobre a apresentação
 
-O deck tem **14 slides** e usa as cores do painel do SDCAC: cinza, tinta, azul e as cores das faixas de risco, sempre com
-rótulo e forma junto da cor. Foi feito numa ferramenta de slides online, e o que está em `deck/` são os arquivos-fonte dele:
-`deck.json` (a ordem dos slides), `deck.css` (o estilo compartilhado) e `slides/` (um arquivo por slide, com as
-notas do apresentador no fim de cada um).
+São **14 slides**, com as cores do painel do SDCAC: cinza, tinta, azul e as cores das faixas de risco, sempre com
+rótulo e forma junto da cor. Os gráficos são nativos do PowerPoint, e portanto editáveis. Os dois gráficos que ilustram
+um conceito (o risco que cresce sem nenhum evento passar do limite, no slide 2, e a nota decomposta, no slide 10) estão
+marcados como **ilustração, não dado do experimento**. Os demais números vêm do artigo e de
+[`results/agregado.md`](../results/agregado.md).
 
-**Os arquivos de `deck/` não abrem sozinhos num editor de slides.** Servem de registro e para reconstruir o deck. Para
-projetar, use o deck na ferramenta onde ele foi feito, ou o PDF exportado dela.
+O arquivo foi gerado por script e **conferido abrindo-o no PowerPoint 2007 e renderizando os 14 slides**. Num PowerPoint
+mais novo, as fontes (Cambria e Calibri) são as do próprio Office, e o resultado deve ser o mesmo.
 
 ## Quem escreveu
 
