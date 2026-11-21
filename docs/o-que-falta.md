@@ -57,9 +57,8 @@ insumos da Yasmin em 12/11. **O Davi leu e aprovou a § 3.3** corrigida pelo
 
 ## Todos
 
-1. **Reenviar a Seção de Resultados ao orientador — prazo 19/11/2026.** As
-   correções que ele pediu, legenda e fonte em toda tabela e figura, estão na
-   `main` desde o #109 e o #127. O envio é de uma pessoa
+1. ~~**Reenviar a Seção de Resultados ao orientador**~~ — reenviada pelo Davi
+   em 19/11/2026, no prazo, relatado por ele em 21/11
 2. **S15 — a versão final, até 10/12.** Montar com
    `python scripts/montar_artigo.py`, converter e conferir as 12 páginas —
    **depois do #131**, que faz o montador escrever as fórmulas no formato do
