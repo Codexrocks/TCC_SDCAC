@@ -148,7 +148,7 @@ Gaithersburg: NIST, 2006. (NIST Special Publication 800-92).
 SANDHU, R. S. et al. Role-based access control models. **IEEE Computer**, v. 29,
 n. 2, p. 38-47, 1996.
 
-SHASHANKA, M.; SHEN, M.-Y.; WAN, J. User and entity behavior analytics for
+SHASHANKA, M.; SHEN, M.-Y.; WANG, J. User and entity behavior analytics for
 enterprise security. In: **2016 IEEE International Conference on Big Data**.
 Washington, D.C.: IEEE, 2016. p. 1867-1874.
 
