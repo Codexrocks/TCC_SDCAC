@@ -21,6 +21,7 @@
 * [O painel](painel.md)
 * [Usabilidade](usabilidade.md)
 * [Avaliação heurística do painel — roteiro](avaliacao-heuristica.md)
+* [Revisão de segurança](seguranca.md)
 
 ## Como trabalhamos
 
@@ -112,4 +113,5 @@
   * [2026-11-17 — Sessão 52: a § 3.8 passa a dizer o que a obra diz, e a heurística entra com um avaliador](relatorios/2026-11-17-sessao-52.md)
   * [2026-11-18 — Sessão 53: o que faltava para terminar, e as fórmulas que saíam em LaTeX cru](relatorios/2026-11-18-sessao-53.md)
   * [2026-11-19 — Sessão 54: uma fonte de 2022 na Introdução, e o #131 preso pela espera](relatorios/2026-11-19-sessao-54.md)
+  * [2026-11-21 — Sessão 56: revisão de segurança do código](relatorios/2026-11-21-sessao-56.md)
   * [Modelo de relatório](relatorios/_modelo.md)

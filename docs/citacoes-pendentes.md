@@ -257,6 +257,8 @@ escreve em `docs/`.
 | [`usabilidade.md`](usabilidade.md) § 6.2 | Formulação exata e porcentagem de Nielsen e Landauer | Filipe | 03/09/2026 |
 | [`usabilidade.md`](usabilidade.md) § 6.3 | Limites exatos de cada faixa adjetiva do SUS, em Bangor, Kortum e Miller (2009) | Filipe | 03/09/2026 |
 | [`usabilidade.md`](usabilidade.md) § 9 | Edição e ano da obra de Shneiderman efetivamente consultada | Filipe | 03/09/2026 |
+| [`seguranca.md`](seguranca.md) — **Referências** | **Aberta pelo assistente por busca, nenhuma na fonte.** Abrir e conferir CWE-79 e CWE-942 (MITRE), OWASP Top 10:2021 e o *XSS prevention cheat sheet*, as notas do PostgreSQL 15, Saltzer e Schroeder (1975, **paginação não conferida**), Rubinstein et al. (2009), Wagner e Soto (2002), Barreno et al. (2010), NIST SP 800-218 e a página do `st.markdown` | Yasmin | 21/11/2026 |
+| [`seguranca.md`](seguranca.md) — **S-05, recomendação 1** | Conferir, na documentação do GitHub, a recomendação de referenciar ações por SHA de commit, e, em fonte primária, o relato da falha do `claude-code-action`, que a página cita a partir de notícia | Yasmin | 21/11/2026 |
 
 ***
 

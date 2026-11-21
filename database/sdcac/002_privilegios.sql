@@ -5,6 +5,11 @@
 -- A aplicacao escreve padrao, nota e alerta. O avaliador escreve so metrica —
 -- e nao escreve nota, porque quem ve o gabarito nao pode mexer no score.
 
+-- Nenhum papel cria objeto no schema `public` so por ser PUBLIC. Ate o
+-- PostgreSQL 14 esse CREATE vinha de fabrica; no 15 deixou de vir, mas banco
+-- criado antes continua com ele. O REVOKE vale nos dois casos (CVE-2018-1058).
+REVOKE CREATE ON SCHEMA public FROM PUBLIC;
+
 GRANT USAGE ON SCHEMA public TO sdcac_app, evaluator;
 
 -- ---------------------------------------------------------------------------

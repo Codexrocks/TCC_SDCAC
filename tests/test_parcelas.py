@@ -174,6 +174,24 @@ def test_o_motivo_mostra_regra_pontos_e_texto():
     assert "17 eventos em 14 dias" in html
 
 
+def test_o_motivo_escapa_o_que_vem_da_api():
+    """O motivo carrega campo de evento, e evento nasce de log (CWE-79)."""
+    html = motivo_html(
+        {
+            "rule": "<b>x</b>",
+            "points": "<i>1</i>",
+            "reason": "acesso ao recurso <img src=x onerror=alert(1)>",
+        }
+    )
+
+    assert "<img" not in html
+    assert "<b>x</b>" not in html
+    assert "<i>1</i>" not in html
+    assert "&lt;img src=x onerror=alert(1)&gt;" in html
+    # O HTML que o proprio painel monta continua valendo.
+    assert html.startswith("<div ")
+
+
 def test_motivo_sem_texto_diz_que_nao_ha_motivo():
     html = motivo_html({"rule": "x", "points": 1, "reason": "   "})
 

@@ -278,3 +278,16 @@ def test_nenhum_segredo_no_sql():
     """Repositorio publico. Senha de papel se define fora daqui."""
     for sql in TODOS_OS_SQL:
         assert not re.search(r"(?i)password\s+'", sql), "senha literal no SQL"
+
+
+def test_ninguem_cria_objeto_no_schema_public_por_ser_public():
+    """Sem o REVOKE, banco criado antes do PostgreSQL 15 deixa qualquer papel
+    com CONNECT criar objeto em `public` e sombrear o catalogo (CVE-2018-1058)."""
+    for nome, sql in (
+        ("corp", CORP_PRIV),
+        ("ground_truth", GABARITO_PRIV),
+        ("sdcac", SDCAC_PRIV),
+    ):
+        assert "REVOKE CREATE ON SCHEMA public FROM PUBLIC;" in sem_comentarios(sql), (
+            f"{nome}: falta o REVOKE CREATE ON SCHEMA public FROM PUBLIC"
+        )

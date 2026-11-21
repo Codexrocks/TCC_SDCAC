@@ -6,6 +6,11 @@
 -- banco. Se algum dia aparecer um GRANT para ele neste arquivo, a trava contra
 -- vazamento de rotulo caiu — e tests/test_schema.py reprova por isso.
 
+-- Nenhum papel cria objeto no schema `public` so por ser PUBLIC. Ate o
+-- PostgreSQL 14 esse CREATE vinha de fabrica; no 15 deixou de vir, mas banco
+-- criado antes continua com ele. O REVOKE vale nos dois casos (CVE-2018-1058).
+REVOKE CREATE ON SCHEMA public FROM PUBLIC;
+
 GRANT USAGE ON SCHEMA public TO generator, evaluator;
 
 -- O gerador escreve o gabarito junto com os eventos, na mesma execucao.
