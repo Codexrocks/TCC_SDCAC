@@ -93,28 +93,38 @@ CHANG, M.; PAKZAD, S. N. Modified natural excitation technique for stochastic
 modal identification. Journal of Structural Engineering, v. 139, n. 10, 2013.
 ```
 
-#### E a chamada dentro do texto? **Autor-ano, em caixa normal**
+#### E a chamada dentro do texto? **Autor-ano, em caixa normal — pelo template**
 
-A chamada no texto está em **autor-ano, em caixa normal** — `(Chandola et al.,
-2009)` —, que é a forma do template. Conferido em 21/11/2026 nos capítulos de
-`artigo/`: nenhuma chamada em caixa alta com ponto e vírgula, como a NBR 10520
-pediria. A conversão valeu para o artigo inteiro de uma vez, e o registro dela
-está na tabela *O que mudou em 13/10* da
-[Introdução](../artigo/01-introducao.md).
+**O template do professor pede essa forma por escrito.** O arquivo
+[`COBEM-2026-modelo-do-professor.docx`](../templates/README.md) diz, no corpo do
+texto, que as referências *"should be cited in the text using the last name of the
+author(s) and the year of publication"*, com os exemplos `(Choma and Ugaya, 2017)` e
+`(Porto-Hernandez et al., 2023)` para três ou mais autores. Conferido no `.docx` em
+21/11/2026. É a forma que o artigo usa: `(Chandola et al., 2009)`.
 
 | | |
 |---|---|
 | O professor disse | "As referências seguem a **ABNT**" |
-| A **lista de referências** segue | **ABNT NBR 6023** |
-| A **chamada no texto** segue | **O template do professor**, em autor-ano |
-| O template do professor | **versionado desde 18/11/2026**, e silencioso sobre a forma da chamada |
+| A **lista de referências** segue | **ABNT NBR 6023**, pela orientação do professor |
+| A **chamada no texto** segue | **O template do professor**: sobrenome e ano, em caixa normal |
 
-> **Uma versão anterior desta seção mandava não converter nada até o template
-> chegar**, por supor que a Introdução usava `(CHANDOLA; BANERJEE; KUMAR, 2009)`.
-> A orientação caiu quando a conversão aconteceu, e deixá-la aqui induziria a
-> reverter o artigo inteiro. A regra que fica vale daqui em diante: **mudança de
-> forma de chamada vale para o artigo inteiro de uma vez**, e não para citações
-> isoladas na véspera de uma entrega.
+> **O registro da decisão é a tabela *O que mudou em 13/10*** da
+> [Introdução](../artigo/01-introducao.md), que dá a conversão como feita para o
+> artigo inteiro de uma vez. **Não há código `D-xx` para ela** em
+> [decisões](decisoes.md). Se a equipe quiser a regra numerada, é uma decisão a
+> registrar, e não algo que esta página possa afirmar por conta própria.
+>
+> Conferido em 21/11/2026 que nenhuma chamada dos capítulos de `artigo/` está em
+> caixa alta com ponto e vírgula, como a NBR 10520 pediria. **Isso é uma busca,
+> não a conferência por pessoa** que o relatório da sessão 55 atribui ao Davi e
+> ao Filipe.
+
+> **Uma versão anterior desta seção mandava não converter nada**, por supor que a
+> Introdução usava `(CHANDOLA; BANERJEE; KUMAR, 2009)` e que o template era
+> silencioso sobre a chamada. As duas premissas caíram: o artigo já usa autor-ano, e
+> o template diz qual é a forma. A regra que fica vale daqui em diante:
+> **mudança de forma de chamada vale para o artigo inteiro de uma vez**, e não
+> para citações isoladas na véspera de uma entrega.
 
 ### Entrega final
 
