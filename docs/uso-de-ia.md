@@ -26,17 +26,20 @@ verificável e não dependa da memória de ninguém.
 | Pessoa | Assistente | Onde usa |
 |---|---|---|
 | Davi | Claude (Claude Code) | Repositório, automação, backend |
-| Yasmin | **não declarado** | Referencial, cenários, regras — produzidos fora do GitHub |
+| Yasmin | Claude Sonnet 5.5 — declarado por ela nos #137 e #138 | Referencial, cenários, regras e revisão de segurança — pelo GitHub desde 21/11/2026 |
 | Filipe | **não declarado** | Gerador, dashboard, métricas — produzidos fora do GitHub |
 
-> **As duas lacunas ficam à vista, porque são lacunas de verdade.** Desde
-> 23/09/2026 só o Davi opera o repositório: Yasmin e Filipe produzem fora e ele
-> versiona. Isso **não** dispensa a declaração — só muda quem a transcreve. Até
-> hoje ela não chegou de nenhum dos dois, e enquanto não chegar o campo do Pull
+> **A lacuna do Filipe fica à vista, porque é lacuna de verdade.** O trabalho
+> dele chega pelo Davi, e isso **não** dispensa a declaração — só muda quem a
+> transcreve. Até hoje ela não chegou, e enquanto não chegar o campo do Pull
 > Request responde exatamente isso: *"não declarado por quem produziu"*.
 >
-> Preencher com "nenhuma" seria inventar; apagar as linhas faria a tabela
-> parecer completa desde sempre. Deixá-las em branco diz o que há.
+> A da Yasmin fechou em 21/11/2026: desde então ela abre os próprios Pull
+> Requests e declara a IA neles. Antes disso, o trabalho dela também chegava
+> pelo Davi, e o que entrou até ali segue sem declaração.
+>
+> Preencher com "nenhuma" seria inventar; apagar a linha faria a tabela
+> parecer completa desde sempre. Deixá-la em branco diz o que há.
 
 Trocar de ferramenta no meio do TCC é normal. Atualize a tabela quando trocar.
 

@@ -18,8 +18,8 @@ Porque são coisas diferentes, e a banca pode perguntar pelas duas.
 | Muda? | **Não.** É registro | Sim, a cada revisão |
 | Serve para | Provar o que foi de quem, e conferir o que a edição mudou | Ser lido pela banca |
 
-Desde 23/09/2026 só o Davi opera o GitHub: Yasmin e Filipe produzem fora e ele
-versiona por Pull Request — ver
+De 23/09 a 21/11/2026 só o Davi operou o GitHub; desde 21/11 a Yasmin também
+opera, e o Filipe segue produzindo fora, com o Davi versionando — ver
 [cronograma](../cronograma.md#como-o-trabalho-chega-ao-repositório). **A autoria
 não muda por causa do caminho.** Esta pasta é o que torna isso verificável em vez
 de afirmado.
