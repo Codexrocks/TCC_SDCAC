@@ -19,19 +19,15 @@
 
 | Coluna | Itens |
 |---|---|
-| ⚠️ Atrasado | 1 |
+| ⚠️ Atrasado | 0 |
 | ▶️ Em curso | 0 |
 | ⏳ A vencer em 7 dias | 0 |
 | 🗓️ Depois | 8 |
-| ✅ Feito | 65 |
+| ✅ Feito | 66 |
 
 ## ⚠️ Atrasado
 
-1 item.
-
-| Tipo | Item | O que é | Quem | Prazo | Situação |
-|---|---|---|---|---|---|
-| Professor | ****Seção de Resultados reenviada**, com legenda e fonte em toda tabela** | Entregue em 12/11 e devolvida pelo orientador com correções: tabela e figura precisam de legenda com a respectiva fonte indicada | Todos | 19/11/2026 | ⚠️ Atrasado há 2 dias |
+Nada nesta coluna.
 
 ## ▶️ Em curso
 
@@ -58,12 +54,13 @@ Nada nesta coluna.
 
 ## ✅ Feito
 
-65 itens.
+66 itens.
 
 | Tipo | Item | O que é | Quem | Prazo | Situação |
 |---|---|---|---|---|---|
 | Professor | **Tema do trabalho e composição do grupo — *Tarefa 01*** |  | Todos | 05/09/2026 | ✅ Entregue em 03/09/2026 |
 | Professor | **Introdução do artigo no template **COBEM 2026** — *Tarefa 02*** | Seis blocos de complementação vazios; a parcialidade foi declarada no arquivo entregue | Todos | 24/09/2026 | ✅ Entregue parcial em 24/09/2026 |
+| Professor | ****Seção de Resultados reenviada**, com legenda e fonte em toda tabela** | Entregue em 12/11 e devolvida pelo orientador com correções: tabela e figura precisam de legenda com a respectiva fonte indicada. Reenviada pelo Davi em 19/11, no prazo, relatado por ele em 21/11/2026 | Todos | 19/11/2026 | ✅ Entregue em 19/11/2026 |
 | Marco | **M1 · Introdução** | Problema, pergunta, objetivos, delimitação | Todos | 24/09/2026 | ✅ Fechado em parte |
 | Marco | **M2 · Metodologia congelada** | Cenários, métricas, quatro configurações, atributos | Todos | 01/10/2026 | ✅ Fechado |
 | Marco | **M3 · Modelo executável** | C0 a C3 rodando sobre o mesmo gerador | Todos | 22/10/2026 | ✅ Fechado |
