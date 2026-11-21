@@ -39,6 +39,7 @@ que estão aqui e não na lista de referências.
 
 | Onde | O que falta | Quem | Desde |
 |---|---|---|---|
+| `artigo/referencias.md` (entrada `SHASHANKA; SHEN; WAN`) e `artigo/04-resultados.md` § 4.2 (`Shashanka, Shen e Wan, 2016`) | **Erro de autor, não falta de fonte:** o terceiro autor é **Jisheng Wang**, e não "Wan". Fonte: [DBLP](https://dblp.org/rec/conf/bigdataconf/ShashankaSW16), consultada em 21/11/2026. Conferir na folha de rosto do artigo, corrigir os dois lugares e remontar o documento, porque a folga é de meia linha. A § 2.3 usa `et al.` e não muda | Davi | 21/11/2026 |
 
 ### 1 da Introdução — **aberta pelo assistente em 19/11/2026, por confirmar**
 
