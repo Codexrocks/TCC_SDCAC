@@ -276,7 +276,7 @@ A D3 tem duas parcelas separadas, cada uma de 0 a 100. A conduta é o que a pess
 
 A postura é o estado da conta e do equipamento na data do evento: segundo fator desligado, privilégio de administrador, atualização atrasada, antivírus desligado, e o desfecho de campanhas de phishing. O código recusa um retrato de outro dia, para o futuro não vazar para o passado.
 
-As duas parcelas ficam separadas porque somá-las exigiria um peso entre conduta e postura sem justificativa defensável.
+As duas parcelas ficam guardadas em campos separados, para o analista ver qual delas causou o alerta. Na nota final elas se somam com pesos declarados, e a postura entra com metade do peso, por ser estado e não ação.
 
 **Passe para:** “Resta integrar tudo numa nota.”
 
