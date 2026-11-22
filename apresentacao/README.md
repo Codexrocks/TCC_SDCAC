@@ -7,6 +7,8 @@ Material da defesa, em 30 minutos, apresentada pelo Filipe.
 | **A apresentação**, em PowerPoint, com a fala nas notas do apresentador | [`apresentacao-sdcac.pptx`](apresentacao-sdcac.pptx) |
 | **O roteiro**, com a fala, o tempo e as palavras-chave de cada slide e as perguntas prováveis da banca | [`roteiro.md`](roteiro.md) |
 | **O mesmo roteiro em PDF**, em página pequena, para ler no celular | [`roteiro-filipe.pdf`](roteiro-filipe.pdf) |
+| **De onde vem cada número**, e como a precisão implícita do slide 4 é calculada | [`fontes-dos-numeros.md`](fontes-dos-numeros.md) |
+| **Os scripts que geram** o `.pptx`, o roteiro e o PDF | [`gerador/`](gerador/README.md) |
 
 ## Sobre a apresentação
 
