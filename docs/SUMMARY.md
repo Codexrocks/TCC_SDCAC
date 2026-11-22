@@ -120,4 +120,5 @@
   * [2026-11-21 — Sessão 59: o reenvio registrado, e os textos que ainda falavam do passado](relatorios/2026-11-21-sessao-59.md)
   * [2026-11-21 — Sessão 60: os slides e o roteiro da defesa](relatorios/2026-11-21-sessao-60.md)
   * [2026-11-21 — Sessão 61: os slides da defesa, conferidos e mergeados](relatorios/2026-11-21-sessao-61.md)
+  * [2026-11-22 — Sessão 62: a apresentação refeita para 30 minutos](relatorios/2026-11-22-sessao-62.md)
   * [Modelo de relatório](relatorios/_modelo.md)
