@@ -103,7 +103,7 @@ LARG = doc.width
 
 h = []
 h += [P("Roteiro da defesa", H1),
-      P("Para o Filipe · 30 minutos · 27 slides · 28:10 de fala, 1:50 de folga", SUB),
+      P("Para o Filipe · 30 minutos · 27 slides · 28:50 de fala, 1:10 de folga", SUB),
       caixa("Rascunho de IA, a pedido da Yasmin, a partir do artigo. Leia em voz alta, ajuste ao seu jeito e "
             "ensaie com cronômetro: o ritmo foi estimado, não medido.", CARE, AMBER_BG),
       Spacer(1, 8),
@@ -130,7 +130,7 @@ for a, b in R["nao_dizer"]:
 corte = [Spacer(1, 6), P("Se estourar no ensaio", H2), P("Corte nesta ordem:", BODY)]
 for i, (a, b) in enumerate(R["cortes"], 1):
     corte.append(P(f"{i}. {a}. {b}", BODY))
-corte.append(caixa("Nunca corte os slides 19, 20 e 21 (resultados e contrapeso) nem o 25 (ameaças à validade). São o que a "
+corte.append(caixa("Nunca corte os slides 19, 20 e 21 (resultados e contrapeso) nem o 24 (ameaças à validade) e o 25 (conclusão). São o que a "
                    "banca avalia.", CARE, AMBER_BG))
 h.append(KeepTogether(corte))
 h.append(PageBreak())

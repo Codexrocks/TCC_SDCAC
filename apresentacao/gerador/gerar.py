@@ -261,7 +261,7 @@ s = novo()
 titulo(s, "Estrutura da apresentação")
 blocos = [("Contexto e referencial", "slides 3 a 7"), ("Pergunta e hipótese", "slide 8"),
           ("Sistema e modelo", "slides 9 a 16"), ("Método", "slides 17 e 18"), ("Resultados", "slides 19 a 21"),
-          ("Qualidade, processo e validade", "slides 22 a 25"), ("Conclusão", "slides 26 e 27")]
+          ("Qualidade e validade", "slides 22 a 24"), ("Conclusão e referências", "slides 25 a 27")]
 for i, (a, b) in enumerate(blocos):
     y = 1.75 + i * 0.7
     txt(s, str(i + 1), MX, y, 0.6, 0.6, size=28, bold=True, color=BLUE, font=HEAD)
@@ -731,25 +731,7 @@ legenda(s, "Tabela 10 — Verificações. A revisão de segurança é por leitur
 rodape(s)
 notas(s)
 
-# ============================================================== 24 processo e IA
-s = novo()
-titulo(s, "Processo e uso de IA: rastreável no repositório")
-rows = [
-    ["Prática", "Como funciona"],
-    ["Pull Request", "Toda alteração entra por PR, com checks automáticos e revisão humana. Só o líder faz o merge."],
-    ["IA declarada", "Todo commit e todo PR diz qual IA ajudou, em quê, e o que é do autor."],
-    ["Fonte conferida", "Referência produzida por IA só entra depois de conferida na fonte por uma pessoa."],
-    ["Erros registrados", "Cada sessão lista os erros da IA e quem os pegou: a pessoa, um teste ou a revisão."],
-]
-tabela(s, MX, 1.85, [2.8, 9.1], rows, [0.45, 0.75, 0.65, 0.65, 0.65], size=15, hsize=12, negrito_1a=True)
-txt(s, [{"runs": [("Exemplo recente. ", {"bold": True}),
-                  ("Na conferência das fontes da página de segurança, duas afirmações escritas pela IA não se sustentaram "
-                   "na fonte primária e foram corrigidas. A conferência feita por máquina é dita assim: a decisão de aceitar é de uma pessoa.", {})]}],
-    MX, 5.2, 11.9, 1.2, size=16)
-rodape(s)
-notas(s)
-
-# ============================================================== 25 validade
+# ============================================================== 24 validade
 s = novo()
 titulo(s, "Ameaças à validade, segundo Wohlin et al. (2012)")
 rows = [
@@ -767,24 +749,46 @@ txt(s, [{"runs": [("Limites declarados: ", {"bold": True}),
 rodape(s)
 notas(s)
 
-# ================================================================ 26 conclusão
+# ================================================================ 25 conclusão: respostas
 s = novo()
-titulo(s, "Conclusão: a pergunta tem resposta, com custo declarado")
-txt(s, "Respostas", MX, 1.85, 5.8, 0.4, size=19, bold=True, color=BLUE, font=HEAD)
-a = ["Sim nas duas grandezas, com p = 0,0020: FPR de 18,44% para 0,40%, e cobertura de 35,0% para 100,0%.",
-     "O ganho vem do padrão individual (D2). A D3 não acrescentou: a leitura dos dados é que pertence a um segundo estágio de triagem.",
-     "O ganho tem custo: mais alarme sobre atividade legítima."]
-txt(s, [{"t": t, "size": 16, "bullet": True, "after": 8} for t in a], MX, 2.35, 5.8, 3.6)
-txt(s, "Contribuições", 6.9, 1.85, 5.7, 0.4, size=19, bold=True, color=BLUE, font=HEAD)
+titulo(s, "Conclusão: o que os resultados mostram e não mostram")
+linhas = [
+    ("A pergunta", "Nos cenários medidos, a avaliação combinada reduz falsos positivos a uma mesma revocação e aumenta a revocação "
+                   "longitudinal. FPR de 18,44% para 0,40% a 0,20 de revocação, e cobertura L de 35,0% para 100,0% (p = 0,0020)."),
+    ("De onde vem", "O ganho vem da D2: comparar o evento com o padrão da própria pessoa leva a FPR de 6,03% (C1, só o evento) "
+                    "para 0,40% (C2)."),
+    ("O que não se confirmou", "A D3 não acrescentou sobre a C2: FPR de 0,54% contra 0,40%, com a cobertura L já em 100,0%. "
+                               "A leitura que os dados sustentam (seção 4.5) é que ela pertence a um segundo estágio de triagem."),
+    ("O custo", "Sobe o alarme sobre atividade legítima: de 75,8% dos episódios na C0 para 96,0% na C2. A C2 cumpre o critério "
+                "de 45 alertas falsos por turno em 7 de 10 sementes."),
+]
+y = 1.85
+for rot, texto in linhas:
+    txt(s, rot, MX, y, 2.7, 0.5, size=16, bold=True, color=BLUE, font=HEAD)
+    txt(s, texto, 3.6, y, 9.0, 1.1, size=15)
+    y += 1.2
+rodape(s)
+notas(s)
+
+# ============================================== 26 conclusão: contribuições e próximos passos
+s = novo()
+titulo(s, "Contribuições, limites e próximos passos")
+txt(s, "Contribuições", MX, 1.85, 5.8, 0.4, size=19, bold=True, color=BLUE, font=HEAD)
 c = ["Protótipo com avaliação independente do meio de armazenamento.",
      "Quatro configurações canônicas, semeadas e só de leitura.",
      "Regras e pesos com SHA-256 preso a cada execução.",
-     "Cenários de teste automatizados e contrato de leitura da API."]
-txt(s, [{"t": t, "size": 14, "bullet": True, "after": 4} for t in c], 6.9, 2.35, 5.7, 2.1)
-txt(s, "Próximos passos", 6.9, 4.5, 5.7, 0.4, size=19, bold=True, color=BLUE, font=HEAD)
+     "Cenários de teste automatizados, com gabarito separado do motor.",
+     "Contrato de leitura da API e painel que mostra a nota decomposta."]
+txt(s, [{"t": t, "size": 15, "bullet": True, "after": 8} for t in c], MX, 2.35, 5.8, 4.0)
+txt(s, "O que o resultado não autoriza", 6.9, 1.85, 5.7, 0.4, size=19, bold=True, color=BLUE, font=HEAD)
+l = ["Dizer que o sistema está pronto: o ambiente é simulado e o limiar não foi calibrado.",
+     "Dizer que o painel é usável: houve um avaliador, e nenhum usuário."]
+txt(s, [{"t": t, "size": 14, "bullet": True, "after": 6} for t in l], 6.9, 2.35, 5.7, 1.9)
+txt(s, "Próximos passos", 6.9, 4.3, 5.7, 0.4, size=19, bold=True, color=BLUE, font=HEAD)
 p = ["Calibrar o limiar e analisar a sensibilidade dos pesos.",
-     "Implantar sobre dado real (LGPD, ISO/IEC 27001) e validar em produção."]
-txt(s, [{"t": t, "size": 14, "bullet": True, "after": 4} for t in p], 6.9, 5.0, 5.7, 1.4)
+     "Implantar sobre dado real, com LGPD e ISO/IEC 27001.",
+     "Validar contra tráfego de produção."]
+txt(s, [{"t": t, "size": 14, "bullet": True, "after": 6} for t in p], 6.9, 4.8, 5.7, 1.8)
 rodape(s)
 notas(s)
 

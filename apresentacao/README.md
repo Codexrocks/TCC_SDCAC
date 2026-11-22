@@ -12,7 +12,7 @@ Material da defesa, em 30 minutos, apresentada pelo Filipe.
 
 ## Sobre a apresentação
 
-São **27 slides**, com pegada técnico-científica e de engenharia de software: problema, referencial (autores do artigo), pergunta e hipótese, arquitetura, dados, as quatro configurações com as fórmulas de cada dimensão, protocolo, métricas e estatística, resultados, contrapeso, qualidade, processo, ameaças à validade (Wohlin et al.), conclusão e referências. Usa as cores do painel do SDCAC, com rótulo e forma junto da cor. Os gráficos são nativos do PowerPoint, e portanto editáveis. Os números vêm do artigo e de [`results/agregado.md`](../results/agregado.md); o artigo não foi alterado.
+São **27 slides**, com pegada técnico-científica e de engenharia de software: problema, referencial (autores do artigo), pergunta e hipótese, arquitetura, dados, as quatro configurações com as fórmulas de cada dimensão, protocolo, métricas e estatística, resultados, contrapeso, qualidade, ameaças à validade (Wohlin et al.), conclusão e referências. Usa as cores do painel do SDCAC, com rótulo e forma junto da cor. Os gráficos são nativos do PowerPoint, e portanto editáveis. Os números vêm do artigo e de [`results/agregado.md`](../results/agregado.md); o artigo não foi alterado.
 
 O arquivo foi gerado por script e **conferido abrindo-o no PowerPoint 2007 e renderizando os 27 slides**. Num PowerPoint mais novo, as fontes (Cambria e Calibri) são as do próprio Office.
 

@@ -66,7 +66,7 @@ insumos da Yasmin em 12/11. **O Davi leu e aprovou a § 3.3** corrigida pelo
 3. **S16 — o ensaio da defesa.** Os slides e o roteiro entraram em 21/11 pelo
    #144 e foram refeitos em 22/11 pelo #146, para os 30 minutos que o professor
    liberou, em [`apresentacao/`](../apresentacao/README.md): 27 slides em `.pptx`,
-   com a fala nas notas, e 28:10 de fala. **Falta ensaiar**: o critério é que
+   com a fala nas notas, e 28:50 de fala. **Falta ensaiar**: o critério é que
    cada um apresente qualquer seção sob sorteio
 
 ---

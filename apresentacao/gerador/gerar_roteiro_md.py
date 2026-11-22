@@ -22,7 +22,7 @@ L.append("- Tenha um **cronômetro**. O tempo acumulado de cada slide está na t
 L.append("- Leve o arquivo em **PDF** também (Arquivo, Salvar como, PDF), para o caso de o computador da sala falhar.")
 L.append("- Ensaie cronometrado, como o cronograma pede (S16). Cada integrante precisa saber apresentar "
          "qualquer seção sob sorteio.")
-L.append("- **27 slides, 28:10 de fala, 1:50 de folga.** Os tempos são **estimativas**, a cerca de 140 palavras "
+L.append("- **27 slides, 28:50 de fala, 1:10 de folga.** Os tempos são **estimativas**, a cerca de 140 palavras "
          "por minuto. O ritmo real do Filipe pode ser outro, e só o ensaio mede.\n")
 
 L.append("## Cola: palavras-chave de cada slide\n")
@@ -36,7 +36,7 @@ L.append("## Se estourar no ensaio\n")
 L.append("Corte nesta ordem:\n")
 for i, (a, b) in enumerate(R["cortes"], 1):
     L.append(f"{i}. **{a}.** {b}")
-L.append("\n**Nunca corte** os slides 19, 20 e 21 (resultados e contrapeso) nem o 25 (ameaças à validade). "
+L.append("\n**Nunca corte** os slides 19, 20 e 21 (resultados e contrapeso) nem o 24 (ameaças à validade) e o 25 (conclusão). "
          "São o que a banca avalia.\n")
 
 L.append("## Slide a slide\n")
@@ -88,7 +88,7 @@ Material da defesa, em 30 minutos, apresentada pelo Filipe.
 
 ## Sobre a apresentação
 
-São **27 slides**, com pegada técnico-científica e de engenharia de software: problema, referencial (autores do artigo), pergunta e hipótese, arquitetura, dados, as quatro configurações com as fórmulas de cada dimensão, protocolo, métricas e estatística, resultados, contrapeso, qualidade, processo, ameaças à validade (Wohlin et al.), conclusão e referências. Usa as cores do painel do SDCAC, com rótulo e forma junto da cor. Os gráficos são nativos do PowerPoint, e portanto editáveis. Os números vêm do artigo e de [`results/agregado.md`](../results/agregado.md); o artigo não foi alterado.
+São **27 slides**, com pegada técnico-científica e de engenharia de software: problema, referencial (autores do artigo), pergunta e hipótese, arquitetura, dados, as quatro configurações com as fórmulas de cada dimensão, protocolo, métricas e estatística, resultados, contrapeso, qualidade, ameaças à validade (Wohlin et al.), conclusão e referências. Usa as cores do painel do SDCAC, com rótulo e forma junto da cor. Os gráficos são nativos do PowerPoint, e portanto editáveis. Os números vêm do artigo e de [`results/agregado.md`](../results/agregado.md); o artigo não foi alterado.
 
 O arquivo foi gerado por script e **conferido abrindo-o no PowerPoint 2007 e renderizando os 27 slides**. Num PowerPoint mais novo, as fontes (Cambria e Calibri) são as do próprio Office.
 
