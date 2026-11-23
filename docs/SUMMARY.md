@@ -122,4 +122,5 @@
   * [2026-11-21 — Sessão 61: os slides da defesa, conferidos e mergeados](relatorios/2026-11-21-sessao-61.md)
   * [2026-11-22 — Sessão 62: a apresentação refeita para 30 minutos](relatorios/2026-11-22-sessao-62.md)
   * [2026-11-22 — Sessão 63: os apontamentos do bot e do Davi no #146](relatorios/2026-11-22-sessao-63.md)
+  * [2026-11-23 — Relatório semanal de 16/11 a 23/11](relatorios/2026-11-23-semana.md)
   * [Modelo de relatório](relatorios/_modelo.md)
