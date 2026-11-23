@@ -109,7 +109,7 @@ com três a cinco avaliadores e com usuários.
 > **A caneta desta seção é do Davi**, pela S14. O texto acima foi redigido a
 > partir dos resultados registrados e dos itens que as instruções anteriores
 > desta página enumeravam — **nada foi acrescentado além do que está no
-> repositório** —, e precisa da leitura de quem assina.
+> repositório** —, e **foi lida pelo Davi**, relatado por ele em 21/11/2026.
 
 ***
 
