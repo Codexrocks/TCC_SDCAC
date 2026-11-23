@@ -86,8 +86,10 @@ Feita uma vez, pelo Davi, e **concluída** desde 03/09/2026:
       aparece no log da banca
 - [x] Dois rulesets ativos — `Proteção da main` e `Merge restrito ao líder`
 - [x] Secret `CLAUDE_CODE_OAUTH_TOKEN` cadastrado
-- [x] Acesso: **só o Davi tem escrita.** Yasmin e Filipe tiveram papel *Write*
-      entre 03/09 e 23/09/2026; hoje produzem fora e ele versiona
+- [x] Acesso: **Davi é admin; Yasmin e Filipe têm papel *Write***, conferido
+      em 21/11/2026. A Yasmin opera o GitHub desde 21/11/2026, com autorização
+      do Davi; o trabalho do Filipe continua chegando por ele. O merge na
+      `main` é só do Davi, pelo ruleset `Merge restrito ao líder`
 
 O passo a passo de cada item, com os campos exatos, para conferir ou refazer,
 está em **[Configuração passo a passo](configuracao.md)** — inclusive a

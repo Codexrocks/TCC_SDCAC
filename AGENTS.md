@@ -21,10 +21,13 @@ backend), **Yasmin** (cybersecurity), **Filipe** (data & dashboard).
 > orientador. Ele continua na [Tarefa 01](docs/entregas/tarefa-01.md) como
 > registro do que foi entregue em 03/09. A sigla do repositório não muda.
 
-Desde 23/09/2026, **só o Davi opera o GitHub**. Yasmin e Filipe produzem fora —
-documento, planilha, rascunho — e ele versiona por Pull Request. A autoria não
-muda por causa do caminho: quem produziu responde pelo conteúdo, e o Pull
-Request precisa dizer de quem é o quê.
+De 23/09 a 21/11/2026, **só o Davi operou o GitHub**. Desde 21/11/2026, **a
+Yasmin também opera**, com autorização dele: abre branch `yasmin/` e Pull Request
+pela própria conta. O Filipe tem papel *Write*, mas o trabalho dele continua
+chegando pelo Davi — documento, planilha, rascunho, versionados por Pull Request.
+**O merge na `main` continua só do Davi.** A autoria não muda por causa do
+caminho: quem produziu responde pelo conteúdo, e o Pull Request precisa dizer de
+quem é o quê.
 
 O repositório é **público**. A pasta `docs/` é publicada no GitBook. Tudo que
 entra em `docs/` vira site público.

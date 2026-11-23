@@ -68,9 +68,10 @@ acúmulo declarado — depois dela o cronograma volta a ter uma entrega por sema
 
 ## Como o trabalho chega ao repositório
 
-A equipe e os papéis continuam os mesmos. **O que mudou é só o caminho:** a
-Yasmin e o Filipe produzem fora do GitHub — documento, planilha, rascunho — e o
-Davi versiona.
+A equipe e os papéis continuam os mesmos. **O que mudou é só o caminho:** desde
+21/11/2026 a **Yasmin** abre os próprios Pull Requests, com autorização do Davi;
+o **Filipe** produz fora do GitHub — documento, planilha, rascunho — e o Davi
+versiona. O merge é sempre do Davi.
 
 > **Os dois arquivos já foram corrigidos.** O [`AGENTS.md`](../AGENTS.md) e a
 > [política de uso de IA](uso-de-ia.md) afirmavam que, desde 23/09, o Davi

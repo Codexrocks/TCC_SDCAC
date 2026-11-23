@@ -72,12 +72,13 @@ Dono da leitura dos dados: o que os números mostram.
 | Pessoa | Usuário | Papel no repositório | Prefixo de branch |
 |---|---|---|---|
 | Davi | `@DaviSoaresDilly` | Admin · owner da organização | `davi/` |
-| Yasmin | `@Yas2046` | Leitura — produz fora e o Davi versiona | `yasmin/` (reservado) |
-| Filipe | `@FilipeF4guiar` | Leitura — produz fora e o Davi versiona | `filipe/` (reservado) |
+| Yasmin | `@Yas2046` | *Write* — opera o GitHub desde 21/11/2026 | `yasmin/` |
+| Filipe | `@FilipeF4guiar` | *Write* — o trabalho chega pelo Davi | `filipe/` (reservado) |
 | Assistente | `@claude` (workflow) | via GitHub Actions | `claude/` |
 
-**Desde 23/09/2026 só o Davi opera o GitHub.** Yasmin e Filipe produzem fora —
-documento, planilha, rascunho — e ele versiona por Pull Request. A autoria não
+**De 23/09 a 21/11/2026 só o Davi operou o GitHub. Desde 21/11, a Yasmin também
+opera**, com autorização dele. O Filipe produz fora — documento, planilha,
+rascunho — e o Davi versiona por Pull Request. A autoria não
 muda por causa do caminho: quem produziu responde pelo conteúdo, e o Pull Request
 precisa dizer de quem é o quê. O caminho completo está no
 [cronograma](cronograma.md#como-o-trabalho-chega-ao-repositório).
