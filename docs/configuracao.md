@@ -420,8 +420,9 @@ branch, abrir PR e aprovar, sem mexer em configuração do repositório.
 > Devolve **só** `DaviSoaresDilly`. Leitura é o que qualquer pessoa tem num
 > repositório público — não é acesso concedido.
 
-Desde 23/09/2026 só o Davi opera o GitHub: Yasmin e Filipe produzem fora e ele
-versiona por Pull Request, como descreve o
+De 23/09 a 21/11/2026 só o Davi operou o GitHub. Desde 21/11, a Yasmin também
+opera, com autorização dele; o Filipe produz fora e o Davi versiona por Pull
+Request, como descreve o
 [cronograma](cronograma.md#como-o-trabalho-chega-ao-repositório). O que entrou no
 lugar da aprovação de outra pessoa está em [`AGENTS.md`](../AGENTS.md), seção 4.
 
