@@ -10,7 +10,7 @@ Roteiro do **Filipe**, que apresenta. A fala de cada slide é a mesma que está 
 - Tenha um **cronômetro**. O tempo acumulado de cada slide está na tabela abaixo.
 - Leve o arquivo em **PDF** também (Arquivo, Salvar como, PDF), para o caso de o computador da sala falhar.
 - Ensaie cronometrado, como o cronograma pede (S16). Cada integrante precisa saber apresentar qualquer seção sob sorteio.
-- **27 slides, 28:10 de fala, 1:50 de folga.** Os tempos são **estimativas**, a cerca de 140 palavras por minuto. O ritmo real do Filipe pode ser outro, e só o ensaio mede.
+- **27 slides, 28:50 de fala, 1:10 de folga.** Os tempos são **estimativas**, a cerca de 140 palavras por minuto. O ritmo real do Filipe pode ser outro, e só o ensaio mede.
 
 ## Cola: palavras-chave de cada slide
 
@@ -39,10 +39,10 @@ Roteiro do **Filipe**, que apresenta. A fala de cada slide é a mesma que está 
 | 21. O contrapeso | 1:15 | 22:20 | 96,0% legítimos alertam · C3 sem ganho · 99,84% no corte 20 · limiar não calibrado · C2: 7 de 10 sementes · 45 alertas por turno |
 | 22. O painel de análise | 1:00 | 23:20 | nota decomposta · “não ligada” não é zero · cor + rótulo + forma · WCAG 1.4.1 e 1.4.3 · 20 achados, nenhum grau 4 · um avaliador, sem usuários |
 | 23. Qualidade e segurança | 1:15 | 24:35 | invariantes viram teste · reprodutibilidade: semente, hash, versão · WCAG calculada no teste · revisão: 7 achados, 3 corrigidos · CWE-79: HTML sem escape |
-| 24. Processo e uso de IA | 0:50 | 25:25 | Pull Request + checks + revisão humana · IA declarada em commit e PR · fonte conferida por pessoa · erros da IA registrados · 2 afirmações de IA derrubadas |
-| 25. Ameaças à validade | 1:15 | 26:40 | Wohlin: construto, interna, externa, conclusão · janela disjunta, Kaufman · simulado ≠ produção, Sommer e Paxson · circularidade do desenho · limiar, pesos, LGPD |
-| 26. Conclusão e próximos passos | 1:15 | 27:55 | sim, nas duas grandezas · 18,44% para 0,40% · 35,0% para 100,0% · ganho vem da D2 · D3: segundo estágio de triagem · custo: mais alarme · próximos: limiar, dado real, produção |
-| 27. Referências | 0:15 | 28:10 | obrigado · 21 referências conferidas · repositório público · quem responde o quê |
+| 24. Ameaças à validade | 1:15 | 25:50 | Wohlin: construto, interna, externa, conclusão · janela disjunta, Kaufman · simulado ≠ produção, Sommer e Paxson · circularidade do desenho · limiar, pesos, LGPD |
+| 25. Conclusão: o que os resultados mostram e não mostram | 1:45 | 27:35 | sim, nas duas grandezas · 18,44% para 0,40% (p = 0,0020) · 35,0% para 100,0% · ganho vem da D2 · D3 não ganhou: 0,54% contra 0,40% · segundo estágio de triagem · custo: 75,8% para 96,0% · 45 alertas/turno em 7 de 10 |
+| 26. Contribuições, limites e próximos passos | 1:00 | 28:35 | 5 contribuições · não está pronto · não é usável: 1 avaliador · limiar, pesos · dado real + LGPD · produção |
+| 27. Referências | 0:15 | 28:50 | obrigado · 21 referências conferidas · repositório público · quem responde o quê |
 
 *Tempos estimados, não medidos.*
 
@@ -51,10 +51,9 @@ Roteiro do **Filipe**, que apresenta. A fala de cada slide é a mesma que está 
 Corte nesta ordem:
 
 1. **Slides 12 e 13, as regras da C0 e da D1.** Diga só “a C0 e a D1 são regras com pontos, em tabela”: economiza 1:30.
-2. **Slide 24, o processo e a IA.** Reduza a duas frases, que já estão no slide 26: economiza 0:35.
-3. **Slide 2, a estrutura.** Pule: economiza 0:20.
+2. **Slide 2, a estrutura.** Pule: economiza 0:20.
 
-**Nunca corte** os slides 19, 20 e 21 (resultados e contrapeso) nem o 25 (ameaças à validade). São o que a banca avalia.
+**Nunca corte** os slides 19, 20 e 21 (resultados e contrapeso) nem o 24 (ameaças à validade) e o 25 (conclusão). São o que a banca avalia.
 
 ## Slide a slide
 
@@ -404,23 +403,11 @@ Fizemos uma revisão de segurança do código, por leitura: sete achados e três
 
 > **Cuidado:** Diga: a revisão de segurança é por leitura de código, não teste de intrusão, e nenhum achado foi explorado.
 
-**Passe para:** “E o processo por trás disso.”
-
-### Slide 24 · Processo e uso de IA
-
-*0:50 · acumulado 25:25 · no slide: Quatro práticas de rastreabilidade, e o que a conferência das fontes encontrou.*
-
-**Palavras-chave:** Pull Request + checks + revisão humana · IA declarada em commit e PR · fonte conferida por pessoa · erros da IA registrados · 2 afirmações de IA derrubadas
-
-Todo commit e todo Pull Request declara qual IA ajudou e em quê. Referência que a IA produziu só entra depois de conferida na fonte, e conferência feita por máquina é dita assim, porque a decisão de aceitar é de uma pessoa.
-
-Cada sessão tem um relatório com os erros da IA e quem os pegou. Um exemplo recente: na conferência das fontes da página de segurança, duas afirmações escritas pela IA não se sustentaram e foram corrigidas.
-
 **Passe para:** “Agora, o que o trabalho não prova.”
 
-### Slide 25 · Ameaças à validade
+### Slide 24 · Ameaças à validade
 
-*1:15 · acumulado 26:40 · no slide: Tabela das quatro categorias de Wohlin et al. (2012): ameaça e mitigação, mais três limites.*
+*1:15 · acumulado 25:50 · no slide: Tabela das quatro categorias de Wohlin et al. (2012): ameaça e mitigação, mais três limites.*
 
 **Palavras-chave:** Wohlin: construto, interna, externa, conclusão · janela disjunta, Kaufman · simulado ≠ produção, Sommer e Paxson · circularidade do desenho · limiar, pesos, LGPD
 
@@ -434,31 +421,47 @@ E há limites: o limiar não foi calibrado, os pesos não passaram por análise 
 
 **Passe para:** “Com isso, a conclusão.”
 
-### Slide 26 · Conclusão e próximos passos
+### Slide 25 · Conclusão: o que os resultados mostram e não mostram
 
-*1:15 · acumulado 27:55 · no slide: Respostas, contribuições e próximos passos.*
+*1:45 · acumulado 27:35 · no slide: Quatro linhas: a pergunta, de onde vem o ganho, o que não se confirmou e o custo.*
 
-**Palavras-chave:** sim, nas duas grandezas · 18,44% para 0,40% · 35,0% para 100,0% · ganho vem da D2 · D3: segundo estágio de triagem · custo: mais alarme · próximos: limiar, dado real, produção
+**Palavras-chave:** sim, nas duas grandezas · 18,44% para 0,40% (p = 0,0020) · 35,0% para 100,0% · ganho vem da D2 · D3 não ganhou: 0,54% contra 0,40% · segundo estágio de triagem · custo: 75,8% para 96,0% · 45 alertas/turno em 7 de 10
 
-Voltando à pergunta: nos cenários medidos, sim, nas duas grandezas, com significância estatística. A taxa de falsos positivos cai de 18,44% para 0,40% a 0,20 de revocação, e a cobertura longitudinal vai de 35,0% para 100,0%.
+Voltando à pergunta: a avaliação combinada reduz os falsos positivos a uma mesma revocação e aumenta a revocação nos cenários longitudinais? Nos cenários medidos, sim, nas duas grandezas. A taxa de falsos positivos cai de 18,44% para 0,40% a 0,20 de revocação, com p igual a 0,0020, e a cobertura longitudinal vai de 35,0% para 100,0%.
 
-O ganho vem do padrão individual, a D2. A D3 não acrescentou, e a leitura que os dados sustentam, seção 4.5, é que ela pertence a um segundo estágio de triagem. E o ganho tem custo: sobe o alarme sobre atividade legítima.
+De onde vem esse ganho? Da D2. Comparar o evento com o padrão da própria pessoa leva a taxa de 6,03%, na C1, que só olha o evento, para 0,40% na C2. É o que a taxonomia de Chandola previa para a anomalia contextual.
 
-O trabalho deixa cinco contribuições: o protótipo, as quatro configurações canônicas, as regras e pesos com SHA-256, os cenários de teste automatizados e o contrato de leitura da API.
+O que não se confirmou: a D3 não acrescentou sobre a C2. A taxa foi de 0,54% contra 0,40%, e a cobertura longitudinal já estava em 100,0% na C2. A hipótese admitia essa resposta, e a leitura que os dados sustentam, seção 4.5, é que a exposição acumulada pertence a um segundo estágio de triagem, depois do alerta, e não ao corte.
 
-Os próximos passos decorrem das limitações: calibrar o limiar e analisar a sensibilidade dos pesos; implantar sobre dado real, com LGPD e ISO/IEC 27001; e validar contra tráfego de produção.
+E o ganho tem custo: sobe o alarme sobre atividade legítima, de 75,8% dos episódios na C0 para 96,0% na C2. A C2 cumpre o critério de 45 alertas falsos por turno em 7 das 10 sementes.
+
+> **Cuidado:** Não diga que a D3 é inútil: diga que, nestes cenários, ela não acrescentou, e que a leitura é de segundo estágio. O critério de 45 alertas e de revocação 0,80 foi fixado depois da primeira execução, e isso consta do artigo.
+
+**Passe para:** “O que o trabalho entrega, e o que não autoriza.”
+
+### Slide 26 · Contribuições, limites e próximos passos
+
+*1:00 · acumulado 28:35 · no slide: Cinco contribuições, dois limites que o resultado não autoriza, e três próximos passos.*
+
+**Palavras-chave:** 5 contribuições · não está pronto · não é usável: 1 avaliador · limiar, pesos · dado real + LGPD · produção
+
+O trabalho deixa cinco contribuições: o protótipo com avaliação independente do meio de armazenamento, as quatro configurações canônicas, as regras e pesos com SHA-256 preso a cada execução, os cenários de teste automatizados com o gabarito separado do motor, e o contrato de leitura da API com o painel.
+
+O resultado não autoriza dizer que o sistema está pronto, porque o ambiente é simulado e o limiar não foi calibrado, nem que o painel é usável, porque houve um avaliador e nenhum usuário.
+
+Os próximos passos decorrem desses limites: calibrar o limiar e analisar a sensibilidade dos pesos, implantar sobre dado real, com LGPD e ISO/IEC 27001, e validar contra tráfego de produção.
 
 **Passe para:** “Obrigado.”
 
 ### Slide 27 · Referências
 
-*0:15 · acumulado 28:10 · no slide: As 21 referências do artigo, em ABNT, e o endereço do repositório.*
+*0:15 · acumulado 28:50 · no slide: As 21 referências do artigo, em ABNT, e o endereço do repositório.*
 
 **Palavras-chave:** obrigado · 21 referências conferidas · repositório público · quem responde o quê
 
 Obrigado. As referências estão neste slide, e o código, os dados e os relatórios de cada sessão estão no repositório público. Ficamos à disposição para as perguntas.
 
-> **Cuidado:** Se a pergunta for sobre uma parte que não é sua: diga o que você sabe e passe para quem cuidou. Davi: arquitetura, banco, API, gerador. Yasmin: segurança, referencial, cenários, pesos. Filipe: painel, usabilidade, resultados.
+> **Cuidado:** Se a pergunta for sobre uma parte que não é sua: diga o que você sabe e passe para quem cuidou. Davi: arquitetura, banco, API, gerador. Yasmin: segurança, referencial, cenários, pesos. Filipe: painel, usabilidade, resultados. Não puxe o assunto do uso de IA. Se perguntarem, responda com a resposta da pergunta “Como vocês usaram IA”.
 
 ## As cinco frases que não podem faltar
 
@@ -548,7 +551,7 @@ Aqui os dados são sintéticos. Uma implantação real exige base legal, transpa
 
 ### Como vocês usaram IA, e como sabemos o que é de vocês?
 
-Todo commit e todo Pull Request declara a IA usada. Referência que a IA produziu só entra depois de conferida na fonte, por uma pessoa. Cada sessão tem um relatório com os erros da IA e quem os pegou. Na conferência recente das fontes, duas afirmações escritas pela IA não se sustentaram e foram corrigidas.
+Se a banca perguntar, a resposta é: usamos. Todo commit e todo Pull Request declara a IA usada. Referência que a IA produziu só entra depois de conferida na fonte, por uma pessoa. Cada sessão tem um relatório com os erros da IA e quem os pegou. Na conferência recente das fontes, duas afirmações escritas pela IA não se sustentaram e foram corrigidas. A IA redigiu rascunhos e fez conferências; as decisões e a aceitação do que entra são de pessoas.
 
 *Quem responde: Qualquer um dos três.*
 

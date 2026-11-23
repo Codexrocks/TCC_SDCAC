@@ -134,7 +134,7 @@ contrário das colunas acima.
 
 | Tipo | Item | Quem | O que está fazendo |
 |---|---|---|---|
-| Semana | **S16** | Todos | Os slides e o roteiro entraram em 21/11/2026 pelo #144 e foram refeitos em 22/11 pelo #146, para os 30 minutos que o professor liberou: 27 slides em `.pptx`, com a fala nas notas, e 28:10 de fala, em `apresentacao/`. Os números, as fórmulas e as permissões dos slides foram conferidos contra `results/` e o código. **Falta o ensaio cronometrado**, com cada integrante apresentando qualquer seção sob sorteio. |
+| Semana | **S16** | Todos | Os slides e o roteiro entraram em 21/11/2026 pelo #144 e foram refeitos em 22/11 pelo #146, para os 30 minutos que o professor liberou: 27 slides em `.pptx`, com a fala nas notas, e 28:50 de fala, em `apresentacao/`. Os números, as fórmulas e as permissões dos slides foram conferidos contra `results/` e o código. **Falta o ensaio cronometrado**, com cada integrante apresentando qualquer seção sob sorteio. |
 | Capítulo | **1. Introdução** | Yasmin, Filipe | Lida e assinada por Yasmin e Filipe. A fonte de contexto de 2022, Alahmadi et al., foi conferida pelo assistente e aceita pelo Davi em 21/11/2026, que delegou a confirmação. |
 | Capítulo | **2. Referencial teórico** | Yasmin | Reorganizado em 13/10 para a estrutura da 3ª reunião, com as 13 fontes conferidas (#64). **A Yasmin releu e assinou**, relatado pelo Davi em 19/11/2026. |
 | Capítulo | **3. Metodologia** | Davi (caneta) | As quatro lacunas da M2 fecharam em 12/11, e as 7 fontes da § 3.7 e da § 3.8 foram confirmadas pelo Davi em 17/11. A § 3.3 foi corrigida em 19/11 pelo #134 e **lida e aprovada pelo Davi**; Yasmin e Filipe assinaram, relatado pelo Davi em 19/11/2026. |
