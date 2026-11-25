@@ -17,7 +17,7 @@ como recusar uma entrega, e a recusa vira atrito.
 | **24/09/26** | Introdução do artigo no template **COBEM 2026** — *Tarefa 02* | ✅ **Entregue parcial em 24/09/2026** — [registro](entregas/tarefa-02.md) |
 | Quinzenal | Reunião de acompanhamento com o orientador | 🔁 Recorrente |
 | **19/11/26** | **Seção de Resultados reenviada**, com legenda e fonte em toda tabela | ✅ **Entregue em 19/11/2026** |
-| **10/12/26** | **Entrega do TCC** | 🗓️ Em 16 dias |
+| **10/12/26** | **Entrega do TCC** | 🗓️ Em 15 dias |
 | Dezembro | Apresentação e defesa | 🗓️ Sem prazo |
 <!-- QUADRO:fim prazos-do-professor -->
 
@@ -150,7 +150,7 @@ Três consequências que valem saber:
 | **M2** Metodologia congelada | **01/10** | Cenários, métricas, quatro configurações, atributos | Congela o que será medido antes de existir código a defender. **Fechou com atraso, em 12/11/2026**, quando a última das quatro lacunas caiu — e o atraso é o fato: a metodologia congelou depois de o código existir, não antes | ✅ Fechado |
 | **M3** Modelo executável | **22/10** | C0 a C3 rodando sobre o mesmo gerador | Última data em que uma dimensão pode ser cortada sem comprometer a comparação. **Fechou em 12/11/2026**, com as quatro configurações sobre dez sementes do mesmo gerador — vinte dias depois da data | ✅ Fechado |
 | **M4** Tabela de ablação | **19/11** | Números finais das quatro configurações | A partir daqui o trabalho é escrita. Nenhuma alteração de código é aceita. **Fechou em 12/11/2026**, antes da data: as quatro configurações sobre dez sementes, com Wilcoxon pareado, nas tabelas da seção 4 | ✅ Fechado |
-| **M5** Entrega | **10/12** | Artigo diagramado e submetido | — | 🗓️ Em 16 dias |
+| **M5** Entrega | **10/12** | Artigo diagramado e submetido | — | 🗓️ Em 15 dias |
 <!-- QUADRO:fim marcos -->
 
 **Caminho crítico:** M2 → S6 (gerador com histórico de um ano) → S8 (D3) → S11 (execução) → S12 (tabela) → M4.
