@@ -9,11 +9,11 @@
 > data do retrato. É o que impede esta página de dizer "amanhã" três dias
 > depois — que foi exatamente o que o cronograma fez em 26/09/2026.
 
-<!-- QUADRO:gerado-em 2026-11-25 -->
+<!-- QUADRO:gerado-em 2026-11-26 -->
 
 **TCC_SDCAC** · TCC 2026/2 · Prof. Euzébio D. de Souza
 
-**Retrato de 25/11/2026.** Entrega do TCC em **10/12/2026**, daqui a **15 dias**.
+**Retrato de 26/11/2026.** Entrega do TCC em **10/12/2026**, daqui a **14 dias**.
 
 ## Resumo
 
@@ -21,8 +21,8 @@
 |---|---|
 | ⚠️ Atrasado | 0 |
 | ▶️ Em curso | 0 |
-| ⏳ A vencer em 7 dias | 0 |
-| 🗓️ Depois | 8 |
+| ⏳ A vencer em 7 dias | 1 |
+| 🗓️ Depois | 7 |
 | ✅ Feito | 66 |
 
 ## ⚠️ Atrasado
@@ -35,21 +35,24 @@ Nada nesta coluna.
 
 ## ⏳ A vencer em 7 dias
 
-Nada nesta coluna.
+1 item.
+
+| Tipo | Item | O que é | Quem | Prazo | Situação |
+|---|---|---|---|---|---|
+| Semana | **S14** | artigo/05-conclusao.md | Davi (caneta) | 27/11/2026 a 03/12/2026 | ⏳ Vence em 7 dias |
 
 ## 🗓️ Depois
 
-8 itens.
+7 itens.
 
 | Tipo | Item | O que é | Quem | Prazo | Situação |
 |---|---|---|---|---|---|
 | Professor | **Reunião de acompanhamento com o orientador** |  | Todos | Quinzenal | 🔁 Recorrente |
-| Professor | ****Entrega do TCC**** |  | Todos | 10/12/2026 | 🗓️ Em 15 dias |
+| Professor | ****Entrega do TCC**** |  | Todos | 10/12/2026 | 🗓️ Em 14 dias |
 | Professor | **Apresentação e defesa** |  | Todos | Dezembro | 🗓️ Sem prazo |
-| Marco | **M5 · Entrega** | Artigo diagramado e submetido | Todos | 10/12/2026 | 🗓️ Em 15 dias |
-| Semana | **S14** | artigo/05-conclusao.md | Davi (caneta) | 27/11/2026 a 03/12/2026 | 🗓️ Em 8 dias |
-| Semana | **S15** | Versão final diagramada · ENTREGA 10/12 | Todos | 04/12/2026 a 10/12/2026 | 🗓️ Em 15 dias |
-| Semana | **S16** | Slides, ensaio cronometrado, defesa | Todos | a partir de 11/12/2026 | 🗓️ Em 16 dias |
+| Marco | **M5 · Entrega** | Artigo diagramado e submetido | Todos | 10/12/2026 | 🗓️ Em 14 dias |
+| Semana | **S15** | Versão final diagramada · ENTREGA 10/12 | Todos | 04/12/2026 a 10/12/2026 | 🗓️ Em 14 dias |
+| Semana | **S16** | Slides, ensaio cronometrado, defesa | Todos | a partir de 11/12/2026 | 🗓️ Em 15 dias |
 | Decisão | **D-07** | Caneta rotativa por seção | Davi, Yasmin, Filipe | — | 🗓️ Sem prazo |
 
 ## ✅ Feito
@@ -125,6 +128,16 @@ Nada nesta coluna.
 | Decisão | **D-44** | Evento cujo equipamento nao tem estado no dia | — | 11/11/2026 | ✅ Fechada em 11/11/2026 |
 | Decisão | **D-43** | Pesos de integração das dimensões na nota final | Davi, Yasmin | 18/11/2026 | ✅ Fechada em 18/11/2026 |
 
+## Critério de aceite do que está aberto
+
+Só das semanas em curso ou vencendo. Critério é o que permite dizer
+"pronto" sem discussão — e sem ele escrito, recusar uma entrega vira
+atrito.
+
+| Semana | Entregável | Critério de aceite | Quem |
+|---|---|---|---|
+| **S14** | artigo/05-conclusao.md | A pergunta é respondida com sim, não ou parcialmente — e um número | Davi (caneta) |
+
 ## O que está em andamento
 
 Declaração de quem está com o item na mão: o que já foi produzido e o
@@ -149,13 +162,13 @@ que some mais fácil de vista.
 
 | Onde | O que falta | Quem | Aberta desde | Idade |
 |---|---|---|---|---|
-| `docs/usabilidade.md § 6.2` | Formulação exata e porcentagem de Nielsen e Landauer | Filipe | 03/09/2026 | 83 dias |
-| `docs/usabilidade.md § 6.3` | Limites exatos de cada faixa adjetiva do SUS, em Bangor, Kortum e Miller (2009) | Filipe | 03/09/2026 | 83 dias |
-| `docs/usabilidade.md § 9` | Edição e ano da obra de Shneiderman efetivamente consultada | Filipe | 03/09/2026 | 83 dias |
-| `artigo/01-introducao.md — caso Target, 2013` | Confirmar na fonte: RILEY; ELGIN; LAWRENCE; MATLACK, Bloomberg Businessweek, 13 mar. 2014 | Yasmin | 10/11/2026 | 15 dias |
-| `artigo/01-introducao.md — caso GE / Zheng, 2018` | Confirmar na fonte: U.S. DOJ, Niskayuna man charged theft trade secrets, 2018 | Yasmin | 10/11/2026 | 15 dias |
-| `artigo/01-introducao.md — caso Capital One, 2019` | Confirmar na fonte: U.S. DOJ, usao-wdwa. **O próprio insumo admite estar incompleto**, com URL genérica | Yasmin | 10/11/2026 | 15 dias |
-| `artigo/01-introducao.md — caso Tesla / Tripp, 2018` | Confirmar na fonte: petição inicial Tesla, Inc. v. Martin Tripp (Nevada) ou GovInfoSecurity, 2018 | Yasmin | 10/11/2026 | 15 dias |
+| `docs/usabilidade.md § 6.2` | Formulação exata e porcentagem de Nielsen e Landauer | Filipe | 03/09/2026 | 84 dias |
+| `docs/usabilidade.md § 6.3` | Limites exatos de cada faixa adjetiva do SUS, em Bangor, Kortum e Miller (2009) | Filipe | 03/09/2026 | 84 dias |
+| `docs/usabilidade.md § 9` | Edição e ano da obra de Shneiderman efetivamente consultada | Filipe | 03/09/2026 | 84 dias |
+| `artigo/01-introducao.md — caso Target, 2013` | Confirmar na fonte: RILEY; ELGIN; LAWRENCE; MATLACK, Bloomberg Businessweek, 13 mar. 2014 | Yasmin | 10/11/2026 | 16 dias |
+| `artigo/01-introducao.md — caso GE / Zheng, 2018` | Confirmar na fonte: U.S. DOJ, Niskayuna man charged theft trade secrets, 2018 | Yasmin | 10/11/2026 | 16 dias |
+| `artigo/01-introducao.md — caso Capital One, 2019` | Confirmar na fonte: U.S. DOJ, usao-wdwa. **O próprio insumo admite estar incompleto**, com URL genérica | Yasmin | 10/11/2026 | 16 dias |
+| `artigo/01-introducao.md — caso Tesla / Tripp, 2018` | Confirmar na fonte: petição inicial Tesla, Inc. v. Martin Tripp (Nevada) ou GovInfoSecurity, 2018 | Yasmin | 10/11/2026 | 16 dias |
 
 ## O que ficou fora desta versão
 
